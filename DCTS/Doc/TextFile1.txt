@@ -1,0 +1,22 @@
+﻿
+行程：
+名称，备注
+
+景点：
+国家，城市，中文名称，当地语言名称，图片，经纬度，当地语言地址，如何抵达，开始时间，结束时间，门票，Tips
+
+住宿：
+国家，城市，中文名称，英文名称，图片，预定房型，早餐，经纬度，地址，如何抵达，联系方式，WIFI，停车位，前台，后厨，Tips
+
+餐厅：
+国家，城市，区域，餐厅名称，菜系，图片，经纬度，地址，如何抵达，营业时间，推荐菜单，Tips
+
+=======================================
+http://stackoverflow.com/questions/33575109/mysql-entity-the-value-for-column-isprimarykey-in-table-tabledetails-is
+
+use dcts_dev;
+set global optimizer_switch='derived_merge=OFF';
+
+=======================================
+lower_case_table_names = 2
+http://stackoverflow.com/questions/8550789/where-to-change-the-value-of-lower-case-table-names-2-on-windows-xampp

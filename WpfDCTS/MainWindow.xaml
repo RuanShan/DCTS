@@ -1,0 +1,17 @@
+﻿<Window x:Class="WpfDCTS.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="117*"/>
+            <ColumnDefinition Width="400*"/>
+        </Grid.ColumnDefinitions>
+        <Menu HorizontalAlignment="Left" Height="44" VerticalAlignment="Top" Width="517" Grid.ColumnSpan="2">
+            <MenuItem Header="行程"/>
+            <MenuItem Header="景點"/>
+        </Menu>
+        <ToolBar HorizontalAlignment="Left" Margin="0,44,0,0" VerticalAlignment="Top" Height="178" Width="76"/>
+
+    </Grid>
+</Window>
