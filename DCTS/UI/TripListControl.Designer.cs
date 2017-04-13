@@ -1,6 +1,6 @@
 ﻿namespace DCTS.UI
 {
-    partial class TripsControl
+    partial class TripListControl
     {
         /// <summary> 
         /// Required designer variable.

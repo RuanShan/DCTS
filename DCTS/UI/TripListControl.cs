@@ -13,9 +13,9 @@ namespace DCTS.UI
     using DCTS.Bus;
     using DCTS.Uti;
 
-    public partial class TripsControl : UserControl, CustomControlInterface
+    public partial class TripListControl : UserControl, CustomControlInterface
     {
-        public TripsControl()
+        public TripListControl()
         {
             InitializeComponent();
             this.tripDataGridView.AutoGenerateColumns = false;

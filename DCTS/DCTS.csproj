@@ -106,6 +106,12 @@
     <Compile Include="UI\EditTripControl.Designer.cs">
       <DependentUpon>EditTripControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\HomeControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\HomeControl.Designer.cs">
+      <DependentUpon>HomeControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\NewScenicForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,6 +123,12 @@
     </Compile>
     <Compile Include="UI\ScenicsControl.Designer.cs">
       <DependentUpon>ScenicsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\TripsManagementControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\TripsManagementControl.Designer.cs">
+      <DependentUpon>TripsManagementControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Uti\EFIntercepterLogging.cs" />
     <Compile Include="Hotel.cs">
@@ -170,11 +182,11 @@
     <Compile Include="UI\TripFormControl.Designer.cs">
       <DependentUpon>TripFormControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\TripsControl.cs">
+    <Compile Include="UI\TripListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\TripsControl.Designer.cs">
-      <DependentUpon>TripsControl.cs</DependentUpon>
+    <Compile Include="UI\TripListControl.Designer.cs">
+      <DependentUpon>TripListControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Uti\DBConnection.cs" />
     <Compile Include="Uti\LogHelper.cs" />
@@ -202,6 +214,9 @@
     <EmbeddedResource Include="UI\EditTripControl.resx">
       <DependentUpon>EditTripControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\HomeControl.resx">
+      <DependentUpon>HomeControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\NewScenicForm.resx">
       <DependentUpon>NewScenicForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -214,8 +229,11 @@
     <EmbeddedResource Include="UI\TripFormControl.resx">
       <DependentUpon>TripFormControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\TripsControl.resx">
-      <DependentUpon>TripsControl.cs</DependentUpon>
+    <EmbeddedResource Include="UI\TripListControl.resx">
+      <DependentUpon>TripListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\TripsManagementControl.resx">
+      <DependentUpon>TripsManagementControl.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

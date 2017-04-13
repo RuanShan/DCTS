@@ -13,24 +13,29 @@ namespace DCTS
 {
     public partial class MainForm : Form
     {
+        TripsManagementControl tripsManagementControl;
          public MainForm()
         {
             InitializeComponent();
         }
-
-        private void xingToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
+ 
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            this.tripsControl.BeginActive();
+            
         }
 
-        private void tripsControl_Load(object sender, EventArgs e)
-        {
+       
 
+        private void tripsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (tripsManagementControl == null)
+            {
+                tripsManagementControl = new TripsManagementControl();
+                tripsManagementControl.Dock = DockStyle.Fill;
+            }
+            this.mainPanel.Controls.Clear();
+            this.mainPanel.Controls.Add(tripsManagementControl);
         }
 
 
