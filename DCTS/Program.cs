@@ -200,8 +200,7 @@ namespace DCTS
         // Creates the error message and displays it.
         private static DialogResult ShowThreadExceptionDialog(string title, Exception e)
         {
-            string errorMsg = "An application error occurred. Please contact the adminstrator " +
-        "with the following information:\n\n";
+            string errorMsg = "An application error occurred. Please contact the adminstrator " +  "with the following information:\n\n";
             errorMsg = errorMsg + e.Message + "\n\nStack Trace:\n" + e.StackTrace;
             return MessageBox.Show(errorMsg, title, MessageBoxButtons.AbortRetryIgnore,
                 MessageBoxIcon.Stop);

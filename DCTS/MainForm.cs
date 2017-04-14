@@ -17,8 +17,6 @@ namespace DCTS
          public MainForm()
         {
             InitializeComponent();
-            MessageBox.Show("测试");
-
         }
  
 
