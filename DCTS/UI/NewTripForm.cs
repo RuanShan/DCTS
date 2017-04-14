@@ -23,8 +23,6 @@ namespace DCTS.UI
 
             using (var ctx = new DctsEntities())
             {
-
-
                 var obj = ctx.Trips.Create();
                 obj.title = this.titleTextBox.Text;
                 obj.memo = this.memoTextBox.Text;

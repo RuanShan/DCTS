@@ -73,6 +73,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bus\TripDbHelper.cs" />
+    <Compile Include="City.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="CustomComponents\Design\ContextTypeTypeConverter.cs" />
     <Compile Include="CustomComponents\Design\EntitySetTypeDescriptor.cs" />
     <Compile Include="CustomComponents\EntityBindingList.cs" />
@@ -91,7 +94,11 @@
     <Compile Include="Day.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DB\GlobalCache.cs" />
     <Compile Include="Dining.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Nation.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="UI\ChooseGameForm.cs">
@@ -272,6 +279,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Doc\seed.sql.txt" />
     <Content Include="Doc\TextFile1.txt" />
     <None Include="Resources\Undo_small.png" />
     <None Include="Resources\Save_small.png" />

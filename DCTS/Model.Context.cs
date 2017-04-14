@@ -30,5 +30,7 @@ namespace DCTS
         public DbSet<Scenic> Scenics { get; set; }
         public DbSet<Trip> Trips { get; set; }
         public DbSet<Day> Days { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<Nation> Nations { get; set; }
     }
 }

@@ -6,12 +6,27 @@
     <edmx:StorageModels>
     <Schema Namespace="DctsModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="DctsModelStoreContainer">
+          <EntitySet Name="Cities" EntityType="DctsModel.Store.Cities" store:Type="Tables" Schema="dcts_dev" />
           <EntitySet Name="Days" EntityType="DctsModel.Store.Days" store:Type="Tables" Schema="dcts_dev" />
           <EntitySet Name="Dinings" EntityType="DctsModel.Store.Dinings" store:Type="Tables" Schema="dcts_dev" />
           <EntitySet Name="Hotels" EntityType="DctsModel.Store.Hotels" store:Type="Tables" Schema="dcts_dev" />
+          <EntitySet Name="Nations" EntityType="DctsModel.Store.Nations" store:Type="Tables" Schema="dcts_dev" />
           <EntitySet Name="Scenics" EntityType="DctsModel.Store.Scenics" store:Type="Tables" Schema="dcts_dev" />
           <EntitySet Name="Trips" EntityType="DctsModel.Store.Trips" store:Type="Tables" Schema="dcts_dev" />
         </EntityContainer>
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="varchar" Nullable="false" MaxLength="24" />
+          <Property Name="nationId" Type="uint" Nullable="false" />
+          <Property Name="nationCode" Type="varchar" Nullable="false" MaxLength="12" />
+          <Property Name="title" Type="varchar" MaxLength="45" />
+          <Property Name="localTitle" Type="varchar" MaxLength="45" />
+          <Property Name="position" Type="int" Nullable="false" />
+          <Property Name="enabled" Type="bool" Nullable="false" />
+        </EntityType>
         <EntityType Name="Days">
           <Key>
             <PropertyRef Name="id" />
@@ -60,6 +75,16 @@
           <Property Name="kitchen" Type="varchar" MaxLength="45" />
           <Property Name="tips" Type="varchar" MaxLength="45" />
         </EntityType>
+        <EntityType Name="Nations">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="varchar" MaxLength="12" />
+          <Property Name="title" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="localTitle" Type="varchar" MaxLength="45" />
+          <Property Name="enabled" Type="bool" Nullable="false" />
+        </EntityType>
         <EntityType Name="Scenics">
           <Key>
             <PropertyRef Name="id" />
@@ -96,6 +121,8 @@
           <EntitySet Name="Scenics" EntityType="DctsModel.Scenic" />
           <EntitySet Name="Trips" EntityType="DctsModel.Trip" />
           <EntitySet Name="Days" EntityType="DctsModel.Day" />
+          <EntitySet Name="Cities" EntityType="DctsModel.City" />
+          <EntitySet Name="Nations" EntityType="DctsModel.Nation" />
         </EntityContainer>
         <EntityType Name="Dining">
           <Key>
@@ -170,6 +197,29 @@
           <Property Type="String" Name="RelatedType" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Type="Int64" Name="day1" Nullable="false" />
           <Property Type="Int64" Name="position" Nullable="false" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int64" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int64" Name="nationId" Nullable="false" />
+          <Property Type="String" Name="title" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="localTitle" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="nationCode" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="position" Nullable="false" />
+          <Property Type="Boolean" Name="enabled" Nullable="false" />
+          <Property Type="String" Name="code" Nullable="false" MaxLength="24" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Nation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int64" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="title" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="localTitle" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="code" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="enabled" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -252,6 +302,31 @@
                 <ScalarProperty Name="day1" ColumnName="day" />
                 <ScalarProperty Name="RelatedType" ColumnName="RelatedType" />
                 <ScalarProperty Name="RelatedId" ColumnName="RelatedId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="DctsModel.City">
+              <MappingFragment StoreEntitySet="Cities">
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="enabled" ColumnName="enabled" />
+                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="nationCode" ColumnName="nationCode" />
+                <ScalarProperty Name="localTitle" ColumnName="localTitle" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="nationId" ColumnName="nationId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nations">
+            <EntityTypeMapping TypeName="DctsModel.Nation">
+              <MappingFragment StoreEntitySet="Nations">
+                <ScalarProperty Name="enabled" ColumnName="enabled" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="localTitle" ColumnName="localTitle" />
+                <ScalarProperty Name="title" ColumnName="title" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

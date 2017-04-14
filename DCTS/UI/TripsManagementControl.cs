@@ -35,8 +35,10 @@ namespace DCTS.UI
                 scenicsControl = new ScenicsControl();
                 scenicsControl.Dock = DockStyle.Fill;
             }
+            this.scenicsControl.BeginActive();
             this.mainPanel.Controls.Clear();
             this.mainPanel.Controls.Add(scenicsControl);
+
         }
 
         private void tripsToolStripMenuItem_Click(object sender, EventArgs e)

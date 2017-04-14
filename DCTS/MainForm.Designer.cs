@@ -36,6 +36,8 @@
             this.mainPanel = new System.Windows.Forms.Panel();
             this.tripsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.entityDataSource = new DCTS.CustomComponents.EntityDataSource(this.components);
+            this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,6 +46,7 @@
             this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.路ToolStripMenuItem,
             this.客户信息ToolStripMenuItem1,
+            this.设置ToolStripMenuItem,
             this.帮助ToolStripMenuItem});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
@@ -90,6 +93,20 @@
             // 
             this.entityDataSource.DbContextType = typeof(DCTS.DctsEntities);
             // 
+            // 设置ToolStripMenuItem
+            // 
+            this.设置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.nationsToolStripMenuItem});
+            this.设置ToolStripMenuItem.Name = "设置ToolStripMenuItem";
+            this.设置ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.设置ToolStripMenuItem.Text = "设置";
+            // 
+            // nationsToolStripMenuItem
+            // 
+            this.nationsToolStripMenuItem.Name = "nationsToolStripMenuItem";
+            this.nationsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.nationsToolStripMenuItem.Text = "国家信息";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -117,6 +134,8 @@
         private System.Windows.Forms.ToolStripMenuItem 客户信息ToolStripMenuItem1;
         private System.Windows.Forms.Panel mainPanel;
         private System.Windows.Forms.ToolStripMenuItem tripsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 设置ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem nationsToolStripMenuItem;
     }
 }
 
