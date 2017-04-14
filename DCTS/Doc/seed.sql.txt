@@ -243,3 +243,147 @@ INSERT INTO `Nations` (`id`, `title`, `code`) VALUES
 (239, '智利', 'CHL'),
 (240, '中非共和国', 'CAF');
 
+INSERT INTO `Cities` ( `nationCode`, `localTitle`, `title`  ) VALUES
+
+('USA', 'Honolulu', '夏威夷檀香山'), 
+('USA', 'Anchorage', '阿拉斯加安克雷奇'), 
+('CAN', 'Vancouver', '温哥华'),  
+('USA', 'San Francisco', '旧金山'),  
+('USA', 'Seattle', '西雅图'),  
+('USA', 'Los Angeles', '洛杉矶'),  
+('CAN', 'Aklavik', '阿克拉维克'),  
+('CAN', 'Edmonton', '艾德蒙顿'),  
+('USA', 'Phoenix', '凤凰城'),  
+('USA', 'Denver', '丹佛'),  
+('MEX', 'Mexico City', '墨西哥城'),  
+('CAN', 'Winnipeg', '温尼伯'),  
+('USA', 'Houston', '休斯敦'),  
+('USA', 'Minneapolis', '明尼亚波利斯'),  
+('USA', 'St. Paul', '圣保罗'),  
+('USA', 'New Orleans', '新奥尔良'),  
+('USA', 'Chicago', '芝加哥'),  
+('USA', 'Montgomery', '蒙哥马利'),  
+('GTM', 'Guatemala', '危地马拉'),  
+('SLV', 'San Salvador', '圣萨尔瓦多'),  
+('HND', 'Tegucigalpa', '特古西加尔巴'),  
+('NIC', 'Managua', '马那瓜'),  
+('CUB', 'Havana', '哈瓦那'),  
+('USA', 'Indianapolis', '印地安纳波利斯'), 
+('USA', 'Atlanta', '亚特兰大'),  
+('USA', 'Detroit', '底特律'),  
+('USA', 'Washington DC', '华盛顿哥伦比亚特区'),  
+('USA', 'Philadelphia', '费城'),  
+('CAN', 'Toronto', '多伦多'),  
+('CAN', 'Ottawa', '渥太华'),  
+('BHS', 'Nassau', '拿骚'),  
+('PER', 'Lima', '利马'),  
+('JAM', 'Kingston', '金斯敦'),  
+('KHM', 'Bogota', '波哥大'),  
+('USA', 'New York', '纽约'),  
+('CAN', 'Montreal', '蒙特利尔'),  
+('USA', 'Boston', '波士顿'), 
+('NZL', 'Wellington', '惠灵顿'),  
+('NZL', 'Chatham Island', '查塔姆群岛'), 
+('1', 'Hong Kong', '香港'),  
+('1', 'Beijing', '北京'), 
+('1', 'Shanghai', '上海'), 
+('1', 'Taipei', '台北'), 
+  
+[多米尼加] Santo Domingo', '圣多明各'),  
+[玻利维亚] La Paz 拉帕兹 
+[委内瑞拉] Caracas 加拉加斯 
+[波多黎各] San Juan 圣胡安 
+('CAN', Halifax 哈里法克斯 
+[智利] Santiago 圣地亚哥 
+[巴拉圭] Asuncion 亚松森 
+('CAN', St\. John\'s 圣约翰斯 
+[阿根廷] Buenos Aires 布宜诺斯艾利斯 
+[乌拉圭] Montevideo 蒙特维的亚 
+[巴西] Brasilia 巴西利亚 
+[巴西] Sao Paulo 圣保罗 
+[巴西] Rio de Janeiro 里约热内卢 
+[冰岛] Reykjavik 雷克雅未克 
+[葡萄牙] Lisbon 里斯本 
+[摩洛哥] Casablanca 卡萨布兰卡 
+[爱尔兰] Dublin 都柏林 
+[英国] London 伦敦 
+[西班牙] Madrid 马德里 
+[西班牙] Barcelona 巴塞罗那 
+[法国] Paris 巴黎 
+[尼日利亚] Lagos 拉各斯 
+[阿尔及利亚] Algiers 阿尔及尔 
+[比利时] Brussels 布鲁塞尔 
+[荷兰] Amsterdam 阿姆斯特丹 
+[瑞士] Geneva 日内瓦 
+[瑞士] Zurich 苏黎世 
+[德国] Frankfurt 法兰克福 
+[挪威] Oslo 奥斯陆 
+[丹麦] Copenhagen 哥本哈根 
+[意大利] Rome 罗马 
+[德国] Berlin 柏林 
+[捷克] Prague 布拉格 
+[克罗地亚] Zagreb 萨格雷布 
+[奥地利] Vienna 维也纳 
+[瑞典] Stockholm 斯德哥尔摩 
+[匈牙利] Budapest 布达佩斯 
+[塞尔维亚与蒙特内哥罗] Belgrade 贝尔格莱德 
+[波兰] Warsaw 华沙 
+[南非] Cape Town 开普敦 
+[保加利亚] Sofia 索非亚 
+[希腊] Athens 雅典城 
+[爱沙尼亚] Tallinn 塔林 
+[芬兰] Helsinki 赫尔辛基 
+[罗马尼亚] Bucharest 布加勒斯特 
+[白俄罗斯] Minsk 明斯克 
+[南非] Johannesburg 约翰尼斯堡 
+[土耳其] Istanbul 伊斯坦布尔 
+[乌克兰] Kyiv 基辅 
+[乌克兰] Odesa 敖德萨 
+[津巴布韦] Harare 哈拉雷 
+[埃及] Cairo 开罗 
+[土耳其] Ankara 安卡拉 
+[以色列] Jerusalem 耶路撒冷 
+[黎巴嫩] Beirut 贝鲁特 
+[约旦] Amman 安曼 
+[苏丹] Khartoum 喀土穆 
+[肯尼亚] Nairobi 内罗毕 
+[俄罗斯] Moscow 莫斯科 
+[埃塞俄比亚] Addis Ababa 亚的斯亚贝巴 
+[伊拉克] Baghdad 巴格达 
+[也门] Aden 亚丁 
+[沙特阿拉伯] Riyadh 利雅得 
+[马达加斯加] Antananarivo 安塔那那利佛 
+[科威特] Kuwait City 科威特城 
+[伊朗] Tehran 德黑兰 
+[阿拉伯联合酋长国] Abu Dhabi 阿布扎比 
+[阿富汗] Kabul 喀布尔 
+[巴基斯坦] Karachi 卡拉奇 
+[乌兹别克斯坦] Tashkent 塔什干 
+[巴基斯坦] Islamabad 伊斯兰堡 
+[巴基斯坦] Lahore 拉合尔 
+[印度] Mumbai 孟买 
+[印度] New Delhi 新德里 
+[印度] Kolkata 柯尔喀塔 
+[尼泊尔] Kathmandu 加德满都 
+[孟加拉] Dhaka 达卡 
+[缅甸] Yangon 仰光 
+[泰国] Bangkok 曼谷 
+[越南] Hanoi 河内 
+[印尼] Jakarta 雅加达 
+[马来西亚] Kuala Lumpur 吉隆坡 
+[新加坡] Singapore 新加坡 
+[澳大利亚] Perth 珀斯 
+[菲律宾] Manila 马尼拉 
+[韩国] Seoul 首尔(汉城) 
+[日本] Tokyo 东京 
+[澳大利亚] Darwin 达尔文 
+[俄罗斯] Vladivostok 符拉迪沃斯托克(海参崴) 
+[澳大利亚] Brisbane 布里斯班 
+[澳大利亚] Melbourne 墨尔本 
+[澳大利亚] Canberra 堪培拉 
+[澳大利亚] Sydney 悉尼 
+[澳大利亚] Adelaide 亚特雷德 
+[俄罗斯] Kamchatka 堪察加 
+[俄罗斯] Anadyr 阿纳德尔 
+[斐济] Suva 苏瓦 
+[基里巴斯] Kiritimati 圣诞岛
