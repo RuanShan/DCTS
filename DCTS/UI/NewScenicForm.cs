@@ -22,7 +22,6 @@ namespace DCTS.UI
         {
             var ctx = this.entityDataSource1.DbContext as DctsEntities;
             var nationList = DCTS.DB.GlobalCache.NationList;
-
             {
                 this.nationComboBox.DisplayMember = "title";
                 this.nationComboBox.ValueMember = "code";

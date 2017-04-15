@@ -15,11 +15,8 @@ namespace DCTS.UI
     public partial class TripsManagementControl : UserControl
     {
         ScenicsControl scenicsControl;
-<<<<<<< HEAD
         EditTripControl editTripControl;
-=======
         DinningsControl dinningsControl;
->>>>>>> f6d920bb01e09cbbf316350ad446055692f923b6
 
         public TripsManagementControl()
         {
@@ -63,7 +60,6 @@ namespace DCTS.UI
             this.mainPanel.Controls.Add(tripsControl);
         }
 
-<<<<<<< HEAD
         void OnCommandRequest(object sender, EventArgs e)
         {
             var commandEventArgs = e as CommandRequestEventArgs;
@@ -86,7 +82,6 @@ namespace DCTS.UI
 
 
         
-=======
         private void dinningsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (dinningsControl == null)
@@ -99,7 +94,7 @@ namespace DCTS.UI
             this.mainPanel.Controls.Add(dinningsControl);
 
         }
->>>>>>> f6d920bb01e09cbbf316350ad446055692f923b6
+
     }
 
 
