@@ -26,5 +26,7 @@ namespace DCTS
         public string address { get; set; }
         public string recommendedDishes { get; set; }
         public string tips { get; set; }
+        public string opentime { get; set; }
+        public string closetime { get; set; }
     }
 }

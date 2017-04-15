@@ -14,6 +14,7 @@ namespace DCTS.UI
     public partial class TripsManagementControl : UserControl
     {
         ScenicsControl scenicsControl;
+        DinningsControl dinningsControl;
 
         public TripsManagementControl()
         {
@@ -45,6 +46,19 @@ namespace DCTS.UI
         {
             this.mainPanel.Controls.Clear();
             this.mainPanel.Controls.Add(tripsControl);
+        }
+
+        private void dinningsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dinningsControl == null)
+            {
+                dinningsControl = new DinningsControl();
+                dinningsControl.Dock = DockStyle.Fill;
+            }
+            this.dinningsControl.BeginActive();
+            this.mainPanel.Controls.Clear();
+            this.mainPanel.Controls.Add(dinningsControl);
+
         }
     }
 }

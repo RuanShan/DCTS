@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace DCTS.UI
 {
-    public partial class NewScenicForm : BaseModalForm
+    public partial class NewDinningsForm : BaseModalForm
     {
-        public NewScenicForm()
+        public NewDinningsForm()
         {
             InitializeComponent();
         }
@@ -48,10 +48,25 @@ namespace DCTS.UI
         {
             using (var ctx = new DctsEntities())
             {
-                var obj = ctx.Scenics.Create();
-                obj.title = this.titleTextBox.Text;
+                var obj = ctx.Dinings.Create();
+                obj.nation = this.nationComboBox.Text;
+                obj.city = this.cityComboBox.Text;
+                obj.area = this.titleTextBox.Text;
+                obj.dishes = this.textBox1.Text;
+                obj.img = this.imgPathTextBox.Text;
+                obj.latlng = this.latlngTextBox.Text;
+                obj.reach = this.textBox2.Text;
+                obj.address = this.localAddressTextBox.Text;
+                obj.recommendedDishes = this.textBox3.Text;
+                obj.tips = this.textBox6.Text;
+                obj.title = this.localTitleTextBox.Text;
+
+                //obj.opentime = this.openAtDateTimePicker.Text;
+                //obj.closetime = this.closeAtDateTimePicker.Text;
+               
+
                 //obj.memo = this.memoTextBox.Text;
-                ctx.Scenics.Add(obj);
+                ctx.Dinings.Add(obj);
                 ctx.SaveChanges();
             }
 
@@ -69,6 +84,7 @@ namespace DCTS.UI
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
+            this.Close();
 
         }
     }

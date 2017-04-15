@@ -45,7 +45,7 @@
             this.tripsControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tripsControl.Location = new System.Drawing.Point(0, 0);
             this.tripsControl.Name = "tripsControl";
-            this.tripsControl.Size = new System.Drawing.Size(690, 350);
+            this.tripsControl.Size = new System.Drawing.Size(690, 379);
             this.tripsControl.TabIndex = 1;
             // 
             // mainPanel
@@ -57,7 +57,7 @@
             this.mainPanel.Controls.Add(this.tripsControl);
             this.mainPanel.Location = new System.Drawing.Point(69, 0);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(690, 350);
+            this.mainPanel.Size = new System.Drawing.Size(690, 379);
             this.mainPanel.TabIndex = 2;
             // 
             // menuStrip1
@@ -71,51 +71,52 @@
             this.活动ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(98, 363);
+            this.menuStrip1.Size = new System.Drawing.Size(98, 393);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // tripsToolStripMenuItem
             // 
             this.tripsToolStripMenuItem.Name = "tripsToolStripMenuItem";
-            this.tripsToolStripMenuItem.Size = new System.Drawing.Size(85, 21);
+            this.tripsToolStripMenuItem.Size = new System.Drawing.Size(85, 19);
             this.tripsToolStripMenuItem.Text = "行程";
             this.tripsToolStripMenuItem.Click += new System.EventHandler(this.tripsToolStripMenuItem_Click);
             // 
             // scenicsToolStripMenuItem
             // 
             this.scenicsToolStripMenuItem.Name = "scenicsToolStripMenuItem";
-            this.scenicsToolStripMenuItem.Size = new System.Drawing.Size(85, 21);
+            this.scenicsToolStripMenuItem.Size = new System.Drawing.Size(85, 19);
             this.scenicsToolStripMenuItem.Text = "景点";
             this.scenicsToolStripMenuItem.Click += new System.EventHandler(this.scenicsToolStripMenuItem_Click);
             // 
             // dinningsToolStripMenuItem
             // 
             this.dinningsToolStripMenuItem.Name = "dinningsToolStripMenuItem";
-            this.dinningsToolStripMenuItem.Size = new System.Drawing.Size(85, 21);
+            this.dinningsToolStripMenuItem.Size = new System.Drawing.Size(85, 19);
             this.dinningsToolStripMenuItem.Text = "餐厅";
+            this.dinningsToolStripMenuItem.Click += new System.EventHandler(this.dinningsToolStripMenuItem_Click);
             // 
             // hotelsToolStripMenuItem
             // 
             this.hotelsToolStripMenuItem.Name = "hotelsToolStripMenuItem";
-            this.hotelsToolStripMenuItem.Size = new System.Drawing.Size(85, 21);
+            this.hotelsToolStripMenuItem.Size = new System.Drawing.Size(85, 19);
             this.hotelsToolStripMenuItem.Text = "住宿";
             // 
             // 活动ToolStripMenuItem
             // 
             this.活动ToolStripMenuItem.Enabled = false;
             this.活动ToolStripMenuItem.Name = "活动ToolStripMenuItem";
-            this.活动ToolStripMenuItem.Size = new System.Drawing.Size(85, 21);
+            this.活动ToolStripMenuItem.Size = new System.Drawing.Size(85, 19);
             this.活动ToolStripMenuItem.Text = "活动";
             // 
             // TripsManagementControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.mainPanel);
             this.Name = "TripsManagementControl";
-            this.Size = new System.Drawing.Size(762, 363);
+            this.Size = new System.Drawing.Size(762, 393);
             this.mainPanel.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

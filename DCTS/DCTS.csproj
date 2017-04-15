@@ -137,6 +137,18 @@
     <Compile Include="UI\TripsManagementControl.Designer.cs">
       <DependentUpon>TripsManagementControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\NewDinningsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\NewDinningsForm.Designer.cs">
+      <DependentUpon>NewDinningsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\DinningsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\DinningsControl.Designer.cs">
+      <DependentUpon>DinningsControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Uti\EFIntercepterLogging.cs" />
     <Compile Include="Hotel.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -241,6 +253,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\TripsManagementControl.resx">
       <DependentUpon>TripsManagementControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\NewDinningsForm.resx">
+      <DependentUpon>NewDinningsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\DinningsControl.resx">
+      <DependentUpon>DinningsControl.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
