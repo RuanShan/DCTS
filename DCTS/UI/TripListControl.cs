@@ -15,10 +15,13 @@ namespace DCTS.UI
 
     public partial class TripListControl : UserControl, CustomControlInterface
     {
+        public event EventHandler CommandRequestEvent;
+  
         public TripListControl()
         {
             InitializeComponent();
             this.tripDataGridView.AutoGenerateColumns = false;
+            
         }
 
         public void BeginActive()
@@ -57,8 +60,12 @@ namespace DCTS.UI
 
             if (column == editTripColumn1)
             {
-                MessageBox.Show("edit");
-            }
+                var row = tripDataGridView.Rows[e.RowIndex];
+                var trip = row.DataBoundItem as Trip;
+
+                var eventArgs = new CommandRequestEventArgs( CommandRequestEnum.EditTrip, trip.id );                 
+                this.CommandRequestEvent(this, eventArgs);
+             }
             else if (column == copyTripColumn1)
             {
                 MessageBox.Show("copy");
@@ -73,12 +80,14 @@ namespace DCTS.UI
                 if (MessageHelper.DeleteConfirm(msg))
                 {
 
-                    TripDbHelper.Delete(trip.id);
+                    TripBusiness.Delete(trip.id);
 
                     BeginActive();
                 }
             }
 
         }
+
+
     }
 }

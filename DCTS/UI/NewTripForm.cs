@@ -26,6 +26,8 @@ namespace DCTS.UI
                 var obj = ctx.Trips.Create();
                 obj.title = this.titleTextBox.Text;
                 obj.memo = this.memoTextBox.Text;
+                obj.days = Convert.ToInt32( this.daysNumericUpDown.Value );
+
                 ctx.Trips.Add(obj);
                 ctx.SaveChanges();
             }

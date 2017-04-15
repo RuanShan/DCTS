@@ -37,7 +37,10 @@
             this.saveButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.daysNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.daysNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -68,7 +71,7 @@
             // 
             // memoTextBox
             // 
-            this.memoTextBox.Location = new System.Drawing.Point(82, 102);
+            this.memoTextBox.Location = new System.Drawing.Point(82, 123);
             this.memoTextBox.Multiline = true;
             this.memoTextBox.Name = "memoTextBox";
             this.memoTextBox.Size = new System.Drawing.Size(440, 82);
@@ -77,7 +80,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(35, 105);
+            this.label3.Location = new System.Drawing.Point(35, 126);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 12);
             this.label3.TabIndex = 3;
@@ -86,7 +89,7 @@
             // saveButton
             // 
             this.saveButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
-            this.saveButton.Location = new System.Drawing.Point(366, 208);
+            this.saveButton.Location = new System.Drawing.Point(366, 230);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 5;
@@ -97,7 +100,7 @@
             // cancelButton
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.No;
-            this.cancelButton.Location = new System.Drawing.Point(447, 208);
+            this.cancelButton.Location = new System.Drawing.Point(447, 230);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 5;
@@ -108,14 +111,37 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // daysNumericUpDown
+            // 
+            this.daysNumericUpDown.Location = new System.Drawing.Point(82, 91);
+            this.daysNumericUpDown.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.daysNumericUpDown.Name = "daysNumericUpDown";
+            this.daysNumericUpDown.Size = new System.Drawing.Size(120, 21);
+            this.daysNumericUpDown.TabIndex = 6;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(35, 93);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 12);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "天数";
+            // 
             // NewTripForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 262);
+            this.ClientSize = new System.Drawing.Size(600, 297);
+            this.Controls.Add(this.daysNumericUpDown);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.memoTextBox);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.titleTextBox);
             this.Controls.Add(this.label2);
@@ -123,6 +149,7 @@
             this.Name = "NewTripForm";
             this.Text = "NewTripForm";
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.daysNumericUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -138,5 +165,7 @@
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.NumericUpDown daysNumericUpDown;
+        private System.Windows.Forms.Label label4;
     }
 }

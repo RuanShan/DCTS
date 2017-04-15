@@ -12,19 +12,32 @@ namespace DCTS
     using System;
     using System.Collections.Generic;
     
-    public partial class Dining
+    public partial class ComboLocation
     {
         public long id { get; set; }
+        public int ltype { get; set; }
         public string nation { get; set; }
         public string city { get; set; }
         public string area { get; set; }
         public string title { get; set; }
-        public string dishes { get; set; }
+        public string local_title { get; set; }
         public string img { get; set; }
-        public string latlng { get; set; }
-        public string reach { get; set; }
         public string address { get; set; }
-        public string recommendedDishes { get; set; }
+        public string local_address { get; set; }
+        public string latlng { get; set; }
+        public string route { get; set; }
+        public string contact { get; set; }
+        public Nullable<System.DateTime> open_at { get; set; }
+        public Nullable<System.DateTime> close_at { get; set; }
+        public string ticket { get; set; }
+        public string room { get; set; }
+        public string dinner { get; set; }
+        public string wifi { get; set; }
+        public string parking { get; set; }
+        public string reception { get; set; }
+        public string kitchen { get; set; }
+        public string dishes { get; set; }
+        public string recommended_dishes { get; set; }
         public string tips { get; set; }
     }
 }

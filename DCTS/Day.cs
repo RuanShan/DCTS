@@ -17,7 +17,9 @@ namespace DCTS
         public long id { get; set; }
         public long RelatedId { get; set; }
         public string RelatedType { get; set; }
-        public long day1 { get; set; }
+        public long day { get; set; }
         public long position { get; set; }
+        public long tripId { get; set; }
+        public long locationId { get; set; }
     }
 }

@@ -7,6 +7,7 @@
     <Schema Namespace="DctsModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="DctsModelStoreContainer">
           <EntitySet Name="Cities" EntityType="DctsModel.Store.Cities" store:Type="Tables" Schema="dcts_dev" />
+          <EntitySet Name="ComboLocations" EntityType="DctsModel.Store.ComboLocations" store:Type="Tables" Schema="dcts_dev" />
           <EntitySet Name="Days" EntityType="DctsModel.Store.Days" store:Type="Tables" Schema="dcts_dev" />
           <EntitySet Name="Dinings" EntityType="DctsModel.Store.Dinings" store:Type="Tables" Schema="dcts_dev" />
           <EntitySet Name="Hotels" EntityType="DctsModel.Store.Hotels" store:Type="Tables" Schema="dcts_dev" />
@@ -27,6 +28,36 @@
           <Property Name="position" Type="int" Nullable="false" />
           <Property Name="enabled" Type="bool" Nullable="false" />
         </EntityType>
+        <EntityType Name="ComboLocations">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ltype" Type="uint" Nullable="false" />
+          <Property Name="nation" Type="varchar" MaxLength="45" />
+          <Property Name="city" Type="varchar" MaxLength="45" />
+          <Property Name="area" Type="varchar" MaxLength="45" />
+          <Property Name="title" Type="varchar" MaxLength="256" />
+          <Property Name="local_title" Type="varchar" MaxLength="256" />
+          <Property Name="img" Type="varchar" MaxLength="256" />
+          <Property Name="address" Type="varchar" MaxLength="1024" />
+          <Property Name="local_address" Type="varchar" MaxLength="1024" />
+          <Property Name="latlng" Type="varchar" MaxLength="256" />
+          <Property Name="route" Type="varchar" MaxLength="512" />
+          <Property Name="contact" Type="varchar" MaxLength="256" />
+          <Property Name="open_at" Type="datetime" />
+          <Property Name="close_at" Type="datetime" />
+          <Property Name="ticket" Type="varchar" MaxLength="45" />
+          <Property Name="room" Type="varchar" MaxLength="512" />
+          <Property Name="dinner" Type="varchar" MaxLength="512" />
+          <Property Name="wifi" Type="varchar" MaxLength="45" />
+          <Property Name="parking" Type="varchar" MaxLength="45" />
+          <Property Name="reception" Type="varchar" MaxLength="45" />
+          <Property Name="kitchen" Type="varchar" MaxLength="512" />
+          <Property Name="dishes" Type="varchar" MaxLength="512" />
+          <Property Name="recommended_dishes" Type="varchar" MaxLength="512" />
+          <Property Name="tips" Type="varchar" MaxLength="1024" />
+        </EntityType>
         <EntityType Name="Days">
           <Key>
             <PropertyRef Name="id" />
@@ -36,6 +67,8 @@
           <Property Name="RelatedType" Type="varchar" MaxLength="45" />
           <Property Name="day" Type="uint" Nullable="false" />
           <Property Name="position" Type="uint" Nullable="false" />
+          <Property Name="tripId" Type="uint" Nullable="false" />
+          <Property Name="locationId" Type="uint" Nullable="false" />
         </EntityType>
         <EntityType Name="Dinings">
           <Key>
@@ -92,7 +125,7 @@
           <Property Name="id" Type="uint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="nation" Type="varchar" MaxLength="45" />
           <Property Name="city" Type="varchar" MaxLength="45" />
-          <Property Name="title" Type="varchar" MaxLength="45" />
+          <Property Name="title" Type="varchar" MaxLength="1024" />
           <Property Name="localTitle" Type="varchar" MaxLength="45" />
           <Property Name="img" Type="varchar" MaxLength="45" />
           <Property Name="latlng" Type="varchar" MaxLength="45" />
@@ -100,7 +133,7 @@
           <Property Name="openAt" Type="datetime" />
           <Property Name="closeAt" Type="datetime" />
           <Property Name="ticket" Type="varchar" MaxLength="45" />
-          <Property Name="tips" Type="varchar" MaxLength="45" />
+          <Property Name="tips" Type="varchar" MaxLength="1024" />
         </EntityType>
         <EntityType Name="Trips">
           <Key>
@@ -108,7 +141,7 @@
           </Key>
           <Property Name="id" Type="uint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="title" Type="varchar" Nullable="false" MaxLength="1024" />
-          <Property Name="memo" Type="varchar" MaxLength="45" />
+          <Property Name="memo" Type="varchar" MaxLength="1024" />
           <Property Name="days" Type="int" Nullable="false" />
         </EntityType>
       </Schema></edmx:StorageModels>
@@ -123,6 +156,7 @@
           <EntitySet Name="Days" EntityType="DctsModel.Day" />
           <EntitySet Name="Cities" EntityType="DctsModel.City" />
           <EntitySet Name="Nations" EntityType="DctsModel.Nation" />
+          <EntitySet Name="ComboLocations" EntityType="DctsModel.ComboLocation" />
         </EntityContainer>
         <EntityType Name="Dining">
           <Key>
@@ -195,8 +229,10 @@
           <Property Type="Int64" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="Int64" Name="RelatedId" Nullable="false" />
           <Property Type="String" Name="RelatedType" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Type="Int64" Name="day1" Nullable="false" />
+          <Property Type="Int64" Name="day" Nullable="false" />
           <Property Type="Int64" Name="position" Nullable="false" />
+          <Property Type="Int64" Name="tripId" Nullable="false" />
+          <Property Type="Int64" Name="locationId" Nullable="false" />
         </EntityType>
         <EntityType Name="City">
           <Key>
@@ -220,6 +256,36 @@
           <Property Type="String" Name="localTitle" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="code" MaxLength="12" FixedLength="false" Unicode="false" />
           <Property Type="Boolean" Name="enabled" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ComboLocation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int64" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ltype" Nullable="false" />
+          <Property Type="String" Name="nation" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="city" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="area" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="title" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="local_title" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="img" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="address" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="local_address" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="latlng" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="route" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="contact" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="open_at" />
+          <Property Type="DateTime" Name="close_at" />
+          <Property Type="String" Name="ticket" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="room" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="dinner" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="wifi" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="parking" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="reception" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="kitchen" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="dishes" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="recommended_dishes" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="tips" MaxLength="1024" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -298,8 +364,10 @@
           <EntitySetMapping Name="Days">
             <EntityTypeMapping TypeName="DctsModel.Day">
               <MappingFragment StoreEntitySet="Days">
+                <ScalarProperty Name="locationId" ColumnName="locationId" />
+                <ScalarProperty Name="tripId" ColumnName="tripId" />
                 <ScalarProperty Name="position" ColumnName="position" />
-                <ScalarProperty Name="day1" ColumnName="day" />
+                <ScalarProperty Name="day" ColumnName="day" />
                 <ScalarProperty Name="RelatedType" ColumnName="RelatedType" />
                 <ScalarProperty Name="RelatedId" ColumnName="RelatedId" />
                 <ScalarProperty Name="id" ColumnName="id" />
@@ -327,6 +395,37 @@
                 <ScalarProperty Name="code" ColumnName="code" />
                 <ScalarProperty Name="localTitle" ColumnName="localTitle" />
                 <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ComboLocations">
+            <EntityTypeMapping TypeName="DctsModel.ComboLocation">
+              <MappingFragment StoreEntitySet="ComboLocations">
+                <ScalarProperty Name="tips" ColumnName="tips" />
+                <ScalarProperty Name="recommended_dishes" ColumnName="recommended_dishes" />
+                <ScalarProperty Name="dishes" ColumnName="dishes" />
+                <ScalarProperty Name="kitchen" ColumnName="kitchen" />
+                <ScalarProperty Name="reception" ColumnName="reception" />
+                <ScalarProperty Name="parking" ColumnName="parking" />
+                <ScalarProperty Name="wifi" ColumnName="wifi" />
+                <ScalarProperty Name="dinner" ColumnName="dinner" />
+                <ScalarProperty Name="room" ColumnName="room" />
+                <ScalarProperty Name="ticket" ColumnName="ticket" />
+                <ScalarProperty Name="close_at" ColumnName="close_at" />
+                <ScalarProperty Name="open_at" ColumnName="open_at" />
+                <ScalarProperty Name="contact" ColumnName="contact" />
+                <ScalarProperty Name="route" ColumnName="route" />
+                <ScalarProperty Name="latlng" ColumnName="latlng" />
+                <ScalarProperty Name="local_address" ColumnName="local_address" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="img" ColumnName="img" />
+                <ScalarProperty Name="local_title" ColumnName="local_title" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="area" ColumnName="area" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="nation" ColumnName="nation" />
+                <ScalarProperty Name="ltype" ColumnName="ltype" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

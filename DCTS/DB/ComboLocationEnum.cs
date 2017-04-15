@@ -4,13 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DCTS.UI
+namespace DCTS.DB
 {
- 
-    interface CustomControlInterface
-    {
-
- 
-        void BeginActive();
-    }
+    enum ComboLocationEnum { Scenic = 1, Dining = 5, Hotel = 9 }
+    
+    
 }
