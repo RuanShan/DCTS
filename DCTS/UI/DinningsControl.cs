@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.Entity;
 
 namespace DCTS.UI
 {
@@ -31,7 +32,7 @@ namespace DCTS.UI
             //using (var ctx = new DctsEntities())
             {
 
-                var query = ctx.Scenics.OrderBy(o => o.id).Skip(offset).Take(pageSize);
+                var query = ctx.Dinings.OrderBy(o => o.id).Skip(offset).Take(pageSize);
                 var list = this.entityDataSource1.CreateView(query);
                 this.dataGridView.DataSource = list;
             }
@@ -54,11 +55,43 @@ namespace DCTS.UI
                 RowRemark = RowRemark - 1;
             }
             string candianmingcheng = this.dataGridView.Rows[RowRemark].Cells["titleColumn1"].EditedFormattedValue.ToString();
-            //string Caipiaomingcheng = this.label2.Text.ToString();
-            //clsAllnew BusinessHelp = new clsAllnew();
+            var oids = GetOrderIdsBySelectedGridCell();
+            using (var ctx = new DctsEntities())
+            {
+                var stockrecs = (from s in ctx.Dinings
+                                 where oids.Contains(s.id)
+                                 select s).ToList();
+                ctx.Dinings.RemoveRange(stockrecs);
+                ctx.SaveChanges();
 
-            //BusinessHelp.delete_CaiPiaoData(QiHao, Caipiaomingcheng);
+                //deletedCount = stockrecs.Count;
+                //this.stockList.RemoveAll(s => deletedStockNumList.Contains(s.納品書番号));
+
+            }
             InitializeDataGridView();
         }
+        private List<long> GetOrderIdsBySelectedGridCell()
+        {
+
+            List<long> order_ids = new List<long>();
+            var rows = GetSelectedRowsBySelectedCells(dataGridView);
+            foreach (DataGridViewRow row in rows)
+            {
+                var Diningorder = row.DataBoundItem as Dining;
+                order_ids.Add(Diningorder.id);
+            }
+
+            return order_ids;
+        }
+        private IEnumerable<DataGridViewRow> GetSelectedRowsBySelectedCells(DataGridView dgv)
+        {
+            List<DataGridViewRow> rows = new List<DataGridViewRow>();
+            foreach (DataGridViewCell cell in dgv.SelectedCells)
+            {
+                rows.Add(cell.OwningRow);
+            }
+            return rows.Distinct();
+        }
+
     }
 }
