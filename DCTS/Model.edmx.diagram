@@ -4,14 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="76933a9ea6684110b1ae0ae88bfb71e2" Name="Diagram1" ZoomLevel="93">
+      <Diagram DiagramId="76933a9ea6684110b1ae0ae88bfb71e2" Name="Diagram1" ZoomLevel="82">
         <EntityTypeShape EntityType="DctsModel.Dining" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DctsModel.Hotel" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DctsModel.Scenic" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DctsModel.Trip" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DctsModel.Day" Width="1.5" PointX="9.125" PointY="1.125" />
-        <EntityTypeShape EntityType="DctsModel.City" Width="1.5" PointX="7.5344124993003962" PointY="12.418268194616896" />
+        <EntityTypeShape EntityType="DctsModel.City" Width="1.5" PointX="0.75" PointY="8" />
         <EntityTypeShape EntityType="DctsModel.Nation" Width="1.5" PointX="10.565858272167787" PointY="17.639409490693087" />
+        <EntityTypeShape EntityType="DctsModel.ComboLocation" Width="1.5" PointX="4.875" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

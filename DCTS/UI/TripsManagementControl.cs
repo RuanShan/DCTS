@@ -11,20 +11,32 @@ using DCTS.Uti;
 
 namespace DCTS.UI
 {
+
     public partial class TripsManagementControl : UserControl
     {
         ScenicsControl scenicsControl;
+        EditTripControl editTripControl;
 
         public TripsManagementControl()
         {
             InitializeComponent();
+
+            this.tripsControl.CommandRequestEvent += new EventHandler( OnCommandRequest );
+
+            this.tripsControl.BeginActive();   
+
             InitUserControls();
-        }
+            
+         }
 
         private void InitUserControls()
         {
-            LogHelper.WriteLog("Start initialize main control");
-            this.tripsControl.BeginActive();   
+            //LogHelper.WriteLog("Start initialize main control");
+             
+            editTripControl = new EditTripControl();
+            editTripControl.Dock = DockStyle.Fill;
+
+            this.editTripControl.CommandRequestEvent += new EventHandler(OnCommandRequest);
 
         }
 
@@ -34,7 +46,7 @@ namespace DCTS.UI
             {
                 scenicsControl = new ScenicsControl();
                 scenicsControl.Dock = DockStyle.Fill;
-            }
+             }
             this.scenicsControl.BeginActive();
             this.mainPanel.Controls.Clear();
             this.mainPanel.Controls.Add(scenicsControl);
@@ -46,5 +58,31 @@ namespace DCTS.UI
             this.mainPanel.Controls.Clear();
             this.mainPanel.Controls.Add(tripsControl);
         }
+
+        void OnCommandRequest(object sender, EventArgs e)
+        {
+            var commandEventArgs = e as CommandRequestEventArgs;
+            if (commandEventArgs.Command == CommandRequestEnum.EditTrip)
+            {
+                editTripControl.ModelId = commandEventArgs.ModelId;
+                editTripControl.BeginActive();
+                this.mainPanel.Controls.Clear();
+                this.mainPanel.Controls.Add(editTripControl);
+            }
+
+            if (commandEventArgs.Command == CommandRequestEnum.TripList)
+            {
+                this.mainPanel.Controls.Clear();
+                this.mainPanel.Controls.Add(tripsControl);
+            }
+
+            Console.WriteLine("Sub1 receives the OnCommandRequest event.");
+        } 
+
+
+        
     }
+
+
+
 }

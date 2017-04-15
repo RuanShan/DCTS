@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace DCTS.UI
 {
+ 
     interface CustomControlInterface
     {
+
+ 
         void BeginActive();
     }
 }

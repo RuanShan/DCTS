@@ -1,6 +1,6 @@
 ﻿namespace DCTS.UI
 {
-    partial class ChooseGameForm
+    partial class ChooseLocaltionForm
     {
         /// <summary>
         /// Required designer variable.
@@ -160,7 +160,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(654, 128);
+            this.dataGridView1.Size = new System.Drawing.Size(654, 189);
             this.dataGridView1.TabIndex = 11;
             // 
             // tabControl1
@@ -171,7 +171,7 @@
             this.tabControl1.Location = new System.Drawing.Point(17, 167);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(668, 160);
+            this.tabControl1.Size = new System.Drawing.Size(668, 221);
             this.tabControl1.TabIndex = 12;
             // 
             // tabPage1
@@ -180,7 +180,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(660, 134);
+            this.tabPage1.Size = new System.Drawing.Size(660, 195);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "景点";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -190,7 +190,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(637, 134);
+            this.tabPage2.Size = new System.Drawing.Size(660, 134);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "餐厅";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -199,7 +199,7 @@
             // 
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(637, 134);
+            this.tabPage3.Size = new System.Drawing.Size(660, 134);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "住宿";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -208,7 +208,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(697, 339);
+            this.ClientSize = new System.Drawing.Size(697, 400);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.groupBox1);

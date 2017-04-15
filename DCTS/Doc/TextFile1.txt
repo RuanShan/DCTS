@@ -11,6 +11,46 @@
 餐厅：
 国家，城市，区域，餐厅名称，菜系，图片，经纬度，地址，如何抵达，营业时间，推荐菜单，Tips
 
+#考虑到条件查询和展示，使用以上都可抽象为一个地点，所以一个表格存储所有的 景点，住宿，餐厅
+
+CREATE TABLE `ComboLocations` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `ltype` varchar(12) DEFAULT NULL,
+  
+  `nation` varchar(45) DEFAULT NULL,
+  `city` varchar(45) DEFAULT NULL,
+  `area` varchar(45) DEFAULT NULL,
+  `title` varchar(256) DEFAULT NULL,
+  `local_title` varchar(256) DEFAULT NULL,
+  `img` varchar(256) DEFAULT NULL,
+
+  `address` varchar(1024) DEFAULT NULL,
+  `local_address` varchar(1024) DEFAULT NULL,
+  `latlng` varchar(256) DEFAULT NULL,
+  `route` varchar(512) DEFAULT NULL,
+  `contact` varchar(256) DEFAULT NULL,
+  
+  #景点
+  `open_at` datetime DEFAULT NULL,
+  `close_at` datetime DEFAULT NULL,
+  `ticket` varchar(45) DEFAULT NULL,
+  
+  # 住宿
+  `room` varchar(512) DEFAULT NULL,
+  `dinner` varchar(512) DEFAULT NULL,
+  `wifi` varchar(45) DEFAULT NULL,
+  `parking` varchar(45) DEFAULT NULL,
+  `reception` varchar(45) DEFAULT NULL,
+  `kitchen` varchar(512) DEFAULT NULL,
+  
+  # 
+  `dishes` varchar(512) DEFAULT NULL,
+  `recommended_dishes` varchar(512) DEFAULT NULL,
+  `tips` varchar(1024) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
 =======================================
 http://stackoverflow.com/questions/33575109/mysql-entity-the-value-for-column-isprimarykey-in-table-tabledetails-is
 
