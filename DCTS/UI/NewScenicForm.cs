@@ -15,6 +15,7 @@ namespace DCTS.UI
         public NewScenicForm()
         {
             InitializeComponent();
+            InitializeDataSource();
         }
 
         public void InitializeDataSource()

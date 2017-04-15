@@ -34,18 +34,20 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button2 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.cityComboBox = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.nationComboBox = new System.Windows.Forms.ComboBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.nationColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cityColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.imgColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.titleColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.localTitleColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.serviceTimeColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.editColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.deleteColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -65,12 +67,17 @@
             this.imgColumn1,
             this.titleColumn1,
             this.localTitleColumn1,
-            this.serviceTimeColumn1});
+            this.serviceTimeColumn1,
+            this.editColumn1,
+            this.deleteColumn});
             this.dataGridView.Location = new System.Drawing.Point(8, 171);
             this.dataGridView.Name = "dataGridView";
+            this.dataGridView.RowHeadersVisible = false;
             this.dataGridView.RowTemplate.Height = 23;
+            this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView.Size = new System.Drawing.Size(668, 169);
             this.dataGridView.TabIndex = 0;
+            this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellContentClick);
             // 
             // newButton
             // 
@@ -87,10 +94,10 @@
             this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.comboBox3);
+            this.groupBox1.Controls.Add(this.cityComboBox);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.comboBox2);
+            this.groupBox1.Controls.Add(this.nationComboBox);
             this.groupBox1.Location = new System.Drawing.Point(8, 51);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(668, 84);
@@ -115,13 +122,14 @@
             this.label4.TabIndex = 6;
             this.label4.Text = "城市";
             // 
-            // comboBox3
+            // cityComboBox
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(288, 21);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(121, 20);
-            this.comboBox3.TabIndex = 5;
+            this.cityComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cityComboBox.FormattingEnabled = true;
+            this.cityComboBox.Location = new System.Drawing.Point(288, 21);
+            this.cityComboBox.Name = "cityComboBox";
+            this.cityComboBox.Size = new System.Drawing.Size(121, 20);
+            this.cityComboBox.TabIndex = 5;
             // 
             // label3
             // 
@@ -132,13 +140,31 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "国家";
             // 
-            // comboBox2
+            // nationComboBox
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(97, 18);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 20);
-            this.comboBox2.TabIndex = 3;
+            this.nationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.nationComboBox.FormattingEnabled = true;
+            this.nationComboBox.Location = new System.Drawing.Point(97, 18);
+            this.nationComboBox.Name = "nationComboBox";
+            this.nationComboBox.Size = new System.Drawing.Size(121, 20);
+            this.nationComboBox.TabIndex = 3;
+            this.nationComboBox.SelectedIndexChanged += new System.EventHandler(this.nationComboBox_SelectedIndexChanged);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(95, 53);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(314, 21);
+            this.textBox1.TabIndex = 10;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(24, 56);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 12);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "名称关键词";
             // 
             // nationColumn1
             // 
@@ -175,25 +201,23 @@
             this.serviceTimeColumn1.HeaderText = "开放时间";
             this.serviceTimeColumn1.Name = "serviceTimeColumn1";
             // 
+            // editColumn1
+            // 
+            this.editColumn1.HeaderText = "";
+            this.editColumn1.Name = "editColumn1";
+            this.editColumn1.Text = "编辑";
+            this.editColumn1.UseColumnTextForButtonValue = true;
+            // 
+            // deleteColumn
+            // 
+            this.deleteColumn.HeaderText = "";
+            this.deleteColumn.Name = "deleteColumn";
+            this.deleteColumn.Text = "删除";
+            this.deleteColumn.UseColumnTextForButtonValue = true;
+            // 
             // entityDataSource1
             // 
             this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(95, 53);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(314, 21);
-            this.textBox1.TabIndex = 10;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 56);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 12);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "名称关键词";
             // 
             // ScenicsControl
             // 
@@ -218,17 +242,19 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox cityComboBox;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox nationComboBox;
         private CustomComponents.EntityDataSource entityDataSource1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewTextBoxColumn nationColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn cityColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn imgColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn titleColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn localTitleColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn serviceTimeColumn1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridViewButtonColumn editColumn1;
+        private System.Windows.Forms.DataGridViewButtonColumn deleteColumn;
     }
 }
