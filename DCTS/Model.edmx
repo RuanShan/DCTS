@@ -33,7 +33,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="uint" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="ltype" Type="varchar" MaxLength="12" />
+          <Property Name="ltype" Type="uint" Nullable="false" />
           <Property Name="nation" Type="varchar" MaxLength="45" />
           <Property Name="city" Type="varchar" MaxLength="45" />
           <Property Name="area" Type="varchar" MaxLength="45" />
@@ -68,6 +68,7 @@
           <Property Name="day" Type="uint" Nullable="false" />
           <Property Name="position" Type="uint" Nullable="false" />
           <Property Name="tripId" Type="uint" Nullable="false" />
+          <Property Name="locationId" Type="uint" Nullable="false" />
         </EntityType>
         <EntityType Name="Dinings">
           <Key>
@@ -231,6 +232,7 @@
           <Property Type="Int64" Name="day" Nullable="false" />
           <Property Type="Int64" Name="position" Nullable="false" />
           <Property Type="Int64" Name="tripId" Nullable="false" />
+          <Property Type="Int64" Name="locationId" Nullable="false" />
         </EntityType>
         <EntityType Name="City">
           <Key>
@@ -260,7 +262,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Type="Int64" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="ltype" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ltype" Nullable="false" />
           <Property Type="String" Name="nation" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="city" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="area" MaxLength="45" FixedLength="false" Unicode="false" />
@@ -362,6 +364,7 @@
           <EntitySetMapping Name="Days">
             <EntityTypeMapping TypeName="DctsModel.Day">
               <MappingFragment StoreEntitySet="Days">
+                <ScalarProperty Name="locationId" ColumnName="locationId" />
                 <ScalarProperty Name="tripId" ColumnName="tripId" />
                 <ScalarProperty Name="position" ColumnName="position" />
                 <ScalarProperty Name="day" ColumnName="day" />

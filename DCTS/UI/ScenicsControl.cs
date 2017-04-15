@@ -33,8 +33,7 @@ namespace DCTS.UI
             int pageSize = 5000;
             var ctx = this.entityDataSource1.DbContext as DctsEntities;
              
-
-            var query = ctx.Scenics.OrderBy(o => o.id).Skip(offset).Take(pageSize);
+            var query = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Scenic).OrderBy(o => o.id).Skip(offset).Take(pageSize);
             var list = this.entityDataSource1.CreateView(query);
             this.dataGridView.DataSource = list;
             
@@ -82,13 +81,13 @@ namespace DCTS.UI
             else if (column == deleteColumn)
             {
                 var row = dataGridView.Rows[e.RowIndex];
-                var model = row.DataBoundItem as Scenic;
+                var model = row.DataBoundItem as ComboLocation;
                 string msg = string.Format("确定删除景点<{0}>？", model.title);
 
                 if (MessageHelper.DeleteConfirm(msg))
                 {
 
-                    ScenicDbHelper.Delete(model.id);
+                    ComboLoactionBusiness.Delete(model.id);
 
                     BeginActive();
                 }

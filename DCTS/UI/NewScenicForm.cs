@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DCTS.DB;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -48,10 +49,19 @@ namespace DCTS.UI
         {
             using (var ctx = new DctsEntities())
             {
-                var obj = ctx.Scenics.Create();
+                var obj = ctx.ComboLocations.Create();
+                obj.ltype = (int)ComboLocationEnum.Scenic;
                 obj.title = this.titleTextBox.Text;
+                obj.nation = this.nationComboBox.Text;
+                obj.city = this.cityComboBox.Text;
+                obj.latlng = this.latlngTextBox.Text;
+                obj.open_at = this.openAtDateTimePicker.Value;
+                obj.close_at = this.closeAtDateTimePicker.Value;
+                obj.tips = this.tipsTextBox.Text;
+                obj.local_address = this.localAddressTextBox.Text;
+
                 //obj.memo = this.memoTextBox.Text;
-                ctx.Scenics.Add(obj);
+                ctx.ComboLocations.Add(obj);
                 ctx.SaveChanges();
             }
 

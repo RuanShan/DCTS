@@ -15,7 +15,7 @@ namespace DCTS
     public partial class ComboLocation
     {
         public long id { get; set; }
-        public string ltype { get; set; }
+        public int ltype { get; set; }
         public string nation { get; set; }
         public string city { get; set; }
         public string area { get; set; }

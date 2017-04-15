@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DCTS.DB;
 using DCTS.Uti;
+using DCTS.Bus;
 
 namespace DCTS.UI
 {
@@ -25,6 +26,12 @@ namespace DCTS.UI
         public EditTripControl()
         {
             InitializeComponent();
+            dayNameColumn.Width = dayDataGridView.ClientSize.Width;
+            dayDataGridView.AutoGenerateColumns = false;
+            dayDetailDataGridView.AutoGenerateColumns = false;
+            //dayListView.Columns[0].Width = 0; //id
+            //dayListView.Columns[0].Width = dayListView.ClientSize.Width;  // 第几天
+
             localtionForm = new ChooseLocaltionForm();
         }
 
@@ -33,29 +40,35 @@ namespace DCTS.UI
             InitializeDataSource();
         }
 
-        public void InitializeDataSource()
+        public void InitializeDataSource(int day = 0)
         {
             var db = this.entityDataSource1.DbContext as DctsEntities;
             this.Model = db.Trips.Find(ModelId);
             this.DayList = db.Days.Where(o => o.tripId == ModelId).OrderBy(o => o.day).ToList();
 
-
-            InitializeDayListBox();
-
+            InitializeDayListBox( day );
         }
 
-        public void InitializeDayListBox()
+        public void InitializeDayListBox( int day = 0)
         {
             List<MockEntity> list = new List<MockEntity>();
             for (int i = 1; i <= Model.days; i++)
             {
                 list.Add(new MockEntity { Id = i, FullName = String.Format("第 {0} 天", i) });
             }
+            this.dayDataGridView.DataSource = list;
 
-            this.dayListBox.DisplayMember = "FullName";
-            this.dayListBox.ValueMember = "Id";
-            this.dayListBox.DataSource = list;
-        
+            if (day > 0)
+            {
+                this.dayDataGridView.Rows[day - 1].Selected = true;
+            }
+        }
+
+        public void InitializeDayDetailListBox( int day )
+        {
+            var dayModelByDay = this.DayList.Where(o => o.day == day).ToList();
+            this.dayDetailDataGridView.DataSource = dayModelByDay;
+
         }
 
 
@@ -68,16 +81,21 @@ namespace DCTS.UI
         private void dayListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            int day = Convert.ToInt32(this.dayListBox.SelectedValue);
 
-            //this.DayList.Where( o=>o.day == day && o.
         }
 
-        private void addButton_Click(object sender, EventArgs e)
+        private void addLocationButton_Click(object sender, EventArgs e)
         {
             if (localtionForm.ShowDialog() == DialogResult.Yes)
-            { 
-            
+            {
+                if (localtionForm.SelectedLocation != null)
+                {
+                    var day = GetSelectedDay();
+                    long locationId = localtionForm.SelectedLocation.id;
+                    TripBusiness.AddLocation(this.ModelId, day, locationId);
+                    InitializeDataSource(day);
+                    //InitializeDayDetailListBox(day);
+                }
             
             }
         }
@@ -93,22 +111,41 @@ namespace DCTS.UI
         private void delDayButton_Click(object sender, EventArgs e)
         {
             var db = this.entityDataSource1.DbContext as DctsEntities;
-            int day = Convert.ToInt32(this.dayListBox.SelectedValue);
-
-            if (MessageHelper.DeleteConfirm(string.Format("确定删除<第{0}天>的行程吗？", day)))
+            
+            var day =  GetSelectedDay();
+            if( day >0 )
             {
-                var listByDay = this.DayList.Where(o => o.day == day).ToList();
+                if (MessageHelper.DeleteConfirm(string.Format("确定删除<第{0}天>的行程吗？", day)))
+                {
+                    TripBusiness.DeleteDay(ModelId, (int) day);
 
-                string sqlFormat = "UPDATE days SET `day`=`day`-1 WHERE `tripId`={0} && `day`>{1}";
-                string sql = String.Format(sqlFormat, this.ModelId, day);
-                db.Days.RemoveRange(listByDay);
-                db.Database.ExecuteSqlCommand(sql);
-
-                Model.days -= 1;
-                db.SaveChanges();
-
-                InitializeDataSource();
+                    InitializeDataSource();
+                }
             }
+        }
+
+        private void dayDataGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            var day = GetSelectedDay();
+
+            if (day > 0)
+            {
+                InitializeDayDetailListBox(day);
+            
+            }
+        }
+
+
+        private int GetSelectedDay()
+        {
+            int day = 0;
+            var row = dayDataGridView.CurrentRow;
+            if(  row != null )
+            {
+                var mockEntity = row.DataBoundItem as MockEntity;
+                day = (int)mockEntity.Id;
+            }
+            return day;
         }
     }
 }

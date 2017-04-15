@@ -29,27 +29,18 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.dayListBox = new System.Windows.Forms.ListBox();
             this.addDayButton = new System.Windows.Forms.Button();
-            this.dayDetailListBox = new System.Windows.Forms.ListBox();
-            this.addButton = new System.Windows.Forms.Button();
+            this.addLocationButton = new System.Windows.Forms.Button();
             this.backLinkLabel = new System.Windows.Forms.LinkLabel();
             this.delDayButton = new System.Windows.Forms.Button();
+            this.dayDataGridView = new System.Windows.Forms.DataGridView();
+            this.dayDetailDataGridView = new System.Windows.Forms.DataGridView();
+            this.dayNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
+            this.localtionTitleColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dayDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dayDetailDataGridView)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dayListBox
-            // 
-            this.dayListBox.FormattingEnabled = true;
-            this.dayListBox.ItemHeight = 12;
-            this.dayListBox.Items.AddRange(new object[] {
-            "第一天",
-            "第二天"});
-            this.dayListBox.Location = new System.Drawing.Point(3, 39);
-            this.dayListBox.Name = "dayListBox";
-            this.dayListBox.Size = new System.Drawing.Size(120, 280);
-            this.dayListBox.TabIndex = 0;
-            this.dayListBox.SelectedIndexChanged += new System.EventHandler(this.dayListBox_SelectedIndexChanged);
             // 
             // addDayButton
             // 
@@ -61,24 +52,15 @@
             this.addDayButton.UseVisualStyleBackColor = true;
             this.addDayButton.Click += new System.EventHandler(this.addDayButton_Click);
             // 
-            // dayDetailListBox
+            // addLocationButton
             // 
-            this.dayDetailListBox.FormattingEnabled = true;
-            this.dayDetailListBox.ItemHeight = 12;
-            this.dayDetailListBox.Location = new System.Drawing.Point(129, 39);
-            this.dayDetailListBox.Name = "dayDetailListBox";
-            this.dayDetailListBox.Size = new System.Drawing.Size(464, 280);
-            this.dayDetailListBox.TabIndex = 2;
-            // 
-            // addButton
-            // 
-            this.addButton.Location = new System.Drawing.Point(518, 10);
-            this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(75, 23);
-            this.addButton.TabIndex = 3;
-            this.addButton.Text = "添加";
-            this.addButton.UseVisualStyleBackColor = true;
-            this.addButton.Click += new System.EventHandler(this.addButton_Click);
+            this.addLocationButton.Location = new System.Drawing.Point(518, 10);
+            this.addLocationButton.Name = "addLocationButton";
+            this.addLocationButton.Size = new System.Drawing.Size(75, 23);
+            this.addLocationButton.TabIndex = 3;
+            this.addLocationButton.Text = "添加";
+            this.addLocationButton.UseVisualStyleBackColor = true;
+            this.addLocationButton.Click += new System.EventHandler(this.addLocationButton_Click);
             // 
             // backLinkLabel
             // 
@@ -101,22 +83,71 @@
             this.delDayButton.UseVisualStyleBackColor = true;
             this.delDayButton.Click += new System.EventHandler(this.delDayButton_Click);
             // 
+            // dayDataGridView
+            // 
+            this.dayDataGridView.AllowUserToAddRows = false;
+            this.dayDataGridView.AllowUserToDeleteRows = false;
+            this.dayDataGridView.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dayDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dayDataGridView.ColumnHeadersVisible = false;
+            this.dayDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dayNameColumn});
+            this.dayDataGridView.Location = new System.Drawing.Point(3, 39);
+            this.dayDataGridView.Name = "dayDataGridView";
+            this.dayDataGridView.RowHeadersVisible = false;
+            this.dayDataGridView.RowTemplate.Height = 23;
+            this.dayDataGridView.Size = new System.Drawing.Size(120, 275);
+            this.dayDataGridView.TabIndex = 8;
+            this.dayDataGridView.SelectionChanged += new System.EventHandler(this.dayDataGridView_SelectionChanged);
+            // 
+            // dayDetailDataGridView
+            // 
+            this.dayDetailDataGridView.AllowUserToAddRows = false;
+            this.dayDetailDataGridView.AllowUserToDeleteRows = false;
+            this.dayDetailDataGridView.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dayDetailDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dayDetailDataGridView.ColumnHeadersVisible = false;
+            this.dayDetailDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.localtionTitleColumn});
+            this.dayDetailDataGridView.Location = new System.Drawing.Point(129, 39);
+            this.dayDetailDataGridView.Name = "dayDetailDataGridView";
+            this.dayDetailDataGridView.RowHeadersVisible = false;
+            this.dayDetailDataGridView.RowTemplate.Height = 23;
+            this.dayDetailDataGridView.Size = new System.Drawing.Size(464, 275);
+            this.dayDetailDataGridView.TabIndex = 8;
+            // 
+            // dayNameColumn
+            // 
+            this.dayNameColumn.DataPropertyName = "FullName";
+            this.dayNameColumn.HeaderText = "FullName";
+            this.dayNameColumn.Name = "dayNameColumn";
+            this.dayNameColumn.Visible = false;
+            // 
             // entityDataSource1
             // 
             this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
+            // 
+            // localtionTitleColumn
+            // 
+            this.localtionTitleColumn.DataPropertyName = "locationId";
+            this.localtionTitleColumn.HeaderText = "localtionTitle";
+            this.localtionTitleColumn.Name = "localtionTitleColumn";
+            this.localtionTitleColumn.Visible = false;
             // 
             // EditTripControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.dayDetailDataGridView);
+            this.Controls.Add(this.dayDataGridView);
             this.Controls.Add(this.delDayButton);
             this.Controls.Add(this.backLinkLabel);
-            this.Controls.Add(this.addButton);
-            this.Controls.Add(this.dayDetailListBox);
+            this.Controls.Add(this.addLocationButton);
             this.Controls.Add(this.addDayButton);
-            this.Controls.Add(this.dayListBox);
             this.Name = "EditTripControl";
             this.Size = new System.Drawing.Size(596, 346);
+            ((System.ComponentModel.ISupportInitialize)(this.dayDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dayDetailDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -124,12 +155,14 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox dayListBox;
         private System.Windows.Forms.Button addDayButton;
-        private System.Windows.Forms.ListBox dayDetailListBox;
-        private System.Windows.Forms.Button addButton;
+        private System.Windows.Forms.Button addLocationButton;
         private System.Windows.Forms.LinkLabel backLinkLabel;
         private CustomComponents.EntityDataSource entityDataSource1;
         private System.Windows.Forms.Button delDayButton;
+        private System.Windows.Forms.DataGridView dayDataGridView;
+        private System.Windows.Forms.DataGridView dayDetailDataGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dayNameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn localtionTitleColumn;
     }
 }

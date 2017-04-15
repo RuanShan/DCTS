@@ -6,19 +6,21 @@ using System.Threading.Tasks;
 
 namespace DCTS.Bus
 {
-    class TripDbHelper
+    class ComboLoactionBusiness
     {
-        public static void Delete(long tripId)
+        public static void Delete(long id)
         {
             using (var ctx = new DctsEntities())
             {
-                var trip = ctx.Trips.Find( tripId );
+                var model = ctx.ComboLocations.Find(id);
 
-                ctx.Trips.Remove(trip);
+                ctx.ComboLocations.Remove(model);
 
                 ctx.SaveChanges();
             }
-        
+
         }
+
+
     }
 }

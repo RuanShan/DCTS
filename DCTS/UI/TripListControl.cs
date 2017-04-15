@@ -80,7 +80,7 @@ namespace DCTS.UI
                 if (MessageHelper.DeleteConfirm(msg))
                 {
 
-                    TripDbHelper.Delete(trip.id);
+                    TripBusiness.Delete(trip.id);
 
                     BeginActive();
                 }

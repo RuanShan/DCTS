@@ -20,5 +20,6 @@ namespace DCTS
         public long day { get; set; }
         public long position { get; set; }
         public long tripId { get; set; }
+        public long locationId { get; set; }
     }
 }

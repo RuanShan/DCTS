@@ -50,7 +50,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.closeAtDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.label10 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.tipsTextBox = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.cancelButton = new System.Windows.Forms.Button();
@@ -60,93 +60,93 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(71, 90);
+            this.label1.Location = new System.Drawing.Point(71, 83);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(31, 13);
+            this.label1.Size = new System.Drawing.Size(29, 12);
             this.label1.TabIndex = 0;
             this.label1.Text = "国家";
             // 
             // titleTextBox
             // 
-            this.titleTextBox.Location = new System.Drawing.Point(118, 124);
+            this.titleTextBox.Location = new System.Drawing.Point(118, 114);
             this.titleTextBox.Name = "titleTextBox";
-            this.titleTextBox.Size = new System.Drawing.Size(518, 20);
+            this.titleTextBox.Size = new System.Drawing.Size(518, 21);
             this.titleTextBox.TabIndex = 1;
             // 
             // label2
             // 
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(20, 28);
+            this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(20, 26);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(673, 44);
+            this.label2.Size = new System.Drawing.Size(673, 41);
             this.label2.TabIndex = 3;
             this.label2.Text = "新建景点";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // localAddressTextBox
             // 
-            this.localAddressTextBox.Location = new System.Drawing.Point(118, 300);
+            this.localAddressTextBox.Location = new System.Drawing.Point(118, 277);
             this.localAddressTextBox.Name = "localAddressTextBox";
-            this.localAddressTextBox.Size = new System.Drawing.Size(518, 20);
+            this.localAddressTextBox.Size = new System.Drawing.Size(518, 21);
             this.localAddressTextBox.TabIndex = 5;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(368, 93);
+            this.label3.Location = new System.Drawing.Point(368, 86);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(31, 13);
+            this.label3.Size = new System.Drawing.Size(29, 12);
             this.label3.TabIndex = 4;
             this.label3.Text = "城市";
             // 
             // nationComboBox
             // 
             this.nationComboBox.FormattingEnabled = true;
-            this.nationComboBox.Location = new System.Drawing.Point(118, 90);
+            this.nationComboBox.Location = new System.Drawing.Point(118, 83);
             this.nationComboBox.Name = "nationComboBox";
-            this.nationComboBox.Size = new System.Drawing.Size(233, 21);
+            this.nationComboBox.Size = new System.Drawing.Size(233, 20);
             this.nationComboBox.TabIndex = 6;
             this.nationComboBox.SelectedIndexChanged += new System.EventHandler(this.nationComboBox_SelectedIndexChanged);
             // 
             // cityComboBox
             // 
             this.cityComboBox.FormattingEnabled = true;
-            this.cityComboBox.Location = new System.Drawing.Point(403, 90);
+            this.cityComboBox.Location = new System.Drawing.Point(403, 83);
             this.cityComboBox.Name = "cityComboBox";
-            this.cityComboBox.Size = new System.Drawing.Size(233, 21);
+            this.cityComboBox.Size = new System.Drawing.Size(233, 20);
             this.cityComboBox.TabIndex = 6;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(47, 127);
+            this.label4.Location = new System.Drawing.Point(47, 117);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(55, 13);
+            this.label4.Size = new System.Drawing.Size(53, 12);
             this.label4.TabIndex = 4;
             this.label4.Text = "中文名称";
             // 
             // localTitleTextBox
             // 
-            this.localTitleTextBox.Location = new System.Drawing.Point(118, 153);
+            this.localTitleTextBox.Location = new System.Drawing.Point(118, 141);
             this.localTitleTextBox.Name = "localTitleTextBox";
-            this.localTitleTextBox.Size = new System.Drawing.Size(518, 20);
+            this.localTitleTextBox.Size = new System.Drawing.Size(518, 21);
             this.localTitleTextBox.TabIndex = 1;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(23, 156);
+            this.label5.Location = new System.Drawing.Point(23, 144);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(79, 13);
+            this.label5.Size = new System.Drawing.Size(77, 12);
             this.label5.TabIndex = 4;
             this.label5.Text = "当地语言名称";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(71, 229);
+            this.label6.Location = new System.Drawing.Point(71, 211);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(31, 13);
+            this.label6.Size = new System.Drawing.Size(29, 12);
             this.label6.TabIndex = 7;
             this.label6.Text = "图片";
             // 
@@ -157,16 +157,16 @@
             // 
             // imgPathTextBox
             // 
-            this.imgPathTextBox.Location = new System.Drawing.Point(118, 225);
+            this.imgPathTextBox.Location = new System.Drawing.Point(118, 208);
             this.imgPathTextBox.Name = "imgPathTextBox";
-            this.imgPathTextBox.Size = new System.Drawing.Size(481, 20);
+            this.imgPathTextBox.Size = new System.Drawing.Size(481, 21);
             this.imgPathTextBox.TabIndex = 1;
             // 
             // findFileButton
             // 
-            this.findFileButton.Location = new System.Drawing.Point(605, 223);
+            this.findFileButton.Location = new System.Drawing.Point(605, 206);
             this.findFileButton.Name = "findFileButton";
-            this.findFileButton.Size = new System.Drawing.Size(32, 25);
+            this.findFileButton.Size = new System.Drawing.Size(32, 23);
             this.findFileButton.TabIndex = 8;
             this.findFileButton.Text = "...";
             this.findFileButton.UseVisualStyleBackColor = true;
@@ -175,76 +175,78 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(59, 192);
+            this.label7.Location = new System.Drawing.Point(59, 177);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(43, 13);
+            this.label7.Size = new System.Drawing.Size(41, 12);
             this.label7.TabIndex = 10;
             this.label7.Text = "经纬度";
             // 
             // latlngTextBox
             // 
-            this.latlngTextBox.Location = new System.Drawing.Point(118, 189);
+            this.latlngTextBox.Location = new System.Drawing.Point(118, 174);
             this.latlngTextBox.Name = "latlngTextBox";
-            this.latlngTextBox.Size = new System.Drawing.Size(518, 20);
+            this.latlngTextBox.Size = new System.Drawing.Size(518, 21);
             this.latlngTextBox.TabIndex = 9;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(23, 303);
+            this.label8.Location = new System.Drawing.Point(23, 280);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(79, 13);
+            this.label8.Size = new System.Drawing.Size(77, 12);
             this.label8.TabIndex = 10;
             this.label8.Text = "当地语言地址";
             // 
             // openAtDateTimePicker
             // 
             this.openAtDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.openAtDateTimePicker.Location = new System.Drawing.Point(116, 261);
+            this.openAtDateTimePicker.Location = new System.Drawing.Point(116, 241);
             this.openAtDateTimePicker.Name = "openAtDateTimePicker";
-            this.openAtDateTimePicker.Size = new System.Drawing.Size(106, 20);
+            this.openAtDateTimePicker.ShowUpDown = true;
+            this.openAtDateTimePicker.Size = new System.Drawing.Size(106, 21);
             this.openAtDateTimePicker.TabIndex = 11;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(47, 268);
+            this.label9.Location = new System.Drawing.Point(47, 247);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(55, 13);
+            this.label9.Size = new System.Drawing.Size(53, 12);
             this.label9.TabIndex = 10;
             this.label9.Text = "开放时间";
             // 
             // closeAtDateTimePicker
             // 
             this.closeAtDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.closeAtDateTimePicker.Location = new System.Drawing.Point(245, 261);
+            this.closeAtDateTimePicker.Location = new System.Drawing.Point(245, 241);
             this.closeAtDateTimePicker.Name = "closeAtDateTimePicker";
-            this.closeAtDateTimePicker.Size = new System.Drawing.Size(106, 20);
+            this.closeAtDateTimePicker.ShowUpDown = true;
+            this.closeAtDateTimePicker.Size = new System.Drawing.Size(106, 21);
             this.closeAtDateTimePicker.TabIndex = 11;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(228, 268);
+            this.label10.Location = new System.Drawing.Point(228, 247);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(10, 13);
+            this.label10.Size = new System.Drawing.Size(11, 12);
             this.label10.TabIndex = 10;
             this.label10.Text = "-";
             // 
-            // textBox6
+            // tipsTextBox
             // 
-            this.textBox6.Location = new System.Drawing.Point(118, 329);
-            this.textBox6.Multiline = true;
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(518, 56);
-            this.textBox6.TabIndex = 5;
+            this.tipsTextBox.Location = new System.Drawing.Point(118, 304);
+            this.tipsTextBox.Multiline = true;
+            this.tipsTextBox.Name = "tipsTextBox";
+            this.tipsTextBox.Size = new System.Drawing.Size(518, 52);
+            this.tipsTextBox.TabIndex = 5;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(47, 333);
+            this.label11.Location = new System.Drawing.Point(47, 307);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(51, 13);
+            this.label11.Size = new System.Drawing.Size(53, 12);
             this.label11.TabIndex = 10;
             this.label11.Text = "深度Tips";
             // 
@@ -255,9 +257,9 @@
             // cancelButton
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.No;
-            this.cancelButton.Location = new System.Drawing.Point(562, 404);
+            this.cancelButton.Location = new System.Drawing.Point(562, 373);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 25);
+            this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 12;
             this.cancelButton.Text = "取消";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -266,9 +268,9 @@
             // saveButton
             // 
             this.saveButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
-            this.saveButton.Location = new System.Drawing.Point(481, 404);
+            this.saveButton.Location = new System.Drawing.Point(481, 373);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(75, 25);
+            this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 13;
             this.saveButton.Text = "保存";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -276,9 +278,9 @@
             // 
             // NewScenicForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(721, 459);
+            this.ClientSize = new System.Drawing.Size(721, 424);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.closeAtDateTimePicker);
@@ -293,7 +295,7 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.cityComboBox);
             this.Controls.Add(this.nationComboBox);
-            this.Controls.Add(this.textBox6);
+            this.Controls.Add(this.tipsTextBox);
             this.Controls.Add(this.localAddressTextBox);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -333,7 +335,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.DateTimePicker closeAtDateTimePicker;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox tipsTextBox;
         private System.Windows.Forms.Label label11;
         private CustomComponents.EntityDataSource entityDataSource1;
         private System.Windows.Forms.Button cancelButton;
