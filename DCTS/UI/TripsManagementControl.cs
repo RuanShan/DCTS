@@ -17,7 +17,7 @@ namespace DCTS.UI
         ScenicsControl scenicsControl;
         EditTripControl editTripControl;
         DinningsControl dinningsControl;
-
+        HotelControl hotelControl;
         public TripsManagementControl()
         {
             InitializeComponent();
@@ -92,6 +92,20 @@ namespace DCTS.UI
             this.dinningsControl.BeginActive();
             this.mainPanel.Controls.Clear();
             this.mainPanel.Controls.Add(dinningsControl);
+
+        }
+
+        private void hotelsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (hotelControl == null)
+            {
+                hotelControl = new HotelControl();
+                hotelControl.Dock = DockStyle.Fill;
+            }
+            this.hotelControl.BeginActive();
+            this.mainPanel.Controls.Clear();
+            this.mainPanel.Controls.Add(hotelControl);
+
 
         }
 

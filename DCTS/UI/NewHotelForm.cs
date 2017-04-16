@@ -11,13 +11,12 @@ using DCTS.DB;
 
 namespace DCTS.UI
 {
-    public partial class NewDinningsForm : BaseModalForm
+    public partial class NewHotelForm : BaseModalForm
     {
-        public NewDinningsForm()
+        public NewHotelForm()
         {
             InitializeComponent();
             InitializeDataSource();
-
 
         }
 
@@ -26,13 +25,10 @@ namespace DCTS.UI
             var ctx = this.entityDataSource1.DbContext as DctsEntities;
             var nationList = DCTS.DB.GlobalCache.NationList;
 
-
-
             this.nationComboBox.DisplayMember = "title";
             this.nationComboBox.ValueMember = "code";
             this.nationComboBox.DataSource = nationList;
 
-            
         }
 
         private void nationComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -52,24 +48,26 @@ namespace DCTS.UI
             using (var ctx = new DctsEntities())
             {
                 var obj = ctx.ComboLocations.Create();
-                obj.ltype = (int)ComboLocationEnum.Dining;
+                obj.ltype = (int)ComboLocationEnum.Hotel;
                 obj.nation = this.nationComboBox.Text;
                 obj.city = this.cityComboBox.Text;
-                obj.area = this.titleTextBox.Text;
-                obj.dishes = this.textBox1.Text;
+                obj.title = this.titleTextBox.Text;
+                obj.local_title = this.localTitleTextBox.Text;
                 obj.img = this.imgPathTextBox.Text;
-                obj.latlng = this.latlngTextBox.Text;
-                obj.local_address = this.textBox2.Text;
-                obj.address = this.localAddressTextBox.Text;
-                obj.recommended_dishes = this.textBox3.Text;
-                obj.tips = this.textBox6.Text;
-                obj.title = this.localTitleTextBox.Text;
+                //  obj.ticket = this.tickettime.Text;
+                obj.open_at = Convert.ToDateTime(this.openAtDateTimePicker.Text);
+                obj.close_at = Convert.ToDateTime(this.closeAtDateTimePicker.Text);
+                obj.room = room.Text;
+                obj.dinner = moringTextBox.Text;
+                obj.latlng = latlng.Text;
+                obj.address = address.Text;
+                obj.local_address = local_address.Text;
+                obj.contact = contact.Text;
+                obj.wifi = wifi.Text;
+                obj.parking = parking.Text;
+                obj.reception = reception.Text;
+                obj.kitchen = kitchen.Text;
 
-                //obj.opentime = this.openAtDateTimePicker.Text;
-                //obj.closetime = this.closeAtDateTimePicker.Text;
-
-
-                //obj.memo = this.memoTextBox.Text;
                 ctx.ComboLocations.Add(obj);
                 ctx.SaveChanges();
             }
@@ -89,6 +87,11 @@ namespace DCTS.UI
         private void cancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
+
+        }
+
+        private void NewDinningsForm_Load(object sender, EventArgs e)
+        {
 
         }
     }

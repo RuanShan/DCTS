@@ -14,7 +14,7 @@ using DCTS.DB;
 
 namespace DCTS.UI
 {
-    public partial class DinningsControl : UserControl
+    public partial class HotelControl : UserControl
     {
         private Hashtable dataGridChanges = null;
 
@@ -22,7 +22,7 @@ namespace DCTS.UI
         int RowRemark = 0;
         //private List<ComboLocation> dinningsOrderList;
         IBindingList dinningsOrderList = null;
-        public DinningsControl()
+        public HotelControl()
         {
             InitializeComponent();
             this.dataGridChanges = new Hashtable();
@@ -31,6 +31,8 @@ namespace DCTS.UI
         public void BeginActive()
         {
             InitializeDataGridView();
+            InitializeDataGridView();
+
         }
 
         private void InitializeDataGridView()
@@ -40,30 +42,28 @@ namespace DCTS.UI
             var ctx = this.entityDataSource1.DbContext as DctsEntities;
             //using (var ctx = new DctsEntities())
             {
+                var query = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Hotel).OrderBy(o => o.id).Skip(offset).Take(pageSize);
 
-                // var query = ctx.ComboLocations.OrderBy(o => o.id).Skip(offset).Take(pageSize);
-                var query = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Dining).OrderBy(o => o.id).Skip(offset).Take(pageSize);
-
+              //  var query = ctx.ComboLocations.OrderBy(o => o.id).Skip(offset).Take(pageSize);
                 var list = this.entityDataSource1.CreateView(query);
                 sortabledinningsOrderList = new SortableBindingList<ComboLocation>(query.ToList());
                 this.bindingSource1.DataSource = this.sortabledinningsOrderList;
                 dataGridView.DataSource = this.bindingSource1;
 
             }
+            var nationList = DCTS.DB.GlobalCache.NationList;
 
             // 初始化查询条件
-            var nationList = DCTS.DB.GlobalCache.NationList;
             var nations = nationList.Select(o => new MockEntity { Id = o.id, ShortName = o.code, FullName = o.title }).ToList();
             nations.Insert(0, new MockEntity { Id = 0, ShortName = "", FullName = "所有" });
             this.nationComboBox.DisplayMember = "FullName";
             this.nationComboBox.ValueMember = "ShortName";
             this.nationComboBox.DataSource = nations;
-
         }
 
         private void newButton_Click(object sender, EventArgs e)
         {
-            var form = new NewDinningsForm();
+            var form = new NewHotelForm();
             if (form.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
             {
                 InitializeDataGridView();
@@ -72,7 +72,7 @@ namespace DCTS.UI
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+         
             var oids = GetOrderIdsBySelectedGridCell();
             using (var ctx = new DctsEntities())
             {
@@ -81,7 +81,7 @@ namespace DCTS.UI
                                  select s).ToList();
                 ctx.ComboLocations.RemoveRange(stockrecs);
                 ctx.SaveChanges();
-
+ 
             }
             InitializeDataGridView();
         }
@@ -93,7 +93,7 @@ namespace DCTS.UI
             foreach (DataGridViewRow row in rows)
             {
                 var Diningorder = row.DataBoundItem as ComboLocation;
-                order_ids.Add(Diningorder.id);
+                order_ids.Add(Diningorder.id); 
             }
 
             return order_ids;
@@ -118,9 +118,8 @@ namespace DCTS.UI
             string filter = "";
             if (this.textBox1.Text.Length > 0)
             {
-                //filter += "(餐厅名称=" + this.textBox1.Text + ")";
-                filter += " (餐厅名称 ='" + this.textBox1.Text + "')";
-
+                 filter += " (中文名称 ='" + this.textBox1.Text + "')";
+             
             }
             if (this.nationComboBox.Text.Length > 0)
             {
@@ -140,9 +139,10 @@ namespace DCTS.UI
                 //filter += "(城市=" + this.comboBox3.Text + ")";
                 filter += "(城市 =" + "'" + cityComboBox.Text + "'" + ")";
             }
-
+            
+ 
             this.bindingSource1.Filter = filter;
-
+ 
         }
 
         private void 修改ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -153,7 +153,7 @@ namespace DCTS.UI
                 InitializeDataGridView();
             }
         }
-
+   
 
         private void btsave_Click(object sender, EventArgs e)
         {
@@ -210,9 +210,8 @@ namespace DCTS.UI
             }
         }
 
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        private void nationComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             string code = nationComboBox.SelectedValue.ToString();
 
             var cityList = DCTS.DB.GlobalCache.CityList;
@@ -224,7 +223,7 @@ namespace DCTS.UI
             this.cityComboBox.ValueMember = "Id";
             this.cityComboBox.DataSource = cities;
         }
-
+      
 
     }
 }
