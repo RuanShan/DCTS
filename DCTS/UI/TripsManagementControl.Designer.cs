@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tripsControl = new DCTS.UI.TripListControl();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.tripsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -36,17 +35,10 @@
             this.dinningsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hotelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.活动ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tripsControl = new DCTS.UI.TripListControl();
             this.mainPanel.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // tripsControl
-            // 
-            this.tripsControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tripsControl.Location = new System.Drawing.Point(0, 0);
-            this.tripsControl.Name = "tripsControl";
-            this.tripsControl.Size = new System.Drawing.Size(690, 379);
-            this.tripsControl.TabIndex = 1;
             // 
             // mainPanel
             // 
@@ -101,6 +93,7 @@
             this.hotelsToolStripMenuItem.Name = "hotelsToolStripMenuItem";
             this.hotelsToolStripMenuItem.Size = new System.Drawing.Size(85, 19);
             this.hotelsToolStripMenuItem.Text = "住宿";
+            this.hotelsToolStripMenuItem.Click += new System.EventHandler(this.hotelsToolStripMenuItem_Click);
             // 
             // 活动ToolStripMenuItem
             // 
@@ -108,6 +101,14 @@
             this.活动ToolStripMenuItem.Name = "活动ToolStripMenuItem";
             this.活动ToolStripMenuItem.Size = new System.Drawing.Size(85, 19);
             this.活动ToolStripMenuItem.Text = "活动";
+            // 
+            // tripsControl
+            // 
+            this.tripsControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tripsControl.Location = new System.Drawing.Point(0, 0);
+            this.tripsControl.Name = "tripsControl";
+            this.tripsControl.Size = new System.Drawing.Size(690, 379);
+            this.tripsControl.TabIndex = 1;
             // 
             // TripsManagementControl
             // 

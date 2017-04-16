@@ -1,6 +1,6 @@
 ﻿namespace DCTS.UI
 {
-    partial class DinningsControl
+    partial class HotelControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -34,17 +34,22 @@
             this.cityColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.areaColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.titleColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dishesColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.imgColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dishesColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.close_atColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.roomColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dinner = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.latlngColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.addressColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.reachColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.recommendedDishesColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contactColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.wifiColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.parkingCloumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.receptionCloumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kitchenCloumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tipsColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.修改ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -77,13 +82,19 @@
             this.cityColumn1,
             this.areaColumn1,
             this.titleColumn1,
-            this.dishesColumn1,
             this.imgColumn1,
+            this.dishesColumn1,
+            this.close_atColumn1,
+            this.roomColumn1,
+            this.dinner,
             this.latlngColumn1,
             this.addressColumn1,
             this.reachColumn1,
-            this.Column6,
-            this.recommendedDishesColumn1,
+            this.contactColumn1,
+            this.wifiColumn1,
+            this.parkingCloumn1,
+            this.receptionCloumn,
+            this.kitchenCloumn,
             this.tipsColumn1});
             this.dataGridView.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView.Location = new System.Drawing.Point(8, 185);
@@ -109,21 +120,15 @@
             // 
             // areaColumn1
             // 
-            this.areaColumn1.DataPropertyName = "area";
-            this.areaColumn1.HeaderText = "区域";
+            this.areaColumn1.DataPropertyName = "title";
+            this.areaColumn1.HeaderText = "中文名称";
             this.areaColumn1.Name = "areaColumn1";
             // 
             // titleColumn1
             // 
-            this.titleColumn1.DataPropertyName = "title";
-            this.titleColumn1.HeaderText = "餐厅名称";
+            this.titleColumn1.DataPropertyName = "local_title";
+            this.titleColumn1.HeaderText = "英文名称";
             this.titleColumn1.Name = "titleColumn1";
-            // 
-            // dishesColumn1
-            // 
-            this.dishesColumn1.DataPropertyName = "dishes";
-            this.dishesColumn1.HeaderText = "菜系";
-            this.dishesColumn1.Name = "dishesColumn1";
             // 
             // imgColumn1
             // 
@@ -131,8 +136,33 @@
             this.imgColumn1.HeaderText = "图片";
             this.imgColumn1.Name = "imgColumn1";
             // 
+            // dishesColumn1
+            // 
+            this.dishesColumn1.DataPropertyName = "openAtDateTimePicker";
+            this.dishesColumn1.HeaderText = "入住日期";
+            this.dishesColumn1.Name = "dishesColumn1";
+            // 
+            // close_atColumn1
+            // 
+            this.close_atColumn1.DataPropertyName = "closeAtDateTimePicker";
+            this.close_atColumn1.HeaderText = "几晚";
+            this.close_atColumn1.Name = "close_atColumn1";
+            // 
+            // roomColumn1
+            // 
+            this.roomColumn1.DataPropertyName = "room";
+            this.roomColumn1.HeaderText = "预定房型";
+            this.roomColumn1.Name = "roomColumn1";
+            // 
+            // dinner
+            // 
+            this.dinner.DataPropertyName = "dinner";
+            this.dinner.HeaderText = "早餐";
+            this.dinner.Name = "dinner";
+            // 
             // latlngColumn1
             // 
+            this.latlngColumn1.DataPropertyName = "latlng";
             this.latlngColumn1.HeaderText = "经纬度";
             this.latlngColumn1.Name = "latlngColumn1";
             // 
@@ -144,20 +174,39 @@
             // 
             // reachColumn1
             // 
-            this.reachColumn1.DataPropertyName = "reach";
-            this.reachColumn1.HeaderText = "如何抵达(周围特征)";
+            this.reachColumn1.DataPropertyName = "local_address";
+            this.reachColumn1.HeaderText = "如何抵达";
             this.reachColumn1.Name = "reachColumn1";
             // 
-            // Column6
+            // contactColumn1
             // 
-            this.Column6.HeaderText = "营业时间";
-            this.Column6.Name = "Column6";
+            this.contactColumn1.DataPropertyName = "contact";
+            this.contactColumn1.HeaderText = "联系方式";
+            this.contactColumn1.Name = "contactColumn1";
             // 
-            // recommendedDishesColumn1
+            // wifiColumn1
             // 
-            this.recommendedDishesColumn1.DataPropertyName = "recommendedDishes ";
-            this.recommendedDishesColumn1.HeaderText = "推荐菜单";
-            this.recommendedDishesColumn1.Name = "recommendedDishesColumn1";
+            this.wifiColumn1.DataPropertyName = "wifi";
+            this.wifiColumn1.HeaderText = "WIFI";
+            this.wifiColumn1.Name = "wifiColumn1";
+            // 
+            // parkingCloumn1
+            // 
+            this.parkingCloumn1.DataPropertyName = "parking";
+            this.parkingCloumn1.HeaderText = "停车位";
+            this.parkingCloumn1.Name = "parkingCloumn1";
+            // 
+            // receptionCloumn
+            // 
+            this.receptionCloumn.DataPropertyName = "reception";
+            this.receptionCloumn.HeaderText = "前台";
+            this.receptionCloumn.Name = "receptionCloumn";
+            // 
+            // kitchenCloumn
+            // 
+            this.kitchenCloumn.DataPropertyName = "kitchen";
+            this.kitchenCloumn.HeaderText = "厨房";
+            this.kitchenCloumn.Name = "kitchenCloumn";
             // 
             // tipsColumn1
             // 
@@ -168,10 +217,9 @@
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.deleteToolStripMenuItem,
-            this.修改ToolStripMenuItem});
+            this.deleteToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(123, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(123, 26);
             // 
             // deleteToolStripMenuItem
             // 
@@ -179,13 +227,6 @@
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.deleteToolStripMenuItem.Text = "删除餐厅";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
-            // 
-            // 修改ToolStripMenuItem
-            // 
-            this.修改ToolStripMenuItem.Name = "修改ToolStripMenuItem";
-            this.修改ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-            this.修改ToolStripMenuItem.Text = "修改";
-            this.修改ToolStripMenuItem.Click += new System.EventHandler(this.修改ToolStripMenuItem_Click);
             // 
             // newButton
             // 
@@ -271,7 +312,7 @@
             this.nationComboBox.Name = "nationComboBox";
             this.nationComboBox.Size = new System.Drawing.Size(121, 21);
             this.nationComboBox.TabIndex = 3;
-            this.nationComboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            this.nationComboBox.SelectedIndexChanged += new System.EventHandler(this.nationComboBox_SelectedIndexChanged);
             // 
             // btsave
             // 
@@ -292,7 +333,7 @@
             this.bindingSource1.DataSource = this.entityDataSource1;
             this.bindingSource1.Position = 0;
             // 
-            // DinningsControl
+            // HotelControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -300,7 +341,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.newButton);
             this.Controls.Add(this.dataGridView);
-            this.Name = "DinningsControl";
+            this.Name = "HotelControl";
             this.Size = new System.Drawing.Size(684, 397);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
@@ -324,22 +365,27 @@
         private CustomComponents.EntityDataSource entityDataSource1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.BindingSource bindingSource1;
+        private System.Windows.Forms.Button btsave;
         private System.Windows.Forms.DataGridViewTextBoxColumn nationColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn cityColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn areaColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn titleColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dishesColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn imgColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dishesColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn close_atColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn roomColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dinner;
         private System.Windows.Forms.DataGridViewTextBoxColumn latlngColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn addressColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn reachColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn recommendedDishesColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn contactColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn wifiColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn parkingCloumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn receptionCloumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn kitchenCloumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn tipsColumn1;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
-        private System.Windows.Forms.BindingSource bindingSource1;
-        private System.Windows.Forms.ToolStripMenuItem 修改ToolStripMenuItem;
-        private System.Windows.Forms.Button btsave;
     }
 }
