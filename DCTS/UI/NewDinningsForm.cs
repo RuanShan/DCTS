@@ -48,16 +48,16 @@ namespace DCTS.UI
         {
             using (var ctx = new DctsEntities())
             {
-                var obj = ctx.Dinings.Create();
+                var obj = ctx.ComboLocations.Create();
                 obj.nation = this.nationComboBox.Text;
                 obj.city = this.cityComboBox.Text;
                 obj.area = this.titleTextBox.Text;
                 obj.dishes = this.textBox1.Text;
                 obj.img = this.imgPathTextBox.Text;
                 obj.latlng = this.latlngTextBox.Text;
-                obj.reach = this.textBox2.Text;
+                obj.local_address = this.textBox2.Text;
                 obj.address = this.localAddressTextBox.Text;
-                obj.recommendedDishes = this.textBox3.Text;
+                obj.recommended_dishes = this.textBox3.Text;
                 obj.tips = this.textBox6.Text;
                 obj.title = this.localTitleTextBox.Text;
 
@@ -66,7 +66,7 @@ namespace DCTS.UI
                
 
                 //obj.memo = this.memoTextBox.Text;
-                ctx.Dinings.Add(obj);
+                ctx.ComboLocations.Add(obj);
                 ctx.SaveChanges();
             }
 

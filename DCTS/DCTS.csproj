@@ -96,6 +96,7 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="CustomComponents\Pager.Designer.cs" />
+    <Compile Include="CustomComponents\SortableBindingList.cs" />
     <Compile Include="Day.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
