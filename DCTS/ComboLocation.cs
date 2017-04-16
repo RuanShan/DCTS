@@ -14,6 +14,11 @@ namespace DCTS
     
     public partial class ComboLocation
     {
+        public ComboLocation()
+        {
+            this.Days = new HashSet<Day>();
+        }
+    
         public long id { get; set; }
         public int ltype { get; set; }
         public string nation { get; set; }
@@ -39,5 +44,7 @@ namespace DCTS
         public string dishes { get; set; }
         public string recommended_dishes { get; set; }
         public string tips { get; set; }
+    
+        public virtual ICollection<Day> Days { get; set; }
     }
 }

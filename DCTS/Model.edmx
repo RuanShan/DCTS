@@ -14,6 +14,14 @@
           <EntitySet Name="Nations" EntityType="DctsModel.Store.Nations" store:Type="Tables" Schema="dcts_dev" />
           <EntitySet Name="Scenics" EntityType="DctsModel.Store.Scenics" store:Type="Tables" Schema="dcts_dev" />
           <EntitySet Name="Trips" EntityType="DctsModel.Store.Trips" store:Type="Tables" Schema="dcts_dev" />
+          <AssociationSet Name="locationId" Association="DctsModel.Store.locationId">
+            <End Role="ComboLocations" EntitySet="ComboLocations" />
+            <End Role="Days" EntitySet="Days" />
+          </AssociationSet>
+          <AssociationSet Name="tripId" Association="DctsModel.Store.tripId">
+            <End Role="Trips" EntitySet="Trips" />
+            <End Role="Days" EntitySet="Days" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Cities">
           <Key>
@@ -66,7 +74,7 @@
           <Property Name="RelatedId" Type="uint" Nullable="false" />
           <Property Name="RelatedType" Type="varchar" MaxLength="45" />
           <Property Name="day" Type="uint" Nullable="false" />
-          <Property Name="position" Type="uint" Nullable="false" />
+          <Property Name="position" Type="int" Nullable="false" />
           <Property Name="tripId" Type="uint" Nullable="false" />
           <Property Name="locationId" Type="uint" Nullable="false" />
         </EntityType>
@@ -144,6 +152,30 @@
           <Property Name="memo" Type="varchar" MaxLength="1024" />
           <Property Name="days" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="locationId">
+          <End Role="ComboLocations" Type="DctsModel.Store.ComboLocations" Multiplicity="1" />
+          <End Role="Days" Type="DctsModel.Store.Days" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ComboLocations">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Days">
+              <PropertyRef Name="locationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tripId">
+          <End Role="Trips" Type="DctsModel.Store.Trips" Multiplicity="1" />
+          <End Role="Days" Type="DctsModel.Store.Days" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trips">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Days">
+              <PropertyRef Name="tripId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -157,6 +189,14 @@
           <EntitySet Name="Cities" EntityType="DctsModel.City" />
           <EntitySet Name="Nations" EntityType="DctsModel.Nation" />
           <EntitySet Name="ComboLocations" EntityType="DctsModel.ComboLocation" />
+          <AssociationSet Name="locationId" Association="DctsModel.locationId">
+            <End Role="ComboLocation" EntitySet="ComboLocations" />
+            <End Role="Day" EntitySet="Days" />
+          </AssociationSet>
+          <AssociationSet Name="tripId" Association="DctsModel.tripId">
+            <End Role="Trip" EntitySet="Trips" />
+            <End Role="Day" EntitySet="Days" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Dining">
           <Key>
@@ -221,6 +261,7 @@
           <Property Name="title" Type="String" Nullable="false" MaxLength="1024" Unicode="false" FixedLength="false" />
           <Property Name="memo" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
           <Property Type="Int32" Name="days" Nullable="false" />
+          <NavigationProperty Name="TripDays" Relationship="DctsModel.tripId" FromRole="Trip" ToRole="Day" />
         </EntityType>
         <EntityType Name="Day">
           <Key>
@@ -230,9 +271,11 @@
           <Property Type="Int64" Name="RelatedId" Nullable="false" />
           <Property Type="String" Name="RelatedType" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Type="Int64" Name="day" Nullable="false" />
-          <Property Type="Int64" Name="position" Nullable="false" />
+          <Property Type="Int32" Name="position" Nullable="false" />
           <Property Type="Int64" Name="tripId" Nullable="false" />
           <Property Type="Int64" Name="locationId" Nullable="false" />
+          <NavigationProperty Name="ComboLocation" Relationship="DctsModel.locationId" FromRole="Day" ToRole="ComboLocation" />
+          <NavigationProperty Name="Trip" Relationship="DctsModel.tripId" FromRole="Day" ToRole="Trip" />
         </EntityType>
         <EntityType Name="City">
           <Key>
@@ -286,7 +329,32 @@
           <Property Type="String" Name="dishes" MaxLength="512" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="recommended_dishes" MaxLength="512" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="tips" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Days" Relationship="DctsModel.locationId" FromRole="ComboLocation" ToRole="Day" />
         </EntityType>
+        <Association Name="locationId">
+          <End Type="DctsModel.ComboLocation" Role="ComboLocation" Multiplicity="1" />
+          <End Type="DctsModel.Day" Role="Day" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ComboLocation">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Day">
+              <PropertyRef Name="locationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tripId">
+          <End Type="DctsModel.Trip" Role="Trip" Multiplicity="1" />
+          <End Type="DctsModel.Day" Role="Day" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trip">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Day">
+              <PropertyRef Name="tripId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

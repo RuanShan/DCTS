@@ -101,6 +101,7 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\ComboLocationEnum.cs" />
+    <Compile Include="DB\DayLocation.cs" />
     <Compile Include="DB\GlobalCache.cs" />
     <Compile Include="DB\MockEntity.cs" />
     <Compile Include="Dining.cs">

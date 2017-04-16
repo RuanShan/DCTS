@@ -34,12 +34,19 @@
             this.backLinkLabel = new System.Windows.Forms.LinkLabel();
             this.delDayButton = new System.Windows.Forms.Button();
             this.dayDataGridView = new System.Windows.Forms.DataGridView();
-            this.dayDetailDataGridView = new System.Windows.Forms.DataGridView();
             this.dayNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
+            this.dayDetailDataGridView = new System.Windows.Forms.DataGridView();
+            this.locationIdColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.positionColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dayIdColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.localtionTitleColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dayDetailBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.moveDownButton = new System.Windows.Forms.Button();
+            this.moveUpButton = new System.Windows.Forms.Button();
+            this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dayDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dayDetailDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dayDetailBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // addDayButton
@@ -54,7 +61,7 @@
             // 
             // addLocationButton
             // 
-            this.addLocationButton.Location = new System.Drawing.Point(518, 10);
+            this.addLocationButton.Location = new System.Drawing.Point(768, 10);
             this.addLocationButton.Name = "addLocationButton";
             this.addLocationButton.Size = new System.Drawing.Size(75, 23);
             this.addLocationButton.TabIndex = 3;
@@ -75,7 +82,7 @@
             // 
             // delDayButton
             // 
-            this.delDayButton.Location = new System.Drawing.Point(87, 320);
+            this.delDayButton.Location = new System.Drawing.Point(45, 320);
             this.delDayButton.Name = "delDayButton";
             this.delDayButton.Size = new System.Drawing.Size(36, 23);
             this.delDayButton.TabIndex = 5;
@@ -87,34 +94,20 @@
             // 
             this.dayDataGridView.AllowUserToAddRows = false;
             this.dayDataGridView.AllowUserToDeleteRows = false;
+            this.dayDataGridView.AllowUserToResizeRows = false;
             this.dayDataGridView.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dayDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dayDataGridView.ColumnHeadersVisible = false;
             this.dayDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dayNameColumn});
             this.dayDataGridView.Location = new System.Drawing.Point(3, 39);
+            this.dayDataGridView.MultiSelect = false;
             this.dayDataGridView.Name = "dayDataGridView";
             this.dayDataGridView.RowHeadersVisible = false;
             this.dayDataGridView.RowTemplate.Height = 23;
-            this.dayDataGridView.Size = new System.Drawing.Size(120, 275);
+            this.dayDataGridView.Size = new System.Drawing.Size(192, 275);
             this.dayDataGridView.TabIndex = 8;
             this.dayDataGridView.SelectionChanged += new System.EventHandler(this.dayDataGridView_SelectionChanged);
-            // 
-            // dayDetailDataGridView
-            // 
-            this.dayDetailDataGridView.AllowUserToAddRows = false;
-            this.dayDetailDataGridView.AllowUserToDeleteRows = false;
-            this.dayDetailDataGridView.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dayDetailDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dayDetailDataGridView.ColumnHeadersVisible = false;
-            this.dayDetailDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.localtionTitleColumn});
-            this.dayDetailDataGridView.Location = new System.Drawing.Point(129, 39);
-            this.dayDetailDataGridView.Name = "dayDetailDataGridView";
-            this.dayDetailDataGridView.RowHeadersVisible = false;
-            this.dayDetailDataGridView.RowTemplate.Height = 23;
-            this.dayDetailDataGridView.Size = new System.Drawing.Size(464, 275);
-            this.dayDetailDataGridView.TabIndex = 8;
             // 
             // dayNameColumn
             // 
@@ -123,21 +116,84 @@
             this.dayNameColumn.Name = "dayNameColumn";
             this.dayNameColumn.Visible = false;
             // 
-            // entityDataSource1
+            // dayDetailDataGridView
             // 
-            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
+            this.dayDetailDataGridView.AllowUserToAddRows = false;
+            this.dayDetailDataGridView.AllowUserToDeleteRows = false;
+            this.dayDetailDataGridView.AllowUserToResizeRows = false;
+            this.dayDetailDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dayDetailDataGridView.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dayDetailDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dayDetailDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.locationIdColumn1,
+            this.positionColumn1,
+            this.dayIdColumn1,
+            this.localtionTitleColumn});
+            this.dayDetailDataGridView.Location = new System.Drawing.Point(201, 39);
+            this.dayDetailDataGridView.MultiSelect = false;
+            this.dayDetailDataGridView.Name = "dayDetailDataGridView";
+            this.dayDetailDataGridView.RowHeadersVisible = false;
+            this.dayDetailDataGridView.RowTemplate.Height = 23;
+            this.dayDetailDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dayDetailDataGridView.Size = new System.Drawing.Size(642, 275);
+            this.dayDetailDataGridView.TabIndex = 8;
+            // 
+            // locationIdColumn1
+            // 
+            this.locationIdColumn1.DataPropertyName = "locationId";
+            this.locationIdColumn1.HeaderText = "locationId";
+            this.locationIdColumn1.Name = "locationIdColumn1";
+            // 
+            // positionColumn1
+            // 
+            this.positionColumn1.DataPropertyName = "position";
+            this.positionColumn1.HeaderText = "Position";
+            this.positionColumn1.Name = "positionColumn1";
+            // 
+            // dayIdColumn1
+            // 
+            this.dayIdColumn1.DataPropertyName = "dayId";
+            this.dayIdColumn1.HeaderText = "dayId";
+            this.dayIdColumn1.Name = "dayIdColumn1";
             // 
             // localtionTitleColumn
             // 
-            this.localtionTitleColumn.DataPropertyName = "locationId";
+            this.localtionTitleColumn.DataPropertyName = "title";
             this.localtionTitleColumn.HeaderText = "localtionTitle";
             this.localtionTitleColumn.Name = "localtionTitleColumn";
-            this.localtionTitleColumn.Visible = false;
+            // 
+            // moveDownButton
+            // 
+            this.moveDownButton.Location = new System.Drawing.Point(243, 320);
+            this.moveDownButton.Name = "moveDownButton";
+            this.moveDownButton.Size = new System.Drawing.Size(36, 23);
+            this.moveDownButton.TabIndex = 10;
+            this.moveDownButton.Text = "Down";
+            this.moveDownButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.moveDownButton.UseVisualStyleBackColor = true;
+            this.moveDownButton.Click += new System.EventHandler(this.moveDownButton_Click);
+            // 
+            // moveUpButton
+            // 
+            this.moveUpButton.Location = new System.Drawing.Point(201, 320);
+            this.moveUpButton.Name = "moveUpButton";
+            this.moveUpButton.Size = new System.Drawing.Size(36, 23);
+            this.moveUpButton.TabIndex = 9;
+            this.moveUpButton.Text = "Up";
+            this.moveUpButton.UseVisualStyleBackColor = true;
+            this.moveUpButton.Click += new System.EventHandler(this.moveUpButton_Click);
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
             // 
             // EditTripControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.moveDownButton);
+            this.Controls.Add(this.moveUpButton);
             this.Controls.Add(this.dayDetailDataGridView);
             this.Controls.Add(this.dayDataGridView);
             this.Controls.Add(this.delDayButton);
@@ -145,9 +201,10 @@
             this.Controls.Add(this.addLocationButton);
             this.Controls.Add(this.addDayButton);
             this.Name = "EditTripControl";
-            this.Size = new System.Drawing.Size(596, 346);
+            this.Size = new System.Drawing.Size(846, 346);
             ((System.ComponentModel.ISupportInitialize)(this.dayDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dayDetailDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dayDetailBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -163,6 +220,12 @@
         private System.Windows.Forms.DataGridView dayDataGridView;
         private System.Windows.Forms.DataGridView dayDetailDataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn dayNameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn locationIdColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn positionColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dayIdColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn localtionTitleColumn;
+        private System.Windows.Forms.BindingSource dayDetailBindingSource;
+        private System.Windows.Forms.Button moveDownButton;
+        private System.Windows.Forms.Button moveUpButton;
     }
 }
