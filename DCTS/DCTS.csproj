@@ -49,6 +49,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DocX">
+      <HintPath>..\packages\DocX.1.0.0.22\lib\net40\DocX.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -110,7 +113,9 @@
     <Compile Include="CustomComponents\Pager.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CustomComponents\Pager.Designer.cs" />
+    <Compile Include="CustomComponents\Pager.Designer.cs">
+      <DependentUpon>Pager.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomComponents\SortableBindingList.cs" />
     <Compile Include="Day.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -124,6 +129,12 @@
     </Compile>
     <Compile Include="Nation.cs">
       <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pager.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pager.Designer.cs">
+      <DependentUpon>Pager.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\ChooseLocaltionForm.cs">
       <SubType>Form</SubType>
@@ -253,9 +264,14 @@
     <Compile Include="Uti\DBConnection.cs" />
     <Compile Include="Uti\LogHelper.cs" />
     <Compile Include="Uti\MessageHelper.cs" />
-    <EmbeddedResource Include="CustomComponents\Pager.resx" />
+    <EmbeddedResource Include="CustomComponents\Pager.resx">
+      <DependentUpon>Pager.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pager.resx">
+      <DependentUpon>Pager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -385,7 +401,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /e /r /y $(ProjectDir)Templates $(SolutionDir)$(OutDir)
+    <PostBuildEvent>xcopy /e /r /y $(ProjectDir)Templates $(TargetDir)Templates\
 </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
