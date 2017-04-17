@@ -151,6 +151,7 @@
             this.exportWordButton.TabIndex = 5;
             this.exportWordButton.Text = "导出Word";
             this.exportWordButton.UseVisualStyleBackColor = true;
+            this.exportWordButton.Click += new System.EventHandler(this.exportWordButton_Click);
             // 
             // TripListControl
             // 

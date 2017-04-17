@@ -88,6 +88,30 @@ namespace DCTS.UI
 
         }
 
+        private void exportWordButton_Click(object sender, EventArgs e)
+        {
+            new TripWordExporter(SelectedTripId).ExportWord();
+        }
+
+
+        private long SelectedTripId
+        {
+            get
+            {
+                long id = 0;
+                var row = tripDataGridView.CurrentRow;
+                if (row != null)
+                {
+                    var trip = row.DataBoundItem as Trip;
+                    if (trip != null)
+                    {
+                        id = trip.id;
+                    }
+                }
+
+                return id;
+            }
+        }
 
     }
 }

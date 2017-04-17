@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace DCTS.Bus
 {
     class TripBusiness
     {
+
         public static void Delete(long tripId)
         {
             using (var ctx = new DctsEntities())

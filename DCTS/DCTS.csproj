@@ -93,6 +93,7 @@
     <Compile Include="Bus\ComboLoactionBusiness.cs" />
     <Compile Include="Bus\ScenicDbHelper.cs" />
     <Compile Include="Bus\TripBusiness.cs" />
+    <Compile Include="Bus\TripWordExporter.cs" />
     <Compile Include="City.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
