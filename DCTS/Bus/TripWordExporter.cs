@@ -42,7 +42,12 @@ namespace DCTS.Bus
 
             var wrappedKeys = txtKeys.Select(o => "%" + o + "%").ToList();
 
-            using (DocX document = DocX.Create(WordFilePath() ))
+            if (!Directory.Exists(WordFolderPath))
+            {
+                Directory.CreateDirectory(WordFolderPath);
+            }
+
+            using (DocX document = DocX.Create(this.WordFilePath ))
             {
                 foreach( var day in this.days)
                 {
@@ -68,9 +73,10 @@ namespace DCTS.Bus
 
                         foreach (string key in txtKeys)
                         {
-                            string val = type.GetProperty(key).GetValue(location).ToString();
+                            var val = type.GetProperty(key).GetValue(location);
+                            string s = val == null ? string.Empty :  val.ToString();                            
                             string wrappedKey = "%" + key + "%";
-                            duplicated.ReplaceText(wrappedKey, val);
+                            duplicated.ReplaceText(wrappedKey, s);
                         }
 
                         document.InsertDocument(duplicated);
@@ -81,12 +87,24 @@ namespace DCTS.Bus
             }
 
         }
+        public string WordFolderPath
+        { 
+            get
+            {
+                string basePath = "data/export/words";
+                return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, basePath, (TripId / 1000).ToString());
+            }
+            
+        }
 
         // data/export/words/
-        public string WordFilePath()
+        public string WordFilePath
         {
-            string basePath = "data/export/words";
-            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, basePath, (TripId / 1000).ToString());
+            get
+            {
+
+                return Path.Combine(WordFolderPath, string.Format("{0}.docx", TripId));
+            }
         }
     }
 }
