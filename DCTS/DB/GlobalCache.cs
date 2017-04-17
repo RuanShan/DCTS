@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace DCTS.DB
 {
@@ -42,5 +43,19 @@ namespace DCTS.DB
         {
             cityList = db.Cities.Where(o => o.enabled).ToList();
         }
+    }
+
+    public class LocationTemplate
+    {
+        public static string TemplatePath = "templates";
+
+        public static string DinningDetailName = "dining-detail.docx";
+        public static string ScenicDetailName = "scenic-detail.docx";
+        public static string HotelDetailName = "hotel-detail.docx";
+
+        public static string DinningDetailPath { get { return Path.Combine(TemplatePath, DinningDetailName); } }
+        public static string ScenicDetailPath { get { return  Path.Combine( TemplatePath, ScenicDetailName); } }
+        public static string HotelDetailPath { get { return  Path.Combine( TemplatePath, HotelDetailName); } }
+    
     }
 }

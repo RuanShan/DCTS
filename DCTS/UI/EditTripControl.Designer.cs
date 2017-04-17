@@ -44,6 +44,9 @@
             this.moveDownButton = new System.Windows.Forms.Button();
             this.moveUpButton = new System.Windows.Forms.Button();
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.selectedLocationTextBox = new System.Windows.Forms.TextBox();
+            this.selectDayTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dayDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dayDetailDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dayDetailBindingSource)).BeginInit();
@@ -188,10 +191,34 @@
             // 
             this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(-15, -15);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 21);
+            this.textBox1.TabIndex = 11;
+            // 
+            // selectedLocationTextBox
+            // 
+            this.selectedLocationTextBox.Location = new System.Drawing.Point(622, 320);
+            this.selectedLocationTextBox.Name = "selectedLocationTextBox";
+            this.selectedLocationTextBox.Size = new System.Drawing.Size(100, 21);
+            this.selectedLocationTextBox.TabIndex = 12;
+            // 
+            // selectDayTextBox
+            // 
+            this.selectDayTextBox.Location = new System.Drawing.Point(491, 320);
+            this.selectDayTextBox.Name = "selectDayTextBox";
+            this.selectDayTextBox.Size = new System.Drawing.Size(100, 21);
+            this.selectDayTextBox.TabIndex = 12;
+            // 
             // EditTripControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.selectDayTextBox);
+            this.Controls.Add(this.selectedLocationTextBox);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.moveDownButton);
             this.Controls.Add(this.moveUpButton);
             this.Controls.Add(this.dayDetailDataGridView);
@@ -227,5 +254,8 @@
         private System.Windows.Forms.BindingSource dayDetailBindingSource;
         private System.Windows.Forms.Button moveDownButton;
         private System.Windows.Forms.Button moveUpButton;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox selectedLocationTextBox;
+        private System.Windows.Forms.TextBox selectDayTextBox;
     }
 }
