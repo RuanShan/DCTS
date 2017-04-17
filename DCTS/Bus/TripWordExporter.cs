@@ -49,6 +49,8 @@ namespace DCTS.Bus
 
             using (DocX document = DocX.Create(this.WordFilePath ))
             {
+                List<ComboLocation> handledLocations = new List<ComboLocation>();
+
                 foreach( var day in this.days)
                 {
                     var location = day.ComboLocation;
@@ -65,10 +67,10 @@ namespace DCTS.Bus
 
                     using (DocX template = DocX.Load(templatePath))
                     {
+                        
                         var type = location.GetType();
 
                         var duplicated = template.Copy();
-
 
 
                         foreach (string key in txtKeys)
@@ -79,10 +81,16 @@ namespace DCTS.Bus
                             duplicated.ReplaceText(wrappedKey, s);
                         }
 
+                        if (handledLocations.Count > 0)
+                        {
+                            document.InsertSectionPageBreak();
+                        }
+
                         document.InsertDocument(duplicated);
-                        //添加一些基本对象，如段落等
-                        document.Save();//保存
+                        handledLocations.Add(location);
                     }
+                    //添加一些基本对象，如段落等
+                    document.Save();//保存
                 }
             }
 
