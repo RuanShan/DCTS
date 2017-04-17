@@ -11,17 +11,19 @@ using System.Data.Entity;
 using DCTS.CustomComponents;
 using System.Collections;
 using DCTS.DB;
+using MySql.Data.MySqlClient;
 
 namespace DCTS.UI
 {
     public partial class DinningsControl : UserControl
     {
         private Hashtable dataGridChanges = null;
-
+        private static string NoOptionSelected = "所有";
         private SortableBindingList<ComboLocation> sortabledinningsOrderList;
         int RowRemark = 0;
         //private List<ComboLocation> dinningsOrderList;
         IBindingList dinningsOrderList = null;
+        private List<ComboLocation> DinningList = null;
         public DinningsControl()
         {
             InitializeComponent();
@@ -31,10 +33,14 @@ namespace DCTS.UI
         public void BeginActive()
         {
             InitializeDataGridView();
+            pager2.Bind();
+
         }
 
         private void InitializeDataGridView()
         {
+            this.pager2.PageCurrent = 1;
+
             int offset = 0;
             int pageSize = 5000;
             var ctx = this.entityDataSource1.DbContext as DctsEntities;
@@ -47,6 +53,7 @@ namespace DCTS.UI
                 var list = this.entityDataSource1.CreateView(query);
                 sortabledinningsOrderList = new SortableBindingList<ComboLocation>(query.ToList());
                 this.bindingSource1.DataSource = this.sortabledinningsOrderList;
+                dataGridView.AutoGenerateColumns = false;
                 dataGridView.DataSource = this.bindingSource1;
 
             }
@@ -110,7 +117,9 @@ namespace DCTS.UI
 
         private void btfind_Click(object sender, EventArgs e)
         {
-            ApplyFilter();
+            //ApplyFilter();
+            FindDataSources();
+
 
         }
         private void ApplyFilter()
@@ -144,6 +153,103 @@ namespace DCTS.UI
             this.bindingSource1.Filter = filter;
 
         }
+
+        private int FindDataSources()
+        {
+
+
+            var nation = nationComboBox.Text;
+            var city = this.cityComboBox.Text;
+            var title = this.textBox1.Text;
+
+            string conditions = "";//s.ltype =(int)ComboLocationEnum.Dining
+            List<MySqlParameter> condition_params = new List<MySqlParameter>();
+
+            var ltype = (int)ComboLocationEnum.Dining;
+
+
+            if (ltype > 0)
+            {
+                if (conditions.Length > 0)
+                {
+                    conditions += " AND ";
+                }
+                conditions += "(`ltype`= @ltype)";
+            }
+
+
+            if (nation != NoOptionSelected)
+            {
+                if (nation.Length > 0)
+                {
+                    if (conditions.Length > 0)
+                    {
+                        conditions += " AND ";
+                    }
+                    conditions += "(`nation`= @nation)";
+                }
+            }
+            if (city != NoOptionSelected)
+            {
+                if (city.Length > 0)
+                {
+                    if (conditions.Length > 0)
+                    {
+                        conditions += " AND ";
+                    }
+                    conditions += "(`city`= @city)";
+                }
+            }
+            if (title.Length > 0)
+            {
+                if (conditions.Length > 0)
+                {
+                    conditions += " AND ";
+                }
+               // conditions += "(`title`= @title)";
+                conditions += "(`title`LIKE '%"+@title+"%')";
+              // conditions += "(`title`LIKE '%2%')";
+                
+            }
+
+
+
+            #region  new
+            condition_params.Add(new MySqlParameter("@ltype", ltype));
+            condition_params.Add(new MySqlParameter("@nation", nation));
+            condition_params.Add(new MySqlParameter("@city", city));
+            condition_params.Add(new MySqlParameter("@title",   title ));
+
+            int limit = pager2.PageSize;
+            int offset = (pager2.PageCurrent > 1 ? pager2.OffSet(pager2.PageCurrent - 1) : 0);
+            int count = 0;
+            using (var ctx = new DctsEntities())
+            {
+                if (conditions.Length > 0)
+                {
+                    conditions = " WHERE " + conditions;
+                }
+
+                string sqlCount = string.Format(" SELECT count(*) FROM combolocations {0}", conditions);
+                count = ctx.Database.SqlQuery<int>(sqlCount, condition_params.ToArray()).First();
+                string sql = string.Format(" SELECT * FROM combolocations {0} LIMIT {1} OFFSET {2}", conditions, limit, offset);
+                DinningList = ctx.Database.SqlQuery<ComboLocation>(sql, condition_params.ToArray()).ToList();
+
+                //DinningList = (from s in ctx.ComboLocations
+                //               where s.title == title
+                //               select s).ToList();
+                sortabledinningsOrderList = new SortableBindingList<ComboLocation>(DinningList.ToList());
+                this.bindingSource1.DataSource = this.sortabledinningsOrderList;
+                dataGridView.AutoGenerateColumns = false;
+                dataGridView.DataSource = this.bindingSource1;
+
+            }
+            return count;
+
+
+            #endregion
+        }
+
 
         private void 修改ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -225,6 +331,52 @@ namespace DCTS.UI
             this.cityComboBox.DataSource = cities;
         }
 
+        private void DinningsControl_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pager2_Load(object sender, EventArgs e)
+        {
+            // this.pager2.ResetText = "";
+
+        }
+        private int pager2_EventPaging(EventPagingArg e)
+        {
+            int count = InitializeOrderData();
+            return count;
+        }
+        private int InitializeOrderData()
+        {
+
+
+            int limit = pager2.PageSize;
+            int offset = (pager2.PageCurrent > 1 ? pager2.OffSet(pager2.PageCurrent - 1) : 0);
+            int count = 0;
+            //using (var ctx = new GODDbContext())
+            //{
+            //    if (conditions.Length > 0)
+            //    {
+            //        conditions = " WHERE " + conditions;
+            //    }
+            //    string sqlCount = string.Format(" SELECT count(*) FROM t_orderdata {0}", conditions);
+            //    count = ctx.Database.SqlQuery<int>(sqlCount, condition_params.ToArray()).First();
+            //    string sql = string.Format(" SELECT * FROM t_orderdata {0} LIMIT {1} OFFSET {2}", conditions, limit, offset);
+            //    orderList = ctx.Database.SqlQuery<v_pendingorder>(sql, condition_params.ToArray()).ToList();
+            //}
+            //orderListBindingList = new SortableBindingList<v_pendingorder>(orderList);
+            //dataGridView1.AutoGenerateColumns = false;
+            //dataGridView1.DataSource = orderListBindingList;
+
+            return count;
+
+        }
+
+        private int pager2_EventPaging_1(EventPagingArg e)
+        {
+            int count = FindDataSources();
+            return count;
+        }
 
     }
 }

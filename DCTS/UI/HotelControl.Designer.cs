@@ -62,6 +62,7 @@
             this.btsave = new System.Windows.Forms.Button();
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.pager1 = new DCTS.CustomComponents.Pager();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -97,10 +98,10 @@
             this.kitchenCloumn,
             this.tipsColumn1});
             this.dataGridView.ContextMenuStrip = this.contextMenuStrip1;
-            this.dataGridView.Location = new System.Drawing.Point(8, 185);
+            this.dataGridView.Location = new System.Drawing.Point(8, 161);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowTemplate.Height = 23;
-            this.dataGridView.Size = new System.Drawing.Size(668, 183);
+            this.dataGridView.Size = new System.Drawing.Size(672, 191);
             this.dataGridView.TabIndex = 0;
             this.dataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView_CellBeginEdit);
             this.dataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellEndEdit);
@@ -333,22 +334,38 @@
             this.bindingSource1.DataSource = this.entityDataSource1;
             this.bindingSource1.Position = 0;
             // 
+            // pager1
+            // 
+            this.pager1.AutoSize = true;
+            this.pager1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pager1.Location = new System.Drawing.Point(0, 371);
+            this.pager1.Name = "pager1";
+            this.pager1.NMax = 0;
+            this.pager1.PageCount = 0;
+            this.pager1.PageCurrent = 0;
+            this.pager1.PageSize = 5000;
+            this.pager1.Size = new System.Drawing.Size(688, 34);
+            this.pager1.TabIndex = 13;
+            this.pager1.EventPaging += new DCTS.CustomComponents.EventPagingHandler(this.pager1_EventPaging);
+            // 
             // HotelControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.pager1);
             this.Controls.Add(this.btsave);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.newButton);
             this.Controls.Add(this.dataGridView);
             this.Name = "HotelControl";
-            this.Size = new System.Drawing.Size(684, 397);
+            this.Size = new System.Drawing.Size(688, 405);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -387,5 +404,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn receptionCloumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn kitchenCloumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn tipsColumn1;
+        private CustomComponents.Pager pager1;
     }
 }
