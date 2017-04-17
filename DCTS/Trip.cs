@@ -14,9 +14,16 @@ namespace DCTS
     
     public partial class Trip
     {
+        public Trip()
+        {
+            this.TripDays = new HashSet<Day>();
+        }
+    
         public long id { get; set; }
         public string title { get; set; }
         public string memo { get; set; }
         public int days { get; set; }
+    
+        public virtual ICollection<Day> TripDays { get; set; }
     }
 }

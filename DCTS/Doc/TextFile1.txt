@@ -60,3 +60,8 @@ set global optimizer_switch='derived_merge=OFF';
 =======================================
 lower_case_table_names = 2
 http://stackoverflow.com/questions/8550789/where-to-change-the-value-of-lower-case-table-names-2-on-windows-xampp
+
+
+=======================================
+Entity Framework Loading Related Entities
+https://msdn.microsoft.com/en-us/data/jj574232

@@ -18,8 +18,11 @@ namespace DCTS
         public long RelatedId { get; set; }
         public string RelatedType { get; set; }
         public long day { get; set; }
-        public long position { get; set; }
+        public int position { get; set; }
         public long tripId { get; set; }
         public long locationId { get; set; }
+    
+        public virtual ComboLocation ComboLocation { get; set; }
+        public virtual Trip Trip { get; set; }
     }
 }
