@@ -43,28 +43,28 @@
           <Property Name="id" Type="uint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ltype" Type="uint" Nullable="false" />
           <Property Name="nation" Type="varchar" MaxLength="45" />
-          <Property Name="city" Type="varchar" MaxLength="45" />
-          <Property Name="area" Type="varchar" MaxLength="45" />
-          <Property Name="title" Type="varchar" MaxLength="256" />
-          <Property Name="local_title" Type="varchar" MaxLength="256" />
-          <Property Name="img" Type="varchar" MaxLength="256" />
-          <Property Name="address" Type="varchar" MaxLength="1024" />
-          <Property Name="local_address" Type="varchar" MaxLength="1024" />
-          <Property Name="latlng" Type="varchar" MaxLength="256" />
-          <Property Name="route" Type="varchar" MaxLength="512" />
-          <Property Name="contact" Type="varchar" MaxLength="256" />
+          <Property Name="city" Type="varchar" MaxLength="48" />
+          <Property Name="area" Type="varchar" MaxLength="48" />
+          <Property Name="title" Type="varchar" MaxLength="255" />
+          <Property Name="local_title" Type="varchar" MaxLength="255" />
+          <Property Name="img" Type="varchar" MaxLength="255" />
+          <Property Name="address" Type="varchar" MaxLength="1020" />
+          <Property Name="local_address" Type="varchar" MaxLength="1020" />
+          <Property Name="latlng" Type="varchar" MaxLength="255" />
+          <Property Name="route" Type="varchar" MaxLength="510" />
+          <Property Name="contact" Type="varchar" MaxLength="255" />
           <Property Name="open_at" Type="datetime" />
           <Property Name="close_at" Type="datetime" />
-          <Property Name="ticket" Type="varchar" MaxLength="45" />
-          <Property Name="room" Type="varchar" MaxLength="512" />
-          <Property Name="dinner" Type="varchar" MaxLength="512" />
-          <Property Name="wifi" Type="varchar" MaxLength="45" />
-          <Property Name="parking" Type="varchar" MaxLength="45" />
-          <Property Name="reception" Type="varchar" MaxLength="45" />
-          <Property Name="kitchen" Type="varchar" MaxLength="512" />
-          <Property Name="dishes" Type="varchar" MaxLength="512" />
-          <Property Name="recommended_dishes" Type="varchar" MaxLength="512" />
-          <Property Name="tips" Type="varchar" MaxLength="1024" />
+          <Property Name="ticket" Type="varchar" MaxLength="48" />
+          <Property Name="room" Type="varchar" MaxLength="510" />
+          <Property Name="dinner" Type="varchar" MaxLength="510" />
+          <Property Name="wifi" Type="varchar" MaxLength="48" />
+          <Property Name="parking" Type="varchar" MaxLength="48" />
+          <Property Name="reception" Type="varchar" MaxLength="48" />
+          <Property Name="kitchen" Type="varchar" MaxLength="510" />
+          <Property Name="dishes" Type="varchar" MaxLength="510" />
+          <Property Name="recommended_dishes" Type="varchar" MaxLength="510" />
+          <Property Name="tips" Type="varchar" MaxLength="1020" />
         </EntityType>
         <EntityType Name="Days">
           <Key>
@@ -308,7 +308,7 @@
           <Property Type="Int32" Name="ltype" Nullable="false" />
           <Property Type="String" Name="nation" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="city" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="area" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="area" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Type="String" Name="title" MaxLength="256" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="local_title" MaxLength="256" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="img" MaxLength="256" FixedLength="false" Unicode="false" />

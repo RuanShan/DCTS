@@ -59,18 +59,25 @@ namespace DCTS.UI
             }
             this.dayDataGridView.DataSource = list;
 
+            //http://stackoverflow.com/questions/6265228/selecting-a-row-in-datagridview-programmatically
             if (day > 0)
             {
-                this.dayDataGridView.Rows[day - 1].Selected = true;
+                Console.WriteLine("InitializeDayListBox day= " + day.ToString());
+
+                dayDataGridView.CurrentCell = dayDataGridView.Rows[day - 1].Cells[0]; 
+                dayDataGridView.Rows[day - 1].Selected = true;
             }
 
             if (selectLocationPosition > 0)
             {
                 if (selectLocationPosition <= this.dayDetailDataGridView.RowCount)
                 {
-                    this.dayDetailDataGridView.Rows[selectLocationPosition - 1].Selected = true;
+                    dayDetailDataGridView.CurrentCell = dayDetailDataGridView.Rows[selectLocationPosition - 1].Cells[0];
+                    dayDetailDataGridView.Rows[selectLocationPosition - 1].Selected = true;
                 }
             }
+            this.selectDayTextBox.Text = day.ToString();
+            this.selectedLocationTextBox.Text = selectLocationPosition.ToString();
         }
 
         public void InitializeDayDetailListBox( int day )
@@ -136,7 +143,7 @@ namespace DCTS.UI
         private void dayDataGridView_SelectionChanged(object sender, EventArgs e)
         {
             var day = GetSelectedDay();
-
+            Console.WriteLine("dayDataGridView_SelectionChanged day= " + day.ToString());
             if (day > 0)
             {
                 InitializeDayDetailListBox(day);

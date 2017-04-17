@@ -179,7 +179,7 @@ namespace DCTS.UI
             condition_params.Add(new MySqlParameter("@title", title));
 
             int limit = pager1.PageSize;
-            int offset = (pager1.PageCurrent > 1 ? pager1.OffSet(pager1.PageCurrent - 1) : 0);
+            int offset = 0; //(pager1.PageCurrent > 1 ? pager1.OffSet(pager1.PageCurrent - 1) : 0);
             int count = 0;
             using (var ctx = new DctsEntities())
             {

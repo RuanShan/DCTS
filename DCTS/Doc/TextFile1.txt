@@ -51,6 +51,16 @@ CREATE TABLE `ComboLocations` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
+关于图片
+=======================================
+数据库中存储名字，文件名字不应重复，可以使用中文。
+  如: 割烹清水.png
+
+图片存在特定目录  /data/images/locations
+ 每1000个图片 一个目录。
+ 路径： /data/images/locations/{ location.id/1000 }/filename
+
+
 =======================================
 http://stackoverflow.com/questions/33575109/mysql-entity-the-value-for-column-isprimarykey-in-table-tabledetails-is
 
@@ -65,3 +75,4 @@ http://stackoverflow.com/questions/8550789/where-to-change-the-value-of-lower-ca
 =======================================
 Entity Framework Loading Related Entities
 https://msdn.microsoft.com/en-us/data/jj574232
+

@@ -80,7 +80,7 @@
             // 
             this.btnLast.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.btnLast.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnLast.Image = global::DCTS.Properties.Resources.LastRecord_small;
+            this.btnLast.Image = Properties.Resources.LastRecord_small;
             this.btnLast.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnLast.Name = "btnLast";
             this.btnLast.Size = new System.Drawing.Size(23, 28);
@@ -91,7 +91,7 @@
             // 
             this.btnNext.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.btnNext.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnNext.Image = global::DCTS.Properties.Resources.NextRecord_small;
+            this.btnNext.Image = Properties.Resources.NextRecord_small;
             this.btnNext.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(23, 28);
@@ -128,7 +128,7 @@
             // 
             this.btnPrev.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.btnPrev.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnPrev.Image = global::DCTS.Properties.Resources.PreviousRecord_small;
+            this.btnPrev.Image = Properties.Resources.PreviousRecord_small;
             this.btnPrev.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnPrev.Name = "btnPrev";
             this.btnPrev.Size = new System.Drawing.Size(23, 28);
@@ -139,7 +139,7 @@
             // 
             this.btnFirst.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.btnFirst.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnFirst.Image = global::DCTS.Properties.Resources.FirstRecord_small;
+            this.btnFirst.Image = Properties.Resources.FirstRecord_small;
             this.btnFirst.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnFirst.Name = "btnFirst";
             this.btnFirst.Size = new System.Drawing.Size(23, 28);
