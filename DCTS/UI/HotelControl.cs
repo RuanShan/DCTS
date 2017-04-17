@@ -11,32 +11,35 @@ using System.Data.Entity;
 using DCTS.CustomComponents;
 using System.Collections;
 using DCTS.DB;
+using MySql.Data.MySqlClient;
 
 namespace DCTS.UI
 {
     public partial class HotelControl : UserControl
     {
         private Hashtable dataGridChanges = null;
-
+        private static string NoOptionSelected = "所有";
+        private List<ComboLocation> hotelList = null;
         private SortableBindingList<ComboLocation> sortabledinningsOrderList;
         int RowRemark = 0;
-        //private List<ComboLocation> dinningsOrderList;
-        IBindingList dinningsOrderList = null;
+        
+        //  IBindingList hotelOrderList = null;
         public HotelControl()
         {
             InitializeComponent();
-            this.dataGridChanges = new Hashtable();
+            this.dataGridChanges = new Hashtable();          
         }
 
         public void BeginActive()
         {
             InitializeDataGridView();
-            InitializeDataGridView();
+            pager1.Bind();
 
         }
 
         private void InitializeDataGridView()
         {
+            this.pager1.PageCurrent = 1;
             int offset = 0;
             int pageSize = 5000;
             var ctx = this.entityDataSource1.DbContext as DctsEntities;
@@ -44,10 +47,11 @@ namespace DCTS.UI
             {
                 var query = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Hotel).OrderBy(o => o.id).Skip(offset).Take(pageSize);
 
-              //  var query = ctx.ComboLocations.OrderBy(o => o.id).Skip(offset).Take(pageSize);
+                //  var query = ctx.ComboLocations.OrderBy(o => o.id).Skip(offset).Take(pageSize);
                 var list = this.entityDataSource1.CreateView(query);
                 sortabledinningsOrderList = new SortableBindingList<ComboLocation>(query.ToList());
                 this.bindingSource1.DataSource = this.sortabledinningsOrderList;
+                dataGridView.AutoGenerateColumns = false;
                 dataGridView.DataSource = this.bindingSource1;
 
             }
@@ -72,7 +76,7 @@ namespace DCTS.UI
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-         
+
             var oids = GetOrderIdsBySelectedGridCell();
             using (var ctx = new DctsEntities())
             {
@@ -81,7 +85,7 @@ namespace DCTS.UI
                                  select s).ToList();
                 ctx.ComboLocations.RemoveRange(stockrecs);
                 ctx.SaveChanges();
- 
+
             }
             InitializeDataGridView();
         }
@@ -93,7 +97,7 @@ namespace DCTS.UI
             foreach (DataGridViewRow row in rows)
             {
                 var Diningorder = row.DataBoundItem as ComboLocation;
-                order_ids.Add(Diningorder.id); 
+                order_ids.Add(Diningorder.id);
             }
 
             return order_ids;
@@ -110,40 +114,99 @@ namespace DCTS.UI
 
         private void btfind_Click(object sender, EventArgs e)
         {
-            ApplyFilter();
+            FindDataSources();
 
         }
-        private void ApplyFilter()
+        private int FindDataSources()
         {
-            string filter = "";
-            if (this.textBox1.Text.Length > 0)
+
+            var nation = nationComboBox.Text;
+            var city = this.cityComboBox.Text;
+            var title = this.textBox1.Text;
+
+            string conditions = "";//s.ltype =(int)ComboLocationEnum.Dining
+            List<MySqlParameter> condition_params = new List<MySqlParameter>();
+            var ltype = (int)ComboLocationEnum.Hotel;
+
+
+            if (ltype > 0)
             {
-                 filter += " (中文名称 ='" + this.textBox1.Text + "')";
-             
-            }
-            if (this.nationComboBox.Text.Length > 0)
-            {
-                if (filter.Length > 0)
+                if (conditions.Length > 0)
                 {
-                    filter += " AND ";
+                    conditions += " AND ";
                 }
-                //filter += "(国家=" + this.comboBox2.Text + ")";
-                filter += "(国家 =" + "'" + cityComboBox.Text + "'" + ")";
+                conditions += "(`ltype`= @ltype)";
             }
-            if (this.cityComboBox.Text.Length > 0)
+            if (nation != NoOptionSelected)
             {
-                if (filter.Length > 0)
+                if (nation.Length > 0)
                 {
-                    filter += " AND ";
+                    if (conditions.Length > 0)
+                    {
+                        conditions += " AND ";
+                    }
+                    conditions += "(`nation`= @nation)";
                 }
-                //filter += "(城市=" + this.comboBox3.Text + ")";
-                filter += "(城市 =" + "'" + cityComboBox.Text + "'" + ")";
             }
-            
- 
-            this.bindingSource1.Filter = filter;
- 
+            if (city != NoOptionSelected)
+            {
+                if (city.Length > 0)
+                {
+                    if (conditions.Length > 0)
+                    {
+                        conditions += " AND ";
+                    }
+                    conditions += "(`city`= @city)";
+                }
+            }
+            if (title.Length > 0)
+            {
+                if (conditions.Length > 0)
+                {
+                    conditions += " AND ";
+                }
+                //conditions += "(`title`= @title)";
+                conditions += "(`title`LIKE '%" + @title + "%')";
+            }
+
+
+
+            #region  new
+            condition_params.Add(new MySqlParameter("@ltype", ltype));
+            condition_params.Add(new MySqlParameter("@nation", nation));
+            condition_params.Add(new MySqlParameter("@city", city));
+            condition_params.Add(new MySqlParameter("@title", title));
+
+            int limit = pager1.PageSize;
+            int offset = (pager1.PageCurrent > 1 ? pager1.OffSet(pager1.PageCurrent - 1) : 0);
+            int count = 0;
+            using (var ctx = new DctsEntities())
+            {
+                if (conditions.Length > 0)
+                {
+                    conditions = " WHERE " + conditions;
+                }
+
+                string sqlCount = string.Format(" SELECT count(*) FROM combolocations {0}", conditions);
+                count = ctx.Database.SqlQuery<int>(sqlCount, condition_params.ToArray()).First();
+                string sql = string.Format(" SELECT * FROM combolocations {0} LIMIT {1} OFFSET {2}", conditions, limit, offset);
+                hotelList = ctx.Database.SqlQuery<ComboLocation>(sql, condition_params.ToArray()).ToList();
+
+                //DinningList = (from s in ctx.ComboLocations
+                //               where s.title == title
+                //               select s).ToList();
+                sortabledinningsOrderList = new SortableBindingList<ComboLocation>(hotelList.ToList());
+                this.bindingSource1.DataSource = this.sortabledinningsOrderList;
+                dataGridView.AutoGenerateColumns = false;
+                dataGridView.DataSource = this.bindingSource1;
+
+            }
+            return count;
+
+
+            #endregion
         }
+
 
         private void 修改ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -153,7 +216,7 @@ namespace DCTS.UI
                 InitializeDataGridView();
             }
         }
-   
+
 
         private void btsave_Click(object sender, EventArgs e)
         {
@@ -223,7 +286,13 @@ namespace DCTS.UI
             this.cityComboBox.ValueMember = "Id";
             this.cityComboBox.DataSource = cities;
         }
-      
+
+        private int pager1_EventPaging(EventPagingArg e)
+        {
+            int count = FindDataSources();
+            return count;
+        }
+
 
     }
 }

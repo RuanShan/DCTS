@@ -57,6 +57,7 @@
             this.btsave = new System.Windows.Forms.Button();
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.pager2 = new DCTS.CustomComponents.Pager();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -86,10 +87,10 @@
             this.recommendedDishesColumn1,
             this.tipsColumn1});
             this.dataGridView.ContextMenuStrip = this.contextMenuStrip1;
-            this.dataGridView.Location = new System.Drawing.Point(8, 185);
+            this.dataGridView.Location = new System.Drawing.Point(8, 152);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowTemplate.Height = 23;
-            this.dataGridView.Size = new System.Drawing.Size(668, 183);
+            this.dataGridView.Size = new System.Drawing.Size(693, 267);
             this.dataGridView.TabIndex = 0;
             this.dataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView_CellBeginEdit);
             this.dataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellEndEdit);
@@ -292,22 +293,39 @@
             this.bindingSource1.DataSource = this.entityDataSource1;
             this.bindingSource1.Position = 0;
             // 
+            // pager2
+            // 
+            this.pager2.AutoSize = true;
+            this.pager2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pager2.Location = new System.Drawing.Point(0, 425);
+            this.pager2.Name = "pager2";
+            this.pager2.NMax = 0;
+            this.pager2.PageCount = 0;
+            this.pager2.PageCurrent = 0;
+            this.pager2.PageSize = 5000;
+            this.pager2.Size = new System.Drawing.Size(709, 34);
+            this.pager2.TabIndex = 13;
+            this.pager2.EventPaging += new DCTS.CustomComponents.EventPagingHandler(this.pager2_EventPaging_1);
+            // 
             // DinningsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.pager2);
             this.Controls.Add(this.btsave);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.newButton);
             this.Controls.Add(this.dataGridView);
             this.Name = "DinningsControl";
-            this.Size = new System.Drawing.Size(684, 397);
+            this.Size = new System.Drawing.Size(709, 459);
+            this.Load += new System.EventHandler(this.DinningsControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -341,5 +359,7 @@
         private System.Windows.Forms.BindingSource bindingSource1;
         private System.Windows.Forms.ToolStripMenuItem 修改ToolStripMenuItem;
         private System.Windows.Forms.Button btsave;
+        private CustomComponents.Pager pager1;
+        private CustomComponents.Pager pager2;
     }
 }
