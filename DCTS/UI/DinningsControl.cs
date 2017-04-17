@@ -119,7 +119,7 @@ namespace DCTS.UI
         {
             //ApplyFilter();
             FindDataSources();
-
+            pager2.Bind();
 
         }
         private void ApplyFilter()

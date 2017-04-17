@@ -27,7 +27,8 @@ namespace DCTS.UI
         public HotelControl()
         {
             InitializeComponent();
-            this.dataGridChanges = new Hashtable();          
+            this.dataGridChanges = new Hashtable();
+            pager1.Bind();
         }
 
         public void BeginActive()
@@ -115,7 +116,7 @@ namespace DCTS.UI
         private void btfind_Click(object sender, EventArgs e)
         {
             FindDataSources();
-
+            pager1.Bind();
         }
         private int FindDataSources()
         {
@@ -201,6 +202,8 @@ namespace DCTS.UI
                 dataGridView.DataSource = this.bindingSource1;
 
             }
+       
+
             return count;
 
 
