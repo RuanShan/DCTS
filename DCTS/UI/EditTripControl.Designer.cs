@@ -34,19 +34,18 @@
             this.backLinkLabel = new System.Windows.Forms.LinkLabel();
             this.delDayButton = new System.Windows.Forms.Button();
             this.dayDataGridView = new System.Windows.Forms.DataGridView();
-            this.dayNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dayDetailDataGridView = new System.Windows.Forms.DataGridView();
+            this.dayDetailBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.moveDownButton = new System.Windows.Forms.Button();
+            this.moveUpButton = new System.Windows.Forms.Button();
+            this.selectedLocationTextBox = new System.Windows.Forms.TextBox();
+            this.selectDayTextBox = new System.Windows.Forms.TextBox();
+            this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
+            this.dayNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.locationIdColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.positionColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dayIdColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.localtionTitleColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dayDetailBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.moveDownButton = new System.Windows.Forms.Button();
-            this.moveUpButton = new System.Windows.Forms.Button();
-            this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.selectedLocationTextBox = new System.Windows.Forms.TextBox();
-            this.selectDayTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dayDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dayDetailDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dayDetailBindingSource)).BeginInit();
@@ -54,6 +53,7 @@
             // 
             // addDayButton
             // 
+            this.addDayButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.addDayButton.Location = new System.Drawing.Point(3, 320);
             this.addDayButton.Name = "addDayButton";
             this.addDayButton.Size = new System.Drawing.Size(36, 23);
@@ -64,6 +64,7 @@
             // 
             // addLocationButton
             // 
+            this.addLocationButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.addLocationButton.Location = new System.Drawing.Point(768, 10);
             this.addLocationButton.Name = "addLocationButton";
             this.addLocationButton.Size = new System.Drawing.Size(75, 23);
@@ -85,6 +86,7 @@
             // 
             // delDayButton
             // 
+            this.delDayButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.delDayButton.Location = new System.Drawing.Point(45, 320);
             this.delDayButton.Name = "delDayButton";
             this.delDayButton.Size = new System.Drawing.Size(36, 23);
@@ -98,35 +100,34 @@
             this.dayDataGridView.AllowUserToAddRows = false;
             this.dayDataGridView.AllowUserToDeleteRows = false;
             this.dayDataGridView.AllowUserToResizeRows = false;
+            this.dayDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.dayDataGridView.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dayDataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dayDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dayDataGridView.ColumnHeadersVisible = false;
             this.dayDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dayNameColumn});
             this.dayDataGridView.Location = new System.Drawing.Point(3, 39);
             this.dayDataGridView.MultiSelect = false;
             this.dayDataGridView.Name = "dayDataGridView";
+            this.dayDataGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dayDataGridView.RowHeadersVisible = false;
             this.dayDataGridView.RowTemplate.Height = 23;
+            this.dayDataGridView.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.dayDataGridView.Size = new System.Drawing.Size(192, 275);
             this.dayDataGridView.TabIndex = 8;
             this.dayDataGridView.SelectionChanged += new System.EventHandler(this.dayDataGridView_SelectionChanged);
-            // 
-            // dayNameColumn
-            // 
-            this.dayNameColumn.DataPropertyName = "FullName";
-            this.dayNameColumn.HeaderText = "FullName";
-            this.dayNameColumn.Name = "dayNameColumn";
-            this.dayNameColumn.Visible = false;
             // 
             // dayDetailDataGridView
             // 
             this.dayDetailDataGridView.AllowUserToAddRows = false;
             this.dayDetailDataGridView.AllowUserToDeleteRows = false;
             this.dayDetailDataGridView.AllowUserToResizeRows = false;
-            this.dayDetailDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.dayDetailDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dayDetailDataGridView.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dayDetailDataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dayDetailDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dayDetailDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.locationIdColumn1,
@@ -141,6 +142,55 @@
             this.dayDetailDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dayDetailDataGridView.Size = new System.Drawing.Size(642, 275);
             this.dayDetailDataGridView.TabIndex = 8;
+            // 
+            // moveDownButton
+            // 
+            this.moveDownButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.moveDownButton.Location = new System.Drawing.Point(243, 320);
+            this.moveDownButton.Name = "moveDownButton";
+            this.moveDownButton.Size = new System.Drawing.Size(36, 23);
+            this.moveDownButton.TabIndex = 10;
+            this.moveDownButton.Text = "Down";
+            this.moveDownButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.moveDownButton.UseVisualStyleBackColor = true;
+            this.moveDownButton.Click += new System.EventHandler(this.moveDownButton_Click);
+            // 
+            // moveUpButton
+            // 
+            this.moveUpButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.moveUpButton.Location = new System.Drawing.Point(201, 320);
+            this.moveUpButton.Name = "moveUpButton";
+            this.moveUpButton.Size = new System.Drawing.Size(36, 23);
+            this.moveUpButton.TabIndex = 9;
+            this.moveUpButton.Text = "Up";
+            this.moveUpButton.UseVisualStyleBackColor = true;
+            this.moveUpButton.Click += new System.EventHandler(this.moveUpButton_Click);
+            // 
+            // selectedLocationTextBox
+            // 
+            this.selectedLocationTextBox.Location = new System.Drawing.Point(622, 320);
+            this.selectedLocationTextBox.Name = "selectedLocationTextBox";
+            this.selectedLocationTextBox.Size = new System.Drawing.Size(100, 21);
+            this.selectedLocationTextBox.TabIndex = 12;
+            this.selectedLocationTextBox.Visible = false;
+            // 
+            // selectDayTextBox
+            // 
+            this.selectDayTextBox.Location = new System.Drawing.Point(491, 320);
+            this.selectDayTextBox.Name = "selectDayTextBox";
+            this.selectDayTextBox.Size = new System.Drawing.Size(100, 21);
+            this.selectDayTextBox.TabIndex = 12;
+            this.selectDayTextBox.Visible = false;
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
+            // 
+            // dayNameColumn
+            // 
+            this.dayNameColumn.DataPropertyName = "FullName";
+            this.dayNameColumn.HeaderText = "行程天数";
+            this.dayNameColumn.Name = "dayNameColumn";
             // 
             // locationIdColumn1
             // 
@@ -163,54 +213,8 @@
             // localtionTitleColumn
             // 
             this.localtionTitleColumn.DataPropertyName = "title";
-            this.localtionTitleColumn.HeaderText = "localtionTitle";
+            this.localtionTitleColumn.HeaderText = "名称";
             this.localtionTitleColumn.Name = "localtionTitleColumn";
-            // 
-            // moveDownButton
-            // 
-            this.moveDownButton.Location = new System.Drawing.Point(243, 320);
-            this.moveDownButton.Name = "moveDownButton";
-            this.moveDownButton.Size = new System.Drawing.Size(36, 23);
-            this.moveDownButton.TabIndex = 10;
-            this.moveDownButton.Text = "Down";
-            this.moveDownButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.moveDownButton.UseVisualStyleBackColor = true;
-            this.moveDownButton.Click += new System.EventHandler(this.moveDownButton_Click);
-            // 
-            // moveUpButton
-            // 
-            this.moveUpButton.Location = new System.Drawing.Point(201, 320);
-            this.moveUpButton.Name = "moveUpButton";
-            this.moveUpButton.Size = new System.Drawing.Size(36, 23);
-            this.moveUpButton.TabIndex = 9;
-            this.moveUpButton.Text = "Up";
-            this.moveUpButton.UseVisualStyleBackColor = true;
-            this.moveUpButton.Click += new System.EventHandler(this.moveUpButton_Click);
-            // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(-15, -15);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 21);
-            this.textBox1.TabIndex = 11;
-            // 
-            // selectedLocationTextBox
-            // 
-            this.selectedLocationTextBox.Location = new System.Drawing.Point(622, 320);
-            this.selectedLocationTextBox.Name = "selectedLocationTextBox";
-            this.selectedLocationTextBox.Size = new System.Drawing.Size(100, 21);
-            this.selectedLocationTextBox.TabIndex = 12;
-            // 
-            // selectDayTextBox
-            // 
-            this.selectDayTextBox.Location = new System.Drawing.Point(491, 320);
-            this.selectDayTextBox.Name = "selectDayTextBox";
-            this.selectDayTextBox.Size = new System.Drawing.Size(100, 21);
-            this.selectDayTextBox.TabIndex = 12;
             // 
             // EditTripControl
             // 
@@ -218,7 +222,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.selectDayTextBox);
             this.Controls.Add(this.selectedLocationTextBox);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.moveDownButton);
             this.Controls.Add(this.moveUpButton);
             this.Controls.Add(this.dayDetailDataGridView);
@@ -246,16 +249,15 @@
         private System.Windows.Forms.Button delDayButton;
         private System.Windows.Forms.DataGridView dayDataGridView;
         private System.Windows.Forms.DataGridView dayDetailDataGridView;
+        private System.Windows.Forms.BindingSource dayDetailBindingSource;
+        private System.Windows.Forms.Button moveDownButton;
+        private System.Windows.Forms.Button moveUpButton;
+        private System.Windows.Forms.TextBox selectedLocationTextBox;
+        private System.Windows.Forms.TextBox selectDayTextBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn dayNameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn locationIdColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn positionColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dayIdColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn localtionTitleColumn;
-        private System.Windows.Forms.BindingSource dayDetailBindingSource;
-        private System.Windows.Forms.Button moveDownButton;
-        private System.Windows.Forms.Button moveUpButton;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox selectedLocationTextBox;
-        private System.Windows.Forms.TextBox selectDayTextBox;
     }
 }

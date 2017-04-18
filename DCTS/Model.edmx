@@ -308,7 +308,7 @@
           <Property Type="Int32" Name="ltype" Nullable="false" />
           <Property Type="String" Name="nation" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="city" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="area" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Type="String" Name="area" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="title" MaxLength="256" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="local_title" MaxLength="256" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="img" MaxLength="256" FixedLength="false" Unicode="false" />

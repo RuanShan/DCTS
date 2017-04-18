@@ -50,7 +50,7 @@
             this.bindingNavigator1.AutoSize = false;
             this.bindingNavigator1.CountItem = null;
             this.bindingNavigator1.DeleteItem = null;
-            this.bindingNavigator1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.bindingNavigator1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bindingNavigator1.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.bindingNavigator1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.bindingNavigator1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -72,7 +72,7 @@
             this.bindingNavigator1.Name = "bindingNavigator1";
             this.bindingNavigator1.PositionItem = null;
             this.bindingNavigator1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.bindingNavigator1.Size = new System.Drawing.Size(721, 31);
+            this.bindingNavigator1.Size = new System.Drawing.Size(721, 28);
             this.bindingNavigator1.TabIndex = 0;
             this.bindingNavigator1.Text = "bindingNavigator1";
             // 
@@ -80,10 +80,10 @@
             // 
             this.btnLast.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.btnLast.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnLast.Image = Properties.Resources.LastRecord_small;
+            this.btnLast.Image = global::DCTS.Properties.Resources.LastRecord_small;
             this.btnLast.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnLast.Name = "btnLast";
-            this.btnLast.Size = new System.Drawing.Size(23, 28);
+            this.btnLast.Size = new System.Drawing.Size(23, 25);
             this.btnLast.Text = "Last page";
             this.btnLast.Click += new System.EventHandler(this.btnLast_Click);
             // 
@@ -91,10 +91,10 @@
             // 
             this.btnNext.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.btnNext.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnNext.Image = Properties.Resources.NextRecord_small;
+            this.btnNext.Image = global::DCTS.Properties.Resources.NextRecord_small;
             this.btnNext.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(23, 28);
+            this.btnNext.Size = new System.Drawing.Size(23, 25);
             this.btnNext.Text = "Next page";
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
@@ -102,36 +102,36 @@
             // 
             this.toolStripSeparator1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 28);
             // 
             // lblPageCount
             // 
             this.lblPageCount.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.lblPageCount.Name = "lblPageCount";
-            this.lblPageCount.Size = new System.Drawing.Size(31, 28);
+            this.lblPageCount.Size = new System.Drawing.Size(31, 25);
             this.lblPageCount.Text = "/{ 0 }";
             // 
             // lblcurentpage
             // 
             this.lblcurentpage.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.lblcurentpage.Name = "lblcurentpage";
-            this.lblcurentpage.Size = new System.Drawing.Size(25, 31);
+            this.lblcurentpage.Size = new System.Drawing.Size(25, 28);
             this.lblcurentpage.Text = "0";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 31);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 28);
             // 
             // btnPrev
             // 
             this.btnPrev.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.btnPrev.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnPrev.Image = Properties.Resources.PreviousRecord_small;
+            this.btnPrev.Image = global::DCTS.Properties.Resources.PreviousRecord_small;
             this.btnPrev.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnPrev.Name = "btnPrev";
-            this.btnPrev.Size = new System.Drawing.Size(23, 28);
+            this.btnPrev.Size = new System.Drawing.Size(23, 25);
             this.btnPrev.Text = "Previous page";
             this.btnPrev.Click += new System.EventHandler(this.btnPrev_Click);
             // 
@@ -139,23 +139,23 @@
             // 
             this.btnFirst.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.btnFirst.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnFirst.Image = Properties.Resources.FirstRecord_small;
+            this.btnFirst.Image = global::DCTS.Properties.Resources.FirstRecord_small;
             this.btnFirst.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnFirst.Name = "btnFirst";
-            this.btnFirst.Size = new System.Drawing.Size(23, 28);
+            this.btnFirst.Size = new System.Drawing.Size(23, 25);
             this.btnFirst.Text = "First page";
             this.btnFirst.Click += new System.EventHandler(this.btnFirst_Click);
             // 
             // lblPageCount1
             // 
             this.lblPageCount1.Name = "lblPageCount1";
-            this.lblPageCount1.Size = new System.Drawing.Size(77, 28);
+            this.lblPageCount1.Size = new System.Drawing.Size(77, 25);
             this.lblPageCount1.Text = "合計 0 ページ";
             // 
             // lblRecordCount
             // 
             this.lblRecordCount.Name = "lblRecordCount";
-            this.lblRecordCount.Size = new System.Drawing.Size(55, 28);
+            this.lblRecordCount.Size = new System.Drawing.Size(55, 25);
             this.lblRecordCount.Text = "合計 0 行";
             // 
             // Pager
@@ -165,7 +165,7 @@
             this.AutoSize = true;
             this.Controls.Add(this.bindingNavigator1);
             this.Name = "Pager";
-            this.Size = new System.Drawing.Size(721, 31);
+            this.Size = new System.Drawing.Size(721, 28);
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();

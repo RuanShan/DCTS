@@ -56,7 +56,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(35, 67);
+            this.label2.Location = new System.Drawing.Point(47, 67);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(29, 12);
             this.label2.TabIndex = 1;
@@ -64,9 +64,9 @@
             // 
             // titleTextBox
             // 
-            this.titleTextBox.Location = new System.Drawing.Point(82, 64);
+            this.titleTextBox.Location = new System.Drawing.Point(82, 63);
             this.titleTextBox.Name = "titleTextBox";
-            this.titleTextBox.Size = new System.Drawing.Size(440, 21);
+            this.titleTextBox.Size = new System.Drawing.Size(458, 21);
             this.titleTextBox.TabIndex = 2;
             // 
             // memoTextBox
@@ -74,13 +74,13 @@
             this.memoTextBox.Location = new System.Drawing.Point(82, 123);
             this.memoTextBox.Multiline = true;
             this.memoTextBox.Name = "memoTextBox";
-            this.memoTextBox.Size = new System.Drawing.Size(440, 82);
+            this.memoTextBox.Size = new System.Drawing.Size(458, 82);
             this.memoTextBox.TabIndex = 4;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(35, 126);
+            this.label3.Location = new System.Drawing.Point(47, 125);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 12);
             this.label3.TabIndex = 3;
@@ -89,7 +89,7 @@
             // saveButton
             // 
             this.saveButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
-            this.saveButton.Location = new System.Drawing.Point(366, 230);
+            this.saveButton.Location = new System.Drawing.Point(384, 230);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 5;
@@ -100,7 +100,7 @@
             // cancelButton
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.No;
-            this.cancelButton.Location = new System.Drawing.Point(447, 230);
+            this.cancelButton.Location = new System.Drawing.Point(465, 230);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 5;
@@ -113,7 +113,7 @@
             // 
             // daysNumericUpDown
             // 
-            this.daysNumericUpDown.Location = new System.Drawing.Point(82, 91);
+            this.daysNumericUpDown.Location = new System.Drawing.Point(82, 92);
             this.daysNumericUpDown.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -126,7 +126,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(35, 93);
+            this.label4.Location = new System.Drawing.Point(47, 96);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 3;
@@ -147,7 +147,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "NewTripForm";
-            this.Text = "NewTripForm";
+            this.Text = "新建行程";
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.daysNumericUpDown)).EndInit();
             this.ResumeLayout(false);

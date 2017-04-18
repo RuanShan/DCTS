@@ -45,17 +45,5 @@ namespace DCTS.DB
         }
     }
 
-    public class LocationTemplate
-    {
-        public static string TemplatePath = "templates";
 
-        public static string DinningDetailName = "dining-detail.docx";
-        public static string ScenicDetailName = "scenic-detail.docx";
-        public static string HotelDetailName = "hotel-detail.docx";
-
-        public static string DinningDetailRelativePath { get { return Path.Combine(TemplatePath, DinningDetailName); } }
-        public static string ScenicDetailRelativePath { get { return Path.Combine(TemplatePath, ScenicDetailName); } }
-        public static string HotelDetailRelativePath { get { return Path.Combine(TemplatePath, HotelDetailName); } }
-    
-    }
 }
