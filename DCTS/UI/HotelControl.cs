@@ -12,6 +12,7 @@ using DCTS.CustomComponents;
 using System.Collections;
 using DCTS.DB;
 using MySql.Data.MySqlClient;
+using System.IO;
 
 namespace DCTS.UI
 {
@@ -259,6 +260,31 @@ namespace DCTS.UI
                 e.CellStyle.BackColor = Color.Red;
                 e.CellStyle.SelectionBackColor = Color.DarkRed;
             }
+
+            //添加图片
+            int i = this.dataGridView.CurrentRow.Index;
+            ComboLocation selectedItem = hotelList[i];
+            long folername = selectedItem.id / 1000;
+            if (selectedItem.img != null && selectedItem.img != "")
+            {
+                string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\locations\\" + folername + "\\", selectedItem.img);
+                if (e.ColumnIndex == 4)
+                {
+                    e.Value = GetImage1(lcoalPath);
+
+                }
+            }
+
+        }
+        public System.Drawing.Image GetImage1(string path)
+        {
+            System.IO.FileStream fs = new System.IO.FileStream(path, System.IO.FileMode.Open);
+            System.Drawing.Image result = System.Drawing.Image.FromStream(fs);
+
+            fs.Close();
+
+            return result;
+
         }
 
         private void dataGridView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
