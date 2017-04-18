@@ -31,12 +31,13 @@ namespace DCTS.UI
         {
             int offset = 0;
             int pageSize = 5000;
-            var ctx = this.entityDataSource1.DbContext as DctsEntities;
-             
-            var query = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Scenic).OrderBy(o => o.id).Skip(offset).Take(pageSize);
-            var list = this.entityDataSource1.CreateView(query);
-            this.dataGridView.DataSource = list;
-            
+            using (var ctx = new DctsEntities())
+            {
+
+                var query = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Scenic).OrderBy(o => o.id).Skip(offset).Take(pageSize);
+                var list = this.entityDataSource1.CreateView(query);
+                this.dataGridView.DataSource = list;
+            }
             // 初始化查询条件
             var nationList = DCTS.DB.GlobalCache.NationList;
             var nations = nationList.Select(o => new MockEntity { Id = o.id, ShortName= o.code ,FullName = o.title }).ToList();
@@ -76,7 +77,15 @@ namespace DCTS.UI
 
             if (column == editColumn1)
             {
-                MessageBox.Show("edit");
+                var row = dataGridView.Rows[e.RowIndex];
+
+                var model = row.DataBoundItem as ComboLocation;
+
+                var form = new EditScenicForm(model.id);
+                if (form.ShowDialog() == DialogResult.Yes)
+                {
+                    BeginActive();
+                }
             }
             else if (column == deleteColumn)
             {

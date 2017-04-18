@@ -39,8 +39,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.nationComboBox = new System.Windows.Forms.ComboBox();
-            this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.label2 = new System.Windows.Forms.Label();
+            this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.nationColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cityColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.imgColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -76,14 +76,14 @@
             this.dataGridView.RowHeadersVisible = false;
             this.dataGridView.RowTemplate.Height = 23;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.Size = new System.Drawing.Size(668, 189);
+            this.dataGridView.Size = new System.Drawing.Size(875, 189);
             this.dataGridView.TabIndex = 0;
             this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellContentClick);
             // 
             // newButton
             // 
             this.newButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.newButton.Location = new System.Drawing.Point(601, 20);
+            this.newButton.Location = new System.Drawing.Point(808, 20);
             this.newButton.Name = "newButton";
             this.newButton.Size = new System.Drawing.Size(75, 23);
             this.newButton.TabIndex = 1;
@@ -104,7 +104,7 @@
             this.groupBox1.Controls.Add(this.nationComboBox);
             this.groupBox1.Location = new System.Drawing.Point(8, 51);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(668, 84);
+            this.groupBox1.Size = new System.Drawing.Size(875, 84);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             // 
@@ -170,10 +170,6 @@
             this.nationComboBox.TabIndex = 3;
             this.nationComboBox.SelectedIndexChanged += new System.EventHandler(this.nationComboBox_SelectedIndexChanged);
             // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
-            // 
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -183,6 +179,10 @@
             this.label2.TabIndex = 12;
             this.label2.Text = "景点列表";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
             // 
             // nationColumn1
             // 
@@ -211,6 +211,7 @@
             // 
             // localTitleColumn1
             // 
+            this.localTitleColumn1.DataPropertyName = "local_title";
             this.localTitleColumn1.HeaderText = "当地语言名称";
             this.localTitleColumn1.Name = "localTitleColumn1";
             this.localTitleColumn1.Width = 200;
@@ -244,7 +245,7 @@
             this.Controls.Add(this.newButton);
             this.Controls.Add(this.dataGridView);
             this.Name = "ScenicsControl";
-            this.Size = new System.Drawing.Size(684, 366);
+            this.Size = new System.Drawing.Size(891, 366);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

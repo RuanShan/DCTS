@@ -34,6 +34,7 @@
             this.backLinkLabel = new System.Windows.Forms.LinkLabel();
             this.delDayButton = new System.Windows.Forms.Button();
             this.dayDataGridView = new System.Windows.Forms.DataGridView();
+            this.dayNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dayDetailDataGridView = new System.Windows.Forms.DataGridView();
             this.dayDetailBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.moveDownButton = new System.Windows.Forms.Button();
@@ -41,9 +42,8 @@
             this.selectedLocationTextBox = new System.Windows.Forms.TextBox();
             this.selectDayTextBox = new System.Windows.Forms.TextBox();
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
-            this.dayNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.locationIdColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.positionColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.locationIdColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dayIdColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.localtionTitleColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dayDataGridView)).BeginInit();
@@ -118,6 +118,12 @@
             this.dayDataGridView.TabIndex = 8;
             this.dayDataGridView.SelectionChanged += new System.EventHandler(this.dayDataGridView_SelectionChanged);
             // 
+            // dayNameColumn
+            // 
+            this.dayNameColumn.DataPropertyName = "FullName";
+            this.dayNameColumn.HeaderText = "行程天数";
+            this.dayNameColumn.Name = "dayNameColumn";
+            // 
             // dayDetailDataGridView
             // 
             this.dayDetailDataGridView.AllowUserToAddRows = false;
@@ -130,8 +136,8 @@
             this.dayDetailDataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dayDetailDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dayDetailDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.locationIdColumn1,
             this.positionColumn1,
+            this.locationIdColumn1,
             this.dayIdColumn1,
             this.localtionTitleColumn});
             this.dayDetailDataGridView.Location = new System.Drawing.Point(201, 39);
@@ -186,23 +192,17 @@
             // 
             this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
             // 
-            // dayNameColumn
+            // positionColumn1
             // 
-            this.dayNameColumn.DataPropertyName = "FullName";
-            this.dayNameColumn.HeaderText = "行程天数";
-            this.dayNameColumn.Name = "dayNameColumn";
+            this.positionColumn1.DataPropertyName = "position";
+            this.positionColumn1.HeaderText = "序号";
+            this.positionColumn1.Name = "positionColumn1";
             // 
             // locationIdColumn1
             // 
             this.locationIdColumn1.DataPropertyName = "locationId";
             this.locationIdColumn1.HeaderText = "locationId";
             this.locationIdColumn1.Name = "locationIdColumn1";
-            // 
-            // positionColumn1
-            // 
-            this.positionColumn1.DataPropertyName = "position";
-            this.positionColumn1.HeaderText = "Position";
-            this.positionColumn1.Name = "positionColumn1";
             // 
             // dayIdColumn1
             // 
@@ -255,8 +255,8 @@
         private System.Windows.Forms.TextBox selectedLocationTextBox;
         private System.Windows.Forms.TextBox selectDayTextBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn dayNameColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn locationIdColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn positionColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn locationIdColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dayIdColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn localtionTitleColumn;
     }
