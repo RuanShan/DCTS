@@ -42,10 +42,7 @@ namespace DCTS.Bus
 
             var wrappedKeys = txtKeys.Select(o => "%" + o + "%").ToList();
 
-            if (!Directory.Exists(WordFolderPath))
-            {
-                Directory.CreateDirectory(WordFolderPath);
-            }
+
 
             using (DocX document = DocX.Create(this.WordFilePath ))
             {

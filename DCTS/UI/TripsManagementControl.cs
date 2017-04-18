@@ -65,10 +65,11 @@ namespace DCTS.UI
             var commandEventArgs = e as CommandRequestEventArgs;
             if (commandEventArgs.Command == CommandRequestEnum.EditTrip)
             {
-                editTripControl.ModelId = commandEventArgs.ModelId;
-                editTripControl.BeginActive();
+
                 this.mainPanel.Controls.Clear();
                 this.mainPanel.Controls.Add(editTripControl);
+                editTripControl.ModelId = commandEventArgs.ModelId;
+                editTripControl.BeginActive();
             }
 
             if (commandEventArgs.Command == CommandRequestEnum.TripList)
@@ -106,6 +107,11 @@ namespace DCTS.UI
             this.mainPanel.Controls.Clear();
             this.mainPanel.Controls.Add(hotelControl);
 
+
+        }
+
+        private void toolStripStatusLabel1_Click(object sender, EventArgs e)
+        {
 
         }
 

@@ -123,6 +123,7 @@
     </Compile>
     <Compile Include="DB\ComboLocationEnum.cs" />
     <Compile Include="DB\DayLocation.cs" />
+    <Compile Include="DB\EntityPathConfig.cs" />
     <Compile Include="DB\GlobalCache.cs" />
     <Compile Include="DB\MockEntity.cs" />
     <Compile Include="Dining.cs">
@@ -130,12 +131,6 @@
     </Compile>
     <Compile Include="Nation.cs">
       <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Pager.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Pager.Designer.cs">
-      <DependentUpon>Pager.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\ChooseLocaltionForm.cs">
       <SubType>Form</SubType>
@@ -270,9 +265,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Pager.resx">
-      <DependentUpon>Pager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

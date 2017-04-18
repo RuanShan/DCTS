@@ -26,7 +26,7 @@ namespace DCTS.UI
         public EditTripControl()
         {
             InitializeComponent();
-            dayNameColumn.Width = dayDataGridView.ClientSize.Width-2;
+
             dayDataGridView.AutoGenerateColumns = false;
             dayDetailDataGridView.AutoGenerateColumns = false;
             //dayListView.Columns[0].Width = 0; //id
@@ -37,7 +37,11 @@ namespace DCTS.UI
 
         public void BeginActive()
         {
+            dayNameColumn.Width = dayDataGridView.ClientSize.Width - 3;
+            localtionTitleColumn.Width = dayDetailDataGridView.ClientSize.Width - 303;
+
             InitializeDataSource();
+
         }
 
         public void InitializeDataSource(int selectDay = 0, int selectLocationPosition = 0)

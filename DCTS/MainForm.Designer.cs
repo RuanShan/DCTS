@@ -43,6 +43,7 @@
             // 
             // menuStrip2
             // 
+            this.menuStrip2.BackColor = System.Drawing.Color.CornflowerBlue;
             this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.路ToolStripMenuItem,
             this.客户信息ToolStripMenuItem1,
@@ -98,6 +99,7 @@
             // mainPanel
             // 
             this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainPanel.ForeColor = System.Drawing.SystemColors.InfoText;
             this.mainPanel.Location = new System.Drawing.Point(0, 25);
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(942, 354);
