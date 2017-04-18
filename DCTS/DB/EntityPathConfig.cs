@@ -28,22 +28,22 @@ namespace DCTS.DB
 
         public static string DinningDetailRelativePath { 
             get {
+                CreateFolder(TemplatePath);
                 string path = Path.Combine(TemplatePath, DinningDetailName);
-                CreateFolder(path);
                 return path;
             } 
         }
         public static string ScenicDetailRelativePath { 
             get {
+                CreateFolder(TemplatePath);
                 string path = Path.Combine(TemplatePath, ScenicDetailName);
-                CreateFolder(path);
                 return path;                 
             } 
         }
         public static string HotelDetailRelativePath { 
             get {
+                CreateFolder(TemplatePath);
                 string path = Path.Combine(TemplatePath, HotelDetailName); 
-                CreateFolder(path);
                 return path;                     
             } 
         }
