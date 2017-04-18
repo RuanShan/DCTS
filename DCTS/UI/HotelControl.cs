@@ -22,12 +22,13 @@ namespace DCTS.UI
         private List<ComboLocation> hotelList = null;
         private SortableBindingList<ComboLocation> sortabledinningsOrderList;
         int RowRemark = 0;
-        
+
         //  IBindingList hotelOrderList = null;
         public HotelControl()
         {
             InitializeComponent();
-            this.dataGridChanges = new Hashtable();          
+            this.dataGridChanges = new Hashtable();
+            pager1.Bind();
         }
 
         public void BeginActive()
@@ -67,7 +68,7 @@ namespace DCTS.UI
 
         private void newButton_Click(object sender, EventArgs e)
         {
-            var form = new NewHotelForm();
+            var form = new NewHotelForm("create", null);
             if (form.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
             {
                 InitializeDataGridView();
@@ -115,7 +116,7 @@ namespace DCTS.UI
         private void btfind_Click(object sender, EventArgs e)
         {
             FindDataSources();
-
+            pager1.Bind();
         }
         private int FindDataSources()
         {
@@ -201,6 +202,8 @@ namespace DCTS.UI
                 dataGridView.DataSource = this.bindingSource1;
 
             }
+
+
             return count;
 
 
@@ -210,11 +213,7 @@ namespace DCTS.UI
 
         private void 修改ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new NewDinningsForm();
-            if (form.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
-            {
-                InitializeDataGridView();
-            }
+
         }
 
 
@@ -291,6 +290,15 @@ namespace DCTS.UI
         {
             int count = FindDataSources();
             return count;
+        }
+
+        private void 修改ToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            var form = new NewHotelForm("Edit", null);
+            if (form.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
+            {
+                InitializeDataGridView();
+            }
         }
 
 

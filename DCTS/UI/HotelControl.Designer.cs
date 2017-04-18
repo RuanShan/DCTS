@@ -60,9 +60,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.nationComboBox = new System.Windows.Forms.ComboBox();
             this.btsave = new System.Windows.Forms.Button();
+            this.pager1 = new DCTS.CustomComponents.Pager();
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.pager1 = new DCTS.CustomComponents.Pager();
+            this.修改ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -218,14 +219,15 @@
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.deleteToolStripMenuItem});
+            this.deleteToolStripMenuItem,
+            this.修改ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(123, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 70);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.deleteToolStripMenuItem.Text = "删除餐厅";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -325,15 +327,6 @@
             this.btsave.UseVisualStyleBackColor = true;
             this.btsave.Click += new System.EventHandler(this.btsave_Click);
             // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
-            // 
-            // bindingSource1
-            // 
-            this.bindingSource1.DataSource = this.entityDataSource1;
-            this.bindingSource1.Position = 0;
-            // 
             // pager1
             // 
             this.pager1.AutoSize = true;
@@ -347,6 +340,22 @@
             this.pager1.Size = new System.Drawing.Size(688, 34);
             this.pager1.TabIndex = 13;
             this.pager1.EventPaging += new DCTS.CustomComponents.EventPagingHandler(this.pager1_EventPaging);
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
+            // 
+            // bindingSource1
+            // 
+            this.bindingSource1.DataSource = this.entityDataSource1;
+            this.bindingSource1.Position = 0;
+            // 
+            // 修改ToolStripMenuItem
+            // 
+            this.修改ToolStripMenuItem.Name = "修改ToolStripMenuItem";
+            this.修改ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.修改ToolStripMenuItem.Text = "修改";
+            this.修改ToolStripMenuItem.Click += new System.EventHandler(this.修改ToolStripMenuItem_Click_1);
             // 
             // HotelControl
             // 
@@ -405,5 +414,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn kitchenCloumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn tipsColumn1;
         private CustomComponents.Pager pager1;
+        private System.Windows.Forms.ToolStripMenuItem 修改ToolStripMenuItem;
     }
 }

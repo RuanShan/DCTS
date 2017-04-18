@@ -46,9 +46,11 @@ namespace DCTS.UI
             var ctx = this.entityDataSource1.DbContext as DctsEntities;
             //using (var ctx = new DctsEntities())
             {
+                DinningList = new List<ComboLocation>();
 
                 // var query = ctx.ComboLocations.OrderBy(o => o.id).Skip(offset).Take(pageSize);
                 var query = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Dining).OrderBy(o => o.id).Skip(offset).Take(pageSize);
+                DinningList = query.ToList();
 
                 var list = this.entityDataSource1.CreateView(query);
                 sortabledinningsOrderList = new SortableBindingList<ComboLocation>(query.ToList());
@@ -70,7 +72,7 @@ namespace DCTS.UI
 
         private void newButton_Click(object sender, EventArgs e)
         {
-            var form = new NewDinningsForm();
+            var form = new NewDinningsForm("create",null);
             if (form.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
             {
                 InitializeDataGridView();
@@ -119,7 +121,7 @@ namespace DCTS.UI
         {
             //ApplyFilter();
             FindDataSources();
-
+            pager2.Bind();
 
         }
         private void ApplyFilter()
@@ -253,7 +255,12 @@ namespace DCTS.UI
 
         private void 修改ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new NewDinningsForm();
+            int i = this.dataGridView.CurrentRow.Index;
+            ComboLocation selectedItem = DinningList[i];
+
+            //ComboLocation selectedItem = DinningList.Find(i => i.id == o.自社コード);
+
+            var form = new NewDinningsForm("Edit", selectedItem);
             if (form.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
             {
                 InitializeDataGridView();

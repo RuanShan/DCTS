@@ -98,7 +98,7 @@ namespace DCTS.CustomComponents
                 lblPageCount.Text = " / " + PageCount.ToString();
                 //lblPageCount1.Text = "每页 "+PageSize .ToString ()+" 条，共 "+PageCount.ToString()+" 页";   
                 //lblPageCount1.Text = "Page size: " + PageSize.ToString() + "   Total: " + PageCount.ToString() + " pages";
-                lblPageCount1.Text = "最大表示行数: " + PageSize.ToString() + "   合計: " + PageCount.ToString() + " ページ";
+                lblPageCount1.Text = "最大表示行数: " + PageSize.ToString() + "   合计: " + PageCount.ToString() + " ";
             }
             else
             {
@@ -136,7 +136,7 @@ namespace DCTS.CustomComponents
             lblcurentpage.Text = PageCurrent.ToString();
             //lblRecordCount.Text = "共有 " + NMax.ToString() + " 条记录";
             //lblRecordCount.Text = "Total: " + NMax.ToString() + " records";
-            lblRecordCount.Text = "合計: " + NMax.ToString() + " 行";
+            lblRecordCount.Text = "合计: " + NMax.ToString() + " 行";
 
 
             btnPrev.Enabled = true;
