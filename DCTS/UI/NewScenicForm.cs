@@ -56,14 +56,13 @@ namespace DCTS.UI
                     obj.title = this.titleTextBox.Text;
                     obj.nation = this.nationComboBox.Text;
                     obj.city = this.cityComboBox.Text;
-                    obj.area =
                     obj.latlng = this.latlngTextBox.Text;
+                    obj.ticket = this.ticketTextBox.Text;
                     obj.open_at = this.openAtDateTimePicker.Value;
                     obj.close_at = this.closeAtDateTimePicker.Value;
                     obj.tips = this.tipsTextBox.Text;
                     obj.local_address = this.localAddressTextBox.Text;
-
-                    //obj.memo = this.memoTextBox.Text;
+                    obj.route = this.routeTextBox.Text;
                     ctx.ComboLocations.Add(obj);
                     ctx.SaveChanges();
                 }
@@ -78,7 +77,7 @@ namespace DCTS.UI
         private void findFileButton_Click(object sender, EventArgs e)
         {
 
-            openFileDialog1.Filter = "PNG(*.png)|*.png|JPEG(*.jpg,*.jpeg,*.jpe,*.jfif)|*.jpg;*.jpeg;*.jpe;*.jfif|GIF(*.gif)|*.gif"; //文件类型
+            openFileDialog1.Filter = "PNG(*.png)JPEG(*.jpg,*.jpeg,*.jpe,*.jfif)GIF(*.gif)BMP(*.bmp)|*.png;*.jpg;*.jpeg;*.jpe;*.jfif;*.gif;*.bmp"; //文件类型
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 this.imgPathTextBox.Text = openFileDialog1.FileName;

@@ -145,6 +145,12 @@
     <Compile Include="UI\DispatcherControl.Designer.cs">
       <DependentUpon>DispatcherControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\EditScenicForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\EditScenicForm.Designer.cs">
+      <DependentUpon>EditScenicForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\EditTripControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -162,6 +168,12 @@
     </Compile>
     <Compile Include="UI\NewScenicForm.Designer.cs">
       <DependentUpon>NewScenicForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ScenicFormControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\ScenicFormControl.Designer.cs">
+      <DependentUpon>ScenicFormControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\ScenicsControl.cs">
       <SubType>UserControl</SubType>
@@ -287,6 +299,9 @@
     <EmbeddedResource Include="UI\DispatcherControl.resx">
       <DependentUpon>DispatcherControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\EditScenicForm.resx">
+      <DependentUpon>EditScenicForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\EditTripControl.resx">
       <DependentUpon>EditTripControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -298,6 +313,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\NewTripForm.resx">
       <DependentUpon>NewTripForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ScenicFormControl.resx">
+      <DependentUpon>ScenicFormControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ScenicsControl.resx">
       <DependentUpon>ScenicsControl.cs</DependentUpon>
