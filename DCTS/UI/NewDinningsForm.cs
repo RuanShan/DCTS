@@ -15,12 +15,38 @@ namespace DCTS.UI
 {
     public partial class NewDinningsForm : BaseModalForm
     {
-        public NewDinningsForm()
+        private long changeid;
+
+        public NewDinningsForm(string maintype, ComboLocation obj)
         {
             InitializeComponent();
             InitializeDataSource();
+            changeid = 0;
+            if (maintype == "Edit")
+            {
 
 
+                //obj.ltype = (int)ComboLocationEnum.Dining;
+                this.nationComboBox.Text = obj.nation;
+                this.cityComboBox.Text = obj.city;
+                this.titleTextBox.Text = obj.area;
+                this.textBox1.Text = obj.dishes;
+                //obj.img = this.imgPathTextBox.Text;
+                imgPathTextBox.Text = obj.img;
+                this.latlngTextBox.Text = obj.latlng;
+                this.textBox2.Text = obj.local_address;
+                this.localAddressTextBox.Text = obj.address;
+                this.textBox3.Text = obj.recommended_dishes;
+                this.textBox6.Text = obj.tips;
+                this.localTitleTextBox.Text = obj.title;
+                this.openAtDateTimePicker.Text = obj.open_at.ToString();
+                this.closeAtDateTimePicker.Text = obj.close_at.ToString();
+                changeid = obj.id;
+
+
+
+
+            }
         }
 
         public void InitializeDataSource()
@@ -80,27 +106,15 @@ namespace DCTS.UI
             {
                 string copyfilename = Path.GetFileName(this.imgPathTextBox.Text);
 
-                var obj = ctx.ComboLocations.Create();
-                obj.ltype = (int)ComboLocationEnum.Dining;
-                obj.nation = this.nationComboBox.Text;
-                obj.city = this.cityComboBox.Text;
-                obj.area = this.titleTextBox.Text;
-                obj.dishes = this.textBox1.Text;
-                //obj.img = this.imgPathTextBox.Text;
-                obj.img = copyfilename;
-                obj.latlng = this.latlngTextBox.Text;
-                obj.local_address = this.textBox2.Text;
-                obj.address = this.localAddressTextBox.Text;
-                obj.recommended_dishes = this.textBox3.Text;
-                obj.tips = this.textBox6.Text;
-                obj.title = this.localTitleTextBox.Text;
-                obj.open_at = Convert.ToDateTime(this.openAtDateTimePicker.Text);
-                obj.close_at = Convert.ToDateTime(this.closeAtDateTimePicker.Text);
 
+                if (changeid != 0)
+                {
 
-                //obj.memo = this.memoTextBox.Text;
-                ctx.ComboLocations.Add(obj);
-                ctx.SaveChanges();
+                    updateNewMethod(ctx, copyfilename);
+
+                }
+                else
+                    createNewMethod(ctx, copyfilename);
 
                 if (File.Exists(copypathto + copyfilename))
                 {
@@ -119,6 +133,58 @@ namespace DCTS.UI
                 //File.Copy(this.imgPathTextBox.Text, lcoalPath);
             }
 
+        }
+
+        private void updateNewMethod(DctsEntities ctx, string copyfilename)
+        {
+            ComboLocation obj = ctx.ComboLocations.Find(Convert.ToInt32(changeid));
+
+            //var obj = ctx.ComboLocations.Create();
+            obj.ltype = (int)ComboLocationEnum.Dining;
+            obj.nation = this.nationComboBox.Text;
+            obj.city = this.cityComboBox.Text;
+            obj.area = this.titleTextBox.Text;
+            obj.dishes = this.textBox1.Text;
+            //obj.img = this.imgPathTextBox.Text;
+            obj.img = copyfilename;
+            obj.latlng = this.latlngTextBox.Text;
+            obj.local_address = this.textBox2.Text;
+            obj.address = this.localAddressTextBox.Text;
+            obj.recommended_dishes = this.textBox3.Text;
+            obj.tips = this.textBox6.Text;
+            obj.title = this.localTitleTextBox.Text;
+            obj.open_at = Convert.ToDateTime(this.openAtDateTimePicker.Text);
+            obj.close_at = Convert.ToDateTime(this.closeAtDateTimePicker.Text);
+
+
+            //obj.memo = this.memoTextBox.Text;
+            //  ctx.ComboLocations.Add(obj);
+            ctx.SaveChanges();
+        }
+        private void createNewMethod(DctsEntities ctx, string copyfilename)
+        {
+
+            var obj = ctx.ComboLocations.Create();
+            obj.ltype = (int)ComboLocationEnum.Dining;
+            obj.nation = this.nationComboBox.Text;
+            obj.city = this.cityComboBox.Text;
+            obj.area = this.titleTextBox.Text;
+            obj.dishes = this.textBox1.Text;
+            //obj.img = this.imgPathTextBox.Text;
+            obj.img = copyfilename;
+            obj.latlng = this.latlngTextBox.Text;
+            obj.local_address = this.textBox2.Text;
+            obj.address = this.localAddressTextBox.Text;
+            obj.recommended_dishes = this.textBox3.Text;
+            obj.tips = this.textBox6.Text;
+            obj.title = this.localTitleTextBox.Text;
+            obj.open_at = Convert.ToDateTime(this.openAtDateTimePicker.Text);
+            obj.close_at = Convert.ToDateTime(this.closeAtDateTimePicker.Text);
+
+
+            //obj.memo = this.memoTextBox.Text;
+            ctx.ComboLocations.Add(obj);
+            ctx.SaveChanges();
         }
 
         private List<string> GetFileName(string dirPath)
