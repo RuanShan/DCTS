@@ -317,9 +317,6 @@
     <EmbeddedResource Include="UI\HomeControl.resx">
       <DependentUpon>HomeControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\ImportDining.resx">
-      <DependentUpon>ImportDining.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UI\NewScenicForm.resx">
       <DependentUpon>NewScenicForm.cs</DependentUpon>
     </EmbeddedResource>

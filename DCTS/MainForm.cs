@@ -46,10 +46,10 @@ namespace DCTS
 
         private void 导入餐厅信息ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new ImportDining();
-            if (form.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
-            {
-            }
+            //var form = new ImportDining();
+            //if (form.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
+            //{
+            //}
         }
 
     
