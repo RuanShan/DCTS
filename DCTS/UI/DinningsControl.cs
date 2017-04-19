@@ -12,6 +12,7 @@ using DCTS.CustomComponents;
 using System.Collections;
 using DCTS.DB;
 using MySql.Data.MySqlClient;
+using System.IO;
 
 namespace DCTS.UI
 {
@@ -34,6 +35,7 @@ namespace DCTS.UI
         {
             InitializeDataGridView();
             pager2.Bind();
+            // InitControlsProperties();
 
         }
 
@@ -72,7 +74,7 @@ namespace DCTS.UI
 
         private void newButton_Click(object sender, EventArgs e)
         {
-            var form = new NewDinningsForm("create",null);
+            var form = new NewDinningsForm("create", null);
             if (form.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
             {
                 InitializeDataGridView();
@@ -208,10 +210,10 @@ namespace DCTS.UI
                 {
                     conditions += " AND ";
                 }
-               // conditions += "(`title`= @title)";
-                conditions += "(`title`LIKE '%"+@title+"%')";
-              // conditions += "(`title`LIKE '%2%')";
-                
+                // conditions += "(`title`= @title)";
+                conditions += "(`title`LIKE '%" + @title + "%')";
+                // conditions += "(`title`LIKE '%2%')";
+
             }
 
 
@@ -220,7 +222,7 @@ namespace DCTS.UI
             condition_params.Add(new MySqlParameter("@ltype", ltype));
             condition_params.Add(new MySqlParameter("@nation", nation));
             condition_params.Add(new MySqlParameter("@city", city));
-            condition_params.Add(new MySqlParameter("@title",   title ));
+            condition_params.Add(new MySqlParameter("@title", title));
 
             int limit = pager2.PageSize;
             int offset = (pager2.PageCurrent > 1 ? pager2.OffSet(pager2.PageCurrent - 1) : 0);
@@ -310,6 +312,31 @@ namespace DCTS.UI
                 e.CellStyle.BackColor = Color.Red;
                 e.CellStyle.SelectionBackColor = Color.DarkRed;
             }
+
+            //添加图片
+            int i = this.dataGridView.CurrentRow.Index;
+            ComboLocation selectedItem = DinningList[i];
+            long folername = selectedItem.id / 1000;
+            if (selectedItem.img != null && selectedItem.img != "")
+            {
+                string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\locations\\" + folername + "\\", selectedItem.img);
+                if (e.ColumnIndex == 5)
+                {
+                    e.Value = GetImage1(lcoalPath);
+
+                }
+            }
+        }
+
+        public System.Drawing.Image GetImage1(string path)
+        {
+            System.IO.FileStream fs = new System.IO.FileStream(path, System.IO.FileMode.Open);
+            System.Drawing.Image result = System.Drawing.Image.FromStream(fs);
+
+            fs.Close();
+
+            return result;
+
         }
 
         private void dataGridView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)

@@ -70,28 +70,7 @@ namespace DCTS.UI
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\locations\\", "");
-            string copypathto = "";
 
-            List<string> Alist = GetFileName(lcoalPath);
-            string[] dirs = Directory.GetDirectories(lcoalPath);
-            for (int i = 0; i < dirs.Length; i++)
-            {
-                string[] files = Directory.GetFiles(dirs[i]);
-                if (files.Length >= 1000)
-                {
-                    copypathto = lcoalPath + DateTime.Now.ToString("yyyyMMdd");
-
-                    Directory.CreateDirectory(copypathto);
-                    break;
-
-                }
-                else if (files.Length < 1000)
-                {
-                    copypathto = dirs[i] + "\\";
-                    break;
-                }
-            }
 
             using (var ctx = new DctsEntities())
             {
@@ -102,12 +81,17 @@ namespace DCTS.UI
                 }
                 else
                     editNewMethod(ctx, copyfilename);
-                if (File.Exists(copypathto + copyfilename))
+
+                long folername = changeid / 1000;
+
+                string copypathto = imagefolderNewMethod(folername);
+
+                if (File.Exists(copypathto + "\\" + copyfilename))
                 {
                     if (MessageBox.Show("此文件名已在本文件夹中存在，是否覆盖?", "信息", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
 
-                        System.IO.File.Copy(this.imgPathTextBox.Text, copypathto + copyfilename, true);
+                        System.IO.File.Copy(this.imgPathTextBox.Text, copypathto + "\\" + copyfilename, true);
                     }
                     else
                         return;
@@ -118,6 +102,41 @@ namespace DCTS.UI
             }
 
         }
+
+
+        private string imagefolderNewMethod(long filename)
+        {
+            string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\locations", "");
+            string copypathto = "";
+
+            //List<string> Alist = GetFileName(lcoalPath);
+            string[] dirs = Directory.GetDirectories(lcoalPath + "\\");
+
+
+            DirectoryInfo dir = new DirectoryInfo(lcoalPath);
+            //  FileInfo[] fil = dir.GetFiles();
+            DirectoryInfo[] dii = dir.GetDirectories();
+            int ishad = 0;
+            foreach (DirectoryInfo f in dii)
+            {
+                if (f.Name == filename.ToString())
+                {
+                    copypathto = lcoalPath + "\\" + filename.ToString();
+
+                    ishad++;
+
+                }
+            }
+            if (ishad == 0)
+            {
+                Directory.CreateDirectory(lcoalPath + "\\" + filename.ToString());
+                copypathto = lcoalPath + "\\" + filename.ToString();
+
+            }
+
+            return copypathto;
+        }
+
 
         private void createNewMethod(DctsEntities ctx, string copyfilename)
         {

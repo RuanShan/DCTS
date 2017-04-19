@@ -51,7 +51,7 @@
             this.areaColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.titleColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dishesColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.imgColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.imgColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.latlngColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.addressColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.reachColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -227,13 +227,13 @@
             // 
             this.pager2.AutoSize = true;
             this.pager2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pager2.Location = new System.Drawing.Point(0, 425);
+            this.pager2.Location = new System.Drawing.Point(0, 459);
             this.pager2.Name = "pager2";
             this.pager2.NMax = 0;
             this.pager2.PageCount = 0;
             this.pager2.PageCurrent = 0;
             this.pager2.PageSize = 5000;
-            this.pager2.Size = new System.Drawing.Size(709, 34);
+            this.pager2.Size = new System.Drawing.Size(709, 0);
             this.pager2.TabIndex = 13;
             this.pager2.EventPaging += new DCTS.CustomComponents.EventPagingHandler(this.pager2_EventPaging_1);
             // 
@@ -269,9 +269,11 @@
             // 
             // imgColumn1
             // 
-            this.imgColumn1.DataPropertyName = "img";
             this.imgColumn1.HeaderText = "图片";
+            this.imgColumn1.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
             this.imgColumn1.Name = "imgColumn1";
+            this.imgColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.imgColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // latlngColumn1
             // 
@@ -355,7 +357,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn areaColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn titleColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dishesColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn imgColumn1;
+        private System.Windows.Forms.DataGridViewImageColumn imgColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn latlngColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn addressColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn reachColumn1;
