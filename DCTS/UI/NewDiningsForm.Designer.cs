@@ -1,6 +1,6 @@
 ﻿namespace DCTS.UI
 {
-    partial class NewDinningsForm
+    partial class NewDiningsForm
     {
         /// <summary>
         /// Required designer variable.

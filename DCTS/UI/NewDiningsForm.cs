@@ -13,11 +13,11 @@ using DCTS.DB;
 
 namespace DCTS.UI
 {
-    public partial class NewDinningsForm : BaseModalForm
+    public partial class NewDiningsForm : BaseModalForm
     {
         private long changeid;
 
-        public NewDinningsForm(string maintype, ComboLocation obj)
+        public NewDiningsForm(string maintype, ComboLocation obj)
         {
             InitializeComponent();
             InitializeDataSource();

@@ -77,7 +77,7 @@ namespace DCTS.UI
 
         private void newButton_Click(object sender, EventArgs e)
         {
-            var form = new NewDinningsForm("create", null);
+            var form = new NewDiningsForm("create", null);
             if (form.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
             {
                 InitializeDataGridView();
@@ -268,7 +268,7 @@ namespace DCTS.UI
 
             //ComboLocation selectedItem = DinningList.Find(i => i.id == o.自社コード);
 
-            var form = new NewDinningsForm("Edit", selectedItem);
+            var form = new NewDiningsForm("Edit", selectedItem);
             if (form.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
             {
                 InitializeDataGridView();
