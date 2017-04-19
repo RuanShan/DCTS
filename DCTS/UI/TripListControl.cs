@@ -123,11 +123,23 @@ namespace DCTS.UI
             }
         }
 
+        private Trip SelectedTrip
+        {
+            get {
+                var row = tripDataGridView.CurrentRow;
+                var trip = row.DataBoundItem as Trip;
+                return trip;
+            }
+        }
+
         private void downloadButton_Click(object sender, EventArgs e)
         {
             long tripId = SelectedTripId;
             if (tripId > 0)
             {
+                var trip = SelectedTrip;
+                this.saveFileDialog1.FileName = trip.title.Normalize();
+
                 if (this.saveFileDialog1.ShowDialog() == DialogResult.OK)
                 {
                     string tripWordFilePath = EntityPathConfig.TripWordFilePath(tripId);

@@ -53,7 +53,13 @@ namespace DCTS.Bus
                 {
                     var location = day.ComboLocation;
                     string templatePath = string.Empty;
-                    if (day.ComboLocation.ltype == (int)ComboLocationEnum.Scenic)
+
+                    if (day.ComboLocation.ltype == (int)ComboLocationEnum.Blank)
+                    {
+                        document.InsertSectionPageBreak();
+                        continue;
+                    }
+                    else if (day.ComboLocation.ltype == (int)ComboLocationEnum.Scenic)
                     {
                         templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, LocationTemplate.ScenicDetailRelativePath );
 
@@ -107,23 +113,6 @@ namespace DCTS.Bus
             }
             return true;
         }
-        public string WordFolderPath
-        { 
-            get
-            {
-                string basePath = "data/export/words";
-                return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, basePath, (TripId / 1000).ToString());
-            }
-            
-        }
-
-        // data/export/words/
-        public string WordFilePath
-        {
-            get
-            {
-                return Path.Combine(WordFolderPath, string.Format("{0}.docx", TripId));
-            }
-        }
+         
     }
 }

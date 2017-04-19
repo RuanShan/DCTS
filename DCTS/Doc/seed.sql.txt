@@ -1,5 +1,7 @@
 ﻿#https://sjolzy.cn/Major-countries-around-the-world-127-Download-Mysql-database.html
 
+INSERT INTO `ComboLocations` (`id`, `title`) VALUES (0, '这是一个空白页');
+
 
 INSERT INTO `Nations` (`id`, `title`, `code`) VALUES
 (1, '中国', '1'),

@@ -251,5 +251,13 @@ namespace DCTS.UI
         {
 
         }
+
+        private void addBlankButton_Click(object sender, EventArgs e)
+        {          
+            var day = GetSelectedDay();
+            long locationId = 0;
+            TripBusiness.AddLocation(this.ModelId, day, locationId);
+            InitializeDataSource(day);
+        }
     }
 }

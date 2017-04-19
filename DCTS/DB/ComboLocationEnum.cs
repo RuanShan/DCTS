@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DCTS.DB
 {
-    enum ComboLocationEnum { Scenic = 1, Dining = 5, Hotel = 9 }
+    enum ComboLocationEnum { Blank = 0,  Scenic = 1, Dining = 5, Hotel = 9 }
     
     
 }
