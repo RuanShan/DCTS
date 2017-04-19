@@ -16,6 +16,7 @@ namespace DCTS
     {
         public ComboLocation()
         {
+            this.img = "\"\"";
             this.Days = new HashSet<Day>();
         }
     

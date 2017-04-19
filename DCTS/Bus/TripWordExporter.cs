@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Novacode;
 using DCTS.DB;
 using System.IO;
+using WindowsBitmap = System.Drawing.Bitmap;
 
 namespace DCTS.Bus
 {
@@ -44,7 +45,7 @@ namespace DCTS.Bus
 
 
 
-            using (DocX document = DocX.Create(this.WordFilePath ))
+            using (DocX document = DocX.Create(EntityPathConfig.TripWordFilePath(this.TripId) ))
             {
                 List<ComboLocation> handledLocations = new List<ComboLocation>();
 
@@ -52,7 +53,13 @@ namespace DCTS.Bus
                 {
                     var location = day.ComboLocation;
                     string templatePath = string.Empty;
-                    if (day.ComboLocation.ltype == (int)ComboLocationEnum.Scenic)
+
+                    if (day.ComboLocation.ltype == (int)ComboLocationEnum.Blank)
+                    {
+                        document.InsertSectionPageBreak();
+                        continue;
+                    }
+                    else if (day.ComboLocation.ltype == (int)ComboLocationEnum.Scenic)
                     {
                         templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, LocationTemplate.ScenicDetailRelativePath );
 
@@ -63,12 +70,10 @@ namespace DCTS.Bus
                     }
 
                     using (DocX template = DocX.Load(templatePath))
-                    {
-                        
+                    {                       
                         var type = location.GetType();
 
                         var duplicated = template.Copy();
-
 
                         foreach (string key in txtKeys)
                         {
@@ -76,6 +81,22 @@ namespace DCTS.Bus
                             string s = val == null ? string.Empty :  val.ToString();                            
                             string wrappedKey = "%" + key + "%";
                             duplicated.ReplaceText(wrappedKey, s);
+                        }
+
+                        if (duplicated.Images.Count >= 2)
+                        {
+                            if (location.img.Length > 0)
+                            {
+                                Image img = duplicated.Images[0];
+
+                                string path = EntityPathConfig.LocationImagePath(location);
+                                if (File.Exists(path)) 
+                                {
+                                    var b = new WindowsBitmap( path );
+                                    // Save this Bitmap back into the document using a Create\Write stream.
+                                    b.Save(img.GetStream(FileMode.Create, FileAccess.Write), System.Drawing.Imaging.ImageFormat.Png);
+                                }
+                            }
                         }
 
                         if (handledLocations.Count > 0)
@@ -92,24 +113,6 @@ namespace DCTS.Bus
             }
             return true;
         }
-        public string WordFolderPath
-        { 
-            get
-            {
-                string basePath = "data/export/words";
-                return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, basePath, (TripId / 1000).ToString());
-            }
-            
-        }
-
-        // data/export/words/
-        public string WordFilePath
-        {
-            get
-            {
-
-                return Path.Combine(WordFolderPath, string.Format("{0}.docx", TripId));
-            }
-        }
+         
     }
 }

@@ -321,6 +321,7 @@ namespace DCTS.UI
                 long folername = selectedItem.id / 1000;
                 if (selectedItem.img != null && selectedItem.img != "")
                 {
+
                     string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\locations\\" + folername + "\\", selectedItem.img);
                     if (e.ColumnIndex == 5)
                     {

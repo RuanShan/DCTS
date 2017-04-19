@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label13 = new System.Windows.Forms.Label();
             this.routeTextBox = new System.Windows.Forms.TextBox();
             this.ticketTextBox = new System.Windows.Forms.TextBox();
@@ -54,6 +55,8 @@
             this.titleTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // label13
@@ -240,8 +243,10 @@
             // 
             this.imgPathTextBox.Location = new System.Drawing.Point(85, 131);
             this.imgPathTextBox.Name = "imgPathTextBox";
+            this.imgPathTextBox.ReadOnly = true;
             this.imgPathTextBox.Size = new System.Drawing.Size(481, 21);
             this.imgPathTextBox.TabIndex = 19;
+            this.imgPathTextBox.TextChanged += new System.EventHandler(this.imgPathTextBox_TextChanged);
             // 
             // localTitleTextBox
             // 
@@ -269,6 +274,10 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // ScenicFormControl
             // 
@@ -302,6 +311,7 @@
             this.Name = "ScenicFormControl";
             this.Size = new System.Drawing.Size(634, 351);
             this.Load += new System.EventHandler(this.ScenicFormControl_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -335,5 +345,6 @@
         private System.Windows.Forms.TextBox titleTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

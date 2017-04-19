@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,10 +48,37 @@ namespace DCTS.UI
 
         private void saveButton_Click(object sender, EventArgs e)
         {
+
             using (var ctx = new DctsEntities())
             {
                 try
                 {
+
+                    string imgFilePath = this.imgPathTextBox.Text;
+                    string imgFileName = "";
+                    bool hasImg = (imgFilePath.Length > 0);
+                    bool existSameImage = false;
+
+                    if (hasImg)
+                    {
+                        imgFileName = Path.GetFileName(imgFilePath);
+
+                        ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o=>o.id).FirstOrDefault();
+                        if (lastLocation != null)
+                        {
+                            long newId = lastLocation.id + 1;
+
+                            long idStart = newId / 1000 * 1000;
+                            long idEnd = idStart + 1000;
+                            existSameImage = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Scenic && o.img == imgFileName && o.id > idStart && o.id < idEnd).Count() > 0);
+                        }
+                        if (existSameImage)
+                        {
+                            MessageBox.Show(string.Format("文件名<{0}>已在, 请使用其他文件名！", imgFileName));
+                            return;
+                        }
+                    }
+
                     var obj = ctx.ComboLocations.Create();
                     obj.ltype = (int)ComboLocationEnum.Scenic;
                     obj.title = this.titleTextBox.Text;
@@ -63,10 +91,18 @@ namespace DCTS.UI
                     obj.tips = this.tipsTextBox.Text;
                     obj.local_address = this.localAddressTextBox.Text;
                     obj.route = this.routeTextBox.Text;
+                    obj.img = imgFileName;
                     ctx.ComboLocations.Add(obj);
                     ctx.SaveChanges();
+
+                    if (hasImg)
+                    {
+                        string copyToPath = EntityPathConfig.LocationImagePath(obj);
+                        File.Copy(imgFilePath, copyToPath);
+                    }
+
                 }
-                catch (Exception exception)
+                catch ( Exception exception)
                 {
                     throw;
                 }

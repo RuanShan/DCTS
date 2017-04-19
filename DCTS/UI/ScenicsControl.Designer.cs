@@ -201,20 +201,21 @@
             this.imgColumn1.DataPropertyName = "img";
             this.imgColumn1.HeaderText = "图片";
             this.imgColumn1.Name = "imgColumn1";
+            this.imgColumn1.Width = 180;
             // 
             // titleColumn1
             // 
             this.titleColumn1.DataPropertyName = "title";
             this.titleColumn1.HeaderText = "中文名称";
             this.titleColumn1.Name = "titleColumn1";
-            this.titleColumn1.Width = 200;
+            this.titleColumn1.Width = 280;
             // 
             // localTitleColumn1
             // 
             this.localTitleColumn1.DataPropertyName = "local_title";
             this.localTitleColumn1.HeaderText = "当地语言名称";
             this.localTitleColumn1.Name = "localTitleColumn1";
-            this.localTitleColumn1.Width = 200;
+            this.localTitleColumn1.Width = 280;
             // 
             // serviceTimeColumn1
             // 
