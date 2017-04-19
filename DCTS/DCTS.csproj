@@ -168,11 +168,11 @@
     <Compile Include="UI\HomeControl.Designer.cs">
       <DependentUpon>HomeControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\ImportDinning.cs">
+    <Compile Include="UI\ImportDining.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\ImportDinning.Designer.cs">
-      <DependentUpon>ImportDinning.cs</DependentUpon>
+    <Compile Include="UI\ImportDining.Designer.cs">
+      <DependentUpon>ImportDining.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\NewScenicForm.cs">
       <SubType>Form</SubType>
@@ -204,11 +204,11 @@
     <Compile Include="UI\NewDinningsForm.Designer.cs">
       <DependentUpon>NewDinningsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\DinningsControl.cs">
+    <Compile Include="UI\DiningsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\DinningsControl.Designer.cs">
-      <DependentUpon>DinningsControl.cs</DependentUpon>
+    <Compile Include="UI\DiningsControl.Designer.cs">
+      <DependentUpon>DiningsControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\HotelControl.cs">
       <SubType>UserControl</SubType>
@@ -319,8 +319,8 @@
     <EmbeddedResource Include="UI\HomeControl.resx">
       <DependentUpon>HomeControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\ImportDinning.resx">
-      <DependentUpon>ImportDinning.cs</DependentUpon>
+    <EmbeddedResource Include="UI\ImportDining.resx">
+      <DependentUpon>ImportDining.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\NewScenicForm.resx">
       <DependentUpon>NewScenicForm.cs</DependentUpon>
@@ -346,8 +346,8 @@
     <EmbeddedResource Include="UI\NewDinningsForm.resx">
       <DependentUpon>NewDinningsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\DinningsControl.resx">
-      <DependentUpon>DinningsControl.cs</DependentUpon>
+    <EmbeddedResource Include="UI\DiningsControl.resx">
+      <DependentUpon>DiningsControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\HotelControl.resx">
       <DependentUpon>HotelControl.cs</DependentUpon>

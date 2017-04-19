@@ -16,7 +16,7 @@ namespace DCTS.UI
     {
         ScenicsControl scenicsControl;
         EditTripControl editTripControl;
-        DinningsControl dinningsControl;
+        DiningsControl dinningsControl;
         HotelControl hotelControl;
         public TripsManagementControl()
         {
@@ -87,7 +87,7 @@ namespace DCTS.UI
         {
             if (dinningsControl == null)
             {
-                dinningsControl = new DinningsControl();
+                dinningsControl = new DiningsControl();
                 dinningsControl.Dock = DockStyle.Fill;
             }
             this.dinningsControl.BeginActive();

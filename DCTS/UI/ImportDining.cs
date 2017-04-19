@@ -11,9 +11,9 @@ using DCTS.CustomComponents;
 
 namespace DCTS.UI
 {
-    public partial class ImportDinning : Form
+    public partial class ImportDining : Form
     {
-        public ImportDinning()
+        public ImportDining()
         {
             InitializeComponent();
         }
