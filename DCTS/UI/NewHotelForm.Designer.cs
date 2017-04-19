@@ -88,7 +88,7 @@
             this.titleTextBox.Location = new System.Drawing.Point(164, 108);
             this.titleTextBox.Name = "titleTextBox";
             this.titleTextBox.Size = new System.Drawing.Size(518, 20);
-            this.titleTextBox.TabIndex = 1;
+            this.titleTextBox.TabIndex = 2;
             // 
             // label2
             // 
@@ -105,7 +105,7 @@
             this.moringTextBox.Location = new System.Drawing.Point(162, 262);
             this.moringTextBox.Name = "moringTextBox";
             this.moringTextBox.Size = new System.Drawing.Size(518, 20);
-            this.moringTextBox.TabIndex = 5;
+            this.moringTextBox.TabIndex = 9;
             // 
             // label3
             // 
@@ -122,7 +122,7 @@
             this.nationComboBox.Location = new System.Drawing.Point(164, 74);
             this.nationComboBox.Name = "nationComboBox";
             this.nationComboBox.Size = new System.Drawing.Size(233, 21);
-            this.nationComboBox.TabIndex = 6;
+            this.nationComboBox.TabIndex = 0;
             this.nationComboBox.SelectedIndexChanged += new System.EventHandler(this.nationComboBox_SelectedIndexChanged);
             // 
             // cityComboBox
@@ -131,7 +131,7 @@
             this.cityComboBox.Location = new System.Drawing.Point(449, 74);
             this.cityComboBox.Name = "cityComboBox";
             this.cityComboBox.Size = new System.Drawing.Size(233, 21);
-            this.cityComboBox.TabIndex = 6;
+            this.cityComboBox.TabIndex = 1;
             // 
             // label4
             // 
@@ -147,7 +147,7 @@
             this.localTitleTextBox.Location = new System.Drawing.Point(164, 137);
             this.localTitleTextBox.Name = "localTitleTextBox";
             this.localTitleTextBox.Size = new System.Drawing.Size(518, 20);
-            this.localTitleTextBox.TabIndex = 1;
+            this.localTitleTextBox.TabIndex = 3;
             // 
             // label5
             // 
@@ -177,14 +177,14 @@
             this.imgPathTextBox.Location = new System.Drawing.Point(164, 167);
             this.imgPathTextBox.Name = "imgPathTextBox";
             this.imgPathTextBox.Size = new System.Drawing.Size(481, 20);
-            this.imgPathTextBox.TabIndex = 1;
+            this.imgPathTextBox.TabIndex = 4;
             // 
             // findFileButton
             // 
             this.findFileButton.Location = new System.Drawing.Point(651, 165);
             this.findFileButton.Name = "findFileButton";
             this.findFileButton.Size = new System.Drawing.Size(32, 20);
-            this.findFileButton.TabIndex = 8;
+            this.findFileButton.TabIndex = 5;
             this.findFileButton.Text = "...";
             this.findFileButton.UseVisualStyleBackColor = true;
             this.findFileButton.Click += new System.EventHandler(this.findFileButton_Click);
@@ -222,7 +222,7 @@
             this.textBox6.Multiline = true;
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(518, 56);
-            this.textBox6.TabIndex = 5;
+            this.textBox6.TabIndex = 18;
             // 
             // label11
             // 
@@ -243,7 +243,7 @@
             this.cancelButton.Location = new System.Drawing.Point(608, 567);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 25);
-            this.cancelButton.TabIndex = 12;
+            this.cancelButton.TabIndex = 20;
             this.cancelButton.Text = "取消";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
@@ -254,7 +254,7 @@
             this.saveButton.Location = new System.Drawing.Point(527, 567);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 25);
-            this.saveButton.TabIndex = 13;
+            this.saveButton.TabIndex = 19;
             this.saveButton.Text = "保存";
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
@@ -282,7 +282,7 @@
             this.latlng.Location = new System.Drawing.Point(162, 293);
             this.latlng.Name = "latlng";
             this.latlng.Size = new System.Drawing.Size(518, 20);
-            this.latlng.TabIndex = 16;
+            this.latlng.TabIndex = 10;
             // 
             // label14
             // 
@@ -298,7 +298,7 @@
             this.address.Location = new System.Drawing.Point(162, 322);
             this.address.Name = "address";
             this.address.Size = new System.Drawing.Size(518, 20);
-            this.address.TabIndex = 18;
+            this.address.TabIndex = 11;
             // 
             // label15
             // 
@@ -315,7 +315,7 @@
             this.room.Location = new System.Drawing.Point(162, 226);
             this.room.Name = "room";
             this.room.Size = new System.Drawing.Size(516, 21);
-            this.room.TabIndex = 22;
+            this.room.TabIndex = 8;
             // 
             // label9
             // 
@@ -331,7 +331,7 @@
             this.local_address.Location = new System.Drawing.Point(162, 355);
             this.local_address.Name = "local_address";
             this.local_address.Size = new System.Drawing.Size(518, 20);
-            this.local_address.TabIndex = 23;
+            this.local_address.TabIndex = 12;
             // 
             // label16
             // 
@@ -347,7 +347,7 @@
             this.contact.Location = new System.Drawing.Point(162, 384);
             this.contact.Name = "contact";
             this.contact.Size = new System.Drawing.Size(518, 20);
-            this.contact.TabIndex = 25;
+            this.contact.TabIndex = 13;
             // 
             // label17
             // 
@@ -363,7 +363,7 @@
             this.wifi.Location = new System.Drawing.Point(162, 410);
             this.wifi.Name = "wifi";
             this.wifi.Size = new System.Drawing.Size(518, 20);
-            this.wifi.TabIndex = 27;
+            this.wifi.TabIndex = 14;
             // 
             // label18
             // 
@@ -379,7 +379,7 @@
             this.parking.Location = new System.Drawing.Point(162, 436);
             this.parking.Name = "parking";
             this.parking.Size = new System.Drawing.Size(518, 20);
-            this.parking.TabIndex = 29;
+            this.parking.TabIndex = 15;
             // 
             // label19
             // 
@@ -395,7 +395,7 @@
             this.reception.Location = new System.Drawing.Point(160, 463);
             this.reception.Name = "reception";
             this.reception.Size = new System.Drawing.Size(237, 20);
-            this.reception.TabIndex = 31;
+            this.reception.TabIndex = 16;
             // 
             // label20
             // 
@@ -411,7 +411,7 @@
             this.kitchen.Location = new System.Drawing.Point(449, 462);
             this.kitchen.Name = "kitchen";
             this.kitchen.Size = new System.Drawing.Size(237, 20);
-            this.kitchen.TabIndex = 33;
+            this.kitchen.TabIndex = 17;
             // 
             // openAtDateTimePicker
             // 
@@ -419,7 +419,7 @@
             this.openAtDateTimePicker.Location = new System.Drawing.Point(165, 200);
             this.openAtDateTimePicker.Name = "openAtDateTimePicker";
             this.openAtDateTimePicker.Size = new System.Drawing.Size(106, 20);
-            this.openAtDateTimePicker.TabIndex = 35;
+            this.openAtDateTimePicker.TabIndex = 6;
             // 
             // closeAtDateTimePicker
             // 
@@ -427,7 +427,7 @@
             this.closeAtDateTimePicker.Location = new System.Drawing.Point(449, 200);
             this.closeAtDateTimePicker.Name = "closeAtDateTimePicker";
             this.closeAtDateTimePicker.Size = new System.Drawing.Size(106, 20);
-            this.closeAtDateTimePicker.TabIndex = 36;
+            this.closeAtDateTimePicker.TabIndex = 7;
             // 
             // NewHotelForm
             // 
