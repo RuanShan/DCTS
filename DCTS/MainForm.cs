@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DCTS.CustomComponents;
 using DCTS.UI;
 
 namespace DCTS
@@ -38,7 +39,24 @@ namespace DCTS
             this.mainPanel.Controls.Add(tripsManagementControl);
         }
 
+        private void 设置ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        private void 导入餐厅信息ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new ImportDinning();
+            if (form.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
+            {
+            }
+        }
+
+    
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+
+        }
 
 
     }
