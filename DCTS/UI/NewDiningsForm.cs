@@ -248,64 +248,7 @@ namespace DCTS.UI
             return copypathto;
         }
 
-        private ComboLocation updateNewMethod(DctsEntities ctx, string copyfilename)
-        {
-            ComboLocation obj = ctx.ComboLocations.Find(Convert.ToInt32(changeid));
-
-            //var obj = ctx.ComboLocations.Create();
-            obj.ltype = (int)ComboLocationEnum.Dining;
-            obj.nation = this.nationComboBox.Text;
-            obj.city = this.cityComboBox.Text;
-            obj.area = this.titleTextBox.Text;
-            obj.dishes = this.textBox1.Text;
-            //obj.img = this.imgPathTextBox.Text;
-            obj.img = copyfilename;
-            obj.latlng = this.latlngTextBox.Text;
-            obj.local_address = this.textBox2.Text;
-            obj.address = this.localAddressTextBox.Text;
-            obj.recommended_dishes = this.textBox3.Text;
-            obj.tips = this.textBox6.Text;
-            obj.title = this.localTitleTextBox.Text;
-            obj.open_at = Convert.ToDateTime(this.openAtDateTimePicker.Text);
-            obj.close_at = Convert.ToDateTime(this.closeAtDateTimePicker.Text);
-
-
-            //obj.memo = this.memoTextBox.Text;
-            //  ctx.ComboLocations.Add(obj);
-            ctx.SaveChanges();
-            return obj;
-
-        }
-        private void createNewMethod(DctsEntities ctx, string copyfilename)
-        {
-
-            var obj = ctx.ComboLocations.Create();
-            obj.ltype = (int)ComboLocationEnum.Dining;
-            obj.nation = this.nationComboBox.Text;
-            obj.city = this.cityComboBox.Text;
-            obj.area = this.titleTextBox.Text;
-            obj.dishes = this.textBox1.Text;
-            //obj.img = this.imgPathTextBox.Text;
-            obj.img = copyfilename;
-            obj.latlng = this.latlngTextBox.Text;
-            obj.local_address = this.textBox2.Text;
-            obj.address = this.localAddressTextBox.Text;
-            obj.recommended_dishes = this.textBox3.Text;
-            obj.tips = this.textBox6.Text;
-            obj.title = this.localTitleTextBox.Text;
-            obj.open_at = Convert.ToDateTime(this.openAtDateTimePicker.Text);
-            obj.close_at = Convert.ToDateTime(this.closeAtDateTimePicker.Text);
-
-
-            //obj.memo = this.memoTextBox.Text;
-            ctx.ComboLocations.Add(obj);
-            ctx.SaveChanges();
-            changeid = obj.id;
-            //return obj;
-
-
-        }
-
+     
         private List<string> GetFileName(string dirPath)
         {
             List<string> FileNameList = new List<string>();

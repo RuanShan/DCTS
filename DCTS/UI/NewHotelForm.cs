@@ -74,7 +74,7 @@ namespace DCTS.UI
 
             using (var ctx = new DctsEntities())
             {
-              //  string copyfilename = Path.GetFileName(this.imgPathTextBox.Text);
+                //  string copyfilename = Path.GetFileName(this.imgPathTextBox.Text);
                 #region new
                 string imgFilePath = this.imgPathTextBox.Text;
                 string copyfilename = "";
@@ -237,62 +237,8 @@ namespace DCTS.UI
             }
 
             return copypathto;
-        }
+        }      
 
-
-        private void createNewMethod(DctsEntities ctx, string copyfilename)
-        {
-            var obj = ctx.ComboLocations.Create();
-            obj.ltype = (int)ComboLocationEnum.Hotel;
-            obj.nation = this.nationComboBox.Text;
-            obj.city = this.cityComboBox.Text;
-            obj.title = this.titleTextBox.Text;
-            obj.local_title = this.localTitleTextBox.Text;
-            obj.img = copyfilename;// this.imgPathTextBox.Text;
-            //  obj.ticket = this.tickettime.Text;
-            obj.open_at = Convert.ToDateTime(this.openAtDateTimePicker.Text);
-            obj.close_at = Convert.ToDateTime(this.closeAtDateTimePicker.Text);
-            obj.room = room.Text;
-            obj.dinner = moringTextBox.Text;
-            obj.latlng = latlng.Text;
-            obj.address = address.Text;
-            obj.local_address = local_address.Text;
-            obj.contact = contact.Text;
-            obj.wifi = wifi.Text;
-            obj.parking = parking.Text;
-            obj.reception = reception.Text;
-            obj.kitchen = kitchen.Text;
-
-            ctx.ComboLocations.Add(obj);
-            ctx.SaveChanges();
-        }
-        private void editNewMethod(DctsEntities ctx, string copyfilename)
-        {
-            ComboLocation obj = ctx.ComboLocations.Find(Convert.ToInt32(changeid));
-
-            obj.ltype = (int)ComboLocationEnum.Hotel;
-            obj.nation = this.nationComboBox.Text;
-            obj.city = this.cityComboBox.Text;
-            obj.title = this.titleTextBox.Text;
-            obj.local_title = this.localTitleTextBox.Text;
-            obj.img = copyfilename;// this.imgPathTextBox.Text;
-            //  obj.ticket = this.tickettime.Text;
-            obj.open_at = Convert.ToDateTime(this.openAtDateTimePicker.Text);
-            obj.close_at = Convert.ToDateTime(this.closeAtDateTimePicker.Text);
-            obj.room = room.Text;
-            obj.dinner = moringTextBox.Text;
-            obj.latlng = latlng.Text;
-            obj.address = address.Text;
-            obj.local_address = local_address.Text;
-            obj.contact = contact.Text;
-            obj.wifi = wifi.Text;
-            obj.parking = parking.Text;
-            obj.reception = reception.Text;
-            obj.kitchen = kitchen.Text;
-
-            //ctx.ComboLocations.Add(obj);
-            ctx.SaveChanges();
-        }
         private List<string> GetFileName(string dirPath)
         {
             List<string> FileNameList = new List<string>();
