@@ -322,7 +322,7 @@ namespace DCTS.UI
                 string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\locations\\" + folername + "\\", selectedItem.img);
                 if (e.ColumnIndex == 5)
                 {
-                    e.Value = GetImage1(lcoalPath);
+                    //e.Value = GetImage1(lcoalPath);
 
                 }
             }

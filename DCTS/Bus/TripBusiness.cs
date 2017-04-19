@@ -9,6 +9,21 @@ namespace DCTS.Bus
 {
     class TripBusiness
     {
+        public static void Duplicate(long tripId)
+        {
+            using (var ctx = new DctsEntities())
+            {
+                var trip = ctx.Trips.Find(tripId);
+                var clonedTrip = new Trip(){ days = trip.days, title = trip.title, memo = trip.memo };
+                var clonedDays = trip.TripDays.Select(o => new Day() { tripId = 0, day = o.day, locationId = o.locationId, position = o.position }).ToList();
+                ctx.Trips.Add(clonedTrip);
+                ctx.SaveChanges();
+                clonedDays.ForEach(delegate(Day day) { day.tripId = clonedTrip.id; });
+                ctx.Days.AddRange( clonedDays );
+                ctx.SaveChanges();
+            }
+
+        }
 
         public static void Delete(long tripId)
         {

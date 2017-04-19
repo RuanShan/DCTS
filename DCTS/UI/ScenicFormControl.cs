@@ -7,15 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DCTS.DB;
+using System.IO;
 
 namespace DCTS.UI
 {
     public partial class ScenicFormControl : UserControl
     {
+        long scenicId;
+        DctsEntities db;
         public ScenicFormControl()
         {
             InitializeComponent();
-           
+            db = new DctsEntities();
+            scenicId = 0;
         }
 
         public void InitializeDataSource()
@@ -45,6 +50,9 @@ namespace DCTS.UI
 
         public void FillFormByModel( ComboLocation scenic)
         {
+            // 查询图片是否存在时使用
+            this.scenicId = scenic.id;
+
             InitializeDataSource();
 
             if (scenic.nation.Length > 0)
@@ -97,6 +105,15 @@ namespace DCTS.UI
             {
                 this.routeTextBox.Text = scenic.route;
             } 
+
+            //处理图片
+            if (scenic.img.Length > 0)
+            {
+                if (scenic.id > 0)
+                {
+                    this.imgPathTextBox.Text = scenic.img;
+                }
+            }
         }
 
         public ComboLocation FillModelByForm(ComboLocation scenic)
@@ -113,6 +130,7 @@ namespace DCTS.UI
             scenic.tips = this.tipsTextBox.Text;
             scenic.local_address = this.localAddressTextBox.Text;
             scenic.route = this.routeTextBox.Text;
+            scenic.img = this.imgPathTextBox.Text;
             return scenic;
         }
 
@@ -127,6 +145,36 @@ namespace DCTS.UI
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 this.imgPathTextBox.Text = openFileDialog1.FileName;
+            }
+        }
+
+        private void imgPathTextBox_TextChanged(object sender, EventArgs e)
+        {
+            string imgFilePath = this.imgPathTextBox.Text;
+            string imgFileName = "";
+            bool hasImg = (imgFilePath.Length > 0);
+            bool existSameImage = false;
+
+            if (hasImg)
+            {
+                imgFileName = Path.GetFileName(imgFilePath);
+
+                ComboLocation lastLocation = db.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
+                if (lastLocation != null)
+                {
+                    long newId = lastLocation.id + 1;
+
+                    long idStart = newId / 1000 * 1000;
+                    long idEnd = idStart + 1000;
+                    existSameImage = (db.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Scenic && o.img == imgFileName && o.id > idStart && o.id < idEnd && o.id != scenicId).Count() > 0);
+                }
+                if (existSameImage)
+                {
+                    this.errorProvider1.SetError(this.imgPathTextBox, string.Format("文件名<{0}>已在, 请使用其他文件名！", imgFileName));
+                }
+                else {
+                    this.errorProvider1.SetError(this.imgPathTextBox, string.Empty);                
+                }
             }
         }
     }

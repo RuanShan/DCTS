@@ -12,6 +12,8 @@ namespace DCTS.UI
 {
     using DCTS.Bus;
     using DCTS.Uti;
+    using DCTS.DB;
+    using System.IO;
 
     public partial class TripListControl : UserControl, CustomControlInterface
     {
@@ -68,9 +70,12 @@ namespace DCTS.UI
              }
             else if (column == copyTripColumn1)
             {
-                MessageBox.Show("copy");
+                var row = tripDataGridView.Rows[e.RowIndex];
+                var trip = row.DataBoundItem as Trip;
+                TripBusiness.Duplicate(trip.id);
+                BeginActive();
 
-            }
+             }
             else if (column == deleteTripColumn1)
             {
                 var row = tripDataGridView.Rows[e.RowIndex];
@@ -115,6 +120,30 @@ namespace DCTS.UI
                 }
 
                 return id;
+            }
+        }
+
+        private void downloadButton_Click(object sender, EventArgs e)
+        {
+            long tripId = SelectedTripId;
+            if (tripId > 0)
+            {
+                if (this.saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    string tripWordFilePath = EntityPathConfig.TripWordFilePath(tripId);
+                    string localFilePath = saveFileDialog1.FileName; //获得文件路径 
+
+                    //给文件名前加上时间 
+                    //newFileName = DateTime.Now.ToString("yyyyMMdd") + fileNameExt;
+
+                    //在文件名里加字符 
+                    //saveFileDialog1.FileName.Insert(1,"dameng");
+
+                    //System.IO.FileStream fs = (System.IO.FileStream)sfd.OpenFile();//输出文件
+
+                    File.Copy(tripWordFilePath, localFilePath,true);
+
+                }
             }
         }
 
