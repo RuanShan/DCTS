@@ -198,11 +198,11 @@
     <Compile Include="UI\TripsManagementControl.Designer.cs">
       <DependentUpon>TripsManagementControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\NewDinningsForm.cs">
+    <Compile Include="UI\NewDiningsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\NewDinningsForm.Designer.cs">
-      <DependentUpon>NewDinningsForm.cs</DependentUpon>
+    <Compile Include="UI\NewDiningsForm.Designer.cs">
+      <DependentUpon>NewDiningsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\DiningsControl.cs">
       <SubType>UserControl</SubType>
@@ -343,8 +343,8 @@
     <EmbeddedResource Include="UI\TripsManagementControl.resx">
       <DependentUpon>TripsManagementControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\NewDinningsForm.resx">
-      <DependentUpon>NewDinningsForm.cs</DependentUpon>
+    <EmbeddedResource Include="UI\NewDiningsForm.resx">
+      <DependentUpon>NewDiningsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\DiningsControl.resx">
       <DependentUpon>DiningsControl.cs</DependentUpon>
