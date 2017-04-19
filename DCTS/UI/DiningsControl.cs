@@ -90,7 +90,7 @@ namespace DCTS.UI
             var oids = GetOrderIdsBySelectedGridCell();
             using (var ctx = new DctsEntities())
             {
-                //  var filtered = DaysList.FindAll(s => s.genreId == (int)this.genreComboBox.SelectedValue);
+                var filtered = DaysList.FindAll(s => s.locationId == oids[0]);
                 //  if (filtered.Count > 0)
 
                 var stockrecs = (from s in ctx.ComboLocations
