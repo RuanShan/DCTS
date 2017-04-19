@@ -61,9 +61,6 @@
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Office.Interop.Excel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
     <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
@@ -103,8 +100,6 @@
     <Compile Include="ComboLocation.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="CustomComponents\clsCommHelp.cs" />
-    <Compile Include="CustomComponents\clsKeyMyExcelProcess.cs" />
     <Compile Include="CustomComponents\Design\ContextTypeTypeConverter.cs" />
     <Compile Include="CustomComponents\Design\EntitySetTypeDescriptor.cs" />
     <Compile Include="CustomComponents\EntityBindingList.cs" />
