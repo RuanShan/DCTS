@@ -213,5 +213,43 @@ namespace DCTS.UI
             }
             return day;
         }
+
+        private void moveDayUpButton_Click(object sender, EventArgs e)
+        {
+            var day = GetSelectedDay();
+            if (day > 1)
+            {
+                int newDay = day-1;
+                TripBusiness.MoveDayPosition(ModelId, day, newDay);
+                InitializeDataSource(newDay);
+            }
+        }
+
+        private void moveDayDownButton_Click(object sender, EventArgs e)
+        {
+            var day = GetSelectedDay();
+            if (day < this.Model.days)
+            {
+                int newDay = day + 1;
+                TripBusiness.MoveDayPosition(ModelId, day, newDay);
+                InitializeDataSource(newDay);
+            }
+        }
+
+        private void removeLocationButton_Click(object sender, EventArgs e)
+        {
+            var day = GetSelectedDay();
+            var dayLocation = GetSelectedDayLocation();
+            if (dayLocation != null)
+            {
+                TripBusiness.DeleteDayLocation(dayLocation.dayId);
+                InitializeDataSource(day);
+            }
+        }
+
+        private void selectDayTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

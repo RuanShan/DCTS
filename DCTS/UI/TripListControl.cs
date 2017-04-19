@@ -90,7 +90,12 @@ namespace DCTS.UI
 
         private void exportWordButton_Click(object sender, EventArgs e)
         {
-            new TripWordExporter(SelectedTripId).ExportWord();
+            var exporter = new TripWordExporter(SelectedTripId);
+            if(  exporter.ExportWord())
+            {
+                MessageBox.Show("导出Word成功！");
+            }
+
         }
 
 

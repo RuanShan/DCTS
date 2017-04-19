@@ -39,7 +39,21 @@ namespace DCTS.Bus
             }
                 
         }
+        public static void DeleteDayLocation(long dayId)
+        {
+            using (var ctx = new DctsEntities())
+            {
 
+                var dayModel = ctx.Days.Find(dayId);
+                int count = ctx.Days.Where(o => o.tripId == dayModel.tripId && o.day == dayModel.day).Count();
+
+                UpdateDayLocationPosition(dayId, count);
+
+                ctx.Days.Remove(dayModel);
+                ctx.SaveChanges();
+            }
+
+        }
         public static void DeleteDay(long tripId, int day)
         {
             using (var ctx = new DctsEntities())
@@ -72,6 +86,34 @@ namespace DCTS.Bus
                 }
                 trip.days += 1;
                 ctx.SaveChanges();
+            }
+        }
+
+        public static void MoveDayPosition(long tripId, int day, int newDay)
+        {
+            using (var ctx = new DctsEntities())
+            {
+                var listByDay = ctx.Days.Where(o => o.tripId == tripId && o.day == day).ToList();
+
+                if (day < newDay) // move down
+                {
+                    string sqlFormat = "UPDATE days SET `day`=`day`-1 WHERE `tripId`={0} &&  `day`> {1} && `day`<= {2}";
+                    string sql = String.Format(sqlFormat, tripId, day, newDay);
+                    ctx.Database.ExecuteSqlCommand(sql);
+                }
+                else
+                { // move up
+                    string sqlFormat = "UPDATE days SET `day`=`day`+1 WHERE `tripId`={0} &&  `day`>= {1} && `day`< {2}";
+                    string sql = String.Format(sqlFormat, tripId, newDay, day );
+                    ctx.Database.ExecuteSqlCommand(sql);
+                }
+
+                foreach (var model in listByDay)
+                {
+                    model.day = newDay;
+                }
+                ctx.SaveChanges();
+
             }
         }
 

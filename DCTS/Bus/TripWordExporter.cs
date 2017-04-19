@@ -29,11 +29,11 @@ namespace DCTS.Bus
 
 
 
-        public void ExportWord( )
+        public bool ExportWord( )
         {
 
 
-            string[] txtKeys = {"nation","city", "area", "title", "local_title", "address", "local_address", "latlng", "route", "contact",
+            string[] txtKeys = {"nation","city", "area", "title", "local_title", "address", "local_address", "latlng", "route", "contact", "tips",
                               // 景点
                                 "open_at", "close_at", "ticket",
                                //住宿
@@ -90,7 +90,7 @@ namespace DCTS.Bus
                     document.Save();//保存
                 }
             }
-
+            return true;
         }
         public string WordFolderPath
         { 
