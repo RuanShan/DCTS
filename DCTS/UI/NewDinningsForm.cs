@@ -118,6 +118,18 @@ namespace DCTS.UI
         private string imagefolderNewMethod(long filename)
         {
             string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\locations", "");
+
+            if (Directory.Exists(lcoalPath))
+            {
+            }
+            else
+            {
+                DirectoryInfo directoryInfo = new DirectoryInfo(lcoalPath);
+                directoryInfo.Create();
+            }
+
+
+
             string copypathto = "";
 
             //List<string> Alist = GetFileName(lcoalPath);

@@ -315,27 +315,42 @@ namespace DCTS.UI
 
             //添加图片
             int i = this.dataGridView.CurrentRow.Index;
-            ComboLocation selectedItem = DinningList[i];
-            long folername = selectedItem.id / 1000;
-            if (selectedItem.img != null && selectedItem.img != "")
+            if (i < DinningList.Count)
             {
-                string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\locations\\" + folername + "\\", selectedItem.img);
-                if (e.ColumnIndex == 5)
+                ComboLocation selectedItem = DinningList[i];
+                long folername = selectedItem.id / 1000;
+                if (selectedItem.img != null && selectedItem.img != "")
                 {
+<<<<<<< HEAD
                     //e.Value = GetImage1(lcoalPath);
+=======
+                    string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\locations\\" + folername + "\\", selectedItem.img);
+                    if (e.ColumnIndex == 5)
+                    {
+                        e.Value = GetImage1(lcoalPath);
+>>>>>>> 8e9b19f825de740d51b2e5415a68ecb572d93a52
 
+                    }
                 }
             }
         }
 
         public System.Drawing.Image GetImage1(string path)
         {
-            System.IO.FileStream fs = new System.IO.FileStream(path, System.IO.FileMode.Open);
-            System.Drawing.Image result = System.Drawing.Image.FromStream(fs);
 
-            fs.Close();
+            if (File.Exists(path))
+            {
 
-            return result;
+                System.IO.FileStream fs = new System.IO.FileStream(path, System.IO.FileMode.Open);
+                System.Drawing.Image result = System.Drawing.Image.FromStream(fs);
+
+                fs.Close();
+
+                return result;
+            }
+            else
+                return null;
+
 
         }
 
