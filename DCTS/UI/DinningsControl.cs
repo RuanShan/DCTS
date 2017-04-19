@@ -315,15 +315,18 @@ namespace DCTS.UI
 
             //添加图片
             int i = this.dataGridView.CurrentRow.Index;
-            ComboLocation selectedItem = DinningList[i];
-            long folername = selectedItem.id / 1000;
-            if (selectedItem.img != null && selectedItem.img != "")
+            if (i < DinningList.Count)
             {
-                string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\locations\\" + folername + "\\", selectedItem.img);
-                if (e.ColumnIndex == 5)
+                ComboLocation selectedItem = DinningList[i];
+                long folername = selectedItem.id / 1000;
+                if (selectedItem.img != null && selectedItem.img != "")
                 {
-                    e.Value = GetImage1(lcoalPath);
+                    string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\locations\\" + folername + "\\", selectedItem.img);
+                    if (e.ColumnIndex == 5)
+                    {
+                        e.Value = GetImage1(lcoalPath);
 
+                    }
                 }
             }
         }
