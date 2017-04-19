@@ -330,12 +330,20 @@ namespace DCTS.UI
 
         public System.Drawing.Image GetImage1(string path)
         {
-            System.IO.FileStream fs = new System.IO.FileStream(path, System.IO.FileMode.Open);
-            System.Drawing.Image result = System.Drawing.Image.FromStream(fs);
 
-            fs.Close();
+            if (File.Exists(path))
+            {
 
-            return result;
+                System.IO.FileStream fs = new System.IO.FileStream(path, System.IO.FileMode.Open);
+                System.Drawing.Image result = System.Drawing.Image.FromStream(fs);
+
+                fs.Close();
+
+                return result;
+            }
+            else
+                return null;
+
 
         }
 

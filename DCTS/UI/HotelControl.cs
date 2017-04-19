@@ -263,27 +263,37 @@ namespace DCTS.UI
 
             //添加图片
             int i = this.dataGridView.CurrentRow.Index;
-            ComboLocation selectedItem = hotelList[i];
-            long folername = selectedItem.id / 1000;
-            if (selectedItem.img != null && selectedItem.img != "")
+            if (i < hotelList.Count)
             {
-                string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\locations\\" + folername + "\\", selectedItem.img);
-                if (e.ColumnIndex == 4)
+                ComboLocation selectedItem = hotelList[i];
+                long folername = selectedItem.id / 1000;
+                if (selectedItem.img != null && selectedItem.img != "")
                 {
-                    e.Value = GetImage1(lcoalPath);
+                    string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\locations\\" + folername + "\\", selectedItem.img);
+                    if (e.ColumnIndex == 4)
+                    {
+                        e.Value = GetImage1(lcoalPath);
 
+                    }
                 }
             }
 
         }
         public System.Drawing.Image GetImage1(string path)
         {
-            System.IO.FileStream fs = new System.IO.FileStream(path, System.IO.FileMode.Open);
-            System.Drawing.Image result = System.Drawing.Image.FromStream(fs);
 
-            fs.Close();
+            if (File.Exists(path))
+            {
 
-            return result;
+                System.IO.FileStream fs = new System.IO.FileStream(path, System.IO.FileMode.Open);
+                System.Drawing.Image result = System.Drawing.Image.FromStream(fs);
+
+                fs.Close();
+
+                return result;
+            }
+            else
+                return null;
 
         }
 
