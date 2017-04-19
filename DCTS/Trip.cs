@@ -23,6 +23,7 @@ namespace DCTS
         public string title { get; set; }
         public string memo { get; set; }
         public int days { get; set; }
+        public Nullable<System.DateTime> word_created_at { get; set; }
     
         public virtual ICollection<Day> TripDays { get; set; }
     }

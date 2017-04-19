@@ -151,6 +151,7 @@
           <Property Name="title" Type="varchar" Nullable="false" MaxLength="1024" />
           <Property Name="memo" Type="varchar" MaxLength="1024" />
           <Property Name="days" Type="int" Nullable="false" />
+          <Property Name="word_created_at" Type="datetime" />
         </EntityType>
         <Association Name="locationId">
           <End Role="ComboLocations" Type="DctsModel.Store.ComboLocations" Multiplicity="1" />
@@ -262,6 +263,7 @@
           <Property Name="memo" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
           <Property Type="Int32" Name="days" Nullable="false" />
           <NavigationProperty Name="TripDays" Relationship="DctsModel.tripId" FromRole="Trip" ToRole="Day" />
+          <Property Type="DateTime" Name="word_created_at" />
         </EntityType>
         <EntityType Name="Day">
           <Key>
@@ -422,6 +424,7 @@
           <EntitySetMapping Name="Trips">
             <EntityTypeMapping TypeName="DctsModel.Trip">
               <MappingFragment StoreEntitySet="Trips">
+                <ScalarProperty Name="word_created_at" ColumnName="word_created_at" />
                 <ScalarProperty Name="days" ColumnName="days" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="title" ColumnName="title" />

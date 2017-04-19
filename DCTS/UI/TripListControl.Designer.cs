@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.addTripButton = new System.Windows.Forms.Button();
             this.tripDataGridView = new System.Windows.Forms.DataGridView();
             this.exportWordButton = new System.Windows.Forms.Button();
@@ -42,16 +42,16 @@
             this.editTripColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.copyTripColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.deleteTripColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.downloadButton = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.tripDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // addTripButton
             // 
             this.addTripButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.addTripButton.Location = new System.Drawing.Point(797, 30);
+            this.addTripButton.Location = new System.Drawing.Point(797, 13);
             this.addTripButton.Name = "addTripButton";
             this.addTripButton.Size = new System.Drawing.Size(75, 23);
             this.addTripButton.TabIndex = 4;
@@ -76,41 +76,41 @@
             this.editTripColumn1,
             this.copyTripColumn1,
             this.deleteTripColumn1});
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle11.Padding = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.tripDataGridView.DefaultCellStyle = dataGridViewCellStyle11;
-            this.tripDataGridView.Location = new System.Drawing.Point(13, 76);
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.tripDataGridView.DefaultCellStyle = dataGridViewCellStyle1;
+            this.tripDataGridView.Location = new System.Drawing.Point(13, 53);
             this.tripDataGridView.Name = "tripDataGridView";
             this.tripDataGridView.RowHeadersVisible = false;
-            dataGridViewCellStyle12.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
-            this.tripDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            this.tripDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.tripDataGridView.RowTemplate.Height = 34;
             this.tripDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.tripDataGridView.Size = new System.Drawing.Size(859, 266);
+            this.tripDataGridView.Size = new System.Drawing.Size(859, 289);
             this.tripDataGridView.TabIndex = 3;
             this.tripDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tripDataGridView_CellContentClick);
             // 
             // exportWordButton
             // 
             this.exportWordButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.exportWordButton.Location = new System.Drawing.Point(635, 30);
+            this.exportWordButton.Location = new System.Drawing.Point(635, 13);
             this.exportWordButton.Name = "exportWordButton";
             this.exportWordButton.Size = new System.Drawing.Size(75, 23);
             this.exportWordButton.TabIndex = 5;
-            this.exportWordButton.Text = "导出Word";
+            this.exportWordButton.Text = "生成Word";
             this.exportWordButton.UseVisualStyleBackColor = true;
             this.exportWordButton.Click += new System.EventHandler(this.exportWordButton_Click);
             // 
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(8, 17);
+            this.label2.Location = new System.Drawing.Point(8, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(124, 41);
             this.label2.TabIndex = 6;
@@ -169,14 +169,10 @@
             this.deleteTripColumn1.UseColumnTextForButtonValue = true;
             this.deleteTripColumn1.Width = 60;
             // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
-            // 
             // downloadButton
             // 
             this.downloadButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.downloadButton.Location = new System.Drawing.Point(716, 30);
+            this.downloadButton.Location = new System.Drawing.Point(716, 13);
             this.downloadButton.Name = "downloadButton";
             this.downloadButton.Size = new System.Drawing.Size(75, 23);
             this.downloadButton.TabIndex = 5;
@@ -188,6 +184,10 @@
             // 
             this.saveFileDialog1.Filter = "Word文件（*.docx）|*.docx";
             this.saveFileDialog1.RestoreDirectory = true;
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
             // 
             // TripListControl
             // 

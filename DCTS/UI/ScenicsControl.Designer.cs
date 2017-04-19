@@ -40,7 +40,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.nationComboBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.nationColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cityColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.imgColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,6 +48,7 @@
             this.serviceTimeColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.editColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.deleteColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -173,16 +173,12 @@
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(3, 7);
+            this.label2.Location = new System.Drawing.Point(3, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(124, 41);
             this.label2.TabIndex = 12;
             this.label2.Text = "景点列表";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
             // 
             // nationColumn1
             // 
@@ -229,6 +225,7 @@
             this.editColumn1.Name = "editColumn1";
             this.editColumn1.Text = "编辑";
             this.editColumn1.UseColumnTextForButtonValue = true;
+            this.editColumn1.Width = 60;
             // 
             // deleteColumn
             // 
@@ -236,6 +233,11 @@
             this.deleteColumn.Name = "deleteColumn";
             this.deleteColumn.Text = "删除";
             this.deleteColumn.UseColumnTextForButtonValue = true;
+            this.deleteColumn.Width = 60;
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
             // 
             // ScenicsControl
             // 
