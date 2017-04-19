@@ -1,6 +1,6 @@
 ﻿namespace DCTS.UI
 {
-    partial class ImportDinning
+    partial class ImportDining
     {
         /// <summary>
         /// Required designer variable.

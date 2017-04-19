@@ -16,7 +16,7 @@ using System.IO;
 
 namespace DCTS.UI
 {
-    public partial class DinningsControl : UserControl
+    public partial class DiningsControl : UserControl
     {
         private Hashtable dataGridChanges = null;
         private static string NoOptionSelected = "所有";
@@ -25,7 +25,8 @@ namespace DCTS.UI
         //private List<ComboLocation> dinningsOrderList;
         IBindingList dinningsOrderList = null;
         private List<ComboLocation> DinningList = null;
-        public DinningsControl()
+        private List<Day> DaysList = null;
+        public DiningsControl()
         {
             InitializeComponent();
             this.dataGridChanges = new Hashtable();
@@ -48,6 +49,8 @@ namespace DCTS.UI
             var ctx = this.entityDataSource1.DbContext as DctsEntities;
             //using (var ctx = new DctsEntities())
             {
+                DaysList = ctx.Days.ToList();
+
                 DinningList = new List<ComboLocation>();
 
                 // var query = ctx.ComboLocations.OrderBy(o => o.id).Skip(offset).Take(pageSize);
@@ -87,6 +90,9 @@ namespace DCTS.UI
             var oids = GetOrderIdsBySelectedGridCell();
             using (var ctx = new DctsEntities())
             {
+                //  var filtered = DaysList.FindAll(s => s.genreId == (int)this.genreComboBox.SelectedValue);
+                //  if (filtered.Count > 0)
+
                 var stockrecs = (from s in ctx.ComboLocations
                                  where oids.Contains(s.id)
                                  select s).ToList();
