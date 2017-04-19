@@ -272,9 +272,19 @@ namespace DCTS.UI
                     string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\locations\\" + folername + "\\", selectedItem.img);
                     if (e.ColumnIndex == 4)
                     {
-                        e.Value = GetImage1(lcoalPath);
+                        if (File.Exists(lcoalPath))
+                        {
+                            e.Value = GetImage1(lcoalPath);
+                        }
+                        else
+                        {
+                            //dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex] = new DataGridViewTextBoxCell();
+                           // dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "未找到图片";
 
+                          //  e.Value = "未找到图片";
+                        }
                     }
+
                 }
             }
 
