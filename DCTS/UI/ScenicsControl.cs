@@ -95,9 +95,16 @@ namespace DCTS.UI
 
                 if (MessageHelper.DeleteConfirm(msg))
                 {
-
-                    ComboLoactionBusiness.Delete(model.id);
-
+                    try
+                    {
+                        var ctx = this.entityDataSource1.DbContext as DctsEntities;
+                        //var day = model.Days.FirstOrDefault();                         
+                        ComboLoactionBusiness.Delete(model.id);
+                    }
+                    catch (Exception exception)
+                    {
+                        MessageBox.Show(exception.Message);
+                    }
                     BeginActive();
                 }
             }

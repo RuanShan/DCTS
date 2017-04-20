@@ -35,16 +35,17 @@
             this.tripDataGridView = new System.Windows.Forms.DataGridView();
             this.exportWordButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.downloadButton = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.IdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.daysColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tripTitleColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tripMemoColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.wordCreatedAtColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.editTripColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.copyTripColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.deleteTripColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.downloadButton = new System.Windows.Forms.Button();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.tripDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -73,6 +74,7 @@
             this.daysColumn1,
             this.tripTitleColumn1,
             this.tripMemoColumn1,
+            this.wordCreatedAtColumn,
             this.editTripColumn1,
             this.copyTripColumn1,
             this.deleteTripColumn1});
@@ -117,6 +119,26 @@
             this.label2.Text = "行程列表";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // downloadButton
+            // 
+            this.downloadButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.downloadButton.Location = new System.Drawing.Point(716, 13);
+            this.downloadButton.Name = "downloadButton";
+            this.downloadButton.Size = new System.Drawing.Size(75, 23);
+            this.downloadButton.TabIndex = 5;
+            this.downloadButton.Text = "下载Word";
+            this.downloadButton.UseVisualStyleBackColor = true;
+            this.downloadButton.Click += new System.EventHandler(this.downloadButton_Click);
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.Filter = "Word文件（*.docx）|*.docx";
+            this.saveFileDialog1.RestoreDirectory = true;
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
+            // 
             // IdColumn
             // 
             this.IdColumn.DataPropertyName = "id";
@@ -145,6 +167,13 @@
             this.tripMemoColumn1.Name = "tripMemoColumn1";
             this.tripMemoColumn1.Width = 260;
             // 
+            // wordCreatedAtColumn
+            // 
+            this.wordCreatedAtColumn.DataPropertyName = "word_created_at";
+            this.wordCreatedAtColumn.HeaderText = "路书生成时间";
+            this.wordCreatedAtColumn.Name = "wordCreatedAtColumn";
+            this.wordCreatedAtColumn.Width = 120;
+            // 
             // editTripColumn1
             // 
             this.editTripColumn1.HeaderText = " ";
@@ -169,26 +198,6 @@
             this.deleteTripColumn1.UseColumnTextForButtonValue = true;
             this.deleteTripColumn1.Width = 60;
             // 
-            // downloadButton
-            // 
-            this.downloadButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.downloadButton.Location = new System.Drawing.Point(716, 13);
-            this.downloadButton.Name = "downloadButton";
-            this.downloadButton.Size = new System.Drawing.Size(75, 23);
-            this.downloadButton.TabIndex = 5;
-            this.downloadButton.Text = "下载Word";
-            this.downloadButton.UseVisualStyleBackColor = true;
-            this.downloadButton.Click += new System.EventHandler(this.downloadButton_Click);
-            // 
-            // saveFileDialog1
-            // 
-            this.saveFileDialog1.Filter = "Word文件（*.docx）|*.docx";
-            this.saveFileDialog1.RestoreDirectory = true;
-            // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
-            // 
             // TripListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -212,14 +221,15 @@
         private CustomComponents.EntityDataSource entityDataSource1;
         private System.Windows.Forms.Button exportWordButton;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button downloadButton;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn daysColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn tripTitleColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn tripMemoColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn wordCreatedAtColumn;
         private System.Windows.Forms.DataGridViewButtonColumn editTripColumn1;
         private System.Windows.Forms.DataGridViewButtonColumn copyTripColumn1;
         private System.Windows.Forms.DataGridViewButtonColumn deleteTripColumn1;
-        private System.Windows.Forms.Button downloadButton;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }

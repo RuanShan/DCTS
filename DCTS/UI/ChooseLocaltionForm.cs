@@ -13,7 +13,7 @@ namespace DCTS.UI
 {
     public partial class ChooseLocaltionForm : BaseModalForm
     {
-
+        static string Any = "所有";
         List<MockEntity> locationTypeList;
 
         List<ComboLocation> comboLocationList;
@@ -26,28 +26,42 @@ namespace DCTS.UI
             InitializeComponent();
             this.dataGridView1.AutoGenerateColumns = false;
             locationTypeList = new List<MockEntity>();
+
+            locationTypeList.Add(new MockEntity { Id = (int)ComboLocationEnum.Scenic, FullName = "景点" });
+            locationTypeList.Add(new MockEntity { Id = (int)ComboLocationEnum.Hotel, FullName = "住宿" });
+            locationTypeList.Add(new MockEntity { Id = (int)ComboLocationEnum.Dining, FullName = "餐厅" });
         }
 
         // 初始化过滤条件数据
         public void InitializeDataSource()
         {
-            locationTypeList.Add(new MockEntity { Id = (int)ComboLocationEnum.Scenic, FullName = ComboLocationEnum.Scenic.ToString() });
-            locationTypeList.Add(new MockEntity { Id = (int)ComboLocationEnum.Hotel, FullName = ComboLocationEnum.Hotel.ToString() });
-            locationTypeList.Add(new MockEntity { Id = (int)ComboLocationEnum.Dining, FullName = ComboLocationEnum.Dining.ToString() });
+            var locationTypeListForComboBox = locationTypeList.Select(o => new MockEntity { Id = o.Id, FullName = o.FullName }).ToList();
+            locationTypeListForComboBox.Insert(0,new MockEntity { Id = 0, FullName = Any });
+
+             
 
             // 活动分类
             this.locationTypeComboBox.DisplayMember = "FullName";
             this.locationTypeComboBox.ValueMember = "Id";
-            this.locationTypeComboBox.DataSource = locationTypeList;
+            this.locationTypeComboBox.DataSource = locationTypeListForComboBox;
 
             // 国家
             var nationList = DCTS.DB.GlobalCache.NationList;
             var nations = nationList.Select(o => new MockEntity { Id = o.id, ShortName = o.code, FullName = o.title }).ToList();
-            nations.Insert(0, new MockEntity { Id = 0, ShortName = "", FullName = "所有" });
+            nations.Insert(0, new MockEntity { Id = 0, ShortName = "", FullName = Any });
             this.nationComboBox.DisplayMember = "FullName";
             this.nationComboBox.ValueMember = "ShortName";
             this.nationComboBox.DataSource = nations;
 
+
+            // 活动分类列
+            var locationTypeListForColumn = locationTypeList.Select(o => new { Id = (int)o.Id, FullName = o.FullName }).ToList();
+
+            this.locationTypeColumn.DisplayMember = "FullName";
+            this.locationTypeColumn.ValueMember = "Id";
+            this.locationTypeColumn.DataSource = locationTypeListForColumn;
+
+            InitializeLocations();
             
         }
 
@@ -58,7 +72,7 @@ namespace DCTS.UI
             int size = 5000;
             //int offset = (pager1.PageCurrent > 1 ? pager1.OffSet(pager1.PageCurrent - 1) : 0);
 
-            var query = ctx.ComboLocations.AsQueryable();
+            var query = ctx.ComboLocations.Where(o=>o.id > 0);
             if (locationType > 0)
             {
                 query = query.Where(o => o.ltype == locationType);
@@ -85,7 +99,7 @@ namespace DCTS.UI
             var cityList = DCTS.DB.GlobalCache.CityList;
             cityList = cityList.Where(o => o.nationCode == code).ToList();
             var cities = cityList.Select(o => new MockEntity { Id = o.id, FullName = o.title }).ToList();
-            cities.Insert(0, new MockEntity { Id = 0, FullName = "所有" });
+            cities.Insert(0, new MockEntity { Id = 0, FullName = Any });
 
             this.cityComboBox.DisplayMember = "FullName";
             this.cityComboBox.ValueMember = "Id";
@@ -94,7 +108,7 @@ namespace DCTS.UI
 
         private void ChooseLocaltionForm_Load(object sender, EventArgs e)
         {
-            InitializeLocations();
+            InitializeDataSource();
         }
 
         private void saveButton_Click(object sender, EventArgs e)
@@ -104,6 +118,16 @@ namespace DCTS.UI
             {
                 SelectedLocation = row.DataBoundItem as ComboLocation;
             }
+        }
+
+        private void findButton_Click(object sender, EventArgs e)
+        {
+            int locationType = Convert.ToInt32(this.locationTypeComboBox.SelectedValue);
+
+            string nation = this.nationComboBox.Text == Any ? "" : this.nationComboBox.Text;
+            string city = this.cityComboBox.Text == Any ? "" : this.cityComboBox.Text;
+            string keyword = this.keyworkTextBox.Text.Trim();
+            InitializeLocations(locationType, nation, city, keyword);
         }
     }
 }
