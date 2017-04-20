@@ -43,73 +43,81 @@ namespace DCTS.Bus
 
             var wrappedKeys = txtKeys.Select(o => "%" + o + "%").ToList();
 
-
-
-            using (DocX document = DocX.Create(EntityPathConfig.TripWordFilePath(this.TripId) ))
+            using (var db = new DctsEntities())
             {
-                List<ComboLocation> handledLocations = new List<ComboLocation>();
 
-                foreach( var day in this.days)
+                using (DocX document = DocX.Create(EntityPathConfig.TripWordFilePath(this.TripId)))
                 {
-                    var location = day.ComboLocation;
-                    string templatePath = string.Empty;
+                    List<ComboLocation> handledLocations = new List<ComboLocation>();
 
-                    if (day.ComboLocation.ltype == (int)ComboLocationEnum.Blank)
+                    foreach (var day in this.days)
                     {
-                        document.InsertSectionPageBreak();
-                        continue;
-                    }
-                    else if (day.ComboLocation.ltype == (int)ComboLocationEnum.Scenic)
-                    {
-                        templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, LocationTemplate.ScenicDetailRelativePath );
+                        var location = day.ComboLocation;
+                        string templatePath = string.Empty;
 
-                    }
-                    if (templatePath.Length == 0)
-                    {
-                        continue;
-                    }
-
-                    using (DocX template = DocX.Load(templatePath))
-                    {                       
-                        var type = location.GetType();
-
-                        var duplicated = template.Copy();
-
-                        foreach (string key in txtKeys)
-                        {
-                            var val = type.GetProperty(key).GetValue(location);
-                            string s = val == null ? string.Empty :  val.ToString();                            
-                            string wrappedKey = "%" + key + "%";
-                            duplicated.ReplaceText(wrappedKey, s);
-                        }
-
-                        if (duplicated.Images.Count >= 2)
-                        {
-                            if (location.img.Length > 0)
-                            {
-                                Image img = duplicated.Images[0];
-
-                                string path = EntityPathConfig.LocationImagePath(location);
-                                if (File.Exists(path)) 
-                                {
-                                    var b = new WindowsBitmap( path );
-                                    // Save this Bitmap back into the document using a Create\Write stream.
-                                    b.Save(img.GetStream(FileMode.Create, FileAccess.Write), System.Drawing.Imaging.ImageFormat.Png);
-                                }
-                            }
-                        }
-
-                        if (handledLocations.Count > 0)
+                        if (day.ComboLocation.ltype == (int)ComboLocationEnum.Blank)
                         {
                             document.InsertSectionPageBreak();
+                            continue;
+                        }
+                        else if (day.ComboLocation.ltype == (int)ComboLocationEnum.Scenic)
+                        {
+                            templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, LocationTemplate.ScenicDetailRelativePath);
+
+                        }
+                        if (templatePath.Length == 0)
+                        {
+                            continue;
                         }
 
-                        document.InsertDocument(duplicated);
-                        handledLocations.Add(location);
+                        using (DocX template = DocX.Load(templatePath))
+                        {
+                            var type = location.GetType();
+
+                            var duplicated = template.Copy();
+
+                            foreach (string key in txtKeys)
+                            {
+                                var val = type.GetProperty(key).GetValue(location);
+                                string s = val == null ? string.Empty : val.ToString();
+                                string wrappedKey = "%" + key + "%";
+                                duplicated.ReplaceText(wrappedKey, s);
+                            }
+
+                            if (duplicated.Images.Count >= 2)
+                            {
+                                if (location.img.Length > 0)
+                                {
+                                    Image img = duplicated.Images[0];
+
+                                    string path = EntityPathConfig.LocationImagePath(location);
+                                    if (File.Exists(path))
+                                    {
+                                        var b = new WindowsBitmap(path);
+                                        // Save this Bitmap back into the document using a Create\Write stream.
+                                        b.Save(img.GetStream(FileMode.Create, FileAccess.Write), System.Drawing.Imaging.ImageFormat.Png);
+                                    }
+                                }
+                            }
+
+                            if (handledLocations.Count > 0)
+                            {
+                                document.InsertSectionPageBreak();
+                            }
+
+                            document.InsertDocument(duplicated);
+                            handledLocations.Add(location);
+                        }
+                        //添加一些基本对象，如段落等
+                        document.Save();//保存
                     }
-                    //添加一些基本对象，如段落等
-                    document.Save();//保存
                 }
+
+                var trip = db.Trips.Find(TripId);
+
+                trip.word_created_at = DateTime.Now;
+
+                db.SaveChanges();
             }
             return true;
         }

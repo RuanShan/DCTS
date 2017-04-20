@@ -31,15 +31,10 @@
             this.components = new System.ComponentModel.Container();
             this.addDayButton = new System.Windows.Forms.Button();
             this.addLocationButton = new System.Windows.Forms.Button();
-            this.backLinkLabel = new System.Windows.Forms.LinkLabel();
             this.delDayButton = new System.Windows.Forms.Button();
             this.dayDataGridView = new System.Windows.Forms.DataGridView();
             this.dayNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dayDetailDataGridView = new System.Windows.Forms.DataGridView();
-            this.positionColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.locationIdColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dayIdColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.localtionTitleColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dayDetailBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.moveDownButton = new System.Windows.Forms.Button();
             this.moveUpButton = new System.Windows.Forms.Button();
@@ -48,8 +43,15 @@
             this.removeLocationButton = new System.Windows.Forms.Button();
             this.moveDayDownButton = new System.Windows.Forms.Button();
             this.moveDayUpButton = new System.Windows.Forms.Button();
-            this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.addBlankButton = new System.Windows.Forms.Button();
+            this.pageTitleLabel = new System.Windows.Forms.Label();
+            this.backButton = new System.Windows.Forms.Button();
+            this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
+            this.positionColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.locationTypeColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.locationIdColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dayIdColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.localtionTitleColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dayDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dayDetailDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dayDetailBindingSource)).BeginInit();
@@ -77,17 +79,6 @@
             this.addLocationButton.UseVisualStyleBackColor = true;
             this.addLocationButton.Click += new System.EventHandler(this.addLocationButton_Click);
             // 
-            // backLinkLabel
-            // 
-            this.backLinkLabel.AutoSize = true;
-            this.backLinkLabel.Location = new System.Drawing.Point(3, 15);
-            this.backLinkLabel.Name = "backLinkLabel";
-            this.backLinkLabel.Size = new System.Drawing.Size(77, 12);
-            this.backLinkLabel.TabIndex = 4;
-            this.backLinkLabel.TabStop = true;
-            this.backLinkLabel.Text = "返回行程列表";
-            this.backLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.backLinkLabel_LinkClicked);
-            // 
             // delDayButton
             // 
             this.delDayButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -111,14 +102,14 @@
             this.dayDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dayDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dayNameColumn});
-            this.dayDataGridView.Location = new System.Drawing.Point(3, 39);
+            this.dayDataGridView.Location = new System.Drawing.Point(3, 55);
             this.dayDataGridView.MultiSelect = false;
             this.dayDataGridView.Name = "dayDataGridView";
             this.dayDataGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dayDataGridView.RowHeadersVisible = false;
             this.dayDataGridView.RowTemplate.Height = 23;
             this.dayDataGridView.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.dayDataGridView.Size = new System.Drawing.Size(192, 275);
+            this.dayDataGridView.Size = new System.Drawing.Size(192, 259);
             this.dayDataGridView.TabIndex = 8;
             this.dayDataGridView.SelectionChanged += new System.EventHandler(this.dayDataGridView_SelectionChanged);
             // 
@@ -141,41 +132,18 @@
             this.dayDetailDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dayDetailDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.positionColumn1,
+            this.locationTypeColumn,
             this.locationIdColumn1,
             this.dayIdColumn1,
             this.localtionTitleColumn});
-            this.dayDetailDataGridView.Location = new System.Drawing.Point(201, 39);
+            this.dayDetailDataGridView.Location = new System.Drawing.Point(201, 55);
             this.dayDetailDataGridView.MultiSelect = false;
             this.dayDetailDataGridView.Name = "dayDetailDataGridView";
             this.dayDetailDataGridView.RowHeadersVisible = false;
             this.dayDetailDataGridView.RowTemplate.Height = 23;
             this.dayDetailDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dayDetailDataGridView.Size = new System.Drawing.Size(642, 275);
+            this.dayDetailDataGridView.Size = new System.Drawing.Size(642, 259);
             this.dayDetailDataGridView.TabIndex = 8;
-            // 
-            // positionColumn1
-            // 
-            this.positionColumn1.DataPropertyName = "position";
-            this.positionColumn1.HeaderText = "序号";
-            this.positionColumn1.Name = "positionColumn1";
-            // 
-            // locationIdColumn1
-            // 
-            this.locationIdColumn1.DataPropertyName = "locationId";
-            this.locationIdColumn1.HeaderText = "locationId";
-            this.locationIdColumn1.Name = "locationIdColumn1";
-            // 
-            // dayIdColumn1
-            // 
-            this.dayIdColumn1.DataPropertyName = "dayId";
-            this.dayIdColumn1.HeaderText = "dayId";
-            this.dayIdColumn1.Name = "dayIdColumn1";
-            // 
-            // localtionTitleColumn
-            // 
-            this.localtionTitleColumn.DataPropertyName = "title";
-            this.localtionTitleColumn.HeaderText = "名称";
-            this.localtionTitleColumn.Name = "localtionTitleColumn";
             // 
             // moveDownButton
             // 
@@ -251,10 +219,6 @@
             this.moveDayUpButton.UseVisualStyleBackColor = true;
             this.moveDayUpButton.Click += new System.EventHandler(this.moveDayUpButton_Click);
             // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
-            // 
             // addBlankButton
             // 
             this.addBlankButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -266,10 +230,72 @@
             this.addBlankButton.UseVisualStyleBackColor = true;
             this.addBlankButton.Click += new System.EventHandler(this.addBlankButton_Click);
             // 
+            // pageTitleLabel
+            // 
+            this.pageTitleLabel.AutoSize = true;
+            this.pageTitleLabel.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.pageTitleLabel.Location = new System.Drawing.Point(3, 11);
+            this.pageTitleLabel.Name = "pageTitleLabel";
+            this.pageTitleLabel.Size = new System.Drawing.Size(96, 28);
+            this.pageTitleLabel.TabIndex = 15;
+            this.pageTitleLabel.Text = "编辑行程";
+            this.pageTitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // backButton
+            // 
+            this.backButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.backButton.Location = new System.Drawing.Point(743, 11);
+            this.backButton.Name = "backButton";
+            this.backButton.Size = new System.Drawing.Size(100, 23);
+            this.backButton.TabIndex = 16;
+            this.backButton.Text = "返回行程列表";
+            this.backButton.UseVisualStyleBackColor = true;
+            this.backButton.Click += new System.EventHandler(this.backButton_Click);
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
+            // 
+            // positionColumn1
+            // 
+            this.positionColumn1.DataPropertyName = "position";
+            this.positionColumn1.HeaderText = "序号";
+            this.positionColumn1.Name = "positionColumn1";
+            // 
+            // locationTypeColumn
+            // 
+            this.locationTypeColumn.DataPropertyName = "ltype";
+            this.locationTypeColumn.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
+            this.locationTypeColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.locationTypeColumn.HeaderText = "活动分类";
+            this.locationTypeColumn.Name = "locationTypeColumn";
+            this.locationTypeColumn.ReadOnly = true;
+            // 
+            // locationIdColumn1
+            // 
+            this.locationIdColumn1.DataPropertyName = "locationId";
+            this.locationIdColumn1.HeaderText = "locationId";
+            this.locationIdColumn1.Name = "locationIdColumn1";
+            // 
+            // dayIdColumn1
+            // 
+            this.dayIdColumn1.DataPropertyName = "dayId";
+            this.dayIdColumn1.HeaderText = "dayId";
+            this.dayIdColumn1.Name = "dayIdColumn1";
+            // 
+            // localtionTitleColumn
+            // 
+            this.localtionTitleColumn.DataPropertyName = "title";
+            this.localtionTitleColumn.HeaderText = "名称";
+            this.localtionTitleColumn.Name = "localtionTitleColumn";
+            this.localtionTitleColumn.Width = 300;
+            // 
             // EditTripControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.backButton);
+            this.Controls.Add(this.pageTitleLabel);
             this.Controls.Add(this.moveDayDownButton);
             this.Controls.Add(this.moveDayUpButton);
             this.Controls.Add(this.selectDayTextBox);
@@ -279,7 +305,6 @@
             this.Controls.Add(this.dayDetailDataGridView);
             this.Controls.Add(this.dayDataGridView);
             this.Controls.Add(this.delDayButton);
-            this.Controls.Add(this.backLinkLabel);
             this.Controls.Add(this.removeLocationButton);
             this.Controls.Add(this.addBlankButton);
             this.Controls.Add(this.addLocationButton);
@@ -298,7 +323,6 @@
 
         private System.Windows.Forms.Button addDayButton;
         private System.Windows.Forms.Button addLocationButton;
-        private System.Windows.Forms.LinkLabel backLinkLabel;
         private CustomComponents.EntityDataSource entityDataSource1;
         private System.Windows.Forms.Button delDayButton;
         private System.Windows.Forms.DataGridView dayDataGridView;
@@ -309,13 +333,16 @@
         private System.Windows.Forms.TextBox selectedLocationTextBox;
         private System.Windows.Forms.TextBox selectDayTextBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn dayNameColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn positionColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn locationIdColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dayIdColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn localtionTitleColumn;
         private System.Windows.Forms.Button removeLocationButton;
         private System.Windows.Forms.Button moveDayDownButton;
         private System.Windows.Forms.Button moveDayUpButton;
         private System.Windows.Forms.Button addBlankButton;
+        private System.Windows.Forms.Label pageTitleLabel;
+        private System.Windows.Forms.Button backButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn positionColumn1;
+        private System.Windows.Forms.DataGridViewComboBoxColumn locationTypeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn locationIdColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dayIdColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn localtionTitleColumn;
     }
 }

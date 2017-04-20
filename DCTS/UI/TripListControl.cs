@@ -35,8 +35,8 @@ namespace DCTS.CustomComponents
         {
             int offset = 0;
             int pageSize = 5000;
-            var ctx = this.entityDataSource1.DbContext as DctsEntities;
-            //using (var ctx = new DctsEntities())
+            //var ctx = this.entityDataSource1.DbContext as DctsEntities;
+            using (var ctx = new DctsEntities())
             {
 
                 var query = ctx.Trips.OrderBy(o=>o.id).Skip(offset).Take(pageSize);
@@ -99,6 +99,7 @@ namespace DCTS.CustomComponents
             if(  exporter.ExportWord())
             {
                 MessageBox.Show("导出Word成功！");
+                BeginActive();
             }
 
         }

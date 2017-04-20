@@ -30,14 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.imgColumn = new System.Windows.Forms.DataGridViewImageColumn();
-            this.nationColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cityColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.titleColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.addressColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.keyworkTextBox = new System.Windows.Forms.TextBox();
             this.findButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -49,6 +44,12 @@
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.cancelButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
+            this.imgColumn = new System.Windows.Forms.DataGridViewImageColumn();
+            this.nationColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cityColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.locationTypeColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.titleColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.addressColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -57,6 +58,7 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -65,6 +67,7 @@
             this.imgColumn,
             this.nationColumn1,
             this.cityColumn1,
+            this.locationTypeColumn,
             this.titleColumn,
             this.addressColumn});
             this.dataGridView1.Location = new System.Drawing.Point(12, 165);
@@ -72,39 +75,8 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(786, 186);
+            this.dataGridView1.Size = new System.Drawing.Size(805, 186);
             this.dataGridView1.TabIndex = 12;
-            // 
-            // imgColumn
-            // 
-            this.imgColumn.HeaderText = "图片";
-            this.imgColumn.Name = "imgColumn";
-            // 
-            // nationColumn1
-            // 
-            this.nationColumn1.DataPropertyName = "nation";
-            this.nationColumn1.HeaderText = "国家";
-            this.nationColumn1.Name = "nationColumn1";
-            // 
-            // cityColumn1
-            // 
-            this.cityColumn1.DataPropertyName = "city";
-            this.cityColumn1.HeaderText = "城市";
-            this.cityColumn1.Name = "cityColumn1";
-            // 
-            // titleColumn
-            // 
-            this.titleColumn.DataPropertyName = "title";
-            this.titleColumn.HeaderText = "中文名称";
-            this.titleColumn.Name = "titleColumn";
-            this.titleColumn.Width = 200;
-            // 
-            // addressColumn
-            // 
-            this.addressColumn.DataPropertyName = "address";
-            this.addressColumn.HeaderText = "地址";
-            this.addressColumn.Name = "addressColumn";
-            this.addressColumn.Width = 200;
             // 
             // label2
             // 
@@ -113,7 +85,7 @@
             this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.Location = new System.Drawing.Point(12, 9);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(786, 41);
+            this.label2.Size = new System.Drawing.Size(805, 41);
             this.label2.TabIndex = 2;
             this.label2.Text = "活动选择";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -122,7 +94,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.keyworkTextBox);
             this.groupBox1.Controls.Add(this.findButton);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label5);
@@ -133,16 +105,16 @@
             this.groupBox1.Controls.Add(this.nationComboBox);
             this.groupBox1.Location = new System.Drawing.Point(12, 53);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(786, 96);
+            this.groupBox1.Size = new System.Drawing.Size(805, 96);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             // 
-            // textBox1
+            // keyworkTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(53, 58);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(502, 21);
-            this.textBox1.TabIndex = 8;
+            this.keyworkTextBox.Location = new System.Drawing.Point(53, 58);
+            this.keyworkTextBox.Name = "keyworkTextBox";
+            this.keyworkTextBox.Size = new System.Drawing.Size(502, 21);
+            this.keyworkTextBox.TabIndex = 8;
             // 
             // findButton
             // 
@@ -152,6 +124,7 @@
             this.findButton.TabIndex = 9;
             this.findButton.Text = "查找";
             this.findButton.UseVisualStyleBackColor = true;
+            this.findButton.Click += new System.EventHandler(this.findButton_Click);
             // 
             // label4
             // 
@@ -225,7 +198,7 @@
             // 
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.No;
-            this.cancelButton.Location = new System.Drawing.Point(723, 374);
+            this.cancelButton.Location = new System.Drawing.Point(742, 374);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 14;
@@ -236,7 +209,7 @@
             // 
             this.saveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.saveButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
-            this.saveButton.Location = new System.Drawing.Point(642, 374);
+            this.saveButton.Location = new System.Drawing.Point(661, 374);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 15;
@@ -244,11 +217,51 @@
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
+            // imgColumn
+            // 
+            this.imgColumn.HeaderText = "图片";
+            this.imgColumn.Name = "imgColumn";
+            // 
+            // nationColumn1
+            // 
+            this.nationColumn1.DataPropertyName = "nation";
+            this.nationColumn1.HeaderText = "国家";
+            this.nationColumn1.Name = "nationColumn1";
+            // 
+            // cityColumn1
+            // 
+            this.cityColumn1.DataPropertyName = "city";
+            this.cityColumn1.HeaderText = "城市";
+            this.cityColumn1.Name = "cityColumn1";
+            // 
+            // locationTypeColumn
+            // 
+            this.locationTypeColumn.DataPropertyName = "ltype";
+            this.locationTypeColumn.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
+            this.locationTypeColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.locationTypeColumn.HeaderText = "活动分类";
+            this.locationTypeColumn.Name = "locationTypeColumn";
+            this.locationTypeColumn.ReadOnly = true;
+            // 
+            // titleColumn
+            // 
+            this.titleColumn.DataPropertyName = "title";
+            this.titleColumn.HeaderText = "中文名称";
+            this.titleColumn.Name = "titleColumn";
+            this.titleColumn.Width = 200;
+            // 
+            // addressColumn
+            // 
+            this.addressColumn.DataPropertyName = "address";
+            this.addressColumn.HeaderText = "地址";
+            this.addressColumn.Name = "addressColumn";
+            this.addressColumn.Width = 200;
+            // 
             // ChooseLocaltionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(810, 420);
+            this.ClientSize = new System.Drawing.Size(829, 420);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.dataGridView1);
@@ -274,18 +287,19 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cityComboBox;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox keyworkTextBox;
         private System.Windows.Forms.Button findButton;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewImageColumn imgColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nationColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cityColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn titleColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn addressColumn;
         private CustomComponents.EntityDataSource entityDataSource1;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.DataGridViewImageColumn imgColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nationColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cityColumn1;
+        private System.Windows.Forms.DataGridViewComboBoxColumn locationTypeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn titleColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn addressColumn;
 
     }
 }

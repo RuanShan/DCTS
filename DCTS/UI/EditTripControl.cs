@@ -33,12 +33,22 @@ namespace DCTS.CustomComponents
             //dayListView.Columns[0].Width = dayListView.ClientSize.Width;  // 第几天
 
             localtionForm = new ChooseLocaltionForm();
+
+            var locationTypeList = new []{ 
+                new { Id = (int)ComboLocationEnum.Blank, FullName = "空白页" },
+                new { Id = (int)ComboLocationEnum.Scenic, FullName = "景点" },
+                new { Id = (int)ComboLocationEnum.Hotel, FullName = "住宿" },
+                new { Id = (int)ComboLocationEnum.Dining, FullName = "餐厅" }}.ToList();
+
+            this.locationTypeColumn.DisplayMember = "FullName";
+            this.locationTypeColumn.ValueMember = "Id";
+            this.locationTypeColumn.DataSource = locationTypeList;
         }
 
         public void BeginActive()
         {
             dayNameColumn.Width = dayDataGridView.ClientSize.Width - 3;
-            localtionTitleColumn.Width = dayDetailDataGridView.ClientSize.Width - 303;
+            localtionTitleColumn.Width = dayDetailDataGridView.ClientSize.Width - 403;
 
             InitializeDataSource();
 
@@ -56,6 +66,7 @@ namespace DCTS.CustomComponents
 
         public void InitializeDayListBox(int day = 0, int selectLocationPosition = 0)
         {
+            this.pageTitleLabel.Text = string.Format("编辑行程<{0}>", Model.title);
             List<MockEntity> list = new List<MockEntity>();
             for (int i = 1; i <= Model.days; i++)
             {
@@ -66,7 +77,6 @@ namespace DCTS.CustomComponents
             //http://stackoverflow.com/questions/6265228/selecting-a-row-in-datagridview-programmatically
             if (day > 0)
             {
-                Console.WriteLine("InitializeDayListBox day= " + day.ToString());
 
                 dayDataGridView.CurrentCell = dayDataGridView.Rows[day - 1].Cells[0]; 
                 dayDataGridView.Rows[day - 1].Selected = true;
@@ -86,7 +96,8 @@ namespace DCTS.CustomComponents
 
         public void InitializeDayDetailListBox( int day )
         {
-            var dayLocations = this.DayList.Where(o => o.day == day).Select(o => new DayLocation() { 
+            var dayLocations = this.DayList.Where(o => o.day == day).Select(o => new DayLocation() {
+                ltype = o.ComboLocation.ltype,
                 dayId = o.id, locationId = o.ComboLocation.id, title = o.ComboLocation.title, position = o.position }).OrderBy(o=>o.position).ToList();
             dayDetailBindingSource.DataSource = dayLocations;
             this.dayDetailDataGridView.DataSource = dayDetailBindingSource;
@@ -258,6 +269,13 @@ namespace DCTS.CustomComponents
             long locationId = 0;
             TripBusiness.AddLocation(this.ModelId, day, locationId);
             InitializeDataSource(day);
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            var eventArgs = new CommandRequestEventArgs(CommandRequestEnum.TripList);
+            this.CommandRequestEvent(this, eventArgs);
+  
         }
     }
 }
