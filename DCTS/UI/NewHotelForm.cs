@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DCTS.DB;
 
-namespace DCTS.UI
+namespace DCTS.CustomComponents
 {
     public partial class NewHotelForm : BaseModalForm
     {
@@ -104,7 +104,6 @@ namespace DCTS.UI
                 #endregion
                 if (changeid == 0)
                 {
-                    //  createNewMethod(ctx, copyfilename);
                     var obj = ctx.ComboLocations.Create();
                     obj.ltype = (int)ComboLocationEnum.Hotel;
                     obj.nation = this.nationComboBox.Text;
@@ -125,7 +124,7 @@ namespace DCTS.UI
                     obj.parking = parking.Text;
                     obj.reception = reception.Text;
                     obj.kitchen = kitchen.Text;
-
+                    obj.tips = this.textBox6.Text;
                     ctx.ComboLocations.Add(obj);
                     ctx.SaveChanges();
                     if (hasImg)
@@ -133,13 +132,9 @@ namespace DCTS.UI
                         string copyToPath = EntityPathConfig.LocationImagePath(obj);
                         File.Copy(imgFilePath, copyToPath);
                     }
-
-
                 }
                 else
                 {
-                    //  editNewMethod(ctx, copyfilename);
-
                     ComboLocation obj = ctx.ComboLocations.Find(Convert.ToInt32(changeid));
 
                     obj.ltype = (int)ComboLocationEnum.Hotel;
@@ -161,7 +156,6 @@ namespace DCTS.UI
                     obj.parking = parking.Text;
                     obj.reception = reception.Text;
                     obj.kitchen = kitchen.Text;
-
                     //ctx.ComboLocations.Add(obj);
                     ctx.SaveChanges();
 
@@ -171,25 +165,8 @@ namespace DCTS.UI
                         File.Copy(imgFilePath, copyToPath);
                     }
                 }
-                //if (imgPathTextBox.Text != null && imgPathTextBox.Text != "")
-                //{
-                //    long folername = changeid / 1000;
-
-                //    string copypathto = imagefolderNewMethod(folername);
-
-                //    if (File.Exists(copypathto + "\\" + copyfilename))
-                //    {
-                //        if (MessageBox.Show("此文件名已在本文件夹中存在，是否覆盖?", "信息", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                //        {
-
-                //            System.IO.File.Copy(this.imgPathTextBox.Text, copypathto + "\\" + copyfilename, true);
-                //        }
-                //        else
-                //            return;
-                //    }
-                //    else
-                //        File.Copy(this.imgPathTextBox.Text, Path.Combine(copypathto, Path.GetFileName(this.imgPathTextBox.Text)));
-                //}
+                this.Close();
+            
             }
 
         }
@@ -237,7 +214,7 @@ namespace DCTS.UI
             }
 
             return copypathto;
-        }      
+        }
 
         private List<string> GetFileName(string dirPath)
         {

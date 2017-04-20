@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DCTS.DB;
 
-namespace DCTS.UI
+namespace DCTS.CustomComponents
 {
     public partial class NewDiningsForm : BaseModalForm
     {
@@ -24,8 +24,6 @@ namespace DCTS.UI
             changeid = 0;
             if (maintype == "Edit")
             {
-
-
                 //obj.ltype = (int)ComboLocationEnum.Dining;
                 this.nationComboBox.Text = obj.nation;
                 this.cityComboBox.Text = obj.city;
@@ -43,9 +41,6 @@ namespace DCTS.UI
                 this.closeAtDateTimePicker.Text = obj.close_at.ToString();
                 changeid = obj.id;
 
-
-
-
             }
         }
 
@@ -53,13 +48,9 @@ namespace DCTS.UI
         {
             var ctx = this.entityDataSource1.DbContext as DctsEntities;
             var nationList = DCTS.DB.GlobalCache.NationList;
-
-
-
             this.nationComboBox.DisplayMember = "title";
             this.nationComboBox.ValueMember = "code";
             this.nationComboBox.DataSource = nationList;
-
 
         }
 
@@ -90,7 +81,6 @@ namespace DCTS.UI
                 if (hasImg)
                 {
                     imgFileName = Path.GetFileName(imgFilePath);
-
                     ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
                     if (lastLocation != null)
                     {
@@ -103,20 +93,17 @@ namespace DCTS.UI
                     if (existSameImage)
                     {
                         MessageBox.Show(string.Format("文件名<{0}>已在, 请使用其他文件名！", imgFileName));
+                        //// this.saveButton.DialogResult = DialogResult.Cancel;
+                        // this.DialogResult = System.Windows.Forms.DialogResult.No;
                         return;
                     }
                 }
-
                 #endregion
                 // ComboLocation obj = new ComboLocation();
-
                 if (changeid != 0)
                 {
 
-                    // obj = updateNewMethod(ctx, copyfilename);
                     ComboLocation obj = ctx.ComboLocations.Find(Convert.ToInt32(changeid));
-
-                    //var obj = ctx.ComboLocations.Create();
                     obj.ltype = (int)ComboLocationEnum.Dining;
                     obj.nation = this.nationComboBox.Text;
                     obj.city = this.cityComboBox.Text;
@@ -141,8 +128,6 @@ namespace DCTS.UI
                 }
                 else
                 {
-                    //  createNewMethod(ctx, copyfilename, hasImg);
-
                     var obj = ctx.ComboLocations.Create();
                     obj.ltype = (int)ComboLocationEnum.Dining;
                     obj.nation = this.nationComboBox.Text;
@@ -167,37 +152,8 @@ namespace DCTS.UI
                         string copyToPath = EntityPathConfig.LocationImagePath(obj);
                         File.Copy(imgFilePath, copyToPath);
                     }
-
                 }
-
-
-
-                #region MyRegion
-                //if (imgPathTextBox.Text != null && imgPathTextBox.Text != "")
-                //{
-                //    long folername = changeid / 1000;
-
-                //    string copypathto = imagefolderNewMethod(folername);
-
-                //    if (File.Exists(copypathto + "\\" + copyfilename))
-                //    {
-                //        if (MessageBox.Show("此文件名已在本文件夹中存在，是否覆盖?", "信息", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                //        {
-
-                //            System.IO.File.Copy(this.imgPathTextBox.Text, copypathto + "\\" + copyfilename, true);
-
-
-                //        }
-                //        else
-                //            return;
-                //    }
-                //    else
-                //        File.Copy(this.imgPathTextBox.Text, Path.Combine(copypathto, Path.GetFileName(this.imgPathTextBox.Text)));
-                //    //File.Copy(this.imgPathTextBox.Text, lcoalPath);
-                //} 
-                #endregion
-
-
+                this.Close();
 
             }
 
@@ -248,7 +204,7 @@ namespace DCTS.UI
             return copypathto;
         }
 
-     
+
         private List<string> GetFileName(string dirPath)
         {
             List<string> FileNameList = new List<string>();

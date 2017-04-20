@@ -1,4 +1,4 @@
-﻿namespace DCTS.UI
+﻿namespace DCTS.CustomComponents
 {
     partial class NewDiningsForm
     {
@@ -271,7 +271,6 @@
             // 
             // saveButton
             // 
-            this.saveButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
             this.saveButton.Location = new System.Drawing.Point(527, 498);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 25);

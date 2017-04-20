@@ -166,6 +166,12 @@
     <Compile Include="UI\HomeControl.Designer.cs">
       <DependentUpon>HomeControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\ImportDiningCSV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ImportDiningCSV.Designer.cs">
+      <DependentUpon>ImportDiningCSV.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\NewScenicForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -213,6 +219,13 @@
     </Compile>
     <Compile Include="UI\NewHotelForm.Designer.cs">
       <DependentUpon>NewHotelForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomComponents\WorkerArgument.cs" />
+    <Compile Include="UI\ImportHotelCSV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ImportHotelCSV.Designer.cs">
+      <DependentUpon>ImportHotelCSV.cs</DependentUpon>
     </Compile>
     <Compile Include="Uti\EFIntercepterLogging.cs" />
     <Compile Include="Hotel.cs">
@@ -311,6 +324,9 @@
     <EmbeddedResource Include="UI\HomeControl.resx">
       <DependentUpon>HomeControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\ImportDiningCSV.resx">
+      <DependentUpon>ImportDiningCSV.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\NewScenicForm.resx">
       <DependentUpon>NewScenicForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -343,6 +359,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\NewHotelForm.resx">
       <DependentUpon>NewHotelForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ImportHotelCSV.resx">
+      <DependentUpon>ImportHotelCSV.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

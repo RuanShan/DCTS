@@ -14,7 +14,7 @@ using DCTS.DB;
 using MySql.Data.MySqlClient;
 using System.IO;
 
-namespace DCTS.UI
+namespace DCTS.CustomComponents
 {
     public partial class HotelControl : UserControl
     {
@@ -261,32 +261,29 @@ namespace DCTS.UI
                 e.CellStyle.SelectionBackColor = Color.DarkRed;
             }
 
-            //添加图片
-            int i = this.dataGridView.CurrentRow.Index;
-            if (i < hotelList.Count)
+         
+            #region  new
+            if (e.ColumnIndex == 4)
             {
-                ComboLocation selectedItem = hotelList[i];
-                long folername = selectedItem.id / 1000;
-                if (selectedItem.img != null && selectedItem.img != "")
+                if (e.RowIndex < hotelList.Count)
                 {
-                    string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\locations\\" + folername + "\\", selectedItem.img);
-                    if (e.ColumnIndex == 4)
+
+                    ComboLocation selectedItem = hotelList[e.RowIndex];
+                    long folername = selectedItem.id / 1000;
+                    if (selectedItem.img != null && selectedItem.img != "")
                     {
-                        if (File.Exists(lcoalPath))
+
+                        string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\locations\\" + folername + "\\", selectedItem.img);
+                        if (e.ColumnIndex == 4)
                         {
                             e.Value = GetImage1(lcoalPath);
-                        }
-                        else
-                        {
-                            //dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex] = new DataGridViewTextBoxCell();
-                           // dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "未找到图片";
 
-                          //  e.Value = "未找到图片";
                         }
                     }
-
                 }
             }
+
+            #endregion
 
         }
         public System.Drawing.Image GetImage1(string path)

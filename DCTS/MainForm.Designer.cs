@@ -35,11 +35,12 @@
             this.客户信息ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.导入餐厅信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.导入餐厅信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.entityDataSource = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.导入住宿信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -82,7 +83,8 @@
             // 
             this.设置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.nationsToolStripMenuItem,
-            this.导入餐厅信息ToolStripMenuItem});
+            this.导入餐厅信息ToolStripMenuItem,
+            this.导入住宿信息ToolStripMenuItem});
             this.设置ToolStripMenuItem.Name = "设置ToolStripMenuItem";
             this.设置ToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
             this.设置ToolStripMenuItem.Text = "设置";
@@ -93,6 +95,13 @@
             this.nationsToolStripMenuItem.Name = "nationsToolStripMenuItem";
             this.nationsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.nationsToolStripMenuItem.Text = "国家信息";
+            // 
+            // 导入餐厅信息ToolStripMenuItem
+            // 
+            this.导入餐厅信息ToolStripMenuItem.Name = "导入餐厅信息ToolStripMenuItem";
+            this.导入餐厅信息ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.导入餐厅信息ToolStripMenuItem.Text = "导入餐厅信息";
+            this.导入餐厅信息ToolStripMenuItem.Click += new System.EventHandler(this.导入餐厅信息ToolStripMenuItem_Click);
             // 
             // 帮助ToolStripMenuItem
             // 
@@ -109,13 +118,6 @@
             this.mainPanel.Size = new System.Drawing.Size(942, 387);
             this.mainPanel.TabIndex = 3;
             // 
-            // 导入餐厅信息ToolStripMenuItem
-            // 
-            this.导入餐厅信息ToolStripMenuItem.Name = "导入餐厅信息ToolStripMenuItem";
-            this.导入餐厅信息ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.导入餐厅信息ToolStripMenuItem.Text = "导入餐厅信息";
-            this.导入餐厅信息ToolStripMenuItem.Click += new System.EventHandler(this.导入餐厅信息ToolStripMenuItem_Click);
-            // 
             // entityDataSource
             // 
             this.entityDataSource.DbContextType = typeof(DCTS.DctsEntities);
@@ -123,6 +125,13 @@
             // backgroundWorker1
             // 
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            // 
+            // 导入住宿信息ToolStripMenuItem
+            // 
+            this.导入住宿信息ToolStripMenuItem.Name = "导入住宿信息ToolStripMenuItem";
+            this.导入住宿信息ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.导入住宿信息ToolStripMenuItem.Text = "导入住宿信息";
+            this.导入住宿信息ToolStripMenuItem.Click += new System.EventHandler(this.导入住宿信息ToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -155,6 +164,7 @@
         private System.Windows.Forms.ToolStripMenuItem nationsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 导入餐厅信息ToolStripMenuItem;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.ToolStripMenuItem 导入住宿信息ToolStripMenuItem;
     }
 }
 

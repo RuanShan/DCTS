@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DCTS.CustomComponents;
-using DCTS.UI;
+using DCTS.CustomComponents;
 
 namespace DCTS
 {
@@ -46,15 +46,24 @@ namespace DCTS
 
         private void 导入餐厅信息ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //var form = new ImportDining();
-            //if (form.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
-            //{
-            //}
+            var form = new ImportDiningCSV();
+            if (form.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
+            {
+            }
         }
 
     
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
+
+        }
+
+        private void 导入住宿信息ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new ImportHotelCSV();
+            if (form.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
+            {
+            }
 
         }
 

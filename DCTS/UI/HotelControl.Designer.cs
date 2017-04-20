@@ -1,4 +1,4 @@
-﻿namespace DCTS.UI
+﻿namespace DCTS.CustomComponents
 {
     partial class HotelControl
     {
