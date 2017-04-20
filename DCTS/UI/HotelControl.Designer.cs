@@ -228,15 +228,16 @@
             // 
             // pager1
             // 
+            this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pager1.AutoSize = true;
-            this.pager1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pager1.Location = new System.Drawing.Point(0, 405);
+            this.pager1.Location = new System.Drawing.Point(0, 371);
             this.pager1.Name = "pager1";
             this.pager1.NMax = 0;
             this.pager1.PageCount = 0;
             this.pager1.PageCurrent = 0;
             this.pager1.PageSize = 5000;
-            this.pager1.Size = new System.Drawing.Size(688, 0);
+            this.pager1.Size = new System.Drawing.Size(688, 34);
             this.pager1.TabIndex = 13;
             this.pager1.EventPaging += new DCTS.CustomComponents.EventPagingHandler(this.pager1_EventPaging);
             // 
@@ -276,7 +277,6 @@
             // imgColumn1
             // 
             this.imgColumn1.HeaderText = "图片";
-            this.imgColumn1.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
             this.imgColumn1.Name = "imgColumn1";
             this.imgColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.imgColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;

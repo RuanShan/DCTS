@@ -43,9 +43,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.nationComboBox = new System.Windows.Forms.ComboBox();
             this.btsave = new System.Windows.Forms.Button();
+            this.pager2 = new DCTS.CustomComponents.Pager();
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.pager2 = new DCTS.CustomComponents.Pager();
             this.nationColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cityColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.areaColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -214,6 +214,21 @@
             this.btsave.UseVisualStyleBackColor = true;
             this.btsave.Click += new System.EventHandler(this.btsave_Click);
             // 
+            // pager2
+            // 
+            this.pager2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pager2.AutoSize = true;
+            this.pager2.Location = new System.Drawing.Point(8, 422);
+            this.pager2.Name = "pager2";
+            this.pager2.NMax = 0;
+            this.pager2.PageCount = 0;
+            this.pager2.PageCurrent = 0;
+            this.pager2.PageSize = 5000;
+            this.pager2.Size = new System.Drawing.Size(693, 34);
+            this.pager2.TabIndex = 13;
+            this.pager2.EventPaging += new DCTS.CustomComponents.EventPagingHandler(this.pager2_EventPaging_1);
+            // 
             // entityDataSource1
             // 
             this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
@@ -222,20 +237,6 @@
             // 
             this.bindingSource1.DataSource = this.entityDataSource1;
             this.bindingSource1.Position = 0;
-            // 
-            // pager2
-            // 
-            this.pager2.AutoSize = true;
-            this.pager2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pager2.Location = new System.Drawing.Point(0, 459);
-            this.pager2.Name = "pager2";
-            this.pager2.NMax = 0;
-            this.pager2.PageCount = 0;
-            this.pager2.PageCurrent = 0;
-            this.pager2.PageSize = 5000;
-            this.pager2.Size = new System.Drawing.Size(709, 0);
-            this.pager2.TabIndex = 13;
-            this.pager2.EventPaging += new DCTS.CustomComponents.EventPagingHandler(this.pager2_EventPaging_1);
             // 
             // nationColumn1
             // 
@@ -270,7 +271,6 @@
             // imgColumn1
             // 
             this.imgColumn1.HeaderText = "图片";
-            this.imgColumn1.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
             this.imgColumn1.Name = "imgColumn1";
             this.imgColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.imgColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
@@ -310,7 +310,7 @@
             this.tipsColumn1.HeaderText = "深度Tlps";
             this.tipsColumn1.Name = "tipsColumn1";
             // 
-            // DinningsControl
+            // DiningsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -319,7 +319,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.newButton);
             this.Controls.Add(this.dataGridView);
-            this.Name = "DinningsControl";
+            this.Name = "DiningsControl";
             this.Size = new System.Drawing.Size(709, 459);
             this.Load += new System.EventHandler(this.DinningsControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();

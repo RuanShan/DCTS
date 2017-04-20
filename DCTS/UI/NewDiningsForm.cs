@@ -80,37 +80,125 @@ namespace DCTS.UI
 
             using (var ctx = new DctsEntities())
             {
-                string copyfilename = Path.GetFileName(this.imgPathTextBox.Text);
+                //string copyfilename = Path.GetFileName(this.imgPathTextBox.Text);
+                #region new
+                string imgFilePath = this.imgPathTextBox.Text;
+                string imgFileName = "";
+                bool hasImg = (imgFilePath.Length > 0);
+                bool existSameImage = false;
 
+                if (hasImg)
+                {
+                    imgFileName = Path.GetFileName(imgFilePath);
+
+                    ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
+                    if (lastLocation != null)
+                    {
+                        long newId = lastLocation.id + 1;
+
+                        long idStart = newId / 1000 * 1000;
+                        long idEnd = idStart + 1000;
+                        existSameImage = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Dining && o.img == imgFileName && o.id > idStart && o.id < idEnd).Count() > 0);
+                    }
+                    if (existSameImage)
+                    {
+                        MessageBox.Show(string.Format("文件名<{0}>已在, 请使用其他文件名！", imgFileName));
+                        return;
+                    }
+                }
+
+                #endregion
+                // ComboLocation obj = new ComboLocation();
 
                 if (changeid != 0)
                 {
 
-                    updateNewMethod(ctx, copyfilename);
+                    // obj = updateNewMethod(ctx, copyfilename);
+                    ComboLocation obj = ctx.ComboLocations.Find(Convert.ToInt32(changeid));
 
-                }
-                else
-                    createNewMethod(ctx, copyfilename);
-
-                long folername = changeid / 1000;
-
-                string copypathto = imagefolderNewMethod(folername);
-
-                if (File.Exists(copypathto + "\\" + copyfilename))
-                {
-                    if (MessageBox.Show("此文件名已在本文件夹中存在，是否覆盖?", "信息", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    //var obj = ctx.ComboLocations.Create();
+                    obj.ltype = (int)ComboLocationEnum.Dining;
+                    obj.nation = this.nationComboBox.Text;
+                    obj.city = this.cityComboBox.Text;
+                    obj.area = this.titleTextBox.Text;
+                    obj.dishes = this.textBox1.Text;
+                    //obj.img = this.imgPathTextBox.Text;
+                    obj.img = imgFileName;
+                    obj.latlng = this.latlngTextBox.Text;
+                    obj.local_address = this.textBox2.Text;
+                    obj.address = this.localAddressTextBox.Text;
+                    obj.recommended_dishes = this.textBox3.Text;
+                    obj.tips = this.textBox6.Text;
+                    obj.title = this.localTitleTextBox.Text;
+                    obj.open_at = Convert.ToDateTime(this.openAtDateTimePicker.Text);
+                    obj.close_at = Convert.ToDateTime(this.closeAtDateTimePicker.Text);
+                    ctx.SaveChanges();
+                    if (hasImg)
                     {
-
-                        System.IO.File.Copy(this.imgPathTextBox.Text, copypathto +"\\"+ copyfilename, true);
-
-
+                        string copyToPath = EntityPathConfig.LocationImagePath(obj);
+                        File.Copy(imgFilePath, copyToPath);
                     }
-                    else
-                        return;
                 }
                 else
-                    File.Copy(this.imgPathTextBox.Text, Path.Combine(copypathto, Path.GetFileName(this.imgPathTextBox.Text)));
-                //File.Copy(this.imgPathTextBox.Text, lcoalPath);
+                {
+                    //  createNewMethod(ctx, copyfilename, hasImg);
+
+                    var obj = ctx.ComboLocations.Create();
+                    obj.ltype = (int)ComboLocationEnum.Dining;
+                    obj.nation = this.nationComboBox.Text;
+                    obj.city = this.cityComboBox.Text;
+                    obj.area = this.titleTextBox.Text;
+                    obj.dishes = this.textBox1.Text;
+                    //obj.img = this.imgPathTextBox.Text;
+                    obj.img = imgFileName;
+                    obj.latlng = this.latlngTextBox.Text;
+                    obj.local_address = this.textBox2.Text;
+                    obj.address = this.localAddressTextBox.Text;
+                    obj.recommended_dishes = this.textBox3.Text;
+                    obj.tips = this.textBox6.Text;
+                    obj.title = this.localTitleTextBox.Text;
+                    obj.open_at = Convert.ToDateTime(this.openAtDateTimePicker.Text);
+                    obj.close_at = Convert.ToDateTime(this.closeAtDateTimePicker.Text);
+                    ctx.ComboLocations.Add(obj);
+                    ctx.SaveChanges();
+                    changeid = obj.id;
+                    if (hasImg)
+                    {
+                        string copyToPath = EntityPathConfig.LocationImagePath(obj);
+                        File.Copy(imgFilePath, copyToPath);
+                    }
+
+                }
+
+
+
+                #region MyRegion
+                //if (imgPathTextBox.Text != null && imgPathTextBox.Text != "")
+                //{
+                //    long folername = changeid / 1000;
+
+                //    string copypathto = imagefolderNewMethod(folername);
+
+                //    if (File.Exists(copypathto + "\\" + copyfilename))
+                //    {
+                //        if (MessageBox.Show("此文件名已在本文件夹中存在，是否覆盖?", "信息", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                //        {
+
+                //            System.IO.File.Copy(this.imgPathTextBox.Text, copypathto + "\\" + copyfilename, true);
+
+
+                //        }
+                //        else
+                //            return;
+                //    }
+                //    else
+                //        File.Copy(this.imgPathTextBox.Text, Path.Combine(copypathto, Path.GetFileName(this.imgPathTextBox.Text)));
+                //    //File.Copy(this.imgPathTextBox.Text, lcoalPath);
+                //} 
+                #endregion
+
+
+
             }
 
         }
@@ -160,60 +248,7 @@ namespace DCTS.UI
             return copypathto;
         }
 
-        private void updateNewMethod(DctsEntities ctx, string copyfilename)
-        {
-            ComboLocation obj = ctx.ComboLocations.Find(Convert.ToInt32(changeid));
-
-            //var obj = ctx.ComboLocations.Create();
-            obj.ltype = (int)ComboLocationEnum.Dining;
-            obj.nation = this.nationComboBox.Text;
-            obj.city = this.cityComboBox.Text;
-            obj.area = this.titleTextBox.Text;
-            obj.dishes = this.textBox1.Text;
-            //obj.img = this.imgPathTextBox.Text;
-            obj.img = copyfilename;
-            obj.latlng = this.latlngTextBox.Text;
-            obj.local_address = this.textBox2.Text;
-            obj.address = this.localAddressTextBox.Text;
-            obj.recommended_dishes = this.textBox3.Text;
-            obj.tips = this.textBox6.Text;
-            obj.title = this.localTitleTextBox.Text;
-            obj.open_at = Convert.ToDateTime(this.openAtDateTimePicker.Text);
-            obj.close_at = Convert.ToDateTime(this.closeAtDateTimePicker.Text);
-
-
-            //obj.memo = this.memoTextBox.Text;
-            //  ctx.ComboLocations.Add(obj);
-            ctx.SaveChanges();
-        }
-        private void createNewMethod(DctsEntities ctx, string copyfilename)
-        {
-
-            var obj = ctx.ComboLocations.Create();
-            obj.ltype = (int)ComboLocationEnum.Dining;
-            obj.nation = this.nationComboBox.Text;
-            obj.city = this.cityComboBox.Text;
-            obj.area = this.titleTextBox.Text;
-            obj.dishes = this.textBox1.Text;
-            //obj.img = this.imgPathTextBox.Text;
-            obj.img = copyfilename;
-            obj.latlng = this.latlngTextBox.Text;
-            obj.local_address = this.textBox2.Text;
-            obj.address = this.localAddressTextBox.Text;
-            obj.recommended_dishes = this.textBox3.Text;
-            obj.tips = this.textBox6.Text;
-            obj.title = this.localTitleTextBox.Text;
-            obj.open_at = Convert.ToDateTime(this.openAtDateTimePicker.Text);
-            obj.close_at = Convert.ToDateTime(this.closeAtDateTimePicker.Text);
-
-
-            //obj.memo = this.memoTextBox.Text;
-            ctx.ComboLocations.Add(obj);
-            ctx.SaveChanges();
-            changeid = obj.id;
-
-        }
-
+     
         private List<string> GetFileName(string dirPath)
         {
             List<string> FileNameList = new List<string>();

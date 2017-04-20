@@ -77,7 +77,7 @@
             this.titleTextBox.Location = new System.Drawing.Point(164, 124);
             this.titleTextBox.Name = "titleTextBox";
             this.titleTextBox.Size = new System.Drawing.Size(518, 20);
-            this.titleTextBox.TabIndex = 1;
+            this.titleTextBox.TabIndex = 2;
             // 
             // label2
             // 
@@ -94,7 +94,7 @@
             this.localAddressTextBox.Location = new System.Drawing.Point(165, 293);
             this.localAddressTextBox.Name = "localAddressTextBox";
             this.localAddressTextBox.Size = new System.Drawing.Size(518, 20);
-            this.localAddressTextBox.TabIndex = 5;
+            this.localAddressTextBox.TabIndex = 8;
             // 
             // label3
             // 
@@ -111,7 +111,7 @@
             this.nationComboBox.Location = new System.Drawing.Point(164, 90);
             this.nationComboBox.Name = "nationComboBox";
             this.nationComboBox.Size = new System.Drawing.Size(233, 21);
-            this.nationComboBox.TabIndex = 6;
+            this.nationComboBox.TabIndex = 0;
             this.nationComboBox.SelectedIndexChanged += new System.EventHandler(this.nationComboBox_SelectedIndexChanged);
             // 
             // cityComboBox
@@ -120,7 +120,7 @@
             this.cityComboBox.Location = new System.Drawing.Point(449, 90);
             this.cityComboBox.Name = "cityComboBox";
             this.cityComboBox.Size = new System.Drawing.Size(233, 21);
-            this.cityComboBox.TabIndex = 6;
+            this.cityComboBox.TabIndex = 1;
             // 
             // label4
             // 
@@ -136,7 +136,7 @@
             this.localTitleTextBox.Location = new System.Drawing.Point(164, 153);
             this.localTitleTextBox.Name = "localTitleTextBox";
             this.localTitleTextBox.Size = new System.Drawing.Size(518, 20);
-            this.localTitleTextBox.TabIndex = 1;
+            this.localTitleTextBox.TabIndex = 3;
             // 
             // label5
             // 
@@ -166,14 +166,14 @@
             this.imgPathTextBox.Location = new System.Drawing.Point(162, 217);
             this.imgPathTextBox.Name = "imgPathTextBox";
             this.imgPathTextBox.Size = new System.Drawing.Size(481, 20);
-            this.imgPathTextBox.TabIndex = 1;
+            this.imgPathTextBox.TabIndex = 5;
             // 
             // findFileButton
             // 
             this.findFileButton.Location = new System.Drawing.Point(649, 215);
             this.findFileButton.Name = "findFileButton";
             this.findFileButton.Size = new System.Drawing.Size(32, 25);
-            this.findFileButton.TabIndex = 8;
+            this.findFileButton.TabIndex = 6;
             this.findFileButton.Text = "...";
             this.findFileButton.UseVisualStyleBackColor = true;
             this.findFileButton.Click += new System.EventHandler(this.findFileButton_Click);
@@ -192,7 +192,7 @@
             this.latlngTextBox.Location = new System.Drawing.Point(165, 257);
             this.latlngTextBox.Name = "latlngTextBox";
             this.latlngTextBox.Size = new System.Drawing.Size(518, 20);
-            this.latlngTextBox.TabIndex = 9;
+            this.latlngTextBox.TabIndex = 7;
             // 
             // label8
             // 
@@ -209,7 +209,7 @@
             this.openAtDateTimePicker.Location = new System.Drawing.Point(162, 352);
             this.openAtDateTimePicker.Name = "openAtDateTimePicker";
             this.openAtDateTimePicker.Size = new System.Drawing.Size(106, 20);
-            this.openAtDateTimePicker.TabIndex = 11;
+            this.openAtDateTimePicker.TabIndex = 10;
             // 
             // label9
             // 
@@ -243,7 +243,7 @@
             this.textBox6.Multiline = true;
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(518, 56);
-            this.textBox6.TabIndex = 5;
+            this.textBox6.TabIndex = 13;
             // 
             // label11
             // 
@@ -264,7 +264,7 @@
             this.cancelButton.Location = new System.Drawing.Point(608, 498);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 25);
-            this.cancelButton.TabIndex = 12;
+            this.cancelButton.TabIndex = 15;
             this.cancelButton.Text = "取消";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
@@ -275,7 +275,7 @@
             this.saveButton.Location = new System.Drawing.Point(527, 498);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 25);
-            this.saveButton.TabIndex = 13;
+            this.saveButton.TabIndex = 14;
             this.saveButton.Text = "保存";
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
@@ -294,7 +294,7 @@
             this.textBox1.Location = new System.Drawing.Point(162, 179);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(518, 20);
-            this.textBox1.TabIndex = 14;
+            this.textBox1.TabIndex = 4;
             // 
             // label13
             // 
@@ -310,7 +310,7 @@
             this.textBox2.Location = new System.Drawing.Point(165, 319);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(518, 20);
-            this.textBox2.TabIndex = 16;
+            this.textBox2.TabIndex = 9;
             // 
             // label14
             // 
@@ -326,9 +326,9 @@
             this.textBox3.Location = new System.Drawing.Point(162, 382);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(518, 20);
-            this.textBox3.TabIndex = 18;
+            this.textBox3.TabIndex = 12;
             // 
-            // NewDinningsForm
+            // NewDiningsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -363,7 +363,7 @@
             this.Controls.Add(this.localTitleTextBox);
             this.Controls.Add(this.titleTextBox);
             this.Controls.Add(this.label1);
-            this.Name = "NewDinningsForm";
+            this.Name = "NewDiningsForm";
             this.Text = "新建餐厅";
             this.ResumeLayout(false);
             this.PerformLayout();

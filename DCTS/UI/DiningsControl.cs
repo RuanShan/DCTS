@@ -91,13 +91,17 @@ namespace DCTS.UI
             using (var ctx = new DctsEntities())
             {
                 var filtered = DaysList.FindAll(s => s.locationId == oids[0]);
-                //  if (filtered.Count > 0)
+                if (filtered.Count == 0)
+                {
+                    var stockrecs = (from s in ctx.ComboLocations
+                                     where oids.Contains(s.id)
+                                     select s).ToList();
+                    ctx.ComboLocations.RemoveRange(stockrecs);
+                    ctx.SaveChanges();
+                }
+                else
+                    MessageBox.Show("删除失败，此餐厅在day 表中存在，请重新确认", "删除", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                var stockrecs = (from s in ctx.ComboLocations
-                                 where oids.Contains(s.id)
-                                 select s).ToList();
-                ctx.ComboLocations.RemoveRange(stockrecs);
-                ctx.SaveChanges();
 
             }
             InitializeDataGridView();
