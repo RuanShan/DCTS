@@ -24,7 +24,7 @@ namespace DCTS.Bus
 
         }
 
-        public static string DisplayOpenningHours(ComboLocation location)
+        public static string DisplayOpeningHours(ComboLocation location)
         {
             string str = string.Empty;
             if (location.open_at != null && location.close_at != null)

@@ -21,7 +21,7 @@ namespace DCTS.UI
         private Hashtable dataGridChanges = null;
         private static string NoOptionSelected = "所有";
         private SortableBindingList<ComboLocation> sortabledinningsOrderList;
-        int RowRemark = 0;
+
         //private List<ComboLocation> dinningsOrderList;
         IBindingList dinningsOrderList = null;
         private List<ComboLocation> DinningList = null;
@@ -163,7 +163,7 @@ namespace DCTS.UI
 
             var nation = nationComboBox.Text;
             var city = this.cityComboBox.Text;
-            var title = this.textBox1.Text;
+            var title = this.keywordTextBox.Text;
 
             string conditions = "";//s.ltype =(int)ComboLocationEnum.Dining
             List<MySqlParameter> condition_params = new List<MySqlParameter>();
