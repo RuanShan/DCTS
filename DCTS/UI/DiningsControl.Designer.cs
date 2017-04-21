@@ -289,7 +289,7 @@
             // 
             // reachColumn1
             // 
-            this.reachColumn1.DataPropertyName = "reach";
+            this.reachColumn1.DataPropertyName = "local_address";
             this.reachColumn1.HeaderText = "如何抵达(周围特征)";
             this.reachColumn1.Name = "reachColumn1";
             // 
@@ -300,7 +300,7 @@
             // 
             // recommendedDishesColumn1
             // 
-            this.recommendedDishesColumn1.DataPropertyName = "recommendedDishes ";
+            this.recommendedDishesColumn1.DataPropertyName = "recommended_dishes";
             this.recommendedDishesColumn1.HeaderText = "推荐菜单";
             this.recommendedDishesColumn1.Name = "recommendedDishesColumn1";
             // 
@@ -321,7 +321,6 @@
             this.Controls.Add(this.dataGridView);
             this.Name = "DiningsControl";
             this.Size = new System.Drawing.Size(709, 459);
-            //this.Load += new System.EventHandler(this.DinningsControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);

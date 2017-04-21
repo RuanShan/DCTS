@@ -75,22 +75,22 @@ namespace DCTS.CustomComponents
 
             #region 显示图片
 
-            for (int j = 0; j < this.DinningList.Count; j++)
-            {
+            //for (int j = 0; j < this.DinningList.Count; j++)
+            //{
 
-                ComboLocation selectedItem = DinningList[j];
-                long folername = selectedItem.id / 1000;
-                if (selectedItem.img != null && selectedItem.img != "")
-                {
+            //    ComboLocation selectedItem = DinningList[j];
+            //    long folername = selectedItem.id / 1000;
+            //    if (selectedItem.img != null && selectedItem.img != "")
+            //    {
 
-                    string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\locations\\" + folername + "\\", selectedItem.img);
+            //        string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\locations\\" + folername + "\\", selectedItem.img);
 
-                    this.dataGridView.Rows[3].Cells[5].Value = GetImage1(lcoalPath);//"imgColumn1"
+            //        this.dataGridView.Rows[3].Cells[5].Value = GetImage1(lcoalPath);//"imgColumn1"
 
 
-                }
+            //    }
 
-            }
+            //}
 
 
             #endregion
@@ -320,7 +320,7 @@ namespace DCTS.CustomComponents
                         string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\locations\\" + folername + "\\", selectedItem.img);
                         if (e.ColumnIndex == 5)
                         {
-                           // e.Value = GetImage1(lcoalPath);
+                           e.Value = GetImage1(lcoalPath);
 
                         }
                     }
