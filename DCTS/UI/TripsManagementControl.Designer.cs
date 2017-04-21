@@ -1,4 +1,4 @@
-﻿namespace DCTS.CustomComponents
+﻿namespace DCTS.UI
 {
     partial class TripsManagementControl
     {
@@ -37,7 +37,7 @@
             this.活动ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tripsControl = new DCTS.CustomComponents.TripListControl();
+            this.tripsControl = new DCTS.UI.TripListControl();
             this.mainPanel.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();

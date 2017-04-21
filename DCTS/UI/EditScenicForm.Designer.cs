@@ -1,4 +1,4 @@
-﻿namespace DCTS.CustomComponents
+﻿namespace DCTS.UI
 {
     partial class EditScenicForm
     {
@@ -32,7 +32,7 @@
             this.cancelButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.scenicFormControl1 = new DCTS.CustomComponents.ScenicFormControl();
+            this.scenicFormControl1 = new DCTS.UI.ScenicFormControl();
             this.label2 = new System.Windows.Forms.Label();
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.panel1.SuspendLayout();

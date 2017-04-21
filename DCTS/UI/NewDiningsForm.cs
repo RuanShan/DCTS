@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DCTS.DB;
 
-namespace DCTS.CustomComponents
+namespace DCTS.UI
 {
     public partial class NewDiningsForm : BaseModalForm
     {

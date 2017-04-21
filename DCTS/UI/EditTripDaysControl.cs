@@ -11,9 +11,9 @@ using DCTS.DB;
 using DCTS.Uti;
 using DCTS.Bus;
 
-namespace DCTS.CustomComponents
+namespace DCTS.UI
 {
-    public partial class EditTripControl : UserControl
+    public partial class EditTripDaysControl : UserControl
     {
         public event EventHandler CommandRequestEvent;
 
@@ -23,7 +23,7 @@ namespace DCTS.CustomComponents
         public List<Day> DayList { get; set; }
         ChooseLocaltionForm localtionForm;
         
-        public EditTripControl()
+        public EditTripDaysControl()
         {
             InitializeComponent();
 

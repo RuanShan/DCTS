@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DCTS.Uti;
 
-namespace DCTS.CustomComponents
+namespace DCTS.UI
 {
 
     public partial class TripsManagementControl : UserControl
     {
         ScenicsControl scenicsControl;
-        EditTripControl editTripControl;
+        EditTripDaysControl editTripControl;
         DiningsControl dinningsControl;
         HotelControl hotelControl;
         public TripsManagementControl()
@@ -34,7 +34,7 @@ namespace DCTS.CustomComponents
         {
             //LogHelper.WriteLog("Start initialize main control");
              
-            editTripControl = new EditTripControl();
+            editTripControl = new EditTripDaysControl();
             editTripControl.Dock = DockStyle.Fill;
 
             this.editTripControl.CommandRequestEvent += new EventHandler(OnCommandRequest);
@@ -63,7 +63,7 @@ namespace DCTS.CustomComponents
         void OnCommandRequest(object sender, EventArgs e)
         {
             var commandEventArgs = e as CommandRequestEventArgs;
-            if (commandEventArgs.Command == CommandRequestEnum.EditTrip)
+            if (commandEventArgs.Command == CommandRequestEnum.EditTripDays)
             {
 
                 this.mainPanel.Controls.Clear();

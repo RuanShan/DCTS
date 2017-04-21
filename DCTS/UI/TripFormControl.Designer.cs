@@ -1,4 +1,4 @@
-﻿namespace DCTS.CustomComponents
+﻿namespace DCTS.UI
 {
     partial class TripFormControl
     {
@@ -28,44 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cancelButton = new System.Windows.Forms.Button();
-            this.saveButton = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.components = new System.ComponentModel.Container();
+            this.memoTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.titleTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.daysNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.daysNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
-            // cancelButton
+            // memoTextBox
             // 
-            this.cancelButton.Location = new System.Drawing.Point(438, 183);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 23);
-            this.cancelButton.TabIndex = 10;
-            this.cancelButton.Text = "取消";
-            this.cancelButton.UseVisualStyleBackColor = true;
-            // 
-            // saveButton
-            // 
-            this.saveButton.Location = new System.Drawing.Point(357, 183);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(75, 23);
-            this.saveButton.TabIndex = 11;
-            this.saveButton.Text = "保存";
-            this.saveButton.UseVisualStyleBackColor = true;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(73, 77);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(440, 82);
-            this.textBox2.TabIndex = 9;
+            this.memoTextBox.Location = new System.Drawing.Point(43, 73);
+            this.memoTextBox.Multiline = true;
+            this.memoTextBox.Name = "memoTextBox";
+            this.memoTextBox.Size = new System.Drawing.Size(440, 82);
+            this.memoTextBox.TabIndex = 9;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(26, 80);
+            this.label3.Location = new System.Drawing.Point(8, 76);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 12);
             this.label3.TabIndex = 8;
@@ -73,7 +59,7 @@
             // 
             // titleTextBox
             // 
-            this.titleTextBox.Location = new System.Drawing.Point(73, 39);
+            this.titleTextBox.Location = new System.Drawing.Point(43, 8);
             this.titleTextBox.Name = "titleTextBox";
             this.titleTextBox.Size = new System.Drawing.Size(440, 21);
             this.titleTextBox.TabIndex = 7;
@@ -81,24 +67,51 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(26, 42);
+            this.label2.Location = new System.Drawing.Point(8, 11);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(29, 12);
             this.label2.TabIndex = 6;
             this.label2.Text = "名称";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(8, 42);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(29, 12);
+            this.label5.TabIndex = 20;
+            this.label5.Text = "天数";
+            // 
+            // daysNumericUpDown
+            // 
+            this.daysNumericUpDown.Location = new System.Drawing.Point(43, 40);
+            this.daysNumericUpDown.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.daysNumericUpDown.Name = "daysNumericUpDown";
+            this.daysNumericUpDown.Size = new System.Drawing.Size(120, 21);
+            this.daysNumericUpDown.TabIndex = 19;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // TripFormControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.cancelButton);
-            this.Controls.Add(this.saveButton);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.daysNumericUpDown);
+            this.Controls.Add(this.memoTextBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.titleTextBox);
             this.Controls.Add(this.label2);
             this.Name = "TripFormControl";
-            this.Size = new System.Drawing.Size(552, 225);
+            this.Size = new System.Drawing.Size(507, 169);
+            ((System.ComponentModel.ISupportInitialize)(this.daysNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -106,11 +119,12 @@
 
         #endregion
 
-        private System.Windows.Forms.Button cancelButton;
-        private System.Windows.Forms.Button saveButton;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox memoTextBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox titleTextBox;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.NumericUpDown daysNumericUpDown;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

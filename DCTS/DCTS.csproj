@@ -154,11 +154,17 @@
     <Compile Include="UI\EditScenicForm.Designer.cs">
       <DependentUpon>EditScenicForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\EditTripControl.cs">
+    <Compile Include="UI\EditTripDaysControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\EditTripControl.Designer.cs">
-      <DependentUpon>EditTripControl.cs</DependentUpon>
+    <Compile Include="UI\EditTripDaysControl.Designer.cs">
+      <DependentUpon>EditTripDaysControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\EditTripForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\EditTripForm.Designer.cs">
+      <DependentUpon>EditTripForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\HomeControl.cs">
       <SubType>UserControl</SubType>
@@ -318,8 +324,11 @@
     <EmbeddedResource Include="UI\EditScenicForm.resx">
       <DependentUpon>EditScenicForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\EditTripControl.resx">
-      <DependentUpon>EditTripControl.cs</DependentUpon>
+    <EmbeddedResource Include="UI\EditTripDaysControl.resx">
+      <DependentUpon>EditTripDaysControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\EditTripForm.resx">
+      <DependentUpon>EditTripForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\HomeControl.resx">
       <DependentUpon>HomeControl.cs</DependentUpon>
