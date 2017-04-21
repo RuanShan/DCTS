@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using DCTS.DB;
 using System.IO;
 
-namespace DCTS.CustomComponents
+namespace DCTS.UI
 {
     public partial class ScenicFormControl : UserControl
     {

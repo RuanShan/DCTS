@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DCTS.CustomComponents
+namespace DCTS.UI
 {
     public partial class ChooseLocaltionForm : BaseModalForm
     {

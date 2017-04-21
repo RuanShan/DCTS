@@ -1,4 +1,4 @@
-﻿namespace DCTS.CustomComponents
+﻿namespace DCTS.UI
 {
     partial class DiningsControl
     {

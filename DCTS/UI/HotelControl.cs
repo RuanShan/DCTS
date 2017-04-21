@@ -14,7 +14,7 @@ using DCTS.DB;
 using MySql.Data.MySqlClient;
 using System.IO;
 
-namespace DCTS.CustomComponents
+namespace DCTS.UI
 {
     public partial class HotelControl : UserControl
     {

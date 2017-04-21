@@ -26,7 +26,7 @@ namespace DCTS.Bus
 
         public static string DisplayOpenningHours(ComboLocation location)
         {
-            string str = string.Empty();
+            string str = string.Empty;
             if (location.open_at != null && location.close_at != null)
             {
                 str = String.Format("{0:HH:mm}-{1:HH:mm}", location.open_at, location.close_at);

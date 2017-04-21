@@ -11,7 +11,7 @@ using DCTS.DB;
 using DCTS.Uti;
 using DCTS.Bus;
 
-namespace DCTS.CustomComponents
+namespace DCTS.UI
 {
     public partial class EditTripDaysControl : UserControl
     {

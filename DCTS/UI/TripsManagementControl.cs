@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DCTS.Uti;
 
-namespace DCTS.CustomComponents
+namespace DCTS.UI
 {
 
     public partial class TripsManagementControl : UserControl
