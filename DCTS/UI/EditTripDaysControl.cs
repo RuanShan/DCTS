@@ -13,7 +13,7 @@ using DCTS.Bus;
 
 namespace DCTS.UI
 {
-    public partial class EditTripControl : UserControl
+    public partial class EditTripDaysControl : UserControl
     {
         public event EventHandler CommandRequestEvent;
 
@@ -23,7 +23,7 @@ namespace DCTS.UI
         public List<Day> DayList { get; set; }
         ChooseLocaltionForm localtionForm;
         
-        public EditTripControl()
+        public EditTripDaysControl()
         {
             InitializeComponent();
 

@@ -60,14 +60,25 @@ namespace DCTS.UI
         {
             DataGridViewColumn column = tripDataGridView.Columns[e.ColumnIndex];
 
+            if (column == editTripDaysColumn1)
+            {
+                var row = tripDataGridView.Rows[e.RowIndex];
+                var trip = row.DataBoundItem as Trip;
+
+                var eventArgs = new CommandRequestEventArgs( CommandRequestEnum.EditTripDays, trip.id );                 
+                this.CommandRequestEvent(this, eventArgs);
+             }
             if (column == editTripColumn1)
             {
                 var row = tripDataGridView.Rows[e.RowIndex];
                 var trip = row.DataBoundItem as Trip;
 
-                var eventArgs = new CommandRequestEventArgs( CommandRequestEnum.EditTrip, trip.id );                 
-                this.CommandRequestEvent(this, eventArgs);
-             }
+                var form = new EditTripForm(trip.id);
+                if (form.ShowDialog() == DialogResult.Yes)
+                {
+                    BeginActive();
+                }
+            }
             else if (column == copyTripColumn1)
             {
                 var row = tripDataGridView.Rows[e.RowIndex];

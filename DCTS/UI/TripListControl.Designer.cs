@@ -37,15 +37,16 @@
             this.label2 = new System.Windows.Forms.Label();
             this.downloadButton = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.IdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.daysColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tripTitleColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tripMemoColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.wordCreatedAtColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.editTripDaysColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.editTripColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.copyTripColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.deleteTripColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.tripDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -75,6 +76,7 @@
             this.tripTitleColumn1,
             this.tripMemoColumn1,
             this.wordCreatedAtColumn,
+            this.editTripDaysColumn1,
             this.editTripColumn1,
             this.copyTripColumn1,
             this.deleteTripColumn1});
@@ -135,10 +137,6 @@
             this.saveFileDialog1.Filter = "Word文件（*.docx）|*.docx";
             this.saveFileDialog1.RestoreDirectory = true;
             // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
-            // 
             // IdColumn
             // 
             this.IdColumn.DataPropertyName = "id";
@@ -174,9 +172,17 @@
             this.wordCreatedAtColumn.Name = "wordCreatedAtColumn";
             this.wordCreatedAtColumn.Width = 120;
             // 
+            // editTripDaysColumn1
+            // 
+            this.editTripDaysColumn1.HeaderText = " ";
+            this.editTripDaysColumn1.Name = "editTripDaysColumn1";
+            this.editTripDaysColumn1.Text = "设置";
+            this.editTripDaysColumn1.UseColumnTextForButtonValue = true;
+            this.editTripDaysColumn1.Width = 60;
+            // 
             // editTripColumn1
             // 
-            this.editTripColumn1.HeaderText = " ";
+            this.editTripColumn1.HeaderText = "";
             this.editTripColumn1.Name = "editTripColumn1";
             this.editTripColumn1.Text = "编辑";
             this.editTripColumn1.UseColumnTextForButtonValue = true;
@@ -198,6 +204,10 @@
             this.deleteTripColumn1.UseColumnTextForButtonValue = true;
             this.deleteTripColumn1.Width = 60;
             // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
+            // 
             // TripListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -218,7 +228,6 @@
 
         private System.Windows.Forms.Button addTripButton;
         private System.Windows.Forms.DataGridView tripDataGridView;
-        private CustomComponents.EntityDataSource entityDataSource1;
         private System.Windows.Forms.Button exportWordButton;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button downloadButton;
@@ -228,8 +237,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn tripTitleColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn tripMemoColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn wordCreatedAtColumn;
+        private System.Windows.Forms.DataGridViewButtonColumn editTripDaysColumn1;
         private System.Windows.Forms.DataGridViewButtonColumn editTripColumn1;
         private System.Windows.Forms.DataGridViewButtonColumn copyTripColumn1;
         private System.Windows.Forms.DataGridViewButtonColumn deleteTripColumn1;
+        private CustomComponents.EntityDataSource entityDataSource1;
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace DCTS.UI
 {
-    partial class EditTripControl
+    partial class EditTripDaysControl
     {
         /// <summary> 
         /// Required designer variable.

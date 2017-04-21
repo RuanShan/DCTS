@@ -38,9 +38,11 @@ namespace DCTS.Bus
                               // 景点
                                 "open_at", "close_at", "ticket",
                                //住宿
-                               "room", "dinner", "wifi", "parking", "reception", "kitchen"
+                               "room", "dinner", "wifi", "parking", "reception", "kitchen",
+                               // 
+                               "recommended_dishes"
                             };
-
+            string[] specKeys = { "openning_hours" };
             var wrappedKeys = txtKeys.Select(o => "%" + o + "%").ToList();
 
             using (var db = new DctsEntities())
@@ -65,6 +67,16 @@ namespace DCTS.Bus
                             templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, LocationTemplate.ScenicDetailRelativePath);
 
                         }
+                        else if (day.ComboLocation.ltype == (int)ComboLocationEnum.Dining)
+                        {
+                            templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, LocationTemplate.DinningDetailRelativePath);
+
+                        }
+                        else if (day.ComboLocation.ltype == (int)ComboLocationEnum.Hotel)
+                        {
+                            templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, LocationTemplate.HotelDetailRelativePath);
+
+                        }
                         if (templatePath.Length == 0)
                         {
                             continue;
@@ -82,6 +94,17 @@ namespace DCTS.Bus
                                 string s = val == null ? string.Empty : val.ToString();
                                 string wrappedKey = "%" + key + "%";
                                 duplicated.ReplaceText(wrappedKey, s);
+                            }
+                            foreach (string key in specKeys)
+                            {
+                                string wrappedKey = "%" + key + "%";
+
+                                if (key == "openning_hours")
+                                {
+
+                                    duplicated.ReplaceText(wrappedKey, ComboLoactionBusiness.DisplayOpenningHours(location));
+
+                                }
                             }
 
                             if (duplicated.Images.Count >= 2)

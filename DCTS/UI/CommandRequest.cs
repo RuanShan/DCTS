@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace DCTS.UI
 {
   
-    public enum CommandRequestEnum { TripList, EditTrip, ScenicList }
+    public enum CommandRequestEnum { TripList, EditTripDays, ScenicList }
     public class CommandRequestEventArgs : EventArgs
     {
         private CommandRequestEnum command;
