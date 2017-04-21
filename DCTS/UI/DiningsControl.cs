@@ -14,7 +14,7 @@ using DCTS.DB;
 using MySql.Data.MySqlClient;
 using System.IO;
 
-namespace DCTS.UI
+namespace DCTS.CustomComponents
 {
     public partial class DiningsControl : UserControl
     {
@@ -73,6 +73,27 @@ namespace DCTS.UI
             this.nationComboBox.ValueMember = "ShortName";
             this.nationComboBox.DataSource = nations;
 
+            #region 显示图片
+
+            for (int j = 0; j < this.DinningList.Count; j++)
+            {
+
+                ComboLocation selectedItem = DinningList[j];
+                long folername = selectedItem.id / 1000;
+                if (selectedItem.img != null && selectedItem.img != "")
+                {
+
+                    string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\locations\\" + folername + "\\", selectedItem.img);
+
+                    this.dataGridView.Rows[3].Cells[5].Value = GetImage1(lcoalPath);//"imgColumn1"
+
+
+                }
+
+            }
+
+
+            #endregion
         }
 
         private void newButton_Click(object sender, EventArgs e)
@@ -131,40 +152,8 @@ namespace DCTS.UI
 
         private void btfind_Click(object sender, EventArgs e)
         {
-            //ApplyFilter();
             FindDataSources();
             pager2.Bind();
-
-        }
-        private void ApplyFilter()
-        {
-            string filter = "";
-            if (this.textBox1.Text.Length > 0)
-            {
-                //filter += "(餐厅名称=" + this.textBox1.Text + ")";
-                filter += " (餐厅名称 ='" + this.textBox1.Text + "')";
-
-            }
-            if (this.nationComboBox.Text.Length > 0)
-            {
-                if (filter.Length > 0)
-                {
-                    filter += " AND ";
-                }
-                //filter += "(国家=" + this.comboBox2.Text + ")";
-                filter += "(国家 =" + "'" + cityComboBox.Text + "'" + ")";
-            }
-            if (this.cityComboBox.Text.Length > 0)
-            {
-                if (filter.Length > 0)
-                {
-                    filter += " AND ";
-                }
-                //filter += "(城市=" + this.comboBox3.Text + ")";
-                filter += "(城市 =" + "'" + cityComboBox.Text + "'" + ")";
-            }
-
-            this.bindingSource1.Filter = filter;
 
         }
 
@@ -220,14 +209,11 @@ namespace DCTS.UI
                 {
                     conditions += " AND ";
                 }
-                // conditions += "(`title`= @title)";
+
                 conditions += "(`title`LIKE '%" + @title + "%')";
-                // conditions += "(`title`LIKE '%2%')";
+
 
             }
-
-
-
             #region  new
             condition_params.Add(new MySqlParameter("@ltype", ltype));
             condition_params.Add(new MySqlParameter("@nation", nation));
@@ -249,9 +235,7 @@ namespace DCTS.UI
                 string sql = string.Format(" SELECT * FROM combolocations {0} LIMIT {1} OFFSET {2}", conditions, limit, offset);
                 DinningList = ctx.Database.SqlQuery<ComboLocation>(sql, condition_params.ToArray()).ToList();
 
-                //DinningList = (from s in ctx.ComboLocations
-                //               where s.title == title
-                //               select s).ToList();
+
                 sortabledinningsOrderList = new SortableBindingList<ComboLocation>(DinningList.ToList());
                 this.bindingSource1.DataSource = this.sortabledinningsOrderList;
                 dataGridView.AutoGenerateColumns = false;
@@ -270,8 +254,6 @@ namespace DCTS.UI
             int i = this.dataGridView.CurrentRow.Index;
             ComboLocation selectedItem = DinningList[i];
 
-            //ComboLocation selectedItem = DinningList.Find(i => i.id == o.自社コード);
-
             var form = new NewDiningsForm("Edit", selectedItem);
             if (form.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
             {
@@ -287,7 +269,6 @@ namespace DCTS.UI
                 entityDataSource1.SaveChanges();
             }
             dataGridChanges.Clear();
-            //InitializeDataSource(ShipNO);
             InitializeDataGridView();
         }
 
@@ -297,8 +278,7 @@ namespace DCTS.UI
             string cell_key = e.RowIndex.ToString() + "_" + e.ColumnIndex.ToString();
             var new_cell_value = row.Cells[e.ColumnIndex].Value;
             var original_cell_value = dataGridChanges[cell_key];
-            // original_cell_value could null
-            //Console.WriteLine(" original = {0} {3}, new ={1} {4}, compare = {2}, {5}", original_cell_value, new_cell_value, original_cell_value == new_cell_value, original_cell_value.GetType(), new_cell_value.GetType(), new_cell_value.Equals(original_cell_value));
+
             if (new_cell_value == null && original_cell_value == null)
             {
                 dataGridChanges.Remove(cell_key + "_changed");
@@ -324,19 +304,25 @@ namespace DCTS.UI
             }
 
             //添加图片
-            int i = this.dataGridView.CurrentRow.Index;
-            if (i < DinningList.Count)
+            //int i = this.dataGridView.CurrentRow.Index;
+            //if (i < DinningList.Count)
+
+            if (e.ColumnIndex == 5)
             {
-                ComboLocation selectedItem = DinningList[i];
-                long folername = selectedItem.id / 1000;
-                if (selectedItem.img != null && selectedItem.img != "")
+                if (e.RowIndex < DinningList.Count)
                 {
-
-                    string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\locations\\" + folername + "\\", selectedItem.img);
-                    if (e.ColumnIndex == 5)
+                    //ComboLocation selectedItem = DinningList[i];
+                    ComboLocation selectedItem = DinningList[e.RowIndex];
+                    long folername = selectedItem.id / 1000;
+                    if (selectedItem.img != null && selectedItem.img != "")
                     {
-                        e.Value = GetImage1(lcoalPath);
 
+                        string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\locations\\" + folername + "\\", selectedItem.img);
+                        if (e.ColumnIndex == 5)
+                        {
+                           // e.Value = GetImage1(lcoalPath);
+
+                        }
                     }
                 }
             }
@@ -387,16 +373,7 @@ namespace DCTS.UI
             this.cityComboBox.DataSource = cities;
         }
 
-        private void DinningsControl_Load(object sender, EventArgs e)
-        {
 
-        }
-
-        private void pager2_Load(object sender, EventArgs e)
-        {
-            // this.pager2.ResetText = "";
-
-        }
         private int pager2_EventPaging(EventPagingArg e)
         {
             int count = InitializeOrderData();

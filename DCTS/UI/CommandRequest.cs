@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DCTS.UI
+namespace DCTS.CustomComponents
 {
   
     public enum CommandRequestEnum { TripList, EditTripDays, ScenicList }

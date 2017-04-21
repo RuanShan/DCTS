@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DCTS.UI
+namespace DCTS.CustomComponents
 {
     using DCTS.Bus;
     using DCTS.Uti;

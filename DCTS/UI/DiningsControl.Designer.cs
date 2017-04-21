@@ -1,4 +1,4 @@
-﻿namespace DCTS.UI
+﻿namespace DCTS.CustomComponents
 {
     partial class DiningsControl
     {
@@ -321,7 +321,7 @@
             this.Controls.Add(this.dataGridView);
             this.Name = "DiningsControl";
             this.Size = new System.Drawing.Size(709, 459);
-            this.Load += new System.EventHandler(this.DinningsControl_Load);
+            //this.Load += new System.EventHandler(this.DinningsControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
