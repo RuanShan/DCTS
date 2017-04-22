@@ -102,7 +102,7 @@ namespace DCTS.Bus
                                 if (key == "openning_hours")
                                 {
 
-                                    duplicated.ReplaceText(wrappedKey, ComboLoactionBusiness.DisplayOpenningHours(location));
+                                    duplicated.ReplaceText(wrappedKey, ComboLoactionBusiness.DisplayOpeningHours(location));
 
                                 }
                             }

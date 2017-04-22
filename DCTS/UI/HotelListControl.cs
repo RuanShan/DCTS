@@ -16,7 +16,7 @@ using System.IO;
 
 namespace DCTS.UI
 {
-    public partial class HotelControl : UserControl
+    public partial class HotelListControl : UserControl
     {
         private Hashtable dataGridChanges = null;
         private static string NoOptionSelected = "所有";
@@ -25,7 +25,7 @@ namespace DCTS.UI
         int RowRemark = 0;
 
         //  IBindingList hotelOrderList = null;
-        public HotelControl()
+        public HotelListControl()
         {
             InitializeComponent();
             this.dataGridChanges = new Hashtable();
@@ -44,7 +44,11 @@ namespace DCTS.UI
             this.pager1.PageCurrent = 1;
             this.pager1.PageSize = 24;
             int offset = 0;
+<<<<<<< HEAD:DCTS/UI/HotelControl.cs
             int pageSize = 50;
+=======
+            int pageSize = 10;
+>>>>>>> origin/master:DCTS/UI/HotelListControl.cs
             var ctx = this.entityDataSource1.DbContext as DctsEntities;
             //using (var ctx = new DctsEntities())
             {

@@ -126,6 +126,7 @@
     </Compile>
     <Compile Include="DB\ComboLocationEnum.cs" />
     <Compile Include="DB\DayLocation.cs" />
+    <Compile Include="DB\DiningLocation.cs" />
     <Compile Include="DB\EntityPathConfig.cs" />
     <Compile Include="DB\GlobalCache.cs" />
     <Compile Include="DB\MockEntity.cs" />
@@ -214,11 +215,11 @@
     <Compile Include="UI\DiningsControl.Designer.cs">
       <DependentUpon>DiningsControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\HotelControl.cs">
+    <Compile Include="UI\HotelListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\HotelControl.Designer.cs">
-      <DependentUpon>HotelControl.cs</DependentUpon>
+    <Compile Include="UI\HotelListControl.Designer.cs">
+      <DependentUpon>HotelListControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\NewHotelForm.cs">
       <SubType>Form</SubType>
@@ -369,8 +370,8 @@
     <EmbeddedResource Include="UI\DiningsControl.resx">
       <DependentUpon>DiningsControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\HotelControl.resx">
-      <DependentUpon>HotelControl.cs</DependentUpon>
+    <EmbeddedResource Include="UI\HotelListControl.resx">
+      <DependentUpon>HotelListControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\NewHotelForm.resx">
       <DependentUpon>NewHotelForm.cs</DependentUpon>

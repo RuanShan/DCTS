@@ -1,6 +1,6 @@
 ﻿namespace DCTS.UI
 {
-    partial class HotelControl
+    partial class HotelListControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -49,8 +49,13 @@
             this.kitchenCloumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tipsColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+<<<<<<< HEAD:DCTS/UI/HotelControl.Designer.cs
             this.修改ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+=======
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.修改ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+>>>>>>> origin/master:DCTS/UI/HotelListControl.Designer.cs
             this.newButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -99,10 +104,10 @@
             this.kitchenCloumn,
             this.tipsColumn1});
             this.dataGridView.ContextMenuStrip = this.contextMenuStrip1;
-            this.dataGridView.Location = new System.Drawing.Point(0, 161);
+            this.dataGridView.Location = new System.Drawing.Point(0, 149);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowTemplate.Height = 23;
-            this.dataGridView.Size = new System.Drawing.Size(688, 204);
+            this.dataGridView.Size = new System.Drawing.Size(688, 188);
             this.dataGridView.TabIndex = 0;
             this.dataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView_CellBeginEdit);
             this.dataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellEndEdit);
@@ -223,13 +228,29 @@
             this.修改ToolStripMenuItem,
             this.deleteToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
+<<<<<<< HEAD:DCTS/UI/HotelControl.Designer.cs
             this.contextMenuStrip1.Size = new System.Drawing.Size(147, 48);
+=======
+            this.contextMenuStrip1.Size = new System.Drawing.Size(125, 48);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.deleteToolStripMenuItem.Text = "删除餐厅";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+>>>>>>> origin/master:DCTS/UI/HotelListControl.Designer.cs
             // 
             // 修改ToolStripMenuItem
             // 
             this.修改ToolStripMenuItem.Name = "修改ToolStripMenuItem";
+<<<<<<< HEAD:DCTS/UI/HotelControl.Designer.cs
             this.修改ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.修改ToolStripMenuItem.Text = "修改本条餐厅";
+=======
+            this.修改ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.修改ToolStripMenuItem.Text = "修改";
+>>>>>>> origin/master:DCTS/UI/HotelListControl.Designer.cs
             this.修改ToolStripMenuItem.Click += new System.EventHandler(this.修改ToolStripMenuItem_Click_1);
             // 
             // deleteToolStripMenuItem
@@ -241,10 +262,14 @@
             // 
             // newButton
             // 
+<<<<<<< HEAD:DCTS/UI/HotelControl.Designer.cs
             this.newButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.newButton.Location = new System.Drawing.Point(597, 14);
+=======
+            this.newButton.Location = new System.Drawing.Point(597, 13);
+>>>>>>> origin/master:DCTS/UI/HotelListControl.Designer.cs
             this.newButton.Name = "newButton";
-            this.newButton.Size = new System.Drawing.Size(75, 25);
+            this.newButton.Size = new System.Drawing.Size(75, 23);
             this.newButton.TabIndex = 1;
             this.newButton.Text = "新建";
             this.newButton.UseVisualStyleBackColor = true;
@@ -259,24 +284,24 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.nationComboBox);
-            this.groupBox1.Location = new System.Drawing.Point(8, 55);
+            this.groupBox1.Location = new System.Drawing.Point(8, 51);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(672, 91);
+            this.groupBox1.Size = new System.Drawing.Size(672, 84);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(95, 57);
+            this.textBox1.Location = new System.Drawing.Point(95, 53);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(314, 20);
+            this.textBox1.Size = new System.Drawing.Size(314, 21);
             this.textBox1.TabIndex = 10;
             // 
             // btfind
             // 
-            this.btfind.Location = new System.Drawing.Point(568, 25);
+            this.btfind.Location = new System.Drawing.Point(568, 23);
             this.btfind.Name = "btfind";
-            this.btfind.Size = new System.Drawing.Size(75, 25);
+            this.btfind.Size = new System.Drawing.Size(75, 23);
             this.btfind.TabIndex = 9;
             this.btfind.Text = "查找";
             this.btfind.UseVisualStyleBackColor = true;
@@ -285,52 +310,52 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(253, 25);
+            this.label4.Location = new System.Drawing.Point(253, 23);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(31, 13);
+            this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 6;
             this.label4.Text = "城市";
             // 
             // cityComboBox
             // 
             this.cityComboBox.FormattingEnabled = true;
-            this.cityComboBox.Location = new System.Drawing.Point(288, 23);
+            this.cityComboBox.Location = new System.Drawing.Point(288, 21);
             this.cityComboBox.Name = "cityComboBox";
-            this.cityComboBox.Size = new System.Drawing.Size(121, 21);
+            this.cityComboBox.Size = new System.Drawing.Size(121, 20);
             this.cityComboBox.TabIndex = 5;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(36, 60);
+            this.label1.Location = new System.Drawing.Point(36, 55);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 13);
+            this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 4;
             this.label1.Text = "餐厅名称";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(60, 23);
+            this.label3.Location = new System.Drawing.Point(60, 21);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(31, 13);
+            this.label3.Size = new System.Drawing.Size(29, 12);
             this.label3.TabIndex = 4;
             this.label3.Text = "国家";
             // 
             // nationComboBox
             // 
             this.nationComboBox.FormattingEnabled = true;
-            this.nationComboBox.Location = new System.Drawing.Point(97, 20);
+            this.nationComboBox.Location = new System.Drawing.Point(97, 18);
             this.nationComboBox.Name = "nationComboBox";
-            this.nationComboBox.Size = new System.Drawing.Size(121, 21);
+            this.nationComboBox.Size = new System.Drawing.Size(121, 20);
             this.nationComboBox.TabIndex = 3;
             this.nationComboBox.SelectedIndexChanged += new System.EventHandler(this.nationComboBox_SelectedIndexChanged);
             // 
             // btsave
             // 
-            this.btsave.Location = new System.Drawing.Point(516, 14);
+            this.btsave.Location = new System.Drawing.Point(516, 13);
             this.btsave.Name = "btsave";
-            this.btsave.Size = new System.Drawing.Size(75, 25);
+            this.btsave.Size = new System.Drawing.Size(75, 23);
             this.btsave.TabIndex = 12;
             this.btsave.Text = "保存";
             this.btsave.UseVisualStyleBackColor = true;
@@ -342,13 +367,13 @@
             this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pager1.AutoSize = true;
-            this.pager1.Location = new System.Drawing.Point(0, 371);
+            this.pager1.Location = new System.Drawing.Point(0, 342);
             this.pager1.Name = "pager1";
             this.pager1.NMax = 0;
             this.pager1.PageCount = 0;
             this.pager1.PageCurrent = 0;
-            this.pager1.PageSize = 5000;
-            this.pager1.Size = new System.Drawing.Size(688, 34);
+            this.pager1.PageSize = 10;
+            this.pager1.Size = new System.Drawing.Size(688, 31);
             this.pager1.TabIndex = 13;
             this.pager1.EventPaging += new DCTS.CustomComponents.EventPagingHandler(this.pager1_EventPaging);
             // 
@@ -361,17 +386,21 @@
             this.bindingSource1.DataSource = this.entityDataSource1;
             this.bindingSource1.Position = 0;
             // 
+<<<<<<< HEAD:DCTS/UI/HotelControl.Designer.cs
             // HotelControl
+=======
+            // HotelListControl
+>>>>>>> origin/master:DCTS/UI/HotelListControl.Designer.cs
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pager1);
             this.Controls.Add(this.btsave);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.newButton);
             this.Controls.Add(this.dataGridView);
-            this.Name = "HotelControl";
-            this.Size = new System.Drawing.Size(688, 405);
+            this.Name = "HotelListControl";
+            this.Size = new System.Drawing.Size(688, 374);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
