@@ -30,9 +30,21 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.nationColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cityColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.areaColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.titleColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dishesColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.imgColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.latlngColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.addressColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.reachColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.recommendedDishesColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tipsColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.修改ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -46,18 +58,6 @@
             this.pager2 = new DCTS.CustomComponents.Pager();
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.nationColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cityColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.areaColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.titleColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dishesColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.imgColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.latlngColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.addressColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.reachColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.recommendedDishesColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tipsColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -96,30 +96,103 @@
             this.dataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellEndEdit);
             this.dataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView_CellFormatting);
             // 
+            // nationColumn1
+            // 
+            this.nationColumn1.DataPropertyName = "nation";
+            this.nationColumn1.HeaderText = "国家";
+            this.nationColumn1.Name = "nationColumn1";
+            // 
+            // cityColumn1
+            // 
+            this.cityColumn1.DataPropertyName = "city";
+            this.cityColumn1.HeaderText = "城市";
+            this.cityColumn1.Name = "cityColumn1";
+            // 
+            // areaColumn1
+            // 
+            this.areaColumn1.DataPropertyName = "area";
+            this.areaColumn1.HeaderText = "区域";
+            this.areaColumn1.Name = "areaColumn1";
+            // 
+            // titleColumn1
+            // 
+            this.titleColumn1.DataPropertyName = "title";
+            this.titleColumn1.HeaderText = "餐厅名称";
+            this.titleColumn1.Name = "titleColumn1";
+            // 
+            // dishesColumn1
+            // 
+            this.dishesColumn1.DataPropertyName = "dishes";
+            this.dishesColumn1.HeaderText = "菜系";
+            this.dishesColumn1.Name = "dishesColumn1";
+            // 
+            // imgColumn1
+            // 
+            this.imgColumn1.HeaderText = "图片";
+            this.imgColumn1.Name = "imgColumn1";
+            this.imgColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.imgColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // latlngColumn1
+            // 
+            this.latlngColumn1.DataPropertyName = "latlng";
+            this.latlngColumn1.HeaderText = "经纬度";
+            this.latlngColumn1.Name = "latlngColumn1";
+            // 
+            // addressColumn1
+            // 
+            this.addressColumn1.DataPropertyName = "address";
+            this.addressColumn1.HeaderText = "地址";
+            this.addressColumn1.Name = "addressColumn1";
+            // 
+            // reachColumn1
+            // 
+            this.reachColumn1.DataPropertyName = "local_address";
+            this.reachColumn1.HeaderText = "如何抵达(周围特征)";
+            this.reachColumn1.Name = "reachColumn1";
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "营业时间";
+            this.Column6.Name = "Column6";
+            // 
+            // recommendedDishesColumn1
+            // 
+            this.recommendedDishesColumn1.DataPropertyName = "recommended_dishes";
+            this.recommendedDishesColumn1.HeaderText = "推荐菜单";
+            this.recommendedDishesColumn1.Name = "recommendedDishesColumn1";
+            // 
+            // tipsColumn1
+            // 
+            this.tipsColumn1.DataPropertyName = "tips";
+            this.tipsColumn1.HeaderText = "深度Tlps";
+            this.tipsColumn1.Name = "tipsColumn1";
+            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.deleteToolStripMenuItem,
-            this.修改ToolStripMenuItem});
+            this.修改ToolStripMenuItem,
+            this.deleteToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(123, 48);
-            // 
-            // deleteToolStripMenuItem
-            // 
-            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-            this.deleteToolStripMenuItem.Text = "删除餐厅";
-            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(147, 48);
             // 
             // 修改ToolStripMenuItem
             // 
             this.修改ToolStripMenuItem.Name = "修改ToolStripMenuItem";
-            this.修改ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-            this.修改ToolStripMenuItem.Text = "修改";
+            this.修改ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.修改ToolStripMenuItem.Text = "编辑";
             this.修改ToolStripMenuItem.Click += new System.EventHandler(this.修改ToolStripMenuItem_Click);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.deleteToolStripMenuItem.Text = "删除此条餐厅";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // newButton
             // 
+            this.newButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.newButton.Location = new System.Drawing.Point(597, 14);
             this.newButton.Name = "newButton";
             this.newButton.Size = new System.Drawing.Size(75, 25);
@@ -212,6 +285,7 @@
             this.btsave.TabIndex = 12;
             this.btsave.Text = "保存";
             this.btsave.UseVisualStyleBackColor = true;
+            this.btsave.Visible = false;
             this.btsave.Click += new System.EventHandler(this.btsave_Click);
             // 
             // pager2
@@ -224,7 +298,7 @@
             this.pager2.NMax = 0;
             this.pager2.PageCount = 0;
             this.pager2.PageCurrent = 0;
-            this.pager2.PageSize = 5000;
+            this.pager2.PageSize = 5;
             this.pager2.Size = new System.Drawing.Size(693, 34);
             this.pager2.TabIndex = 13;
             this.pager2.EventPaging += new DCTS.CustomComponents.EventPagingHandler(this.pager2_EventPaging_1);
@@ -237,78 +311,6 @@
             // 
             this.bindingSource1.DataSource = this.entityDataSource1;
             this.bindingSource1.Position = 0;
-            // 
-            // nationColumn1
-            // 
-            this.nationColumn1.DataPropertyName = "nation";
-            this.nationColumn1.HeaderText = "国家";
-            this.nationColumn1.Name = "nationColumn1";
-            // 
-            // cityColumn1
-            // 
-            this.cityColumn1.DataPropertyName = "city";
-            this.cityColumn1.HeaderText = "城市";
-            this.cityColumn1.Name = "cityColumn1";
-            // 
-            // areaColumn1
-            // 
-            this.areaColumn1.DataPropertyName = "area";
-            this.areaColumn1.HeaderText = "区域";
-            this.areaColumn1.Name = "areaColumn1";
-            // 
-            // titleColumn1
-            // 
-            this.titleColumn1.DataPropertyName = "title";
-            this.titleColumn1.HeaderText = "餐厅名称";
-            this.titleColumn1.Name = "titleColumn1";
-            // 
-            // dishesColumn1
-            // 
-            this.dishesColumn1.DataPropertyName = "dishes";
-            this.dishesColumn1.HeaderText = "菜系";
-            this.dishesColumn1.Name = "dishesColumn1";
-            // 
-            // imgColumn1
-            // 
-            this.imgColumn1.HeaderText = "图片";
-            this.imgColumn1.Name = "imgColumn1";
-            this.imgColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.imgColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // latlngColumn1
-            // 
-            this.latlngColumn1.DataPropertyName = "latlng";
-            this.latlngColumn1.HeaderText = "经纬度";
-            this.latlngColumn1.Name = "latlngColumn1";
-            // 
-            // addressColumn1
-            // 
-            this.addressColumn1.DataPropertyName = "address";
-            this.addressColumn1.HeaderText = "地址";
-            this.addressColumn1.Name = "addressColumn1";
-            // 
-            // reachColumn1
-            // 
-            this.reachColumn1.DataPropertyName = "local_address";
-            this.reachColumn1.HeaderText = "如何抵达(周围特征)";
-            this.reachColumn1.Name = "reachColumn1";
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "营业时间";
-            this.Column6.Name = "Column6";
-            // 
-            // recommendedDishesColumn1
-            // 
-            this.recommendedDishesColumn1.DataPropertyName = "recommended_dishes";
-            this.recommendedDishesColumn1.HeaderText = "推荐菜单";
-            this.recommendedDishesColumn1.Name = "recommendedDishesColumn1";
-            // 
-            // tipsColumn1
-            // 
-            this.tipsColumn1.DataPropertyName = "tips";
-            this.tipsColumn1.HeaderText = "深度Tlps";
-            this.tipsColumn1.Name = "tipsColumn1";
             // 
             // DiningsControl
             // 
@@ -349,7 +351,7 @@
         private System.Windows.Forms.BindingSource bindingSource1;
         private System.Windows.Forms.ToolStripMenuItem 修改ToolStripMenuItem;
         private System.Windows.Forms.Button btsave;
-        private CustomComponents.Pager pager1;
+        //private CustomComponents.Pager pager1;
         private CustomComponents.Pager pager2;
         private System.Windows.Forms.DataGridViewTextBoxColumn nationColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn cityColumn1;

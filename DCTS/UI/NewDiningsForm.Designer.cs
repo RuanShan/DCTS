@@ -271,6 +271,7 @@
             // 
             // saveButton
             // 
+            this.saveButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
             this.saveButton.Location = new System.Drawing.Point(527, 498);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 25);
@@ -364,6 +365,7 @@
             this.Controls.Add(this.label1);
             this.Name = "NewDiningsForm";
             this.Text = "新建餐厅";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NewDiningsForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

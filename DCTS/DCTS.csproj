@@ -233,6 +233,12 @@
     <Compile Include="UI\ImportHotelCSV.Designer.cs">
       <DependentUpon>ImportHotelCSV.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\ImportScenicCSV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ImportScenicCSV.Designer.cs">
+      <DependentUpon>ImportScenicCSV.cs</DependentUpon>
+    </Compile>
     <Compile Include="Uti\EFIntercepterLogging.cs" />
     <Compile Include="Hotel.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -371,6 +377,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ImportHotelCSV.resx">
       <DependentUpon>ImportHotelCSV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ImportScenicCSV.resx">
+      <DependentUpon>ImportScenicCSV.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

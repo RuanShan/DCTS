@@ -43,9 +43,10 @@ namespace DCTS.UI
         private void InitializeDataGridView()
         {
             this.pager2.PageCurrent = 1;
+            this.pager2.PageSize = 24;
 
             int offset = 0;
-            int pageSize = 5000;
+            int pageSize = 50;
             var ctx = this.entityDataSource1.DbContext as DctsEntities;
             //using (var ctx = new DctsEntities())
             {
@@ -72,7 +73,7 @@ namespace DCTS.UI
             this.nationComboBox.DisplayMember = "FullName";
             this.nationComboBox.ValueMember = "ShortName";
             this.nationComboBox.DataSource = nations;
-
+            pager2.Bind();
             #region 显示图片
 
             //for (int j = 0; j < this.DinningList.Count; j++)
@@ -314,7 +315,7 @@ namespace DCTS.UI
                     //ComboLocation selectedItem = DinningList[i];
                     ComboLocation selectedItem = DinningList[e.RowIndex];
                     long folername = selectedItem.id / 1000;
-                    if (selectedItem.img != null && selectedItem.img != "")
+                    if (selectedItem.img != null && selectedItem.img != "" && selectedItem.img != "\"\"")
                     {
 
                         string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\locations\\" + folername + "\\", selectedItem.img);
