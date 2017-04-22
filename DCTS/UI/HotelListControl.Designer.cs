@@ -49,13 +49,13 @@
             this.kitchenCloumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tipsColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-<<<<<<< HEAD:DCTS/UI/HotelControl.Designer.cs
+//<<<<<<< HEAD:DCTS/UI/HotelControl.Designer.cs
             this.修改ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-=======
+//=======
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.修改ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
->>>>>>> origin/master:DCTS/UI/HotelListControl.Designer.cs
+//>>>>>>> origin/master:DCTS/UI/HotelListControl.Designer.cs
             this.newButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -228,9 +228,9 @@
             this.修改ToolStripMenuItem,
             this.deleteToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-<<<<<<< HEAD:DCTS/UI/HotelControl.Designer.cs
+//<<<<<<< HEAD:DCTS/UI/HotelControl.Designer.cs
             this.contextMenuStrip1.Size = new System.Drawing.Size(147, 48);
-=======
+//=======
             this.contextMenuStrip1.Size = new System.Drawing.Size(125, 48);
             // 
             // deleteToolStripMenuItem
@@ -239,18 +239,18 @@
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.deleteToolStripMenuItem.Text = "删除餐厅";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
->>>>>>> origin/master:DCTS/UI/HotelListControl.Designer.cs
+//>>>>>>> origin/master:DCTS/UI/HotelListControl.Designer.cs
             // 
             // 修改ToolStripMenuItem
             // 
             this.修改ToolStripMenuItem.Name = "修改ToolStripMenuItem";
-<<<<<<< HEAD:DCTS/UI/HotelControl.Designer.cs
+//<<<<<<< HEAD:DCTS/UI/HotelControl.Designer.cs
             this.修改ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.修改ToolStripMenuItem.Text = "修改本条餐厅";
-=======
+//=======
             this.修改ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.修改ToolStripMenuItem.Text = "修改";
->>>>>>> origin/master:DCTS/UI/HotelListControl.Designer.cs
+//>>>>>>> origin/master:DCTS/UI/HotelListControl.Designer.cs
             this.修改ToolStripMenuItem.Click += new System.EventHandler(this.修改ToolStripMenuItem_Click_1);
             // 
             // deleteToolStripMenuItem
@@ -262,12 +262,12 @@
             // 
             // newButton
             // 
-<<<<<<< HEAD:DCTS/UI/HotelControl.Designer.cs
+//<<<<<<< HEAD:DCTS/UI/HotelControl.Designer.cs
             this.newButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.newButton.Location = new System.Drawing.Point(597, 14);
-=======
+//=======
             this.newButton.Location = new System.Drawing.Point(597, 13);
->>>>>>> origin/master:DCTS/UI/HotelListControl.Designer.cs
+//>>>>>>> origin/master:DCTS/UI/HotelListControl.Designer.cs
             this.newButton.Name = "newButton";
             this.newButton.Size = new System.Drawing.Size(75, 23);
             this.newButton.TabIndex = 1;
@@ -386,11 +386,11 @@
             this.bindingSource1.DataSource = this.entityDataSource1;
             this.bindingSource1.Position = 0;
             // 
-<<<<<<< HEAD:DCTS/UI/HotelControl.Designer.cs
+//<<<<<<< HEAD:DCTS/UI/HotelControl.Designer.cs
             // HotelControl
-=======
+//=======
             // HotelListControl
->>>>>>> origin/master:DCTS/UI/HotelListControl.Designer.cs
+//>>>>>>> origin/master:DCTS/UI/HotelListControl.Designer.cs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

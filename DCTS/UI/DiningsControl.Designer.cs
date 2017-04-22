@@ -69,8 +69,8 @@
             this.dataGridView.AllowUserToAddRows = false;
             this.dataGridView.AllowUserToDeleteRows = false;
             this.dataGridView.AllowUserToResizeRows = false;
-            this.dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -149,11 +149,9 @@
             // 
             // reachColumn1
             // 
-<<<<<<< HEAD
+
             this.reachColumn1.DataPropertyName = "local_address";
-=======
-            this.reachColumn1.DataPropertyName = "reach";
->>>>>>> origin/master
+
             this.reachColumn1.HeaderText = "如何抵达(周围特征)";
             this.reachColumn1.Name = "reachColumn1";
             // 
@@ -164,11 +162,9 @@
             // 
             // recommendedDishesColumn1
             // 
-<<<<<<< HEAD
+
             this.recommendedDishesColumn1.DataPropertyName = "recommended_dishes";
-=======
-            this.recommendedDishesColumn1.DataPropertyName = "recommendedDishes ";
->>>>>>> origin/master
+
             this.recommendedDishesColumn1.HeaderText = "推荐菜单";
             this.recommendedDishesColumn1.Name = "recommendedDishesColumn1";
             // 
@@ -184,9 +180,9 @@
             this.修改ToolStripMenuItem,
             this.deleteToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-<<<<<<< HEAD
+            //<<<<<<< HEAD
             this.contextMenuStrip1.Size = new System.Drawing.Size(147, 48);
-=======
+            //=======
             this.contextMenuStrip1.Size = new System.Drawing.Size(125, 48);
             // 
             // deleteToolStripMenuItem
@@ -195,18 +191,15 @@
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.deleteToolStripMenuItem.Text = "删除餐厅";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
->>>>>>> origin/master
+            //>>>>>>> origin/master
             // 
             // 修改ToolStripMenuItem
             // 
             this.修改ToolStripMenuItem.Name = "修改ToolStripMenuItem";
-<<<<<<< HEAD
+
             this.修改ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.修改ToolStripMenuItem.Text = "编辑";
-=======
-            this.修改ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.修改ToolStripMenuItem.Text = "修改";
->>>>>>> origin/master
+
             this.修改ToolStripMenuItem.Click += new System.EventHandler(this.修改ToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
@@ -218,12 +211,10 @@
             // 
             // newButton
             // 
-<<<<<<< HEAD
+
             this.newButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.newButton.Location = new System.Drawing.Point(597, 14);
-=======
-            this.newButton.Location = new System.Drawing.Point(597, 13);
->>>>>>> origin/master
+
             this.newButton.Name = "newButton";
             this.newButton.Size = new System.Drawing.Size(75, 23);
             this.newButton.TabIndex = 1;
@@ -233,7 +224,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.keywordTextBox);
             this.groupBox1.Controls.Add(this.btfind);
@@ -322,7 +313,7 @@
             // 
             // pager2
             // 
-            this.pager2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.pager2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pager2.AutoSize = true;
             this.pager2.Location = new System.Drawing.Point(8, 390);
@@ -330,13 +321,10 @@
             this.pager2.NMax = 0;
             this.pager2.PageCount = 0;
             this.pager2.PageCurrent = 0;
-<<<<<<< HEAD
             this.pager2.PageSize = 5;
             this.pager2.Size = new System.Drawing.Size(693, 34);
-=======
             this.pager2.PageSize = 5000;
             this.pager2.Size = new System.Drawing.Size(693, 31);
->>>>>>> origin/master
             this.pager2.TabIndex = 13;
             this.pager2.EventPaging += new DCTS.CustomComponents.EventPagingHandler(this.pager2_EventPaging_1);
             // 
@@ -359,11 +347,11 @@
             this.Controls.Add(this.newButton);
             this.Controls.Add(this.dataGridView);
             this.Name = "DiningsControl";
-<<<<<<< HEAD
-            this.Size = new System.Drawing.Size(709, 459);
-=======
+            //<<<<<<< HEAD
+            //            this.Size = new System.Drawing.Size(709, 459);
+            //=======
             this.Size = new System.Drawing.Size(709, 424);
->>>>>>> origin/master
+            //>>>>>>> origin/master
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);

@@ -44,11 +44,9 @@ namespace DCTS.UI
             this.pager1.PageCurrent = 1;
             this.pager1.PageSize = 24;
             int offset = 0;
-<<<<<<< HEAD:DCTS/UI/HotelControl.cs
+
             int pageSize = 50;
-=======
-            int pageSize = 10;
->>>>>>> origin/master:DCTS/UI/HotelListControl.cs
+
             var ctx = this.entityDataSource1.DbContext as DctsEntities;
             //using (var ctx = new DctsEntities())
             {
