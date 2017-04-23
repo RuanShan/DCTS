@@ -17,9 +17,14 @@ namespace DCTS.CustomComponents
 {
     public partial class ImportDiningCSV : Form
     {
+        private List<Nation> NationList = null;
         public ImportDiningCSV()
         {
             InitializeComponent();
+            var nationList = DCTS.DB.GlobalCache.NationList;
+            NationList = new List<Nation>();
+            NationList = nationList.ToList();
+
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -301,6 +306,15 @@ namespace DCTS.CustomComponents
                     {
 
                         string[] temp1 = System.Text.RegularExpressions.Regex.Split(texi, "\t");
+                        //判断国家是否存在
+                        Nation order = this.NationList.Find(o => o.title == temp1[1]);
+                        if (order == null || order.title == null || order.title == "")
+                        {
+                            e.Result = "导入[" + temp1[4] + "]国家信息在系统中不存在";
+                            throw new Exception("导入[" + temp1[4] + "]国家信息在系统中不存在");
+                            //continue;
+                        }
+
                         var obj = ctx.ComboLocations.Create();
                         obj.ltype = (int)ComboLocationEnum.Dining;
                         obj.nation = temp1[1];
@@ -351,6 +365,8 @@ namespace DCTS.CustomComponents
                 }
                 success = false;
             }
+
+
 
             return success;
         }
