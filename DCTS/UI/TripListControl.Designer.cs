@@ -219,6 +219,8 @@
             this.Controls.Add(this.tripDataGridView);
             this.Name = "TripListControl";
             this.Size = new System.Drawing.Size(882, 380);
+            this.Load += new System.EventHandler(this.TripListControl_Load);
+            this.Resize += new System.EventHandler(this.TripListControl_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.tripDataGridView)).EndInit();
             this.ResumeLayout(false);
 

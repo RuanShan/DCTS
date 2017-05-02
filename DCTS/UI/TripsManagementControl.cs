@@ -116,6 +116,11 @@ namespace DCTS.UI
 
         }
 
+        private void TripsManagementControl_Resize(object sender, EventArgs e)
+        {
+            //this.tripsControl
+        }
+
     }
 
 

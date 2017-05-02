@@ -67,7 +67,7 @@
             this.活动ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(98, 363);
+            this.menuStrip1.Size = new System.Drawing.Size(50, 363);
             this.menuStrip1.Stretch = false;
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
@@ -77,28 +77,28 @@
             this.tripsToolStripMenuItem.Checked = true;
             this.tripsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.tripsToolStripMenuItem.Name = "tripsToolStripMenuItem";
-            this.tripsToolStripMenuItem.Size = new System.Drawing.Size(85, 21);
+            this.tripsToolStripMenuItem.Size = new System.Drawing.Size(37, 21);
             this.tripsToolStripMenuItem.Text = "行程";
             this.tripsToolStripMenuItem.Click += new System.EventHandler(this.tripsToolStripMenuItem_Click);
             // 
             // scenicsToolStripMenuItem
             // 
             this.scenicsToolStripMenuItem.Name = "scenicsToolStripMenuItem";
-            this.scenicsToolStripMenuItem.Size = new System.Drawing.Size(85, 21);
+            this.scenicsToolStripMenuItem.Size = new System.Drawing.Size(37, 21);
             this.scenicsToolStripMenuItem.Text = "景点";
             this.scenicsToolStripMenuItem.Click += new System.EventHandler(this.scenicsToolStripMenuItem_Click);
             // 
             // dinningsToolStripMenuItem
             // 
             this.dinningsToolStripMenuItem.Name = "dinningsToolStripMenuItem";
-            this.dinningsToolStripMenuItem.Size = new System.Drawing.Size(85, 21);
+            this.dinningsToolStripMenuItem.Size = new System.Drawing.Size(37, 21);
             this.dinningsToolStripMenuItem.Text = "餐厅";
             this.dinningsToolStripMenuItem.Click += new System.EventHandler(this.dinningsToolStripMenuItem_Click);
             // 
             // hotelsToolStripMenuItem
             // 
             this.hotelsToolStripMenuItem.Name = "hotelsToolStripMenuItem";
-            this.hotelsToolStripMenuItem.Size = new System.Drawing.Size(85, 21);
+            this.hotelsToolStripMenuItem.Size = new System.Drawing.Size(37, 21);
             this.hotelsToolStripMenuItem.Text = "住宿";
             this.hotelsToolStripMenuItem.Click += new System.EventHandler(this.hotelsToolStripMenuItem_Click);
             // 
@@ -106,16 +106,16 @@
             // 
             this.活动ToolStripMenuItem.Enabled = false;
             this.活动ToolStripMenuItem.Name = "活动ToolStripMenuItem";
-            this.活动ToolStripMenuItem.Size = new System.Drawing.Size(85, 21);
+            this.活动ToolStripMenuItem.Size = new System.Drawing.Size(37, 21);
             this.活动ToolStripMenuItem.Text = "活动";
             // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(98, 341);
+            this.statusStrip1.Location = new System.Drawing.Point(50, 341);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(664, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(712, 22);
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
             // 

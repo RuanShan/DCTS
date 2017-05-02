@@ -29,6 +29,8 @@ namespace DCTS.UI
         public void BeginActive()
         {
             InitializeTripDataGridView();
+            // ID 80, 天数 80， 备注260 路书生成时间120，  4个按钮
+            //tripTitleColumn1.Width = tripDataGridView.ClientSize.Width - 80 * 2 - 260 - 120 - 60 * 4;
         }
 
         private void InitializeTripDataGridView()
@@ -169,6 +171,17 @@ namespace DCTS.UI
 
                 }
             }
+        }
+
+        private void TripListControl_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TripListControl_Resize(object sender, EventArgs e)
+        {
+            tripTitleColumn1.Width = tripDataGridView.ClientSize.Width - 80 * 2 - 260 - 120 - 60 * 4 -3;
+
         }
 
     }
