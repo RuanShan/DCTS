@@ -268,8 +268,6 @@ namespace DCTS.CustomComponents
         private void importButton_Click(object sender, EventArgs e)
         {
 
-
-
             this.importButton.Enabled = false;
             this.cancelButton.Enabled = true;
             this.closeButton.Enabled = false;
@@ -292,18 +290,19 @@ namespace DCTS.CustomComponents
                 arg.OrderCount = dt.Rows.Count;
                 int i = 1;
                 int progress = 0;
-                foreach (DataRow row in dt.Rows)
+                using (var ctx = new DctsEntities())
                 {
-                    arg.CurrentIndex = i + 1;
-                    progress = Convert.ToInt16(((i + 1) * 1.0 / dt.Rows.Count) * 100);
-                    string texi = "";
-                    foreach (DataColumn column in dt.Columns)
+                    foreach (DataRow row in dt.Rows)
                     {
-                        var text = row[column];
-                        texi = texi + "\t" + row[column];
-                    }
-                    using (var ctx = new DctsEntities())
-                    {
+                        arg.CurrentIndex = i + 1;
+                        progress = Convert.ToInt16(((i + 1) * 1.0 / dt.Rows.Count) * 100);
+                        string texi = "";
+                        foreach (DataColumn column in dt.Columns)
+                        {
+                            var text = row[column];
+                            texi = texi + "\t" + row[column];
+                        }
+
 
                         string[] temp1 = System.Text.RegularExpressions.Regex.Split(texi, "\t");
                         //判断国家是否存在
@@ -346,7 +345,7 @@ namespace DCTS.CustomComponents
 
                         ctx.ComboLocations.Add(obj);
                         ctx.SaveChanges();
-                        if (arg.CurrentIndex % 25 == 0)
+                        if (arg.CurrentIndex % 5 == 0)
                         {
                             backgroundWorker1.ReportProgress(progress, arg);
                         }

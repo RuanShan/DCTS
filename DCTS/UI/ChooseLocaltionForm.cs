@@ -38,8 +38,6 @@ namespace DCTS.UI
             var locationTypeListForComboBox = locationTypeList.Select(o => new MockEntity { Id = o.Id, FullName = o.FullName }).ToList();
             locationTypeListForComboBox.Insert(0,new MockEntity { Id = 0, FullName = Any });
 
-             
-
             // 活动分类
             this.locationTypeComboBox.DisplayMember = "FullName";
             this.locationTypeComboBox.ValueMember = "Id";
@@ -60,6 +58,8 @@ namespace DCTS.UI
             this.locationTypeColumn.DisplayMember = "FullName";
             this.locationTypeColumn.ValueMember = "Id";
             this.locationTypeColumn.DataSource = locationTypeListForColumn;
+
+            this.keyworkTextBox.Text = "";
 
             InitializeLocations();
             
@@ -83,9 +83,13 @@ namespace DCTS.UI
                 query = query.Where(o => o.nation == nation);            
             }
 
-            if (nation.Length > 0)
+            if (city.Length > 0)
             {
                 query = query.Where(o => o.city == city);
+            }
+            if (keyword.Length > 0)
+            {
+                query = query.Where(o=>o.title.Contains( keyword ));
             }
             query = query.OrderBy(o => o.city).Skip(offset).Take(size);
             this.dataGridView1.DataSource = this.entityDataSource1.CreateView(query);
@@ -109,6 +113,7 @@ namespace DCTS.UI
         private void ChooseLocaltionForm_Load(object sender, EventArgs e)
         {
             InitializeDataSource();
+            //Console.WriteLine("yes ChooseLocaltionForm_Load called" + DateTime.Now.ToString());
         }
 
         private void saveButton_Click(object sender, EventArgs e)

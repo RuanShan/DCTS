@@ -44,7 +44,7 @@
             // cancelButton
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.No;
-            this.cancelButton.Location = new System.Drawing.Point(471, 246);
+            this.cancelButton.Location = new System.Drawing.Point(443, 246);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 13;
@@ -54,7 +54,7 @@
             // saveButton
             // 
             this.saveButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
-            this.saveButton.Location = new System.Drawing.Point(390, 246);
+            this.saveButton.Location = new System.Drawing.Point(362, 246);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 14;
@@ -83,9 +83,9 @@
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(14, 17);
+            this.label1.Location = new System.Drawing.Point(1, 17);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(576, 41);
+            this.label1.Size = new System.Drawing.Size(589, 41);
             this.label1.TabIndex = 7;
             this.label1.Text = "编辑行程";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -107,7 +107,7 @@
             // 
             this.tripFormControl1.Location = new System.Drawing.Point(34, 71);
             this.tripFormControl1.Name = "tripFormControl1";
-            this.tripFormControl1.Size = new System.Drawing.Size(547, 169);
+            this.tripFormControl1.Size = new System.Drawing.Size(526, 169);
             this.tripFormControl1.TabIndex = 15;
             // 
             // entityDataSource1
@@ -118,7 +118,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(615, 331);
+            this.ClientSize = new System.Drawing.Size(592, 311);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.label3);

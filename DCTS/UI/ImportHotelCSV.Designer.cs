@@ -43,53 +43,52 @@
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.FileName = "HACCYU";
             this.openFileDialog1.Filter = "Text Files (.csv)|*.csv|All Files (*.*)|*.*";
             // 
             // cancelButton
             // 
             this.cancelButton.Enabled = false;
-            this.cancelButton.Location = new System.Drawing.Point(275, 187);
+            this.cancelButton.Location = new System.Drawing.Point(275, 173);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 25);
+            this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 13;
-            this.cancelButton.Text = "Cancel";
+            this.cancelButton.Text = "取消";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // importButton
             // 
-            this.importButton.Location = new System.Drawing.Point(187, 187);
+            this.importButton.Location = new System.Drawing.Point(187, 173);
             this.importButton.Name = "importButton";
-            this.importButton.Size = new System.Drawing.Size(75, 25);
+            this.importButton.Size = new System.Drawing.Size(75, 23);
             this.importButton.TabIndex = 12;
-            this.importButton.Text = "Import";
+            this.importButton.Text = "导入";
             this.importButton.UseVisualStyleBackColor = true;
             this.importButton.Click += new System.EventHandler(this.importButton_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 74);
+            this.label1.Location = new System.Drawing.Point(27, 68);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 13);
+            this.label1.Size = new System.Drawing.Size(95, 12);
             this.label1.TabIndex = 11;
-            this.label1.Text = "Path";
+            this.label1.Text = "酒店CSV文件路径";
             // 
             // pathTextBox
             // 
-            this.pathTextBox.Location = new System.Drawing.Point(62, 70);
+            this.pathTextBox.Location = new System.Drawing.Point(128, 65);
             this.pathTextBox.Name = "pathTextBox";
-            this.pathTextBox.Size = new System.Drawing.Size(339, 20);
+            this.pathTextBox.Size = new System.Drawing.Size(260, 21);
             this.pathTextBox.TabIndex = 10;
             // 
             // openFileBtton
             // 
-            this.openFileBtton.Location = new System.Drawing.Point(407, 69);
+            this.openFileBtton.Location = new System.Drawing.Point(394, 63);
             this.openFileBtton.Name = "openFileBtton";
-            this.openFileBtton.Size = new System.Drawing.Size(31, 25);
+            this.openFileBtton.Size = new System.Drawing.Size(44, 23);
             this.openFileBtton.TabIndex = 9;
-            this.openFileBtton.Text = "...";
+            this.openFileBtton.Text = "选择";
             this.openFileBtton.UseVisualStyleBackColor = true;
             this.openFileBtton.Click += new System.EventHandler(this.openFileBtton_Click);
             // 
@@ -104,45 +103,45 @@
             // closeButton
             // 
             this.closeButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.closeButton.Location = new System.Drawing.Point(363, 187);
+            this.closeButton.Location = new System.Drawing.Point(363, 173);
             this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(75, 25);
+            this.closeButton.Size = new System.Drawing.Size(75, 23);
             this.closeButton.TabIndex = 17;
-            this.closeButton.Text = "Close";
+            this.closeButton.Text = "关闭";
             this.closeButton.UseVisualStyleBackColor = true;
             this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
             // 
             // label2
             // 
-            this.label2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(6, 10);
+            this.label2.Font = new System.Drawing.Font("SimSun", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(6, 22);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(458, 25);
+            this.label2.Size = new System.Drawing.Size(458, 23);
             this.label2.TabIndex = 16;
-            this.label2.Text = "Import Hotel.csv";
+            this.label2.Text = "导入酒店CSV数据";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // progressMsgLabel
             // 
             this.progressMsgLabel.AutoSize = true;
-            this.progressMsgLabel.Location = new System.Drawing.Point(29, 108);
+            this.progressMsgLabel.Location = new System.Drawing.Point(29, 100);
             this.progressMsgLabel.Name = "progressMsgLabel";
-            this.progressMsgLabel.Size = new System.Drawing.Size(24, 13);
+            this.progressMsgLabel.Size = new System.Drawing.Size(23, 12);
             this.progressMsgLabel.TabIndex = 15;
             this.progressMsgLabel.Text = "0/0";
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(29, 127);
+            this.progressBar1.Location = new System.Drawing.Point(29, 117);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(409, 25);
+            this.progressBar1.Size = new System.Drawing.Size(409, 23);
             this.progressBar1.TabIndex = 14;
             // 
-            // ImportDiningCSV
+            // ImportHotelCSV
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(465, 249);
+            this.ClientSize = new System.Drawing.Size(465, 230);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.importButton);
             this.Controls.Add(this.label1);
@@ -152,8 +151,10 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.progressMsgLabel);
             this.Controls.Add(this.progressBar1);
-            this.Name = "ImportDiningCSV";
-            this.Text = "ImportDiningCSV";
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "ImportHotelCSV";
+            this.Text = "酒店CSV数据导入";
             this.ResumeLayout(false);
             this.PerformLayout();
 

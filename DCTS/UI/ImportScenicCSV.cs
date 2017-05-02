@@ -258,7 +258,7 @@ namespace DCTS.CustomComponents
                         obj.tips = temp1[10];
                         ctx.ComboLocations.Add(obj);
                         ctx.SaveChanges();
-                        if (arg.CurrentIndex % 25 == 0)
+                        if (arg.CurrentIndex % 5 == 0)
                         {
                             backgroundWorker1.ReportProgress(progress, arg);
                         }

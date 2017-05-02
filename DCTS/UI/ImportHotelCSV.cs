@@ -270,7 +270,7 @@ namespace DCTS.CustomComponents
                         ctx.SaveChanges();
 
 
-                        if (arg.CurrentIndex % 25 == 0)
+                        if (arg.CurrentIndex % 5 == 0)
                         {
                             backgroundWorker1.ReportProgress(progress, arg);
                         }
