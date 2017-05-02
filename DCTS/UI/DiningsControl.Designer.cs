@@ -58,6 +58,7 @@
             this.pager2 = new DCTS.CustomComponents.Pager();
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -69,8 +70,8 @@
             this.dataGridView.AllowUserToAddRows = false;
             this.dataGridView.AllowUserToDeleteRows = false;
             this.dataGridView.AllowUserToResizeRows = false;
-            this.dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -149,9 +150,7 @@
             // 
             // reachColumn1
             // 
-
             this.reachColumn1.DataPropertyName = "local_address";
-
             this.reachColumn1.HeaderText = "如何抵达(周围特征)";
             this.reachColumn1.Name = "reachColumn1";
             // 
@@ -162,9 +161,7 @@
             // 
             // recommendedDishesColumn1
             // 
-
             this.recommendedDishesColumn1.DataPropertyName = "recommended_dishes";
-
             this.recommendedDishesColumn1.HeaderText = "推荐菜单";
             this.recommendedDishesColumn1.Name = "recommendedDishesColumn1";
             // 
@@ -180,41 +177,26 @@
             this.修改ToolStripMenuItem,
             this.deleteToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            //<<<<<<< HEAD
-            this.contextMenuStrip1.Size = new System.Drawing.Size(147, 48);
-            //=======
-            this.contextMenuStrip1.Size = new System.Drawing.Size(125, 48);
-            // 
-            // deleteToolStripMenuItem
-            // 
-            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.deleteToolStripMenuItem.Text = "删除餐厅";
-            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
-            //>>>>>>> origin/master
+            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 48);
             // 
             // 修改ToolStripMenuItem
             // 
             this.修改ToolStripMenuItem.Name = "修改ToolStripMenuItem";
-
-            this.修改ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.修改ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.修改ToolStripMenuItem.Text = "编辑";
-
             this.修改ToolStripMenuItem.Click += new System.EventHandler(this.修改ToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.deleteToolStripMenuItem.Text = "删除此条餐厅";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // newButton
             // 
-
             this.newButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.newButton.Location = new System.Drawing.Point(597, 14);
-
+            this.newButton.Location = new System.Drawing.Point(626, 14);
             this.newButton.Name = "newButton";
             this.newButton.Size = new System.Drawing.Size(75, 23);
             this.newButton.TabIndex = 1;
@@ -224,7 +206,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.keywordTextBox);
             this.groupBox1.Controls.Add(this.btfind);
@@ -243,12 +225,12 @@
             // 
             this.keywordTextBox.Location = new System.Drawing.Point(95, 53);
             this.keywordTextBox.Name = "keywordTextBox";
-            this.keywordTextBox.Size = new System.Drawing.Size(314, 21);
+            this.keywordTextBox.Size = new System.Drawing.Size(441, 21);
             this.keywordTextBox.TabIndex = 10;
             // 
             // btfind
             // 
-            this.btfind.Location = new System.Drawing.Point(415, 21);
+            this.btfind.Location = new System.Drawing.Point(542, 23);
             this.btfind.Name = "btfind";
             this.btfind.Size = new System.Drawing.Size(75, 23);
             this.btfind.TabIndex = 9;
@@ -259,7 +241,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(253, 27);
+            this.label4.Location = new System.Drawing.Point(309, 26);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 6;
@@ -267,10 +249,11 @@
             // 
             // cityComboBox
             // 
+            this.cityComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cityComboBox.FormattingEnabled = true;
-            this.cityComboBox.Location = new System.Drawing.Point(288, 23);
+            this.cityComboBox.Location = new System.Drawing.Point(344, 23);
             this.cityComboBox.Name = "cityComboBox";
-            this.cityComboBox.Size = new System.Drawing.Size(121, 20);
+            this.cityComboBox.Size = new System.Drawing.Size(192, 20);
             this.cityComboBox.TabIndex = 5;
             // 
             // label1
@@ -293,16 +276,17 @@
             // 
             // nationComboBox
             // 
+            this.nationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.nationComboBox.FormattingEnabled = true;
             this.nationComboBox.Location = new System.Drawing.Point(97, 23);
             this.nationComboBox.Name = "nationComboBox";
-            this.nationComboBox.Size = new System.Drawing.Size(121, 20);
+            this.nationComboBox.Size = new System.Drawing.Size(192, 20);
             this.nationComboBox.TabIndex = 3;
             this.nationComboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // btsave
             // 
-            this.btsave.Location = new System.Drawing.Point(516, 13);
+            this.btsave.Location = new System.Drawing.Point(545, 14);
             this.btsave.Name = "btsave";
             this.btsave.Size = new System.Drawing.Size(75, 23);
             this.btsave.TabIndex = 12;
@@ -313,7 +297,7 @@
             // 
             // pager2
             // 
-            this.pager2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.pager2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pager2.AutoSize = true;
             this.pager2.Location = new System.Drawing.Point(8, 390);
@@ -321,8 +305,6 @@
             this.pager2.NMax = 0;
             this.pager2.PageCount = 0;
             this.pager2.PageCurrent = 0;
-            this.pager2.PageSize = 5;
-            this.pager2.Size = new System.Drawing.Size(693, 34);
             this.pager2.PageSize = 5000;
             this.pager2.Size = new System.Drawing.Size(693, 31);
             this.pager2.TabIndex = 13;
@@ -337,21 +319,28 @@
             this.bindingSource1.DataSource = this.entityDataSource1;
             this.bindingSource1.Position = 0;
             // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(3, 1);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(124, 41);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "餐厅列表";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // DiningsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.pager2);
             this.Controls.Add(this.btsave);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.newButton);
             this.Controls.Add(this.dataGridView);
             this.Name = "DiningsControl";
-            //<<<<<<< HEAD
-            //            this.Size = new System.Drawing.Size(709, 459);
-            //=======
             this.Size = new System.Drawing.Size(709, 424);
-            //>>>>>>> origin/master
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
@@ -394,5 +383,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn recommendedDishesColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn tipsColumn1;
+        private System.Windows.Forms.Label label2;
     }
 }

@@ -14,7 +14,7 @@ namespace DCTS.Bus
             using (var ctx = new DctsEntities())
             {
                 var trip = ctx.Trips.Find(tripId);
-                var clonedTrip = new Trip(){ days = trip.days, title = trip.title, memo = trip.memo };
+                var clonedTrip = new Trip(){ days = trip.days, title = "(复制)"+trip.title, memo = trip.memo };
                 var clonedDays = trip.TripDays.Select(o => new Day() { tripId = 0, day = o.day, locationId = o.locationId, position = o.position }).ToList();
                 ctx.Trips.Add(clonedTrip);
                 ctx.SaveChanges();

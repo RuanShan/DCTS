@@ -30,6 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.imgColumn = new System.Windows.Forms.DataGridViewImageColumn();
+            this.nationColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cityColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.locationTypeColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.titleColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.addressColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.keyworkTextBox = new System.Windows.Forms.TextBox();
@@ -44,12 +50,6 @@
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.cancelButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
-            this.imgColumn = new System.Windows.Forms.DataGridViewImageColumn();
-            this.nationColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cityColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.locationTypeColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.titleColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.addressColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -75,147 +75,8 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(805, 186);
+            this.dataGridView1.Size = new System.Drawing.Size(852, 186);
             this.dataGridView1.TabIndex = 12;
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(12, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(805, 41);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "活动选择";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.keyworkTextBox);
-            this.groupBox1.Controls.Add(this.findButton);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.cityComboBox);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.locationTypeComboBox);
-            this.groupBox1.Controls.Add(this.nationComboBox);
-            this.groupBox1.Location = new System.Drawing.Point(12, 53);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(805, 96);
-            this.groupBox1.TabIndex = 10;
-            this.groupBox1.TabStop = false;
-            // 
-            // keyworkTextBox
-            // 
-            this.keyworkTextBox.Location = new System.Drawing.Point(53, 58);
-            this.keyworkTextBox.Name = "keyworkTextBox";
-            this.keyworkTextBox.Size = new System.Drawing.Size(502, 21);
-            this.keyworkTextBox.TabIndex = 8;
-            // 
-            // findButton
-            // 
-            this.findButton.Location = new System.Drawing.Point(561, 56);
-            this.findButton.Name = "findButton";
-            this.findButton.Size = new System.Drawing.Size(75, 23);
-            this.findButton.TabIndex = 9;
-            this.findButton.Text = "查找";
-            this.findButton.UseVisualStyleBackColor = true;
-            this.findButton.Click += new System.EventHandler(this.findButton_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(396, 25);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 12);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "城市";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 58);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(41, 12);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "关键词";
-            // 
-            // cityComboBox
-            // 
-            this.cityComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cityComboBox.FormattingEnabled = true;
-            this.cityComboBox.Location = new System.Drawing.Point(443, 22);
-            this.cityComboBox.Name = "cityComboBox";
-            this.cityComboBox.Size = new System.Drawing.Size(121, 20);
-            this.cityComboBox.TabIndex = 5;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 22);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 12);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "活动";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(205, 22);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 12);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "国家";
-            // 
-            // locationTypeComboBox
-            // 
-            this.locationTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.locationTypeComboBox.FormattingEnabled = true;
-            this.locationTypeComboBox.Location = new System.Drawing.Point(53, 19);
-            this.locationTypeComboBox.Name = "locationTypeComboBox";
-            this.locationTypeComboBox.Size = new System.Drawing.Size(121, 20);
-            this.locationTypeComboBox.TabIndex = 0;
-            // 
-            // nationComboBox
-            // 
-            this.nationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.nationComboBox.FormattingEnabled = true;
-            this.nationComboBox.Location = new System.Drawing.Point(252, 19);
-            this.nationComboBox.Name = "nationComboBox";
-            this.nationComboBox.Size = new System.Drawing.Size(121, 20);
-            this.nationComboBox.TabIndex = 3;
-            this.nationComboBox.SelectedIndexChanged += new System.EventHandler(this.nationComboBox_SelectedIndexChanged);
-            // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
-            // 
-            // cancelButton
-            // 
-            this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.No;
-            this.cancelButton.Location = new System.Drawing.Point(742, 374);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 23);
-            this.cancelButton.TabIndex = 14;
-            this.cancelButton.Text = "取消";
-            this.cancelButton.UseVisualStyleBackColor = true;
-            // 
-            // saveButton
-            // 
-            this.saveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.saveButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
-            this.saveButton.Location = new System.Drawing.Point(661, 374);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(75, 23);
-            this.saveButton.TabIndex = 15;
-            this.saveButton.Text = "选择";
-            this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // imgColumn
             // 
@@ -257,11 +118,150 @@
             this.addressColumn.Name = "addressColumn";
             this.addressColumn.Width = 200;
             // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(12, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(852, 41);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "活动选择";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.keyworkTextBox);
+            this.groupBox1.Controls.Add(this.findButton);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.cityComboBox);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.locationTypeComboBox);
+            this.groupBox1.Controls.Add(this.nationComboBox);
+            this.groupBox1.Location = new System.Drawing.Point(12, 53);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(852, 96);
+            this.groupBox1.TabIndex = 10;
+            this.groupBox1.TabStop = false;
+            // 
+            // keyworkTextBox
+            // 
+            this.keyworkTextBox.Location = new System.Drawing.Point(53, 58);
+            this.keyworkTextBox.Name = "keyworkTextBox";
+            this.keyworkTextBox.Size = new System.Drawing.Size(684, 21);
+            this.keyworkTextBox.TabIndex = 8;
+            // 
+            // findButton
+            // 
+            this.findButton.Location = new System.Drawing.Point(747, 22);
+            this.findButton.Name = "findButton";
+            this.findButton.Size = new System.Drawing.Size(75, 23);
+            this.findButton.TabIndex = 9;
+            this.findButton.Text = "查找";
+            this.findButton.UseVisualStyleBackColor = true;
+            this.findButton.Click += new System.EventHandler(this.findButton_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(509, 27);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 12);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "城市";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 62);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(41, 12);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "关键词";
+            // 
+            // cityComboBox
+            // 
+            this.cityComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cityComboBox.FormattingEnabled = true;
+            this.cityComboBox.Location = new System.Drawing.Point(544, 23);
+            this.cityComboBox.Name = "cityComboBox";
+            this.cityComboBox.Size = new System.Drawing.Size(193, 20);
+            this.cityComboBox.TabIndex = 5;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(18, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(29, 12);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "活动";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(264, 27);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(29, 12);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "国家";
+            // 
+            // locationTypeComboBox
+            // 
+            this.locationTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.locationTypeComboBox.FormattingEnabled = true;
+            this.locationTypeComboBox.Location = new System.Drawing.Point(53, 23);
+            this.locationTypeComboBox.Name = "locationTypeComboBox";
+            this.locationTypeComboBox.Size = new System.Drawing.Size(193, 20);
+            this.locationTypeComboBox.TabIndex = 0;
+            // 
+            // nationComboBox
+            // 
+            this.nationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.nationComboBox.FormattingEnabled = true;
+            this.nationComboBox.Location = new System.Drawing.Point(299, 23);
+            this.nationComboBox.Name = "nationComboBox";
+            this.nationComboBox.Size = new System.Drawing.Size(193, 20);
+            this.nationComboBox.TabIndex = 3;
+            this.nationComboBox.SelectedIndexChanged += new System.EventHandler(this.nationComboBox_SelectedIndexChanged);
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.No;
+            this.cancelButton.Location = new System.Drawing.Point(789, 374);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.TabIndex = 14;
+            this.cancelButton.Text = "取消";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            // 
+            // saveButton
+            // 
+            this.saveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.saveButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
+            this.saveButton.Location = new System.Drawing.Point(708, 374);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.TabIndex = 15;
+            this.saveButton.Text = "选择";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            // 
             // ChooseLocaltionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(829, 420);
+            this.ClientSize = new System.Drawing.Size(876, 420);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.dataGridView1);
