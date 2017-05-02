@@ -93,6 +93,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutBox.Designer.cs">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Bus\ComboLoactionBusiness.cs" />
     <Compile Include="Bus\ScenicDbHelper.cs" />
     <Compile Include="Bus\TripBusiness.cs" />
@@ -301,6 +307,9 @@
     <Compile Include="Uti\DBConnection.cs" />
     <Compile Include="Uti\LogHelper.cs" />
     <Compile Include="Uti\MessageHelper.cs" />
+    <EmbeddedResource Include="AboutBox.resx">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomComponents\Pager.resx">
       <DependentUpon>Pager.cs</DependentUpon>
     </EmbeddedResource>

@@ -15,9 +15,12 @@ namespace DCTS
     public partial class MainForm : Form
     {
         TripsManagementControl tripsManagementControl;
-         public MainForm()
+        AboutBox aboutbox;
+        
+        public MainForm()
         {
             InitializeComponent();
+            aboutbox = new AboutBox();
         }
  
 
@@ -73,6 +76,11 @@ namespace DCTS
             if (form.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
             {
             }
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            aboutbox.ShowDialog();
         }
 
 

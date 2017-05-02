@@ -196,7 +196,7 @@
             // newButton
             // 
             this.newButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.newButton.Location = new System.Drawing.Point(626, 14);
+            this.newButton.Location = new System.Drawing.Point(626, 19);
             this.newButton.Name = "newButton";
             this.newButton.Size = new System.Drawing.Size(75, 23);
             this.newButton.TabIndex = 1;
@@ -286,7 +286,7 @@
             // 
             // btsave
             // 
-            this.btsave.Location = new System.Drawing.Point(545, 14);
+            this.btsave.Location = new System.Drawing.Point(545, 19);
             this.btsave.Name = "btsave";
             this.btsave.Size = new System.Drawing.Size(75, 23);
             this.btsave.TabIndex = 12;
@@ -324,7 +324,7 @@
             this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.Location = new System.Drawing.Point(3, 1);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(124, 41);
+            this.label2.Size = new System.Drawing.Size(124, 50);
             this.label2.TabIndex = 14;
             this.label2.Text = "餐厅列表";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;

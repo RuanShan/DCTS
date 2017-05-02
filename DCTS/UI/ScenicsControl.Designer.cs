@@ -141,7 +141,7 @@
             // newButton
             // 
             this.newButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.newButton.Location = new System.Drawing.Point(815, 13);
+            this.newButton.Location = new System.Drawing.Point(815, 18);
             this.newButton.Name = "newButton";
             this.newButton.Size = new System.Drawing.Size(75, 23);
             this.newButton.TabIndex = 1;
@@ -235,7 +235,7 @@
             this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.Location = new System.Drawing.Point(3, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(124, 41);
+            this.label2.Size = new System.Drawing.Size(124, 50);
             this.label2.TabIndex = 12;
             this.label2.Text = "景点列表";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;

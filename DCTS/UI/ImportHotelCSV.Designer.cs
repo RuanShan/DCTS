@@ -119,7 +119,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(458, 23);
             this.label2.TabIndex = 16;
-            this.label2.Text = "导入酒店CSV数据";
+            this.label2.Text = "导入住宿CSV数据";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // progressMsgLabel
@@ -156,7 +156,7 @@
             this.MinimizeBox = false;
             this.Name = "ImportHotelCSV";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "酒店CSV数据导入";
+            this.Text = "住宿CSV数据导入";
             this.ResumeLayout(false);
             this.PerformLayout();
 

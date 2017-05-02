@@ -351,6 +351,7 @@ namespace DCTS.CustomComponents
                         }
                     }
                 }
+                arg.CurrentIndex = dt.Rows.Count;
                 backgroundWorker1.ReportProgress(100, arg);
                 e.Result = string.Format("{0} 条正常导入成功", dt.Rows.Count);
             }
