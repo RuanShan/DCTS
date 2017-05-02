@@ -15,10 +15,10 @@ using DCTS.DB;
 
 namespace DCTS.CustomComponents
 {
-    public partial class ImportHotelCSV : Form
+    public partial class ImportScenicCSV : Form
     {
         private List<Nation> NationList = null;
-        public ImportHotelCSV()
+        public ImportScenicCSV()
         {
             InitializeComponent();
             var nationList = DCTS.DB.GlobalCache.NationList;
@@ -29,13 +29,11 @@ namespace DCTS.CustomComponents
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
-
-            //bool success = Execute(pathTextBox.Text, worker, e);
             bool success = NewMethod(worker, e);
         }
 
 
-     
+
         #region csv 路径
         public static DataTable OpenCSV(string filePath)//从csv读取数据返回table
         {
@@ -197,9 +195,6 @@ namespace DCTS.CustomComponents
 
         private void importButton_Click(object sender, EventArgs e)
         {
-
-
-
             this.importButton.Enabled = false;
             this.cancelButton.Enabled = true;
             this.closeButton.Enabled = false;
@@ -234,8 +229,8 @@ namespace DCTS.CustomComponents
                     }
                     using (var ctx = new DctsEntities())
                     {
-
                         string[] temp1 = System.Text.RegularExpressions.Regex.Split(texi, "\t");
+
                         //判断国家是否存在                       
                         Nation order = this.NationList.Find(o => o.title == temp1[1]);
                         if (order == null || order.title == null || order.title == "")
@@ -245,31 +240,24 @@ namespace DCTS.CustomComponents
                             //continue;
                         }
 
+
                         var obj = ctx.ComboLocations.Create();
-                        obj.ltype = (int)ComboLocationEnum.Hotel;
+                        obj.ltype = (int)ComboLocationEnum.Scenic;
                         obj.nation = temp1[1];
                         obj.city = temp1[2];
                         obj.title = temp1[3];
                         obj.local_title = temp1[4];
-                        obj.img = temp1[5]; ;// this.imgPathTextBox.Text;
-                      
-                        //obj.open_at = Convert.ToDateTime( temp1[1]);
-                        //obj.close_at = Convert.ToDateTime( temp1[1]);
-                        obj.room = temp1[6];
-                        obj.dinner = temp1[7];
-                        obj.latlng = temp1[8];
-                        obj.address = temp1[9];
-                        obj.local_address = temp1[10];
-                        obj.contact = temp1[11];
-                        obj.wifi = temp1[12];
-                        obj.parking = temp1[13];
-                        obj.reception = temp1[14];
-                        obj.kitchen = temp1[15];
-                        obj.tips = temp1[16];
+                        obj.img = temp1[5];
+                        obj.latlng = temp1[6];
+                        obj.local_address = temp1[7];
+                        obj.route = temp1[8];
+                        //obj.open_at = Convert.ToDateTime(temp1[1]);
+                        //obj.close_at = Convert.ToDateTime(temp1[1]);
+                       
+                        obj.ticket = temp1[9];
+                        obj.tips = temp1[10];
                         ctx.ComboLocations.Add(obj);
                         ctx.SaveChanges();
-
-
                         if (arg.CurrentIndex % 25 == 0)
                         {
                             backgroundWorker1.ReportProgress(progress, arg);

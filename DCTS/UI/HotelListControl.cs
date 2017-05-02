@@ -29,7 +29,7 @@ namespace DCTS.UI
         {
             InitializeComponent();
             this.dataGridChanges = new Hashtable();
-            pager1.Bind();
+           // pager1.Bind();
         }
 
         public void BeginActive()
@@ -42,13 +42,17 @@ namespace DCTS.UI
         private void InitializeDataGridView()
         {
             this.pager1.PageCurrent = 1;
+            this.pager1.PageSize = 24;
             int offset = 0;
-            int pageSize = 10;
+
+            int pageSize = 50;
+
             var ctx = this.entityDataSource1.DbContext as DctsEntities;
             //using (var ctx = new DctsEntities())
             {
+                hotelList = new List<ComboLocation>();
                 var query = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Hotel).OrderBy(o => o.id).Skip(offset).Take(pageSize);
-
+                hotelList = query.ToList();
                 //  var query = ctx.ComboLocations.OrderBy(o => o.id).Skip(offset).Take(pageSize);
                 var list = this.entityDataSource1.CreateView(query);
                 sortabledinningsOrderList = new SortableBindingList<ComboLocation>(query.ToList());
@@ -65,6 +69,7 @@ namespace DCTS.UI
             this.nationComboBox.DisplayMember = "FullName";
             this.nationComboBox.ValueMember = "ShortName";
             this.nationComboBox.DataSource = nations;
+            pager1.Bind();
         }
 
         private void newButton_Click(object sender, EventArgs e)
@@ -180,7 +185,7 @@ namespace DCTS.UI
             condition_params.Add(new MySqlParameter("@title", title));
 
             int limit = pager1.PageSize;
-            int offset = 0; //(pager1.PageCurrent > 1 ? pager1.OffSet(pager1.PageCurrent - 1) : 0);
+            int offset = (pager1.PageCurrent > 1 ? pager1.OffSet(pager1.PageCurrent - 1) : 0);
             int count = 0;
             using (var ctx = new DctsEntities())
             {
@@ -337,7 +342,9 @@ namespace DCTS.UI
 
         private void 修改ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            var form = new NewHotelForm("Edit", null);
+            int i = this.dataGridView.CurrentRow.Index;
+            ComboLocation selectedItem = hotelList[i];
+            var form = new NewHotelForm("Edit", selectedItem);
             if (form.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
             {
                 InitializeDataGridView();

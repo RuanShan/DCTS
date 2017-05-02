@@ -43,8 +43,8 @@
             this.recommendedDishesColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tipsColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.修改ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.keywordTextBox = new System.Windows.Forms.TextBox();
@@ -69,8 +69,8 @@
             this.dataGridView.AllowUserToAddRows = false;
             this.dataGridView.AllowUserToDeleteRows = false;
             this.dataGridView.AllowUserToResizeRows = false;
-            this.dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -149,7 +149,9 @@
             // 
             // reachColumn1
             // 
-            this.reachColumn1.DataPropertyName = "reach";
+
+            this.reachColumn1.DataPropertyName = "local_address";
+
             this.reachColumn1.HeaderText = "如何抵达(周围特征)";
             this.reachColumn1.Name = "reachColumn1";
             // 
@@ -160,7 +162,9 @@
             // 
             // recommendedDishesColumn1
             // 
-            this.recommendedDishesColumn1.DataPropertyName = "recommendedDishes ";
+
+            this.recommendedDishesColumn1.DataPropertyName = "recommended_dishes";
+
             this.recommendedDishesColumn1.HeaderText = "推荐菜单";
             this.recommendedDishesColumn1.Name = "recommendedDishesColumn1";
             // 
@@ -173,9 +177,12 @@
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.deleteToolStripMenuItem,
-            this.修改ToolStripMenuItem});
+            this.修改ToolStripMenuItem,
+            this.deleteToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
+            //<<<<<<< HEAD
+            this.contextMenuStrip1.Size = new System.Drawing.Size(147, 48);
+            //=======
             this.contextMenuStrip1.Size = new System.Drawing.Size(125, 48);
             // 
             // deleteToolStripMenuItem
@@ -184,17 +191,30 @@
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.deleteToolStripMenuItem.Text = "删除餐厅";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            //>>>>>>> origin/master
             // 
             // 修改ToolStripMenuItem
             // 
             this.修改ToolStripMenuItem.Name = "修改ToolStripMenuItem";
-            this.修改ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.修改ToolStripMenuItem.Text = "修改";
+
+            this.修改ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.修改ToolStripMenuItem.Text = "编辑";
+
             this.修改ToolStripMenuItem.Click += new System.EventHandler(this.修改ToolStripMenuItem_Click);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.deleteToolStripMenuItem.Text = "删除此条餐厅";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // newButton
             // 
-            this.newButton.Location = new System.Drawing.Point(597, 13);
+
+            this.newButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.newButton.Location = new System.Drawing.Point(597, 14);
+
             this.newButton.Name = "newButton";
             this.newButton.Size = new System.Drawing.Size(75, 23);
             this.newButton.TabIndex = 1;
@@ -204,7 +224,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.keywordTextBox);
             this.groupBox1.Controls.Add(this.btfind);
@@ -288,11 +308,12 @@
             this.btsave.TabIndex = 12;
             this.btsave.Text = "保存";
             this.btsave.UseVisualStyleBackColor = true;
+            this.btsave.Visible = false;
             this.btsave.Click += new System.EventHandler(this.btsave_Click);
             // 
             // pager2
             // 
-            this.pager2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.pager2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pager2.AutoSize = true;
             this.pager2.Location = new System.Drawing.Point(8, 390);
@@ -300,6 +321,8 @@
             this.pager2.NMax = 0;
             this.pager2.PageCount = 0;
             this.pager2.PageCurrent = 0;
+            this.pager2.PageSize = 5;
+            this.pager2.Size = new System.Drawing.Size(693, 34);
             this.pager2.PageSize = 5000;
             this.pager2.Size = new System.Drawing.Size(693, 31);
             this.pager2.TabIndex = 13;
@@ -324,7 +347,11 @@
             this.Controls.Add(this.newButton);
             this.Controls.Add(this.dataGridView);
             this.Name = "DiningsControl";
+            //<<<<<<< HEAD
+            //            this.Size = new System.Drawing.Size(709, 459);
+            //=======
             this.Size = new System.Drawing.Size(709, 424);
+            //>>>>>>> origin/master
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
@@ -353,7 +380,7 @@
         private System.Windows.Forms.BindingSource bindingSource1;
         private System.Windows.Forms.ToolStripMenuItem 修改ToolStripMenuItem;
         private System.Windows.Forms.Button btsave;
-        private CustomComponents.Pager pager1;
+        //private CustomComponents.Pager pager1;
         private CustomComponents.Pager pager2;
         private System.Windows.Forms.DataGridViewTextBoxColumn nationColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn cityColumn1;

@@ -67,6 +67,14 @@ namespace DCTS
 
         }
 
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            var form = new ImportScenicCSV();
+            if (form.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
+            {
+            }
+        }
+
 
     }
 }

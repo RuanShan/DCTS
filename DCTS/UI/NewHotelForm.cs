@@ -74,99 +74,111 @@ namespace DCTS.UI
 
             using (var ctx = new DctsEntities())
             {
-                //  string copyfilename = Path.GetFileName(this.imgPathTextBox.Text);
-                #region new
-                string imgFilePath = this.imgPathTextBox.Text;
-                string copyfilename = "";
-                bool hasImg = (imgFilePath.Length > 0);
-                bool existSameImage = false;
-
-                if (hasImg)
+                try
                 {
-                    copyfilename = Path.GetFileName(imgFilePath);
-
-                    ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
-                    if (lastLocation != null)
-                    {
-                        long newId = lastLocation.id + 1;
-
-                        long idStart = newId / 1000 * 1000;
-                        long idEnd = idStart + 1000;
-                        existSameImage = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Hotel && o.img == copyfilename && o.id > idStart && o.id < idEnd).Count() > 0);
-                    }
-                    if (existSameImage)
-                    {
-                        MessageBox.Show(string.Format("文件名<{0}>已在, 请使用其他文件名！", copyfilename));
-                        return;
-                    }
-                }
-
-                #endregion
-                if (changeid == 0)
-                {
-                    var obj = ctx.ComboLocations.Create();
-                    obj.ltype = (int)ComboLocationEnum.Hotel;
-                    obj.nation = this.nationComboBox.Text;
-                    obj.city = this.cityComboBox.Text;
-                    obj.title = this.titleTextBox.Text;
-                    obj.local_title = this.localTitleTextBox.Text;
-                    obj.img = copyfilename;// this.imgPathTextBox.Text;
-                    //  obj.ticket = this.tickettime.Text;
-                    obj.open_at = Convert.ToDateTime(this.openAtDateTimePicker.Text);
-                    obj.close_at = Convert.ToDateTime(this.closeAtDateTimePicker.Text);
-                    obj.room = room.Text;
-                    obj.dinner = moringTextBox.Text;
-                    obj.latlng = latlng.Text;
-                    obj.address = address.Text;
-                    obj.local_address = local_address.Text;
-                    obj.contact = contact.Text;
-                    obj.wifi = wifi.Text;
-                    obj.parking = parking.Text;
-                    obj.reception = reception.Text;
-                    obj.kitchen = kitchen.Text;
-                    obj.tips = this.textBox6.Text;
-                    ctx.ComboLocations.Add(obj);
-                    ctx.SaveChanges();
-                    if (hasImg)
-                    {
-                        string copyToPath = EntityPathConfig.LocationImagePath(obj);
-                        File.Copy(imgFilePath, copyToPath);
-                    }
-                }
-                else
-                {
-                    ComboLocation obj = ctx.ComboLocations.Find(Convert.ToInt32(changeid));
-
-                    obj.ltype = (int)ComboLocationEnum.Hotel;
-                    obj.nation = this.nationComboBox.Text;
-                    obj.city = this.cityComboBox.Text;
-                    obj.title = this.titleTextBox.Text;
-                    obj.local_title = this.localTitleTextBox.Text;
-                    obj.img = copyfilename;// this.imgPathTextBox.Text;
-                    //  obj.ticket = this.tickettime.Text;
-                    obj.open_at = Convert.ToDateTime(this.openAtDateTimePicker.Text);
-                    obj.close_at = Convert.ToDateTime(this.closeAtDateTimePicker.Text);
-                    obj.room = room.Text;
-                    obj.dinner = moringTextBox.Text;
-                    obj.latlng = latlng.Text;
-                    obj.address = address.Text;
-                    obj.local_address = local_address.Text;
-                    obj.contact = contact.Text;
-                    obj.wifi = wifi.Text;
-                    obj.parking = parking.Text;
-                    obj.reception = reception.Text;
-                    obj.kitchen = kitchen.Text;
-                    //ctx.ComboLocations.Add(obj);
-                    ctx.SaveChanges();
+                    //  string copyfilename = Path.GetFileName(this.imgPathTextBox.Text);
+                    #region new
+                    string imgFilePath = this.imgPathTextBox.Text;
+                    string copyfilename = "";
+                    bool hasImg = (imgFilePath.Length > 0);
+                    bool existSameImage = false;
 
                     if (hasImg)
                     {
-                        string copyToPath = EntityPathConfig.LocationImagePath(obj);
-                        File.Copy(imgFilePath, copyToPath);
+                        copyfilename = Path.GetFileName(imgFilePath);
+
+                        ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
+                        if (lastLocation != null)
+                        {
+                            long newId = lastLocation.id + 1;
+
+                            long idStart = newId / 1000 * 1000;
+                            long idEnd = idStart + 1000;
+                            existSameImage = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Hotel && o.img == copyfilename && o.id > idStart && o.id < idEnd).Count() > 0);
+                        }
+
+                    }
+
+                    #endregion
+                    if (changeid == 0)
+                    {
+                        if (existSameImage)
+                        {
+                            MessageBox.Show(string.Format("文件名<{0}>已在, 请使用其他文件名！", copyfilename));
+                            return;
+                        }
+                        var obj = ctx.ComboLocations.Create();
+                        obj.ltype = (int)ComboLocationEnum.Hotel;
+                        obj.nation = this.nationComboBox.Text;
+                        obj.city = this.cityComboBox.Text;
+                        obj.title = this.titleTextBox.Text;
+                        obj.local_title = this.localTitleTextBox.Text;
+                        obj.img = copyfilename;// this.imgPathTextBox.Text;
+                        //  obj.ticket = this.tickettime.Text;
+                        obj.open_at = Convert.ToDateTime(this.openAtDateTimePicker.Text);
+                        obj.close_at = Convert.ToDateTime(this.closeAtDateTimePicker.Text);
+                        obj.room = room.Text;
+                        obj.dinner = moringTextBox.Text;
+                        obj.latlng = latlng.Text;
+                        obj.address = address.Text;
+                        obj.local_address = local_address.Text;
+                        obj.contact = contact.Text;
+                        obj.wifi = wifi.Text;
+                        obj.parking = parking.Text;
+                        obj.reception = reception.Text;
+                        obj.kitchen = kitchen.Text;
+                        obj.tips = this.textBox6.Text;
+                        ctx.ComboLocations.Add(obj);
+                        ctx.SaveChanges();
+                        if (hasImg)
+                        {
+                            string copyToPath = EntityPathConfig.LocationImagePath(obj);
+                            File.Copy(imgFilePath, copyToPath);
+                        }
+                    }
+                    else
+                    {
+
+
+                        ComboLocation obj = ctx.ComboLocations.Find(Convert.ToInt32(changeid));
+
+                        obj.ltype = (int)ComboLocationEnum.Hotel;
+                        obj.nation = this.nationComboBox.Text;
+                        obj.city = this.cityComboBox.Text;
+                        obj.title = this.titleTextBox.Text;
+                        obj.local_title = this.localTitleTextBox.Text;
+                        obj.img = copyfilename;// this.imgPathTextBox.Text;
+                        //  obj.ticket = this.tickettime.Text;
+                        obj.open_at = Convert.ToDateTime(this.openAtDateTimePicker.Text);
+                        obj.close_at = Convert.ToDateTime(this.closeAtDateTimePicker.Text);
+                        obj.room = room.Text;
+                        obj.dinner = moringTextBox.Text;
+                        obj.latlng = latlng.Text;
+                        obj.address = address.Text;
+                        obj.local_address = local_address.Text;
+                        obj.contact = contact.Text;
+                        obj.wifi = wifi.Text;
+                        obj.parking = parking.Text;
+                        obj.reception = reception.Text;
+                        obj.kitchen = kitchen.Text;
+                        obj.tips = this.textBox6.Text;
+                        //ctx.ComboLocations.Add(obj);
+                        ctx.SaveChanges();
+
+                        if (hasImg)
+                        {
+                            string copyToPath = EntityPathConfig.LocationImagePath(obj);
+                            File.Copy(imgFilePath, copyToPath);
+                        }
                     }
                 }
-                this.Close();
-            
+                catch (Exception EX)
+                {
+
+                    throw;
+                }
+
+
             }
 
         }

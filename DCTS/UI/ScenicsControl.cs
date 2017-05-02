@@ -10,41 +10,59 @@ using System.Windows.Forms;
 using DCTS.DB;
 using DCTS.Uti;
 using DCTS.Bus;
+using MySql.Data.MySqlClient;
+using DCTS.CustomComponents;
 
 namespace DCTS.UI
 {
-    
+
     public partial class ScenicsControl : UserControl
     {
+        private static string NoOptionSelected = "所有";
+        private List<ComboLocation> ScenicslList = null;
+        private SortableBindingList<ComboLocation> sortabledinningsOrderList;
         public ScenicsControl()
         {
             InitializeComponent();
             dataGridView.AutoGenerateColumns = false;
+            pager1.Bind();
         }
 
         public void BeginActive()
         {
             InitializeDataGridView();
+            pager1.Bind();
         }
 
         private void InitializeDataGridView()
         {
+            this.pager1.PageCurrent = 1;
+            this.pager1.PageSize = 25;
+
             int offset = 0;
-            int pageSize = 5000;
+            int pageSize = 50;
             using (var ctx = new DctsEntities())
             {
 
                 var query = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Scenic).OrderBy(o => o.id).Skip(offset).Take(pageSize);
                 var list = this.entityDataSource1.CreateView(query);
                 this.dataGridView.DataSource = list;
+                //bew 
+                //ScenicslList = query.ToList();
+                //sortabledinningsOrderList = new SortableBindingList<ComboLocation>(query.ToList());
+                //this.bindingSource1.DataSource = this.sortabledinningsOrderList;
+                //dataGridView.AutoGenerateColumns = false;
+                //dataGridView.DataSource = this.bindingSource1;
             }
             // 初始化查询条件
             var nationList = DCTS.DB.GlobalCache.NationList;
-            var nations = nationList.Select(o => new MockEntity { Id = o.id, ShortName= o.code ,FullName = o.title }).ToList();
+            var nations = nationList.Select(o => new MockEntity { Id = o.id, ShortName = o.code, FullName = o.title }).ToList();
             nations.Insert(0, new MockEntity { Id = 0, ShortName = "", FullName = "所有" });
             this.nationComboBox.DisplayMember = "FullName";
             this.nationComboBox.ValueMember = "ShortName";
             this.nationComboBox.DataSource = nations;
+
+            pager1.Bind();
 
         }
 
@@ -63,8 +81,8 @@ namespace DCTS.UI
 
             var cityList = DCTS.DB.GlobalCache.CityList;
             cityList = cityList.Where(o => o.nationCode == code).ToList();
-            var cities = cityList.Select(o => new MockEntity { Id = o.id,  FullName = o.title }).ToList();
-            cities.Insert(0, new MockEntity { Id = 0,  FullName = "所有" });
+            var cities = cityList.Select(o => new MockEntity { Id = o.id, FullName = o.title }).ToList();
+            cities.Insert(0, new MockEntity { Id = 0, FullName = "所有" });
 
             this.cityComboBox.DisplayMember = "FullName";
             this.cityComboBox.ValueMember = "Id";
@@ -109,5 +127,107 @@ namespace DCTS.UI
                 }
             }
         }
+
+        private int pager1_EventPaging(CustomComponents.EventPagingArg e)
+        {
+            int count = FindDataSources();
+            return count;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            FindDataSources();
+            pager1.Bind();
+        }
+        private int FindDataSources()
+        {
+
+            var nation = nationComboBox.Text;
+            var city = this.cityComboBox.Text;
+            var title = this.textBox1.Text;
+
+            string conditions = "";//s.ltype =(int)ComboLocationEnum.Dining
+            List<MySqlParameter> condition_params = new List<MySqlParameter>();
+            var ltype = (int)ComboLocationEnum.Scenic;
+
+
+            if (ltype > 0)
+            {
+                if (conditions.Length > 0)
+                {
+                    conditions += " AND ";
+                }
+                conditions += "(`ltype`= @ltype)";
+            }
+            if (nation != NoOptionSelected)
+            {
+                if (nation.Length > 0)
+                {
+                    if (conditions.Length > 0)
+                    {
+                        conditions += " AND ";
+                    }
+                    conditions += "(`nation`= @nation)";
+                }
+            }
+            if (city != NoOptionSelected)
+            {
+                if (city.Length > 0)
+                {
+                    if (conditions.Length > 0)
+                    {
+                        conditions += " AND ";
+                    }
+                    conditions += "(`city`= @city)";
+                }
+            }
+            if (title.Length > 0)
+            {
+                if (conditions.Length > 0)
+                {
+                    conditions += " AND ";
+                }
+                //conditions += "(`title`= @title)";
+                conditions += "(`title`LIKE '%" + @title + "%')";
+            }
+
+
+
+            #region  new
+            condition_params.Add(new MySqlParameter("@ltype", ltype));
+            condition_params.Add(new MySqlParameter("@nation", nation));
+            condition_params.Add(new MySqlParameter("@city", city));
+            condition_params.Add(new MySqlParameter("@title", title));
+
+            int limit = pager1.PageSize;
+            int offset = (pager1.PageCurrent > 1 ? pager1.OffSet(pager1.PageCurrent - 1) : 0);
+            int count = 0;
+            using (var ctx = new DctsEntities())
+            {
+                if (conditions.Length > 0)
+                {
+                    conditions = " WHERE " + conditions;
+                }
+
+                string sqlCount = string.Format(" SELECT count(*) FROM combolocations {0}", conditions);
+                count = ctx.Database.SqlQuery<int>(sqlCount, condition_params.ToArray()).First();
+                string sql = string.Format(" SELECT * FROM combolocations {0} LIMIT {1} OFFSET {2}", conditions, limit, offset);
+                ScenicslList = ctx.Database.SqlQuery<ComboLocation>(sql, condition_params.ToArray()).ToList();
+
+
+                sortabledinningsOrderList = new SortableBindingList<ComboLocation>(ScenicslList.ToList());
+                this.bindingSource1.DataSource = this.sortabledinningsOrderList;
+                dataGridView.AutoGenerateColumns = false;
+                dataGridView.DataSource = this.bindingSource1;
+
+            }
+
+
+            return count;
+
+
+            #endregion
+        }
+
     }
 }

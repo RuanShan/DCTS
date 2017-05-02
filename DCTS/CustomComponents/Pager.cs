@@ -34,7 +34,7 @@ namespace DCTS.CustomComponents
         /// <summary>   
         /// 每页显示记录数   
         /// </summary>   
-        private int _pageSize = 500;
+        private int _pageSize = 5;
         /**/
         /// <summary>   
         /// 每页显示记录数   
