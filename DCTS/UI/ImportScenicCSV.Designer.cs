@@ -44,6 +44,7 @@
             // openFileDialog1
             // 
             this.openFileDialog1.Filter = "Text Files (.csv)|*.csv|All Files (*.*)|*.*";
+            this.openFileDialog1.Title = "请选择景点CSV数据文件";
             // 
             // cancelButton
             // 
@@ -71,15 +72,15 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(27, 68);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(95, 12);
+            this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 11;
-            this.label1.Text = "景点CSV文件路径";
+            this.label1.Text = "文件路径";
             // 
             // pathTextBox
             // 
-            this.pathTextBox.Location = new System.Drawing.Point(128, 65);
+            this.pathTextBox.Location = new System.Drawing.Point(86, 65);
             this.pathTextBox.Name = "pathTextBox";
-            this.pathTextBox.Size = new System.Drawing.Size(260, 21);
+            this.pathTextBox.Size = new System.Drawing.Size(302, 21);
             this.pathTextBox.TabIndex = 10;
             // 
             // openFileBtton
@@ -154,6 +155,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ImportScenicCSV";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "景点CSV数据导入";
             this.ResumeLayout(false);
             this.PerformLayout();

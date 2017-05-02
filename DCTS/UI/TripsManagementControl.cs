@@ -74,6 +74,7 @@ namespace DCTS.UI
 
             if (commandEventArgs.Command == CommandRequestEnum.TripList)
             {
+                tripsControl.BeginActive();
                 this.mainPanel.Controls.Clear();
                 this.mainPanel.Controls.Add(tripsControl);
             }
