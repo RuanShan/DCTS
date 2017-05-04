@@ -26,8 +26,17 @@ namespace DCTS
             }
 
             Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
+            if (DbConnectable())
+            {
+                LogHelper.WriteLog("Start application DCTS");
+                StartMainForm();
+            }
+            else
+            {
 
-            StartMainForm();
+                StartDbConfiguration();
+            }
+          //  StartMainForm();
         }
 
 
@@ -70,7 +79,7 @@ namespace DCTS
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new DBConfigurationForm());
             MessageBox.Show(String.Format("{0}",
-                "データベースに接続できません。設定ファイルInventoryDemo.exe.config中のGOD DBContext内容を修正してください !"));
+                "不能连接到数据库。设定InventoryDemo.exe.config中 DBContext内容请修改!"));
         }
 
         static bool DbConnectable()
@@ -78,7 +87,7 @@ namespace DCTS
             bool success = false;
             string msg = "";
             //连接字符串拼装  
-            var myconn = new MySqlConnection(DBConfiguration.GetConnectionString("GODDbContext"));
+            var myconn = new MySqlConnection(DBConfiguration.GetConnectionString("DctsEntities1"));
 
 
             //连接 
@@ -96,7 +105,7 @@ namespace DCTS
             catch (MySqlException exception)
             {
                 LogHelper.WriteLog("DB open error", exception);
-                LogHelper.WriteLog(string.Format("DB connection string is {0}", DBConfiguration.GetConnectionString("GODDbContext")));
+                LogHelper.WriteLog(string.Format("DB connection string is {0}", DBConfiguration.GetConnectionString("DctsEntities1")));
             }
             finally
             {

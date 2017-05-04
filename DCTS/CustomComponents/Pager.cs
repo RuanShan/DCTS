@@ -102,6 +102,7 @@ namespace DCTS.CustomComponents
             }
             else
             {
+                lblPageCount1.Text = "每页 " + PageSize.ToString() + " 条，共 " + "0" + " 页";   
                 this.PageCount = 0;
             }
         }

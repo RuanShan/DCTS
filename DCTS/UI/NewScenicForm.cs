@@ -58,12 +58,12 @@ namespace DCTS.UI
                     string imgFileName = "";
                     bool hasImg = (imgFilePath.Length > 0);
                     bool existSameImage = false;
-
+                    bool nameishave = false;
                     if (hasImg)
                     {
                         imgFileName = Path.GetFileName(imgFilePath);
 
-                        ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o=>o.id).FirstOrDefault();
+                        ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
                         if (lastLocation != null)
                         {
                             long newId = lastLocation.id + 1;
@@ -77,6 +77,13 @@ namespace DCTS.UI
                             MessageBox.Show(string.Format("文件名<{0}>已在, 请使用其他文件名！", imgFileName));
                             return;
                         }
+                    }
+                    bool hastitle = (titleTextBox.Text.Length > 0);
+                    if (hastitle)
+                    {
+                        ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
+                        if (lastLocation != null)
+                            nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Hotel && o.title == titleTextBox.Text).Count() > 0);
                     }
 
                     var obj = ctx.ComboLocations.Create();
@@ -93,8 +100,13 @@ namespace DCTS.UI
                     obj.route = this.routeTextBox.Text;
                     obj.img = imgFileName;
                     ctx.ComboLocations.Add(obj);
-                    ctx.SaveChanges();
-
+                    if (nameishave == false && this.titleTextBox.Text.Length <= 100)
+                        ctx.SaveChanges();
+                    else
+                    {
+                        MessageBox.Show("错误：请检查名称的长度或是否已存在！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                     if (hasImg)
                     {
                         string copyToPath = EntityPathConfig.LocationImagePath(obj);
@@ -102,7 +114,7 @@ namespace DCTS.UI
                     }
 
                 }
-                catch ( Exception exception)
+                catch (Exception exception)
                 {
                     throw;
                 }
@@ -123,6 +135,26 @@ namespace DCTS.UI
         private void cancelButton_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void titleTextBox_TextChanged(object sender, EventArgs e)
+        {
+            using (var ctx = new DctsEntities())
+            {
+                bool nameishave = false;
+                bool hastitle = (titleTextBox.Text.Length > 0);
+                if (hastitle)
+                {
+                    ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
+                    if (lastLocation != null)
+                        nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Scenic && o.title == titleTextBox.Text).Count() > 0);
+
+                    if (nameishave == true || this.titleTextBox.Text.Length > 100)
+                        errorProvider1.SetError(titleTextBox, String.Format("错误：请检查名称的长度或是否已存在 {0}", titleTextBox.Text));
+
+
+                }
+            }
         }
     }
 }

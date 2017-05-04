@@ -100,12 +100,12 @@
             this.kitchenCloumn,
             this.tipsColumn1});
             this.dataGridView.ContextMenuStrip = this.contextMenuStrip1;
-            this.dataGridView.Location = new System.Drawing.Point(8, 149);
+            this.dataGridView.Location = new System.Drawing.Point(8, 161);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowHeadersVisible = false;
             this.dataGridView.RowTemplate.Height = 23;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.Size = new System.Drawing.Size(672, 188);
+            this.dataGridView.Size = new System.Drawing.Size(672, 204);
             this.dataGridView.TabIndex = 0;
             this.dataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView_CellBeginEdit);
             this.dataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellEndEdit);
@@ -226,28 +226,28 @@
             this.修改ToolStripMenuItem,
             this.deleteToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 70);
             // 
             // 修改ToolStripMenuItem
             // 
             this.修改ToolStripMenuItem.Name = "修改ToolStripMenuItem";
-            this.修改ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.修改ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.修改ToolStripMenuItem.Text = "编辑";
             this.修改ToolStripMenuItem.Click += new System.EventHandler(this.修改ToolStripMenuItem_Click_1);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.deleteToolStripMenuItem.Text = "删除此条餐厅";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deleteToolStripMenuItem.Text = "删除此条住宿";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // newButton
             // 
             this.newButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.newButton.Location = new System.Drawing.Point(605, 18);
+            this.newButton.Location = new System.Drawing.Point(605, 20);
             this.newButton.Name = "newButton";
-            this.newButton.Size = new System.Drawing.Size(75, 23);
+            this.newButton.Size = new System.Drawing.Size(75, 25);
             this.newButton.TabIndex = 1;
             this.newButton.Text = "新建";
             this.newButton.UseVisualStyleBackColor = true;
@@ -264,24 +264,24 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.nationComboBox);
-            this.groupBox1.Location = new System.Drawing.Point(8, 51);
+            this.groupBox1.Location = new System.Drawing.Point(8, 55);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(672, 84);
+            this.groupBox1.Size = new System.Drawing.Size(672, 91);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(95, 51);
+            this.textBox1.Location = new System.Drawing.Point(95, 55);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(427, 21);
+            this.textBox1.Size = new System.Drawing.Size(427, 20);
             this.textBox1.TabIndex = 10;
             // 
             // btfind
             // 
-            this.btfind.Location = new System.Drawing.Point(528, 19);
+            this.btfind.Location = new System.Drawing.Point(528, 21);
             this.btfind.Name = "btfind";
-            this.btfind.Size = new System.Drawing.Size(75, 23);
+            this.btfind.Size = new System.Drawing.Size(75, 25);
             this.btfind.TabIndex = 9;
             this.btfind.Text = "查找";
             this.btfind.UseVisualStyleBackColor = true;
@@ -290,9 +290,9 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(293, 25);
+            this.label4.Location = new System.Drawing.Point(293, 27);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 12);
+            this.label4.Size = new System.Drawing.Size(31, 13);
             this.label4.TabIndex = 6;
             this.label4.Text = "城市";
             // 
@@ -300,26 +300,26 @@
             // 
             this.cityComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cityComboBox.FormattingEnabled = true;
-            this.cityComboBox.Location = new System.Drawing.Point(328, 21);
+            this.cityComboBox.Location = new System.Drawing.Point(328, 23);
             this.cityComboBox.Name = "cityComboBox";
-            this.cityComboBox.Size = new System.Drawing.Size(192, 20);
+            this.cityComboBox.Size = new System.Drawing.Size(192, 21);
             this.cityComboBox.TabIndex = 5;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(36, 55);
+            this.label1.Location = new System.Drawing.Point(36, 60);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.Size = new System.Drawing.Size(55, 13);
             this.label1.TabIndex = 4;
             this.label1.Text = "餐厅名称";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(60, 25);
+            this.label3.Location = new System.Drawing.Point(60, 27);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 12);
+            this.label3.Size = new System.Drawing.Size(31, 13);
             this.label3.TabIndex = 4;
             this.label3.Text = "国家";
             // 
@@ -327,17 +327,17 @@
             // 
             this.nationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.nationComboBox.FormattingEnabled = true;
-            this.nationComboBox.Location = new System.Drawing.Point(95, 21);
+            this.nationComboBox.Location = new System.Drawing.Point(95, 23);
             this.nationComboBox.Name = "nationComboBox";
-            this.nationComboBox.Size = new System.Drawing.Size(192, 20);
+            this.nationComboBox.Size = new System.Drawing.Size(192, 21);
             this.nationComboBox.TabIndex = 3;
             this.nationComboBox.SelectedIndexChanged += new System.EventHandler(this.nationComboBox_SelectedIndexChanged);
             // 
             // btsave
             // 
-            this.btsave.Location = new System.Drawing.Point(524, 18);
+            this.btsave.Location = new System.Drawing.Point(524, 20);
             this.btsave.Name = "btsave";
-            this.btsave.Size = new System.Drawing.Size(75, 23);
+            this.btsave.Size = new System.Drawing.Size(75, 25);
             this.btsave.TabIndex = 12;
             this.btsave.Text = "保存";
             this.btsave.UseVisualStyleBackColor = true;
@@ -346,10 +346,10 @@
             // 
             // label2
             // 
-            this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.Location = new System.Drawing.Point(3, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(124, 50);
+            this.label2.Size = new System.Drawing.Size(124, 54);
             this.label2.TabIndex = 14;
             this.label2.Text = "酒店列表";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -359,13 +359,13 @@
             this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pager1.AutoSize = true;
-            this.pager1.Location = new System.Drawing.Point(8, 342);
+            this.pager1.Location = new System.Drawing.Point(8, 371);
             this.pager1.Name = "pager1";
             this.pager1.NMax = 0;
             this.pager1.PageCount = 0;
             this.pager1.PageCurrent = 0;
             this.pager1.PageSize = 10;
-            this.pager1.Size = new System.Drawing.Size(672, 31);
+            this.pager1.Size = new System.Drawing.Size(672, 34);
             this.pager1.TabIndex = 13;
             this.pager1.EventPaging += new DCTS.CustomComponents.EventPagingHandler(this.pager1_EventPaging);
             // 
@@ -380,7 +380,7 @@
             // 
             // HotelListControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pager1);
@@ -389,7 +389,7 @@
             this.Controls.Add(this.newButton);
             this.Controls.Add(this.dataGridView);
             this.Name = "HotelListControl";
-            this.Size = new System.Drawing.Size(688, 374);
+            this.Size = new System.Drawing.Size(688, 405);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);

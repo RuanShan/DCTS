@@ -27,6 +27,9 @@ namespace DCTS.UI
             changeid = 0;
             if (maintype == "Edit")
             {
+                label2.Text = "编辑餐厅";
+                this.Text = "编辑餐厅";
+                changeid = obj.id;
                 //obj.ltype = (int)ComboLocationEnum.Dining;
                 this.nationComboBox.Text = obj.nation;
                 this.cityComboBox.Text = obj.city;
@@ -42,7 +45,7 @@ namespace DCTS.UI
                 this.localTitleTextBox.Text = obj.title;
                 this.openAtDateTimePicker.Text = obj.open_at.ToString();
                 this.closeAtDateTimePicker.Text = obj.close_at.ToString();
-                changeid = obj.id;
+
 
             }
         }
@@ -76,12 +79,13 @@ namespace DCTS.UI
             {
                 try
                 {
-                 
+
                     #region new
                     string imgFilePath = this.imgPathTextBox.Text;
                     string imgFileName = "";
                     bool hasImg = (imgFilePath.Length > 0);
                     bool existSameImage = false;
+                    bool nameishave = false;
 
                     if (hasImg)
                     {
@@ -94,6 +98,8 @@ namespace DCTS.UI
                             long idStart = newId / 1000 * 1000;
                             long idEnd = idStart + 1000;
                             existSameImage = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Dining && o.img == imgFileName && o.id > idStart && o.id < idEnd).Count() > 0);
+                            nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Dining && o.title == localTitleTextBox.Text && o.id > idStart && o.id < idEnd).Count() > 0);
+
                         }
                         //if (existSameImage)
                         //{
@@ -101,8 +107,17 @@ namespace DCTS.UI
 
                         //}
                     }
+                    bool hastitle = (localTitleTextBox.Text.Length > 0);
+                    if (hastitle)
+                    {
+                        ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
+                        if (lastLocation != null)
+                            nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Dining && o.title == localTitleTextBox.Text).Count() > 0);
+                    }
+
+
                     #endregion
-                
+
 
                     {
                         if (changeid != 0)
@@ -145,7 +160,7 @@ namespace DCTS.UI
                             obj.city = this.cityComboBox.Text;
                             obj.area = this.titleTextBox.Text;
                             obj.dishes = this.textBox1.Text;
-                          
+
                             obj.img = imgFileName;
                             obj.latlng = this.latlngTextBox.Text;
                             obj.local_address = this.textBox2.Text;
@@ -156,12 +171,20 @@ namespace DCTS.UI
                             obj.open_at = Convert.ToDateTime(this.openAtDateTimePicker.Text);
                             obj.close_at = Convert.ToDateTime(this.closeAtDateTimePicker.Text);
                             ctx.ComboLocations.Add(obj);
-                            ctx.SaveChanges();
+                            if (nameishave == false && this.localTitleTextBox.Text.Length <= 100)
+                                ctx.SaveChanges();
+                            else
+                            {
+                                MessageBox.Show("错误：请检查名称的长度或是否已存在！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+
+                            }
                             changeid = obj.id;
                             if (hasImg)
                             {
-                                string copyToPath = EntityPathConfig.LocationImagePath(obj);
-                                File.Copy(imgFilePath, copyToPath);
+                                string copyToPath = EntityPathConfig.LocationDiningImagePath(obj);
+                                if (!File.Exists(copyToPath))
+                                    File.Copy(imgFilePath, copyToPath);
                             }
                         }
                         istrue = true;
@@ -194,12 +217,12 @@ namespace DCTS.UI
 
             string copypathto = "";
 
-           
+
             string[] dirs = Directory.GetDirectories(lcoalPath + "\\");
 
 
             DirectoryInfo dir = new DirectoryInfo(lcoalPath);
-           
+
             DirectoryInfo[] dii = dir.GetDirectories();
             int ishad = 0;
             foreach (DirectoryInfo f in dii)
@@ -267,6 +290,32 @@ namespace DCTS.UI
 
         }
 
-     
+        private void localTitleTextBox_TextChanged(object sender, EventArgs e)
+        {
+            using (var ctx = new DctsEntities())
+            {
+                bool nameishave = false;
+                bool hastitle = (localTitleTextBox.Text.Length > 0);
+                if (hastitle)
+                {
+                    ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
+                    if (lastLocation != null)
+                        nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Dining && o.title == localTitleTextBox.Text).Count() > 0);
+
+                    if (changeid == 0)
+                    {
+                        if (nameishave == true || this.localTitleTextBox.Text.Length > 100)
+                            errorProvider1.SetError(localTitleTextBox, String.Format("错误：请检查名称的长度或是否已存在 {0}", localTitleTextBox.Text));
+                    }
+                    else
+                    {
+                        if (this.localTitleTextBox.Text.Length > 100)
+                            errorProvider1.SetError(localTitleTextBox, String.Format("错误：请检查名称的长度 {0}", localTitleTextBox.Text));
+                    }
+                }
+            }
+        }
+
+
     }
 }

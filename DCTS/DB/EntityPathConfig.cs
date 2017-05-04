@@ -67,7 +67,28 @@ namespace DCTS.DB
 
             return fullPath;
         }
+        public static string LocationDiningImagePath(ComboLocation location)
+        {
+            string basePath = DiningLocationImageBasePath;
+            string folderPath = Path.Combine(basePath, (location.id / 1000 * 1000).ToString());
 
+            CreateFolder(folderPath);
+
+            string fullPath = Path.Combine(folderPath, location.img);
+
+            return fullPath;
+        }
+        public static string LocationHotelImagePath(ComboLocation location)
+        {
+            string basePath = DiningLocationImageBasePath;
+            string folderPath = Path.Combine(basePath, (location.id / 1000 * 1000).ToString());
+
+            CreateFolder(folderPath);
+
+            string fullPath = Path.Combine(folderPath, location.img);
+
+            return fullPath;
+        }
         public static string TripWordFolderPath(long tripId)
         {
             

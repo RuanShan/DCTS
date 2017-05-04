@@ -109,6 +109,11 @@ namespace DCTS.UI
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+            if (MessageBox.Show(" 确定删除本条餐厅 ?", "删除确认", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+            }
+            else
+                return;
             var oids = GetOrderIdsBySelectedGridCell();
             using (var ctx = new DctsEntities())
             {
@@ -317,11 +322,11 @@ namespace DCTS.UI
                     long folername = selectedItem.id / 1000;
                     if (selectedItem.img != null && selectedItem.img != "" && selectedItem.img != "\"\"")
                     {
-
-                        string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\locations\\" + folername + "\\", selectedItem.img);
+                        string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\location_" + ComboLocationEnum.Dining.ToString().ToLower() + "\\" + folername + "\\", selectedItem.img);
+                        //string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\locations\\" + folername + "\\", selectedItem.img);
                         if (e.ColumnIndex == 5)
                         {
-                           e.Value = GetImage1(lcoalPath);
+                            e.Value = GetImage1(lcoalPath);
 
                         }
                     }

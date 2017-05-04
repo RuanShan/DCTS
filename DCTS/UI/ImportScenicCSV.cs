@@ -253,10 +253,29 @@ namespace DCTS.CustomComponents
                         obj.route = temp1[8];
                         //obj.open_at = Convert.ToDateTime(temp1[1]);
                         //obj.close_at = Convert.ToDateTime(temp1[1]);
-                       
+
                         obj.ticket = temp1[9];
                         obj.tips = temp1[10];
-                        ctx.ComboLocations.Add(obj);
+
+                        #region 判断名称长度
+                        bool nameishave = false;
+                        bool hastitle = (temp1[3].Length > 0);
+                        if (hastitle)
+                        {
+                            ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
+                            if (lastLocation != null)
+                                nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Hotel && o.title == temp1[3]).Count() > 0);
+                        }
+                        #endregion
+                        if (nameishave == false && temp1[3].Length <= 100)
+                            ctx.ComboLocations.Add(obj);
+                        else
+                        {
+                            throw new Exception("导入[" + temp1[3] + "]请检查名称的长度或是否已存在");
+
+                            //MessageBox.Show("错误：请检查名称的长度或是否已存在！" + temp1[3], "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return false;
+                        }
                         ctx.SaveChanges();
                         if (arg.CurrentIndex % 5 == 0)
                         {

@@ -12,6 +12,8 @@ using DCTS.Uti;
 using DCTS.Bus;
 using MySql.Data.MySqlClient;
 using DCTS.CustomComponents;
+using System.IO;
+
 
 namespace DCTS.UI
 {
@@ -21,6 +23,7 @@ namespace DCTS.UI
         private static string NoOptionSelected = "所有";
         private List<ComboLocation> ScenicslList = null;
         private SortableBindingList<ComboLocation> sortabledinningsOrderList;
+
         public ScenicsControl()
         {
             InitializeComponent();
@@ -231,6 +234,47 @@ namespace DCTS.UI
 
         private void groupBox1_Enter(object sender, EventArgs e)
         {
+
+        }
+
+        private void dataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex == 2)
+            {
+                if (e.RowIndex < ScenicslList.Count)
+                {
+                    ComboLocation selectedItem = ScenicslList[e.RowIndex];
+                    long folername = selectedItem.id / 1000;
+                    if (selectedItem.img != null && selectedItem.img != "" && selectedItem.img != "\"\"")
+                    {
+                        string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\location_" + ComboLocationEnum.Scenic.ToString().ToLower() + "\\" + folername + "\\", selectedItem.img);
+
+                        //string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\locations\\" + folername + "\\", selectedItem.img);
+                        if (e.ColumnIndex == 2)
+                        {
+                            e.Value = GetImage1(lcoalPath);
+
+                        }
+                    }
+                }
+            }
+        }
+        public System.Drawing.Image GetImage1(string path)
+        {
+
+            if (File.Exists(path))
+            {
+
+                System.IO.FileStream fs = new System.IO.FileStream(path, System.IO.FileMode.Open);
+                System.Drawing.Image result = System.Drawing.Image.FromStream(fs);
+
+                fs.Close();
+
+                return result;
+            }
+            else
+                return null;
+
 
         }
 

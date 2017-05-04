@@ -341,9 +341,25 @@ namespace DCTS.CustomComponents
                         }
                         obj.recommended_dishes = temp1[11];
                         obj.tips = temp1[12];
+                        #region 判断名称长度
+                        bool nameishave = false;
+                        bool hastitle = (temp1[4].Length > 0);
+                        if (hastitle)
+                        {
+                            ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
+                            if (lastLocation != null)
+                                nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Dining && o.title == temp1[4]).Count() > 0);
+                        }
 
-
-                        ctx.ComboLocations.Add(obj);
+                        #endregion
+                        if (nameishave == false && temp1[4].Length <= 100)
+                            ctx.ComboLocations.Add(obj);
+                        else
+                        {
+                            throw new Exception("导入[" + temp1[4] + "]请检查名称的长度或是否已存在");
+                            //MessageBox.Show("错误：请检查名称的长度或是否已存在！" + temp1[4], "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return false;
+                        }
                         ctx.SaveChanges();
                         if (arg.CurrentIndex % 5 == 0)
                         {

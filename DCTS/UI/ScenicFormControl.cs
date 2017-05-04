@@ -25,15 +25,15 @@ namespace DCTS.UI
 
         public void InitializeDataSource()
         {
-                var nationList = DCTS.DB.GlobalCache.NationList;
-            
-                this.nationComboBox.DisplayMember = "title";
-                this.nationComboBox.ValueMember = "code";
-                this.nationComboBox.DataSource = nationList;
-                //var query = ctx.Scenics.OrderBy(o => o.id).Skip(offset).Take(pageSize);
-                //var list = this.entityDataSource1.CreateView(query);
-                //this.dataGridView.DataSource = list;
-            
+            var nationList = DCTS.DB.GlobalCache.NationList;
+
+            this.nationComboBox.DisplayMember = "title";
+            this.nationComboBox.ValueMember = "code";
+            this.nationComboBox.DataSource = nationList;
+            //var query = ctx.Scenics.OrderBy(o => o.id).Skip(offset).Take(pageSize);
+            //var list = this.entityDataSource1.CreateView(query);
+            //this.dataGridView.DataSource = list;
+
         }
 
         private void nationComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -48,7 +48,7 @@ namespace DCTS.UI
 
         }
 
-        public void FillFormByModel( ComboLocation scenic)
+        public void FillFormByModel(ComboLocation scenic)
         {
             // 查询图片是否存在时使用
             this.scenicId = scenic.id;
@@ -101,10 +101,10 @@ namespace DCTS.UI
             {
                 this.localAddressTextBox.Text = scenic.local_address;
             }
-            if (scenic.route!=null)
+            if (scenic.route != null)
             {
                 this.routeTextBox.Text = scenic.route;
-            } 
+            }
 
             //处理图片
             if (scenic.img.Length > 0)
@@ -120,7 +120,7 @@ namespace DCTS.UI
         {
             scenic.title = this.titleTextBox.Text;
             scenic.local_title = this.localTitleTextBox.Text;
-            
+
             scenic.nation = this.nationComboBox.Text;
             scenic.city = this.cityComboBox.Text;
             scenic.latlng = this.latlngTextBox.Text;
@@ -136,7 +136,7 @@ namespace DCTS.UI
 
         private void ScenicFormControl_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void findFileButton_Click(object sender, EventArgs e)
@@ -172,8 +172,35 @@ namespace DCTS.UI
                 {
                     this.errorProvider1.SetError(this.imgPathTextBox, string.Format("文件名<{0}>已在, 请使用其他文件名！", imgFileName));
                 }
-                else {
-                    this.errorProvider1.SetError(this.imgPathTextBox, string.Empty);                
+                else
+                {
+                    this.errorProvider1.SetError(this.imgPathTextBox, string.Empty);
+                }
+            }
+        }
+
+        private void titleTextBox_TextChanged(object sender, EventArgs e)
+        {
+            using (var ctx = new DctsEntities())
+            {
+                bool nameishave = false;
+                bool hastitle = (titleTextBox.Text.Length > 0);
+                if (hastitle)
+                {
+                    ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
+                    if (lastLocation != null)
+                        nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Scenic && o.title == titleTextBox.Text).Count() > 0);
+
+                    if (scenicId == 0)
+                    {
+                        if (nameishave == true || this.titleTextBox.Text.Length > 100)
+                            errorProvider1.SetError(titleTextBox, String.Format("错误：请检查名称的长度或是否已存在 {0}", titleTextBox.Text));
+                    }
+                    else
+                    {
+                        if (this.titleTextBox.Text.Length > 100)
+                            errorProvider1.SetError(titleTextBox, String.Format("错误：请检查名称的长度 {0}", titleTextBox.Text));
+                    }
                 }
             }
         }
