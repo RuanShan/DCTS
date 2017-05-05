@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ComLib;
@@ -37,56 +39,94 @@ namespace DCTS.CustomComponents
         #region csv 路径
         public static DataTable OpenCSV(string filePath)//从csv读取数据返回table
         {
-            System.Text.Encoding encoding = GetType(filePath); //Encoding.ASCII;//
-            DataTable dt = new DataTable();
-            System.IO.FileStream fs = new System.IO.FileStream(filePath, System.IO.FileMode.Open,
-                System.IO.FileAccess.Read);
-
-            System.IO.StreamReader sr = new System.IO.StreamReader(fs, encoding);
-
-            //记录每次读取的一行记录
-            string strLine = "";
-            //记录每行记录中的各字段内容
-            string[] aryLine = null;
-            string[] tableHead = null;
-            //标示列数
-            int columnCount = 0;
-            //标示是否是读取的第一行
-            bool IsFirst = true;
-            //逐行读取CSV中的数据
-            while ((strLine = sr.ReadLine()) != null)
+            try
             {
-                if (IsFirst == true)
+                System.Text.Encoding encoding = GetType(filePath); //Encoding.ASCII;//
+                DataTable dt = new DataTable();
+                System.IO.FileStream fs = new System.IO.FileStream(filePath, System.IO.FileMode.Open,
+                    System.IO.FileAccess.Read);
+
+                System.IO.StreamReader sr = new System.IO.StreamReader(fs, encoding);
+
+                //记录每次读取的一行记录
+                string strLine = "";
+                //记录每行记录中的各字段内容
+                string[] aryLine = null;
+                string[] tableHead = null;
+                //标示列数
+                int columnCount = 0;
+                //标示是否是读取的第一行
+                bool IsFirst = true;
+                //逐行读取CSV中的数据
+                //new
+                string s = string.Empty;
+                string src = string.Empty;
+                SortedList sl = new SortedList();
+
+                while ((strLine = sr.ReadLine()) != null)
                 {
-                    tableHead = strLine.Split(',');
-                    IsFirst = false;
-                    columnCount = tableHead.Length;
-                    //创建列
-                    for (int i = 0; i < columnCount; i++)
+                    if (IsFirst == true)
                     {
-                        DataColumn dc = new DataColumn(tableHead[i]);
-                        dt.Columns.Add(dc);
+                        tableHead = strLine.Split(',');
+                        IsFirst = false;
+                        columnCount = tableHead.Length;
+                        //创建列
+                        for (int i = 0; i < columnCount; i++)
+                        {
+                            DataColumn dc = new DataColumn(tableHead[i]);
+                            dt.Columns.Add(dc);
+                        }
+                    }
+                    else
+                    {
+                        aryLine = strLine.Split(',');
+                        DataRow dr = dt.NewRow();
+                        ////
+                        s = strLine;
+                        src = s.Replace("\"\"", "'");
+                        MatchCollection col = Regex.Matches(src, ",\"([^\"]+)\",", RegexOptions.ExplicitCapture);
+                        IEnumerator ie = col.GetEnumerator();
+                        while (ie.MoveNext())
+                        {
+                            string patn = ie.Current.ToString();
+                            int key = src.Substring(0, src.IndexOf(patn)).Split(',').Length;
+                            if (!sl.ContainsKey(key))
+                            {
+                                sl.Add(key, patn.Trim(new char[] { ',', '"' }).Replace("'", "\""));
+                                src = src.Replace(patn, ",,");
+                            }
+                        }
+                        string[] arr = src.Split(',');
+                        for (int i = 0; i < arr.Length; i++)
+                        {
+                            if (!sl.ContainsKey(i))
+                                sl.Add(i, arr[i]);
+                        }
+                        //aryLine = sl;
+                        ///
+                        for (int j = 0; j < columnCount; j++)
+                        {
+                            //dr[j] = aryLine[j];
+                            dr[j] = sl[j];
+                        }
+
+                        dt.Rows.Add(dr);
                     }
                 }
-                else
+                if (aryLine != null && aryLine.Length > 0)
                 {
-                    aryLine = strLine.Split(',');
-                    DataRow dr = dt.NewRow();
-                    for (int j = 0; j < columnCount; j++)
-                    {
-                        dr[j] = aryLine[j];
-                    }
-                    dt.Rows.Add(dr);
+                    dt.DefaultView.Sort = tableHead[0] + " " + "asc";
                 }
-            }
-            if (aryLine != null && aryLine.Length > 0)
-            {
-                dt.DefaultView.Sort = tableHead[0] + " " + "asc";
-            }
 
-            sr.Close();
-            fs.Close();
-            return dt;
+                sr.Close();
+                fs.Close();
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("" + ex);
+                throw;
+            }
         }
 
         public static System.Text.Encoding GetType(string FILE_NAME)
@@ -225,57 +265,108 @@ namespace DCTS.CustomComponents
                     foreach (DataColumn column in dt.Columns)
                     {
                         var text = row[column];
-                        texi = texi + "\t" + row[column];
+                        texi = texi + "__" + row[column];
                     }
                     using (var ctx = new DctsEntities())
                     {
-                        string[] temp1 = System.Text.RegularExpressions.Regex.Split(texi, "\t");
+                        string[] temp1 = System.Text.RegularExpressions.Regex.Split(texi, "__");
 
+                        #region 自己模板
+                        ////判断国家是否存在                       
+                        //Nation order = this.NationList.Find(o => o.title == temp1[1]);
+                        //if (order == null || order.title == null || order.title == "")
+                        //{
+                        //    e.Result = "导入[" + temp1[4] + "]国家信息在系统中不存在";
+                        //    throw new Exception("导入[" + temp1[4] + "]国家信息在系统中不存在");
+                        //    //continue;
+                        //}
+
+
+                        //var obj = ctx.ComboLocations.Create();
+                        //obj.ltype = (int)ComboLocationEnum.Scenic;
+                        //obj.nation = temp1[1];
+                        //obj.city = temp1[2];
+                        //obj.title = temp1[3];
+                        //obj.local_title = temp1[4];
+                        //obj.img = temp1[5];
+                        //obj.latlng = temp1[6];
+                        //obj.local_address = temp1[7];
+                        //obj.route = temp1[8];
+                        ////obj.open_at = Convert.ToDateTime(temp1[1]);
+                        ////obj.close_at = Convert.ToDateTime(temp1[1]);
+
+                        //obj.ticket = temp1[9];
+                        //obj.tips = temp1[10];
+
+                        //#region 判断名称长度
+                        //bool nameishave = false;
+                        //bool hastitle = (temp1[3].Length > 0);
+                        //if (hastitle)
+                        //{
+                        //    ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
+                        //    if (lastLocation != null)
+                        //        nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Hotel && o.title == temp1[3]).Count() > 0);
+                        //}
+                        //#endregion
+                        //if (nameishave == false && temp1[3].Length <= 100)
+                        //    ctx.ComboLocations.Add(obj);
+                        //else
+                        //{
+                        //    throw new Exception("导入[" + temp1[3] + "]请检查名称的长度或是否已存在");
+
+                        //    //MessageBox.Show("错误：请检查名称的长度或是否已存在！" + temp1[3], "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //    return false;
+                        //} 
+
+                        #endregion
+
+                        #region 新模板
                         //判断国家是否存在                       
-                        Nation order = this.NationList.Find(o => o.title == temp1[1]);
+                        Nation order = this.NationList.Find(o => o.title == temp1[2]);
                         if (order == null || order.title == null || order.title == "")
                         {
                             e.Result = "导入[" + temp1[4] + "]国家信息在系统中不存在";
                             throw new Exception("导入[" + temp1[4] + "]国家信息在系统中不存在");
                             //continue;
                         }
-
-
                         var obj = ctx.ComboLocations.Create();
                         obj.ltype = (int)ComboLocationEnum.Scenic;
-                        obj.nation = temp1[1];
-                        obj.city = temp1[2];
-                        obj.title = temp1[3];
-                        obj.local_title = temp1[4];
-                        obj.img = temp1[5];
+                        obj.nation = temp1[2];
+                        obj.city = temp1[3];
+                        obj.title = temp1[4];
+                        obj.local_title = temp1[5];
+                        //obj.img = temp1[5];
                         obj.latlng = temp1[6];
                         obj.local_address = temp1[7];
                         obj.route = temp1[8];
                         //obj.open_at = Convert.ToDateTime(temp1[1]);
                         //obj.close_at = Convert.ToDateTime(temp1[1]);
 
-                        obj.ticket = temp1[9];
-                        obj.tips = temp1[10];
+                        obj.ticket = temp1[10];
+                        obj.tips = temp1[11];
 
                         #region 判断名称长度
                         bool nameishave = false;
-                        bool hastitle = (temp1[3].Length > 0);
+                        bool hastitle = (temp1[4].Length > 0);
                         if (hastitle)
                         {
                             ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
                             if (lastLocation != null)
-                                nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Hotel && o.title == temp1[3]).Count() > 0);
+                                nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Hotel && o.title == obj.title).Count() > 0);
                         }
                         #endregion
-                        if (nameishave == false && temp1[3].Length <= 100)
+                        if (nameishave == false && temp1[4].Length <= 100)
                             ctx.ComboLocations.Add(obj);
                         else
                         {
                             throw new Exception("导入[" + temp1[3] + "]请检查名称的长度或是否已存在");
 
-                            //MessageBox.Show("错误：请检查名称的长度或是否已存在！" + temp1[3], "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                             return false;
                         }
+
+
+                        #endregion
                         ctx.SaveChanges();
                         if (arg.CurrentIndex % 5 == 0)
                         {
