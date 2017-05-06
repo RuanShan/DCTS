@@ -33,6 +33,8 @@
             this.addLocationButton = new System.Windows.Forms.Button();
             this.delDayButton = new System.Windows.Forms.Button();
             this.dayDataGridView = new System.Windows.Forms.DataGridView();
+            this.dayColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dayTitleColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dayDetailDataGridView = new System.Windows.Forms.DataGridView();
             this.dayDetailBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.moveDownButton = new System.Windows.Forms.Button();
@@ -45,8 +47,6 @@
             this.addBlankButton = new System.Windows.Forms.Button();
             this.pageTitleLabel = new System.Windows.Forms.Label();
             this.backButton = new System.Windows.Forms.Button();
-            this.dayColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dayTitleColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.positionColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.locationTypeColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
@@ -103,7 +103,7 @@
             this.dayDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dayDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dayColumn,
-            this.dayTitleColumn1});
+            this.dayTitleColumn});
             this.dayDataGridView.Location = new System.Drawing.Point(3, 55);
             this.dayDataGridView.MultiSelect = false;
             this.dayDataGridView.Name = "dayDataGridView";
@@ -114,7 +114,22 @@
             this.dayDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dayDataGridView.Size = new System.Drawing.Size(192, 259);
             this.dayDataGridView.TabIndex = 8;
+            this.dayDataGridView.CurrentCellChanged += new System.EventHandler(this.dayDataGridView_CurrentCellChanged);
             this.dayDataGridView.SelectionChanged += new System.EventHandler(this.dayDataGridView_SelectionChanged);
+            // 
+            // dayColumn
+            // 
+            this.dayColumn.DataPropertyName = "day";
+            this.dayColumn.HeaderText = "天数";
+            this.dayColumn.Name = "dayColumn";
+            this.dayColumn.ReadOnly = true;
+            this.dayColumn.Width = 60;
+            // 
+            // dayTitleColumn
+            // 
+            this.dayTitleColumn.DataPropertyName = "title";
+            this.dayTitleColumn.HeaderText = "名称";
+            this.dayTitleColumn.Name = "dayTitleColumn";
             // 
             // dayDetailDataGridView
             // 
@@ -171,7 +186,6 @@
             this.selectedLocationTextBox.Name = "selectedLocationTextBox";
             this.selectedLocationTextBox.Size = new System.Drawing.Size(100, 21);
             this.selectedLocationTextBox.TabIndex = 12;
-            this.selectedLocationTextBox.Visible = false;
             // 
             // selectDayTextBox
             // 
@@ -180,7 +194,6 @@
             this.selectDayTextBox.Name = "selectDayTextBox";
             this.selectDayTextBox.Size = new System.Drawing.Size(100, 21);
             this.selectDayTextBox.TabIndex = 12;
-            this.selectDayTextBox.Visible = false;
             this.selectDayTextBox.TextChanged += new System.EventHandler(this.selectDayTextBox_TextChanged);
             // 
             // removeLocationButton
@@ -249,20 +262,6 @@
             this.backButton.UseVisualStyleBackColor = true;
             this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
-            // dayColumn
-            // 
-            this.dayColumn.DataPropertyName = "day";
-            this.dayColumn.HeaderText = "天数";
-            this.dayColumn.Name = "dayColumn";
-            this.dayColumn.ReadOnly = true;
-            this.dayColumn.Width = 60;
-            // 
-            // dayTitleColumn1
-            // 
-            this.dayTitleColumn1.DataPropertyName = "title";
-            this.dayTitleColumn1.HeaderText = "名称";
-            this.dayTitleColumn1.Name = "dayTitleColumn1";
-            // 
             // entityDataSource1
             // 
             this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
@@ -284,13 +283,13 @@
             // 
             // locationIdColumn1
             // 
-            this.locationIdColumn1.DataPropertyName = "locationId";
+            this.locationIdColumn1.DataPropertyName = "location_id";
             this.locationIdColumn1.HeaderText = "locationId";
             this.locationIdColumn1.Name = "locationIdColumn1";
             // 
             // dayIdColumn1
             // 
-            this.dayIdColumn1.DataPropertyName = "dayId";
+            this.dayIdColumn1.DataPropertyName = "id";
             this.dayIdColumn1.HeaderText = "dayId";
             this.dayIdColumn1.Name = "dayIdColumn1";
             // 
@@ -350,7 +349,7 @@
         private System.Windows.Forms.Label pageTitleLabel;
         private System.Windows.Forms.Button backButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn dayColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dayTitleColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dayTitleColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn positionColumn1;
         private System.Windows.Forms.DataGridViewComboBoxColumn locationTypeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn locationIdColumn1;

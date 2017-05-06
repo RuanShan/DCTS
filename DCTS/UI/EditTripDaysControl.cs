@@ -20,7 +20,7 @@ namespace DCTS.UI
         public int ModelId { get; set; }
 
         public Trip Model { get; set; }
-        public List<TripDay> DayList { get; set; }
+        List<TripDay> dayList;
         List<DayLocation> dayLocationList;
         ChooseLocaltionForm localtionForm;
         
@@ -48,7 +48,7 @@ namespace DCTS.UI
 
         public void BeginActive()
         {
-            dayTitleColumn1.Width = dayDataGridView.ClientSize.Width - 60 - 3;
+            dayTitleColumn.Width = dayDataGridView.ClientSize.Width - 60 - 3;
             localtionTitleColumn.Width = dayDetailDataGridView.ClientSize.Width - 403;
 
             InitializeDataSource();
@@ -59,11 +59,9 @@ namespace DCTS.UI
         {
             using (var ctx = new DctsEntities())
             {
-                ctx.Configuration.LazyLoadingEnabled = false;
-
                 this.Model = ctx.Trips.Find(ModelId);
-                this.DayList = ctx.TripDays.Where(o => o.trip_id == ModelId).OrderBy(o => o.day).ToList();
-                this.dayLocationList = ctx.DayLocations.Include("ComboLocation").Where(o => o.trip_id == ModelId).OrderBy(o => o.day).ToList();                
+                this.dayList = ctx.TripDays.Where(o => o.trip_id == ModelId).OrderBy(o => o.day).ToList();
+                this.dayLocationList = ctx.DayLocations.Include("ComboLocation").Where(o => o.trip_id == ModelId).OrderBy(o => o.day_id).ThenBy(o=>o.position).ToList();                
             }
             InitializeDayListBox(selectDay, selectLocationPosition);
         }
@@ -75,15 +73,16 @@ namespace DCTS.UI
             //for (int i = 1; i <= Model.days; i++)
             //{
             //    list.Add(new MockEntity { Id = i, FullName = String.Format("第 {0} 天", i) });
-            //}
+            //}           
             //this.dayDataGridView.DataSource = null; //重置一下，添加dayLocation時需要更新 活动列表。
-            this.dayDataGridView.DataSource = this.DayList;
+            this.dayDataGridView.DataSource = this.dayList;
 
             //http://stackoverflow.com/questions/6265228/selecting-a-row-in-datagridview-programmatically
             if (day > 0)
             {
 
-                dayDataGridView.CurrentCell = dayDataGridView.Rows[day - 1].Cells[0]; 
+                var cell = dayDataGridView.Rows[day - 1].Cells[0];
+                dayDataGridView.CurrentCell = cell;
                 dayDataGridView.Rows[day - 1].Selected = true;
             }
 
@@ -104,7 +103,7 @@ namespace DCTS.UI
             var dayLocations = this.dayLocationList.Where(o => o.day_id == dayId).Select(o => new DayLocationView()
             {
                 ltype = o.ComboLocation.ltype,
-                id = o.id, locationId = o.ComboLocation.id, title = o.ComboLocation.title, position = o.position }).OrderBy(o=>o.position).ToList();
+                id = o.id, location_id = o.ComboLocation.id, title = o.ComboLocation.title, position = o.position }).OrderBy(o=>o.position).ToList();
             dayDetailBindingSource.DataSource = dayLocations;
             this.dayDetailDataGridView.DataSource = dayDetailBindingSource;
 
@@ -161,15 +160,11 @@ namespace DCTS.UI
             }
         }
 
+        //https://msdn.microsoft.com/en-us/library/system.windows.forms.datagridview.currentcell.aspx
+        //When you change the value of this property, the SelectionChanged event occurs before the CurrentCellChanged event. Any SelectionChanged event handler accessing the CurrentCell property at this time will get its previous value.
         private void dayDataGridView_SelectionChanged(object sender, EventArgs e)
         {
-            var tripDay = GetSelectedTripDay();
-            Console.WriteLine("dayDataGridView_SelectionChanged day= " + tripDay.day.ToString());
-            if (tripDay != null)
-            {
-                InitializeDayDetailListBox(tripDay.id);
-            
-            }
+
         }
 
 
@@ -295,6 +290,17 @@ namespace DCTS.UI
                 tripDay = row.DataBoundItem as TripDay;                
             }
             return tripDay;
+        }
+
+        private void dayDataGridView_CurrentCellChanged(object sender, EventArgs e)
+        {
+            var tripDay = GetSelectedTripDay();
+            if (tripDay != null)
+            {
+                Console.WriteLine("dayDataGridView_CurrentCellChanged day= " + tripDay.day.ToString());
+                InitializeDayDetailListBox(tripDay.id);
+
+            }
         }
     }
 }

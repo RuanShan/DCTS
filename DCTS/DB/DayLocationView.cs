@@ -13,7 +13,7 @@ namespace DCTS.DB
         public int id {get; set;} 
         public int ltype { get; set; }
     
-        public int locationId {get; set;}
+        public int location_id {get; set;}
         public int position {get; set;}
         public string title {get; set;}
     }
