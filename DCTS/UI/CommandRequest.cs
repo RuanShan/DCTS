@@ -12,9 +12,9 @@ namespace DCTS.UI
     {
         private CommandRequestEnum command;
 
-        public long ModelId { get; set; }
+        public int ModelId { get; set; }
 
-        public CommandRequestEventArgs(CommandRequestEnum command, long modelId =0)
+        public CommandRequestEventArgs(CommandRequestEnum command, int modelId =0)
         {
             this.command = command;
             this.ModelId = modelId;

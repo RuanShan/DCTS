@@ -17,10 +17,11 @@ namespace DCTS.UI
     {
         public event EventHandler CommandRequestEvent;
 
-        public long ModelId { get; set; }
+        public int ModelId { get; set; }
 
         public Trip Model { get; set; }
-        public List<Day> DayList { get; set; }
+        public List<TripDay> DayList { get; set; }
+        List<DayLocation> dayLocationList;
         ChooseLocaltionForm localtionForm;
         
         public EditTripDaysControl()
@@ -47,7 +48,7 @@ namespace DCTS.UI
 
         public void BeginActive()
         {
-            dayNameColumn.Width = dayDataGridView.ClientSize.Width - 3;
+            dayTitleColumn1.Width = dayDataGridView.ClientSize.Width - 60 - 3;
             localtionTitleColumn.Width = dayDetailDataGridView.ClientSize.Width - 403;
 
             InitializeDataSource();
@@ -56,23 +57,27 @@ namespace DCTS.UI
 
         public void InitializeDataSource(int selectDay = 0, int selectLocationPosition = 0)
         {
-             using (var ctx = new DctsEntities())
+            using (var ctx = new DctsEntities())
             {
+                ctx.Configuration.LazyLoadingEnabled = false;
+
                 this.Model = ctx.Trips.Find(ModelId);
-                this.DayList = ctx.Days.Include("ComboLocation").Where(o => o.tripId == ModelId).OrderBy(o => o.day).ToList();
+                this.DayList = ctx.TripDays.Where(o => o.trip_id == ModelId).OrderBy(o => o.day).ToList();
+                this.dayLocationList = ctx.DayLocations.Include("ComboLocation").Where(o => o.trip_id == ModelId).OrderBy(o => o.day).ToList();                
             }
-             InitializeDayListBox(selectDay, selectLocationPosition);
+            InitializeDayListBox(selectDay, selectLocationPosition);
         }
 
         public void InitializeDayListBox(int day = 0, int selectLocationPosition = 0)
         {
             this.pageTitleLabel.Text = string.Format("编辑行程<{0}>", Model.title);
-            List<MockEntity> list = new List<MockEntity>();
-            for (int i = 1; i <= Model.days; i++)
-            {
-                list.Add(new MockEntity { Id = i, FullName = String.Format("第 {0} 天", i) });
-            }
-            this.dayDataGridView.DataSource = list;
+            //List<MockEntity> list = new List<MockEntity>();
+            //for (int i = 1; i <= Model.days; i++)
+            //{
+            //    list.Add(new MockEntity { Id = i, FullName = String.Format("第 {0} 天", i) });
+            //}
+            //this.dayDataGridView.DataSource = null; //重置一下，添加dayLocation時需要更新 活动列表。
+            this.dayDataGridView.DataSource = this.DayList;
 
             //http://stackoverflow.com/questions/6265228/selecting-a-row-in-datagridview-programmatically
             if (day > 0)
@@ -94,11 +99,12 @@ namespace DCTS.UI
             this.selectedLocationTextBox.Text = selectLocationPosition.ToString();
         }
 
-        public void InitializeDayDetailListBox( int day )
+        public void InitializeDayDetailListBox( int dayId )
         {
-            var dayLocations = this.DayList.Where(o => o.day == day).Select(o => new DayLocation() {
+            var dayLocations = this.dayLocationList.Where(o => o.day_id == dayId).Select(o => new DayLocationView()
+            {
                 ltype = o.ComboLocation.ltype,
-                dayId = o.id, locationId = o.ComboLocation.id, title = o.ComboLocation.title, position = o.position }).OrderBy(o=>o.position).ToList();
+                id = o.id, locationId = o.ComboLocation.id, title = o.ComboLocation.title, position = o.position }).OrderBy(o=>o.position).ToList();
             dayDetailBindingSource.DataSource = dayLocations;
             this.dayDetailDataGridView.DataSource = dayDetailBindingSource;
 
@@ -123,11 +129,10 @@ namespace DCTS.UI
             {
                 if (localtionForm.SelectedLocation != null)
                 {
-                    var day = GetSelectedDay();
-                    long locationId = localtionForm.SelectedLocation.id;
-                    TripBusiness.AddLocation(this.ModelId, day, locationId);
-                    InitializeDataSource(day);
-                    //InitializeDayDetailListBox(day);
+                    var tripDay = GetSelectedTripDay();
+                    int locationId = localtionForm.SelectedLocation.id;
+                    TripBusiness.AddLocation(tripDay.id, locationId);
+                    InitializeDataSource(tripDay.day);
                 }
             
             }
@@ -135,33 +140,34 @@ namespace DCTS.UI
 
         private void addDayButton_Click(object sender, EventArgs e)
         {
-            TripBusiness.AddDay(ModelId);
-            int selectDay = Model.days + 1;
-            InitializeDataSource(selectDay);
+            int day = GetSelectedDay();
+            TripBusiness.AddDay(ModelId, day);
+
+            InitializeDataSource(day+1);
 
         }
 
         private void delDayButton_Click(object sender, EventArgs e)
         {
-            
-            var day =  GetSelectedDay();
-            if( day >0 )
+
+            var tripDay = GetSelectedTripDay();
+            if (tripDay != null)
             {
-                if (MessageHelper.DeleteConfirm(string.Format("确定删除<第{0}天>的行程吗？", day)))
+                if (MessageHelper.DeleteConfirm(string.Format("确定删除<第{0}天>的行程吗？", tripDay.day)))
                 {
-                    TripBusiness.DeleteDay(ModelId, (int) day);                     
-                    InitializeDataSource(day-1);
+                    TripBusiness.DeleteDay(tripDay.id);
+                    InitializeDataSource(tripDay.day - 1);
                 }
             }
         }
 
         private void dayDataGridView_SelectionChanged(object sender, EventArgs e)
         {
-            var day = GetSelectedDay();
-            Console.WriteLine("dayDataGridView_SelectionChanged day= " + day.ToString());
-            if (day > 0)
+            var tripDay = GetSelectedTripDay();
+            Console.WriteLine("dayDataGridView_SelectionChanged day= " + tripDay.day.ToString());
+            if (tripDay != null)
             {
-                InitializeDayDetailListBox(day);
+                InitializeDayDetailListBox(tripDay.id);
             
             }
         }
@@ -177,7 +183,7 @@ namespace DCTS.UI
             {
                  
                 int newPosition =  dayLocation.position -1;
-                TripBusiness.UpdateDayLocationPosition(dayLocation.dayId,newPosition);
+                TripBusiness.UpdateDayLocationPosition(dayLocation.id, newPosition);
                 InitializeDataSource(day,newPosition );
                  
             }
@@ -195,20 +201,20 @@ namespace DCTS.UI
 
                 int newPosition =  dayLocation.position +1;
 
-                TripBusiness.UpdateDayLocationPosition(dayLocation.dayId, newPosition);
+                TripBusiness.UpdateDayLocationPosition(dayLocation.id, newPosition);
                 InitializeDataSource(day, newPosition);
                 
             }
         }
 
 
-        private DayLocation GetSelectedDayLocation()
+        private DayLocationView GetSelectedDayLocation()
         {
-            DayLocation dayLocation = null;
+            DayLocationView dayLocation = null;
             var row = dayDetailDataGridView.CurrentRow;
             if (row != null)
             {
-                dayLocation = row.DataBoundItem as DayLocation;
+                dayLocation = row.DataBoundItem as DayLocationView;
             }
             return dayLocation;
         }
@@ -219,8 +225,8 @@ namespace DCTS.UI
             var row = dayDataGridView.CurrentRow;
             if (row != null)
             {
-                var mockEntity = row.DataBoundItem as MockEntity;
-                day = (int)mockEntity.Id;
+                var dayTrip = row.DataBoundItem as TripDay;
+                day = dayTrip.day;
             }
             return day;
         }
@@ -253,7 +259,7 @@ namespace DCTS.UI
             var dayLocation = GetSelectedDayLocation();
             if (dayLocation != null)
             {
-                TripBusiness.DeleteDayLocation(dayLocation.dayId);
+                TripBusiness.DeleteDayLocation(dayLocation.id);
                 InitializeDataSource(day);
             }
         }
@@ -265,10 +271,10 @@ namespace DCTS.UI
 
         private void addBlankButton_Click(object sender, EventArgs e)
         {          
-            var day = GetSelectedDay();
-            long locationId = 0;
-            TripBusiness.AddLocation(this.ModelId, day, locationId);
-            InitializeDataSource(day);
+            var tripDay = GetSelectedTripDay();
+            int locationId = 0;
+            TripBusiness.AddLocation(tripDay.id, locationId);
+            InitializeDataSource(tripDay.day);
         }
 
         private void backButton_Click(object sender, EventArgs e)
@@ -276,6 +282,19 @@ namespace DCTS.UI
             var eventArgs = new CommandRequestEventArgs(CommandRequestEnum.TripList);
             this.CommandRequestEvent(this, eventArgs);
   
+        }
+
+
+        private TripDay GetSelectedTripDay()
+        {
+            TripDay tripDay = null;
+
+            var row = dayDataGridView.CurrentRow;
+            if (row != null)
+            {
+                tripDay = row.DataBoundItem as TripDay;                
+            }
+            return tripDay;
         }
     }
 }

@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace DCTS.DB
 {
-    class DayLocation
+    // join DayLocation + ComboLocation
+    class DayLocationView
     {
-        public long dayId {get; set;}
+        // DayLocation.id
+        public int id {get; set;} 
         public int ltype { get; set; }
     
-        public long locationId {get; set;}
+        public int locationId {get; set;}
         public int position {get; set;}
         public string title {get; set;}
     }

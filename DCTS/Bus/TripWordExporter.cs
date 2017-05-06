@@ -15,16 +15,16 @@ namespace DCTS.Bus
         long TripId {get; set;}
 
         Trip trip;
-        List<Day> days;
+        List<DayLocation> days;
 
-        public TripWordExporter( long tripId)
+        public TripWordExporter( long trip_id)
         {
-            TripId = tripId;
+            TripId = trip_id;
 
             using (var ctx = new DctsEntities())
             {
                 trip = ctx.Trips.Find(TripId);
-                days = ctx.Days.Include("ComboLocation").Where(o => o.tripId == TripId).OrderBy(o => o.day).ThenBy(o => o.position).ToList(); 
+                days = ctx.DayLocations.Include("ComboLocation").Where(o => o.trip_id == TripId).OrderBy(o => o.day).ThenBy(o => o.position).ToList(); 
             }
         }
 

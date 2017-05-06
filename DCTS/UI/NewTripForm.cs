@@ -23,12 +23,21 @@ namespace DCTS.UI
 
             using (var ctx = new DctsEntities())
             {
-                var obj = ctx.Trips.Create();
-                obj.title = this.titleTextBox.Text;
-                obj.memo = this.memoTextBox.Text;
-                obj.days = Convert.ToInt32( this.daysNumericUpDown.Value );
 
-                ctx.Trips.Add(obj);
+                var trip = new Trip();
+                trip.title = this.titleTextBox.Text;
+                trip.memo = this.memoTextBox.Text;
+                trip.days = Convert.ToInt32(this.daysNumericUpDown.Value);
+                
+                for( int i=0; i<trip.days;i++)
+                {
+                    var tripDay = new TripDay();
+                    tripDay.day = i + 1;
+                    tripDay.title = String.Format("第{0}天", i + 1);
+                    trip.TripDays.Add(tripDay);
+                    //ctx.TripDays.Add(tripDay);
+                }
+                ctx.Trips.Add(trip);
                 ctx.SaveChanges();
             }
         }
