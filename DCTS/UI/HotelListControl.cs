@@ -83,7 +83,11 @@ namespace DCTS.UI
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            if (MessageBox.Show(" 确定删除 ?", "删除确认", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+            }
+            else
+                return;
             var oids = GetOrderIdsBySelectedGridCell();
             using (var ctx = new DctsEntities())
             {
@@ -198,6 +202,7 @@ namespace DCTS.UI
                 count = ctx.Database.SqlQuery<int>(sqlCount, condition_params.ToArray()).First();
                 string sql = string.Format(" SELECT * FROM combolocations {0} LIMIT {1} OFFSET {2}", conditions, limit, offset);
                 hotelList = ctx.Database.SqlQuery<ComboLocation>(sql, condition_params.ToArray()).ToList();
+                count = hotelList.Count;
 
                 //DinningList = (from s in ctx.ComboLocations
                 //               where s.title == title
@@ -277,8 +282,9 @@ namespace DCTS.UI
                     long folername = selectedItem.id / 1000;
                     if (selectedItem.img != null && selectedItem.img != "")
                     {
+                     //   string path = Path.Combine(ImageBasePath, "location_" + ComboLocationEnum.Scenic.ToString().ToLower());
 
-                        string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\locations\\" + folername + "\\", selectedItem.img);
+                        string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\location_" + ComboLocationEnum.Hotel.ToString().ToLower() + "\\" + folername + "\\", selectedItem.img);
                         if (e.ColumnIndex == 4)
                         {
                             e.Value = GetImage1(lcoalPath);
@@ -293,7 +299,8 @@ namespace DCTS.UI
         }
         public System.Drawing.Image GetImage1(string path)
         {
-
+            //C:\mysteap\work_office\ProjectOut\RuanShanLvYou\DCTS\DCTS\bin\Debug\\data\images\locations\0\QQ截图20170105225656.png
+            //C:\mysteap\work_office\ProjectOut\RuanShanLvYou\DCTS\DCTS\bin\Debug\data\images\location_scenic\0
             if (File.Exists(path))
             {
 

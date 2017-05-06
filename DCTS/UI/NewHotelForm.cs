@@ -23,6 +23,9 @@ namespace DCTS.UI
             changeid = 0;
             if (maintype == "Edit")
             {
+                label2.Text = "编辑住宿";
+                this.Text = "编辑住宿";
+                changeid = obj.id;
                 //obj.ltype = (int)ComboLocationEnum.Hotel;
                 this.nationComboBox.Text = obj.nation;
                 this.cityComboBox.Text = obj.city;
@@ -41,7 +44,7 @@ namespace DCTS.UI
                 parking.Text = obj.parking;
                 reception.Text = obj.reception;
                 kitchen.Text = obj.kitchen;
-                changeid = obj.id;
+
             }
         }
 
@@ -82,7 +85,7 @@ namespace DCTS.UI
                     string copyfilename = "";
                     bool hasImg = (imgFilePath.Length > 0);
                     bool existSameImage = false;
-
+                    bool nameishave = false;
                     if (hasImg)
                     {
                         copyfilename = Path.GetFileName(imgFilePath);
@@ -98,7 +101,13 @@ namespace DCTS.UI
                         }
 
                     }
-
+                    bool hastitle = (titleTextBox.Text.Length > 0);
+                    if (hastitle)
+                    {
+                        ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
+                        if (lastLocation != null)
+                            nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Hotel && o.title == titleTextBox.Text).Count() > 0);
+                    }
                     #endregion
                     if (changeid == 0)
                     {
@@ -129,7 +138,13 @@ namespace DCTS.UI
                         obj.kitchen = kitchen.Text;
                         obj.tips = this.textBox6.Text;
                         ctx.ComboLocations.Add(obj);
-                        ctx.SaveChanges();
+                        if (nameishave == false && this.titleTextBox.Text.Length <= 100)
+                            ctx.SaveChanges();
+                        else
+                        {
+                            MessageBox.Show("错误：请检查名称的长度或是否已存在！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
                         if (hasImg)
                         {
                             string copyToPath = EntityPathConfig.LocationImagePath(obj);
@@ -167,7 +182,8 @@ namespace DCTS.UI
 
                         if (hasImg)
                         {
-                            string copyToPath = EntityPathConfig.LocationImagePath(obj);
+                            string copyToPath = EntityPathConfig.LocationHotelImagePath(obj);
+                            if (!File.Exists(copyToPath))        
                             File.Copy(imgFilePath, copyToPath);
                         }
                     }
@@ -266,6 +282,32 @@ namespace DCTS.UI
         private void NewDinningsForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void titleTextBox_TextChanged(object sender, EventArgs e)
+        {
+            using (var ctx = new DctsEntities())
+            {
+                bool nameishave = false;
+                bool hastitle = (titleTextBox.Text.Length > 0);
+                if (hastitle)
+                {
+                    ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
+                    if (lastLocation != null)
+                        nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Hotel && o.title == titleTextBox.Text).Count() > 0);
+
+                    if (changeid == 0)
+                    {
+                        if (nameishave == true || this.titleTextBox.Text.Length > 100)
+                            errorProvider1.SetError(titleTextBox, String.Format("错误：请检查名称的长度或是否已存在 {0}", titleTextBox.Text));
+                    }
+                    else
+                    {
+                        if (this.titleTextBox.Text.Length > 100)
+                            errorProvider1.SetError(titleTextBox, String.Format("错误：请检查名称的长度 {0}", titleTextBox.Text));
+                    }
+                }
+            }
         }
     }
 }
