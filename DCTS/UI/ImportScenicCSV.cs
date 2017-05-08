@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Validation;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -23,9 +24,13 @@ namespace DCTS.CustomComponents
         public ImportScenicCSV()
         {
             InitializeComponent();
-            var nationList = DCTS.DB.GlobalCache.NationList;
-            NationList = new List<Nation>();
-            NationList = nationList.ToList();
+            //var nationList = DCTS.DB.GlobalCache.NationList;
+            //NationList = new List<Nation>();
+            //NationList = nationList.ToList();
+             using (var ctx = new DctsEntities())
+                
+            NationList = ctx.Nations.ToList();
+
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -82,16 +87,23 @@ namespace DCTS.CustomComponents
                         aryLine = strLine.Split(',');
                         DataRow dr = dt.NewRow();
                         ////
+                        sl = new SortedList();
+                        src = string.Empty;
+                        s = string.Empty;
                         s = strLine;
                         src = s.Replace("\"\"", "'");
                         MatchCollection col = Regex.Matches(src, ",\"([^\"]+)\",", RegexOptions.ExplicitCapture);
                         IEnumerator ie = col.GetEnumerator();
+                        bool splitdouhao = false;
+
                         while (ie.MoveNext())
                         {
                             string patn = ie.Current.ToString();
                             int key = src.Substring(0, src.IndexOf(patn)).Split(',').Length;
                             if (!sl.ContainsKey(key))
                             {
+                                splitdouhao = true;
+
                                 sl.Add(key, patn.Trim(new char[] { ',', '"' }).Replace("'", "\""));
                                 src = src.Replace(patn, ",,");
                             }
@@ -102,12 +114,15 @@ namespace DCTS.CustomComponents
                             if (!sl.ContainsKey(i))
                                 sl.Add(i, arr[i]);
                         }
-                        //aryLine = sl;
+
+                        // aryLine = sl;
                         ///
                         for (int j = 0; j < columnCount; j++)
                         {
-                            //dr[j] = aryLine[j];
-                            dr[j] = sl[j];
+                            if (splitdouhao == false)
+                                dr[j] = aryLine[j];
+                            else
+                                dr[j] = sl[j];
                         }
 
                         dt.Rows.Add(dr);
@@ -257,18 +272,22 @@ namespace DCTS.CustomComponents
                 arg.OrderCount = dt.Rows.Count;
                 int i = 1;
                 int progress = 0;
-                foreach (DataRow row in dt.Rows)
+                using (var ctx = new DctsEntities())
                 {
-                    arg.CurrentIndex = i + 1;
-                    progress = Convert.ToInt16(((i + 1) * 1.0 / dt.Rows.Count) * 100);
-                    string texi = "";
-                    foreach (DataColumn column in dt.Columns)
+                    foreach (DataRow row in dt.Rows)
                     {
-                        var text = row[column];
-                        texi = texi + "__" + row[column];
-                    }
-                    using (var ctx = new DctsEntities())
-                    {
+
+
+                        var obj = ctx.ComboLocations.Create();
+                        arg.CurrentIndex = i + 1;
+                        progress = Convert.ToInt16(((i + 1) * 1.0 / dt.Rows.Count) * 100);
+                        string texi = "";
+                        foreach (DataColumn column in dt.Columns)
+                        {
+                            var text = row[column];
+                            texi = texi + "__" + row[column];
+                        }
+
                         string[] temp1 = System.Text.RegularExpressions.Regex.Split(texi, "__");
 
                         #region 自己模板
@@ -329,7 +348,7 @@ namespace DCTS.CustomComponents
                             throw new Exception("导入[" + temp1[4] + "]国家信息在系统中不存在");
                             //continue;
                         }
-                        var obj = ctx.ComboLocations.Create();
+
                         obj.ltype = (int)ComboLocationEnum.Scenic;
                         obj.nation = temp1[2];
                         obj.city = temp1[3];
@@ -342,7 +361,7 @@ namespace DCTS.CustomComponents
                         //obj.open_at = Convert.ToDateTime(temp1[1]);
                         //obj.close_at = Convert.ToDateTime(temp1[1]);
 
-                        obj.ticket = temp1[10];
+                        obj.ticket = temp1[10].Trim();
                         obj.tips = temp1[11];
 
                         #region 判断名称长度
@@ -367,23 +386,26 @@ namespace DCTS.CustomComponents
 
 
                         #endregion
-                        ctx.SaveChanges();
+
                         if (arg.CurrentIndex % 5 == 0)
                         {
                             backgroundWorker1.ReportProgress(progress, arg);
                         }
+                      
                     }
+                    ctx.SaveChanges();
                 }
                 backgroundWorker1.ReportProgress(100, arg);
                 e.Result = string.Format("{0} 条正常导入成功", dt.Rows.Count);
             }
-            catch (Exception exception)
+            //catch (Exception exception)
+            catch (DbEntityValidationException exception)
             {
                 if (!e.Cancel)
                 {
                     //arg.HasError = true;
                     //arg.ErrorMessage = exception.Message;
-                    e.Result = exception.Message;
+                    e.Result = exception.Message + "或所导入信息超出要求长度";
                 }
                 success = false;
             }

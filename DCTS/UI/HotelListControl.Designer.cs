@@ -65,6 +65,7 @@
             this.pager1 = new DCTS.CustomComponents.Pager();
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.btdown = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -138,6 +139,7 @@
             // imgColumn1
             // 
             this.imgColumn1.HeaderText = "图片";
+            this.imgColumn1.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
             this.imgColumn1.Name = "imgColumn1";
             this.imgColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.imgColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
@@ -226,19 +228,19 @@
             this.修改ToolStripMenuItem,
             this.deleteToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(147, 48);
             // 
             // 修改ToolStripMenuItem
             // 
             this.修改ToolStripMenuItem.Name = "修改ToolStripMenuItem";
-            this.修改ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.修改ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.修改ToolStripMenuItem.Text = "编辑";
             this.修改ToolStripMenuItem.Click += new System.EventHandler(this.修改ToolStripMenuItem_Click_1);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.deleteToolStripMenuItem.Text = "删除此条住宿";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -335,7 +337,7 @@
             // 
             // btsave
             // 
-            this.btsave.Location = new System.Drawing.Point(524, 20);
+            this.btsave.Location = new System.Drawing.Point(434, 20);
             this.btsave.Name = "btsave";
             this.btsave.Size = new System.Drawing.Size(75, 25);
             this.btsave.TabIndex = 12;
@@ -378,10 +380,22 @@
             this.bindingSource1.DataSource = this.entityDataSource1;
             this.bindingSource1.Position = 0;
             // 
+            // btdown
+            // 
+            this.btdown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btdown.Location = new System.Drawing.Point(515, 20);
+            this.btdown.Name = "btdown";
+            this.btdown.Size = new System.Drawing.Size(75, 25);
+            this.btdown.TabIndex = 16;
+            this.btdown.Text = "下载";
+            this.btdown.UseVisualStyleBackColor = true;
+            this.btdown.Click += new System.EventHandler(this.btdown_Click);
+            // 
             // HotelListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btdown);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pager1);
             this.Controls.Add(this.btsave);
@@ -419,6 +433,7 @@
         private System.Windows.Forms.Button btsave;
         private CustomComponents.Pager pager1;
         private System.Windows.Forms.ToolStripMenuItem 修改ToolStripMenuItem;
+        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridViewTextBoxColumn nationColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn cityColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn areaColumn1;
@@ -437,6 +452,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn receptionCloumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn kitchenCloumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn tipsColumn1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btdown;
     }
 }

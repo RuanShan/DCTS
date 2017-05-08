@@ -129,6 +129,7 @@ namespace DCTS.UI
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 this.imgPathTextBox.Text = openFileDialog1.FileName;
+                pictureBox1.ImageLocation = openFileDialog1.FileName;
             }
         }
 

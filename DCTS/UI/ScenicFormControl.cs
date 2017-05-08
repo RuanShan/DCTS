@@ -112,6 +112,9 @@ namespace DCTS.UI
                 if (scenic.id > 0)
                 {
                     this.imgPathTextBox.Text = scenic.img;
+                    long folername = scenic.id / 1000;
+                    string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\location_" + ComboLocationEnum.Scenic.ToString().ToLower() + "\\" + folername + "\\", scenic.img);
+                    pictureBox1.ImageLocation = lcoalPath;
                 }
             }
         }
@@ -145,6 +148,7 @@ namespace DCTS.UI
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 this.imgPathTextBox.Text = openFileDialog1.FileName;
+                pictureBox1.ImageLocation = openFileDialog1.FileName;
             }
         }
 

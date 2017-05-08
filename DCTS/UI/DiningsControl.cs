@@ -417,5 +417,115 @@ namespace DCTS.UI
             return count;
         }
 
+
+
+        private void btdown_Click(object sender, EventArgs e)
+        {
+
+            #region MyRegion
+            if (this.dataGridView.Rows.Count == 0)
+            {
+                MessageBox.Show("Sorry , No Data Output !", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            var saveFileDialog = new SaveFileDialog();
+            saveFileDialog.DefaultExt = ".csv";
+            saveFileDialog.Filter = "csv|*.csv";
+            string strFileName = "Dinings  " + "_" + DateTime.Now.ToString("yyyyMMddHHmmss");
+            saveFileDialog.FileName = strFileName;
+            if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
+            {
+                strFileName = saveFileDialog.FileName.ToString();
+            }
+            else
+            {
+                return;
+            }
+            FileStream fa = new FileStream(strFileName, FileMode.Create);
+            StreamWriter sw = new StreamWriter(fa, Encoding.Unicode);
+            string delimiter = "\t";
+            string strHeader = "";
+
+            strHeader = "国家\t城市\t区域\t餐厅名称\t菜系\t图片\t经纬度\t地址\t如何抵达(周围特征)\t营业时间\t推荐菜单\t深度Tlps";
+
+            sw.WriteLine(strHeader);
+            //output rows data
+            for (int j = 0; j < this.dataGridView.Rows.Count; j++)
+            {
+                string strRowValue = "";
+
+                //  strRowValue += delimiter;
+                var row = dataGridView.Rows[j];
+                var model = row.DataBoundItem as ComboLocation;
+                if (model.nation != null)
+                    strRowValue += model.nation.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                else
+                    strRowValue += delimiter;
+
+                if (model.city != null)
+                    strRowValue += model.city.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                else
+                    strRowValue += delimiter;
+
+                if (model.area != null)
+                    strRowValue += model.area.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                else
+                    strRowValue += delimiter;
+
+                if (model.title != null)
+                    strRowValue += model.title.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                else
+                    strRowValue += delimiter;
+
+                if (model.dishes != null)
+                    strRowValue += model.dishes.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                else
+                    strRowValue += delimiter;
+
+                if (model.img != null)
+                    strRowValue += model.img.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                else
+                    strRowValue += delimiter;
+
+                if (model.latlng != null)
+                    strRowValue += model.latlng.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                else
+                    strRowValue += delimiter;
+
+                if (model.address != null)
+                    strRowValue += model.address.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                else
+                    strRowValue += delimiter;
+
+                if (model.local_address != null)
+                    strRowValue += model.local_address.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                else
+                    strRowValue += delimiter;
+                //开放时间
+                //if (model.tips != null)
+                //    strRowValue += model.tips.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                //else
+                strRowValue += delimiter;
+
+
+                if (model.recommended_dishes != null)
+                    strRowValue += model.recommended_dishes.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                else
+                    strRowValue += delimiter;
+
+                if (model.tips != null)
+                    strRowValue += model.tips.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                else
+                    strRowValue += delimiter;
+                ;
+
+                sw.WriteLine(strRowValue);
+            }
+            sw.Close();
+            fa.Close();
+            MessageBox.Show("下载成功！", "System", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            #endregion
+        }
+
     }
 }

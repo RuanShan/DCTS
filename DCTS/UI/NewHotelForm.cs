@@ -44,7 +44,9 @@ namespace DCTS.UI
                 parking.Text = obj.parking;
                 reception.Text = obj.reception;
                 kitchen.Text = obj.kitchen;
-
+                long folername = obj.id / 1000;
+                string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\location_" + ComboLocationEnum.Hotel.ToString().ToLower() + "\\" + folername + "\\", obj.img);
+                pictureBox1.ImageLocation = lcoalPath;
             }
         }
 
@@ -147,7 +149,8 @@ namespace DCTS.UI
                         }
                         if (hasImg)
                         {
-                            string copyToPath = EntityPathConfig.LocationImagePath(obj);
+                            string copyToPath = EntityPathConfig.LocationHotelImagePath(obj);
+                           if (!File.Exists(copyToPath))
                             File.Copy(imgFilePath, copyToPath);
                         }
                     }
@@ -270,6 +273,7 @@ namespace DCTS.UI
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 this.imgPathTextBox.Text = openFileDialog1.FileName;
+                pictureBox1.ImageLocation = openFileDialog1.FileName;
             }
         }
 

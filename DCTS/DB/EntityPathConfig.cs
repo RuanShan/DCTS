@@ -80,7 +80,7 @@ namespace DCTS.DB
         }
         public static string LocationHotelImagePath(ComboLocation location)
         {
-            string basePath = DiningLocationImageBasePath;
+            string basePath = HotelLocationImageBasePath;
             string folderPath = Path.Combine(basePath, (location.id / 1000 * 1000).ToString());
 
             CreateFolder(folderPath);
