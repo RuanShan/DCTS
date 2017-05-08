@@ -15,15 +15,19 @@ namespace DCTS.Bus
             {
                 var trip = ctx.Trips.Find(trip_id);
                 var clonedTrip = new Trip(){ days = trip.days, title = "(复制)"+trip.title, memo = trip.memo };
-                var clonedDays = trip.TripDays.Select(o => new TripDay() { day = o.day, title = o.title, memo = o.memo }).ToList();
+
+                var days = ctx.TripDays.Include("DayLocations").Where(o => o.trip_id == trip.id).ToList();
+
+                var clonedDays = days.Select(o => new TripDay() { day = o.day, title = o.title, memo = o.memo, DayLocations = o.DayLocations.Select(d => new DayLocation() { day = d.day, location_id = d.location_id, position = d.position }).ToList() }).ToList();
 
                 var clonedDayLocations = trip.DayLocations.Select(o => new DayLocation() { day = o.day, location_id = o.location_id, position = o.position }).ToList();
+                clonedTrip.TripDays = clonedDays;
+                //clonedTrip.DayLocations.Concat(clonedDayLocations);
                 ctx.Trips.Add(clonedTrip);
                 ctx.SaveChanges();
-                clonedDays.ForEach(delegate(TripDay day) { day.trip_id = clonedTrip.id; });
-                ctx.TripDays.AddRange( clonedDays );
-
-                ctx.SaveChanges();
+                //clonedDays.ForEach(delegate(TripDay day) { day.trip_id = clonedTrip.id; });
+                //ctx.TripDays.AddRange( clonedDays );
+                //ctx.SaveChanges();
             }
 
         }
@@ -32,10 +36,12 @@ namespace DCTS.Bus
         {
             using (var ctx = new DctsEntities())
             {
-                var trip = ctx.Trips.Find( trip_id );
+                //Include("TripDays").Include("DayLocations")
+                var trip = ctx.Trips.Where( o=>o.id == trip_id ).First();
 
+                var locations = trip.DayLocations;
+                ctx.DayLocations.RemoveRange(locations);
                 ctx.Trips.Remove(trip);
-
                 ctx.SaveChanges();
             }
         

@@ -24,7 +24,7 @@ namespace DCTS.Bus
             using (var ctx = new DctsEntities())
             {
                 trip = ctx.Trips.Find(TripId);
-                days = ctx.DayLocations.Include("ComboLocation").Where(o => o.trip_id == TripId).OrderBy(o => o.day).ThenBy(o => o.position).ToList(); 
+                days = ctx.DayLocations.Include("TripDay").Include("ComboLocation").Where(o => o.trip_id == TripId).OrderBy(o => o.TripDay.day).ThenBy(o => o.position).ToList(); 
             }
         }
 

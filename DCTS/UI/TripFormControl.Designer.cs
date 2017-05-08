@@ -121,10 +121,10 @@
 
         private System.Windows.Forms.TextBox memoTextBox;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox titleTextBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.NumericUpDown daysNumericUpDown;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        public System.Windows.Forms.NumericUpDown daysNumericUpDown;
+        public System.Windows.Forms.TextBox titleTextBox;
     }
 }

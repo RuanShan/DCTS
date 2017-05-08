@@ -35,6 +35,7 @@ namespace DCTS.UI
 
             this.trip = ctx.Trips.Find(TripId);
             this.tripFormControl1.FillFormByModel(trip);
+            this.tripFormControl1.daysNumericUpDown.ReadOnly = true;
         }
 
 

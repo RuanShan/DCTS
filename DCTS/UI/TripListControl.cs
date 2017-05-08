@@ -148,27 +148,32 @@ namespace DCTS.UI
 
         private void downloadButton_Click(object sender, EventArgs e)
         {
-            long tripId = SelectedTripId;
-            if (tripId > 0)
+            var trip = SelectedTrip;
+            if ( trip != null )
             {
-                var trip = SelectedTrip;
-                this.saveFileDialog1.FileName = trip.title.Normalize();
-
-                if (this.saveFileDialog1.ShowDialog() == DialogResult.OK)
+                if (trip.word_created_at != null)
                 {
-                    string tripWordFilePath = EntityPathConfig.TripWordFilePath(tripId);
-                    string localFilePath = saveFileDialog1.FileName; //获得文件路径 
+                    this.saveFileDialog1.FileName = trip.title.Normalize();
 
-                    //给文件名前加上时间 
-                    //newFileName = DateTime.Now.ToString("yyyyMMdd") + fileNameExt;
+                    if (this.saveFileDialog1.ShowDialog() == DialogResult.OK)
+                    {
+                        string tripWordFilePath = EntityPathConfig.TripWordFilePath(trip.id);
+                        string localFilePath = saveFileDialog1.FileName; //获得文件路径 
 
-                    //在文件名里加字符 
-                    //saveFileDialog1.FileName.Insert(1,"dameng");
+                        //给文件名前加上时间 
+                        //newFileName = DateTime.Now.ToString("yyyyMMdd") + fileNameExt;
 
-                    //System.IO.FileStream fs = (System.IO.FileStream)sfd.OpenFile();//输出文件
+                        //在文件名里加字符 
+                        //saveFileDialog1.FileName.Insert(1,"dameng");
 
-                    File.Copy(tripWordFilePath, localFilePath,true);
+                        //System.IO.FileStream fs = (System.IO.FileStream)sfd.OpenFile();//输出文件
 
+                        File.Copy(tripWordFilePath, localFilePath, true);
+
+                    }
+                }
+                else {
+                    MessageBox.Show("请先生成路书文档，然后再下载！");
                 }
             }
         }

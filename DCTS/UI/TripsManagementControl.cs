@@ -56,8 +56,11 @@ namespace DCTS.UI
 
         private void tripsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.mainPanel.Controls.Clear();
-            this.mainPanel.Controls.Add(tripsControl);
+            var eventArgs = new CommandRequestEventArgs(CommandRequestEnum.TripList);
+            OnCommandRequest(tripsControl, eventArgs);
+
+            //this.mainPanel.Controls.Clear();
+            //this.mainPanel.Controls.Add(tripsControl);
         }
 
         void OnCommandRequest(object sender, EventArgs e)

@@ -356,7 +356,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="tripId1">
-          <End Type="DctsModel.Trip" Role="Trip" Multiplicity="1" />
+          <End Type="DctsModel.Trip" Role="Trip" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="DctsModel.DayLocation" Role="DayLocation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Trip">
