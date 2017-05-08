@@ -16,8 +16,8 @@ namespace DCTS.Bus
             using (var ctx = new DctsEntities())
             {
                 var model = ctx.ComboLocations.Find(id);
-                var days = model.Days;
-                ctx.Days.RemoveRange(days);
+                var days = model.DayLocations;
+                ctx.DayLocations.RemoveRange(days);
                 ctx.ComboLocations.Remove(model);
                 ctx.SaveChanges();
             }

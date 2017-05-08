@@ -9,27 +9,30 @@ namespace DCTS.Bus
 {
     class TripBusiness
     {
-        public static void Duplicate(long tripId)
+        public static void Duplicate(long trip_id)
         {
             using (var ctx = new DctsEntities())
             {
-                var trip = ctx.Trips.Find(tripId);
+                var trip = ctx.Trips.Find(trip_id);
                 var clonedTrip = new Trip(){ days = trip.days, title = "(复制)"+trip.title, memo = trip.memo };
-                var clonedDays = trip.TripDays.Select(o => new Day() { tripId = 0, day = o.day, locationId = o.locationId, position = o.position }).ToList();
+                var clonedDays = trip.TripDays.Select(o => new TripDay() { day = o.day, title = o.title, memo = o.memo }).ToList();
+
+                var clonedDayLocations = trip.DayLocations.Select(o => new DayLocation() { day = o.day, location_id = o.location_id, position = o.position }).ToList();
                 ctx.Trips.Add(clonedTrip);
                 ctx.SaveChanges();
-                clonedDays.ForEach(delegate(Day day) { day.tripId = clonedTrip.id; });
-                ctx.Days.AddRange( clonedDays );
+                clonedDays.ForEach(delegate(TripDay day) { day.trip_id = clonedTrip.id; });
+                ctx.TripDays.AddRange( clonedDays );
+
                 ctx.SaveChanges();
             }
 
         }
 
-        public static void Delete(long tripId)
+        public static void Delete(long trip_id)
         {
             using (var ctx = new DctsEntities())
             {
-                var trip = ctx.Trips.Find( tripId );
+                var trip = ctx.Trips.Find( trip_id );
 
                 ctx.Trips.Remove(trip);
 
@@ -38,47 +41,54 @@ namespace DCTS.Bus
         
         }
 
-        public static void AddLocation(long tripId, int day, long locationId)
+        public static DayLocation AddLocation(int day_id, int location_id)
         {
+            DayLocation dayLocation = null;
+
             using (var ctx = new DctsEntities())
             {
-                int count = ctx.Days.Where(o => o.tripId == tripId && o.day == day).Count();
-                var dayModel = ctx.Days.Create();
+                var tripDay = ctx.TripDays.Include("DayLocations").Where( o=> o.id == day_id).First();
 
-                dayModel.day = day;
-                dayModel.tripId = tripId;
-                dayModel.position = count + 1;
-                dayModel.locationId = locationId;
-                ctx.Days.Add(dayModel);
+                int count = tripDay.DayLocations.Count();
+
+                dayLocation = ctx.DayLocations.Create();
+
+                dayLocation.day_id = day_id;
+                dayLocation.trip_id = tripDay.trip_id;
+                dayLocation.position = count + 1;
+                dayLocation.location_id = location_id;
+                ctx.DayLocations.Add(dayLocation);
                 ctx.SaveChanges();
             }
-                
+
+            return dayLocation;    
         }
         public static void DeleteDayLocation(long dayId)
         {
             using (var ctx = new DctsEntities())
             {
 
-                var dayModel = ctx.Days.Find(dayId);
-                int count = ctx.Days.Where(o => o.tripId == dayModel.tripId && o.day == dayModel.day).Count();
-
+                var dayModel = ctx.DayLocations.Find(dayId);
+                int count = ctx.DayLocations.Where(o => o.day_id == dayModel.day_id).Count();
+                // 移動到最後，然後刪除
                 UpdateDayLocationPosition(dayId, count);
 
-                ctx.Days.Remove(dayModel);
+                ctx.DayLocations.Remove(dayModel);
                 ctx.SaveChanges();
             }
 
         }
-        public static void DeleteDay(long tripId, int day)
+        public static void DeleteDay(int dayId)
         {
             using (var ctx = new DctsEntities())
             {
-                var trip = ctx.Trips.Find(tripId);
-                var listByDay = ctx.Days.Where(o => o.tripId == tripId && o.day == day).ToList();
-
-                string sqlFormat = "UPDATE days SET `day`=`day`-1 WHERE `tripId`={0} && `day`>{1}";
-                string sql = String.Format(sqlFormat, tripId, day);
-                ctx.Days.RemoveRange(listByDay);
+                var tripDay = ctx.TripDays.Include("DayLocations").Where(o => o.id == dayId).First();
+                var trip = ctx.Trips.Find(tripDay.trip_id);
+                
+                // 修正刪除后的排序
+                string sqlFormat = "UPDATE TripDays SET `day`=`day`-1 WHERE `trip_id`={0} && `day`>{1}";
+                string sql = String.Format(sqlFormat, tripDay.trip_id, tripDay.day);
+                ctx.TripDays.Remove(tripDay);
                 ctx.Database.ExecuteSqlCommand(sql);
 
                 trip.days -= 1;
@@ -87,46 +97,53 @@ namespace DCTS.Bus
         }
 
 
-        public static void AddDay(long tripId, int afterDay=0)
+        public static TripDay AddDay(long trip_id, int afterDay = 0)
         {
+            TripDay tripDay;
+
             using (var ctx = new DctsEntities())
             {
-                var trip = ctx.Trips.Find(tripId);
+                var trip = ctx.Trips.Find(trip_id);
 
+                tripDay = ctx.TripDays.Create();
+                tripDay.title = string.Format("第{0}天", afterDay+1);
+                tripDay.day = afterDay + 1;
+                
                 if (afterDay > 0)
                 {
-                    string sqlFormat = "UPDATE days SET `day`=`day`+1 WHERE `tripId`={0} && `day`>{1}";
-                    string sql = String.Format(sqlFormat, tripId, afterDay);
+                    string sqlFormat = "UPDATE TripDays SET `day`=`day`+1 WHERE `trip_id`={0} && `day`>{1}";
+                    string sql = String.Format(sqlFormat, trip_id, afterDay);
                     ctx.Database.ExecuteSqlCommand(sql);
                 }
                 trip.days += 1;
+                trip.TripDays.Add(tripDay);
                 ctx.SaveChanges();
             }
+            return tripDay;
         }
 
-        public static void MoveDayPosition(long tripId, int day, int newDay)
+        public static void MoveDayPosition(long trip_id, int day, int newDay)
         {
             using (var ctx = new DctsEntities())
             {
-                var listByDay = ctx.Days.Where(o => o.tripId == tripId && o.day == day).ToList();
+                var tripDay = ctx.TripDays.Where(o => o.trip_id == trip_id && o.day == day).First();
 
                 if (day < newDay) // move down
                 {
-                    string sqlFormat = "UPDATE days SET `day`=`day`-1 WHERE `tripId`={0} &&  `day`> {1} && `day`<= {2}";
-                    string sql = String.Format(sqlFormat, tripId, day, newDay);
+                    string sqlFormat = "UPDATE TripDays SET `day`=`day`-1 WHERE `trip_id`={0} &&  `day`> {1} && `day`<= {2}";
+                    string sql = String.Format(sqlFormat, trip_id, day, newDay);
                     ctx.Database.ExecuteSqlCommand(sql);
                 }
                 else
                 { // move up
-                    string sqlFormat = "UPDATE days SET `day`=`day`+1 WHERE `tripId`={0} &&  `day`>= {1} && `day`< {2}";
-                    string sql = String.Format(sqlFormat, tripId, newDay, day );
+                    string sqlFormat = "UPDATE TripDays SET `day`=`day`+1 WHERE `trip_id`={0} &&  `day`>= {1} && `day`< {2}";
+                    string sql = String.Format(sqlFormat, trip_id, newDay, day );
                     ctx.Database.ExecuteSqlCommand(sql);
                 }
 
-                foreach (var model in listByDay)
-                {
-                    model.day = newDay;
-                }
+
+                tripDay.day = newDay;
+                
                 ctx.SaveChanges();
 
             }
@@ -136,19 +153,19 @@ namespace DCTS.Bus
         {
             using (var ctx = new DctsEntities())
             {
-                var day = ctx.Days.Find(dayId);
-                if (day.position < position) // move down
+                var dayLocation = ctx.DayLocations.Find(dayId);
+                if (dayLocation.position < position) // move down
                 {
-                    string sqlFormat = "UPDATE days SET `position`=`position`-1 WHERE `tripId`={0} && `day`={1} && `position`> {2} && `position`<= {3}";
-                    string sql = String.Format(sqlFormat, day.tripId, day.day, day.position, position);
+                    string sqlFormat = "UPDATE DayLocations SET `position`=`position`-1 WHERE `day_id`={0} && `position`> {1} && `position`<= {2}";
+                    string sql = String.Format(sqlFormat, dayLocation.day_id, dayLocation.position, position);
                     ctx.Database.ExecuteSqlCommand(sql);
                 }
                 else { // move up
-                    string sqlFormat = "UPDATE days SET `position`=`position`+1 WHERE `tripId`={0} && `day`={1} && `position`>= {2} && `position`< {3}";
-                    string sql = String.Format(sqlFormat, day.tripId, day.day, position, day.position);
+                    string sqlFormat = "UPDATE DayLocations SET `position`=`position`+1 WHERE `day_id`={0} && `position`>= {1} && `position`< {2}";
+                    string sql = String.Format(sqlFormat, dayLocation.day_id, position, dayLocation.position);
                     ctx.Database.ExecuteSqlCommand(sql);
                 }
-                day.position = position;
+                dayLocation.position = position;
                 ctx.SaveChanges();
 
             }

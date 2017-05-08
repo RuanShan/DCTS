@@ -127,11 +127,11 @@
       <DependentUpon>Pager.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomComponents\SortableBindingList.cs" />
-    <Compile Include="Day.cs">
+    <Compile Include="DayLocation.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\ComboLocationEnum.cs" />
-    <Compile Include="DB\DayLocation.cs" />
+    <Compile Include="DB\DayLocationView.cs" />
     <Compile Include="DB\DiningLocation.cs" />
     <Compile Include="DB\EntityPathConfig.cs" />
     <Compile Include="DB\GlobalCache.cs" />
@@ -139,7 +139,19 @@
     <Compile Include="Dining.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Hotel.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Nation.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Scenic.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Trip.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TripDay.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="UI\ChooseLocaltionForm.cs">
@@ -247,9 +259,6 @@
       <DependentUpon>ImportScenicCSV.cs</DependentUpon>
     </Compile>
     <Compile Include="Uti\EFIntercepterLogging.cs" />
-    <Compile Include="Hotel.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -273,12 +282,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Scenic.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Trip.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="UI\BaseModalForm.cs">
       <SubType>Form</SubType>
     </Compile>

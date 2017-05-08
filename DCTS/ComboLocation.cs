@@ -17,10 +17,10 @@ namespace DCTS
         public ComboLocation()
         {
             this.img = "\"\"";
-            this.Days = new HashSet<Day>();
+            this.DayLocations = new HashSet<DayLocation>();
         }
     
-        public long id { get; set; }
+        public int id { get; set; }
         public int ltype { get; set; }
         public string nation { get; set; }
         public string city { get; set; }
@@ -45,7 +45,8 @@ namespace DCTS
         public string dishes { get; set; }
         public string recommended_dishes { get; set; }
         public string tips { get; set; }
+        public string open_close_more { get; set; }
     
-        public virtual ICollection<Day> Days { get; set; }
+        public virtual ICollection<DayLocation> DayLocations { get; set; }
     }
 }

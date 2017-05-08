@@ -8,19 +8,16 @@
         <EntityContainer Name="DctsModelStoreContainer">
           <EntitySet Name="Cities" EntityType="DctsModel.Store.Cities" store:Type="Tables" Schema="dcts_dev" />
           <EntitySet Name="ComboLocations" EntityType="DctsModel.Store.ComboLocations" store:Type="Tables" Schema="dcts_dev" />
-          <EntitySet Name="Days" EntityType="DctsModel.Store.Days" store:Type="Tables" Schema="dcts_dev" />
+          <EntitySet Name="DayLocations" EntityType="DctsModel.Store.DayLocations" store:Type="Tables" Schema="dcts_dev" />
           <EntitySet Name="Dinings" EntityType="DctsModel.Store.Dinings" store:Type="Tables" Schema="dcts_dev" />
           <EntitySet Name="Hotels" EntityType="DctsModel.Store.Hotels" store:Type="Tables" Schema="dcts_dev" />
           <EntitySet Name="Nations" EntityType="DctsModel.Store.Nations" store:Type="Tables" Schema="dcts_dev" />
           <EntitySet Name="Scenics" EntityType="DctsModel.Store.Scenics" store:Type="Tables" Schema="dcts_dev" />
+          <EntitySet Name="TripDays" EntityType="DctsModel.Store.TripDays" store:Type="Tables" Schema="dcts_dev" />
           <EntitySet Name="Trips" EntityType="DctsModel.Store.Trips" store:Type="Tables" Schema="dcts_dev" />
-          <AssociationSet Name="locationId" Association="DctsModel.Store.locationId">
-            <End Role="ComboLocations" EntitySet="ComboLocations" />
-            <End Role="Days" EntitySet="Days" />
-          </AssociationSet>
-          <AssociationSet Name="tripId" Association="DctsModel.Store.tripId">
-            <End Role="Trips" EntitySet="Trips" />
-            <End Role="Days" EntitySet="Days" />
+          <AssociationSet Name="fk_day_id" Association="DctsModel.Store.fk_day_id">
+            <End Role="TripDays" EntitySet="TripDays" />
+            <End Role="DayLocations" EntitySet="DayLocations" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Cities">
@@ -40,8 +37,8 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="uint" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="ltype" Type="uint" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ltype" Type="int" Nullable="false" />
           <Property Name="nation" Type="varchar" MaxLength="45" />
           <Property Name="city" Type="varchar" MaxLength="48" />
           <Property Name="area" Type="varchar" MaxLength="48" />
@@ -55,6 +52,7 @@
           <Property Name="contact" Type="varchar" MaxLength="255" />
           <Property Name="open_at" Type="datetime" />
           <Property Name="close_at" Type="datetime" />
+          <Property Name="open_close_more" Type="varchar" MaxLength="45" />
           <Property Name="ticket" Type="varchar" MaxLength="48" />
           <Property Name="room" Type="varchar" MaxLength="510" />
           <Property Name="dinner" Type="varchar" MaxLength="510" />
@@ -66,17 +64,18 @@
           <Property Name="recommended_dishes" Type="varchar" MaxLength="510" />
           <Property Name="tips" Type="varchar" MaxLength="1020" />
         </EntityType>
-        <EntityType Name="Days">
+        <EntityType Name="DayLocations">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="uint" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="RelatedId" Type="uint" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RelatedId" Type="int" Nullable="false" />
           <Property Name="RelatedType" Type="varchar" MaxLength="45" />
-          <Property Name="day" Type="uint" Nullable="false" />
+          <Property Name="day" Type="int" Nullable="false" />
           <Property Name="position" Type="int" Nullable="false" />
-          <Property Name="tripId" Type="uint" Nullable="false" />
-          <Property Name="locationId" Type="uint" Nullable="false" />
+          <Property Name="trip_id" Type="int" Nullable="false" />
+          <Property Name="location_id" Type="int" Nullable="false" />
+          <Property Name="day_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Dinings">
           <Key>
@@ -143,37 +142,35 @@
           <Property Name="ticket" Type="varchar" MaxLength="45" />
           <Property Name="tips" Type="varchar" MaxLength="1024" />
         </EntityType>
+        <EntityType Name="TripDays">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="trip_id" Type="int" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="256" />
+          <Property Name="day" Type="int" Nullable="false" />
+          <Property Name="memo" Type="varchar" MaxLength="512" />
+        </EntityType>
         <EntityType Name="Trips">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="uint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="title" Type="varchar" Nullable="false" MaxLength="1024" />
           <Property Name="memo" Type="varchar" MaxLength="1024" />
           <Property Name="days" Type="int" Nullable="false" />
           <Property Name="word_created_at" Type="datetime" />
         </EntityType>
-        <Association Name="locationId">
-          <End Role="ComboLocations" Type="DctsModel.Store.ComboLocations" Multiplicity="1" />
-          <End Role="Days" Type="DctsModel.Store.Days" Multiplicity="*" />
+        <Association Name="fk_day_id">
+          <End Role="TripDays" Type="DctsModel.Store.TripDays" Multiplicity="1" />
+          <End Role="DayLocations" Type="DctsModel.Store.DayLocations" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ComboLocations">
+            <Principal Role="TripDays">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="Days">
-              <PropertyRef Name="locationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="tripId">
-          <End Role="Trips" Type="DctsModel.Store.Trips" Multiplicity="1" />
-          <End Role="Days" Type="DctsModel.Store.Days" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Trips">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Days">
-              <PropertyRef Name="tripId" />
+            <Dependent Role="DayLocations">
+              <PropertyRef Name="day_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -186,17 +183,26 @@
           <EntitySet Name="Hotels" EntityType="DctsModel.Hotel" />
           <EntitySet Name="Scenics" EntityType="DctsModel.Scenic" />
           <EntitySet Name="Trips" EntityType="DctsModel.Trip" />
-          <EntitySet Name="Days" EntityType="DctsModel.Day" />
           <EntitySet Name="Cities" EntityType="DctsModel.City" />
           <EntitySet Name="Nations" EntityType="DctsModel.Nation" />
           <EntitySet Name="ComboLocations" EntityType="DctsModel.ComboLocation" />
-          <AssociationSet Name="locationId" Association="DctsModel.locationId">
+          <EntitySet Name="DayLocations" EntityType="DctsModel.DayLocation" />
+          <AssociationSet Name="locationId1" Association="DctsModel.locationId1">
             <End Role="ComboLocation" EntitySet="ComboLocations" />
-            <End Role="Day" EntitySet="Days" />
+            <End Role="DayLocation" EntitySet="DayLocations" />
           </AssociationSet>
-          <AssociationSet Name="tripId" Association="DctsModel.tripId">
+          <AssociationSet Name="tripId1" Association="DctsModel.tripId1">
             <End Role="Trip" EntitySet="Trips" />
-            <End Role="Day" EntitySet="Days" />
+            <End Role="DayLocation" EntitySet="DayLocations" />
+          </AssociationSet>
+          <EntitySet Name="TripDays" EntityType="DctsModel.TripDay" />
+          <AssociationSet Name="dayId" Association="DctsModel.dayId">
+            <End Role="TripDay" EntitySet="TripDays" />
+            <End Role="DayLocation" EntitySet="DayLocations" />
+          </AssociationSet>
+          <AssociationSet Name="tripdays1" Association="DctsModel.tripdays1">
+            <End Role="Trip" EntitySet="Trips" />
+            <End Role="TripDay" EntitySet="TripDays" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Dining">
@@ -258,26 +264,13 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="title" Type="String" Nullable="false" MaxLength="1024" Unicode="false" FixedLength="false" />
           <Property Name="memo" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
           <Property Type="Int32" Name="days" Nullable="false" />
-          <NavigationProperty Name="TripDays" Relationship="DctsModel.tripId" FromRole="Trip" ToRole="Day" />
           <Property Type="DateTime" Name="word_created_at" />
-        </EntityType>
-        <EntityType Name="Day">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Type="Int64" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int64" Name="RelatedId" Nullable="false" />
-          <Property Type="String" Name="RelatedType" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Type="Int64" Name="day" Nullable="false" />
-          <Property Type="Int32" Name="position" Nullable="false" />
-          <Property Type="Int64" Name="tripId" Nullable="false" />
-          <Property Type="Int64" Name="locationId" Nullable="false" />
-          <NavigationProperty Name="ComboLocation" Relationship="DctsModel.locationId" FromRole="Day" ToRole="ComboLocation" />
-          <NavigationProperty Name="Trip" Relationship="DctsModel.tripId" FromRole="Day" ToRole="Trip" />
+          <NavigationProperty Name="DayLocations" Relationship="DctsModel.tripId1" FromRole="Trip" ToRole="DayLocation" />
+          <NavigationProperty Name="TripDays" Relationship="DctsModel.tripdays1" FromRole="Trip" ToRole="TripDay" />
         </EntityType>
         <EntityType Name="City">
           <Key>
@@ -306,7 +299,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Type="Int64" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="Int32" Name="ltype" Nullable="false" />
           <Property Type="String" Name="nation" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="city" MaxLength="45" FixedLength="false" Unicode="false" />
@@ -331,29 +324,86 @@
           <Property Type="String" Name="dishes" MaxLength="512" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="recommended_dishes" MaxLength="512" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="tips" MaxLength="1024" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Days" Relationship="DctsModel.locationId" FromRole="ComboLocation" ToRole="Day" />
+          <Property Type="String" Name="open_close_more" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DayLocations" Relationship="DctsModel.locationId1" FromRole="ComboLocation" ToRole="DayLocation" />
         </EntityType>
-        <Association Name="locationId">
+        <EntityType Name="DayLocation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="RelatedId" Nullable="false" />
+          <Property Type="String" Name="RelatedType" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="day" Nullable="false" />
+          <Property Type="Int32" Name="position" Nullable="false" />
+          <NavigationProperty Name="ComboLocation" Relationship="DctsModel.locationId1" FromRole="DayLocation" ToRole="ComboLocation" />
+          <NavigationProperty Name="Trip" Relationship="DctsModel.tripId1" FromRole="DayLocation" ToRole="Trip" />
+          <Property Type="Int32" Name="day_id" Nullable="false" />
+          <NavigationProperty Name="TripDay" Relationship="DctsModel.dayId" FromRole="DayLocation" ToRole="TripDay" />
+          <Property Type="Int32" Name="trip_id" Nullable="false" />
+          <Property Type="Int32" Name="location_id" Nullable="false" />
+        </EntityType>
+        <Association Name="locationId1">
           <End Type="DctsModel.ComboLocation" Role="ComboLocation" Multiplicity="1" />
-          <End Type="DctsModel.Day" Role="Day" Multiplicity="*" />
+          <End Type="DctsModel.DayLocation" Role="DayLocation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ComboLocation">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="Day">
-              <PropertyRef Name="locationId" />
+            <Dependent Role="DayLocation">
+              <PropertyRef Name="location_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="tripId">
+        <Association Name="tripId1">
           <End Type="DctsModel.Trip" Role="Trip" Multiplicity="1" />
-          <End Type="DctsModel.Day" Role="Day" Multiplicity="*" />
+          <End Type="DctsModel.DayLocation" Role="DayLocation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Trip">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="Day">
-              <PropertyRef Name="tripId" />
+            <Dependent Role="DayLocation">
+              <PropertyRef Name="trip_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TripDay">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="trip_id" Nullable="false" />
+          <Property Type="String" Name="title" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="day" Nullable="false" />
+          <Property Type="String" Name="memo" MaxLength="512" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DayLocations" Relationship="DctsModel.dayId" FromRole="TripDay" ToRole="DayLocation" />
+          <NavigationProperty Name="Trip" Relationship="DctsModel.tripdays1" FromRole="TripDay" ToRole="Trip" />
+        </EntityType>
+        <Association Name="dayId">
+          <End Type="DctsModel.TripDay" Role="TripDay" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DctsModel.DayLocation" Role="DayLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TripDay">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DayLocation">
+              <PropertyRef Name="day_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tripdays1">
+          <End Type="DctsModel.Trip" Role="Trip" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DctsModel.TripDay" Role="TripDay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trip">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TripDay">
+              <PropertyRef Name="trip_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -432,19 +482,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Days">
-            <EntityTypeMapping TypeName="DctsModel.Day">
-              <MappingFragment StoreEntitySet="Days">
-                <ScalarProperty Name="locationId" ColumnName="locationId" />
-                <ScalarProperty Name="tripId" ColumnName="tripId" />
-                <ScalarProperty Name="position" ColumnName="position" />
-                <ScalarProperty Name="day" ColumnName="day" />
-                <ScalarProperty Name="RelatedType" ColumnName="RelatedType" />
-                <ScalarProperty Name="RelatedId" ColumnName="RelatedId" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Cities">
             <EntityTypeMapping TypeName="DctsModel.City">
               <MappingFragment StoreEntitySet="Cities">
@@ -473,6 +510,7 @@
           <EntitySetMapping Name="ComboLocations">
             <EntityTypeMapping TypeName="DctsModel.ComboLocation">
               <MappingFragment StoreEntitySet="ComboLocations">
+                <ScalarProperty Name="open_close_more" ColumnName="open_close_more" />
                 <ScalarProperty Name="tips" ColumnName="tips" />
                 <ScalarProperty Name="recommended_dishes" ColumnName="recommended_dishes" />
                 <ScalarProperty Name="dishes" ColumnName="dishes" />
@@ -497,6 +535,31 @@
                 <ScalarProperty Name="city" ColumnName="city" />
                 <ScalarProperty Name="nation" ColumnName="nation" />
                 <ScalarProperty Name="ltype" ColumnName="ltype" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DayLocations">
+            <EntityTypeMapping TypeName="DctsModel.DayLocation">
+              <MappingFragment StoreEntitySet="DayLocations">
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
+                <ScalarProperty Name="trip_id" ColumnName="trip_id" />
+                <ScalarProperty Name="day_id" ColumnName="day_id" />
+                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="RelatedType" ColumnName="RelatedType" />
+                <ScalarProperty Name="RelatedId" ColumnName="RelatedId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TripDays">
+            <EntityTypeMapping TypeName="DctsModel.TripDay">
+              <MappingFragment StoreEntitySet="TripDays">
+                <ScalarProperty Name="memo" ColumnName="memo" />
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="trip_id" ColumnName="trip_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

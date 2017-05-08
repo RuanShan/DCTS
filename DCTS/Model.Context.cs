@@ -29,9 +29,10 @@ namespace DCTS
         public DbSet<Hotel> Hotels { get; set; }
         public DbSet<Scenic> Scenics { get; set; }
         public DbSet<Trip> Trips { get; set; }
-        public DbSet<Day> Days { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Nation> Nations { get; set; }
         public DbSet<ComboLocation> ComboLocations { get; set; }
+        public DbSet<DayLocation> DayLocations { get; set; }
+        public DbSet<TripDay> TripDays { get; set; }
     }
 }

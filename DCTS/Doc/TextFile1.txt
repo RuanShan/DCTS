@@ -34,6 +34,7 @@ CREATE TABLE `ComboLocations` (
   `open_at` datetime DEFAULT NULL,
   `close_at` datetime DEFAULT NULL,
   `ticket` varchar(45) DEFAULT NULL,
+  `open_close_more` varchar(45) DEFAULT NULL,
   
   # 住宿
   `room` varchar(512) DEFAULT NULL,
@@ -49,6 +50,22 @@ CREATE TABLE `ComboLocations` (
   `tips` varchar(1024) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE `DayLocations` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `RelatedId` int(10) NOT NULL DEFAULT '0',
+  `RelatedType` varchar(45) DEFAULT NULL,
+  `day` int(10) NOT NULL DEFAULT '0',
+  `position` int(11) NOT NULL DEFAULT '0',
+  `trip_id` int(11) NOT NULL DEFAULT '0', # 以便找出所有屬於行程的 DayLocation
+  `location_id` int(11) NOT NULL DEFAULT '0',
+  `day_id` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `trip_id_idx` (`trip_id`),
+  KEY `day_id_idx` (`day_id`),
+  CONSTRAINT `fk_day_id` FOREIGN KEY (`day_id`) REFERENCES `TripDays` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
+
 
 
 关于图片
@@ -76,3 +93,6 @@ http://stackoverflow.com/questions/8550789/where-to-change-the-value-of-lower-ca
 Entity Framework Loading Related Entities
 https://msdn.microsoft.com/en-us/data/jj574232
 
+=======================================
+ change any unsigned columns in mysql to signed. EF doesn't support unsigned
+http://stackoverflow.com/questions/22138579/ef6mysql-error-inserting-2-related-objects-in-a-single-savechanges

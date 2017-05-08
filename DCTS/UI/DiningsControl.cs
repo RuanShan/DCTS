@@ -25,7 +25,7 @@ namespace DCTS.UI
         //private List<ComboLocation> dinningsOrderList;
         IBindingList dinningsOrderList = null;
         private List<ComboLocation> DinningList = null;
-        private List<Day> DaysList = null;
+        private List<DayLocation> DaysList = null;
         public DiningsControl()
         {
             InitializeComponent();
@@ -50,7 +50,7 @@ namespace DCTS.UI
             var ctx = this.entityDataSource1.DbContext as DctsEntities;
             //using (var ctx = new DctsEntities())
             {
-                DaysList = ctx.Days.ToList();
+                DaysList = ctx.DayLocations.ToList();
 
                 DinningList = new List<ComboLocation>();
 
@@ -117,7 +117,7 @@ namespace DCTS.UI
             var oids = GetOrderIdsBySelectedGridCell();
             using (var ctx = new DctsEntities())
             {
-                var filtered = DaysList.FindAll(s => s.locationId == oids[0]);
+                var filtered = DaysList.FindAll(s => s.location_id == oids[0]);
                 if (filtered.Count == 0)
                 {
                     var stockrecs = (from s in ctx.ComboLocations
