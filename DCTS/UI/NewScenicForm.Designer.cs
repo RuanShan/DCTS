@@ -60,7 +60,9 @@
             this.label13 = new System.Windows.Forms.Label();
             this.routeTextBox = new System.Windows.Forms.TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -252,7 +254,7 @@
             // 
             this.imgPathTextBox.Location = new System.Drawing.Point(116, 224);
             this.imgPathTextBox.Name = "imgPathTextBox";
-            this.imgPathTextBox.Size = new System.Drawing.Size(481, 20);
+            this.imgPathTextBox.Size = new System.Drawing.Size(233, 20);
             this.imgPathTextBox.TabIndex = 1;
             // 
             // localTitleTextBox
@@ -320,11 +322,21 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(401, 222);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(58, 20);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 21;
+            this.pictureBox1.TabStop = false;
+            // 
             // NewScenicForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(730, 544);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.routeTextBox);
             this.Controls.Add(this.ticketTextBox);
@@ -356,6 +368,7 @@
             this.Name = "NewScenicForm";
             this.Text = "新建景点";
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -394,5 +407,6 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox routeTextBox;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

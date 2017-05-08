@@ -346,9 +346,11 @@ namespace DCTS.CustomComponents
                         bool hastitle = (temp1[4].Length > 0);
                         if (hastitle)
                         {
+                            string demo = temp1[4].ToString();
+
                             ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
                             if (lastLocation != null)
-                                nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Dining && o.title == temp1[4]).Count() > 0);
+                                nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Dining && o.title == demo).Count() > 0);
                         }
 
                         #endregion

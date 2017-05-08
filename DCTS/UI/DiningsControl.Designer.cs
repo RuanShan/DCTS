@@ -56,6 +56,7 @@
             this.nationComboBox = new System.Windows.Forms.ComboBox();
             this.btsave = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.btdown = new System.Windows.Forms.Button();
             this.pager2 = new DCTS.CustomComponents.Pager();
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
@@ -132,6 +133,7 @@
             // imgColumn1
             // 
             this.imgColumn1.HeaderText = "图片";
+            this.imgColumn1.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
             this.imgColumn1.Name = "imgColumn1";
             this.imgColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.imgColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
@@ -305,6 +307,17 @@
             this.label2.Text = "餐厅列表";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // btdown
+            // 
+            this.btdown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btdown.Location = new System.Drawing.Point(469, 21);
+            this.btdown.Name = "btdown";
+            this.btdown.Size = new System.Drawing.Size(75, 25);
+            this.btdown.TabIndex = 15;
+            this.btdown.Text = "下载";
+            this.btdown.UseVisualStyleBackColor = true;
+            this.btdown.Click += new System.EventHandler(this.btdown_Click);
+            // 
             // pager2
             // 
             this.pager2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -333,6 +346,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btdown);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pager2);
             this.Controls.Add(this.btsave);
@@ -371,6 +385,7 @@
         private System.Windows.Forms.Button btsave;
         //private CustomComponents.Pager pager1;
         private CustomComponents.Pager pager2;
+        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridViewTextBoxColumn nationColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn cityColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn areaColumn1;
@@ -383,6 +398,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn recommendedDishesColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn tipsColumn1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btdown;
     }
 }

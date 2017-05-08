@@ -278,5 +278,99 @@ namespace DCTS.UI
 
         }
 
+        private void btdown_Click(object sender, EventArgs e)
+        {
+            if (this.dataGridView.Rows.Count == 0)
+            {
+                MessageBox.Show("Sorry , No Data Output !", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            var saveFileDialog = new SaveFileDialog();
+            saveFileDialog.DefaultExt = ".csv";
+            saveFileDialog.Filter = "csv|*.csv";
+            string strFileName = "Scenics  " + "_" + DateTime.Now.ToString("yyyyMMddHHmmss");
+            saveFileDialog.FileName = strFileName;
+            if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
+            {
+                strFileName = saveFileDialog.FileName.ToString();
+            }
+            else
+            {
+                return;
+            }
+            FileStream fa = new FileStream(strFileName, FileMode.Create);
+            StreamWriter sw = new StreamWriter(fa, Encoding.Unicode);
+            string delimiter = "\t";
+            string strHeader = "";
+
+            strHeader = "序号\t国家\t城市\t景点名称\t英文名称\t经纬度\t地址\t如何抵达\t开放时间\t门票\t小贴士\t游玩方式";
+
+            sw.WriteLine(strHeader);
+            //output rows data
+            for (int j = 0; j < this.dataGridView.Rows.Count; j++)
+            {
+                string strRowValue = "";
+
+                strRowValue += delimiter;
+                var row = dataGridView.Rows[j];
+                var model = row.DataBoundItem as ComboLocation;
+                if (model.nation != null)
+                    strRowValue += model.nation.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                else
+                    strRowValue += delimiter;
+
+                if (model.city != null)
+                    strRowValue += model.city.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                else
+                    strRowValue += delimiter;
+
+                if (model.title != null)
+                    strRowValue += model.title.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                else
+                    strRowValue += delimiter;
+
+                if (model.local_title != null)
+                    strRowValue += model.local_title.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                else
+                    strRowValue += delimiter;
+
+                if (model.latlng != null)
+                    strRowValue += model.latlng.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                else
+                    strRowValue += delimiter;
+
+                if (model.local_address != null)
+                    strRowValue += model.local_address.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                else
+                    strRowValue += delimiter;
+
+                if (model.route != null)
+                    strRowValue += model.route.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                else
+                    strRowValue += delimiter;
+                //开放时间
+                //if (model.route != null)
+                //    strRowValue += model.open_at.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                //else
+                strRowValue += delimiter;
+
+                if (model.ticket != null)
+                    strRowValue += model.ticket.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                else
+                    strRowValue += delimiter;
+
+                if (model.tips != null)
+                    strRowValue += model.tips.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                else
+                    strRowValue += delimiter;
+                ;
+
+                sw.WriteLine(strRowValue);
+            }
+            sw.Close();
+            fa.Close();
+            MessageBox.Show("下载成功！", "System", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
     }
 }

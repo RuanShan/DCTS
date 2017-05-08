@@ -33,9 +33,7 @@ namespace DCTS.CustomComponents
             //bool success = Execute(pathTextBox.Text, worker, e);
             bool success = NewMethod(worker, e);
         }
-
-
-
+        
         #region csv 路径
         public static DataTable OpenCSV(string filePath)//从csv读取数据返回table
         {
@@ -197,9 +195,6 @@ namespace DCTS.CustomComponents
 
         private void importButton_Click(object sender, EventArgs e)
         {
-
-
-
             this.importButton.Enabled = false;
             this.cancelButton.Enabled = true;
             this.closeButton.Enabled = false;
@@ -222,18 +217,19 @@ namespace DCTS.CustomComponents
                 arg.OrderCount = dt.Rows.Count;
                 int i = 1;
                 int progress = 0;
-                foreach (DataRow row in dt.Rows)
+                using (var ctx = new DctsEntities())
                 {
-                    arg.CurrentIndex = i + 1;
-                    progress = Convert.ToInt16(((i + 1) * 1.0 / dt.Rows.Count) * 100);
-                    string texi = "";
-                    foreach (DataColumn column in dt.Columns)
+                    foreach (DataRow row in dt.Rows)
                     {
-                        var text = row[column];
-                        texi = texi + "\t" + row[column];
-                    }
-                    using (var ctx = new DctsEntities())
-                    {
+                        arg.CurrentIndex = i + 1;
+                        progress = Convert.ToInt16(((i + 1) * 1.0 / dt.Rows.Count) * 100);
+                        string texi = "";
+                        foreach (DataColumn column in dt.Columns)
+                        {
+                            var text = row[column];
+                            texi = texi + "\t" + row[column];
+                        }
+
 
                         string[] temp1 = System.Text.RegularExpressions.Regex.Split(texi, "\t");
                         //判断国家是否存在                       
@@ -252,7 +248,6 @@ namespace DCTS.CustomComponents
                         obj.title = temp1[3];
                         obj.local_title = temp1[4];
                         obj.img = temp1[5]; ;// this.imgPathTextBox.Text;
-
                         //obj.open_at = Convert.ToDateTime( temp1[1]);
                         //obj.close_at = Convert.ToDateTime( temp1[1]);
                         obj.room = temp1[6];
@@ -271,9 +266,11 @@ namespace DCTS.CustomComponents
                         bool hastitle = (temp1[3].Length > 0);
                         if (hastitle)
                         {
+                            string demo = temp1[3].ToString();
+
                             ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
                             if (lastLocation != null)
-                                nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Hotel && o.title == temp1[3]).Count() > 0);
+                                nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Hotel && o.title == demo).Count() > 0);
                         }
 
                         #endregion
@@ -283,18 +280,15 @@ namespace DCTS.CustomComponents
                         else
                         {
                             throw new Exception("导入[" + temp1[3] + "]请检查名称的长度或是否已存在");
-
-                            //MessageBox.Show("错误：请检查名称的长度或是否已存在！" + temp1[3], "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return false;
                         }
-                        ctx.SaveChanges();
-
-
                         if (arg.CurrentIndex % 5 == 0)
                         {
                             backgroundWorker1.ReportProgress(progress, arg);
                         }
                     }
+                    ctx.SaveChanges();
+
                 }
                 backgroundWorker1.ReportProgress(100, arg);
                 e.Result = string.Format("{0} 条正常导入成功", dt.Rows.Count);

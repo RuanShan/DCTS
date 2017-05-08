@@ -30,6 +30,14 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.nationColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cityColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.imgColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.titleColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.localTitleColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.serviceTimeColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.editColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.deleteColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.newButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -43,14 +51,7 @@
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.pager1 = new DCTS.CustomComponents.Pager();
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
-            this.nationColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cityColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.imgColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.titleColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.localTitleColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.serviceTimeColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.editColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.deleteColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.btdown = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -83,6 +84,63 @@
             this.dataGridView.TabIndex = 0;
             this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellContentClick);
             this.dataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView_CellFormatting);
+            // 
+            // nationColumn1
+            // 
+            this.nationColumn1.DataPropertyName = "nation";
+            this.nationColumn1.HeaderText = "国家";
+            this.nationColumn1.Name = "nationColumn1";
+            // 
+            // cityColumn1
+            // 
+            this.cityColumn1.DataPropertyName = "city";
+            this.cityColumn1.HeaderText = "城市";
+            this.cityColumn1.Name = "cityColumn1";
+            // 
+            // imgColumn1
+            // 
+            this.imgColumn1.HeaderText = "图片";
+            this.imgColumn1.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.imgColumn1.Name = "imgColumn1";
+            this.imgColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.imgColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.imgColumn1.Width = 180;
+            // 
+            // titleColumn1
+            // 
+            this.titleColumn1.DataPropertyName = "title";
+            this.titleColumn1.HeaderText = "中文名称";
+            this.titleColumn1.Name = "titleColumn1";
+            this.titleColumn1.Width = 280;
+            // 
+            // localTitleColumn1
+            // 
+            this.localTitleColumn1.DataPropertyName = "local_title";
+            this.localTitleColumn1.HeaderText = "当地语言名称";
+            this.localTitleColumn1.Name = "localTitleColumn1";
+            this.localTitleColumn1.Width = 280;
+            // 
+            // serviceTimeColumn1
+            // 
+            this.serviceTimeColumn1.DataPropertyName = "serviceTime";
+            this.serviceTimeColumn1.HeaderText = "开放时间";
+            this.serviceTimeColumn1.Name = "serviceTimeColumn1";
+            // 
+            // editColumn1
+            // 
+            this.editColumn1.HeaderText = "";
+            this.editColumn1.Name = "editColumn1";
+            this.editColumn1.Text = "编辑";
+            this.editColumn1.UseColumnTextForButtonValue = true;
+            this.editColumn1.Width = 60;
+            // 
+            // deleteColumn
+            // 
+            this.deleteColumn.HeaderText = "";
+            this.deleteColumn.Name = "deleteColumn";
+            this.deleteColumn.Text = "删除";
+            this.deleteColumn.UseColumnTextForButtonValue = true;
+            this.deleteColumn.Width = 60;
             // 
             // newButton
             // 
@@ -205,66 +263,22 @@
             // 
             this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
             // 
-            // nationColumn1
+            // btdown
             // 
-            this.nationColumn1.DataPropertyName = "nation";
-            this.nationColumn1.HeaderText = "国家";
-            this.nationColumn1.Name = "nationColumn1";
-            // 
-            // cityColumn1
-            // 
-            this.cityColumn1.DataPropertyName = "city";
-            this.cityColumn1.HeaderText = "城市";
-            this.cityColumn1.Name = "cityColumn1";
-            // 
-            // imgColumn1
-            // 
-            this.imgColumn1.HeaderText = "图片";
-            this.imgColumn1.Name = "imgColumn1";
-            this.imgColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.imgColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.imgColumn1.Width = 180;
-            // 
-            // titleColumn1
-            // 
-            this.titleColumn1.DataPropertyName = "title";
-            this.titleColumn1.HeaderText = "中文名称";
-            this.titleColumn1.Name = "titleColumn1";
-            this.titleColumn1.Width = 280;
-            // 
-            // localTitleColumn1
-            // 
-            this.localTitleColumn1.DataPropertyName = "local_title";
-            this.localTitleColumn1.HeaderText = "当地语言名称";
-            this.localTitleColumn1.Name = "localTitleColumn1";
-            this.localTitleColumn1.Width = 280;
-            // 
-            // serviceTimeColumn1
-            // 
-            this.serviceTimeColumn1.DataPropertyName = "serviceTime";
-            this.serviceTimeColumn1.HeaderText = "开放时间";
-            this.serviceTimeColumn1.Name = "serviceTimeColumn1";
-            // 
-            // editColumn1
-            // 
-            this.editColumn1.HeaderText = "";
-            this.editColumn1.Name = "editColumn1";
-            this.editColumn1.Text = "编辑";
-            this.editColumn1.UseColumnTextForButtonValue = true;
-            this.editColumn1.Width = 60;
-            // 
-            // deleteColumn
-            // 
-            this.deleteColumn.HeaderText = "";
-            this.deleteColumn.Name = "deleteColumn";
-            this.deleteColumn.Text = "删除";
-            this.deleteColumn.UseColumnTextForButtonValue = true;
-            this.deleteColumn.Width = 60;
+            this.btdown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btdown.Location = new System.Drawing.Point(734, 20);
+            this.btdown.Name = "btdown";
+            this.btdown.Size = new System.Drawing.Size(75, 25);
+            this.btdown.TabIndex = 16;
+            this.btdown.Text = "下载";
+            this.btdown.UseVisualStyleBackColor = true;
+            this.btdown.Click += new System.EventHandler(this.btdown_Click);
             // 
             // ScenicsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btdown);
             this.Controls.Add(this.pager1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.groupBox1);
@@ -305,5 +319,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn serviceTimeColumn1;
         private System.Windows.Forms.DataGridViewButtonColumn editColumn1;
         private System.Windows.Forms.DataGridViewButtonColumn deleteColumn;
+        private System.Windows.Forms.Button btdown;
     }
 }
