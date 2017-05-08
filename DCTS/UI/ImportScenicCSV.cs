@@ -27,9 +27,9 @@ namespace DCTS.CustomComponents
             //var nationList = DCTS.DB.GlobalCache.NationList;
             //NationList = new List<Nation>();
             //NationList = nationList.ToList();
-             using (var ctx = new DctsEntities())
-                
-            NationList = ctx.Nations.ToList();
+            using (var ctx = new DctsEntities())
+
+                NationList = ctx.Nations.ToList();
 
         }
 
@@ -354,12 +354,13 @@ namespace DCTS.CustomComponents
                         obj.city = temp1[3];
                         obj.title = temp1[4];
                         obj.local_title = temp1[5];
-                        //obj.img = temp1[5];
+                        obj.img = "";
                         obj.latlng = temp1[6];
                         obj.local_address = temp1[7];
                         obj.route = temp1[8];
                         //obj.open_at = Convert.ToDateTime(temp1[1]);
                         //obj.close_at = Convert.ToDateTime(temp1[1]);
+                        obj.open_close_more = temp1[9].Trim();
 
                         obj.ticket = temp1[10].Trim();
                         obj.tips = temp1[11];
@@ -391,7 +392,7 @@ namespace DCTS.CustomComponents
                         {
                             backgroundWorker1.ReportProgress(progress, arg);
                         }
-                      
+
                     }
                     ctx.SaveChanges();
                 }

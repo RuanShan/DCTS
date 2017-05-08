@@ -288,7 +288,7 @@
             // 
             // btsave
             // 
-            this.btsave.Location = new System.Drawing.Point(545, 21);
+            this.btsave.Location = new System.Drawing.Point(469, 21);
             this.btsave.Name = "btsave";
             this.btsave.Size = new System.Drawing.Size(75, 25);
             this.btsave.TabIndex = 12;
@@ -310,7 +310,7 @@
             // btdown
             // 
             this.btdown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btdown.Location = new System.Drawing.Point(469, 21);
+            this.btdown.Location = new System.Drawing.Point(545, 21);
             this.btdown.Name = "btdown";
             this.btdown.Size = new System.Drawing.Size(75, 25);
             this.btdown.TabIndex = 15;
