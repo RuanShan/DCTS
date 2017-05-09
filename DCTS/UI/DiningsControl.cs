@@ -453,7 +453,7 @@ namespace DCTS.UI
                 string delimiter = "\t";
                 string strHeader = "";
 
-                strHeader = "国家\t城市\t区域\t餐厅名称\t菜系\t图片\t经纬度\t地址\t如何抵达(周围特征)\t营业时间\t推荐菜单\t深度Tlps";
+                strHeader = "序号\t国家\t城市\t区域\t餐厅名称\t菜系\t图片\t经纬度\t地址\t如何抵达(周围特征)\t营业时间\t推荐菜单\t深度Tlps";
 
                 sw.WriteLine(strHeader);
                 //output rows data
@@ -461,9 +461,17 @@ namespace DCTS.UI
                 {
                     string strRowValue = "";
 
-                    //  strRowValue += delimiter;
+                    //strRowValue += delimiter;
                     var row = list1[j];
                     var model = row;
+
+                    if (model.id != null)
+                        strRowValue += model.id.ToString().Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+
+
                     if (model.nation != null)
                         strRowValue += model.nation.Replace("\r\n", " ").Replace("\n", "") + delimiter;
                     else

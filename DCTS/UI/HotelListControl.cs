@@ -376,7 +376,7 @@ namespace DCTS.UI
                 string strHeader = "";
                 //国家	城市		英文名称	图片	预定房型	早餐	经纬度	地址	如何抵达	联系方式	WIFI	停车位	前台	厨房	深度TIPS
 
-                strHeader = "国家\t城市\t中文名称\t英文名称\t图片\t预定房型\t早餐\t经纬度\t地址\t如何抵达\t联系方式\tWIFI\t停车位\t前台\t厨房\t深度TIPS";
+                strHeader = "序号\t国家\t城市\t中文名称\t英文名称\t图片\t预定房型\t早餐\t经纬度\t地址\t如何抵达\t联系方式\tWIFI\t停车位\t前台\t厨房\t深度TIPS";
 
                 sw.WriteLine(strHeader);
                 //output rows data
@@ -384,9 +384,16 @@ namespace DCTS.UI
                 {
                     string strRowValue = "";
 
-                    //  strRowValue += delimiter;
-                    var row = dataGridView.Rows[j];
+                    //strRowValue += delimiter;
+
                     var model = list1[j];
+                    if (model.id != null)
+                        strRowValue += model.id.ToString().Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+
+
                     if (model.nation != null)
                         strRowValue += model.nation.Replace("\r\n", " ").Replace("\n", "") + delimiter;
                     else
