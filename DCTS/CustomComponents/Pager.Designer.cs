@@ -48,6 +48,7 @@
             // 
             this.bindingNavigator1.AddNewItem = null;
             this.bindingNavigator1.AutoSize = false;
+            this.bindingNavigator1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.bindingNavigator1.CountItem = null;
             this.bindingNavigator1.DeleteItem = null;
             this.bindingNavigator1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -149,14 +150,13 @@
             // lblPageCount1
             // 
             this.lblPageCount1.Name = "lblPageCount1";
-            this.lblPageCount1.Size = new System.Drawing.Size(77, 25);
-            //this.lblPageCount1.Text = "合計 0 ページ";
+            this.lblPageCount1.Size = new System.Drawing.Size(43, 25);
             this.lblPageCount1.Text = "共 0 页";
             // 
             // lblRecordCount
             // 
             this.lblRecordCount.Name = "lblRecordCount";
-            this.lblRecordCount.Size = new System.Drawing.Size(55, 25);
+            this.lblRecordCount.Size = new System.Drawing.Size(79, 25);
             this.lblRecordCount.Text = "共有 0 条记录";
             // 
             // Pager

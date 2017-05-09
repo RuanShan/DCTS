@@ -13,6 +13,8 @@ using System.Collections;
 using DCTS.DB;
 using MySql.Data.MySqlClient;
 using System.IO;
+using DCTS.Uti;
+using DCTS.Bus;
 
 namespace DCTS.UI
 {
@@ -113,7 +115,9 @@ namespace DCTS.UI
             {
             }
             else
+            {
                 return;
+            }
             var oids = GetOrderIdsBySelectedGridCell();
             using (var ctx = new DctsEntities())
             {
@@ -127,7 +131,9 @@ namespace DCTS.UI
                     ctx.SaveChanges();
                 }
                 else
+                {
                     MessageBox.Show("删除失败，此餐厅在day 表中存在，请重新确认", "删除", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
 
 
             }
@@ -313,22 +319,18 @@ namespace DCTS.UI
             //int i = this.dataGridView.CurrentRow.Index;
             //if (i < DinningList.Count)
 
-            if (e.ColumnIndex == 5)
+            if (dataGridView.Columns[e.ColumnIndex] == this.imgColumn1)
             {
                 if (e.RowIndex < DinningList.Count)
                 {
                     //ComboLocation selectedItem = DinningList[i];
-                    ComboLocation selectedItem = DinningList[e.RowIndex];
+                    ComboLocation selectedItem = dataGridView.Rows[e.RowIndex].DataBoundItem as ComboLocation;
                     long folername = selectedItem.id / 1000;
                     if (selectedItem.img != null && selectedItem.img != "" && selectedItem.img != "\"\"")
                     {
                         string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\location_" + ComboLocationEnum.Dining.ToString().ToLower() + "\\" + folername + "\\", selectedItem.img);
                         //string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\locations\\" + folername + "\\", selectedItem.img);
-                        if (e.ColumnIndex == 5)
-                        {
-                            e.Value = GetImage1(lcoalPath);
-
-                        }
+                        e.Value = GetImage1(lcoalPath);
                     }
                 }
             }
@@ -525,6 +527,47 @@ namespace DCTS.UI
             fa.Close();
             MessageBox.Show("下载成功！", "System", MessageBoxButtons.OK, MessageBoxIcon.Information);
             #endregion
+        }
+
+        private void DiningsControl_Resize(object sender, EventArgs e)
+        {
+            //                                                   id
+            //titleColumn1.Width = dataGridView.ClientSize.Width - 60 - 100 * 3 - 280 - 200 - 100 - 60 * 2 - 3;
+            //是否包含滚动条
+            //if (!(this.dataGridView.DisplayedRowCount(false) == this.dataGridView.RowCount))
+            //{
+            //    titleColumn1.Width -= 18;
+            //}
+        }
+
+        private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewColumn column = dataGridView.Columns[e.ColumnIndex];
+
+            if (column == editColumn1)
+            {
+                var row = dataGridView.Rows[e.RowIndex];
+
+                var model = row.DataBoundItem as ComboLocation;
+
+                var form = new NewDiningsForm("Edit", model);                
+                if (form.ShowDialog() == DialogResult.Yes)
+                {
+                    BeginActive();
+                }
+            }
+            else if (column == deleteColumn1)
+            {
+                var row = dataGridView.Rows[e.RowIndex];
+                var model = row.DataBoundItem as ComboLocation;
+                string msg = string.Format("确定删除餐厅<{0}>？", model.title);
+
+                if (MessageHelper.DeleteConfirm(msg))
+                {                    
+                    ComboLoactionBusiness.Delete(model.id);                   
+                    BeginActive();
+                }
+            }
         }
 
     }

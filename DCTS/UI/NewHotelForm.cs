@@ -32,8 +32,8 @@ namespace DCTS.UI
                 this.titleTextBox.Text = obj.title;
                 this.localTitleTextBox.Text = obj.local_title;
                 this.imgPathTextBox.Text = obj.img;
-                this.openAtDateTimePicker.Text = obj.open_at.ToString();
-                this.closeAtDateTimePicker.Text = obj.close_at.ToString();
+                //this.openAtDateTimePicker.Text = obj.open_at.ToString();
+                //this.closeAtDateTimePicker.Text = obj.close_at.ToString();
                 room.Text = obj.room;
                 moringTextBox.Text = obj.dinner;
                 latlng.Text = obj.latlng;
@@ -126,8 +126,8 @@ namespace DCTS.UI
                         obj.local_title = this.localTitleTextBox.Text;
                         obj.img = copyfilename;// this.imgPathTextBox.Text;
                         //  obj.ticket = this.tickettime.Text;
-                        obj.open_at = Convert.ToDateTime(this.openAtDateTimePicker.Text);
-                        obj.close_at = Convert.ToDateTime(this.closeAtDateTimePicker.Text);
+                        //obj.open_at = Convert.ToDateTime(this.openAtDateTimePicker.Text);
+                        //obj.close_at = Convert.ToDateTime(this.closeAtDateTimePicker.Text);
                         obj.room = room.Text;
                         obj.dinner = moringTextBox.Text;
                         obj.latlng = latlng.Text;
@@ -167,8 +167,8 @@ namespace DCTS.UI
                         obj.local_title = this.localTitleTextBox.Text;
                         obj.img = copyfilename;// this.imgPathTextBox.Text;
                         //  obj.ticket = this.tickettime.Text;
-                        obj.open_at = Convert.ToDateTime(this.openAtDateTimePicker.Text);
-                        obj.close_at = Convert.ToDateTime(this.closeAtDateTimePicker.Text);
+                        //obj.open_at = Convert.ToDateTime(this.openAtDateTimePicker.Text);
+                        //obj.close_at = Convert.ToDateTime(this.closeAtDateTimePicker.Text);
                         obj.room = room.Text;
                         obj.dinner = moringTextBox.Text;
                         obj.latlng = latlng.Text;

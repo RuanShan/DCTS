@@ -239,7 +239,7 @@ namespace DCTS.UI
 
         private void dataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex == 2)
+            if (dataGridView.Columns[e.ColumnIndex] == this.imgColumn1)
             {
                 if (e.RowIndex < ScenicslList.Count)
                 {
@@ -248,13 +248,8 @@ namespace DCTS.UI
                     if (selectedItem.img != null && selectedItem.img != "" && selectedItem.img != "\"\"")
                     {
                         string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\location_" + ComboLocationEnum.Scenic.ToString().ToLower() + "\\" + folername + "\\", selectedItem.img);
-
-                        //string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\locations\\" + folername + "\\", selectedItem.img);
-                        if (e.ColumnIndex == 2)
-                        {
-                            e.Value = GetImage1(lcoalPath);
-
-                        }
+                       
+                        e.Value = GetImage1(lcoalPath);                        
                     }
                 }
             }
@@ -288,7 +283,8 @@ namespace DCTS.UI
             var saveFileDialog = new SaveFileDialog();
             saveFileDialog.DefaultExt = ".csv";
             saveFileDialog.Filter = "csv|*.csv";
-            string strFileName = "Scenics  " + "_" + DateTime.Now.ToString("yyyyMMddHHmmss");
+            saveFileDialog.Title = "下载景点数据...";
+            string strFileName = "景点" + "_" + DateTime.Now.ToString("yyyyMMddHHmmss");
             saveFileDialog.FileName = strFileName;
             if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
             {
@@ -370,6 +366,18 @@ namespace DCTS.UI
             sw.Close();
             fa.Close();
             MessageBox.Show("下载成功！", "System", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void ScenicsControl_Resize(object sender, EventArgs e)
+        {
+            //                                                   id
+            titleColumn1.Width = dataGridView.ClientSize.Width - 60- 100 * 3 - 280 - 200 - 100 - 60 * 2 - 3;
+            //是否包含滚动条
+            if (!(this.dataGridView.DisplayedRowCount(false) == this.dataGridView.RowCount))
+            {
+                titleColumn1.Width -= 18;
+            }
+
         }
 
     }

@@ -43,8 +43,8 @@ namespace DCTS.UI
                 this.textBox3.Text = obj.recommended_dishes;
                 this.textBox6.Text = obj.tips;
                 this.localTitleTextBox.Text = obj.title;
-                this.openAtDateTimePicker.Text = obj.open_at.ToString();
-                this.closeAtDateTimePicker.Text = obj.close_at.ToString();
+                //this.openAtDateTimePicker.Text = obj.open_at.ToString();
+                //this.closeAtDateTimePicker.Text = obj.close_at.ToString();
 
                 long folername = obj.id / 1000;
                 string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\location_" + ComboLocationEnum.Dining.ToString().ToLower() + "\\" + folername + "\\", obj.img);
@@ -145,8 +145,8 @@ namespace DCTS.UI
                             obj.recommended_dishes = this.textBox3.Text;
                             obj.tips = this.textBox6.Text;
                             obj.title = this.localTitleTextBox.Text;
-                            obj.open_at = Convert.ToDateTime(this.openAtDateTimePicker.Text);
-                            obj.close_at = Convert.ToDateTime(this.closeAtDateTimePicker.Text);
+                            //obj.open_at = Convert.ToDateTime(this.openAtDateTimePicker.Text);
+                            //obj.close_at = Convert.ToDateTime(this.closeAtDateTimePicker.Text);
                             ctx.SaveChanges();
                             if (hasImg)
                             {
@@ -171,8 +171,8 @@ namespace DCTS.UI
                             obj.recommended_dishes = this.textBox3.Text;
                             obj.tips = this.textBox6.Text;
                             obj.title = this.localTitleTextBox.Text;
-                            obj.open_at = Convert.ToDateTime(this.openAtDateTimePicker.Text);
-                            obj.close_at = Convert.ToDateTime(this.closeAtDateTimePicker.Text);
+                            //obj.open_at = Convert.ToDateTime(this.openAtDateTimePicker.Text);
+                            //obj.close_at = Convert.ToDateTime(this.closeAtDateTimePicker.Text);
                             ctx.ComboLocations.Add(obj);
                             if (nameishave == false && this.localTitleTextBox.Text.Length <= 100)
                                 ctx.SaveChanges();

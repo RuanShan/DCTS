@@ -86,11 +86,11 @@ namespace DCTS.UI
 
             if (scenic.open_at != null)
             {
-                this.openAtDateTimePicker.Value = (DateTime)scenic.open_at;
+                //this.openAtDateTimePicker.Value = (DateTime)scenic.open_at;
             }
             if (scenic.close_at != null)
             {
-                this.closeAtDateTimePicker.Value = (DateTime)scenic.close_at;
+                //this.closeAtDateTimePicker.Value = (DateTime)scenic.close_at;
             }
 
             if (scenic.tips.Length > 0)
@@ -128,8 +128,8 @@ namespace DCTS.UI
             scenic.city = this.cityComboBox.Text;
             scenic.latlng = this.latlngTextBox.Text;
             scenic.ticket = this.ticketTextBox.Text;
-            scenic.open_at = this.openAtDateTimePicker.Value;
-            scenic.close_at = this.closeAtDateTimePicker.Value;
+            //scenic.open_at = this.openAtDateTimePicker.Value;
+            //scenic.close_at = this.closeAtDateTimePicker.Value;
             scenic.tips = this.tipsTextBox.Text;
             scenic.local_address = this.localAddressTextBox.Text;
             scenic.route = this.routeTextBox.Text;

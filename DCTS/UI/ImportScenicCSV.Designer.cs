@@ -155,6 +155,8 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ImportScenicCSV";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "景点CSV数据导入";
             this.ResumeLayout(false);

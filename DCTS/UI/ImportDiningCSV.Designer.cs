@@ -155,6 +155,8 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ImportDiningCSV";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "餐厅CSV数据导入";
             this.ResumeLayout(false);
