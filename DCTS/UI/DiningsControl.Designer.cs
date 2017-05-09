@@ -295,20 +295,21 @@
             this.nationColumn1.DataPropertyName = "nation";
             this.nationColumn1.HeaderText = "国家";
             this.nationColumn1.Name = "nationColumn1";
-            this.nationColumn1.Visible = false;
+            this.nationColumn1.Width = 60;
             // 
             // cityColumn1
             // 
             this.cityColumn1.DataPropertyName = "city";
             this.cityColumn1.HeaderText = "城市";
             this.cityColumn1.Name = "cityColumn1";
-            this.cityColumn1.Visible = false;
+            this.cityColumn1.Width = 60;
             // 
             // areaColumn1
             // 
             this.areaColumn1.DataPropertyName = "area";
             this.areaColumn1.HeaderText = "区域";
             this.areaColumn1.Name = "areaColumn1";
+            this.areaColumn1.Width = 60;
             // 
             // imgColumn1
             // 

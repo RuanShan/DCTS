@@ -274,7 +274,6 @@
             this.localTitleColumn1.DataPropertyName = "local_title";
             this.localTitleColumn1.HeaderText = "当地语言名称";
             this.localTitleColumn1.Name = "localTitleColumn1";
-            this.localTitleColumn1.Visible = false;
             this.localTitleColumn1.Width = 280;
             // 
             // serviceTimeColumn1

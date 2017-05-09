@@ -72,7 +72,9 @@ namespace DCTS.UI
         private void newButton_Click(object sender, EventArgs e)
         {
             var form = new NewScenicForm();
-            if (form.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
+            form.ShowDialog();
+
+            if ( form.Saved )
             {
                 InitializeDataGridView();
             }

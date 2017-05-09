@@ -80,7 +80,7 @@
             // 
             this.ticketTextBox.Location = new System.Drawing.Point(85, 122);
             this.ticketTextBox.Name = "ticketTextBox";
-            this.ticketTextBox.Size = new System.Drawing.Size(231, 21);
+            this.ticketTextBox.Size = new System.Drawing.Size(518, 21);
             this.ticketTextBox.TabIndex = 8;
             // 
             // label12
@@ -128,7 +128,7 @@
             // 
             // findFileButton
             // 
-            this.findFileButton.Location = new System.Drawing.Point(571, 121);
+            this.findFileButton.Location = new System.Drawing.Point(571, 148);
             this.findFileButton.Name = "findFileButton";
             this.findFileButton.Size = new System.Drawing.Size(32, 23);
             this.findFileButton.TabIndex = 5;
@@ -139,7 +139,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(337, 126);
+            this.label6.Location = new System.Drawing.Point(337, 153);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(29, 12);
             this.label6.TabIndex = 28;
@@ -205,7 +205,7 @@
             // 
             // imgPathTextBox
             // 
-            this.imgPathTextBox.Location = new System.Drawing.Point(370, 122);
+            this.imgPathTextBox.Location = new System.Drawing.Point(370, 149);
             this.imgPathTextBox.Name = "imgPathTextBox";
             this.imgPathTextBox.ReadOnly = true;
             this.imgPathTextBox.Size = new System.Drawing.Size(195, 21);
@@ -250,9 +250,9 @@
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(370, 152);
+            this.pictureBox1.Location = new System.Drawing.Point(370, 176);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(233, 102);
+            this.pictureBox1.Size = new System.Drawing.Size(195, 78);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 42;
             this.pictureBox1.TabStop = false;
