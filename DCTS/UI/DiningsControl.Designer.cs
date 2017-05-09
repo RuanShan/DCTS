@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView = new System.Windows.Forms.DataGridView();
@@ -49,6 +48,9 @@
             this.btsave = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.btdown = new System.Windows.Forms.Button();
+            this.pager2 = new DCTS.CustomComponents.Pager();
+            this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.idColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nationColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cityColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,9 +63,6 @@
             this.recommendedDishesColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.editColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.deleteColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.pager2 = new DCTS.CustomComponents.Pager();
-            this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -106,8 +105,6 @@
             this.dataGridView.Location = new System.Drawing.Point(8, 140);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowHeadersVisible = false;
-            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
-            this.dataGridView.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView.RowTemplate.Height = 50;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView.Size = new System.Drawing.Size(693, 246);
@@ -262,6 +259,30 @@
             this.btdown.UseVisualStyleBackColor = true;
             this.btdown.Click += new System.EventHandler(this.btdown_Click);
             // 
+            // pager2
+            // 
+            this.pager2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pager2.AutoSize = true;
+            this.pager2.Location = new System.Drawing.Point(8, 390);
+            this.pager2.Name = "pager2";
+            this.pager2.NMax = 0;
+            this.pager2.PageCount = 0;
+            this.pager2.PageCurrent = 0;
+            this.pager2.PageSize = 5000;
+            this.pager2.Size = new System.Drawing.Size(693, 31);
+            this.pager2.TabIndex = 13;
+            this.pager2.EventPaging += new DCTS.CustomComponents.EventPagingHandler(this.pager2_EventPaging_1);
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
+            // 
+            // bindingSource1
+            // 
+            this.bindingSource1.DataSource = this.entityDataSource1;
+            this.bindingSource1.Position = 0;
+            // 
             // idColumn1
             // 
             this.idColumn1.DataPropertyName = "id";
@@ -346,7 +367,7 @@
             // 
             this.deleteColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(2, 14, 2, 14);
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(2, 12, 2, 12);
             this.deleteColumn1.DefaultCellStyle = dataGridViewCellStyle2;
             this.deleteColumn1.HeaderText = "";
             this.deleteColumn1.Name = "deleteColumn1";
@@ -354,30 +375,6 @@
             this.deleteColumn1.ToolTipText = "删除";
             this.deleteColumn1.UseColumnTextForButtonValue = true;
             this.deleteColumn1.Width = 60;
-            // 
-            // pager2
-            // 
-            this.pager2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pager2.AutoSize = true;
-            this.pager2.Location = new System.Drawing.Point(8, 390);
-            this.pager2.Name = "pager2";
-            this.pager2.NMax = 0;
-            this.pager2.PageCount = 0;
-            this.pager2.PageCurrent = 0;
-            this.pager2.PageSize = 5000;
-            this.pager2.Size = new System.Drawing.Size(693, 31);
-            this.pager2.TabIndex = 13;
-            this.pager2.EventPaging += new DCTS.CustomComponents.EventPagingHandler(this.pager2_EventPaging_1);
-            // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
-            // 
-            // bindingSource1
-            // 
-            this.bindingSource1.DataSource = this.entityDataSource1;
-            this.bindingSource1.Position = 0;
             // 
             // DiningsControl
             // 
