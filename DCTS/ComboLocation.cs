@@ -46,6 +46,7 @@ namespace DCTS
         public string recommended_dishes { get; set; }
         public string tips { get; set; }
         public string open_close_more { get; set; }
+        public string guidance { get; set; }
     
         public virtual ICollection<DayLocation> DayLocations { get; set; }
     }

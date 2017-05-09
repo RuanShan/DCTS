@@ -39,8 +39,10 @@ namespace DCTS.Bus
                 //Include("TripDays").Include("DayLocations")
                 var trip = ctx.Trips.Where( o=>o.id == trip_id ).First();
 
-                var locations = trip.DayLocations;
-                ctx.DayLocations.RemoveRange(locations);
+                string sqlRemoveDays = string.Format("DELETE FROM TripDays WHERE TripDays.trip_id={0}", trip_id);
+                string sqlRemoveLocations = string.Format("DELETE FROM DayLocations WHERE DayLocations.trip_id={0}", trip_id);
+                ctx.Database.ExecuteSqlCommand(sqlRemoveLocations);
+                ctx.Database.ExecuteSqlCommand(sqlRemoveDays);
                 ctx.Trips.Remove(trip);
                 ctx.SaveChanges();
             }

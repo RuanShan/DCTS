@@ -49,7 +49,7 @@ namespace DCTS.CustomComponents
                 System.Text.Encoding encoding = GetType(filePath); //Encoding.ASCII;//
                 DataTable dt = new DataTable();
                 System.IO.FileStream fs = new System.IO.FileStream(filePath, System.IO.FileMode.Open,
-                    System.IO.FileAccess.Read);
+                    System.IO.FileAccess.Read, FileShare.ReadWrite);
 
                 System.IO.StreamReader sr = new System.IO.StreamReader(fs, encoding);
 
@@ -147,7 +147,7 @@ namespace DCTS.CustomComponents
         public static System.Text.Encoding GetType(string FILE_NAME)
         {
             System.IO.FileStream fs = new System.IO.FileStream(FILE_NAME, System.IO.FileMode.Open,
-                System.IO.FileAccess.Read);
+                System.IO.FileAccess.Read, System.IO.FileShare.ReadWrite);
             System.Text.Encoding r = GetType(fs);
             fs.Close();
             return r;

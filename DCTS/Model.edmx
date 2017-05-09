@@ -53,7 +53,7 @@
           <Property Name="open_at" Type="datetime" />
           <Property Name="close_at" Type="datetime" />
           <Property Name="open_close_more" Type="varchar" MaxLength="45" />
-          <Property Name="ticket" Type="varchar" MaxLength="48" />
+          <Property Name="ticket" Type="varchar" MaxLength="512" />
           <Property Name="room" Type="varchar" MaxLength="510" />
           <Property Name="dinner" Type="varchar" MaxLength="510" />
           <Property Name="wifi" Type="varchar" MaxLength="48" />
@@ -63,6 +63,7 @@
           <Property Name="dishes" Type="varchar" MaxLength="510" />
           <Property Name="recommended_dishes" Type="varchar" MaxLength="510" />
           <Property Name="tips" Type="varchar" MaxLength="1020" />
+          <Property Name="guidance" Type="varchar" MaxLength="1020" />
         </EntityType>
         <EntityType Name="DayLocations">
           <Key>
@@ -314,7 +315,7 @@
           <Property Type="String" Name="contact" MaxLength="256" FixedLength="false" Unicode="false" />
           <Property Type="DateTime" Name="open_at" />
           <Property Type="DateTime" Name="close_at" />
-          <Property Type="String" Name="ticket" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ticket" MaxLength="340" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="room" MaxLength="512" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="dinner" MaxLength="512" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="wifi" MaxLength="45" FixedLength="false" Unicode="false" />
@@ -326,6 +327,7 @@
           <Property Type="String" Name="tips" MaxLength="1024" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="open_close_more" MaxLength="45" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="DayLocations" Relationship="DctsModel.locationId1" FromRole="ComboLocation" ToRole="DayLocation" />
+          <Property Type="String" Name="guidance" MaxLength="1020" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="DayLocation">
           <Key>
@@ -512,6 +514,7 @@
           <EntitySetMapping Name="ComboLocations">
             <EntityTypeMapping TypeName="DctsModel.ComboLocation">
               <MappingFragment StoreEntitySet="ComboLocations">
+                <ScalarProperty Name="guidance" ColumnName="guidance" />
                 <ScalarProperty Name="open_close_more" ColumnName="open_close_more" />
                 <ScalarProperty Name="tips" ColumnName="tips" />
                 <ScalarProperty Name="recommended_dishes" ColumnName="recommended_dishes" />

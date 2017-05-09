@@ -48,6 +48,7 @@ CREATE TABLE `ComboLocations` (
   `dishes` varchar(512) DEFAULT NULL,
   `recommended_dishes` varchar(512) DEFAULT NULL,
   `tips` varchar(1024) DEFAULT NULL,
+  `guidance` varchar(1024) DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
