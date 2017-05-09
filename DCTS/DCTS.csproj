@@ -424,6 +424,7 @@
     </Compile>
     <None Include="Templates\dining-detail.docx" />
     <None Include="Templates\hotel-detail.docx" />
+    <None Include="Templates\layout.docx" />
     <None Include="Templates\scenic-detail.docx" />
   </ItemGroup>
   <ItemGroup>

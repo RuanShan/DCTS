@@ -116,9 +116,21 @@ namespace DCTS.DB
     {
         public static string TemplatePath = "templates";
 
+        public static string LayoutlName = "layout.docx";
         public static string DinningDetailName = "dining-detail.docx";
         public static string ScenicDetailName = "scenic-detail.docx";
         public static string HotelDetailName = "hotel-detail.docx";
+
+        public static string LayoutRelativePath
+        {
+            get
+            {
+                CreateFolder(TemplatePath);
+                string path = Path.Combine(TemplatePath, LayoutlName);
+                return path;
+            }
+        }
+
 
         public static string DinningDetailRelativePath { 
             get {

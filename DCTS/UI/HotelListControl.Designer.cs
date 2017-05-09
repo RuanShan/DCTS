@@ -383,7 +383,7 @@
             // btdown
             // 
             this.btdown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btdown.Location = new System.Drawing.Point(515, 20);
+            this.btdown.Location = new System.Drawing.Point(524, 20);
             this.btdown.Name = "btdown";
             this.btdown.Size = new System.Drawing.Size(75, 25);
             this.btdown.TabIndex = 16;

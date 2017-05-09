@@ -325,7 +325,7 @@
           <Property Type="String" Name="dishes" MaxLength="512" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="recommended_dishes" MaxLength="512" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="tips" MaxLength="1024" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="open_close_more" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="open_close_more" MaxLength="170" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="DayLocations" Relationship="DctsModel.locationId1" FromRole="ComboLocation" ToRole="DayLocation" />
           <Property Type="String" Name="guidance" MaxLength="1020" FixedLength="false" Unicode="false" />
         </EntityType>

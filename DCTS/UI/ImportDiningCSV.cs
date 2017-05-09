@@ -106,6 +106,7 @@ namespace DCTS.CustomComponents
                     + @"3,(`~!@#$%^&*()_+-=[]\{}|<>?./;:),C:\pictures\100_01.JPG,4/12/2009 11:47 AM";
             return csv;
         }
+        
         #region csv 路径
         public static DataTable OpenCSV(string filePath)//从csv读取数据返回table
         {

@@ -109,7 +109,7 @@ namespace DCTS.UI
             //处理图片
             if (scenic.img.Length > 0)
             {
-                if (scenic.id > 0)
+                if (scenic.id > 0 && scenic.img != "\"\"")
                 {
                     this.imgPathTextBox.Text = scenic.img;
                     long folername = scenic.id / 1000;
@@ -159,8 +159,9 @@ namespace DCTS.UI
             bool hasImg = (imgFilePath.Length > 0);
             bool existSameImage = false;
 
-            if (hasImg)
+            if (hasImg && imgFilePath != "\"\"")
             {
+
                 imgFileName = Path.GetFileName(imgFilePath);
 
                 ComboLocation lastLocation = db.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();

@@ -47,8 +47,11 @@ namespace DCTS.Bus
 
             using (var db = new DctsEntities())
             {
-
-                using (DocX document = DocX.Create(EntityPathConfig.TripWordFilePath(this.TripId)))
+                //copy templates/base as template
+                string layout = LocationTemplate.LayoutRelativePath;
+                string tripPath = EntityPathConfig.TripWordFilePath(this.TripId);
+                File.Copy(layout, tripPath,true);
+                using (DocX document = DocX.Load(tripPath))
                 {
                     List<ComboLocation> handledLocations = new List<ComboLocation>();
 

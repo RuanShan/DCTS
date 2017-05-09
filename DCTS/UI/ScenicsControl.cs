@@ -349,10 +349,10 @@ namespace DCTS.UI
                 else
                     strRowValue += delimiter;
                 //开放时间
-                //if (model.route != null)
-                //    strRowValue += model.open_at.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                //else
-                strRowValue += delimiter;
+                if (model.open_close_more != null)
+                    strRowValue += model.open_close_more.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                else
+                    strRowValue += delimiter;
 
                 if (model.ticket != null)
                     strRowValue += model.ticket.Replace("\r\n", " ").Replace("\n", "") + delimiter;
