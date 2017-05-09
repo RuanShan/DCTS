@@ -17,14 +17,21 @@ namespace DCTS.CustomComponents
 {
     public partial class ImportDiningCSV : Form
     {
+        private List<City> CityList = null;
+
         private List<Nation> NationList = null;
         public ImportDiningCSV()
         {
             InitializeComponent();
-            var nationList = DCTS.DB.GlobalCache.NationList;
-            NationList = new List<Nation>();
-            NationList = nationList.ToList();
+            //var nationList = DCTS.DB.GlobalCache.NationList;
+            //NationList = new List<Nation>();
+            //NationList = nationList.ToList();
 
+            using (var ctx = new DctsEntities())
+            {
+                NationList = ctx.Nations.ToList();
+                CityList = ctx.Cities.ToList();
+            }
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -106,7 +113,7 @@ namespace DCTS.CustomComponents
                     + @"3,(`~!@#$%^&*()_+-=[]\{}|<>?./;:),C:\pictures\100_01.JPG,4/12/2009 11:47 AM";
             return csv;
         }
-        
+
         #region csv 路径
         public static DataTable OpenCSV(string filePath)//从csv读取数据返回table
         {
@@ -307,28 +314,56 @@ namespace DCTS.CustomComponents
 
                         string[] temp1 = System.Text.RegularExpressions.Regex.Split(texi, "\t");
                         //判断国家是否存在
-                        Nation order = this.NationList.Find(o => o.title == temp1[1]);
+                        Nation order = this.NationList.Find(o => o.title == temp1[2]);
                         if (order == null || order.title == null || order.title == "")
                         {
-                            e.Result = "导入[" + temp1[4] + "]国家信息在系统中不存在";
+                            e.Result = "导入[" + temp1[5] + "]国家信息在系统中不存在";
                             throw new Exception("导入[" + temp1[4] + "]国家信息在系统中不存在");
                             //continue;
                         }
+                        //判断城市是否存在 不存在创建
+                        City CityListorder = this.CityList.Find(o => o.title == temp1[3]);
+                        if (CityListorder == null)
+                        {
+                            var objcity = ctx.Cities.Create();
+                            objcity.title = temp1[3];
+                            objcity.nationCode = order.code;
+                            if (temp1[1] == null || temp1[1] == "")
+                            {
+                                e.Result = "导入[" + temp1[5] + "]文件中【序号】列不能为空";
+                                throw new Exception("导入[" + temp1[5] + "]导入文件中【序号】列不能为空");
+
+                            }
+                            objcity.id = Convert.ToInt64(temp1[1]);
+                        }
+                        else
+                        {
+                            if (temp1[1] == null || temp1[1] == "")
+                            {
+                                e.Result = "导入[" + temp1[5] + "]文件中【序号】列不能为空";
+                                throw new Exception("导入[" + temp1[5] + "]导入文件中【序号】列不能为空");
+
+                            }
+                            City objcity = ctx.Cities.Find(Convert.ToInt32(Convert.ToInt64(temp1[1])));
+                            objcity.title = temp1[3];
+                            objcity.nationCode = order.code;
+                        }
+
 
                         var obj = ctx.ComboLocations.Create();
                         obj.ltype = (int)ComboLocationEnum.Dining;
-                        obj.nation = temp1[1];
-                        obj.city = temp1[2];
-                        obj.area = temp1[3];
-                        obj.title = temp1[4];
-                        obj.dishes = temp1[5];
-                        obj.img = temp1[6];
-                        obj.latlng = temp1[7];
-                        obj.address = temp1[8];
-                        obj.local_address = temp1[9];
-                        if (temp1[10] != null && temp1[10] != "" && temp1[10].Contains("-"))
+                        obj.nation = temp1[2];
+                        obj.city = temp1[3];
+                        obj.area = temp1[4];
+                        obj.title = temp1[5];
+                        obj.dishes = temp1[6];
+                        obj.img = temp1[7];
+                        obj.latlng = temp1[8];
+                        obj.address = temp1[9];
+                        obj.local_address = temp1[10];
+                        if (temp1[11] != null && temp1[11] != "" && temp1[11].Contains("-"))
                         {
-                            string[] temp2 = System.Text.RegularExpressions.Regex.Split(temp1[10], "-");
+                            string[] temp2 = System.Text.RegularExpressions.Regex.Split(temp1[11], "-");
 
                             try
                             {
@@ -340,14 +375,14 @@ namespace DCTS.CustomComponents
                                 success = false;
                             }
                         }
-                        obj.recommended_dishes = temp1[11];
+                        obj.recommended_dishes = temp1[12];
                         obj.tips = temp1[12];
                         #region 判断名称长度
                         bool nameishave = false;
-                        bool hastitle = (temp1[4].Length > 0);
+                        bool hastitle = (temp1[5].Length > 0);
                         if (hastitle)
                         {
-                            string demo = temp1[4].ToString();
+                            string demo = temp1[5].ToString();
 
                             ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
                             if (lastLocation != null)
@@ -355,11 +390,11 @@ namespace DCTS.CustomComponents
                         }
 
                         #endregion
-                        if (nameishave == false && temp1[4].Length <= 100)
+                        if (nameishave == false && temp1[5].Length <= 100)
                             ctx.ComboLocations.Add(obj);
                         else
                         {
-                            throw new Exception("导入[" + temp1[4] + "]请检查名称的长度或是否已存在");
+                            throw new Exception("导入[" + temp1[5] + "]请检查名称的长度或是否已存在");
                             //MessageBox.Show("错误：请检查名称的长度或是否已存在！" + temp1[4], "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return false;
                         }

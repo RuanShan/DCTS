@@ -342,7 +342,7 @@ namespace DCTS.CustomComponents
                         //    return false;
                         //} 
 
-                        #endregion
+                        #endregion  
 
                         #region 新模板
                         //判断国家是否存在                       
@@ -414,7 +414,7 @@ namespace DCTS.CustomComponents
                             ctx.ComboLocations.Add(obj);
                         else
                         {
-                            throw new Exception("导入[" + temp1[3] + "]请检查名称的长度或是否已存在");
+                            throw new Exception("导入[" + temp1[4] + "]请检查名称的长度或是否已存在");
                         }
 
 

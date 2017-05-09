@@ -23,6 +23,7 @@ namespace DCTS.UI
         private static string NoOptionSelected = "所有";
         private List<ComboLocation> ScenicslList = null;
         private SortableBindingList<ComboLocation> sortabledinningsOrderList;
+        string sqlfilter = "";
 
         public ScenicsControl()
         {
@@ -144,6 +145,7 @@ namespace DCTS.UI
         }
         private int FindDataSources()
         {
+            sqlfilter = "";
 
             var nation = nationComboBox.Text;
             var city = this.cityComboBox.Text;
@@ -216,8 +218,7 @@ namespace DCTS.UI
                 count = ctx.Database.SqlQuery<int>(sqlCount, condition_params.ToArray()).First();
                 string sql = string.Format(" SELECT * FROM combolocations {0} LIMIT {1} OFFSET {2}", conditions, limit, offset);
                 ScenicslList = ctx.Database.SqlQuery<ComboLocation>(sql, condition_params.ToArray()).ToList();
-
-
+                sqlfilter = string.Format(" SELECT * FROM combolocations ", conditions);
                 sortabledinningsOrderList = new SortableBindingList<ComboLocation>(ScenicslList.ToList());
                 this.bindingSource1.DataSource = this.sortabledinningsOrderList;
                 dataGridView.AutoGenerateColumns = false;
@@ -248,8 +249,8 @@ namespace DCTS.UI
                     if (selectedItem.img != null && selectedItem.img != "" && selectedItem.img != "\"\"")
                     {
                         string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\location_" + ComboLocationEnum.Scenic.ToString().ToLower() + "\\" + folername + "\\", selectedItem.img);
-                       
-                        e.Value = GetImage1(lcoalPath);                        
+
+                        e.Value = GetImage1(lcoalPath);
                     }
                 }
             }
@@ -275,103 +276,109 @@ namespace DCTS.UI
 
         private void btdown_Click(object sender, EventArgs e)
         {
-            if (this.dataGridView.Rows.Count == 0)
+            using (var ctx = new DctsEntities())
             {
-                MessageBox.Show("Sorry , No Data Output !", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+
+                var list1 = ctx.Database.SqlQuery<ComboLocation>(sqlfilter).ToList();
+                if (list1 == null || list1.Count == 0)
+                {
+                    MessageBox.Show("Sorry , No Data Output !", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                var saveFileDialog = new SaveFileDialog();
+                saveFileDialog.DefaultExt = ".csv";
+                saveFileDialog.Filter = "csv|*.csv";
+                saveFileDialog.Title = "下载景点数据...";
+                string strFileName = "景点" + "_" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                saveFileDialog.FileName = strFileName;
+                if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
+                {
+                    strFileName = saveFileDialog.FileName.ToString();
+                }
+                else
+                {
+                    return;
+                }
+                FileStream fa = new FileStream(strFileName, FileMode.Create);
+                StreamWriter sw = new StreamWriter(fa, Encoding.Unicode);
+                string delimiter = "\t";
+                string strHeader = "";
+
+                strHeader = "序号\t国家\t城市\t景点名称\t英文名称\t经纬度\t地址\t如何抵达\t开放时间\t门票\t小贴士\t游玩方式";
+
+                sw.WriteLine(strHeader);
+                //output rows data
+                for (int j = 0; j < list1.Count; j++)
+                {
+                    string strRowValue = "";
+
+                    strRowValue += delimiter;
+                    //var row = dataGridView.Rows[j];
+                    //var model = row.DataBoundItem as ComboLocation;
+                    var model = list1[j];
+                    if (model.nation != null)
+                        strRowValue += model.nation.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+                    if (model.city != null)
+                        strRowValue += model.city.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+                    if (model.title != null)
+                        strRowValue += model.title.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+                    if (model.local_title != null)
+                        strRowValue += model.local_title.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+                    if (model.latlng != null)
+                        strRowValue += model.latlng.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+                    if (model.local_address != null)
+                        strRowValue += model.local_address.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+                    if (model.route != null)
+                        strRowValue += model.route.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+                    //开放时间
+                    if (model.open_close_more != null)
+                        strRowValue += model.open_close_more.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+                    if (model.ticket != null)
+                        strRowValue += model.ticket.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+                    if (model.tips != null)
+                        strRowValue += model.tips.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+                    ;
+
+                    sw.WriteLine(strRowValue);
+                }
+                sw.Close();
+                fa.Close();
+                MessageBox.Show("下载成功！", "System", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            var saveFileDialog = new SaveFileDialog();
-            saveFileDialog.DefaultExt = ".csv";
-            saveFileDialog.Filter = "csv|*.csv";
-            saveFileDialog.Title = "下载景点数据...";
-            string strFileName = "景点" + "_" + DateTime.Now.ToString("yyyyMMddHHmmss");
-            saveFileDialog.FileName = strFileName;
-            if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                strFileName = saveFileDialog.FileName.ToString();
-            }
-            else
-            {
-                return;
-            }
-            FileStream fa = new FileStream(strFileName, FileMode.Create);
-            StreamWriter sw = new StreamWriter(fa, Encoding.Unicode);
-            string delimiter = "\t";
-            string strHeader = "";
-
-            strHeader = "序号\t国家\t城市\t景点名称\t英文名称\t经纬度\t地址\t如何抵达\t开放时间\t门票\t小贴士\t游玩方式";
-
-            sw.WriteLine(strHeader);
-            //output rows data
-            for (int j = 0; j < this.dataGridView.Rows.Count; j++)
-            {
-                string strRowValue = "";
-
-                strRowValue += delimiter;
-                var row = dataGridView.Rows[j];
-                var model = row.DataBoundItem as ComboLocation;
-                if (model.nation != null)
-                    strRowValue += model.nation.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-
-                if (model.city != null)
-                    strRowValue += model.city.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-
-                if (model.title != null)
-                    strRowValue += model.title.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-
-                if (model.local_title != null)
-                    strRowValue += model.local_title.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-
-                if (model.latlng != null)
-                    strRowValue += model.latlng.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-
-                if (model.local_address != null)
-                    strRowValue += model.local_address.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-
-                if (model.route != null)
-                    strRowValue += model.route.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-                //开放时间
-                if (model.open_close_more != null)
-                    strRowValue += model.open_close_more.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-
-                if (model.ticket != null)
-                    strRowValue += model.ticket.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-
-                if (model.tips != null)
-                    strRowValue += model.tips.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-                ;
-
-                sw.WriteLine(strRowValue);
-            }
-            sw.Close();
-            fa.Close();
-            MessageBox.Show("下载成功！", "System", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void ScenicsControl_Resize(object sender, EventArgs e)
         {
             //                                                   id
-            titleColumn1.Width = dataGridView.ClientSize.Width - 60- 100 * 3 - 280 - 200 - 100 - 60 * 2 - 3;
+            titleColumn1.Width = dataGridView.ClientSize.Width - 60 - 100 * 3 - 280 - 200 - 100 - 60 * 2 - 3;
             //是否包含滚动条
             if (!(this.dataGridView.DisplayedRowCount(false) == this.dataGridView.RowCount))
             {

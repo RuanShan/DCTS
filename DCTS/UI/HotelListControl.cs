@@ -23,8 +23,7 @@ namespace DCTS.UI
         private List<ComboLocation> hotelList = null;
         private SortableBindingList<ComboLocation> sortabledinningsOrderList;
         int RowRemark = 0;
-
-        //  IBindingList hotelOrderList = null;
+        string sqlfilter = "";
         public HotelListControl()
         {
             InitializeComponent();
@@ -130,6 +129,7 @@ namespace DCTS.UI
         }
         private int FindDataSources()
         {
+            sqlfilter = "";
 
             var nation = nationComboBox.Text;
             var city = this.cityComboBox.Text;
@@ -203,6 +203,7 @@ namespace DCTS.UI
                 string sql = string.Format(" SELECT * FROM combolocations {0} LIMIT {1} OFFSET {2}", conditions, limit, offset);
                 hotelList = ctx.Database.SqlQuery<ComboLocation>(sql, condition_params.ToArray()).ToList();
                 count = hotelList.Count;
+                sqlfilter = string.Format(" SELECT * FROM combolocations ", conditions);
 
                 //DinningList = (from s in ctx.ComboLocations
                 //               where s.title == title
@@ -347,137 +348,140 @@ namespace DCTS.UI
 
         private void btdown_Click(object sender, EventArgs e)
         {
-
-            #region MyRegion
-            if (this.dataGridView.Rows.Count == 0)
+            using (var ctx = new DctsEntities())
             {
-                MessageBox.Show("Sorry , No Data Output !", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                var list1 = ctx.Database.SqlQuery<ComboLocation>(sqlfilter).ToList();
+                #region MyRegion
+                if (list1 == null || list1.Count == 0)
+                {
+                    MessageBox.Show("Sorry , No Data Output !", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                var saveFileDialog = new SaveFileDialog();
+                saveFileDialog.DefaultExt = ".csv";
+                saveFileDialog.Filter = "csv|*.csv";
+                string strFileName = "Hotellist  " + "_" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                saveFileDialog.FileName = strFileName;
+                if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
+                {
+                    strFileName = saveFileDialog.FileName.ToString();
+                }
+                else
+                {
+                    return;
+                }
+                FileStream fa = new FileStream(strFileName, FileMode.Create);
+                StreamWriter sw = new StreamWriter(fa, Encoding.Unicode);
+                string delimiter = "\t";
+                string strHeader = "";
+                //国家	城市		英文名称	图片	预定房型	早餐	经纬度	地址	如何抵达	联系方式	WIFI	停车位	前台	厨房	深度TIPS
+
+                strHeader = "国家\t城市\t中文名称\t英文名称\t图片\t预定房型\t早餐\t经纬度\t地址\t如何抵达\t联系方式\tWIFI\t停车位\t前台\t厨房\t深度TIPS";
+
+                sw.WriteLine(strHeader);
+                //output rows data
+                for (int j = 0; j < list1.Count; j++)
+                {
+                    string strRowValue = "";
+
+                    //  strRowValue += delimiter;
+                    var row = dataGridView.Rows[j];
+                    var model = list1[j];
+                    if (model.nation != null)
+                        strRowValue += model.nation.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+                    if (model.city != null)
+                        strRowValue += model.city.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+                    if (model.title != null)
+                        strRowValue += model.title.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+                    if (model.local_title != null)
+                        strRowValue += model.local_title.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+                    if (model.img != null)
+                        strRowValue += model.img.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+                    if (model.room != null)
+                        strRowValue += model.room.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+                    if (model.dinner != null)
+                        strRowValue += model.dinner.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+                    if (model.latlng != null)
+                        strRowValue += model.latlng.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+                    if (model.address != null)
+                        strRowValue += model.address.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+                    if (model.local_address != null)
+                        strRowValue += model.local_address.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+
+                    if (model.contact != null)
+                        strRowValue += model.contact.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+                    if (model.wifi != null)
+                        strRowValue += model.wifi.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+
+                    if (model.parking != null)
+                        strRowValue += model.parking.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+
+                    if (model.reception != null)
+                        strRowValue += model.reception.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+
+
+                    if (model.kitchen != null)
+                        strRowValue += model.kitchen.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+
+                    if (model.tips != null)
+                        strRowValue += model.tips.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+                    ;
+
+                    sw.WriteLine(strRowValue);
+                }
+                sw.Close();
+                fa.Close();
+                MessageBox.Show("下载成功！", "System", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                #endregion
             }
-            var saveFileDialog = new SaveFileDialog();
-            saveFileDialog.DefaultExt = ".csv";
-            saveFileDialog.Filter = "csv|*.csv";
-            string strFileName = "Hotellist  " + "_" + DateTime.Now.ToString("yyyyMMddHHmmss");
-            saveFileDialog.FileName = strFileName;
-            if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                strFileName = saveFileDialog.FileName.ToString();
-            }
-            else
-            {
-                return;
-            }
-            FileStream fa = new FileStream(strFileName, FileMode.Create);
-            StreamWriter sw = new StreamWriter(fa, Encoding.Unicode);
-            string delimiter = "\t";
-            string strHeader = "";
-            //国家	城市		英文名称	图片	预定房型	早餐	经纬度	地址	如何抵达	联系方式	WIFI	停车位	前台	厨房	深度TIPS
-
-            strHeader = "国家\t城市\t中文名称\t英文名称\t图片\t预定房型\t早餐\t经纬度\t地址\t如何抵达\t联系方式\tWIFI\t停车位\t前台\t厨房\t深度TIPS";
-
-            sw.WriteLine(strHeader);
-            //output rows data
-            for (int j = 0; j < this.dataGridView.Rows.Count; j++)
-            {
-                string strRowValue = "";
-
-                //  strRowValue += delimiter;
-                var row = dataGridView.Rows[j];
-                var model = row.DataBoundItem as ComboLocation;
-                if (model.nation != null)
-                    strRowValue += model.nation.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-
-                if (model.city != null)
-                    strRowValue += model.city.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-
-                if (model.title != null)
-                    strRowValue += model.title.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-
-                if (model.local_title != null)
-                    strRowValue += model.local_title.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-
-                if (model.img != null)
-                    strRowValue += model.img.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-
-                if (model.room != null)
-                    strRowValue += model.room.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-
-                if (model.dinner != null)
-                    strRowValue += model.dinner.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-
-                if (model.latlng != null)
-                    strRowValue += model.latlng.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-
-                if (model.address != null)
-                    strRowValue += model.address.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-
-                if (model.local_address != null)
-                    strRowValue += model.local_address.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-
-
-                if (model.contact != null)
-                    strRowValue += model.contact.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-
-                if (model.wifi != null)
-                    strRowValue += model.wifi.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-
-
-                if (model.parking != null)
-                    strRowValue += model.parking.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-
-
-                if (model.reception != null)
-                    strRowValue += model.reception.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-
-
-
-                if (model.kitchen != null)
-                    strRowValue += model.kitchen.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-
-
-                if (model.tips != null)
-                    strRowValue += model.tips.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-
-                ;
-
-                sw.WriteLine(strRowValue);
-            }
-            sw.Close();
-            fa.Close();
-            MessageBox.Show("下载成功！", "System", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            #endregion
         }
 
 
