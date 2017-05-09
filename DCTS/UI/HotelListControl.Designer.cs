@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView = new System.Windows.Forms.DataGridView();
@@ -52,13 +51,12 @@
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.btdown = new System.Windows.Forms.Button();
+            this.idColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nationColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.editColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.deleteColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.cityColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.imgColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.areaColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.titleColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.imgColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.roomColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dinner = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.latlngColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,9 +65,8 @@
             this.contactColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.wifiColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.parkingCloumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.receptionCloumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kitchenCloumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tipsColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.deleteColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.editColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -86,13 +83,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idColumn1,
             this.nationColumn1,
-            this.editColumn1,
-            this.deleteColumn1,
             this.cityColumn1,
+            this.imgColumn1,
             this.areaColumn1,
             this.titleColumn1,
-            this.imgColumn1,
             this.roomColumn1,
             this.dinner,
             this.latlngColumn1,
@@ -101,9 +97,8 @@
             this.contactColumn1,
             this.wifiColumn1,
             this.parkingCloumn1,
-            this.receptionCloumn,
-            this.kitchenCloumn,
-            this.tipsColumn1});
+            this.deleteColumn1,
+            this.editColumn1});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -116,14 +111,10 @@
             this.dataGridView.Location = new System.Drawing.Point(8, 149);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowHeadersVisible = false;
-            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
-            this.dataGridView.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView.RowTemplate.Height = 50;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView.Size = new System.Drawing.Size(672, 188);
             this.dataGridView.TabIndex = 0;
-            this.dataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView_CellBeginEdit);
-            this.dataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellEndEdit);
             this.dataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView_CellFormatting);
             // 
             // contextMenuStrip1
@@ -295,37 +286,32 @@
             this.btdown.UseVisualStyleBackColor = true;
             this.btdown.Click += new System.EventHandler(this.btdown_Click);
             // 
+            // idColumn1
+            // 
+            this.idColumn1.DataPropertyName = "id";
+            this.idColumn1.HeaderText = "序号";
+            this.idColumn1.Name = "idColumn1";
+            this.idColumn1.Width = 60;
+            // 
             // nationColumn1
             // 
             this.nationColumn1.DataPropertyName = "nation";
             this.nationColumn1.HeaderText = "国家";
             this.nationColumn1.Name = "nationColumn1";
             // 
-            // editColumn1
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(2, 12, 2, 12);
-            this.editColumn1.DefaultCellStyle = dataGridViewCellStyle1;
-            this.editColumn1.HeaderText = "";
-            this.editColumn1.Name = "editColumn1";
-            this.editColumn1.Text = "编辑";
-            this.editColumn1.UseColumnTextForButtonValue = true;
-            // 
-            // deleteColumn1
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(2, 12, 1, 12);
-            this.deleteColumn1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.deleteColumn1.HeaderText = "";
-            this.deleteColumn1.Name = "deleteColumn1";
-            this.deleteColumn1.Text = "删除";
-            this.deleteColumn1.UseColumnTextForButtonValue = true;
-            // 
             // cityColumn1
             // 
             this.cityColumn1.DataPropertyName = "city";
             this.cityColumn1.HeaderText = "城市";
             this.cityColumn1.Name = "cityColumn1";
+            // 
+            // imgColumn1
+            // 
+            this.imgColumn1.HeaderText = "图片";
+            this.imgColumn1.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.imgColumn1.Name = "imgColumn1";
+            this.imgColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.imgColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // areaColumn1
             // 
@@ -338,14 +324,7 @@
             this.titleColumn1.DataPropertyName = "local_title";
             this.titleColumn1.HeaderText = "英文名称";
             this.titleColumn1.Name = "titleColumn1";
-            // 
-            // imgColumn1
-            // 
-            this.imgColumn1.HeaderText = "图片";
-            this.imgColumn1.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.imgColumn1.Name = "imgColumn1";
-            this.imgColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.imgColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.titleColumn1.Visible = false;
             // 
             // roomColumn1
             // 
@@ -376,6 +355,7 @@
             this.reachColumn1.DataPropertyName = "local_address";
             this.reachColumn1.HeaderText = "如何抵达";
             this.reachColumn1.Name = "reachColumn1";
+            this.reachColumn1.Visible = false;
             // 
             // contactColumn1
             // 
@@ -395,23 +375,27 @@
             this.parkingCloumn1.HeaderText = "停车位";
             this.parkingCloumn1.Name = "parkingCloumn1";
             // 
-            // receptionCloumn
+            // deleteColumn1
             // 
-            this.receptionCloumn.DataPropertyName = "reception";
-            this.receptionCloumn.HeaderText = "前台";
-            this.receptionCloumn.Name = "receptionCloumn";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(2, 12, 1, 12);
+            this.deleteColumn1.DefaultCellStyle = dataGridViewCellStyle1;
+            this.deleteColumn1.HeaderText = "";
+            this.deleteColumn1.Name = "deleteColumn1";
+            this.deleteColumn1.Text = "删除";
+            this.deleteColumn1.UseColumnTextForButtonValue = true;
+            this.deleteColumn1.Width = 60;
             // 
-            // kitchenCloumn
+            // editColumn1
             // 
-            this.kitchenCloumn.DataPropertyName = "kitchen";
-            this.kitchenCloumn.HeaderText = "厨房";
-            this.kitchenCloumn.Name = "kitchenCloumn";
-            // 
-            // tipsColumn1
-            // 
-            this.tipsColumn1.DataPropertyName = "tips";
-            this.tipsColumn1.HeaderText = "深度Tlps";
-            this.tipsColumn1.Name = "tipsColumn1";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(2, 12, 2, 12);
+            this.editColumn1.DefaultCellStyle = dataGridViewCellStyle2;
+            this.editColumn1.HeaderText = "";
+            this.editColumn1.Name = "editColumn1";
+            this.editColumn1.Text = "编辑";
+            this.editColumn1.UseColumnTextForButtonValue = true;
+            this.editColumn1.Width = 60;
             // 
             // HotelListControl
             // 
@@ -457,13 +441,12 @@
         private System.Windows.Forms.ToolStripMenuItem 修改ToolStripMenuItem;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btdown;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn nationColumn1;
-        private System.Windows.Forms.DataGridViewButtonColumn editColumn1;
-        private System.Windows.Forms.DataGridViewButtonColumn deleteColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn cityColumn1;
+        private System.Windows.Forms.DataGridViewImageColumn imgColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn areaColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn titleColumn1;
-        private System.Windows.Forms.DataGridViewImageColumn imgColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn roomColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dinner;
         private System.Windows.Forms.DataGridViewTextBoxColumn latlngColumn1;
@@ -472,8 +455,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn contactColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn wifiColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn parkingCloumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn receptionCloumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn kitchenCloumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tipsColumn1;
+        private System.Windows.Forms.DataGridViewButtonColumn deleteColumn1;
+        private System.Windows.Forms.DataGridViewButtonColumn editColumn1;
     }
 }

@@ -263,33 +263,20 @@ namespace DCTS.UI
 
         private void dataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            string cell_key = e.RowIndex.ToString() + "_" + e.ColumnIndex.ToString() + "_changed";
-
-            if (dataGridChanges.ContainsKey(cell_key))
-            {
-                e.CellStyle.BackColor = Color.Red;
-                e.CellStyle.SelectionBackColor = Color.DarkRed;
-            }
-
 
             #region  new
-            if (e.ColumnIndex == 4)
+            if (dataGridView.Columns[e.ColumnIndex] == this.imgColumn1)
             {
                 if (e.RowIndex < hotelList.Count)
                 {
 
-                    ComboLocation selectedItem = hotelList[e.RowIndex];
+                    ComboLocation selectedItem = dataGridView.Rows[e.RowIndex].DataBoundItem as ComboLocation;
                     long folername = selectedItem.id / 1000;
                     if (selectedItem.img != null && selectedItem.img != "")
                     {
                         //   string path = Path.Combine(ImageBasePath, "location_" + ComboLocationEnum.Scenic.ToString().ToLower());
-
                         string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\location_" + ComboLocationEnum.Hotel.ToString().ToLower() + "\\" + folername + "\\", selectedItem.img);
-                        if (e.ColumnIndex == 4)
-                        {
-                            e.Value = GetImage1(lcoalPath);
-
-                        }
+                        e.Value = GetImage1(lcoalPath);
                     }
                 }
             }
