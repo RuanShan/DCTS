@@ -21,6 +21,7 @@ namespace DCTS.CustomComponents
     public partial class ImportScenicCSV : Form
     {
         private List<Nation> NationList = null;
+        private List<City> CityList = null;
         public ImportScenicCSV()
         {
             InitializeComponent();
@@ -28,9 +29,12 @@ namespace DCTS.CustomComponents
             //NationList = new List<Nation>();
             //NationList = nationList.ToList();
             using (var ctx = new DctsEntities())
-
+            {
                 NationList = ctx.Nations.ToList();
+                CityList = ctx.Cities.ToList();
 
+
+            }
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -139,9 +143,9 @@ namespace DCTS.CustomComponents
             }
             catch (Exception ex)
             {
-                throw ;
+                throw;
             }
-            
+
             return dt;
         }
 
@@ -279,7 +283,7 @@ namespace DCTS.CustomComponents
                     {
 
                         var obj = ctx.ComboLocations.Create();
-                        i+=1;
+                        i += 1;
                         progress = Convert.ToInt16(((i) * 1.0 / dt.Rows.Count) * 100);
                         arg.CurrentIndex = i;
                         string texi = "";
@@ -343,11 +347,38 @@ namespace DCTS.CustomComponents
                         #region 新模板
                         //判断国家是否存在                       
                         Nation order = this.NationList.Find(o => o.title == temp1[2]);
-                        if (order == null )
+                        if (order == null)
                         {
                             e.Result = "导入[" + temp1[4] + "]国家信息在系统中不存在";
                             throw new Exception("导入[" + temp1[4] + "]国家信息在系统中不存在");
                             //continue;
+                        }
+                        //判断城市是否存在 不存在创建
+                        City CityListorder = this.CityList.Find(o => o.title == temp1[3]);
+                        if (CityListorder == null)
+                        {
+                            var objcity = ctx.Cities.Create();
+                            objcity.title = temp1[3];
+                            objcity.nationCode = order.code;
+                            if (temp1[1] == null || temp1[1] == "")
+                            {
+                                e.Result = "导入[" + temp1[4] + "]文件中【序号】列不能为空";
+                                throw new Exception("导入[" + temp1[4] + "]导入文件中【序号】列不能为空");
+
+                            }
+                            objcity.id = Convert.ToInt64(temp1[1]);
+                        }
+                        else
+                        {
+                            if (temp1[1] == null || temp1[1] == "")
+                            {
+                                e.Result = "导入[" + temp1[4] + "]文件中【序号】列不能为空";
+                                throw new Exception("导入[" + temp1[4] + "]导入文件中【序号】列不能为空");
+
+                            }
+                            City objcity = ctx.Cities.Find(Convert.ToInt32(Convert.ToInt64(temp1[1])));
+                            objcity.title = temp1[3];
+                            objcity.nationCode = order.code;
                         }
 
                         obj.ltype = (int)ComboLocationEnum.Scenic;
