@@ -218,7 +218,7 @@ namespace DCTS.UI
                 count = ctx.Database.SqlQuery<int>(sqlCount, condition_params.ToArray()).First();
                 string sql = string.Format(" SELECT * FROM combolocations {0} LIMIT {1} OFFSET {2}", conditions, limit, offset);
                 ScenicslList = ctx.Database.SqlQuery<ComboLocation>(sql, condition_params.ToArray()).ToList();
-                sqlfilter = string.Format(" SELECT * FROM combolocations ", conditions);
+                sqlfilter = string.Format(" SELECT * FROM combolocations " + conditions.Replace("@ltype", ltype.ToString()).Replace("@nation", "'" + nation.ToString() + "'").Replace("@city", "'" + city.ToString() + "'").Replace("@title", "'" + title.ToString() + "'"));
                 sortabledinningsOrderList = new SortableBindingList<ComboLocation>(ScenicslList.ToList());
                 this.bindingSource1.DataSource = this.sortabledinningsOrderList;
                 dataGridView.AutoGenerateColumns = false;
@@ -312,10 +312,19 @@ namespace DCTS.UI
                 {
                     string strRowValue = "";
 
-                    strRowValue += delimiter;
+                   // strRowValue += delimiter;
                     //var row = dataGridView.Rows[j];
                     //var model = row.DataBoundItem as ComboLocation;
+
                     var model = list1[j];
+
+
+                    if (model.id != null)
+                        strRowValue += model.id.ToString().Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+
                     if (model.nation != null)
                         strRowValue += model.nation.Replace("\r\n", " ").Replace("\n", "") + delimiter;
                     else

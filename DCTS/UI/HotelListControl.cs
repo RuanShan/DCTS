@@ -203,8 +203,8 @@ namespace DCTS.UI
                 string sql = string.Format(" SELECT * FROM combolocations {0} LIMIT {1} OFFSET {2}", conditions, limit, offset);
                 hotelList = ctx.Database.SqlQuery<ComboLocation>(sql, condition_params.ToArray()).ToList();
                 count = hotelList.Count;
-                sqlfilter = string.Format(" SELECT * FROM combolocations ", conditions);
-
+            
+                sqlfilter = string.Format(" SELECT * FROM combolocations " + conditions.Replace("@ltype", ltype.ToString()).Replace("@nation", "'" + nation.ToString() + "'").Replace("@city", "'" + city.ToString() + "'").Replace("@title", "'" + title.ToString() + "'"));
                 //DinningList = (from s in ctx.ComboLocations
                 //               where s.title == title
                 //               select s).ToList();
