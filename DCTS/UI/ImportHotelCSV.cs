@@ -259,9 +259,10 @@ namespace DCTS.CustomComponents
                             {
                                 e.Result = "导入[" + temp1[4] + "]文件中【序号】列不能为空";
                                 throw new Exception("导入[" + temp1[4] + "]导入文件中【序号】列不能为空");
-
-                            }
-                            objcity.id = Convert.ToInt64(temp1[1]);
+                            }                          
+                            objcity.code = "";                        
+                            var objcity1 = ctx.Cities.Add(objcity);
+                            ctx.SaveChanges();
                         }
                         else
                         {

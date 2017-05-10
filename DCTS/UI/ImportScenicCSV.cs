@@ -342,7 +342,7 @@ namespace DCTS.CustomComponents
                         //    return false;
                         //} 
 
-                        #endregion  
+                        #endregion
 
                         #region 新模板
                         //判断国家是否存在                       
@@ -366,7 +366,10 @@ namespace DCTS.CustomComponents
                                 throw new Exception("导入[" + temp1[4] + "]导入文件中【序号】列不能为空");
 
                             }
-                            objcity.id = Convert.ToInt64(temp1[1]);
+                            objcity.code = "";                           
+                            var objcity1 = ctx.Cities.Add(objcity);
+                            ctx.SaveChanges();
+
                         }
                         else
                         {

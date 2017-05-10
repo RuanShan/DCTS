@@ -41,8 +41,7 @@ namespace DCTS.CustomComponents
             //bool success = Execute(pathTextBox.Text, worker, e);
             bool success = NewMethod(worker, e);
         }
-
-
+        
         /// <summary>
         /// Run the application.
         /// </summary>
@@ -332,9 +331,10 @@ namespace DCTS.CustomComponents
                             {
                                 e.Result = "导入[" + temp1[5] + "]文件中【序号】列不能为空";
                                 throw new Exception("导入[" + temp1[5] + "]导入文件中【序号】列不能为空");
-
                             }
-                            objcity.id = Convert.ToInt64(temp1[1]);
+                            objcity.code = "";
+                            var objcity1 = ctx.Cities.Add(objcity);
+                            ctx.SaveChanges();
                         }
                         else
                         {
@@ -438,6 +438,7 @@ namespace DCTS.CustomComponents
                 this.progressMsgLabel.Text = arg.ErrorMessage;
             }
         }
+
         public int ProgressValue
         {
             get { return this.progressBar1.Value; }
