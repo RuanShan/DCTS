@@ -490,6 +490,7 @@
     <Content Include="Doc\seed.sql.txt" />
     <Content Include="Doc\TextFile1.txt" />
     <Content Include="app128.ico" />
+    <Content Include="Doc\fix.txt" />
     <None Include="Resources\Undo_small.png" />
     <None Include="Resources\Save_small.png" />
     <None Include="Resources\Refresh_small.png" />

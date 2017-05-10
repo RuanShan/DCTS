@@ -248,13 +248,9 @@ namespace DCTS.UI
                 count = ctx.Database.SqlQuery<int>(sqlCount, condition_params.ToArray()).First();
                 string sql = string.Format(" SELECT * FROM combolocations {0} LIMIT {1} OFFSET {2}", conditions, limit, offset);
                 DinningList = ctx.Database.SqlQuery<ComboLocation>(sql, condition_params.ToArray()).ToList();
-<<<<<<< HEAD
-                sqlfilter = string.Format(" SELECT * FROM combolocations {0}", conditions);
-
-=======
             
                 sqlfilter = string.Format(" SELECT * FROM combolocations " + conditions.Replace("@ltype", ltype.ToString()).Replace("@nation", "'" + nation.ToString() + "'").Replace("@city", "'" + city.ToString() + "'").Replace("@title", "'" + title.ToString() + "'"));
->>>>>>> 4c95bb24ee13c0aa796f6f4ed3daf7e4ffcbc899
+
                 sortabledinningsOrderList = new SortableBindingList<ComboLocation>(DinningList.ToList());
                 this.bindingSource1.DataSource = this.sortabledinningsOrderList;
                 dataGridView.AutoGenerateColumns = false;
