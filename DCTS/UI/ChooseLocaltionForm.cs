@@ -134,5 +134,10 @@ namespace DCTS.UI
             string keyword = this.keyworkTextBox.Text.Trim();
             InitializeLocations(locationType, nation, city, keyword);
         }
+
+        private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            ;
+        }
     }
 }

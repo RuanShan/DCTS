@@ -4,17 +4,17 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DctsModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DctsModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="DctsModelStoreContainer">
-          <EntitySet Name="Cities" EntityType="DctsModel.Store.Cities" store:Type="Tables" Schema="dcts_dev" />
-          <EntitySet Name="ComboLocations" EntityType="DctsModel.Store.ComboLocations" store:Type="Tables" Schema="dcts_dev" />
-          <EntitySet Name="DayLocations" EntityType="DctsModel.Store.DayLocations" store:Type="Tables" Schema="dcts_dev" />
-          <EntitySet Name="Dinings" EntityType="DctsModel.Store.Dinings" store:Type="Tables" Schema="dcts_dev" />
-          <EntitySet Name="Hotels" EntityType="DctsModel.Store.Hotels" store:Type="Tables" Schema="dcts_dev" />
-          <EntitySet Name="Nations" EntityType="DctsModel.Store.Nations" store:Type="Tables" Schema="dcts_dev" />
-          <EntitySet Name="Scenics" EntityType="DctsModel.Store.Scenics" store:Type="Tables" Schema="dcts_dev" />
-          <EntitySet Name="TripDays" EntityType="DctsModel.Store.TripDays" store:Type="Tables" Schema="dcts_dev" />
-          <EntitySet Name="Trips" EntityType="DctsModel.Store.Trips" store:Type="Tables" Schema="dcts_dev" />
+          <EntitySet Name="Cities" EntityType="DctsModel.Store.Cities" store:Type="Tables" Schema="dcts_dev" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="ComboLocations" EntityType="DctsModel.Store.ComboLocations" store:Type="Tables" Schema="dcts_dev" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="DayLocations" EntityType="DctsModel.Store.DayLocations" store:Type="Tables" Schema="dcts_dev" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Dinings" EntityType="DctsModel.Store.Dinings" store:Type="Tables" Schema="dcts_dev" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Hotels" EntityType="DctsModel.Store.Hotels" store:Type="Tables" Schema="dcts_dev" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Nations" EntityType="DctsModel.Store.Nations" store:Type="Tables" Schema="dcts_dev" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Scenics" EntityType="DctsModel.Store.Scenics" store:Type="Tables" Schema="dcts_dev" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="TripDays" EntityType="DctsModel.Store.TripDays" store:Type="Tables" Schema="dcts_dev" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Trips" EntityType="DctsModel.Store.Trips" store:Type="Tables" Schema="dcts_dev" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
           <AssociationSet Name="fk_day_id" Association="DctsModel.Store.fk_day_id">
             <End Role="TripDays" EntitySet="TripDays" />
             <End Role="DayLocations" EntitySet="DayLocations" />
@@ -178,7 +178,7 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="DctsModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="DctsModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
         <EntityContainer Name="DctsEntities" p1:LazyLoadingEnabled="true">
           <EntitySet Name="Dinings" EntityType="DctsModel.Dining" />
           <EntitySet Name="Hotels" EntityType="DctsModel.Hotel" />
@@ -277,7 +277,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Type="Int64" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int64" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Type="Int64" Name="nationId" Nullable="false" />
           <Property Type="String" Name="title" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="localTitle" MaxLength="45" FixedLength="false" Unicode="false" />
@@ -290,7 +290,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Type="Int64" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int64" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Type="String" Name="title" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="localTitle" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="code" MaxLength="12" FixedLength="false" Unicode="false" />
@@ -300,7 +300,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Type="Int32" Name="ltype" Nullable="false" />
           <Property Type="String" Name="nation" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="city" MaxLength="45" FixedLength="false" Unicode="false" />
@@ -333,7 +333,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Type="Int32" Name="RelatedId" Nullable="false" />
           <Property Type="String" Name="RelatedType" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="day" Nullable="false" />
@@ -358,7 +358,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="tripId1">
-          <End Type="DctsModel.Trip" Role="Trip" Multiplicity="1" >
+          <End Type="DctsModel.Trip" Role="Trip" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Type="DctsModel.DayLocation" Role="DayLocation" Multiplicity="*" />
@@ -375,7 +375,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Type="Int32" Name="trip_id" Nullable="false" />
           <Property Type="String" Name="title" MaxLength="256" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="day" Nullable="false" />
@@ -384,7 +384,7 @@
           <NavigationProperty Name="Trip" Relationship="DctsModel.tripdays1" FromRole="TripDay" ToRole="Trip" />
         </EntityType>
         <Association Name="dayId">
-          <End Type="DctsModel.TripDay" Role="TripDay" Multiplicity="1" >
+          <End Type="DctsModel.TripDay" Role="TripDay" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Type="DctsModel.DayLocation" Role="DayLocation" Multiplicity="*" />
@@ -398,7 +398,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="tripdays1">
-          <End Type="DctsModel.Trip" Role="Trip" Multiplicity="1" >
+          <End Type="DctsModel.Trip" Role="Trip" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Type="DctsModel.TripDay" Role="TripDay" Multiplicity="*" />
@@ -589,6 +589,6 @@
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
-    <Diagrams></Diagrams>
+    <Diagrams />
   </Designer>
 </edmx:Edmx>

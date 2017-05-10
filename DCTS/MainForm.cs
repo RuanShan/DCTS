@@ -83,6 +83,11 @@ namespace DCTS
             aboutbox.ShowDialog();
         }
 
+        private void importScenicExcelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
 
     }
 }

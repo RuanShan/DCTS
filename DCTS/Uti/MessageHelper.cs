@@ -14,5 +14,11 @@ namespace DCTS.Uti
 
             return MessageBox.Show(msg, "刪除確認", MessageBoxButtons.YesNo) == DialogResult.Yes;
         }
+
+        public static DialogResult ErrorBox(string msg)
+        {
+            return MessageBox.Show(msg, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
     }
 }

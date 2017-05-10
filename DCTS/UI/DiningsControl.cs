@@ -23,6 +23,7 @@ namespace DCTS.UI
         private Hashtable dataGridChanges = null;
         private static string NoOptionSelected = "所有";
         private SortableBindingList<ComboLocation> sortabledinningsOrderList;
+        string sqlfilter = "";
 
         //private List<ComboLocation> dinningsOrderList;
         IBindingList dinningsOrderList = null;
@@ -36,7 +37,7 @@ namespace DCTS.UI
 
         public void BeginActive()
         {
-            InitializeDataGridView();
+            //InitializeDataGridView();
             pager2.Bind();
             // InitControlsProperties();
 
@@ -172,6 +173,7 @@ namespace DCTS.UI
         private int FindDataSources()
         {
 
+            sqlfilter = "";
 
             var nation = nationComboBox.Text;
             var city = this.cityComboBox.Text;
@@ -246,7 +248,7 @@ namespace DCTS.UI
                 count = ctx.Database.SqlQuery<int>(sqlCount, condition_params.ToArray()).First();
                 string sql = string.Format(" SELECT * FROM combolocations {0} LIMIT {1} OFFSET {2}", conditions, limit, offset);
                 DinningList = ctx.Database.SqlQuery<ComboLocation>(sql, condition_params.ToArray()).ToList();
-
+                sqlfilter = string.Format(" SELECT * FROM combolocations {0}", conditions);
 
                 sortabledinningsOrderList = new SortableBindingList<ComboLocation>(DinningList.ToList());
                 this.bindingSource1.DataSource = this.sortabledinningsOrderList;
@@ -423,110 +425,122 @@ namespace DCTS.UI
 
         private void btdown_Click(object sender, EventArgs e)
         {
-
-            #region MyRegion
-            if (this.dataGridView.Rows.Count == 0)
+            using (var ctx = new DctsEntities())
             {
-                MessageBox.Show("Sorry , No Data Output !", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+
+                var list1 = ctx.Database.SqlQuery<ComboLocation>(sqlfilter).ToList();
+                #region MyRegion
+                if (list1 == null || list1.Count == 0)
+                {
+                    MessageBox.Show("Sorry , No Data Output !", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                var saveFileDialog = new SaveFileDialog();
+                saveFileDialog.DefaultExt = ".csv";
+                saveFileDialog.Filter = "csv|*.csv";
+                string strFileName = "餐厅" + "_" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                saveFileDialog.FileName = strFileName;
+                if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
+                {
+                    strFileName = saveFileDialog.FileName.ToString();
+                }
+                else
+                {
+                    return;
+                }
+                FileStream fa = new FileStream(strFileName, FileMode.Create);
+                StreamWriter sw = new StreamWriter(fa, Encoding.Unicode);
+                string delimiter = "\t";
+                string strHeader = "";
+
+                strHeader = "序号\t国家\t城市\t区域\t餐厅名称\t菜系\t图片\t经纬度\t地址\t如何抵达(周围特征)\t营业时间\t推荐菜单\t深度Tlps";
+
+                sw.WriteLine(strHeader);
+                //output rows data
+                for (int j = 0; j < list1.Count; j++)
+                {
+                    string strRowValue = "";
+
+                    //strRowValue += delimiter;
+                    var row = list1[j];
+                    var model = row;
+
+                    if (model.id != null)
+                        strRowValue += model.id.ToString().Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+
+
+                    if (model.nation != null)
+                        strRowValue += model.nation.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+                    if (model.city != null)
+                        strRowValue += model.city.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+                    if (model.area != null)
+                        strRowValue += model.area.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+                    if (model.title != null)
+                        strRowValue += model.title.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+                    if (model.dishes != null)
+                        strRowValue += model.dishes.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+                    if (model.img != null)
+                        strRowValue += model.img.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+                    if (model.latlng != null)
+                        strRowValue += model.latlng.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+                    if (model.address != null)
+                        strRowValue += model.address.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+                    if (model.local_address != null)
+                        strRowValue += model.local_address.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+                    //开放时间
+                    //if (model.tips != null)
+                    //    strRowValue += model.tips.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    //else
+                    strRowValue += delimiter;
+
+
+                    if (model.recommended_dishes != null)
+                        strRowValue += model.recommended_dishes.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+
+                    if (model.tips != null)
+                        strRowValue += model.tips.Replace("\r\n", " ").Replace("\n", "") + delimiter;
+                    else
+                        strRowValue += delimiter;
+                    ;
+
+                    sw.WriteLine(strRowValue);
+                }
+                sw.Close();
+                fa.Close();
+                MessageBox.Show("下载成功！", "System", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            var saveFileDialog = new SaveFileDialog();
-            saveFileDialog.DefaultExt = ".csv";
-            saveFileDialog.Filter = "csv|*.csv";
-            string strFileName = "Dinings  " + "_" + DateTime.Now.ToString("yyyyMMddHHmmss");
-            saveFileDialog.FileName = strFileName;
-            if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                strFileName = saveFileDialog.FileName.ToString();
-            }
-            else
-            {
-                return;
-            }
-            FileStream fa = new FileStream(strFileName, FileMode.Create);
-            StreamWriter sw = new StreamWriter(fa, Encoding.Unicode);
-            string delimiter = "\t";
-            string strHeader = "";
-
-            strHeader = "国家\t城市\t区域\t餐厅名称\t菜系\t图片\t经纬度\t地址\t如何抵达(周围特征)\t营业时间\t推荐菜单\t深度Tlps";
-
-            sw.WriteLine(strHeader);
-            //output rows data
-            for (int j = 0; j < this.dataGridView.Rows.Count; j++)
-            {
-                string strRowValue = "";
-
-                //  strRowValue += delimiter;
-                var row = dataGridView.Rows[j];
-                var model = row.DataBoundItem as ComboLocation;
-                if (model.nation != null)
-                    strRowValue += model.nation.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-
-                if (model.city != null)
-                    strRowValue += model.city.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-
-                if (model.area != null)
-                    strRowValue += model.area.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-
-                if (model.title != null)
-                    strRowValue += model.title.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-
-                if (model.dishes != null)
-                    strRowValue += model.dishes.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-
-                if (model.img != null)
-                    strRowValue += model.img.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-
-                if (model.latlng != null)
-                    strRowValue += model.latlng.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-
-                if (model.address != null)
-                    strRowValue += model.address.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-
-                if (model.local_address != null)
-                    strRowValue += model.local_address.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-                //开放时间
-                //if (model.tips != null)
-                //    strRowValue += model.tips.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                //else
-                strRowValue += delimiter;
-
-
-                if (model.recommended_dishes != null)
-                    strRowValue += model.recommended_dishes.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-
-                if (model.tips != null)
-                    strRowValue += model.tips.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                else
-                    strRowValue += delimiter;
-                ;
-
-                sw.WriteLine(strRowValue);
-            }
-            sw.Close();
-            fa.Close();
-            MessageBox.Show("下载成功！", "System", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            #endregion
+                #endregion
         }
 
         private void DiningsControl_Resize(object sender, EventArgs e)
@@ -550,7 +564,7 @@ namespace DCTS.UI
 
                 var model = row.DataBoundItem as ComboLocation;
 
-                var form = new NewDiningsForm("Edit", model);                
+                var form = new NewDiningsForm("Edit", model);
                 if (form.ShowDialog() == DialogResult.Yes)
                 {
                     BeginActive();
@@ -563,8 +577,8 @@ namespace DCTS.UI
                 string msg = string.Format("确定删除餐厅<{0}>？", model.title);
 
                 if (MessageHelper.DeleteConfirm(msg))
-                {                    
-                    ComboLoactionBusiness.Delete(model.id);                   
+                {
+                    ComboLoactionBusiness.Delete(model.id);
                     BeginActive();
                 }
             }
