@@ -85,7 +85,10 @@ namespace DCTS
 
         private void importScenicExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            var form = new ImportScenicExcel();
+            if (form.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
+            {
+            }
         }
 
 

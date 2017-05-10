@@ -102,7 +102,7 @@ namespace DCTS.Uti
                 int startRow = 0;
                 try
                 {
-                    fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+                    fs = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
                     if (fileName.IndexOf(".xlsx") > 0) // 2007版本
                         workbook = new XSSFWorkbook(fs);
                     else if (fileName.IndexOf(".xls") > 0) // 2003版本

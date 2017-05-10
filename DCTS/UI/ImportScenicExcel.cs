@@ -150,7 +150,7 @@ namespace DCTS.CustomComponents
 
                                 existsLocation.ticket = location.ticket;
                                 existsLocation.tips = location.tips;
-                                ctx.ComboLocations.Add(existsLocation);
+                                //ctx.ComboLocations.Add(existsLocation);
                             }
                             else {
                                 ctx.ComboLocations.Add(location);                            

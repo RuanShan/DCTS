@@ -301,7 +301,7 @@
             // saveFileDialog1
             // 
             this.saveFileDialog1.DefaultExt = "xslx";
-            this.saveFileDialog1.Filter = "EXCEL文件(*.xsl)|*.xsl\"";
+            this.saveFileDialog1.Filter = "EXCEL文件(*.xls,*.xlsx)|*.xls;*.xlsx";
             this.saveFileDialog1.Title = "导出景点数据";
             // 
             // pager1

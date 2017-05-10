@@ -21,6 +21,7 @@ namespace DCTS.DB
                                     "img",	"address",	"local_address",	"latlng",	"route",	"contact"};
         public static Dictionary<string, string> ColumnNameDictionary = new Dictionary<string, string>() { 
           { "id", "id"},            {"序号", "id" },
+          { "ltype", "ltype"},    {"类型", "ltype" },
           { "nation", "nation"},    {"国家", "nation" },
           { "city", "city"},        {"城市", "city" },
           { "area", "area"},         {"区域", "area" },
@@ -51,6 +52,7 @@ namespace DCTS.DB
 
         public static Dictionary<string, string> ScenicCnNameDictionary = new Dictionary<string, string>() { 
           { "id", "序号"},    
+          { "ltype", "类型"},    
           { "nation", "国家"},  
           { "city", "城市"},   
           { "area", "区域"},   
@@ -78,7 +80,35 @@ namespace DCTS.DB
           { "guidance", "游玩方式"}
         };
 
-
+        public static Dictionary<string, string> LocationCnNameDictionary = new Dictionary<string, string>() { 
+          { "id", "序号"},    
+          { "ltype", "类型"},    
+          { "nation", "国家"},  
+          { "city", "城市"},   
+          { "area", "区域"},   
+          { "title", "中文名称"},
+          { "local_title", "当地语言名称"}, 
+          { "img", "图片"},         
+          { "address", "地址"}, 
+          { "local_address", "当地语言地址"}, 
+          { "latlng", "经纬度"},  
+          { "route", "如何抵达"}, 
+          { "contact", "联系方式"},
+          { "open_at", "开始时间"},
+          { "close_at", "结束时间"},
+          { "open_close_more", "营业时间说明"}, 
+          { "ticket", "门票"},  
+          { "room", "房型"},    
+          { "dinner", "早餐"},  
+          { "wifi", "WIFI"},    
+          { "parking", "停车场"},
+          { "reception", "前台"}, 
+          { "kitchen", "厨房"},  
+          { "dishes", "菜系"},   
+          { "recommended_dishes", "推荐菜单"}, 
+          { "tips", "小贴士"},  
+          { "guidance", "游玩方式"}
+        };
         static void LocationColumnInfo()
         {
 

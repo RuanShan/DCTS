@@ -44,13 +44,13 @@ namespace DCTS.Uti
             //    }
             //}
             DocumentSummaryInformation dsi = PropertySetFactory.CreateDocumentSummaryInformation();
-            dsi.Company = "測試公司";
+            dsi.Company = "大连佐客文化传播有限公司";
             workbook.DocumentSummaryInformation = dsi;
             ////create a entry of SummaryInformation
             SummaryInformation si = PropertySetFactory.CreateSummaryInformation();
             si.Subject = "測試公司Excel檔案";
             si.Title = "測試公司Excel檔案";
-            si.Author = "killysss";
+            si.Author = "David";
             si.Comments = "謝謝您的使用！";
             workbook.SummaryInformation = si;
 

@@ -412,7 +412,16 @@ namespace DCTS.UI
             {
                 using (var ctx = new DctsEntities())
                 {
+
+                    string sql = "SELECT * FROM combolocations";
                     DataTable dataTable = ctx.DataTable(sqlfilter);
+                    foreach (DataColumn col in dataTable.Columns)
+                    {
+                        if( ComboLocationSchema.LocationCnNameDictionary.ContainsKey( col.ColumnName ))
+                        {
+                            col.ColumnName = ComboLocationSchema.LocationCnNameDictionary[col.ColumnName];
+                        }
+                    }
                     
                     var stream = ExcelUtility.RenderDataTableToExcel(dataTable);
 
