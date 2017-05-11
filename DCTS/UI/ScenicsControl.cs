@@ -327,36 +327,38 @@ namespace DCTS.UI
         }
 
         // 根据当前选择条件，构造查询语句
-        //private string BuildSql(DctsEntities ctx, int pageIndex = 0, int pageSize = 0)
-        //{
-        //    string sql = string.Empty;
-        //    var nation = this.nationComboBox.Text;
-        //    var city = this.cityComboBox.Text;
-        //    var title = this.keywordTextBox.Text;             
-        //    {
-        //        var query = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Scenic);               
-        //        if (nation.Length > 0 && nation != NoOptionSelected)
-        //        {
-        //            query = query.Where(o => o.nation == nation);
-        //        }
-        //        if (city.Length > 0 && city != NoOptionSelected)
-        //        {
-        //            query = query.Where(o => o.city == city);
-        //        }
-        //        if (title.Length > 0)
-        //        {
-        //            query = query.Where(o => o.city.Contains( city));
-        //        }
+        private string BuildSql()
+        {
+            var ltype = (int)ComboLocationEnum.Scenic;
+
+            string sql = string.Empty;
+            var nation = this.nationComboBox.Text;
+            var city = this.cityComboBox.Text;
+            var title = this.keywordTextBox.Text;             
+            string conditions = string.format( "(`ltype`= {0})", ltype);
+            
+            
+                if (nation.Length > 0 && nation != NoOptionSelected)
+                {
+                    conditions = conditions+ " AND " + string.format("`nation`='{0}'", nation);
+                }
+                if (city.Length > 0 && city != NoOptionSelected)
+                {
+                    conditions = conditions+ " AND " + string.format("`city`='{0}'", city);
+                }
+                if (title.Length > 0)
+                {
+                    conditions = conditions+ " AND " + string.format("(`title` like '%{0}%')", title);
+                }
         //        if (pageSize > 0)
         //        {
         //            int offset = pageIndex * pageSize;
         //            // order is required before skip
         //            query = query.OrderBy(o => o.id).Skip(offset).Take(pageSize);
         //        }
-        //        sql = query.ToString();
-        //    }
-        //    return sql;
-        //}
+               sql = string.format(" SELECT * FROM combolocations " + conditions);
+            return sql;
+        }
 
     }
 }
