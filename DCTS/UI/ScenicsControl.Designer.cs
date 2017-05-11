@@ -45,8 +45,8 @@
             this.deleteColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.newButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.keywordTextBox = new System.Windows.Forms.TextBox();
+            this.findButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.cityComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -54,7 +54,6 @@
             this.nationComboBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.btdown = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.pager1 = new DCTS.CustomComponents.Pager();
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
@@ -200,8 +199,8 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Controls.Add(this.button2);
+            this.groupBox1.Controls.Add(this.keywordTextBox);
+            this.groupBox1.Controls.Add(this.findButton);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.cityComboBox);
             this.groupBox1.Controls.Add(this.label1);
@@ -212,24 +211,23 @@
             this.groupBox1.Size = new System.Drawing.Size(882, 84);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
-            // textBox1
+            // keywordTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(95, 53);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(435, 21);
-            this.textBox1.TabIndex = 10;
+            this.keywordTextBox.Location = new System.Drawing.Point(95, 53);
+            this.keywordTextBox.Name = "keywordTextBox";
+            this.keywordTextBox.Size = new System.Drawing.Size(435, 21);
+            this.keywordTextBox.TabIndex = 10;
             // 
-            // button2
+            // findButton
             // 
-            this.button2.Location = new System.Drawing.Point(536, 17);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 9;
-            this.button2.Text = "查找";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.findButton.Location = new System.Drawing.Point(536, 17);
+            this.findButton.Name = "findButton";
+            this.findButton.Size = new System.Drawing.Size(75, 23);
+            this.findButton.TabIndex = 9;
+            this.findButton.Text = "查找";
+            this.findButton.UseVisualStyleBackColor = true;
+            this.findButton.Click += new System.EventHandler(this.button2_Click);
             // 
             // label4
             // 
@@ -287,17 +285,6 @@
             this.label2.Text = "景点列表";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // btdown
-            // 
-            this.btdown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btdown.Location = new System.Drawing.Point(734, 18);
-            this.btdown.Name = "btdown";
-            this.btdown.Size = new System.Drawing.Size(75, 23);
-            this.btdown.TabIndex = 16;
-            this.btdown.Text = "下载";
-            this.btdown.UseVisualStyleBackColor = true;
-            this.btdown.Click += new System.EventHandler(this.btdown_Click);
-            // 
             // saveFileDialog1
             // 
             this.saveFileDialog1.DefaultExt = "xslx";
@@ -313,8 +300,8 @@
             this.pager1.Name = "pager1";
             this.pager1.NMax = 0;
             this.pager1.PageCount = 0;
-            this.pager1.PageCurrent = 0;
-            this.pager1.PageSize = 5000;
+            this.pager1.PageCurrent = 1;
+            this.pager1.PageSize = 25;
             this.pager1.Size = new System.Drawing.Size(877, 29);
             this.pager1.TabIndex = 13;
             this.pager1.EventPaging += new DCTS.CustomComponents.EventPagingHandler(this.pager1_EventPaging);
@@ -325,7 +312,8 @@
             // 
             // exportExcelButton
             // 
-            this.exportExcelButton.Location = new System.Drawing.Point(645, 18);
+            this.exportExcelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.exportExcelButton.Location = new System.Drawing.Point(734, 18);
             this.exportExcelButton.Name = "exportExcelButton";
             this.exportExcelButton.Size = new System.Drawing.Size(75, 23);
             this.exportExcelButton.TabIndex = 17;
@@ -338,7 +326,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.exportExcelButton);
-            this.Controls.Add(this.btdown);
             this.Controls.Add(this.pager1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.groupBox1);
@@ -361,18 +348,17 @@
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.Button newButton;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button findButton;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cityComboBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox nationComboBox;
         private CustomComponents.EntityDataSource entityDataSource1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox keywordTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private CustomComponents.Pager pager1;
         private System.Windows.Forms.BindingSource bindingSource1;
-        private System.Windows.Forms.Button btdown;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.DataGridViewTextBoxColumn IDColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn nationColumn1;

@@ -38,12 +38,12 @@
             this.导入餐厅信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.导入住宿信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.importScenicExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.entityDataSource = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.importScenicExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -98,29 +98,36 @@
             // nationsToolStripMenuItem
             // 
             this.nationsToolStripMenuItem.Name = "nationsToolStripMenuItem";
-            this.nationsToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.nationsToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.nationsToolStripMenuItem.Text = "国家信息";
             // 
             // 导入餐厅信息ToolStripMenuItem
             // 
             this.导入餐厅信息ToolStripMenuItem.Name = "导入餐厅信息ToolStripMenuItem";
-            this.导入餐厅信息ToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.导入餐厅信息ToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.导入餐厅信息ToolStripMenuItem.Text = "导入餐厅信息";
             this.导入餐厅信息ToolStripMenuItem.Click += new System.EventHandler(this.导入餐厅信息ToolStripMenuItem_Click);
             // 
             // 导入住宿信息ToolStripMenuItem
             // 
             this.导入住宿信息ToolStripMenuItem.Name = "导入住宿信息ToolStripMenuItem";
-            this.导入住宿信息ToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.导入住宿信息ToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.导入住宿信息ToolStripMenuItem.Text = "导入住宿信息";
             this.导入住宿信息ToolStripMenuItem.Click += new System.EventHandler(this.导入住宿信息ToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(153, 22);
             this.toolStripMenuItem1.Text = "导入景点信息";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // importScenicExcelToolStripMenuItem
+            // 
+            this.importScenicExcelToolStripMenuItem.Name = "importScenicExcelToolStripMenuItem";
+            this.importScenicExcelToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.importScenicExcelToolStripMenuItem.Text = "导入Excel数据";
+            this.importScenicExcelToolStripMenuItem.Click += new System.EventHandler(this.importScenicExcelToolStripMenuItem_Click);
             // 
             // 帮助ToolStripMenuItem
             // 
@@ -153,13 +160,6 @@
             // backgroundWorker1
             // 
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            // 
-            // importScenicExcelToolStripMenuItem
-            // 
-            this.importScenicExcelToolStripMenuItem.Name = "importScenicExcelToolStripMenuItem";
-            this.importScenicExcelToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
-            this.importScenicExcelToolStripMenuItem.Text = "导入景点Excel数据";
-            this.importScenicExcelToolStripMenuItem.Click += new System.EventHandler(this.importScenicExcelToolStripMenuItem_Click);
             // 
             // MainForm
             // 

@@ -13,6 +13,36 @@ namespace DCTS.Bus
 
     class ComboLoactionBusiness
     {
+        public static int Count( ComboLocationEnum locationType, string nation, string city, string title)
+        {
+            int count = 0;
+            using (var ctx = new DctsEntities())
+            {
+                var query = ctx.ComboLocations.AsQueryable();
+                
+                if ((int)locationType > 0)
+                {
+                    query = query.Where(o => o.ltype == (int)ComboLocationEnum.Scenic);
+
+                }
+                if (nation.Length > 0 )
+                {
+                    query = query.Where(o => o.nation == nation);
+                }
+
+                if (city.Length > 0 )
+                {
+                    query = query.Where(o => o.city == city);
+                }
+
+                if (title.Length > 0)
+                {
+                    query = query.Where(o => o.city.Contains(city));
+                }
+            }
+            return count;
+        }
+
 
         public static void Delete(long id)
         {

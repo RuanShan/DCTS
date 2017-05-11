@@ -29,35 +29,19 @@ namespace DCTS.UI
         {
             InitializeComponent();
             dataGridView.AutoGenerateColumns = false;
-            pager1.Bind();
         }
 
         public void BeginActive()
         {
-            InitializeDataGridView();
+            InitializeDataSource();
             pager1.Bind();
         }
 
-        private void InitializeDataGridView()
+
+        // 初始化控件的数据源
+        private void InitializeDataSource(  )
         {
-            this.pager1.PageCurrent = 1;
-            this.pager1.PageSize = 25;
 
-            int offset = 0;
-            int pageSize = 50;
-            using (var ctx = new DctsEntities())
-            {
-
-                var query = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Scenic).OrderBy(o => o.id).Skip(offset).Take(pageSize);
-                var list = this.entityDataSource1.CreateView(query);
-                this.dataGridView.DataSource = list;
-                //bew 
-                //ScenicslList = query.ToList();
-                //sortabledinningsOrderList = new SortableBindingList<ComboLocation>(query.ToList());
-                //this.bindingSource1.DataSource = this.sortabledinningsOrderList;
-                //dataGridView.AutoGenerateColumns = false;
-                //dataGridView.DataSource = this.bindingSource1;
-            }
             // 初始化查询条件
             var nationList = DCTS.DB.GlobalCache.NationList;
             var nations = nationList.Select(o => new MockEntity { Id = o.id, ShortName = o.code, FullName = o.title }).ToList();
@@ -66,9 +50,31 @@ namespace DCTS.UI
             this.nationComboBox.ValueMember = "ShortName";
             this.nationComboBox.DataSource = nations;
 
-            pager1.Bind();
-
         }
+
+        // 初始化DataGridView的数据源
+        private int InitializeDataGridView( int pageIndex = 0)
+        {
+            string nation = ( this.nationComboBox.Text != NoOptionSelected ? this.nationComboBox.Text : string.Empty);
+            string city = (this.cityComboBox.Text != NoOptionSelected ? this.cityComboBox.Text : string.Empty);
+            string title = (this.keywordTextBox.Text != NoOptionSelected ? this.keywordTextBox.Text : string.Empty); 
+
+            int count = 0;
+            int pageSize = pager1.PageSize;
+            pager1.PageCurrent = pageIndex + 1;
+
+            using (var ctx = new DctsEntities())
+            {
+                //分页需要数据总数
+                count = ComboLoactionBusiness.Count( ComboLocationEnum.Scenic, nation, city, title);
+
+                string sql = BuildSql(pageIndex, pageSize);
+                var list = ctx.Database.SqlQuery<ComboLocation>(sql).ToList();
+                this.dataGridView.DataSource = list;
+            }
+            return count;
+        }
+
 
         private void newButton_Click(object sender, EventArgs e)
         {
@@ -77,7 +83,8 @@ namespace DCTS.UI
 
             if ( form.Saved )
             {
-                InitializeDataGridView();
+                //更新当前页面，以便显示新添加的数据
+                pager1.Bind();
             }
         }
 
@@ -136,13 +143,13 @@ namespace DCTS.UI
 
         private int pager1_EventPaging(CustomComponents.EventPagingArg e)
         {
-            int count = FindDataSources();
+            int count = InitializeDataGridView( e.PageIndex );
             return count;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            FindDataSources();
+            pager1.PageCurrent = 1;
             pager1.Bind();
         }
         private int FindDataSources()
@@ -151,7 +158,7 @@ namespace DCTS.UI
 
             var nation = nationComboBox.Text;
             var city = this.cityComboBox.Text;
-            var title = this.textBox1.Text;
+            var title = this.keywordTextBox.Text;
 
             string conditions = "";//s.ltype =(int)ComboLocationEnum.Dining
             List<MySqlParameter> condition_params = new List<MySqlParameter>();
@@ -235,18 +242,14 @@ namespace DCTS.UI
             #endregion
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
         private void dataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
+            var grid = sender as DataGridView;
             if (dataGridView.Columns[e.ColumnIndex] == this.imgColumn1)
             {
-                if (e.RowIndex < ScenicslList.Count)
+                if (e.RowIndex < grid.Rows.Count)
                 {
-                    ComboLocation selectedItem = ScenicslList[e.RowIndex];
+                    ComboLocation selectedItem = grid.Rows[e.RowIndex].DataBoundItem as ComboLocation;
                     long folername = selectedItem.id / 1000;
                     if (selectedItem.img != null && selectedItem.img != "" && selectedItem.img != "\"\"")
                     {
@@ -257,6 +260,7 @@ namespace DCTS.UI
                 }
             }
         }
+        
         public System.Drawing.Image GetImage1(string path)
         {
 
@@ -272,119 +276,8 @@ namespace DCTS.UI
             }
             else
                 return null;
-
-
         }
 
-        private void btdown_Click(object sender, EventArgs e)
-        {
-            using (var ctx = new DctsEntities())
-            {
-
-                var list1 = ctx.Database.SqlQuery<ComboLocation>(sqlfilter).ToList();
-                if (list1 == null || list1.Count == 0)
-                {
-                    MessageBox.Show("Sorry , No Data Output !", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                var saveFileDialog = new SaveFileDialog();
-                saveFileDialog.DefaultExt = ".csv";
-                saveFileDialog.Filter = "csv|*.csv";
-                saveFileDialog.Title = "下载景点数据...";
-                string strFileName = "景点" + "_" + DateTime.Now.ToString("yyyyMMddHHmmss");
-                saveFileDialog.FileName = strFileName;
-                if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
-                {
-                    strFileName = saveFileDialog.FileName.ToString();
-                }
-                else
-                {
-                    return;
-                }
-                FileStream fa = new FileStream(strFileName, FileMode.Create);
-                StreamWriter sw = new StreamWriter(fa, Encoding.Unicode);
-                string delimiter = "\t";
-                string strHeader = "";
-
-                strHeader = "序号\t国家\t城市\t景点名称\t英文名称\t经纬度\t地址\t如何抵达\t开放时间\t门票\t小贴士\t游玩方式";
-
-                sw.WriteLine(strHeader);
-                //output rows data
-                for (int j = 0; j < list1.Count; j++)
-                {
-                    string strRowValue = "";
-
-                   // strRowValue += delimiter;
-                    //var row = dataGridView.Rows[j];
-                    //var model = row.DataBoundItem as ComboLocation;
-
-                    var model = list1[j];
-
-
-                    if (model.id != null)
-                        strRowValue += model.id.ToString().Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                    else
-                        strRowValue += delimiter;
-
-
-                    if (model.nation != null)
-                        strRowValue += model.nation.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                    else
-                        strRowValue += delimiter;
-
-                    if (model.city != null)
-                        strRowValue += model.city.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                    else
-                        strRowValue += delimiter;
-
-                    if (model.title != null)
-                        strRowValue += model.title.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                    else
-                        strRowValue += delimiter;
-
-                    if (model.local_title != null)
-                        strRowValue += model.local_title.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                    else
-                        strRowValue += delimiter;
-
-                    if (model.latlng != null)
-                        strRowValue += model.latlng.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                    else
-                        strRowValue += delimiter;
-
-                    if (model.local_address != null)
-                        strRowValue += model.local_address.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                    else
-                        strRowValue += delimiter;
-
-                    if (model.route != null)
-                        strRowValue += model.route.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                    else
-                        strRowValue += delimiter;
-                    //开放时间
-                    if (model.open_close_more != null)
-                        strRowValue += model.open_close_more.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                    else
-                        strRowValue += delimiter;
-
-                    if (model.ticket != null)
-                        strRowValue += model.ticket.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                    else
-                        strRowValue += delimiter;
-
-                    if (model.tips != null)
-                        strRowValue += model.tips.Replace("\r\n", " ").Replace("\n", "") + delimiter;
-                    else
-                        strRowValue += delimiter;
-                    ;
-
-                    sw.WriteLine(strRowValue);
-                }
-                sw.Close();
-                fa.Close();
-                MessageBox.Show("下载成功！", "System", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
 
         private void ScenicsControl_Resize(object sender, EventArgs e)
         {
@@ -428,6 +321,47 @@ namespace DCTS.UI
                     ExcelUtility.WriteSteamToFile(stream, strFileName);
                 }
             }
+        }
+
+
+        // 根据当前选择条件，构造查询语句
+        private string BuildSql( int pageIndex = 0, int pageSize = 0  )
+        {
+            string sql = string.Empty;
+            var nation = this.nationComboBox.Text;
+            var city = this.cityComboBox.Text;
+            var title = this.keywordTextBox.Text; 
+            
+            using (var ctx = new DctsEntities())
+            {
+                var query = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Scenic);
+               
+                if (nation.Length > 0 && nation != NoOptionSelected)
+                {
+                    query = query.Where(o => o.nation == nation);
+                }
+                if (city.Length > 0 && city != NoOptionSelected)
+                {
+                    query = query.Where(o => o.city == city);
+                }
+                if (title.Length > 0)
+                {
+                    query = query.Where(o => o.city.Contains( city));
+                }
+
+                if (pageSize > 0)
+                {
+                    int offset = pageIndex * pageSize;
+                    // order is required before skip
+                    query = query.OrderBy(o => o.id).Skip(offset).Take(pageSize);
+                }
+
+                
+                sql = query.ToString();
+                 
+            }
+
+            return sql;
         }
 
     }

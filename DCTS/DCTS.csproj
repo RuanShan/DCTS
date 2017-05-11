@@ -185,6 +185,12 @@
       <DependentUpon>ChooseLocaltionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\CommandRequest.cs" />
+    <Compile Include="UI\ImportLocationExcel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ImportLocationExcel.Designer.cs">
+      <DependentUpon>ImportLocationExcel.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\ImportScenicExcel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -368,6 +374,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ChooseLocaltionForm.resx">
       <DependentUpon>ChooseLocaltionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ImportLocationExcel.resx">
+      <DependentUpon>ImportLocationExcel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ImportScenicExcel.resx">
       <DependentUpon>ImportScenicExcel.cs</DependentUpon>
