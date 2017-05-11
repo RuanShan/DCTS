@@ -241,10 +241,10 @@ namespace DCTS.CustomComponents
     /// </summary>   
     public class EventPagingArg : EventArgs
     {
-        public int PageIndex {get; set;}
-        public EventPagingArg(int pageIndex)
+        public int PageCurrent {get; set;}
+        public EventPagingArg(int pageCurrent)
         {
-            PageIndex = pageIndex;
+            PageCurrent = pageCurrent;
         }
     }
 

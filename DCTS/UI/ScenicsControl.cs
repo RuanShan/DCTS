@@ -29,6 +29,7 @@ namespace DCTS.UI
         {
             InitializeComponent();
             dataGridView.AutoGenerateColumns = false;
+            pager1.PageCurrent = 1;
         }
 
         public void BeginActive()
@@ -52,28 +53,7 @@ namespace DCTS.UI
 
         }
 
-        // 初始化DataGridView的数据源
-        private int InitializeDataGridView( int pageIndex = 0)
-        {
-            string nation = ( this.nationComboBox.Text != NoOptionSelected ? this.nationComboBox.Text : string.Empty);
-            string city = (this.cityComboBox.Text != NoOptionSelected ? this.cityComboBox.Text : string.Empty);
-            string title = (this.keywordTextBox.Text != NoOptionSelected ? this.keywordTextBox.Text : string.Empty); 
 
-            int count = 0;
-            int pageSize = pager1.PageSize;
-            pager1.PageCurrent = pageIndex + 1;
-
-            using (var ctx = new DctsEntities())
-            {
-                //分页需要数据总数
-                count = ComboLoactionBusiness.Count( ComboLocationEnum.Scenic, nation, city, title);
-
-                string sql = BuildSql(pageIndex, pageSize);
-                var list = ctx.Database.SqlQuery<ComboLocation>(sql).ToList();
-                this.dataGridView.DataSource = list;
-            }
-            return count;
-        }
 
 
         private void newButton_Click(object sender, EventArgs e)
@@ -143,7 +123,7 @@ namespace DCTS.UI
 
         private int pager1_EventPaging(CustomComponents.EventPagingArg e)
         {
-            int count = InitializeDataGridView( e.PageIndex );
+            int count = InitializeDataGridView( e.PageCurrent );
             return count;
         }
 
@@ -324,45 +304,59 @@ namespace DCTS.UI
         }
 
 
-        // 根据当前选择条件，构造查询语句
-        private string BuildSql( int pageIndex = 0, int pageSize = 0  )
+        // 初始化DataGridView的数据源, 分页事件调用
+        private int InitializeDataGridView(int pageCurrent = 1)
         {
-            string sql = string.Empty;
-            var nation = this.nationComboBox.Text;
-            var city = this.cityComboBox.Text;
-            var title = this.keywordTextBox.Text; 
-            
+            string nation = (this.nationComboBox.Text != NoOptionSelected ? this.nationComboBox.Text : string.Empty);
+            string city = (this.cityComboBox.Text != NoOptionSelected ? this.cityComboBox.Text : string.Empty);
+            string title = (this.keywordTextBox.Text != NoOptionSelected ? this.keywordTextBox.Text : string.Empty);
+
+            int count = 0;
+            int pageSize = pager1.PageSize;
+
             using (var ctx = new DctsEntities())
             {
-                var query = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Scenic);
-               
-                if (nation.Length > 0 && nation != NoOptionSelected)
-                {
-                    query = query.Where(o => o.nation == nation);
-                }
-                if (city.Length > 0 && city != NoOptionSelected)
-                {
-                    query = query.Where(o => o.city == city);
-                }
-                if (title.Length > 0)
-                {
-                    query = query.Where(o => o.city.Contains( city));
-                }
+                //分页需要数据总数
+                count = ComboLoactionBusiness.Count(ComboLocationEnum.Scenic, nation, city, title);
 
-                if (pageSize > 0)
-                {
-                    int offset = pageIndex * pageSize;
-                    // order is required before skip
-                    query = query.OrderBy(o => o.id).Skip(offset).Take(pageSize);
-                }
+                var list = ComboLoactionBusiness.Paginate(ComboLocationEnum.Scenic, pageCurrent, pageSize, nation, city, title);
 
-                
-                sql = query.ToString();
-                 
+                this.dataGridView.DataSource = list;
             }
-
-            return sql;
+            return count;
         }
+
+        // 根据当前选择条件，构造查询语句
+        //private string BuildSql(DctsEntities ctx, int pageIndex = 0, int pageSize = 0)
+        //{
+        //    string sql = string.Empty;
+        //    var nation = this.nationComboBox.Text;
+        //    var city = this.cityComboBox.Text;
+        //    var title = this.keywordTextBox.Text;             
+        //    {
+        //        var query = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Scenic);               
+        //        if (nation.Length > 0 && nation != NoOptionSelected)
+        //        {
+        //            query = query.Where(o => o.nation == nation);
+        //        }
+        //        if (city.Length > 0 && city != NoOptionSelected)
+        //        {
+        //            query = query.Where(o => o.city == city);
+        //        }
+        //        if (title.Length > 0)
+        //        {
+        //            query = query.Where(o => o.city.Contains( city));
+        //        }
+        //        if (pageSize > 0)
+        //        {
+        //            int offset = pageIndex * pageSize;
+        //            // order is required before skip
+        //            query = query.OrderBy(o => o.id).Skip(offset).Take(pageSize);
+        //        }
+        //        sql = query.ToString();
+        //    }
+        //    return sql;
+        //}
 
     }
 }

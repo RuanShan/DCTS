@@ -13,6 +13,42 @@ namespace DCTS.Bus
 
     class ComboLoactionBusiness
     {
+
+        public static List<ComboLocation> Paginate(ComboLocationEnum locationType, int currentPage = 1, int pageSize = 25, string nation = "", string city = "", string title = "")
+        {
+            List<ComboLocation> list = new List<ComboLocation>();
+
+            using (var ctx = new DctsEntities())
+            {
+
+                var query = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Scenic);
+
+                if (nation.Length > 0 )
+                {
+                    query = query.Where(o => o.nation == nation);
+                }
+                if (city.Length > 0 )
+                {
+                    query = query.Where(o => o.city == city);
+                }
+                if (title.Length > 0)
+                {
+                    query = query.Where(o => o.city.Contains(city));
+                }
+
+                if (pageSize > 0)
+                {
+                    int offset = (currentPage-1) * pageSize;
+                    // order is required before skip
+                    query = query.OrderBy(o => o.id).Skip(offset).Take(pageSize);
+                }
+                list = query.ToList();
+
+            }
+            return list;   
+        }
+
+
         public static int Count( ComboLocationEnum locationType, string nation, string city, string title)
         {
             int count = 0;
@@ -39,6 +75,7 @@ namespace DCTS.Bus
                 {
                     query = query.Where(o => o.city.Contains(city));
                 }
+                count = query.Count();
             }
             return count;
         }
