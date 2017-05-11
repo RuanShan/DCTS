@@ -40,7 +40,7 @@ namespace DCTS.UI
 
 
         // 初始化控件的数据源
-        private void InitializeDataSource(  )
+        private void InitializeDataSource()
         {
 
             // 初始化查询条件
@@ -61,7 +61,7 @@ namespace DCTS.UI
             var form = new NewScenicForm();
             form.ShowDialog();
 
-            if ( form.Saved )
+            if (form.Saved)
             {
                 //更新当前页面，以便显示新添加的数据
                 pager1.Bind();
@@ -123,7 +123,7 @@ namespace DCTS.UI
 
         private int pager1_EventPaging(CustomComponents.EventPagingArg e)
         {
-            int count = InitializeDataGridView( e.PageCurrent );
+            int count = InitializeDataGridView(e.PageCurrent);
             return count;
         }
 
@@ -131,6 +131,67 @@ namespace DCTS.UI
         {
             pager1.PageCurrent = 1;
             pager1.Bind();
+        }
+        private string sqlfiter_()
+        {
+            sqlfilter = "";
+
+            var nation = nationComboBox.Text;
+            var city = this.cityComboBox.Text;
+            var title = this.keywordTextBox.Text;
+
+            string conditions = "";//s.ltype =(int)ComboLocationEnum.Dining
+            List<MySqlParameter> condition_params = new List<MySqlParameter>();
+            var ltype = (int)ComboLocationEnum.Scenic;
+
+
+            if (ltype > 0)
+            {
+                if (conditions.Length > 0)
+                {
+                    conditions += " AND ";
+                }
+                conditions += "(`ltype`= @ltype)";
+            }
+            if (nation != NoOptionSelected)
+            {
+                if (nation.Length > 0)
+                {
+                    if (conditions.Length > 0)
+                    {
+                        conditions += " AND ";
+                    }
+                    conditions += "(`nation`= @nation)";
+                }
+            }
+            if (city != NoOptionSelected)
+            {
+                if (city.Length > 0)
+                {
+                    if (conditions.Length > 0)
+                    {
+                        conditions += " AND ";
+                    }
+                    conditions += "(`city`= @city)";
+                }
+            }
+            if (title.Length > 0)
+            {
+                if (conditions.Length > 0)
+                {
+                    conditions += " AND ";
+                }
+                conditions += "(`title`LIKE '%" + @title + "%')";
+            }
+            if (conditions.Length > 0)
+            {
+                conditions = " WHERE " + conditions;
+            }
+            sqlfilter = string.Format(" SELECT * FROM combolocations " + conditions.Replace("@ltype", ltype.ToString()).Replace("@nation", "'" + nation.ToString() + "'").Replace("@city", "'" + city.ToString() + "'").Replace("@title", "'" + title.ToString() + "'"));
+
+            return sqlfilter;
+
+
         }
         private int FindDataSources()
         {
@@ -184,9 +245,6 @@ namespace DCTS.UI
                 //conditions += "(`title`= @title)";
                 conditions += "(`title`LIKE '%" + @title + "%')";
             }
-
-
-
             #region  new
             condition_params.Add(new MySqlParameter("@ltype", ltype));
             condition_params.Add(new MySqlParameter("@nation", nation));
@@ -240,7 +298,7 @@ namespace DCTS.UI
                 }
             }
         }
-        
+
         public System.Drawing.Image GetImage1(string path)
         {
 
@@ -286,16 +344,18 @@ namespace DCTS.UI
                 using (var ctx = new DctsEntities())
                 {
 
-                    string sql = "SELECT * FROM combolocations";
-                    DataTable dataTable = ctx.DataTable(sqlfilter);
+                    // string sql = "SELECT * FROM combolocations";
+                    string sql = sqlfiter_();
+
+                    DataTable dataTable = ctx.DataTable(sql);
                     foreach (DataColumn col in dataTable.Columns)
                     {
-                        if( ComboLocationSchema.LocationCnNameDictionary.ContainsKey( col.ColumnName ))
+                        if (ComboLocationSchema.LocationCnNameDictionary.ContainsKey(col.ColumnName))
                         {
                             col.ColumnName = ComboLocationSchema.LocationCnNameDictionary[col.ColumnName];
                         }
                     }
-                    
+
                     var stream = ExcelUtility.RenderDataTableToExcel(dataTable);
 
                     ExcelUtility.WriteSteamToFile(stream, strFileName);
