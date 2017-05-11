@@ -60,7 +60,7 @@ namespace DCTS.Uti
 
         public static void WriteSteamToFile(MemoryStream ms, string FileName)
         {
-            FileStream fs = new FileStream(FileName, FileMode.Create, FileAccess.Write);
+            FileStream fs = new FileStream(FileName, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
             byte[] data = ms.ToArray();
 
             fs.Write(data, 0, data.Length);

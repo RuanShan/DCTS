@@ -124,18 +124,23 @@ namespace DCTS.CustomComponents
                                 //continue;
                             }
                             //判断城市是否存在 不存在创建
-                            City CityListorder = this.CityList.Find(o => o.title == location.city );
-                            if (CityListorder == null)
+                            City city = this.CityList.Find(o => o.title == location.city );
+                            if (city == null)
                             {
-                                var city = ctx.Cities.Create();
+                                city = ctx.Cities.Create();
                                 city.title = location.city;
                                 city.nationCode = nation.code;
-                                
+                                city.code = "";
+                                ctx.Cities.Add(city);                            
+
                             }
 
                             if (location.id > 0)
                             {
-                                existsLocation = ctx.ComboLocations.Find(location.id);
+                                existsLocation = ctx.ComboLocations.Where(o => o.id == location.id).FirstOrDefault();
+                            }
+                            if (existsLocation != null)
+                            {
                                 existsLocation.nation = location.nation;
                                 existsLocation.city = location.city;
                                 existsLocation.title = location.title;
