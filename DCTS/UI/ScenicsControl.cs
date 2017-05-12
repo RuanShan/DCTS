@@ -132,67 +132,7 @@ namespace DCTS.UI
             pager1.PageCurrent = 1;
             pager1.Bind();
         }
-        private string sqlfiter_()
-        {
-            sqlfilter = "";
 
-            var nation = nationComboBox.Text;
-            var city = this.cityComboBox.Text;
-            var title = this.keywordTextBox.Text;
-
-            string conditions = "";//s.ltype =(int)ComboLocationEnum.Dining
-            List<MySqlParameter> condition_params = new List<MySqlParameter>();
-            var ltype = (int)ComboLocationEnum.Scenic;
-
-
-            if (ltype > 0)
-            {
-                if (conditions.Length > 0)
-                {
-                    conditions += " AND ";
-                }
-                conditions += "(`ltype`= @ltype)";
-            }
-            if (nation != NoOptionSelected)
-            {
-                if (nation.Length > 0)
-                {
-                    if (conditions.Length > 0)
-                    {
-                        conditions += " AND ";
-                    }
-                    conditions += "(`nation`= @nation)";
-                }
-            }
-            if (city != NoOptionSelected)
-            {
-                if (city.Length > 0)
-                {
-                    if (conditions.Length > 0)
-                    {
-                        conditions += " AND ";
-                    }
-                    conditions += "(`city`= @city)";
-                }
-            }
-            if (title.Length > 0)
-            {
-                if (conditions.Length > 0)
-                {
-                    conditions += " AND ";
-                }
-                conditions += "(`title`LIKE '%" + @title + "%')";
-            }
-            if (conditions.Length > 0)
-            {
-                conditions = " WHERE " + conditions;
-            }
-            sqlfilter = string.Format(" SELECT * FROM combolocations " + conditions.Replace("@ltype", ltype.ToString()).Replace("@nation", "'" + nation.ToString() + "'").Replace("@city", "'" + city.ToString() + "'").Replace("@title", "'" + title.ToString() + "'"));
-
-            return sqlfilter;
-
-
-        }
         private int FindDataSources()
         {
             sqlfilter = "";
@@ -345,7 +285,7 @@ namespace DCTS.UI
                 {
 
                     // string sql = "SELECT * FROM combolocations";
-                    string sql = sqlfiter_();
+                    string sql = BuildSql();
 
                     DataTable dataTable = ctx.DataTable(sql);
                     foreach (DataColumn col in dataTable.Columns)
@@ -394,29 +334,33 @@ namespace DCTS.UI
             string sql = string.Empty;
             var nation = this.nationComboBox.Text;
             var city = this.cityComboBox.Text;
-            var title = this.keywordTextBox.Text;             
-            string conditions = string.format( "(`ltype`= {0})", ltype);
-            
-            
-                if (nation.Length > 0 && nation != NoOptionSelected)
-                {
-                    conditions = conditions+ " AND " + string.format("`nation`='{0}'", nation);
-                }
-                if (city.Length > 0 && city != NoOptionSelected)
-                {
-                    conditions = conditions+ " AND " + string.format("`city`='{0}'", city);
-                }
-                if (title.Length > 0)
-                {
-                    conditions = conditions+ " AND " + string.format("(`title` like '%{0}%')", title);
-                }
-        //        if (pageSize > 0)
-        //        {
-        //            int offset = pageIndex * pageSize;
-        //            // order is required before skip
-        //            query = query.OrderBy(o => o.id).Skip(offset).Take(pageSize);
-        //        }
-               sql = string.format(" SELECT * FROM combolocations " + conditions);
+            var title = this.keywordTextBox.Text;
+            string conditions = string.Format("(`ltype`= {0})", ltype);
+
+
+            if (nation.Length > 0 && nation != NoOptionSelected)
+            {
+                conditions = conditions + " AND " + string.Format("`nation`='{0}'", nation);
+            }
+            if (city.Length > 0 && city != NoOptionSelected)
+            {
+                conditions = conditions + " AND " + string.Format("`city`='{0}'", city);
+            }
+            if (title.Length > 0)
+            {
+                conditions = conditions + " AND " + string.Format("(`title` like '%{0}%')", title);
+            }
+            //        if (pageSize > 0)
+            //        {
+            //            int offset = pageIndex * pageSize;
+            //            // order is required before skip
+            //            query = query.OrderBy(o => o.id).Skip(offset).Take(pageSize);
+            //        }
+            if (conditions.Length > 0)
+            {
+                conditions = " WHERE " + conditions;
+            }
+            sql = string.Format(" SELECT * FROM combolocations " + conditions);
             return sql;
         }
 

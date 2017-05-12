@@ -227,11 +227,11 @@
     <Compile Include="UI\HomeControl.Designer.cs">
       <DependentUpon>HomeControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\ImportDiningCSV.cs">
+    <Compile Include="UI\ImportDiningExcel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\ImportDiningCSV.Designer.cs">
-      <DependentUpon>ImportDiningCSV.cs</DependentUpon>
+    <Compile Include="UI\ImportDiningExcel.Designer.cs">
+      <DependentUpon>ImportDiningExcel.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\NewScenicForm.cs">
       <SubType>Form</SubType>
@@ -282,11 +282,11 @@
       <DependentUpon>NewHotelForm.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomComponents\WorkerArgument.cs" />
-    <Compile Include="UI\ImportHotelCSV.cs">
+    <Compile Include="UI\ImportHotelExcel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\ImportHotelCSV.Designer.cs">
-      <DependentUpon>ImportHotelCSV.cs</DependentUpon>
+    <Compile Include="UI\ImportHotelExcel.Designer.cs">
+      <DependentUpon>ImportHotelExcel.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\ImportScenicCSV.cs">
       <SubType>Form</SubType>
@@ -350,6 +350,7 @@
     <Compile Include="Uti\ExcelUtility.cs" />
     <EmbeddedResource Include="AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomComponents\Pager.resx">
       <DependentUpon>Pager.cs</DependentUpon>
@@ -396,8 +397,8 @@
     <EmbeddedResource Include="UI\HomeControl.resx">
       <DependentUpon>HomeControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\ImportDiningCSV.resx">
-      <DependentUpon>ImportDiningCSV.cs</DependentUpon>
+    <EmbeddedResource Include="UI\ImportDiningExcel.resx">
+      <DependentUpon>ImportDiningExcel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\NewScenicForm.resx">
       <DependentUpon>NewScenicForm.cs</DependentUpon>
@@ -432,8 +433,8 @@
     <EmbeddedResource Include="UI\NewHotelForm.resx">
       <DependentUpon>NewHotelForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\ImportHotelCSV.resx">
-      <DependentUpon>ImportHotelCSV.cs</DependentUpon>
+    <EmbeddedResource Include="UI\ImportHotelExcel.resx">
+      <DependentUpon>ImportHotelExcel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ImportScenicCSV.resx">
       <DependentUpon>ImportScenicCSV.cs</DependentUpon>
