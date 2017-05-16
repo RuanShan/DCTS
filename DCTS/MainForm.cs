@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -90,6 +92,25 @@ namespace DCTS
             {
             }
         }
+
+        private void 初始化ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                var form = new ImportMysql();
+                if (form.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
+                {
+                }
+             
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.ToString());
+            }
+        }
+
+      
 
 
     }
