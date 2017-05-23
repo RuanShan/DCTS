@@ -32,8 +32,6 @@ namespace DCTS.CustomComponents
 
         }
 
-
-
         private void closeButton_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -50,9 +48,7 @@ namespace DCTS.CustomComponents
             //得到APP.config字符串
             var myconn = new MySqlConnection(DBConfiguration.GetConnectionString("DctsEntities1"));
             string con = myconn.ConnectionString;
-
             //用户ID
-
             string[] temp1 = System.Text.RegularExpressions.Regex.Split(con, "user id=");
             string[] temp2 = System.Text.RegularExpressions.Regex.Split(temp1[1], ";");
             //数据库名称
@@ -63,7 +59,6 @@ namespace DCTS.CustomComponents
             //string cmd = @"mysql -u root -p123456 dcts_dev <d:\a.sql";
             string cmd = @"mysql -u root dcts_dev <C:\\Program Files\\MySQL\\20170510.sql";
             cmd = @"mysql -u " + temp2[0] + " " + temp4[0] + " <" + @db;
-
             string output = "";
             RunCmd(cmd, out output);
             MessageBox.Show("导入成功");
