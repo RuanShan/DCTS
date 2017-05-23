@@ -2,9 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity.Validation;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -23,28 +25,14 @@ namespace DCTS.CustomComponents
 {
     public partial class ImportMysql : Form
     {
-        private List<Nation> NationList = null;
-        private List<City> CityList = null;
+
         public ImportMysql()
         {
             InitializeComponent();
 
         }
 
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {
-            BackgroundWorker worker = sender as BackgroundWorker;
-            bool success = NewMethod(worker, e);
-        }
 
-
-        private void openFileBtton_Click(object sender, EventArgs e)
-        {
-            if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                this.pathTextBox.Text = openFileDialog1.FileName;
-            }
-        }
 
         private void closeButton_Click(object sender, EventArgs e)
         {
@@ -54,26 +42,31 @@ namespace DCTS.CustomComponents
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            if (this.backgroundWorker1.IsBusy)
-            {
-
-                this.backgroundWorker1.CancelAsync();
-                // Disable the Cancel button.
-                this.cancelButton.Enabled = false;
-            }
-
         }
 
         private void importButton_Click(object sender, EventArgs e)
         {
-            this.importButton.Enabled = false;
-            this.cancelButton.Enabled = true;
-            this.closeButton.Enabled = false;
-            if (backgroundWorker1.IsBusy != true)
-            {
-                backgroundWorker1.RunWorkerAsync(new WorkerArgument { OrderCount = 0, CurrentIndex = 0 });
 
-            }
+            //得到APP.config字符串
+            var myconn = new MySqlConnection(DBConfiguration.GetConnectionString("DctsEntities1"));
+            string con = myconn.ConnectionString;
+
+            //用户ID
+
+            string[] temp1 = System.Text.RegularExpressions.Regex.Split(con, "user id=");
+            string[] temp2 = System.Text.RegularExpressions.Regex.Split(temp1[1], ";");
+            //数据库名称
+            string[] temp3 = System.Text.RegularExpressions.Regex.Split(con, "database=");
+            string[] temp4 = System.Text.RegularExpressions.Regex.Split(temp3[1], ";");
+
+            String db = ConfigurationManager.AppSettings["DB_Public_Disk_Path"];
+            //string cmd = @"mysql -u root -p123456 dcts_dev <d:\a.sql";
+            string cmd = @"mysql -u root dcts_dev <C:\\Program Files\\MySQL\\20170510.sql";
+            cmd = @"mysql -u " + temp2[0] + " " + temp4[0] + " <" + @db;
+
+            string output = "";
+            RunCmd(cmd, out output);
+            MessageBox.Show("导入成功");
         }
 
         private bool NewMethod(BackgroundWorker worker, DoWorkEventArgs e)
@@ -84,7 +77,13 @@ namespace DCTS.CustomComponents
             try
             {
                 string connctionString = "Database=dcts_dev;Data Source=127.0.0.1;User Id=root;Character Set=utf8";//Password=root;
-                ExecuteSqlFile(this.pathTextBox.Text, connctionString);
+
+                string cmd = @"mysql -u root -p123456 dcts_dev <d:\a.sql";
+                cmd = @"mysql -u root dcts_dev <C:\\mysteap\\work_office\\ProjectOut\\RuanShanLvYou\\20170510.sql";
+                string output = "";
+                RunCmd(cmd, out output);
+
+
 
                 backgroundWorker1.ReportProgress(100, arg);
                 e.Result = string.Format("{0} 条正常导入成功");
@@ -102,108 +101,42 @@ namespace DCTS.CustomComponents
             return success;
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        #region 直接调用命令
+
+        public static void RunCmd(string cmd, out string output)
         {
-            WorkerArgument arg = e.UserState as WorkerArgument;
-            if (!arg.HasError)
+            try
             {
-                this.progressMsgLabel.Text = String.Format("{0}/{1}", arg.CurrentIndex, arg.OrderCount);
-                this.ProgressValue = e.ProgressPercentage;
-            }
-            else
-            {
-                this.progressMsgLabel.Text = arg.ErrorMessage;
-            }
-        }
-        public int ProgressValue
-        {
-            get { return this.progressBar1.Value; }
-            set { progressBar1.Value = value; }
-        }
-
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-
-            this.cancelButton.Enabled = false;
-            this.closeButton.Enabled = true;
-            this.importButton.Enabled = true;
-
-            if (e.Error != null)
-            {
-                MessageBox.Show(e.Error.Message);
-            }
-            else if (e.Cancelled)
-            {
-                MessageBox.Show(string.Format("It is cancelled!"));
-            }
-            else
-            {
-                MessageBox.Show(string.Format("{0}", e.Result));
-
-            }
-
-        }
-
-
-
-        #region mysql 执行脚本文件
-        /// <summary>   
-        /// 执行Sql文件   
-        /// </summary>   
-        /// <param name="varFileName">sql文件</param>   
-        /// <param name="Conn">连接字符串</param>   
-        /// <returns></returns>   
-        private bool ExecuteSqlFile(string varFileName, String Conn)
-        {
-            using (StreamReader reader = new StreamReader(varFileName, System.Text.Encoding.GetEncoding("utf-8")))
-            {
-                MySqlCommand command;
-                MySqlConnection Connection = new MySqlConnection(Conn);
-                Connection.Open();
-                try
+                string CmdPath = @"C:\Windows\System32\cmd.exe";
+                cmd = cmd.Trim().TrimEnd('&') + "&exit";//说明：不管命令是否成功均执行exit命令，否则当调用ReadToEnd()方法时，会处于假死状态
+                using (Process p = new Process())
                 {
-                    string line = "";
-                    string l;
-                    while (true)
-                    {
-                        // 如果line被使用，则设为空  
-                        if (line.EndsWith(";"))
-                            line = "";
+                    p.StartInfo.FileName = CmdPath;
+                    p.StartInfo.UseShellExecute = false;        //是否使用操作系统shell启动
+                    p.StartInfo.RedirectStandardInput = true;   //接受来自调用程序的输入信息
+                    p.StartInfo.RedirectStandardOutput = true;  //由调用程序获取输出信息
+                    p.StartInfo.RedirectStandardError = true;   //重定向标准错误输出
+                    p.StartInfo.CreateNoWindow = true;          //不显示程序窗口
+                    p.Start();//启动程序
 
-                        l = reader.ReadLine();
+                    //向cmd窗口写入命令
+                    p.StandardInput.WriteLine(cmd);
+                    p.StandardInput.AutoFlush = true;
 
-                        // 如果到了最后一行，则退出循环  
-                        if (l == null) break;
-                        // 去除空格  
-                        l = l.TrimEnd();
-                        // 如果是空行，则跳出循环  
-                        if (l == "") continue;
-                        // 如果是注释，则跳出循环  
-                        if (l.StartsWith("--")) continue;
-
-                        // 行数加1   
-                        line += l;
-                        // 如果不是完整的一条语句，则继续读取  
-                        if (!line.EndsWith(";")) continue;
-                        if (line.StartsWith("/*!"))
-                        {
-                            continue;
-                        }
-
-                        //执行当前行  
-                        command = new MySqlCommand(line, Connection);
-                        command.ExecuteNonQuery();
-                    }
-                }
-                finally
-                {
-                    Connection.Close();
+                    //获取cmd窗口的输出信息
+                    output = p.StandardOutput.ReadToEnd();
+                    p.WaitForExit();//等待程序执行完退出进程
+                    p.Close();
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("EX:数据库配置失败 ：" + ex);
 
-            return true;
+
+                throw;
+            }
         }
-
 
 
         #endregion
