@@ -40,7 +40,7 @@ namespace DCTS.UI
 
 
         // 初始化控件的数据源
-        private void InitializeDataSource(  )
+        private void InitializeDataSource()
         {
 
             // 初始化查询条件
@@ -61,7 +61,7 @@ namespace DCTS.UI
             var form = new NewScenicForm();
             form.ShowDialog();
 
-            if ( form.Saved )
+            if (form.Saved)
             {
                 //更新当前页面，以便显示新添加的数据
                 pager1.Bind();
@@ -123,7 +123,7 @@ namespace DCTS.UI
 
         private int pager1_EventPaging(CustomComponents.EventPagingArg e)
         {
-            int count = InitializeDataGridView( e.PageCurrent );
+            int count = InitializeDataGridView(e.PageCurrent);
             return count;
         }
 
@@ -132,6 +132,7 @@ namespace DCTS.UI
             pager1.PageCurrent = 1;
             pager1.Bind();
         }
+
         private int FindDataSources()
         {
             sqlfilter = "";
@@ -184,9 +185,6 @@ namespace DCTS.UI
                 //conditions += "(`title`= @title)";
                 conditions += "(`title`LIKE '%" + @title + "%')";
             }
-
-
-
             #region  new
             condition_params.Add(new MySqlParameter("@ltype", ltype));
             condition_params.Add(new MySqlParameter("@nation", nation));
@@ -240,7 +238,7 @@ namespace DCTS.UI
                 }
             }
         }
-        
+
         public System.Drawing.Image GetImage1(string path)
         {
 
@@ -286,16 +284,18 @@ namespace DCTS.UI
                 using (var ctx = new DctsEntities())
                 {
 
-                    string sql = "SELECT * FROM combolocations";
-                    DataTable dataTable = ctx.DataTable(sqlfilter);
+                    // string sql = "SELECT * FROM combolocations";
+                    string sql = BuildSql();
+
+                    DataTable dataTable = ctx.DataTable(sql);
                     foreach (DataColumn col in dataTable.Columns)
                     {
-                        if( ComboLocationSchema.LocationCnNameDictionary.ContainsKey( col.ColumnName ))
+                        if (ComboLocationSchema.LocationCnNameDictionary.ContainsKey(col.ColumnName))
                         {
                             col.ColumnName = ComboLocationSchema.LocationCnNameDictionary[col.ColumnName];
                         }
                     }
-                    
+
                     var stream = ExcelUtility.RenderDataTableToExcel(dataTable);
 
                     ExcelUtility.WriteSteamToFile(stream, strFileName);
@@ -327,36 +327,42 @@ namespace DCTS.UI
         }
 
         // 根据当前选择条件，构造查询语句
-        //private string BuildSql(DctsEntities ctx, int pageIndex = 0, int pageSize = 0)
-        //{
-        //    string sql = string.Empty;
-        //    var nation = this.nationComboBox.Text;
-        //    var city = this.cityComboBox.Text;
-        //    var title = this.keywordTextBox.Text;             
-        //    {
-        //        var query = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Scenic);               
-        //        if (nation.Length > 0 && nation != NoOptionSelected)
-        //        {
-        //            query = query.Where(o => o.nation == nation);
-        //        }
-        //        if (city.Length > 0 && city != NoOptionSelected)
-        //        {
-        //            query = query.Where(o => o.city == city);
-        //        }
-        //        if (title.Length > 0)
-        //        {
-        //            query = query.Where(o => o.city.Contains( city));
-        //        }
-        //        if (pageSize > 0)
-        //        {
-        //            int offset = pageIndex * pageSize;
-        //            // order is required before skip
-        //            query = query.OrderBy(o => o.id).Skip(offset).Take(pageSize);
-        //        }
-        //        sql = query.ToString();
-        //    }
-        //    return sql;
-        //}
+        private string BuildSql()
+        {
+            var ltype = (int)ComboLocationEnum.Scenic;
+
+            string sql = string.Empty;
+            var nation = this.nationComboBox.Text;
+            var city = this.cityComboBox.Text;
+            var title = this.keywordTextBox.Text;
+            string conditions = string.Format("(`ltype`= {0})", ltype);
+
+
+            if (nation.Length > 0 && nation != NoOptionSelected)
+            {
+                conditions = conditions + " AND " + string.Format("`nation`='{0}'", nation);
+            }
+            if (city.Length > 0 && city != NoOptionSelected)
+            {
+                conditions = conditions + " AND " + string.Format("`city`='{0}'", city);
+            }
+            if (title.Length > 0)
+            {
+                conditions = conditions + " AND " + string.Format("(`title` like '%{0}%')", title);
+            }
+            //        if (pageSize > 0)
+            //        {
+            //            int offset = pageIndex * pageSize;
+            //            // order is required before skip
+            //            query = query.OrderBy(o => o.id).Skip(offset).Take(pageSize);
+            //        }
+            if (conditions.Length > 0)
+            {
+                conditions = " WHERE " + conditions;
+            }
+            sql = string.Format(" SELECT * FROM combolocations " + conditions);
+            return sql;
+        }
 
     }
 }

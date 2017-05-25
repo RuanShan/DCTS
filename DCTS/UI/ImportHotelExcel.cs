@@ -2,25 +2,28 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Validation;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ComLib;
 using ComLib.CsvParse;
 using DCTS.DB;
+using DCTS.Uti;
 
 namespace DCTS.CustomComponents
 {
-    public partial class ImportDiningCSV : Form
+    public partial class ImportHotelCSV : Form
     {
         private List<City> CityList = null;
 
         private List<Nation> NationList = null;
-        public ImportDiningCSV()
+        public ImportHotelCSV()
         {
             InitializeComponent();
             //var nationList = DCTS.DB.GlobalCache.NationList;
@@ -40,77 +43,6 @@ namespace DCTS.CustomComponents
 
             //bool success = Execute(pathTextBox.Text, worker, e);
             bool success = NewMethod(worker, e);
-        }
-        
-        /// <summary>
-        /// Run the application.
-        /// </summary>
-        public bool Execute(string path, BackgroundWorker worker, DoWorkEventArgs e)
-        {
-            bool isrun = false;
-
-            try
-            {
-                //<doc:example>
-                // See CommonLibrary.UnitTests Source code for actual csv files.
-                string text = GetSampleCsv();
-                CsvDoc csv = Csv.LoadText(text, true);
-
-                // 1. Get cell at row 0, column 1
-                string cell0 = csv.Get<string>(0, 1);
-
-                // 2. Get cell at row 0, column called "FilePath"
-                string cell2 = csv.Get<string>(0, "FilePath");
-
-                // 3. Number of columns
-                var colCount = csv.Columns.Count;
-
-                // 4. Number of rows
-                var rowCount = csv.Data.Count;
-
-                // 5. Column name at index 2
-                var col2 = csv.Columns[1];
-
-                // 6. Get int id at row 2
-                var id = csv.Get<int>(2, 0);
-
-                // 7. Iterate over all the cells in column named "Date" starting at row 0.
-                csv.ForEach<DateTime>("Date", 0, (row, col, val) =>
-                {
-                    Console.WriteLine(string.Format("Row[{0}]Col[{1}] : {2}", row, col, val.ToString()));
-                });
-
-                // 8. Get the csv data as a datatable.
-                DataTable table = csv.ToDataTable("My_Sample_Data");
-
-                // 9. Iterate over rows / columns
-                for (int row = 0; row < csv.Data.Count; row++)
-                {
-                    for (int col = 0; col < csv.Columns.Count; col++)
-                    {
-                        string cellVal = csv.Data[row][col] as string;
-                    }
-                }
-                //</doc:example>
-                isrun = true;
-
-            }
-            catch (Exception ex)
-            {
-                isrun = false;
-
-                return isrun;
-                throw;
-            }
-            return isrun;
-        }
-        private string GetSampleCsv()
-        {
-            var csv = @"Id,NonAlphaNumeric,FilePath,Date" + Environment.NewLine
-                    + @"1,(`~!@#$%^&*()_+-=[]\{}|<>?./;:),C:\pictures\100_01.JPG,4/10/2009 11:27 AM" + Environment.NewLine
-                    + @"2,(`~!@#$%^&*()_+-=[]\{}|<>?./;:),C:\pictures\100_01.JPG,4/11/2009 11:37 AM" + Environment.NewLine
-                    + @"3,(`~!@#$%^&*()_+-=[]\{}|<>?./;:),C:\pictures\100_01.JPG,4/12/2009 11:47 AM";
-            return csv;
         }
 
         #region csv 路径
@@ -274,7 +206,6 @@ namespace DCTS.CustomComponents
 
         private void importButton_Click(object sender, EventArgs e)
         {
-
             this.importButton.Enabled = false;
             this.cancelButton.Enabled = true;
             this.closeButton.Enabled = false;
@@ -285,7 +216,7 @@ namespace DCTS.CustomComponents
             }
         }
 
-        private bool NewMethod(BackgroundWorker worker, DoWorkEventArgs e)
+        private bool NewMethod11(BackgroundWorker worker, DoWorkEventArgs e)
         {
             WorkerArgument arg = e.Argument as WorkerArgument;
 
@@ -312,11 +243,11 @@ namespace DCTS.CustomComponents
 
 
                         string[] temp1 = System.Text.RegularExpressions.Regex.Split(texi, "\t");
-                        //判断国家是否存在
+                        //判断国家是否存在                       
                         Nation order = this.NationList.Find(o => o.title == temp1[2]);
                         if (order == null || order.title == null || order.title == "")
                         {
-                            e.Result = "导入[" + temp1[5] + "]国家信息在系统中不存在";
+                            e.Result = "导入[" + temp1[4] + "]国家信息在系统中不存在";
                             throw new Exception("导入[" + temp1[4] + "]国家信息在系统中不存在");
                             //continue;
                         }
@@ -329,8 +260,8 @@ namespace DCTS.CustomComponents
                             objcity.nationCode = order.code;
                             if (temp1[1] == null || temp1[1] == "")
                             {
-                                e.Result = "导入[" + temp1[5] + "]文件中【序号】列不能为空";
-                                throw new Exception("导入[" + temp1[5] + "]导入文件中【序号】列不能为空");
+                                e.Result = "导入[" + temp1[4] + "]文件中【序号】列不能为空";
+                                throw new Exception("导入[" + temp1[4] + "]导入文件中【序号】列不能为空");
                             }
                             objcity.code = "";
                             var objcity1 = ctx.Cities.Add(objcity);
@@ -340,8 +271,8 @@ namespace DCTS.CustomComponents
                         {
                             if (temp1[1] == null || temp1[1] == "")
                             {
-                                e.Result = "导入[" + temp1[5] + "]文件中【序号】列不能为空";
-                                throw new Exception("导入[" + temp1[5] + "]导入文件中【序号】列不能为空");
+                                e.Result = "导入[" + temp1[4] + "]文件中【序号】列不能为空";
+                                throw new Exception("导入[" + temp1[4] + "]导入文件中【序号】列不能为空");
 
                             }
                             City objcity = ctx.Cities.Find(Convert.ToInt32(Convert.ToInt64(temp1[1])));
@@ -350,62 +281,56 @@ namespace DCTS.CustomComponents
                         }
 
 
+
                         var obj = ctx.ComboLocations.Create();
-                        obj.ltype = (int)ComboLocationEnum.Dining;
+                        obj.ltype = (int)ComboLocationEnum.Hotel;
                         obj.nation = temp1[2];
                         obj.city = temp1[3];
-                        obj.area = temp1[4];
-                        obj.title = temp1[5];
-                        obj.dishes = temp1[6];
-                        obj.img = temp1[7];
-                        obj.latlng = temp1[8];
-                        obj.address = temp1[9];
-                        obj.local_address = temp1[10];
-                        if (temp1[11] != null && temp1[11] != "" && temp1[11].Contains("-"))
-                        {
-                            string[] temp2 = System.Text.RegularExpressions.Regex.Split(temp1[11], "-");
-
-                            try
-                            {
-                                obj.open_at = Convert.ToDateTime(temp2[0].Trim());
-                                obj.close_at = Convert.ToDateTime(temp2[1].Trim());
-                            }
-                            catch (Exception)
-                            {
-                                success = false;
-                            }
-                        }
-                        obj.recommended_dishes = temp1[12];
-                        obj.tips = temp1[12];
+                        obj.title = temp1[4];
+                        obj.local_title = temp1[5];
+                        obj.img = temp1[6]; ;// this.imgPathTextBox.Text;
+                        //obj.open_at = Convert.ToDateTime( temp1[1]);
+                        //obj.close_at = Convert.ToDateTime( temp1[1]);
+                        obj.room = temp1[7];
+                        obj.dinner = temp1[8];
+                        obj.latlng = temp1[9];
+                        obj.address = temp1[10];
+                        obj.local_address = temp1[11];
+                        obj.contact = temp1[12];
+                        obj.wifi = temp1[13];
+                        obj.parking = temp1[14];
+                        obj.reception = temp1[15];
+                        obj.kitchen = temp1[16];
+                        obj.tips = temp1[17];
                         #region 判断名称长度
                         bool nameishave = false;
-                        bool hastitle = (temp1[5].Length > 0);
+                        bool hastitle = (temp1[4].Length > 0);
                         if (hastitle)
                         {
-                            string demo = temp1[5].ToString();
+                            string demo = temp1[4].ToString();
 
                             ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
                             if (lastLocation != null)
-                                nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Dining && o.title == demo).Count() > 0);
+                                nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Hotel && o.title == demo).Count() > 0);
                         }
 
                         #endregion
-                        if (nameishave == false && temp1[5].Length <= 100)
+
+                        if (nameishave == false && temp1[4].Length <= 100)
                             ctx.ComboLocations.Add(obj);
                         else
                         {
-                            throw new Exception("导入[" + temp1[5] + "]请检查名称的长度或是否已存在");
-                            //MessageBox.Show("错误：请检查名称的长度或是否已存在！" + temp1[4], "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            throw new Exception("导入[" + temp1[4] + "]请检查名称的长度或是否已存在");
                             return false;
                         }
-                        ctx.SaveChanges();
                         if (arg.CurrentIndex % 5 == 0)
                         {
                             backgroundWorker1.ReportProgress(progress, arg);
                         }
                     }
+                    ctx.SaveChanges();
+
                 }
-                arg.CurrentIndex = dt.Rows.Count;
                 backgroundWorker1.ReportProgress(100, arg);
                 e.Result = string.Format("{0} 条正常导入成功", dt.Rows.Count);
             }
@@ -420,10 +345,112 @@ namespace DCTS.CustomComponents
                 success = false;
             }
 
+            return success;
+        }
 
+        private bool NewMethod(BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            WorkerArgument arg = e.Argument as WorkerArgument;
+
+            bool success = true;
+            try
+            {
+                string sheetName = this.pathTextBox.Text;
+                using (var excelHelper = new ExcelHelper(sheetName))
+                {
+
+                    DataTable dt = excelHelper.ExcelToDataTable(string.Empty, true);
+
+                    var newLocations = ConverDataTableToComboLocationList(dt);
+
+                    int rowCount = dt.Rows.Count;
+                    arg.OrderCount = rowCount;
+                    int i = 0;
+                    int progress = 0;
+                    using (var ctx = new DctsEntities())
+                    {
+                        var locations = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Hotel).ToList();
+
+                        foreach (var location in newLocations)
+                        {
+                            ComboLocation existsLocation = null;
+
+                            i += 1;
+                            progress = Convert.ToInt16(((i) * 1.0 / rowCount) * 100);
+                            arg.CurrentIndex = i;
+
+                            //判断国家是否存在                       
+                            Nation nation = this.NationList.Find(o => o.title == location.nation);
+                            if (nation == null)
+                            {
+                                e.Result = "导入[" + location.nation + "]国家信息在系统中不存在";
+                                e.Cancel = true;
+                                //continue;
+                            }
+                            //判断城市是否存在 不存在创建
+                            City city = this.CityList.Find(o => o.title == location.city);
+                            if (city == null)
+                            {
+                                city = ctx.Cities.Create();
+                                city.title = location.city;
+                                city.nationCode = nation.code;
+                                city.code = "";
+                                ctx.Cities.Add(city);
+
+                            }
+
+                            if (location.id > 0)
+                            {
+                                existsLocation = ctx.ComboLocations.Where(o => o.id == location.id).FirstOrDefault();
+                            }
+                            if (existsLocation != null)
+                            {
+                                existsLocation.nation = location.nation;
+                                existsLocation.city = location.city;
+                                existsLocation.title = location.title;
+                                existsLocation.local_title = location.local_title;
+                                existsLocation.room = location.room;
+                                existsLocation.dinner = location.dinner;
+                                existsLocation.latlng = location.latlng;
+                                existsLocation.address = location.address;
+                                existsLocation.route = location.route;
+                                existsLocation.contact = location.contact;
+                                existsLocation.wifi = location.wifi;
+                                existsLocation.parking = location.parking;
+                                existsLocation.reception = location.reception;
+                                existsLocation.kitchen = location.kitchen;
+                                existsLocation.tips = location.tips;
+
+                            }
+                            else
+                            {
+                                ctx.ComboLocations.Add(location);
+                            }
+
+
+                            backgroundWorker1.ReportProgress(progress, arg);
+
+                        }
+                        ctx.SaveChanges();
+                    }
+                    backgroundWorker1.ReportProgress(100, arg);
+                    e.Result = string.Format("{0} 条正常导入成功", dt.Rows.Count);
+                }
+            }
+            catch (DbEntityValidationException exception)
+            {
+                if (!e.Cancel)
+                {
+                    //arg.HasError = true;
+                    //arg.ErrorMessage = exception.Message;
+                    e.Result = exception.Message + "或所导入信息超出要求长度";
+                }
+                success = false;
+            }
 
             return success;
         }
+
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
@@ -438,7 +465,6 @@ namespace DCTS.CustomComponents
                 this.progressMsgLabel.Text = arg.ErrorMessage;
             }
         }
-
         public int ProgressValue
         {
             get { return this.progressBar1.Value; }
@@ -466,6 +492,58 @@ namespace DCTS.CustomComponents
 
             }
 
+        }
+
+        private List<ComboLocation> ConverDataTableToComboLocationList(DataTable table)
+        {
+
+            //ltype	nation	city	area	title local_title  img         room    dinner  latlng    latlng   route    contact    wifi   wifi
+            //reception reception  tips
+            // 序号	国家	城市	  中文名称	    英文名称	   图片	  预定房型	早餐	经纬度	地址	如何抵达	联系方式	WIFI	停车位	
+            //前台	厨房	深度TIPS
+
+            var columnNameMap = ComboLocationSchema.hotelColumnNameDictionary;
+
+            List<ComboLocation> list = new List<ComboLocation>();
+
+            Type locationType = typeof(ComboLocation);
+
+            List<MethodInfo> methods = new List<MethodInfo>();
+            foreach (DataColumn column in table.Columns)
+            {
+                string innerColumnName = columnNameMap[column.Caption];
+                var m = locationType.GetMethod(innerColumnName);
+                methods.Add(m);
+
+                column.ColumnName = innerColumnName;
+            }
+
+            foreach (DataRow row in table.Rows)
+            {
+
+                var location = new ComboLocation();
+                location.ltype = (int)ComboLocationEnum.Hotel;
+                location.id = Convert.ToInt32(row["id"]);
+                location.nation = row["nation"].ToString();
+                location.city = row["city"].ToString();
+                location.title = row["title"].ToString();
+                location.local_title = row["local_title"].ToString();
+                location.img = "";
+                location.room = row["room"].ToString();
+                location.dinner = row["dinner"].ToString();
+                location.latlng = row["latlng"].ToString();
+                location.address = row["address"].ToString();
+                location.route = row["route"].ToString();
+                location.contact = row["contact"].ToString();
+                location.wifi = row["wifi"].ToString();
+                location.parking = row["parking"].ToString();
+                location.reception = row["reception"].ToString();
+                location.kitchen = row["kitchen"].ToString();
+                location.tips = row["tips"].ToString();
+                list.Add(location);
+            }
+
+            return list;
         }
 
     }
