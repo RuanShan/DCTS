@@ -3,21 +3,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Configuration;
+using System.Collections;
 
 namespace DCTS.Uti
 {
     class DBConfiguration
     {
+        /// 
+        /// 获取ConnectionStrings 
+        /// 
+        /// 
+        /// 
+        public static Dictionary<string, string> ConnectionSettings()
+        {
+            var ctx = new DctsEntities();
+            string connectionString = GetConnectionString();
+            Dictionary<string,string> setting = new Dictionary<string,string>();
+            //"server=127.0.0.1;user id=root;database=dcts_dev;allowuservariables=True;characterset=utf8"
+            string[] kvs = connectionString.Split(';');
+            foreach (string kv in kvs)
+            {
+                var key_val = kv.Split('=');
+                setting[key_val[0]] = key_val[1];
+            }           
+
+            return setting;
+        }
        
             /// 
             /// 获取ConnectionStrings 
             /// 
             /// 
             /// 
-            public static string GetConnectionString(string connectionName)
+            public static string GetConnectionString( )
             {
-                string connectionString = ConfigurationManager.ConnectionStrings[connectionName].ConnectionString;
-                return connectionString;
+                var ctx = new DctsEntities();
+
+               
+                return ctx.Database.Connection.ConnectionString;
             }
 
             /// 
