@@ -46,7 +46,7 @@ namespace DCTS.CustomComponents
         {
 
             //得到APP.config字符串
-            var myconn = new MySqlConnection(DBConfiguration.GetConnectionString("DctsEntities1"));
+            var myconn = new MySqlConnection(DBConfiguration.GetConnectionString());
             string con = myconn.ConnectionString;
             //用户ID
             string[] temp1 = System.Text.RegularExpressions.Regex.Split(con, "user id=");

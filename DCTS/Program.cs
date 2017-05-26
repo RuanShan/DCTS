@@ -84,34 +84,34 @@ namespace DCTS
 
         static bool DbConnectable()
         {
+           
             bool success = false;
-            string msg = "";
             //连接字符串拼装  
-            var myconn = new MySqlConnection(DBConfiguration.GetConnectionString("DctsEntities1"));
-
+            string connectionString = "";
 
             //连接 
             try
             {
-                myconn.Open();
-
-                if (myconn.State.ToString() == "Open")
+                using (var ctx = new DctsEntities())
                 {
-                    LogHelper.WriteLog("Connect DB successfully");
-                    success = true;
-                }
+                    connectionString = ctx.Database.Connection.ConnectionString;
 
+                    ctx.Database.Connection.Open();
+
+
+                    if (ctx.Database.Connection.State == System.Data.ConnectionState.Open)
+                    {
+                        LogHelper.WriteLog("Connect DB successfully");
+                        success = true;
+                    }
+                }
             }
             catch (MySqlException exception)
             {
                 LogHelper.WriteLog("DB open error", exception);
-                LogHelper.WriteLog(string.Format("DB connection string is {0}", DBConfiguration.GetConnectionString("DctsEntities1")));
+                LogHelper.WriteLog(string.Format("DB connection string is {0}", connectionString));
             }
-            finally
-            {
-
-                myconn.Close();
-            }
+            
 
             return success;
         }
