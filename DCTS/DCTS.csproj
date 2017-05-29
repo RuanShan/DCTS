@@ -521,7 +521,7 @@
     <None Include="Resources\Cancel2_small.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DB\sql\" />
+    <Folder Include="Sql\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
