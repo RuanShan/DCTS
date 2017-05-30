@@ -6,8 +6,17 @@ using System.Threading.Tasks;
 
 namespace DCTS.DB
 {
-    enum ComboLocationEnum { Blank = 0, Scenic = 1, Dining = 5, Hotel = 9 }
+   
+    enum ComboLocationEnum
+    {   // 空白页，   景点，   餐厅，  住宿，  国家， 火车，飞机（机票说明）,
+        Blank = 0, Scenic = 1, Dining = 5, Hotel = 9, Country = 10, Flight = 16, Train = 17,
+        //  一封信，目录， 出行必备, Google,
+        Letter = 101, Index = 102, Preparation = 103, Google = 110,   
+        //  线上查询说明，机票说明，酒店说明，租车说明，交通及活动票，退税
+        DeepOnline=120, AirList=121, HotelList=122, CarList=123, TrainList=124, TaxReturn = 181
 
+         
+    }
 
     // id	ltype	nation	city	area	title	local_title	img	address	local_address	latlng	route	contact	
     // open_at	close_at	open_close_more	ticket	room	dinner	wifi	parking	reception	kitchen	dishes	recommended_dishes	tips	guidance

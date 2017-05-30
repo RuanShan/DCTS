@@ -12,22 +12,13 @@ namespace DCTS
     using System;
     using System.Collections.Generic;
     
-    public partial class TripDay
+    public partial class Customer
     {
-        public TripDay()
-        {
-            this.DayLocations = new HashSet<DayLocation>();
-        }
-    
         public int id { get; set; }
-        public int trip_id { get; set; }
-        public string title { get; set; }
-        public int day { get; set; }
-        public string memo { get; set; }
-        public string tips { get; set; }
-        public string schedule { get; set; }
-    
-        public virtual ICollection<DayLocation> DayLocations { get; set; }
-        public virtual Trip Trip { get; set; }
+        public string name { get; set; }
+        public string gender { get; set; }
+        public Nullable<System.DateTime> birthday { get; set; }
+        public string enname { get; set; }
+        public string passport { get; set; }
     }
 }

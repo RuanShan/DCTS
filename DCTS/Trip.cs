@@ -25,6 +25,9 @@ namespace DCTS
         public string memo { get; set; }
         public int days { get; set; }
         public Nullable<System.DateTime> word_created_at { get; set; }
+        public int customer_id { get; set; }
+        public Nullable<System.DateTime> start_at { get; set; }
+        public Nullable<System.DateTime> end_at { get; set; }
     
         public virtual ICollection<DayLocation> DayLocations { get; set; }
         public virtual ICollection<TripDay> TripDays { get; set; }

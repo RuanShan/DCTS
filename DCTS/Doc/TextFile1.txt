@@ -67,6 +67,32 @@ CREATE TABLE `DayLocations` (
   CONSTRAINT `fk_day_id` FOREIGN KEY (`day_id`) REFERENCES `TripDays` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 
+CREATE TABLE `CustomerTrips` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_id` int(11) NOT NULL DEFAULT '0',
+  `title` varchar(1024) NOT NULL DEFAULT '',
+  `memo` varchar(1024) DEFAULT NULL,
+  `days` int(11) NOT NULL DEFAULT '0',
+  `word_created_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+关于表关系
+=======================================
+Customers  客户， 客户有多个行程，
+     CustomerTrips
+Trips  行程，一个行程可能有多个客户
+
+行程概览：
+天| 日期           | 城市        | 每日简略内容  | 住宿
+1 | 2016/11/25     | 大连-罗马   | 1.什么地方    | 飞机
+
+每个国家会有个封面，每个路书，应该有个全程示意图。
+
+详细行程的显示无法仅仅使用每天行程作为每一项, 
+比如, 仅仅有景点浏览开始时间,没有离开酒店的出发时间.
+或者何时去机场,火车站等.这应该是一个自定义项  时间||活动//时间||活动
 
 
 关于图片
@@ -97,3 +123,5 @@ https://msdn.microsoft.com/en-us/data/jj574232
 =======================================
  change any unsigned columns in mysql to signed. EF doesn't support unsigned
 http://stackoverflow.com/questions/22138579/ef6mysql-error-inserting-2-related-objects-in-a-single-savechanges
+
+

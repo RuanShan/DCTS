@@ -22,6 +22,7 @@ namespace DCTS
         public int day_id { get; set; }
         public int trip_id { get; set; }
         public int location_id { get; set; }
+        public Nullable<System.DateTime> start_at { get; set; }
     
         public virtual ComboLocation ComboLocation { get; set; }
         public virtual Trip Trip { get; set; }
