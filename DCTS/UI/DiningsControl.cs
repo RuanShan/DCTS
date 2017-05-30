@@ -15,6 +15,10 @@ using MySql.Data.MySqlClient;
 using System.IO;
 using DCTS.Uti;
 using DCTS.Bus;
+using NPOI.XWPF.UserModel;
+using NPOI.OpenXmlFormats.Wordprocessing;
+using NPOI.OpenXmlFormats.Dml.WordProcessing;
+using NPOI.OpenXmlFormats.Dml;
 
 namespace DCTS.UI
 {
@@ -474,6 +478,95 @@ namespace DCTS.UI
                 }
             }
         }
+
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            // BT1();
+            {
+                newster();
+                return;
+
+
+                MessageBox.Show("ok");
+
+            }
+
+
+        }
+
+        private void newster()
+        {
+            //图片位置
+            String m_PicPath = "..\\..\\..\\pic\\";
+            m_PicPath = "C:\\pic\\";
+
+            FileStream gfs = null;
+            MemoryStream ms = new MemoryStream();
+            XWPFDocument m_Docx = new XWPFDocument();
+            //页面设置
+            //A4:W=11906,h=16838
+            //CT_SectPr m_SectPr = m_Docx.Document.body.AddNewSectPr();
+            m_Docx.Document.body.sectPr = new CT_SectPr();
+            CT_SectPr m_SectPr = m_Docx.Document.body.sectPr;
+            //页面设置A4纵向
+            m_SectPr.pgSz.h = (ulong)16838;
+            m_SectPr.pgSz.w = (ulong)11906;
+            XWPFParagraph gp = m_Docx.CreateParagraph();
+            // gp.GetCTPPr().AddNewJc().val = ST_Jc.center; //水平居中
+            XWPFRun gr = gp.CreateRun();
+            gr.GetCTR().AddNewRPr().AddNewRFonts().ascii = "黑体";
+            gr.GetCTR().AddNewRPr().AddNewRFonts().eastAsia = "黑体";
+            gr.GetCTR().AddNewRPr().AddNewRFonts().hint = ST_Hint.eastAsia;
+            gr.GetCTR().AddNewRPr().AddNewSz().val = (ulong)44;//2号字体
+            gr.GetCTR().AddNewRPr().AddNewSzCs().val = (ulong)44;
+            gr.GetCTR().AddNewRPr().AddNewB().val = true; //加粗
+            gr.GetCTR().AddNewRPr().AddNewColor().val = "red";//字体颜色
+            gr.SetText("NPOI创建Word2007Docx");
+            gp = m_Docx.CreateParagraph();
+            ////创建表
+            XWPFTable table = m_Docx.CreateTable(1, 4);//创建一行4列表
+            CT_Row m_NewRow = new CT_Row();//创建1行
+            XWPFTableRow m_Row = new XWPFTableRow(m_NewRow, table);
+            table.AddRow(m_Row); //必须要！！！
+            XWPFTableCell cell = m_Row.CreateCell();//创建单元格，也创建了一个CT_P
+
+            //表插入图片
+            m_NewRow = new CT_Row();
+            m_Row = new XWPFTableRow(m_NewRow, table);
+            table.AddRow(m_Row);
+            gp = cell.GetParagraph(cell.GetCTTc().GetPList()[0]);
+            gr = gp.CreateRun();//创建run
+            gfs = new FileStream(m_PicPath + "1.jpg", FileMode.Open, FileAccess.Read);//读取图片文件
+            gr.AddPicture(gfs, (int)PictureType.PNG, "1.jpg", 500000, 500000);//插入图片
+            gfs.Close();
+            cell = m_Row.CreateCell();//第2单元格
+
+            m_Docx.Write(ms);
+            ms.Flush();
+            SaveToFile(ms, Path.GetPathRoot(Directory.GetCurrentDirectory()) + "\\NPOI.docx");
+
+
+
+        }
+
+        #region  好用 保存word
+        static void SaveToFile(MemoryStream ms, string fileName)
+        {
+            using (FileStream fs = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+            {
+                byte[] data = ms.ToArray();
+
+                fs.Write(data, 0, data.Length);
+                fs.Flush();
+                data = null;
+            }
+        }
+        #endregion
+
+
+
 
     }
 }

@@ -18,20 +18,20 @@ namespace DCTS
     {
         TripsManagementControl tripsManagementControl;
         AboutBox aboutbox;
-        
+
         public MainForm()
         {
             InitializeComponent();
             aboutbox = new AboutBox();
         }
- 
+
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            
+
         }
 
-       
+
 
         private void tripsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -57,7 +57,7 @@ namespace DCTS
             }
         }
 
-    
+
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
 
@@ -102,7 +102,7 @@ namespace DCTS
                 if (form.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
                 {
                 }
-             
+
             }
             catch (Exception err)
             {
@@ -110,7 +110,25 @@ namespace DCTS
             }
         }
 
-      
+        private void 导入图片信息ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+
+            try
+            {
+                var form = new ImportImage();
+                if (form.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
+                {
+                }
+
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.ToString());
+            }
+        }
+
+
 
 
     }
