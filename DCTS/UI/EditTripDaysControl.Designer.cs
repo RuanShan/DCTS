@@ -248,7 +248,7 @@
             this.pageTitleLabel.Name = "pageTitleLabel";
             this.pageTitleLabel.Size = new System.Drawing.Size(96, 28);
             this.pageTitleLabel.TabIndex = 15;
-            this.pageTitleLabel.Text = "编辑行程";
+            this.pageTitleLabel.Text = "编辑模板";
             this.pageTitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // backButton
@@ -258,7 +258,7 @@
             this.backButton.Name = "backButton";
             this.backButton.Size = new System.Drawing.Size(100, 23);
             this.backButton.TabIndex = 16;
-            this.backButton.Text = "返回行程列表";
+            this.backButton.Text = "返回模板列表";
             this.backButton.UseVisualStyleBackColor = true;
             this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 

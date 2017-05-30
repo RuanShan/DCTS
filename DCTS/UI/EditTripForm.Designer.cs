@@ -87,7 +87,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(589, 41);
             this.label1.TabIndex = 7;
-            this.label1.Text = "编辑行程";
+            this.label1.Text = "编辑模板";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // errorProvider1
@@ -127,7 +127,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.tripFormControl1);
             this.Name = "EditTripForm";
-            this.Text = "编辑行程";
+            this.Text = "编辑模板";
             this.Load += new System.EventHandler(this.EditTripForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);

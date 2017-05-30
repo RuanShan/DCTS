@@ -68,7 +68,7 @@ namespace DCTS.UI
 
         public void InitializeDayListBox(int day = 0, int selectLocationPosition = 0)
         {
-            this.pageTitleLabel.Text = string.Format("编辑行程<{0}>", Model.title);
+            this.pageTitleLabel.Text = string.Format("编辑模板<{0}>", Model.title);
             //List<MockEntity> list = new List<MockEntity>();
             //for (int i = 1; i <= Model.days; i++)
             //{
@@ -152,7 +152,7 @@ namespace DCTS.UI
             var tripDay = GetSelectedTripDay();
             if (tripDay != null)
             {
-                if (MessageHelper.DeleteConfirm(string.Format("确定删除<第{0}天>的行程吗？", tripDay.day)))
+                if (MessageHelper.DeleteConfirm(string.Format("确定删除<第{0}天>的模板吗？", tripDay.day)))
                 {
                     TripBusiness.DeleteDay(tripDay.id);
                     InitializeDataSource(tripDay.day - 1);

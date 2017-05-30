@@ -50,7 +50,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(576, 41);
             this.label1.TabIndex = 0;
-            this.label1.Text = "新建行程";
+            this.label1.Text = "新建模板";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label2
@@ -147,7 +147,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "NewTripForm";
-            this.Text = "新建行程";
+            this.Text = "新建模板";
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.daysNumericUpDown)).EndInit();
             this.ResumeLayout(false);

@@ -93,7 +93,7 @@ namespace DCTS.UI
             {
                 var row = tripDataGridView.Rows[e.RowIndex];
                 var trip = row.DataBoundItem as Trip;
-                string msg = string.Format("确定删除行程<{0}>", trip.title);
+                string msg = string.Format("确定删除模板<{0}>", trip.title);
 
                 if (MessageHelper.DeleteConfirm(msg))
                 {

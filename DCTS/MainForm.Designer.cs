@@ -178,7 +178,7 @@
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.menuStrip2);
             this.Name = "MainForm";
-            this.Text = "深度定制行程管理系统";
+            this.Text = "深度定制管理系统";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip2.ResumeLayout(false);

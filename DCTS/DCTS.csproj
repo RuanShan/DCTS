@@ -150,6 +150,9 @@
       <DependentUpon>Pager.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomComponents\SortableBindingList.cs" />
+    <Compile Include="Customer.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DayLocation.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
