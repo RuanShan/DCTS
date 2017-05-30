@@ -19,6 +19,8 @@
         <AssociationConnector Association="DctsModel.dayId" />
         <AssociationConnector Association="DctsModel.tripdays1" />
         <EntityTypeShape EntityType="DctsModel.Customer" Width="1.5" PointX="9.875" PointY="9.5" />
+        <EntityTypeShape EntityType="DctsModel.LocationImage" Width="1.5" PointX="10.5" PointY="0.75" />
+        <AssociationConnector Association="DctsModel.fk_location" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

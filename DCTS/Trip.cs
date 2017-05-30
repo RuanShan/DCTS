@@ -28,6 +28,7 @@ namespace DCTS
         public int customer_id { get; set; }
         public Nullable<System.DateTime> start_at { get; set; }
         public Nullable<System.DateTime> end_at { get; set; }
+        public int cover_id { get; set; }
     
         public virtual ICollection<DayLocation> DayLocations { get; set; }
         public virtual ICollection<TripDay> TripDays { get; set; }

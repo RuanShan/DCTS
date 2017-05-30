@@ -169,6 +169,9 @@
     <Compile Include="Hotel.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="LocationImage.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Nation.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -188,6 +191,24 @@
       <DependentUpon>ChooseLocaltionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\CommandRequest.cs" />
+    <Compile Include="UI\DayLocationFormControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\DayLocationFormControl.Designer.cs">
+      <DependentUpon>DayLocationFormControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\TripDayFormControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\TripDayFormControl.Designer.cs">
+      <DependentUpon>TripDayFormControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\CustomerTripListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\CustomerTripListControl.Designer.cs">
+      <DependentUpon>CustomerTripListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\ImportLocationExcel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -384,6 +405,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ChooseLocaltionForm.resx">
       <DependentUpon>ChooseLocaltionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\DayLocationFormControl.resx">
+      <DependentUpon>DayLocationFormControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\TripDayFormControl.resx">
+      <DependentUpon>TripDayFormControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\CustomerTripListControl.resx">
+      <DependentUpon>CustomerTripListControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ImportLocationExcel.resx">
       <DependentUpon>ImportLocationExcel.cs</DependentUpon>

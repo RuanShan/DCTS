@@ -18,6 +18,7 @@ namespace DCTS
         {
             this.img = "\"\"";
             this.DayLocations = new HashSet<DayLocation>();
+            this.LocationImages = new HashSet<LocationImage>();
         }
     
         public int id { get; set; }
@@ -49,5 +50,6 @@ namespace DCTS
         public string guidance { get; set; }
     
         public virtual ICollection<DayLocation> DayLocations { get; set; }
+        public virtual ICollection<LocationImage> LocationImages { get; set; }
     }
 }

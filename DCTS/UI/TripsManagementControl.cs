@@ -18,6 +18,8 @@ namespace DCTS.UI
         EditTripDaysControl editTripControl;
         DiningsControl dinningsControl;
         HotelListControl hotelControl;
+        CustomerTripListControl bookControl;
+
         public TripsManagementControl()
         {
             InitializeComponent();
@@ -122,6 +124,19 @@ namespace DCTS.UI
         private void TripsManagementControl_Resize(object sender, EventArgs e)
         {
             //this.tripsControl
+        }
+
+        private void bookToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (bookControl == null)
+            {
+                bookControl = new CustomerTripListControl();
+                bookControl.Dock = DockStyle.Fill;
+            }
+            this.bookControl.BeginActive();
+            this.mainPanel.Controls.Clear();
+            this.mainPanel.Controls.Add(bookControl);
+
         }
 
     }

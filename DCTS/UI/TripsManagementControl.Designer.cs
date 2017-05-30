@@ -29,7 +29,9 @@
         private void InitializeComponent()
         {
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.tripsControl = new DCTS.UI.TripListControl();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.bookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tripsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scenicsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dinningsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -37,8 +39,6 @@
             this.活动ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.bookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tripsControl = new DCTS.UI.TripListControl();
             this.mainPanel.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -55,6 +55,14 @@
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(691, 338);
             this.mainPanel.TabIndex = 2;
+            // 
+            // tripsControl
+            // 
+            this.tripsControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tripsControl.Location = new System.Drawing.Point(0, 0);
+            this.tripsControl.Name = "tripsControl";
+            this.tripsControl.Size = new System.Drawing.Size(691, 338);
+            this.tripsControl.TabIndex = 1;
             // 
             // menuStrip1
             // 
@@ -76,33 +84,40 @@
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // bookToolStripMenuItem
+            // 
+            this.bookToolStripMenuItem.Name = "bookToolStripMenuItem";
+            this.bookToolStripMenuItem.Size = new System.Drawing.Size(85, 29);
+            this.bookToolStripMenuItem.Text = "路书";
+            this.bookToolStripMenuItem.Click += new System.EventHandler(this.bookToolStripMenuItem_Click);
+            // 
             // tripsToolStripMenuItem
             // 
             this.tripsToolStripMenuItem.Checked = true;
             this.tripsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.tripsToolStripMenuItem.Name = "tripsToolStripMenuItem";
-            this.tripsToolStripMenuItem.Size = new System.Drawing.Size(85, 21);
+            this.tripsToolStripMenuItem.Size = new System.Drawing.Size(85, 29);
             this.tripsToolStripMenuItem.Text = "模板";
             this.tripsToolStripMenuItem.Click += new System.EventHandler(this.tripsToolStripMenuItem_Click);
             // 
             // scenicsToolStripMenuItem
             // 
             this.scenicsToolStripMenuItem.Name = "scenicsToolStripMenuItem";
-            this.scenicsToolStripMenuItem.Size = new System.Drawing.Size(85, 21);
+            this.scenicsToolStripMenuItem.Size = new System.Drawing.Size(85, 29);
             this.scenicsToolStripMenuItem.Text = "景点";
             this.scenicsToolStripMenuItem.Click += new System.EventHandler(this.scenicsToolStripMenuItem_Click);
             // 
             // dinningsToolStripMenuItem
             // 
             this.dinningsToolStripMenuItem.Name = "dinningsToolStripMenuItem";
-            this.dinningsToolStripMenuItem.Size = new System.Drawing.Size(85, 21);
+            this.dinningsToolStripMenuItem.Size = new System.Drawing.Size(85, 29);
             this.dinningsToolStripMenuItem.Text = "餐厅";
             this.dinningsToolStripMenuItem.Click += new System.EventHandler(this.dinningsToolStripMenuItem_Click);
             // 
             // hotelsToolStripMenuItem
             // 
             this.hotelsToolStripMenuItem.Name = "hotelsToolStripMenuItem";
-            this.hotelsToolStripMenuItem.Size = new System.Drawing.Size(85, 21);
+            this.hotelsToolStripMenuItem.Size = new System.Drawing.Size(85, 29);
             this.hotelsToolStripMenuItem.Text = "住宿";
             this.hotelsToolStripMenuItem.Click += new System.EventHandler(this.hotelsToolStripMenuItem_Click);
             // 
@@ -110,7 +125,7 @@
             // 
             this.活动ToolStripMenuItem.Enabled = false;
             this.活动ToolStripMenuItem.Name = "活动ToolStripMenuItem";
-            this.活动ToolStripMenuItem.Size = new System.Drawing.Size(85, 21);
+            this.活动ToolStripMenuItem.Size = new System.Drawing.Size(85, 29);
             this.活动ToolStripMenuItem.Text = "活动";
             // 
             // statusStrip1
@@ -129,21 +144,6 @@
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(44, 17);
             this.toolStripStatusLabel1.Text = "状态条";
             this.toolStripStatusLabel1.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
-            // 
-            // bookToolStripMenuItem
-            // 
-            this.bookToolStripMenuItem.Enabled = false;
-            this.bookToolStripMenuItem.Name = "bookToolStripMenuItem";
-            this.bookToolStripMenuItem.Size = new System.Drawing.Size(85, 21);
-            this.bookToolStripMenuItem.Text = "路书";
-            // 
-            // tripsControl
-            // 
-            this.tripsControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tripsControl.Location = new System.Drawing.Point(0, 0);
-            this.tripsControl.Name = "tripsControl";
-            this.tripsControl.Size = new System.Drawing.Size(691, 338);
-            this.tripsControl.TabIndex = 1;
             // 
             // TripsManagementControl
             // 

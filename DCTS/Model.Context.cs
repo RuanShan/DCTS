@@ -35,5 +35,6 @@ namespace DCTS
         public DbSet<DayLocation> DayLocations { get; set; }
         public DbSet<TripDay> TripDays { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<LocationImage> LocationImages { get; set; }
     }
 }
