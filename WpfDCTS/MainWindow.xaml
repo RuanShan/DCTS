@@ -8,7 +8,7 @@
             <ColumnDefinition Width="400*"/>
         </Grid.ColumnDefinitions>
         <Menu HorizontalAlignment="Left" Height="44" VerticalAlignment="Top" Width="517" Grid.ColumnSpan="2">
-            <MenuItem Header="行程"/>
+            <MenuItem Header="模板"/>
             <MenuItem Header="景點"/>
         </Menu>
         <ToolBar HorizontalAlignment="Left" Margin="0,44,0,0" VerticalAlignment="Top" Height="178" Width="76"/>

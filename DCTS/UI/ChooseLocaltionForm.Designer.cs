@@ -268,7 +268,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.groupBox1);
             this.Name = "ChooseLocaltionForm";
-            this.Text = "请选择行程活动";
+            this.Text = "请选择活动";
             this.Load += new System.EventHandler(this.ChooseLocaltionForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);

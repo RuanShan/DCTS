@@ -82,7 +82,7 @@
             this.tripsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.tripsToolStripMenuItem.Name = "tripsToolStripMenuItem";
             this.tripsToolStripMenuItem.Size = new System.Drawing.Size(85, 21);
-            this.tripsToolStripMenuItem.Text = "行程";
+            this.tripsToolStripMenuItem.Text = "模板";
             this.tripsToolStripMenuItem.Click += new System.EventHandler(this.tripsToolStripMenuItem_Click);
             // 
             // scenicsToolStripMenuItem
