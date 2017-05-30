@@ -17,6 +17,8 @@ using DCTS.Uti;
 using DCTS.Bus;
 using NPOI.XWPF.UserModel;
 using NPOI.OpenXmlFormats.Wordprocessing;
+using NPOI.OpenXmlFormats.Dml.WordProcessing;
+using NPOI.OpenXmlFormats.Dml;
 
 namespace DCTS.UI
 {
@@ -476,141 +478,80 @@ namespace DCTS.UI
                 }
             }
         }
-        #region 下载word
+
 
         private void button1_Click(object sender, EventArgs e)
         {
+
+            // BT1();
+            {
+                newster();
+                return;
+
+
+                MessageBox.Show("ok");
+
+            }
+
+
+        }
+
+        private void newster()
+        {
+            //图片位置
+            String m_PicPath = "..\\..\\..\\pic\\";
+            m_PicPath = "C:\\pic\\";
+
+            FileStream gfs = null;
             MemoryStream ms = new MemoryStream();
             XWPFDocument m_Docx = new XWPFDocument();
-            m_Docx = CreatDocxTable();
+            //页面设置
+            //A4:W=11906,h=16838
+            //CT_SectPr m_SectPr = m_Docx.Document.body.AddNewSectPr();
+            m_Docx.Document.body.sectPr = new CT_SectPr();
+            CT_SectPr m_SectPr = m_Docx.Document.body.sectPr;
+            //页面设置A4纵向
+            m_SectPr.pgSz.h = (ulong)16838;
+            m_SectPr.pgSz.w = (ulong)11906;
+            XWPFParagraph gp = m_Docx.CreateParagraph();
+            // gp.GetCTPPr().AddNewJc().val = ST_Jc.center; //水平居中
+            XWPFRun gr = gp.CreateRun();
+            gr.GetCTR().AddNewRPr().AddNewRFonts().ascii = "黑体";
+            gr.GetCTR().AddNewRPr().AddNewRFonts().eastAsia = "黑体";
+            gr.GetCTR().AddNewRPr().AddNewRFonts().hint = ST_Hint.eastAsia;
+            gr.GetCTR().AddNewRPr().AddNewSz().val = (ulong)44;//2号字体
+            gr.GetCTR().AddNewRPr().AddNewSzCs().val = (ulong)44;
+            gr.GetCTR().AddNewRPr().AddNewB().val = true; //加粗
+            gr.GetCTR().AddNewRPr().AddNewColor().val = "red";//字体颜色
+            gr.SetText("NPOI创建Word2007Docx");
+            gp = m_Docx.CreateParagraph();
+            ////创建表
+            XWPFTable table = m_Docx.CreateTable(1, 4);//创建一行4列表
+            CT_Row m_NewRow = new CT_Row();//创建1行
+            XWPFTableRow m_Row = new XWPFTableRow(m_NewRow, table);
+            table.AddRow(m_Row); //必须要！！！
+            XWPFTableCell cell = m_Row.CreateCell();//创建单元格，也创建了一个CT_P
+
+            //表插入图片
+            m_NewRow = new CT_Row();
+            m_Row = new XWPFTableRow(m_NewRow, table);
+            table.AddRow(m_Row);
+            gp = cell.GetParagraph(cell.GetCTTc().GetPList()[0]);
+            gr = gp.CreateRun();//创建run
+            gfs = new FileStream(m_PicPath + "1.jpg", FileMode.Open, FileAccess.Read);//读取图片文件
+            gr.AddPicture(gfs, (int)PictureType.PNG, "1.jpg", 500000, 500000);//插入图片
+            gfs.Close();
+            cell = m_Row.CreateCell();//第2单元格
+
             m_Docx.Write(ms);
             ms.Flush();
-            SaveToFile(ms, "C:\\test.docx");
-        }
-        protected XWPFDocument CreatDocxTable()
-        {
-            XWPFDocument m_Docx = new XWPFDocument();
-            XWPFParagraph p0 = m_Docx.CreateParagraph();
-            XWPFRun r0 = p0.CreateRun();
-            r0.SetText("DOCX表");
+            SaveToFile(ms, Path.GetPathRoot(Directory.GetCurrentDirectory()) + "\\NPOI.docx");
 
-            XWPFTable table = m_Docx.CreateTable(1, 3);//创建一行3列表
-            table.GetRow(0).GetCell(0).SetText("111");
-            table.GetRow(0).GetCell(1).SetText("222");
-            table.GetRow(0).GetCell(2).SetText("333");
 
-            XWPFTableRow m_Row = table.CreateRow();//创建一行
-            m_Row = table.CreateRow();//创建一行
-            m_Row.GetCell(0).SetText("211");
 
-            //合并单元格
-            m_Row = table.InsertNewTableRow(0);//表头插入一行
-            XWPFTableCell cell = m_Row.CreateCell();//创建一个单元格,创建单元格时就创建了一个CT_P
-            CT_Tc cttc = cell.GetCTTc();
-            CT_TcPr ctPr = cttc.AddNewTcPr();
-           //   ctPr.gridSpan.val = "3";//合并3列
-            cttc.GetPList()[0].AddNewPPr().AddNewJc().val = ST_Jc.center;
-            cttc.GetPList()[0].AddNewR().AddNewT().Value = "abc";
-
-            XWPFTableRow td3 = table.InsertNewTableRow(table.Rows.Count - 1);//插入行
-            cell = td3.CreateCell();
-            cttc = cell.GetCTTc();
-            ctPr = cttc.AddNewTcPr();
-            //ctPr.gridSpan.val = "3";
-            cttc.GetPList()[0].AddNewPPr().AddNewJc().val = ST_Jc.center;
-            cttc.GetPList()[0].AddNewR().AddNewT().Value = "qqq";
-
-            //表增加行，合并列
-            CT_Row m_NewRow = new CT_Row();
-            m_Row = new XWPFTableRow(m_NewRow, table);
-            table.AddRow(m_Row); //必须要！！！
-            cell = m_Row.CreateCell();
-            cttc = cell.GetCTTc();
-            ctPr = cttc.AddNewTcPr();
-           // ctPr.gridSpan.val = "3";
-            cttc.GetPList()[0].AddNewPPr().AddNewJc().val = ST_Jc.center;
-            cttc.GetPList()[0].AddNewR().AddNewT().Value = "sss";
-
-            //表未增加行，合并2列，合并2行
-            //1行
-            m_NewRow = new CT_Row();
-            m_Row = new XWPFTableRow(m_NewRow, table);
-            table.AddRow(m_Row);
-            cell = m_Row.CreateCell();
-            cttc = cell.GetCTTc();
-            ctPr = cttc.AddNewTcPr();
-           // ctPr.gridSpan.val = "2";
-            ctPr.AddNewVMerge().val = ST_Merge.restart;//合并行
-            ctPr.AddNewVAlign().val = ST_VerticalJc.center;//垂直居中
-            cttc.GetPList()[0].AddNewPPr().AddNewJc().val = ST_Jc.center;
-            cttc.GetPList()[0].AddNewR().AddNewT().Value = "xxx";
-            cell = m_Row.CreateCell();
-            cell.SetText("ddd");
-            //2行，多行合并类似
-            m_NewRow = new CT_Row();
-            m_Row = new XWPFTableRow(m_NewRow, table);
-            table.AddRow(m_Row);
-            cell = m_Row.CreateCell();
-            cttc = cell.GetCTTc();
-            ctPr = cttc.AddNewTcPr();
-          //  ctPr.gridSpan.val = "2";
-            ctPr.AddNewVMerge().val = ST_Merge.@continue;//合并行
-            cell = m_Row.CreateCell();
-            cell.SetText("kkk");
-            ////3行
-            //m_NewRow = new CT_Row();
-            //m_Row = new XWPFTableRow(m_NewRow, table);
-            //table.AddRow(m_Row);
-            //cell = m_Row.CreateCell();
-            //cttc = cell.GetCTTc();
-            //ctPr = cttc.AddNewTcPr();
-            //ctPr.gridSpan.val = "2";
-            //ctPr.AddNewVMerge().val = ST_Merge.@continue;
-            //cell = m_Row.CreateCell();
-            //cell.SetText("hhh");
-
-            return m_Docx;
         }
 
-        /// <summary>
-        /// 创建列
-        /// </summary>
-        /// <param name="row"></param>
-        /// <returns></returns>
-        private XWPFTableCell CreateCell(XWPFTableRow row)
-        {
-            XWPFTableCell cell = row.CreateCell();
-            CT_Tc cttc = cell.GetCTTc();
-            CT_TcPr ctpr = cttc.AddNewTcPr();
-
-            cttc.GetPList()[0].AddNewPPr().AddNewJc().val = ST_Jc.center;//水平居中
-
-            ctpr.AddNewVAlign().val = ST_VerticalJc.center;//垂直居中
-
-            ctpr.tcW = new CT_TblWidth();
-            ctpr.tcW.w = "1200";//默认列宽
-            ctpr.tcW.type = ST_TblWidth.dxa;
-
-            return cell;
-        }
-
-        /// <summary>
-        /// 创建行
-        /// </summary>
-        /// <param name="table"></param>
-        /// <returns></returns>
-        private XWPFTableRow CreateRow(XWPFTable table)
-        {
-            CT_Row m_NewRow = new CT_Row();
-            XWPFTableRow m_row = new XWPFTableRow(m_NewRow, table);
-            m_row.GetCTRow().AddNewTrPr().AddNewTrHeight().val = (ulong)426;
-            table.AddRow(m_row);
-
-            return m_row;
-        }
-
-
-
+        #region  好用 保存word
         static void SaveToFile(MemoryStream ms, string fileName)
         {
             using (FileStream fs = new FileStream(fileName, FileMode.Create, FileAccess.Write))
@@ -622,7 +563,10 @@ namespace DCTS.UI
                 data = null;
             }
         }
-
         #endregion
+
+
+
+
     }
 }

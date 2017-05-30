@@ -45,23 +45,30 @@ namespace DCTS.CustomComponents
         private void importButton_Click(object sender, EventArgs e)
         {
 
-            //得到APP.config字符串
-            var myconn = new MySqlConnection(DBConfiguration.GetConnectionString());
-            string con = myconn.ConnectionString;
-            //用户ID
-            string[] temp1 = System.Text.RegularExpressions.Regex.Split(con, "user id=");
-            string[] temp2 = System.Text.RegularExpressions.Regex.Split(temp1[1], ";");
-            //数据库名称
-            string[] temp3 = System.Text.RegularExpressions.Regex.Split(con, "database=");
-            string[] temp4 = System.Text.RegularExpressions.Regex.Split(temp3[1], ";");
+            try
+            {
+                DBConfiguration BusinessHelp = new DBConfiguration();
+                Dictionary<string, string> setting = DBConfiguration.ConnectionSettings();
 
-            String db = ConfigurationManager.AppSettings["DB_Public_Disk_Path"];
-            //string cmd = @"mysql -u root -p123456 dcts_dev <d:\a.sql";
-            string cmd = @"mysql -u root dcts_dev <C:\\Program Files\\MySQL\\20170510.sql";
-            cmd = @"mysql -u " + temp2[0] + " " + temp4[0] + " <" + @db;
-            string output = "";
-            RunCmd(cmd, out output);
-            MessageBox.Show("导入成功");
+                //string cmd = @"mysql -u root -p123456 dcts_dev <d:\a.sql";
+                string cmd = @"mysql -u root dcts_dev <C:\\Program Files\\MySQL\\20170510.sql";
+                string db = AppDomain.CurrentDomain.BaseDirectory + "initialize.sql";
+                string cmdO = @"C:&cd " + pathTextBox.Text + "\\";
+                cmd = @"mysql -u " + setting["user id"] + " " + setting["database"] + " <" + @db;
+
+                cmd = cmdO + cmd;
+
+                string output = "";
+                RunCmd(cmd, out output);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("异常" + ex);
+                return;
+
+                throw ex;
+            } MessageBox.Show("导入成功");
         }
 
         private bool NewMethod(BackgroundWorker worker, DoWorkEventArgs e)
@@ -135,5 +142,19 @@ namespace DCTS.CustomComponents
 
 
         #endregion
+
+        private void openFileBtton_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
+            dialog.Description = "请选择文件夹路径";
+
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                this.pathTextBox.Text = dialog.SelectedPath;
+            }
+
+
+        }
     }
 }
