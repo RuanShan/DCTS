@@ -303,6 +303,12 @@
     <Compile Include="UI\ImportMysql.Designer.cs">
       <DependentUpon>ImportMysql.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\ImportImage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ImportImage.Designer.cs">
+      <DependentUpon>ImportImage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Uti\EFIntercepterLogging.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -450,6 +456,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ImportMysql.resx">
       <DependentUpon>ImportMysql.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ImportImage.resx">
+      <DependentUpon>ImportImage.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
