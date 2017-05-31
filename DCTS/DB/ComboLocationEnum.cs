@@ -11,9 +11,9 @@ namespace DCTS.DB
     {   // 空白页，   景点，   餐厅，  住宿，  国家， 火车，飞机（机票说明）,
         Blank = 0, Scenic = 1, Dining = 5, Hotel = 9, Country = 10, Flight = 16, Train = 17,
         //  一封信，目录， 出行必备, Google,
-        Letter = 101, Index = 102, Preparation = 103, Google = 110,   
+        Letter = 101, Index = 102, Preparation = 103, Google = 126,   
         //  线上查询说明，机票说明，酒店说明，租车说明，交通及活动票，退税
-        DeepOnline=120, AirList=121, HotelList=122, CarList=123, TrainList=124, TaxReturn = 181
+        DeepOnline=120, AirList=121, HotelList=122, CarList=123, TrainList=125, TaxReturn = 181
 
          
     }
