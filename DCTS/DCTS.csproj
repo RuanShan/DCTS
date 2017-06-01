@@ -552,7 +552,9 @@
     <Content Include="Doc\TextFile1.txt" />
     <Content Include="app128.ico" />
     <Content Include="Doc\fix.txt" />
-    <Content Include="Doc\upgrade.sql" />
+    <Content Include="Sql\setup.sql" />
+    <Content Include="Sql\upgrade.sql" />
+    <Content Include="Sql\seed.sql" />
     <None Include="Resources\Undo_small.png" />
     <None Include="Resources\Save_small.png" />
     <None Include="Resources\Refresh_small.png" />
@@ -563,9 +565,7 @@
     <None Include="Resources\FirstRecord_small.png" />
     <None Include="Resources\Cancel2_small.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Sql\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <PropertyGroup>
