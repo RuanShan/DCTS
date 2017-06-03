@@ -20,6 +20,8 @@ using NPOI.OpenXmlFormats.Wordprocessing;
 using NPOI.OpenXmlFormats.Dml.WordProcessing;
 using NPOI.OpenXmlFormats.Dml;
 using System.Configuration;
+using ComLib.Models;
+using System.Reflection;
 
 namespace DCTS.UI
 {
@@ -486,9 +488,13 @@ namespace DCTS.UI
 
             // BT1();
             {
+                replace();
+                return;
+
 
                 //读取 word
                 string file = @"C:\mysteap\work_office\ProjectOut\RuanShanLvYou\data\06正文.docx";
+                file = @"C:\mysteap\work_office\ProjectOut\RuanShanLvYou\data\1.docx";
 
                 ReadWordText(file);
 
@@ -603,11 +609,13 @@ namespace DCTS.UI
                 using (FileStream file = new FileStream(fileName, FileMode.Open, FileAccess.Read))
                 {
                     document = new XWPFDocument(file);
+                    byte[] rsidr = document.Document.body.GetPArray(0).rsidR;
+
                 }
             }
             catch (Exception e)
             {
-               // LogHandler.LogWrite(string.Format("文件{0}打开失败，错误：{1}", new string[] { fileName, e.ToString() }));
+                // LogHandler.LogWrite(string.Format("文件{0}打开失败，错误：{1}", new string[] { fileName, e.ToString() }));
             }
             #endregion
 
@@ -659,20 +667,22 @@ namespace DCTS.UI
             #endregion
 
             #region 图片
-             
+
             if (CaptureWordImage == "true")
             {
                 sbFileText.AppendLine("Capture Image Begin");
                 foreach (XWPFPictureData pictureData in document.AllPictures)
                 {
-                  
+
                     string picExtName = pictureData.SuggestFileExtension();
                     string picFileName = pictureData.FileName;
                     byte[] picFileContent = pictureData.Data;
-                    //
-                  //  CaptureWordImageFileName = @"C:\mysteap\work_office\ProjectOut\RuanShanLvYou\data\1.doc";
 
-                   string picTempName = string.Format(CaptureWordImageFileName, new string[] { Guid.NewGuid().ToString() + "_" + picFileName + "." + picExtName });
+                    document.AddPictureData(picFileContent, 0);
+                    //
+                    //  CaptureWordImageFileName = @"C:\mysteap\work_office\ProjectOut\RuanShanLvYou\data\1.doc";
+
+                    string picTempName = string.Format(CaptureWordImageFileName, new string[] { Guid.NewGuid().ToString() + "_" + picFileName + "." + picExtName });
                     //
                     using (FileStream fs = new FileStream(picTempName, FileMode.Create, FileAccess.Write))
                     {
@@ -705,6 +715,69 @@ namespace DCTS.UI
 
         #endregion
 
+        #region 替换
+        private void replace()
+        {
+            string filePath = @"C:\mysteap\work_office\ProjectOut\RuanShanLvYou\data\1.docx";
 
+            // string filePath = "C:/Users/Jason/Desktop/模板.docx";
+            FileStream filestream = File.OpenRead(filePath);
+            XWPFDocument doc = new XWPFDocument(filestream);
+            foreach (XWPFTable table in doc.Tables)
+            {
+
+                //    var tables = doc.GetTable();
+                var tab1 = table;
+                string a = tab1.GetRow(0).GetCell(0).GetText();//验证是否读出数据
+                foreach (XWPFTableRow row in table.Rows)
+                {
+
+                    foreach (XWPFTableCell cell in row.GetTableCells())
+                    {
+                        if (cell.GetText() == "初始意大利")
+                        {
+                            cell.RemoveParagraph(0);
+                            cell.SetText("123");
+                        }
+                        // foreach (var row in tab1.GetRows())
+                        {
+                            // row.GetCell(1).SetText("试试看");//编辑每行第二列的值
+                            //if (row.GetCell(1) != null)
+                            //    row.GetCell(1).GetText().Replace("意大利", "0092");
+
+                        }
+                    }
+                }
+            }
+            foreach (XWPFParagraph paragraph in doc.Paragraphs)
+            {
+                if (paragraph.ParagraphText.Contains("意大利"))
+                {
+                    paragraph.ParagraphText.Replace("意大利", "zhongguo");
+                    //  cell.SetText("123");
+                }
+
+
+            }
+            MemoryStream ms = new MemoryStream();
+          
+            doc.Write(ms);
+            ms.Flush();
+            SaveToFile(ms, Path.GetPathRoot(Directory.GetCurrentDirectory()) + "\\NPOI.docx");
+
+            return;
+
+
+            //保存stream流，这里出现问题了
+
+            FileStream ss = File.Create(@"C:\Users\IBM_ADMIN\Desktop\blank.docx");
+            doc.Write(ss);
+            ss.Close();
+
+
+
+
+        }
+        #endregion
     }
 }
