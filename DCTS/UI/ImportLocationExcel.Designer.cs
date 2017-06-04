@@ -120,7 +120,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(458, 23);
             this.label2.TabIndex = 16;
-            this.label2.Text = "导入景点Excel数据";
+            this.label2.Text = "导入景点/餐厅/住宿Excel数据";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // progressMsgLabel
@@ -139,7 +139,7 @@
             this.progressBar1.Size = new System.Drawing.Size(409, 23);
             this.progressBar1.TabIndex = 14;
             // 
-            // ImportScenicExcel
+            // ImportLocationExcel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -155,11 +155,11 @@
             this.Controls.Add(this.progressBar1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "ImportScenicExcel";
+            this.Name = "ImportLocationExcel";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "景点Excel数据导入";
+            this.Text = "通用Excel数据导入";
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -124,12 +124,14 @@
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Bus\ComboLoactionBusiness.cs" />
+    <Compile Include="Bus\CustomerTripWordExporter.cs" />
     <Compile Include="Bus\TripWordExporterEx.cs" />
     <Compile Include="Bus\CSVStreamReader.cs" />
     <Compile Include="Bus\LocationExporter.cs" />
     <Compile Include="Bus\ScenicDbHelper.cs" />
     <Compile Include="Bus\TripBusiness.cs" />
     <Compile Include="Bus\TripWordExporter.cs" />
+    <Compile Include="Bus\WordTemplateHelper.cs" />
     <Compile Include="City.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -522,10 +524,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="templates\day-summary.docx" />
     <None Include="templates\dining-detail.docx" />
     <None Include="templates\hotel-detail.docx" />
     <None Include="templates\layout.docx" />
     <None Include="templates\scenic-detail.docx" />
+    <None Include="templates\trip-summary.docx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -557,6 +561,7 @@
     <Content Include="app128.ico" />
     <Content Include="Doc\fix.txt" />
     <Content Include="sql\setup.sql" />
+    <Content Include="sql\sample.txt" />
     <Content Include="sql\upgrade.sql" />
     <Content Include="sql\seed.sql" />
     <None Include="Resources\Undo_small.png" />

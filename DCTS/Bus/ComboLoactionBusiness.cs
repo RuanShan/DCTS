@@ -16,12 +16,17 @@ namespace DCTS.Bus
 
         public static List<ComboLocation> Paginate(ComboLocationEnum locationType, int currentPage = 1, int pageSize = 25, string nation = "", string city = "", string title = "")
         {
+            // 如果数据为0，分页控件，设置currentPage = 0; 这回导致下面查询异常
+            if (currentPage <= 0)
+            {
+                currentPage = 1;
+            }
             List<ComboLocation> list = new List<ComboLocation>();
 
             using (var ctx = new DctsEntities())
             {
 
-                var query = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Scenic);
+                var query = ctx.ComboLocations.Where(o => o.ltype == (int)locationType);
 
                 if (nation.Length > 0 )
                 {

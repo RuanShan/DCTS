@@ -185,7 +185,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(124, 50);
             this.label2.TabIndex = 6;
-            this.label2.Text = "模板列表";
+            this.label2.Text = "路书列表";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // downloadButton
@@ -208,7 +208,7 @@
             // 
             this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
             // 
-            // TripListControl
+            // CustomerTripListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -217,7 +217,7 @@
             this.Controls.Add(this.exportWordButton);
             this.Controls.Add(this.addTripButton);
             this.Controls.Add(this.tripDataGridView);
-            this.Name = "TripListControl";
+            this.Name = "CustomerTripListControl";
             this.Size = new System.Drawing.Size(882, 380);
             this.Load += new System.EventHandler(this.TripListControl_Load);
             this.Resize += new System.EventHandler(this.TripListControl_Resize);

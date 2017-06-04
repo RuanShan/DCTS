@@ -39,6 +39,7 @@
             this.活动ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.其他ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainPanel.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -75,7 +76,8 @@
             this.scenicsToolStripMenuItem,
             this.dinningsToolStripMenuItem,
             this.hotelsToolStripMenuItem,
-            this.活动ToolStripMenuItem});
+            this.活动ToolStripMenuItem,
+            this.其他ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(6, 12, 0, 2);
@@ -123,10 +125,9 @@
             // 
             // 活动ToolStripMenuItem
             // 
-            this.活动ToolStripMenuItem.Enabled = false;
             this.活动ToolStripMenuItem.Name = "活动ToolStripMenuItem";
             this.活动ToolStripMenuItem.Size = new System.Drawing.Size(85, 29);
-            this.活动ToolStripMenuItem.Text = "活动";
+            this.活动ToolStripMenuItem.Text = "国家";
             // 
             // statusStrip1
             // 
@@ -144,6 +145,12 @@
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(44, 17);
             this.toolStripStatusLabel1.Text = "状态条";
             this.toolStripStatusLabel1.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
+            // 
+            // 其他ToolStripMenuItem
+            // 
+            this.其他ToolStripMenuItem.Name = "其他ToolStripMenuItem";
+            this.其他ToolStripMenuItem.Size = new System.Drawing.Size(85, 29);
+            this.其他ToolStripMenuItem.Text = "其他";
             // 
             // TripsManagementControl
             // 
@@ -177,5 +184,6 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripMenuItem bookToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 其他ToolStripMenuItem;
     }
 }

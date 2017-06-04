@@ -20,6 +20,37 @@ namespace DCTS.DB
             }
         }
 
+        public static string WordBasePath
+        {
+            get
+            {
+                string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "data", "words");
+                CreateFolder(path);
+                return path;
+            }
+        }
+        public static string LocationWordBasePath(ComboLocation location)
+        {
+            ComboLocationEnum type = (ComboLocationEnum)location.ltype;
+            string path = Path.Combine(WordBasePath, "location_" + type.ToString().ToLower());
+            CreateFolder(path);
+            return path;
+        }
+
+        public static string LocationWordPath(ComboLocation location)
+        {
+
+            string basePath = LocationWordBasePath(location);
+            string folderPath = Path.Combine(basePath, (location.id / 1000 * 1000).ToString());
+
+            CreateFolder(folderPath);
+
+            string fullPath = Path.Combine(folderPath, location.title);
+
+            return fullPath;
+        }
+
+
         public static string ImageBasePath
         {
             get {
@@ -29,38 +60,19 @@ namespace DCTS.DB
             }
         }
 
-        public static string ScenicLocationImageBasePath
-        {
-            get {
-                string path = Path.Combine( ImageBasePath, "location_" + ComboLocationEnum.Scenic.ToString().ToLower());
-                CreateFolder(path);
-                return path;
-            }
-        }
 
-        public static string DiningLocationImageBasePath
+        public static string LocationImageBasePath(ComboLocation location)
         {
-            get
-            {
-                string path = Path.Combine(ImageBasePath, "location_" + ComboLocationEnum.Dining.ToString().ToLower());
-                CreateFolder(path);
-                return path;
-            }
-        }
-
-        public static string HotelLocationImageBasePath
-        {
-            get
-            {
-                string path = Path.Combine(ImageBasePath, "location_" + ComboLocationEnum.Hotel.ToString().ToLower());
-                CreateFolder(path);
-                return path;
-            }
+            ComboLocationEnum type = (ComboLocationEnum)location.ltype;
+            string path = Path.Combine(ImageBasePath, "location_" + type.ToString().ToLower());
+            CreateFolder(path);
+            return path;
         }
 
         public  static string LocationImagePath( ComboLocation location )
         {
-            string basePath = ScenicLocationImageBasePath;
+
+            string basePath = LocationImageBasePath(location);
             string folderPath = Path.Combine(basePath, (location.id / 1000 * 1000).ToString());
 
             CreateFolder(folderPath);
@@ -69,28 +81,8 @@ namespace DCTS.DB
 
             return fullPath;
         }
-        public static string LocationDiningImagePath(ComboLocation location)
-        {
-            string basePath = DiningLocationImageBasePath;
-            string folderPath = Path.Combine(basePath, (location.id / 1000 * 1000).ToString());
 
-            CreateFolder(folderPath);
 
-            string fullPath = Path.Combine(folderPath, location.img);
-
-            return fullPath;
-        }
-        public static string LocationHotelImagePath(ComboLocation location)
-        {
-            string basePath = HotelLocationImageBasePath;
-            string folderPath = Path.Combine(basePath, (location.id / 1000 * 1000).ToString());
-
-            CreateFolder(folderPath);
-
-            string fullPath = Path.Combine(folderPath, location.img);
-
-            return fullPath;
-        }
         public static string TripWordFolderPath(long tripId)
         {
             
@@ -122,40 +114,91 @@ namespace DCTS.DB
         public static string DinningDetailName = "dining-detail.docx";
         public static string ScenicDetailName = "scenic-detail.docx";
         public static string HotelDetailName = "hotel-detail.docx";
+        public static string TripSumaryName = "trip-summary.docx";
+        public static string DaySumaryName = "day-summary.docx";
+
 
         public static string LayoutRelativePath
         {
             get
             {
-                CreateFolder(TemplatePath);
                 string path = Path.Combine(TemplatePath, LayoutlName);
                 return path;
+            }
+        }
+        public static string TripSumaryRelativePath
+        {
+            get
+            {
+                return Path.Combine(TemplatePath, TripSumaryName);
+            }
+        }
+        public static string TripSumaryPath
+        {
+            get
+            {
+                return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, TripSumaryRelativePath);
+            }
+        }
+
+        public static string DaySumaryRelativePath
+        {
+            get
+            {
+                return Path.Combine(TemplatePath, DaySumaryName);
+             }
+        }
+
+        public static string DaySumaryPath
+        {
+            get
+            {
+                return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, DaySumaryRelativePath);
             }
         }
 
 
         public static string DinningDetailRelativePath { 
             get {
-                CreateFolder(TemplatePath);
-                string path = Path.Combine(TemplatePath, DinningDetailName);
-                return path;
-            } 
-        }
-        public static string ScenicDetailRelativePath { 
-            get {
-                CreateFolder(TemplatePath);
-                string path = Path.Combine(TemplatePath, ScenicDetailName);
-                return path;                 
-            } 
-        }
-        public static string HotelDetailRelativePath { 
-            get {
-                CreateFolder(TemplatePath);
-                string path = Path.Combine(TemplatePath, HotelDetailName); 
-                return path;                     
+                return Path.Combine(TemplatePath, DinningDetailName);
             } 
         }
 
+        public static string DinningDetailPath
+        {
+            get
+            {
+                return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, DinningDetailRelativePath);
+            }
+        }
+
+        public static string ScenicDetailRelativePath { 
+            get {
+                return Path.Combine(TemplatePath, ScenicDetailName);
+             } 
+        }
+
+        public static string ScenicDetailPath
+        {
+            get
+            {
+                return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ScenicDetailRelativePath);
+            }
+        }
+
+        public static string HotelDetailRelativePath { 
+            get {
+                return Path.Combine(TemplatePath, HotelDetailName); 
+            } 
+        }
+
+        public static string HotelDetailPath
+        {
+            get
+            {
+                return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, HotelDetailRelativePath);
+            }
+        }
 
         private static void CreateFolder( string path )
         {

@@ -70,6 +70,7 @@
           <Property Name="recommended_dishes" Type="varchar" MaxLength="1024" />
           <Property Name="tips" Type="varchar" MaxLength="1020" />
           <Property Name="guidance" Type="varchar" MaxLength="1020" />
+          <Property Name="word" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="Customers">
           <Key>
@@ -388,6 +389,7 @@
           <NavigationProperty Name="DayLocations" Relationship="DctsModel.locationId1" FromRole="ComboLocation" ToRole="DayLocation" />
           <Property Type="String" Name="guidance" MaxLength="1020" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="LocationImages" Relationship="DctsModel.fk_location" FromRole="ComboLocation" ToRole="LocationImage" />
+          <Property Type="String" Name="word" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="DayLocation">
           <Key>
@@ -618,6 +620,7 @@
           <EntitySetMapping Name="ComboLocations">
             <EntityTypeMapping TypeName="DctsModel.ComboLocation">
               <MappingFragment StoreEntitySet="ComboLocations">
+                <ScalarProperty Name="word" ColumnName="word" />
                 <ScalarProperty Name="guidance" ColumnName="guidance" />
                 <ScalarProperty Name="open_close_more" ColumnName="open_close_more" />
                 <ScalarProperty Name="tips" ColumnName="tips" />

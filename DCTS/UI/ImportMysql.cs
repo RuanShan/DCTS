@@ -5,7 +5,6 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.Entity.Validation;
-using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
@@ -15,8 +14,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ComLib;
-using ComLib.CsvParse;
 using DCTS.DB;
 using DCTS.Uti;
 using MySql.Data.MySqlClient;
@@ -48,7 +45,6 @@ namespace DCTS.CustomComponents
 
             try
             {
-                DBConfiguration BusinessHelp = new DBConfiguration();
                 Dictionary<string, string> setting = DBConfiguration.ConnectionSettings();
 
                 string sql = SqlPath.SetupSql;
@@ -57,8 +53,19 @@ namespace DCTS.CustomComponents
 
                 
 
-                string output = "";
-                RunCmd(cmd, out output);
+                using(MySqlConnection conn = new MySqlConnection( DBConfiguration.GetConnectionString() ))
+                {
+
+                    MySqlScript script = new MySqlScript(conn);
+
+                    script.Query = File.ReadAllText(sql);
+
+                    script.Execute();
+                }
+                
+
+                //string output = "";
+                //RunCmd(cmd, out output);
 
             }
             catch (Exception ex)

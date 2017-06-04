@@ -39,13 +39,13 @@
             this.导入住宿信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.importScenicExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.初始化ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.导入图片信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.初始化ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.entityDataSource = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.entityDataSource = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -88,11 +88,11 @@
             // 
             this.设置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.nationsToolStripMenuItem,
+            this.importScenicExcelToolStripMenuItem,
+            this.导入图片信息ToolStripMenuItem,
             this.导入餐厅信息ToolStripMenuItem,
             this.导入住宿信息ToolStripMenuItem,
             this.toolStripMenuItem1,
-            this.importScenicExcelToolStripMenuItem,
-            this.导入图片信息ToolStripMenuItem,
             this.初始化ToolStripMenuItem});
             this.设置ToolStripMenuItem.Name = "设置ToolStripMenuItem";
             this.设置ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
@@ -107,6 +107,7 @@
             // 
             // 导入餐厅信息ToolStripMenuItem
             // 
+            this.导入餐厅信息ToolStripMenuItem.Enabled = false;
             this.导入餐厅信息ToolStripMenuItem.Name = "导入餐厅信息ToolStripMenuItem";
             this.导入餐厅信息ToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.导入餐厅信息ToolStripMenuItem.Text = "导入餐厅信息";
@@ -114,6 +115,7 @@
             // 
             // 导入住宿信息ToolStripMenuItem
             // 
+            this.导入住宿信息ToolStripMenuItem.Enabled = false;
             this.导入住宿信息ToolStripMenuItem.Name = "导入住宿信息ToolStripMenuItem";
             this.导入住宿信息ToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.导入住宿信息ToolStripMenuItem.Text = "导入住宿信息";
@@ -121,6 +123,7 @@
             // 
             // toolStripMenuItem1
             // 
+            this.toolStripMenuItem1.Enabled = false;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(153, 22);
             this.toolStripMenuItem1.Text = "导入景点信息";
@@ -133,19 +136,19 @@
             this.importScenicExcelToolStripMenuItem.Text = "导入Excel数据";
             this.importScenicExcelToolStripMenuItem.Click += new System.EventHandler(this.importScenicExcelToolStripMenuItem_Click);
             // 
-            // 初始化ToolStripMenuItem
-            // 
-            this.初始化ToolStripMenuItem.Name = "初始化ToolStripMenuItem";
-            this.初始化ToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
-            this.初始化ToolStripMenuItem.Text = "系统初始化";
-            this.初始化ToolStripMenuItem.Click += new System.EventHandler(this.初始化ToolStripMenuItem_Click);
-            // 
             // 导入图片信息ToolStripMenuItem
             // 
             this.导入图片信息ToolStripMenuItem.Name = "导入图片信息ToolStripMenuItem";
             this.导入图片信息ToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.导入图片信息ToolStripMenuItem.Text = "导入图片信息";
             this.导入图片信息ToolStripMenuItem.Click += new System.EventHandler(this.导入图片信息ToolStripMenuItem_Click);
+            // 
+            // 初始化ToolStripMenuItem
+            // 
+            this.初始化ToolStripMenuItem.Name = "初始化ToolStripMenuItem";
+            this.初始化ToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.初始化ToolStripMenuItem.Text = "系统初始化";
+            this.初始化ToolStripMenuItem.Click += new System.EventHandler(this.初始化ToolStripMenuItem_Click);
             // 
             // 帮助ToolStripMenuItem
             // 
@@ -171,13 +174,13 @@
             this.mainPanel.Size = new System.Drawing.Size(942, 354);
             this.mainPanel.TabIndex = 3;
             // 
-            // entityDataSource
-            // 
-            this.entityDataSource.DbContextType = typeof(DCTS.DctsEntities);
-            // 
             // backgroundWorker1
             // 
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            // 
+            // entityDataSource
+            // 
+            this.entityDataSource.DbContextType = typeof(DCTS.DctsEntities);
             // 
             // MainForm
             // 

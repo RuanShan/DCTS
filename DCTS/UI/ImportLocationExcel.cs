@@ -233,14 +233,14 @@ namespace DCTS.CustomComponents
 
             // id	ltype	nation	city	area	title	local_title	img	address	local_address	latlng	route	contact	
             // open_at	close_at	open_close_more	ticket	room	dinner	wifi	parking	reception	kitchen	dishes	recommended_dishes	tips	guidance
-            
+
             // 序号  类型    国家    城市    区域     中文名称 当地语言名称    图片  地址   当地语言地址 经纬度  如何抵达    联系方式 
             // 开始时间  结束时间  营业时间说明  门票  房型  早餐   WIFI 停车场  前台 厨房 菜系 推荐菜单 小贴士
 
 
             var columnNameMap = ComboLocationSchema.ColumnNameDictionary;
 
-          
+
             List<ComboLocation> list = new List<ComboLocation>();
 
             Type locationType = typeof(ComboLocation);
@@ -250,39 +250,39 @@ namespace DCTS.CustomComponents
             {
                 string innerColumnName = columnNameMap[column.Caption];
                 var m = locationType.GetMethod(innerColumnName);
-                methods.Add( m );
+                methods.Add(m);
 
                 column.ColumnName = innerColumnName;
             }
 
-            
-
             foreach (DataRow row in table.Rows)
             {
-                 
-                var location =  new ComboLocation();
-                                location.ltype = (int)ComboLocationEnum.Scenic;
 
+                var location = new ComboLocation();
 
-               location.id = Convert.ToInt32( row["id"] );
-                    //location.
-                    
-                    location.nation = row["nation"].ToString();
-                    location.city = row["city"].ToString();
-                    location.title = row["title"].ToString();
-                    location.local_title = row["local_title"].ToString();
-                    location.img = "";
-                    location.latlng = row["latlng"].ToString();
-                    location.local_address = row["local_address"].ToString();
-                    location.route = row["route"].ToString();
-                    // 格式定义11:00-22:00
-                    //obj.open_at = Convert.ToDateTime(temp1[1]);
-                    //obj.close_at = Convert.ToDateTime(temp1[1]);
-                    location.open_close_more = row["open_close_more"].ToString().Trim();
+                //对象不能从 DBNull 转换为其他类型。
+                int id = 0;
+                Int32.TryParse(row["id"].ToString(), out id);
 
-                    location.ticket = row["ticket"].ToString().Trim();
-                    location.tips = row["tips"].ToString();
-                    list.Add(location);
+                location.id = id;
+                location.ltype = Convert.ToInt32(row["ltype"]);
+
+                location.nation = row["nation"].ToString();
+                location.city = row["city"].ToString();
+                location.title = row["title"].ToString();
+                location.local_title = row["local_title"].ToString();
+                location.img = row["img"].ToString();
+                location.latlng = row["latlng"].ToString();
+                location.local_address = row["local_address"].ToString();
+                location.route = row["route"].ToString();
+                // 格式定义11:00-22:00
+                //obj.open_at = Convert.ToDateTime(temp1[1]);
+                //obj.close_at = Convert.ToDateTime(temp1[1]);
+                location.open_close_more = row["open_close_more"].ToString().Trim();
+
+                location.ticket = row["ticket"].ToString().Trim();
+                location.tips = row["tips"].ToString();
+                list.Add(location);
             }
 
             return list;

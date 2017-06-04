@@ -23,7 +23,8 @@ namespace DCTS.UI
         List<TripDay> dayList;
         List<DayLocation> dayLocationList;
         ChooseLocaltionForm localtionForm;
-        
+        ComboLocation blankLocation;
+
         public EditTripDaysControl()
         {
             InitializeComponent();
@@ -59,6 +60,7 @@ namespace DCTS.UI
         {
             using (var ctx = new DctsEntities())
             {
+                this.blankLocation = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Blank).First();
                 this.Model = ctx.Trips.Find(ModelId);
                 this.dayList = ctx.TripDays.Where(o => o.trip_id == ModelId).OrderBy(o => o.day).ToList();
                 this.dayLocationList = ctx.DayLocations.Include("ComboLocation").Where(o => o.trip_id == ModelId).OrderBy(o => o.day_id).ThenBy(o=>o.position).ToList();                
@@ -266,9 +268,8 @@ namespace DCTS.UI
 
         private void addBlankButton_Click(object sender, EventArgs e)
         {          
-            var tripDay = GetSelectedTripDay();
-            int locationId = 0;
-            TripBusiness.AddLocation(tripDay.id, locationId);
+            var tripDay = GetSelectedTripDay();            
+            TripBusiness.AddLocation(tripDay.id, this.blankLocation.id);
             InitializeDataSource(tripDay.day);
         }
 

@@ -149,7 +149,7 @@ namespace DCTS.UI
                         }
                         if (hasImg)
                         {
-                            string copyToPath = EntityPathConfig.LocationHotelImagePath(obj);
+                            string copyToPath = EntityPathConfig.LocationImagePath(obj);
                            if (!File.Exists(copyToPath))
                             File.Copy(imgFilePath, copyToPath);
                         }
@@ -185,7 +185,7 @@ namespace DCTS.UI
 
                         if (hasImg)
                         {
-                            string copyToPath = EntityPathConfig.LocationHotelImagePath(obj);
+                            string copyToPath = EntityPathConfig.LocationImagePath(obj);
                             if (!File.Exists(copyToPath))        
                             File.Copy(imgFilePath, copyToPath);
                         }

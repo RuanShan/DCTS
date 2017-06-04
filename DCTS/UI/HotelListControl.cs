@@ -55,38 +55,6 @@ namespace DCTS.UI
 
         }
 
-        private void InitializeDataGridView11()
-        {
-            this.pager1.PageCurrent = 1;
-            this.pager1.PageSize = 24;
-            int offset = 0;
-
-            int pageSize = 50;
-
-            var ctx = this.entityDataSource1.DbContext as DctsEntities;
-            //using (var ctx = new DctsEntities())
-            {
-                hotelList = new List<ComboLocation>();
-                var query = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Hotel).OrderBy(o => o.id).Skip(offset).Take(pageSize);
-                hotelList = query.ToList();
-                //  var query = ctx.ComboLocations.OrderBy(o => o.id).Skip(offset).Take(pageSize);
-                var list = this.entityDataSource1.CreateView(query);
-                sortabledinningsOrderList = new SortableBindingList<ComboLocation>(query.ToList());
-                this.bindingSource1.DataSource = this.sortabledinningsOrderList;
-                dataGridView.AutoGenerateColumns = false;
-                dataGridView.DataSource = this.bindingSource1;
-
-            }
-            var nationList = DCTS.DB.GlobalCache.NationList;
-
-            // 初始化查询条件
-            var nations = nationList.Select(o => new MockEntity { Id = o.id, ShortName = o.code, FullName = o.title }).ToList();
-            nations.Insert(0, new MockEntity { Id = 0, ShortName = "", FullName = "所有" });
-            this.nationComboBox.DisplayMember = "FullName";
-            this.nationComboBox.ValueMember = "ShortName";
-            this.nationComboBox.DataSource = nations;
-            pager1.Bind();
-        }
 
         private void newButton_Click(object sender, EventArgs e)
         {

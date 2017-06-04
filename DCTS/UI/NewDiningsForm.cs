@@ -150,7 +150,7 @@ namespace DCTS.UI
                             ctx.SaveChanges();
                             if (hasImg)
                             {
-                                string copyToPath = EntityPathConfig.LocationDiningImagePath(obj);
+                                string copyToPath = EntityPathConfig.LocationImagePath(obj);
                                 if (!File.Exists(copyToPath))
                                 File.Copy(imgFilePath, copyToPath);
                             }
@@ -185,7 +185,7 @@ namespace DCTS.UI
                             changeid = obj.id;
                             if (hasImg)
                             {
-                                string copyToPath = EntityPathConfig.LocationDiningImagePath(obj);
+                                string copyToPath = EntityPathConfig.LocationImagePath(obj);
                                 if (!File.Exists(copyToPath))
                                     File.Copy(imgFilePath, copyToPath);
                             }
