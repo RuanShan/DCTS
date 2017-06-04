@@ -141,6 +141,7 @@ namespace DCTS
                 customersControl = new CustomersControl();
                 customersControl.Dock = DockStyle.Fill;
             }
+            this.customersControl.BeginActive();
             this.mainPanel.Controls.Clear();
             this.mainPanel.Controls.Add(customersControl);
         }

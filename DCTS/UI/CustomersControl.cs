@@ -293,7 +293,7 @@ namespace DCTS.UI
             using (var ctx = new DctsEntities())
             {
                 //分页需要数据总数
-                // count = ComboLoactionBusiness.Count(ComboLocationEnum.Hotel,title);
+                count = Count(title);
 
                 var list = Paginate(ComboLocationEnum.Hotel, pageCurrent, pageSize, title);
 
@@ -326,7 +326,21 @@ namespace DCTS.UI
             }
             return list;
         }
+        private static int Count(string title)
+        {
+            int count = 0;
+            using (var ctx = new DctsEntities())
+            {
+                var query = ctx.Customers.AsQueryable();
 
+                if (title.Length > 0)
+                {
+                    query = query.Where(o => o.name.Contains(title));
+                }
+                count = query.Count();
+            }
+            return count;
+        }
         // 根据当前选择条件，构造查询语句
         private string BuildSql()
         {
@@ -346,7 +360,7 @@ namespace DCTS.UI
             {
                 conditions = " WHERE " + conditions;
             }
-            sql = string.Format(" SELECT * FROM Customer " + conditions);
+            sql = string.Format(" SELECT * FROM Customers " + conditions);
             return sql;
         }
 

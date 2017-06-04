@@ -49,7 +49,7 @@ namespace DCTS.UI
             using (var ctx = new DctsEntities())
             {
                 bool nameishave = (ctx.Customers.Where(o => o.passport == passporttexbox.Text).Count() > 0);
-                if (nameishave == true)
+                if (nameishave == true && changeid == 0)
                 {
                     MessageBox.Show("同护照ID已存在");
                     return;
@@ -57,7 +57,9 @@ namespace DCTS.UI
                 }
                 if (changeid == 0)
                 {
-                    var obj = ctx.Customers.Create();
+               
+                    Customer obj = new Customer();
+
                     obj.name = nameTextBox.Text;
                     obj.enname = ennameTextBox.Text;
                     obj.gender = genderComboBox.Text;
@@ -65,7 +67,10 @@ namespace DCTS.UI
                     obj.birthday = Convert.ToDateTime(birthdayTextBox.Text);
 
                     if (nameishave == false)
+                    {    
+                        ctx.Customers.Add(obj);
                         ctx.SaveChanges();
+                    }
                 }
                 else
                 {
