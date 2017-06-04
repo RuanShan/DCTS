@@ -9,6 +9,8 @@ namespace DCTS.DB
 {
     class EntityPathConfig
     {
+
+
         public static string DataBasePath
         {
             get {
@@ -162,5 +164,26 @@ namespace DCTS.DB
                 Directory.CreateDirectory(path);
             }
         }
+    }
+
+    public class SqlPath
+    {
+
+        public static string BasePath
+        {
+            get
+            {
+                string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "sql");
+                return path;
+            }
+        }
+
+        public static string SetupSql
+        {
+            get {
+                return Path.Combine(BasePath,  "setup.sql"); 
+            }
+        }
+            
     }
 }
