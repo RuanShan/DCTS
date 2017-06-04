@@ -45,7 +45,6 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Enabled = false;
             this.cancelButton.Location = new System.Drawing.Point(314, 140);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
