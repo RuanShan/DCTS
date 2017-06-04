@@ -45,11 +45,11 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-<<<<<<< HEAD
+//<<<<<<< HEAD
             this.entityDataSource = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.客户管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-=======
->>>>>>> origin/master
+//=======
+//>>>>>>> origin/master
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,11 +78,11 @@
             // tripsToolStripMenuItem
             // 
             this.tripsToolStripMenuItem.Name = "tripsToolStripMenuItem";
-<<<<<<< HEAD
-            this.tripsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-=======
+//<<<<<<< HEAD
+           // this.tripsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+//=======
             this.tripsToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
->>>>>>> origin/master
+//>>>>>>> origin/master
             this.tripsToolStripMenuItem.Text = "路书";
             this.tripsToolStripMenuItem.Click += new System.EventHandler(this.tripsToolStripMenuItem_Click);
             // 
@@ -113,77 +113,77 @@
             // nationsToolStripMenuItem
             // 
             this.nationsToolStripMenuItem.Name = "nationsToolStripMenuItem";
-<<<<<<< HEAD
-            this.nationsToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-=======
+//<<<<<<< HEAD
+//            this.nationsToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+//=======
             this.nationsToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
->>>>>>> origin/master
+//>>>>>>> origin/master
             this.nationsToolStripMenuItem.Text = "国家信息";
             // 
             // 导入餐厅信息ToolStripMenuItem
             // 
             this.导入餐厅信息ToolStripMenuItem.Name = "导入餐厅信息ToolStripMenuItem";
-<<<<<<< HEAD
-            this.导入餐厅信息ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-=======
+//<<<<<<< HEAD
+//            this.导入餐厅信息ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+//=======
             this.导入餐厅信息ToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
->>>>>>> origin/master
+//>>>>>>> origin/master
             this.导入餐厅信息ToolStripMenuItem.Text = "导入餐厅信息";
             this.导入餐厅信息ToolStripMenuItem.Click += new System.EventHandler(this.导入餐厅信息ToolStripMenuItem_Click);
             // 
             // 导入住宿信息ToolStripMenuItem
             // 
             this.导入住宿信息ToolStripMenuItem.Name = "导入住宿信息ToolStripMenuItem";
-<<<<<<< HEAD
-            this.导入住宿信息ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-=======
+//<<<<<<< HEAD
+//            this.导入住宿信息ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+//=======
             this.导入住宿信息ToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
->>>>>>> origin/master
+//>>>>>>> origin/master
             this.导入住宿信息ToolStripMenuItem.Text = "导入住宿信息";
             this.导入住宿信息ToolStripMenuItem.Click += new System.EventHandler(this.导入住宿信息ToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-<<<<<<< HEAD
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
-=======
+//<<<<<<< HEAD
+//            this.toolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
+//=======
             this.toolStripMenuItem1.Size = new System.Drawing.Size(153, 22);
->>>>>>> origin/master
+//>>>>>>> origin/master
             this.toolStripMenuItem1.Text = "导入景点信息";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // importScenicExcelToolStripMenuItem
             // 
             this.importScenicExcelToolStripMenuItem.Name = "importScenicExcelToolStripMenuItem";
-<<<<<<< HEAD
-            this.importScenicExcelToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-=======
+//<<<<<<< HEAD
+//            this.importScenicExcelToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+//=======
             this.importScenicExcelToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
->>>>>>> origin/master
+//>>>>>>> origin/master
             this.importScenicExcelToolStripMenuItem.Text = "导入Excel数据";
             this.importScenicExcelToolStripMenuItem.Click += new System.EventHandler(this.importScenicExcelToolStripMenuItem_Click);
             // 
             // 初始化ToolStripMenuItem
             // 
             this.初始化ToolStripMenuItem.Name = "初始化ToolStripMenuItem";
-<<<<<<< HEAD
-            this.初始化ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.初始化ToolStripMenuItem.Text = "初始化";
-=======
+//<<<<<<< HEAD
+//            this.初始化ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+//            this.初始化ToolStripMenuItem.Text = "初始化";
+//=======
             this.初始化ToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.初始化ToolStripMenuItem.Text = "系统初始化";
->>>>>>> origin/master
+//>>>>>>> origin/master
             this.初始化ToolStripMenuItem.Click += new System.EventHandler(this.初始化ToolStripMenuItem_Click);
             // 
             // 导入图片信息ToolStripMenuItem
             // 
             this.导入图片信息ToolStripMenuItem.Name = "导入图片信息ToolStripMenuItem";
-<<<<<<< HEAD
-            this.导入图片信息ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-=======
+//<<<<<<< HEAD
+//            this.导入图片信息ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+//=======
             this.导入图片信息ToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
->>>>>>> origin/master
+//>>>>>>> origin/master
             this.导入图片信息ToolStripMenuItem.Text = "导入图片信息";
             this.导入图片信息ToolStripMenuItem.Click += new System.EventHandler(this.导入图片信息ToolStripMenuItem_Click);
             // 
@@ -215,7 +215,7 @@
             // 
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
-<<<<<<< HEAD
+//<<<<<<< HEAD
             // entityDataSource
             // 
             this.entityDataSource.DbContextType = typeof(DCTS.DctsEntities);
@@ -227,8 +227,8 @@
             this.客户管理ToolStripMenuItem.Text = "客户管理";
             this.客户管理ToolStripMenuItem.Click += new System.EventHandler(this.客户管理ToolStripMenuItem_Click);
             // 
-=======
->>>>>>> origin/master
+//=======
+//>>>>>>> origin/master
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
