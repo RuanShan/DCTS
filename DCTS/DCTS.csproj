@@ -58,6 +58,9 @@
     <Reference Include="CommonLibrary">
       <HintPath>..\packages\SEA.CommonLibrary.NET.0.9.8.8\lib\CommonLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="DocumentFormat.OpenXml">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.7.1\lib\net45\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
     <Reference Include="DocX">
       <HintPath>..\packages\DocX.1.0.0.22\lib\net40\DocX.dll</HintPath>
     </Reference>
@@ -121,6 +124,7 @@
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Bus\ComboLoactionBusiness.cs" />
+    <Compile Include="Bus\TripWordExporterEx.cs" />
     <Compile Include="Bus\CSVStreamReader.cs" />
     <Compile Include="Bus\LocationExporter.cs" />
     <Compile Include="Bus\ScenicDbHelper.cs" />
@@ -518,10 +522,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Templates\dining-detail.docx" />
-    <None Include="Templates\hotel-detail.docx" />
-    <None Include="Templates\layout.docx" />
-    <None Include="Templates\scenic-detail.docx" />
+    <None Include="templates\dining-detail.docx" />
+    <None Include="templates\hotel-detail.docx" />
+    <None Include="templates\layout.docx" />
+    <None Include="templates\scenic-detail.docx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -552,9 +556,9 @@
     <Content Include="Doc\TextFile1.txt" />
     <Content Include="app128.ico" />
     <Content Include="Doc\fix.txt" />
-    <Content Include="Sql\setup.sql" />
-    <Content Include="Sql\upgrade.sql" />
-    <Content Include="Sql\seed.sql" />
+    <Content Include="sql\setup.sql" />
+    <Content Include="sql\upgrade.sql" />
+    <Content Include="sql\seed.sql" />
     <None Include="Resources\Undo_small.png" />
     <None Include="Resources\Save_small.png" />
     <None Include="Resources\Refresh_small.png" />
@@ -569,7 +573,9 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /e /r /y $(ProjectDir)Templates $(TargetDir)Templates\
+    <PostBuildEvent>xcopy /e /r /y $(ProjectDir)templates $(TargetDir)templates\
+xcopy /e /r /y $(ProjectDir)sql $(TargetDir)sql\
+
 </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

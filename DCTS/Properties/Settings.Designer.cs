@@ -22,5 +22,17 @@ namespace DCTS.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files\\MySQL\\MySQL Server 5.7")]
+        public string DBServerPath {
+            get {
+                return ((string)(this["DBServerPath"]));
+            }
+            set {
+                this["DBServerPath"] = value;
+            }
+        }
     }
 }

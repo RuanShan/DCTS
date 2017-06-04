@@ -26,6 +26,11 @@ namespace DCTS.Uti
                 var key_val = kv.Split('=');
                 setting[key_val[0]] = key_val[1];
             }           
+            // 设置 password, importsql 使用
+            if (!setting.ContainsKey("password"))
+            {
+                setting["password"] = String.Empty;
+            }
 
             return setting;
         }

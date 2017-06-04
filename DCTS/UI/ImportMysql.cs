@@ -30,6 +30,7 @@ namespace DCTS.CustomComponents
         {
             InitializeComponent();
 
+            this.pathTextBox.Text = Properties.Settings.Default.DBServerPath;
         }
 
         private void closeButton_Click(object sender, EventArgs e)
@@ -50,13 +51,11 @@ namespace DCTS.CustomComponents
                 DBConfiguration BusinessHelp = new DBConfiguration();
                 Dictionary<string, string> setting = DBConfiguration.ConnectionSettings();
 
-                //string cmd = @"mysql -u root -p123456 dcts_dev <d:\a.sql";
-                string cmd = @"mysql -u root dcts_dev <C:\\Program Files\\MySQL\\20170510.sql";
-                string db = AppDomain.CurrentDomain.BaseDirectory + "initialize.sql";
-                string cmdO = @"C:&cd " + pathTextBox.Text + "\\";
-                cmd = @"mysql -u " + setting["user id"] + " " + setting["database"] + " <" + @db;
+                string sql = SqlPath.SetupSql;
+                string mysql = Path.Combine( pathTextBox.Text, "bin", "mysql");
+                string cmd = mysql + " -u " + setting["user id"] + " -p " + setting["password"] + setting["database"] + " <" + sql;
 
-                cmd = cmdO + cmd;
+                
 
                 string output = "";
                 RunCmd(cmd, out output);
@@ -71,37 +70,6 @@ namespace DCTS.CustomComponents
             } MessageBox.Show("导入成功");
         }
 
-        private bool NewMethod(BackgroundWorker worker, DoWorkEventArgs e)
-        {
-            WorkerArgument arg = e.Argument as WorkerArgument;
-
-            bool success = true;
-            try
-            {
-                string connctionString = "Database=dcts_dev;Data Source=127.0.0.1;User Id=root;Character Set=utf8";//Password=root;
-
-                string cmd = @"mysql -u root -p123456 dcts_dev <d:\a.sql";
-                cmd = @"mysql -u root dcts_dev <C:\\mysteap\\work_office\\ProjectOut\\RuanShanLvYou\\20170510.sql";
-                string output = "";
-                RunCmd(cmd, out output);
-
-
-
-                backgroundWorker1.ReportProgress(100, arg);
-                e.Result = string.Format("{0} 条正常导入成功");
-            }
-            catch (DbEntityValidationException exception)
-            {
-                if (!e.Cancel)
-                {
-
-                    e.Result = exception.Message + "运行失败";
-                }
-                success = false;
-            }
-
-            return success;
-        }
 
         #region 直接调用命令
 
@@ -146,7 +114,7 @@ namespace DCTS.CustomComponents
         private void openFileBtton_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog dialog = new FolderBrowserDialog();
-            dialog.Description = "请选择文件夹路径";
+            dialog.Description = "请选择数据库服务器安装路径";
 
 
             if (dialog.ShowDialog() == DialogResult.OK)
