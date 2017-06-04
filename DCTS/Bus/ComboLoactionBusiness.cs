@@ -93,7 +93,17 @@ namespace DCTS.Bus
             }
 
         }
+        public static void Customer_Delete(long id)
+        {
+            using (var ctx = new DctsEntities())
+            {
+                var model = ctx.Customers.Find(id);
+           
+                ctx.Customers.Remove(model);
+                ctx.SaveChanges();
+            }
 
+        }
         public static string DisplayOpeningHours(ComboLocation location)
         {
             string str = string.Empty;

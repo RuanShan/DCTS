@@ -170,6 +170,16 @@ namespace DCTS.DB
           { "tips", "小贴士"},  
           { "guidance", "游玩方式"}
         };
+        public static Dictionary<string, string> CustomterCnNameDictionary = new Dictionary<string, string>() { 
+          { "id", "序号"},    
+          { "name", "名字"},    
+          { "gender", "性别"},   
+          { "birthday", "生日"},   
+          { "enname", "英文姓名"},
+          { "passport", "护照号码"}
+         
+        };
+
         static void LocationColumnInfo()
         {
 

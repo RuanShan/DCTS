@@ -17,6 +17,7 @@ namespace DCTS
     public partial class MainForm : Form
     {
         TripsManagementControl tripsManagementControl;
+        CustomersControl customersControl;
         AboutBox aboutbox;
 
         public MainForm()
@@ -126,6 +127,22 @@ namespace DCTS
             {
                 MessageBox.Show(err.ToString());
             }
+        }
+
+        private void 客户信息ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 客户管理ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (customersControl == null)
+            {
+                customersControl = new CustomersControl();
+                customersControl.Dock = DockStyle.Fill;
+            }
+            this.mainPanel.Controls.Clear();
+            this.mainPanel.Controls.Add(customersControl);
         }
 
 

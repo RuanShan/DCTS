@@ -330,6 +330,18 @@
     <Compile Include="UI\ImportImage.Designer.cs">
       <DependentUpon>ImportImage.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\CustomersControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\CustomersControl.Designer.cs">
+      <DependentUpon>CustomersControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\NewCustomerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\NewCustomerForm.Designer.cs">
+      <DependentUpon>NewCustomerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Uti\EFIntercepterLogging.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -489,6 +501,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ImportImage.resx">
       <DependentUpon>ImportImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\CustomersControl.resx">
+      <DependentUpon>CustomersControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\NewCustomerForm.resx">
+      <DependentUpon>NewCustomerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
