@@ -129,12 +129,25 @@ namespace DCTS
             }
         }
 
-        private void 客户信息ToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
+     
 
+        private void ImportnationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var form = new ImportNationDoc();
+                if (form.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
+                {
+                }
+
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.ToString());
+            }
         }
 
-        private void 客户管理ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CustomersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (customersControl == null)
             {

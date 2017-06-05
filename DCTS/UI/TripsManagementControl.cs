@@ -19,7 +19,7 @@ namespace DCTS.UI
         DiningsControl dinningsControl;
         HotelListControl hotelControl;
         CustomerTripListControl bookControl;
-
+        NationsControl nationsControl;
         public TripsManagementControl()
         {
             InitializeComponent();
@@ -136,6 +136,20 @@ namespace DCTS.UI
             this.bookControl.BeginActive();
             this.mainPanel.Controls.Clear();
             this.mainPanel.Controls.Add(bookControl);
+
+        }
+
+        
+        private void NationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (nationsControl == null)
+            {
+                nationsControl = new NationsControl();
+                nationsControl.Dock = DockStyle.Fill;
+            }
+            this.nationsControl.BeginActive();
+            this.mainPanel.Controls.Clear();
+            this.mainPanel.Controls.Add(nationsControl);
 
         }
 

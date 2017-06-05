@@ -361,6 +361,24 @@
     <Compile Include="UI\NewCustomerForm.Designer.cs">
       <DependentUpon>NewCustomerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\NationsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\NationsControl.Designer.cs">
+      <DependentUpon>NationsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\NewNationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\NewNationForm.Designer.cs">
+      <DependentUpon>NewNationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ImportNationDoc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ImportNationDoc.Designer.cs">
+      <DependentUpon>ImportNationDoc.cs</DependentUpon>
+    </Compile>
     <Compile Include="Uti\EFIntercepterLogging.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -532,6 +550,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\NewCustomerForm.resx">
       <DependentUpon>NewCustomerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\NationsControl.resx">
+      <DependentUpon>NationsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\NewNationForm.resx">
+      <DependentUpon>NewNationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ImportNationDoc.resx">
+      <DependentUpon>ImportNationDoc.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
