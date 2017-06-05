@@ -51,7 +51,7 @@ namespace DCTS.UI
 
         private void addTripButton_Click(object sender, EventArgs e)
         {
-            var form = new NewTripForm();
+            var form = new NewCustomerTripForm();
             if (form.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
             {
                 InitializeTripDataGridView();
@@ -67,7 +67,7 @@ namespace DCTS.UI
                 var row = tripDataGridView.Rows[e.RowIndex];
                 var trip = row.DataBoundItem as Trip;
 
-                var eventArgs = new CommandRequestEventArgs( CommandRequestEnum.EditTripDays, trip.id );                 
+                var eventArgs = new CommandRequestEventArgs(CommandRequestEnum.EditCustomerTripDays, trip.id);                 
                 this.CommandRequestEvent(this, eventArgs);
              }
             if (column == editTripColumn1)
@@ -93,7 +93,7 @@ namespace DCTS.UI
             {
                 var row = tripDataGridView.Rows[e.RowIndex];
                 var trip = row.DataBoundItem as Trip;
-                string msg = string.Format("确定删除模板<{0}>", trip.title);
+                string msg = string.Format("确定删除路书<{0}>", trip.title);
 
                 if (MessageHelper.DeleteConfirm(msg))
                 {

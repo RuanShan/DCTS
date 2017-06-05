@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.tripsControl = new DCTS.UI.TripListControl();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.bookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tripsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,7 +39,6 @@
             this.其他ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.mainPanel.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -51,25 +49,16 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.mainPanel.BackColor = System.Drawing.SystemColors.Window;
-            this.mainPanel.Controls.Add(this.tripsControl);
             this.mainPanel.Location = new System.Drawing.Point(68, 0);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(691, 366);
+            this.mainPanel.Size = new System.Drawing.Size(691, 338);
             this.mainPanel.TabIndex = 2;
-            // 
-            // tripsControl
-            // 
-            this.tripsControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tripsControl.Location = new System.Drawing.Point(0, 0);
-            this.tripsControl.Name = "tripsControl";
-            this.tripsControl.Size = new System.Drawing.Size(691, 366);
-            this.tripsControl.TabIndex = 1;
             // 
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.SystemColors.Control;
             this.menuStrip1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.menuStrip1.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.menuStrip1.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.bookToolStripMenuItem,
             this.tripsToolStripMenuItem,
@@ -80,8 +69,8 @@
             this.其他ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(6, 13, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(98, 393);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(6, 12, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(68, 363);
             this.menuStrip1.Stretch = false;
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
@@ -89,7 +78,7 @@
             // bookToolStripMenuItem
             // 
             this.bookToolStripMenuItem.Name = "bookToolStripMenuItem";
-            this.bookToolStripMenuItem.Size = new System.Drawing.Size(85, 29);
+            this.bookToolStripMenuItem.Size = new System.Drawing.Size(55, 29);
             this.bookToolStripMenuItem.Text = "路书";
             this.bookToolStripMenuItem.Click += new System.EventHandler(this.bookToolStripMenuItem_Click);
             // 
@@ -98,71 +87,70 @@
             this.tripsToolStripMenuItem.Checked = true;
             this.tripsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.tripsToolStripMenuItem.Name = "tripsToolStripMenuItem";
-            this.tripsToolStripMenuItem.Size = new System.Drawing.Size(85, 29);
+            this.tripsToolStripMenuItem.Size = new System.Drawing.Size(55, 29);
             this.tripsToolStripMenuItem.Text = "模板";
             this.tripsToolStripMenuItem.Click += new System.EventHandler(this.tripsToolStripMenuItem_Click);
             // 
             // scenicsToolStripMenuItem
             // 
             this.scenicsToolStripMenuItem.Name = "scenicsToolStripMenuItem";
-            this.scenicsToolStripMenuItem.Size = new System.Drawing.Size(85, 29);
+            this.scenicsToolStripMenuItem.Size = new System.Drawing.Size(55, 29);
             this.scenicsToolStripMenuItem.Text = "景点";
             this.scenicsToolStripMenuItem.Click += new System.EventHandler(this.scenicsToolStripMenuItem_Click);
             // 
             // dinningsToolStripMenuItem
             // 
             this.dinningsToolStripMenuItem.Name = "dinningsToolStripMenuItem";
-            this.dinningsToolStripMenuItem.Size = new System.Drawing.Size(85, 29);
+            this.dinningsToolStripMenuItem.Size = new System.Drawing.Size(55, 29);
             this.dinningsToolStripMenuItem.Text = "餐厅";
             this.dinningsToolStripMenuItem.Click += new System.EventHandler(this.dinningsToolStripMenuItem_Click);
             // 
             // hotelsToolStripMenuItem
             // 
             this.hotelsToolStripMenuItem.Name = "hotelsToolStripMenuItem";
-            this.hotelsToolStripMenuItem.Size = new System.Drawing.Size(85, 29);
+            this.hotelsToolStripMenuItem.Size = new System.Drawing.Size(55, 29);
             this.hotelsToolStripMenuItem.Text = "住宿";
             this.hotelsToolStripMenuItem.Click += new System.EventHandler(this.hotelsToolStripMenuItem_Click);
             // 
             // NationToolStripMenuItem
             // 
             this.NationToolStripMenuItem.Name = "NationToolStripMenuItem";
-            this.NationToolStripMenuItem.Size = new System.Drawing.Size(85, 29);
+            this.NationToolStripMenuItem.Size = new System.Drawing.Size(55, 29);
             this.NationToolStripMenuItem.Text = "国家";
             this.NationToolStripMenuItem.Click += new System.EventHandler(this.NationToolStripMenuItem_Click);
             // 
             // 其他ToolStripMenuItem
             // 
             this.其他ToolStripMenuItem.Name = "其他ToolStripMenuItem";
-            this.其他ToolStripMenuItem.Size = new System.Drawing.Size(85, 29);
+            this.其他ToolStripMenuItem.Size = new System.Drawing.Size(55, 29);
             this.其他ToolStripMenuItem.Text = "其他";
             // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(98, 371);
+            this.statusStrip1.Location = new System.Drawing.Point(68, 341);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(664, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(694, 22);
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(43, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(44, 17);
             this.toolStripStatusLabel1.Text = "状态条";
             this.toolStripStatusLabel1.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
             // 
             // TripsManagementControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.mainPanel);
             this.Name = "TripsManagementControl";
-            this.Size = new System.Drawing.Size(762, 393);
-            this.mainPanel.ResumeLayout(false);
+            this.Size = new System.Drawing.Size(762, 363);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
@@ -174,7 +162,6 @@
 
         #endregion
 
-        private TripListControl tripsControl;
         private System.Windows.Forms.Panel mainPanel;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem tripsToolStripMenuItem;
