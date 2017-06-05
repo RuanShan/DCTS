@@ -303,6 +303,10 @@ namespace DCTS.UI
         }
         private static List<Customer> Paginate(ComboLocationEnum locationType, int currentPage = 1, int pageSize = 25, string title = "")
         {
+            if (currentPage == 0)
+            {
+                currentPage = 1;
+            }
             List<Customer> list = new List<Customer>();
 
             using (var ctx = new DctsEntities())

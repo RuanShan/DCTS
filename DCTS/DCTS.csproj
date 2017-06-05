@@ -124,6 +124,7 @@
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Bus\ComboLoactionBusiness.cs" />
+    <None Include="Bus\CustomerTripWordExporterEx.csx" />
     <Compile Include="Bus\CustomerTripWordExporter.cs" />
     <Compile Include="Bus\TripWordExporterEx.cs" />
     <Compile Include="Bus\CSVStreamReader.cs" />
@@ -197,6 +198,18 @@
       <DependentUpon>ChooseLocaltionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\CommandRequest.cs" />
+    <Compile Include="UI\NewCustomerTripForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\NewCustomerTripForm.Designer.cs">
+      <DependentUpon>NewCustomerTripForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\CustomerTripFormControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\CustomerTripFormControl.Designer.cs">
+      <DependentUpon>CustomerTripFormControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\DayLocationFormControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -430,6 +443,12 @@
     <EmbeddedResource Include="UI\ChooseLocaltionForm.resx">
       <DependentUpon>ChooseLocaltionForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\NewCustomerTripForm.resx">
+      <DependentUpon>NewCustomerTripForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\CustomerTripFormControl.resx">
+      <DependentUpon>CustomerTripFormControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\DayLocationFormControl.resx">
       <DependentUpon>DayLocationFormControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -542,11 +561,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="templates\location_blank.docx" />
     <None Include="templates\day-summary.docx" />
-    <None Include="templates\dining-detail.docx" />
-    <None Include="templates\hotel-detail.docx" />
+    <None Include="templates\location_dining.docx" />
+    <None Include="templates\location_hotel.docx" />
     <None Include="templates\layout.docx" />
-    <None Include="templates\scenic-detail.docx" />
+    <None Include="templates\location_scenic.docx" />
     <None Include="templates\trip-summary.docx" />
   </ItemGroup>
   <ItemGroup>

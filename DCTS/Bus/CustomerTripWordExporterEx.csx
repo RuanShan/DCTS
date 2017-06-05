@@ -13,14 +13,14 @@ using DocumentFormat.OpenXml.Wordprocessing;
 namespace DCTS.Bus
 {
     //http://www.cnblogs.com/kesalin/archive/2012/04/18/open_xml_word.html
-    class TripWordExporterEx
+    class CustomerTripWordExporterEx
     {
         long TripId {get; set;}
 
         Trip trip;
         List<DayLocation> days;
 
-        public TripWordExporterEx(long trip_id)
+        public CustomerTripWordExporterEx(long trip_id)
         {
             TripId = trip_id;
 

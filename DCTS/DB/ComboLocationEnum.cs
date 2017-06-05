@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace DCTS.DB
 {
    
-    enum ComboLocationEnum
+    public enum ComboLocationEnum
     {   // 空白页，   景点，   餐厅，  住宿，  国家， 火车，飞机（机票说明）,
         Blank = 0, Scenic = 1, Dining = 5, Hotel = 9, Country = 10, Flight = 16, Train = 17,
         //  一封信，目录， 出行必备, Google,

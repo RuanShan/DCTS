@@ -37,6 +37,7 @@ namespace DCTS.DB
             return path;
         }
 
+
         public static string LocationWordPath(ComboLocation location)
         {
 
@@ -117,6 +118,18 @@ namespace DCTS.DB
         public static string TripSumaryName = "trip-summary.docx";
         public static string DaySumaryName = "day-summary.docx";
 
+
+        public static string GetPath(ComboLocation location)
+        {
+            ComboLocationEnum type = (ComboLocationEnum)location.ltype;
+            return GetPath(type);
+
+        }
+        public static string GetPath(ComboLocationEnum type)
+        {
+            string name = BuildTemplateNameByLocationType(type);
+            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, TemplatePath, name);
+        }
 
         public static string LayoutRelativePath
         {
@@ -206,6 +219,12 @@ namespace DCTS.DB
             {
                 Directory.CreateDirectory(path);
             }
+        }
+
+        private static string BuildTemplateNameByLocationType(ComboLocationEnum type)
+        {
+            return  "location_" + type.ToString().ToLower()+".docx";
+
         }
     }
 
