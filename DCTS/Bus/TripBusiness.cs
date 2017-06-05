@@ -9,12 +9,14 @@ namespace DCTS.Bus
 {
     class TripBusiness
     {
-        public static void Duplicate(long trip_id)
+        public static Trip Duplicate(long trip_id, int customer_id=0)
         {
+            Trip clonedTrip = null;
             using (var ctx = new DctsEntities())
             {
                 var trip = ctx.Trips.Find(trip_id);
-                var clonedTrip = new Trip(){ days = trip.days, title = "(复制)"+trip.title, memo = trip.memo };
+                clonedTrip = new Trip(){ days = trip.days, title = "(复制)"+trip.title, memo = trip.memo };
+                clonedTrip.customer_id = customer_id;
 
                 var days = ctx.TripDays.Include("DayLocations").Where(o => o.trip_id == trip.id).ToList();
 
@@ -29,7 +31,7 @@ namespace DCTS.Bus
                 //ctx.TripDays.AddRange( clonedDays );
                 //ctx.SaveChanges();
             }
-
+            return clonedTrip;
         }
 
         public static void Delete(long trip_id)

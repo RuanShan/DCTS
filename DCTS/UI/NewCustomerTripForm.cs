@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DCTS.Bus;
+using DCTS.DB;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,12 +12,32 @@ using System.Windows.Forms;
 
 namespace DCTS.UI
 {
-    public partial class NewCusotmerTripForm : BaseModalForm
+    public partial class NewCustomerTripForm : BaseModalForm
     {
 
-        public NewCusotmerTripForm()
+        public NewCustomerTripForm()
         {
             InitializeComponent();
+            InitializeDataSource();
+        }
+
+        private void InitializeDataSource()
+        {
+            var ctx = this.entityDataSource1.DbContext as DctsEntities;
+            var trips = ctx.Trips.Take(10).ToList();
+            var customerList = ctx.Customers.Take(10).ToList();
+
+            this.customerComboBox.DisplayMember = "name";
+            this.customerComboBox.ValueMember = "id";
+            this.customerComboBox.DataSource = customerList;
+
+
+            var tripList = trips.Select(o => new MockEntity { Id = o.id, ShortName = o.title }).ToList();
+            tripList.Add( new MockEntity{ Id = 0, ShortName="不使用模板"});
+            this.tripComboBox.DisplayMember = "ShortName";
+            this.tripComboBox.ValueMember = "Id";
+            this.tripComboBox.DataSource = tripList;
+
         }
 
         private void saveButton_Click(object sender, EventArgs e)
@@ -23,21 +45,32 @@ namespace DCTS.UI
 
             using (var ctx = new DctsEntities())
             {
-
-                var trip = new Trip();
-               
-
+                int customer_id = Convert.ToInt32(customerComboBox.SelectedValue);
                 
-                for( int i=0; i<trip.days;i++)
+                int template_id = Convert.ToInt32(tripComboBox.SelectedValue);
+                if (template_id > 0)
                 {
-                    var tripDay = new TripDay();
-                    tripDay.day = i + 1;
-                    tripDay.title = String.Format("第{0}天", i + 1);
-                    trip.TripDays.Add(tripDay);
-                    //ctx.TripDays.Add(tripDay);
+                    var trip = TripBusiness.Duplicate(template_id,customer_id);
                 }
-                ctx.Trips.Add(trip);
-                ctx.SaveChanges();
+                else
+                {
+                    var trip = new Trip();
+                    trip.customer_id = customer_id;
+                    trip.title = this.titleTextBox.Text;
+                    trip.memo = this.memoTextBox.Text;
+                    trip.days = Convert.ToInt32(this.daysNumericUpDown.Value);
+
+                    for (int i = 0; i < trip.days; i++)
+                    {
+                        var tripDay = new TripDay();
+                        tripDay.day = i + 1;
+                        tripDay.title = String.Format("第{0}天", i + 1);
+                        trip.TripDays.Add(tripDay);
+                    }
+                    ctx.Trips.Add(trip);
+                    ctx.SaveChanges();
+                }
+
             }
         }
     }

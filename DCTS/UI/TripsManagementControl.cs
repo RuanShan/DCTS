@@ -14,19 +14,18 @@ namespace DCTS.UI
 
     public partial class TripsManagementControl : UserControl
     {
+        TripListControl tripsControl;
         ScenicsControl scenicsControl;
         EditTripDaysControl editTripControl;
         DiningsControl dinningsControl;
         HotelListControl hotelControl;
         CustomerTripListControl bookControl;
+        EditCustomerTripDaysControl editCustomerTripControl;
         NationsControl nationsControl;
+
         public TripsManagementControl()
         {
             InitializeComponent();
-
-            this.tripsControl.CommandRequestEvent += new EventHandler( OnCommandRequest );
-
-            this.tripsControl.BeginActive();   
 
             InitUserControls();
             
@@ -34,13 +33,21 @@ namespace DCTS.UI
 
         private void InitUserControls()
         {
+
             //LogHelper.WriteLog("Start initialize main control");
              
             editTripControl = new EditTripDaysControl();
             editTripControl.Dock = DockStyle.Fill;
-
             this.editTripControl.CommandRequestEvent += new EventHandler(OnCommandRequest);
 
+            editCustomerTripControl = new EditCustomerTripDaysControl();
+            editCustomerTripControl.Dock = DockStyle.Fill;
+
+            this.editCustomerTripControl.CommandRequestEvent += new EventHandler(OnCommandRequest);
+
+            
+
+            bookToolStripMenuItem_Click(this, new EventArgs());
         }
 
         private void scenicsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -58,6 +65,11 @@ namespace DCTS.UI
 
         private void tripsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (tripsControl == null)
+            {
+                tripsControl = new TripListControl();
+                tripsControl.Dock = DockStyle.Fill;
+            }
             var eventArgs = new CommandRequestEventArgs(CommandRequestEnum.TripList);
             OnCommandRequest(tripsControl, eventArgs);
 
@@ -83,6 +95,24 @@ namespace DCTS.UI
                 this.mainPanel.Controls.Clear();
                 this.mainPanel.Controls.Add(tripsControl);
             }
+
+            if (commandEventArgs.Command == CommandRequestEnum.CustomerTripList)
+            {
+                bookControl.BeginActive();
+                this.mainPanel.Controls.Clear();
+                this.mainPanel.Controls.Add(bookControl);
+            }
+            
+
+            if (commandEventArgs.Command == CommandRequestEnum.EditCustomerTripDays)
+            {
+                this.mainPanel.Controls.Clear();
+                this.mainPanel.Controls.Add(editCustomerTripControl);
+                editCustomerTripControl.ModelId = commandEventArgs.ModelId;
+                editCustomerTripControl.BeginActive();
+            }
+
+            
 
             Console.WriteLine("Sub1 receives the OnCommandRequest event.");
         } 
@@ -132,6 +162,8 @@ namespace DCTS.UI
             {
                 bookControl = new CustomerTripListControl();
                 bookControl.Dock = DockStyle.Fill;
+                this.bookControl.CommandRequestEvent += new EventHandler(OnCommandRequest);
+
             }
             this.bookControl.BeginActive();
             this.mainPanel.Controls.Clear();

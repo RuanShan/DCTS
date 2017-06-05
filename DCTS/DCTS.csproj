@@ -198,6 +198,12 @@
       <DependentUpon>ChooseLocaltionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\CommandRequest.cs" />
+    <Compile Include="UI\EditCustomerTripDaysControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\EditCustomerTripDaysControl.Designer.cs">
+      <DependentUpon>EditCustomerTripDaysControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\NewCustomerTripForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -460,6 +466,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ChooseLocaltionForm.resx">
       <DependentUpon>ChooseLocaltionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\EditCustomerTripDaysControl.resx">
+      <DependentUpon>EditCustomerTripDaysControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\NewCustomerTripForm.resx">
       <DependentUpon>NewCustomerTripForm.cs</DependentUpon>

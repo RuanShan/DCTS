@@ -41,7 +41,7 @@ namespace DCTS.UI
             using (var ctx = new DctsEntities())
             {
 
-                var query = ctx.Trips.OrderBy(o=>o.id).Skip(offset).Take(pageSize);
+                var query = ctx.Trips.Where(o=>o.customer_id==0).OrderBy(o=>o.id).Skip(offset).Take(pageSize);
                 var list = this.entityDataSource1.CreateView(query);
                 tripDataGridView.DataSource = list;
             }
