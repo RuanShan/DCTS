@@ -27,11 +27,12 @@ namespace DCTS.UI
                 this.Text = "编辑国家";
                 changeid = obj.id;
                 this.titleTextBox.Text = obj.nation;
-              
+
                 this.textBox6.Text = obj.tips;
                 long folername = obj.id / 1000;
-                string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\export\\words" +"\\" + folername + "\\", obj.word);
-                this.docPathTextBox.Text = lcoalPath;
+                string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\export\\words" + "\\" + folername + "\\", obj.word);
+                if (obj.word != null && obj.word != "")
+                    this.docPathTextBox.Text = lcoalPath;
             }
         }
 
@@ -40,12 +41,10 @@ namespace DCTS.UI
             var ctx = this.entityDataSource1.DbContext as DctsEntities;
             var nationList = DCTS.DB.GlobalCache.NationList;
         }
-
-
+        
         private void saveButton_Click(object sender, EventArgs e)
         {
-
-
+            
             using (var ctx = new DctsEntities())
             {
                 try
@@ -67,7 +66,7 @@ namespace DCTS.UI
 
                             long idStart = newId / 1000 * 1000;
                             long idEnd = idStart + 1000;
-                            existSamedoc = (ctx.ComboLocations.Where(o => o.word == copyfilename && o.id > idStart && o.id < idEnd).Count() > 0);
+                            existSamedoc = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Country && o.word == copyfilename && o.id > idStart && o.id < idEnd).Count() > 0);
                         }
 
                     }
@@ -76,7 +75,7 @@ namespace DCTS.UI
                     {
                         ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
                         if (lastLocation != null)
-                            nameishave = (ctx.ComboLocations.Where(o => o.word == openFileDialog1.SafeFileName&& o.title == titleTextBox.Text).Count() > 0);
+                            nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Country && o.word == openFileDialog1.SafeFileName && o.title == titleTextBox.Text).Count() > 0);
                     }
                     #endregion
                     if (changeid == 0)
@@ -87,7 +86,7 @@ namespace DCTS.UI
                             return;
                         }
                         var obj = ctx.ComboLocations.Create();
-
+                        obj.ltype = (int)ComboLocationEnum.Country;
                         obj.nation = this.titleTextBox.Text;
 
                         //obj.word = copyfilename;
@@ -113,11 +112,11 @@ namespace DCTS.UI
                     {
                         ComboLocation obj = ctx.ComboLocations.Find(Convert.ToInt32(changeid));
                         obj.nation = this.titleTextBox.Text;
-                       
-                        obj.word = obj.word;
+                        obj.ltype = (int)ComboLocationEnum.Country;
+                        obj.word = "";
                         obj.tips = this.textBox6.Text;
                         //ctx.ComboLocations.Add(obj);
-                      
+
 
                         if (hasDoc)
                         {
@@ -237,7 +236,7 @@ namespace DCTS.UI
                 {
                     ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
                     if (lastLocation != null)
-                        nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Hotel && o.title == titleTextBox.Text).Count() > 0);
+                        nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Country && o.title == titleTextBox.Text).Count() > 0);
 
                     if (changeid == 0)
                     {

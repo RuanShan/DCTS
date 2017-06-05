@@ -223,7 +223,7 @@ namespace DCTS.UI
             {
                 using (var ctx = new DctsEntities())
                 {
-                    List<ComboLocation> list = ctx.ComboLocations.Where(o => o.nation != null).ToList();
+                    List<ComboLocation> list = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Country && o.nation != null).ToList();
                     foreach (ComboLocation item in list)
                     {
                         string copyToPath = EntityPathConfig.TripWordFilePath(item.id);
@@ -288,7 +288,7 @@ namespace DCTS.UI
             using (var ctx = new DctsEntities())
             {
 
-                var query = ctx.ComboLocations.Where(o => o.nation != null);
+                var query = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Country && o.nation != null);
 
                 if (nation.Length > 0)
                 {
@@ -360,7 +360,7 @@ namespace DCTS.UI
             {
                 var row = dataGridView.Rows[e.RowIndex];
                 var model = row.DataBoundItem as ComboLocation;
-                string msg = string.Format("确定删除餐厅<{0}>？", model.nation);
+                string msg = string.Format("确定删除国家<{0}>？", model.nation);
 
                 if (MessageHelper.DeleteConfirm(msg))
                 {
