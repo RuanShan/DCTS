@@ -52,8 +52,9 @@
             this.addBlankButton = new System.Windows.Forms.Button();
             this.pageTitleLabel = new System.Windows.Forms.Label();
             this.backButton = new System.Windows.Forms.Button();
-            this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.editButton = new System.Windows.Forms.Button();
+            this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
+            this.editLocationButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dayDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dayDetailDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dayDetailBindingSource)).BeginInit();
@@ -300,10 +301,6 @@
             this.backButton.UseVisualStyleBackColor = true;
             this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
-            // 
             // editButton
             // 
             this.editButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -315,10 +312,25 @@
             this.editButton.UseVisualStyleBackColor = true;
             this.editButton.Click += new System.EventHandler(this.button1_Click);
             // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
+            // 
+            // editLocationButton
+            // 
+            this.editLocationButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.editLocationButton.Location = new System.Drawing.Point(502, 320);
+            this.editLocationButton.Name = "editLocationButton";
+            this.editLocationButton.Size = new System.Drawing.Size(53, 23);
+            this.editLocationButton.TabIndex = 18;
+            this.editLocationButton.Text = "编辑";
+            this.editLocationButton.UseVisualStyleBackColor = true;
+            // 
             // EditCustomerTripDaysControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.editLocationButton);
             this.Controls.Add(this.editButton);
             this.Controls.Add(this.backButton);
             this.Controls.Add(this.pageTitleLabel);
@@ -372,5 +384,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dayIdColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn localtionTitleColumn;
         private System.Windows.Forms.Button editButton;
+        private System.Windows.Forms.Button editLocationButton;
     }
 }
