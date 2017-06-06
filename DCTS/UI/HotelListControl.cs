@@ -24,7 +24,6 @@ namespace DCTS.UI
         private static string NoOptionSelected = "所有";
         private List<ComboLocation> hotelList = null;
         private SortableBindingList<ComboLocation> sortabledinningsOrderList;
-        int RowRemark = 0;
         string sqlfilter = "";
         public HotelListControl()
         {
@@ -327,7 +326,6 @@ namespace DCTS.UI
                 using (var ctx = new DctsEntities())
                 {
 
-                    // string sql = "SELECT * FROM combolocations";
                     string sql = BuildSql();
 
                     DataTable dataTable = ctx.DataTable(sql);
