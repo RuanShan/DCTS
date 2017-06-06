@@ -400,6 +400,12 @@
     <Compile Include="UI\OtherControl.Designer.cs">
       <DependentUpon>OtherControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\AirportControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\AirportControl.Designer.cs">
+      <DependentUpon>AirportControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Uti\EFIntercepterLogging.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -586,6 +592,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ImportNationDoc.resx">
       <DependentUpon>ImportNationDoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\AirportControl.resx">
+      <DependentUpon>AirportControl.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
