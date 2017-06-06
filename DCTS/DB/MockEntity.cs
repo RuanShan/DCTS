@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DCTS.DB
 {
- 
+    
 
     public class MockEntity : IEquatable<MockEntity>
     {
@@ -43,6 +43,15 @@ namespace DCTS.DB
 
             //Calculate the hash code for the product. 
             return hashProductName ^ hashProductCode;
+        }
+    }
+
+    public class FlightCompanyRepository
+    {
+        public static List<MockEntity> All()
+        {
+           var list = new List<MockEntity> { new MockEntity{ Id=1, ShortName="中国南方航空公司"}};
+           return list;
         }
     }
 }

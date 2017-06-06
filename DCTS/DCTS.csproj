@@ -124,6 +124,9 @@
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Bus\ComboLoactionBusiness.cs" />
+    <EmbeddedResource Include="UI\EditCustomerFlightForm.resx">
+      <DependentUpon>EditCustomerFlightForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\OtherControl.resx">
       <DependentUpon>OtherControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -201,6 +204,12 @@
       <DependentUpon>ChooseLocaltionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\CommandRequest.cs" />
+    <Compile Include="UI\EditCustomerFlightForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\EditCustomerFlightForm.Designer.cs">
+      <DependentUpon>EditCustomerFlightForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\EditCustomerTripDayForm.cs">
       <SubType>Form</SubType>
     </Compile>

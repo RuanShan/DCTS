@@ -323,5 +323,29 @@ namespace DCTS.UI
                 }
             }
         }
+
+        private void editLocationButton_Click(object sender, EventArgs e)
+        {
+            
+            var dayLocation = GetSelectedDayLocation();
+            if (dayLocation != null)
+            {
+                DialogResult result = DialogResult.No;
+                if (dayLocation.ltype == (int)ComboLocationEnum.Flight)
+                {
+                    var form = new EditCustomerFlightForm(dayLocation.id);
+
+                    result = form.ShowDialog();
+                }
+
+                if (result == DialogResult.Yes)
+                {
+                    var tripDay = GetSelectedTripDay();
+                    InitializeDayDetailListBox(tripDay.id);
+                }
+
+
+            }
+        }
     }
 }
