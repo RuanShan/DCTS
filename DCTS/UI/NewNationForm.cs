@@ -219,7 +219,6 @@ namespace DCTS.UI
             {
                this.docPathTextBox.Text = openFileDialog1.FileName;
                 
-
             }
         }
 
