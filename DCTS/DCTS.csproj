@@ -124,6 +124,9 @@
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Bus\ComboLoactionBusiness.cs" />
+    <EmbeddedResource Include="UI\OtherControl.resx">
+      <DependentUpon>OtherControl.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Bus\CustomerTripWordExporterEx.csx" />
     <Compile Include="Bus\CustomerTripWordExporter.cs" />
     <Compile Include="Bus\TripWordExporterEx.cs" />
@@ -384,6 +387,12 @@
     </Compile>
     <Compile Include="UI\ImportNationDoc.Designer.cs">
       <DependentUpon>ImportNationDoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\OtherControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\OtherControl.Designer.cs">
+      <DependentUpon>OtherControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Uti\EFIntercepterLogging.cs" />
     <Compile Include="MainForm.cs">

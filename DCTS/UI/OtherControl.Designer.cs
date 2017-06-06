@@ -1,6 +1,6 @@
 ﻿namespace DCTS.UI
 {
-    partial class NationsControl
+    partial class OtherControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -33,26 +33,23 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.idColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nationColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tips = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.word = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.deleteColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.editColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.修改ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.keywordTextBox = new System.Windows.Forms.TextBox();
             this.btfind = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.btdown = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.pager1 = new DCTS.CustomComponents.Pager();
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.idColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nationColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.word = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.deleteColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.editColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -71,7 +68,6 @@
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idColumn1,
             this.nationColumn1,
-            this.tips,
             this.word,
             this.deleteColumn1,
             this.editColumn1});
@@ -94,53 +90,6 @@
             this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellContentClick);
             this.dataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView_CellFormatting);
             // 
-            // idColumn1
-            // 
-            this.idColumn1.DataPropertyName = "id";
-            this.idColumn1.HeaderText = "序号";
-            this.idColumn1.Name = "idColumn1";
-            this.idColumn1.Width = 60;
-            // 
-            // nationColumn1
-            // 
-            this.nationColumn1.DataPropertyName = "nation";
-            this.nationColumn1.HeaderText = "国家";
-            this.nationColumn1.Name = "nationColumn1";
-            // 
-            // tips
-            // 
-            this.tips.DataPropertyName = "tips";
-            this.tips.HeaderText = "tips";
-            this.tips.Name = "tips";
-            // 
-            // word
-            // 
-            this.word.DataPropertyName = "word";
-            this.word.HeaderText = "word";
-            this.word.Name = "word";
-            // 
-            // deleteColumn1
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(2, 12, 1, 12);
-            this.deleteColumn1.DefaultCellStyle = dataGridViewCellStyle1;
-            this.deleteColumn1.HeaderText = "";
-            this.deleteColumn1.Name = "deleteColumn1";
-            this.deleteColumn1.Text = "删除";
-            this.deleteColumn1.UseColumnTextForButtonValue = true;
-            this.deleteColumn1.Width = 60;
-            // 
-            // editColumn1
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(2, 12, 2, 12);
-            this.editColumn1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.editColumn1.HeaderText = "";
-            this.editColumn1.Name = "editColumn1";
-            this.editColumn1.Text = "编辑";
-            this.editColumn1.UseColumnTextForButtonValue = true;
-            this.editColumn1.Width = 60;
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -162,17 +111,6 @@
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.deleteToolStripMenuItem.Text = "删除此条住宿";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
-            // 
-            // newButton
-            // 
-            this.newButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.newButton.Location = new System.Drawing.Point(605, 20);
-            this.newButton.Name = "newButton";
-            this.newButton.Size = new System.Drawing.Size(75, 25);
-            this.newButton.TabIndex = 1;
-            this.newButton.Text = "新建";
-            this.newButton.UseVisualStyleBackColor = true;
-            this.newButton.Click += new System.EventHandler(this.newButton_Click);
             // 
             // groupBox1
             // 
@@ -209,9 +147,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(36, 43);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 13);
+            this.label1.Size = new System.Drawing.Size(31, 13);
             this.label1.TabIndex = 4;
-            this.label1.Text = "国家名称";
+            this.label1.Text = "名称";
             // 
             // label2
             // 
@@ -220,19 +158,8 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(124, 54);
             this.label2.TabIndex = 14;
-            this.label2.Text = "国家列表";
+            this.label2.Text = "其他列表";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // btdown
-            // 
-            this.btdown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btdown.Location = new System.Drawing.Point(524, 20);
-            this.btdown.Name = "btdown";
-            this.btdown.Size = new System.Drawing.Size(75, 25);
-            this.btdown.TabIndex = 16;
-            this.btdown.Text = "下载word";
-            this.btdown.UseVisualStyleBackColor = true;
-            this.btdown.Click += new System.EventHandler(this.btdown_Click);
             // 
             // saveFileDialog1
             // 
@@ -264,17 +191,56 @@
             this.bindingSource1.DataSource = this.entityDataSource1;
             this.bindingSource1.Position = 0;
             // 
-            // NationsControl
+            // idColumn1
+            // 
+            this.idColumn1.DataPropertyName = "id";
+            this.idColumn1.HeaderText = "序号";
+            this.idColumn1.Name = "idColumn1";
+            this.idColumn1.Width = 60;
+            // 
+            // nationColumn1
+            // 
+            this.nationColumn1.DataPropertyName = "name";
+            this.nationColumn1.HeaderText = "名称";
+            this.nationColumn1.Name = "nationColumn1";
+            // 
+            // word
+            // 
+            this.word.DataPropertyName = "word";
+            this.word.HeaderText = "word";
+            this.word.Name = "word";
+            // 
+            // deleteColumn1
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(2, 12, 1, 12);
+            this.deleteColumn1.DefaultCellStyle = dataGridViewCellStyle1;
+            this.deleteColumn1.HeaderText = "";
+            this.deleteColumn1.Name = "deleteColumn1";
+            this.deleteColumn1.Text = "上传";
+            this.deleteColumn1.UseColumnTextForButtonValue = true;
+            this.deleteColumn1.Width = 60;
+            // 
+            // editColumn1
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(2, 12, 2, 12);
+            this.editColumn1.DefaultCellStyle = dataGridViewCellStyle2;
+            this.editColumn1.HeaderText = "";
+            this.editColumn1.Name = "editColumn1";
+            this.editColumn1.Text = "下载";
+            this.editColumn1.UseColumnTextForButtonValue = true;
+            this.editColumn1.Width = 60;
+            // 
+            // OtherControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btdown);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pager1);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.newButton);
             this.Controls.Add(this.dataGridView);
-            this.Name = "NationsControl";
+            this.Name = "OtherControl";
             this.Size = new System.Drawing.Size(688, 405);
             this.Resize += new System.EventHandler(this.NationsControl_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
@@ -290,7 +256,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView;
-        private System.Windows.Forms.Button newButton;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btfind;
         private CustomComponents.EntityDataSource entityDataSource1;
@@ -302,11 +267,9 @@
         private CustomComponents.Pager pager1;
         private System.Windows.Forms.ToolStripMenuItem 修改ToolStripMenuItem;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btdown;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.DataGridViewTextBoxColumn idColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn nationColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tips;
         private System.Windows.Forms.DataGridViewTextBoxColumn word;
         private System.Windows.Forms.DataGridViewButtonColumn deleteColumn1;
         private System.Windows.Forms.DataGridViewButtonColumn editColumn1;
