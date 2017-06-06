@@ -331,6 +331,8 @@ namespace DCTS.UI
 
             if (column == this.uploadColumn1)
             {
+              
+
 
                 var row = dataGridView.Rows[e.RowIndex];
 
@@ -345,6 +347,22 @@ namespace DCTS.UI
                 }
                 using (var ctx = new DctsEntities())
                 {
+                    ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
+                    if (lastLocation != null)
+                    {
+                        long newId = lastLocation.id + 1;
+
+                        long idStart = newId / 1000 * 1000;
+                        long idEnd = idStart + 1000;
+                        bool existSamedoc = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Country && o.word == openFileDialog1.SafeFileName && o.id > idStart && o.id < idEnd).Count() > 0);
+                        if (existSamedoc)
+                        {
+                            MessageBox.Show(string.Format("文件名<{0}>已在, 请使用其他文件名！", model.word));
+                            return;
+                        }
+                    }
+
+
                     bool hasDoc = (openFileDialog1.FileName.Length > 0);
                     string docFilePath = this.openFileDialog1.FileName;
 

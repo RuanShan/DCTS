@@ -40,12 +40,10 @@ namespace DCTS.UI
             pager1.Bind();
 
         }
-
-
-
+        
         private void newButton_Click(object sender, EventArgs e)
         {
-            var form = new NewNationForm("create", null);
+            var form = new NewAirportForm("create", null);
             if (form.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
             {
                 InitializeDataGridView();
@@ -99,8 +97,7 @@ namespace DCTS.UI
             pager1.PageCurrent = 1;
             pager1.Bind();
         }
-
-
+        
         private void dataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow row = dataGridView.Rows[e.RowIndex];
@@ -133,7 +130,7 @@ namespace DCTS.UI
                 {
 
                     ComboLocation selectedItem = dataGridView.Rows[e.RowIndex].DataBoundItem as ComboLocation;
-                   
+
                     long folername = selectedItem.id / 1000;
                     if (selectedItem.img != null && selectedItem.img != "")
                     {
@@ -159,9 +156,7 @@ namespace DCTS.UI
                 dataGridChanges[cell_key] = dgrSingle.Cells[e.ColumnIndex].Value;
             }
         }
-
-
-
+        
         private int pager1_EventPaging(EventPagingArg e)
         {
 
@@ -173,44 +168,13 @@ namespace DCTS.UI
         {
             int i = this.dataGridView.CurrentRow.Index;
             ComboLocation selectedItem = nationlList[i];
-            var form = new NewNationForm("Edit", selectedItem);
+            var form = new NewAirportForm("Edit", selectedItem);
             if (form.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
             {
                 InitializeDataGridView();
             }
         }
 
-        private void btdown_Click(object sender, EventArgs e)
-        {
-
-            string strFileName = String.Empty;
-
-
-            FolderBrowserDialog dialog = new FolderBrowserDialog();
-            dialog.Description = "请选择下载路径";
-
-
-            if (dialog.ShowDialog() == DialogResult.OK)
-            {
-                strFileName = dialog.SelectedPath;
-            }
-
-            if (strFileName.Length > 0)
-            {
-                using (var ctx = new DctsEntities())
-                {
-                    List<ComboLocation> list = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Country && o.nation != null).ToList();
-                    foreach (ComboLocation item in list)
-                    {
-                        string copyToPath = EntityPathConfig.TripWordFilePath(item.id);
-                        if (File.Exists(copyToPath))
-                            File.Copy(copyToPath, strFileName + "\\" + item.id.ToString() + ".docx");
-                    }
-                }
-            }
-            MessageBox.Show("下载完成！");
-
-        }
 
         // 初始化DataGridView的数据源, 分页事件调用
         private int InitializeDataGridView(int pageCurrent = 1)
@@ -223,7 +187,7 @@ namespace DCTS.UI
             using (var ctx = new DctsEntities())
             {
                 //分页需要数据总数
-                count = Count(ComboLocationEnum.Country, title);
+                count = Count(ComboLocationEnum.Flight, title);
 
                 var list = Paginate(pageCurrent, pageSize, title);
 
@@ -239,7 +203,7 @@ namespace DCTS.UI
                 var query = ctx.ComboLocations.AsQueryable();
                 if ((int)locationType > 0)
                 {
-                    query = query.Where(o => o.ltype == (int)ComboLocationEnum.Country);
+                    query = query.Where(o => o.ltype == (int)ComboLocationEnum.Flight);
 
                 }
 
@@ -263,12 +227,12 @@ namespace DCTS.UI
             using (var ctx = new DctsEntities())
             {
 
-                var query = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Country && o.nation != null);
+                var query = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Flight && o.title != null);
 
 
                 if (title.Length > 0)
                 {
-                    query = query.Where(o => o.city.Contains(title));
+                    query = query.Where(o => o.title.Contains(title));
                 }
 
                 if (pageSize > 0)
@@ -291,11 +255,9 @@ namespace DCTS.UI
             var title = this.keywordTextBox.Text;
             string conditions = "";
 
-
-
             if (title.Length > 0)
             {
-                conditions = conditions + " AND " + string.Format("(`nation` like '%{0}%')", title);
+                conditions = conditions + " AND " + string.Format("(`title` like '%{0}%')", title);
             }
 
             if (conditions.Length > 0)
@@ -316,7 +278,7 @@ namespace DCTS.UI
 
                 var model = row.DataBoundItem as ComboLocation;
 
-                var form = new NewNationForm("Edit", model);
+                var form = new NewAirportForm("Edit", model);
                 if (form.ShowDialog() == DialogResult.Yes)
                 {
                     BeginActive();
@@ -334,18 +296,98 @@ namespace DCTS.UI
                     BeginActive();
                 }
             }
+            if (column == this.uploadColumn1)
+            {
 
+                var row = dataGridView.Rows[e.RowIndex];
+
+                var model = row.DataBoundItem as ComboLocation;
+                openFileDialog1.Filter = "DOCX(*.doc,*.docx)|*.doc;*.docx"; //文件类型
+                if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    if (openFileDialog1.FileName == "")
+                        return;
+
+                    model.word = openFileDialog1.FileName;
+                }
+                using (var ctx = new DctsEntities())
+                {
+                    ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
+                    if (lastLocation != null)
+                    {
+                        long newId = lastLocation.id + 1;
+
+                        long idStart = newId / 1000 * 1000;
+                        long idEnd = idStart + 1000;
+                        bool existSamedoc = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Flight && o.word == openFileDialog1.SafeFileName && o.id > idStart && o.id < idEnd).Count() > 0);
+                        if (existSamedoc)
+                        {
+                            MessageBox.Show(string.Format("文件名<{0}>已在, 请使用其他文件名！", model.word));
+                            return;
+                        }
+                    }
+                    bool hasDoc = (openFileDialog1.FileName.Length > 0);
+                    string docFilePath = this.openFileDialog1.FileName;
+
+                    ComboLocation obj = ctx.ComboLocations.Find(Convert.ToInt32(model.id));
+                    obj.title = model.title;
+                    obj.ltype = model.ltype;
+                    obj.tips = model.tips;
+                    obj.word = openFileDialog1.SafeFileName;
+                    if (hasDoc)
+                    {
+
+                        string copyToPath = EntityPathConfig.LocationWordPath(obj);
+                        if (!File.Exists(copyToPath))
+                            File.Copy(docFilePath, copyToPath, true);
+                    }
+                    ctx.SaveChanges();
+                }
+                BeginActive();
+
+            }
+            else if (column == this.downloadColumn1)
+            {
+                string strFileName = String.Empty;
+
+                var row = dataGridView.Rows[e.RowIndex];
+                var model = row.DataBoundItem as ComboLocation;
+
+                FolderBrowserDialog dialog = new FolderBrowserDialog();
+                dialog.Description = "请选择下载路径";
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    strFileName = dialog.SelectedPath;
+                }
+
+                if (strFileName.Length > 0)
+                {
+                    using (var ctx = new DctsEntities())
+                    {
+                        List<ComboLocation> list = ctx.ComboLocations.Where(o => o.ltype == model.ltype && o.nation == model.nation).ToList();
+                        foreach (ComboLocation item in list)
+                        {
+                            string copyToPath = EntityPathConfig.LocationWordPath(item);
+                            if (File.Exists(copyToPath))
+                            {
+                                File.Copy(copyToPath, strFileName + "\\" + item.word.ToString());
+                                MessageBox.Show("下载完成！");
+                            }
+                        }
+                    }
+                }
+            }
 
 
         }
 
         private void NationsControl_Resize(object sender, EventArgs e)
         {  //                                                   id
-            nationColumn1.Width = dataGridView.ClientSize.Width - 60 - 100 * 3 - 280 - 200 - 100 - 60 * 2 - 3;
+            titleColumn1.Width = dataGridView.ClientSize.Width - 60 - 100 * 3 - 280 - 200 - 100 - 60 * 2 - 3;
             //是否包含滚动条
             if (!(this.dataGridView.DisplayedRowCount(false) == this.dataGridView.RowCount))
             {
-                nationColumn1.Width -= 18;
+                titleColumn1.Width -= 18;
             }
 
         }
