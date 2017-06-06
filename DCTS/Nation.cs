@@ -14,7 +14,7 @@ namespace DCTS
     
     public partial class Nation
     {
-        public long id { get; set; }
+        public int id { get; set; }
         public string title { get; set; }
         public string localTitle { get; set; }
         public string code { get; set; }

@@ -35,6 +35,18 @@ namespace DCTS.DB
             }
         }
 
+        public static List<MockEntity> LocationTypeList{
+            get{
+                return (new[]{ 
+                    new MockEntity{ Id = (int)ComboLocationEnum.Blank, ShortName="空白页", FullName = "空白页" },
+                    new MockEntity{ Id = (int)ComboLocationEnum.Scenic,ShortName="景点", FullName = "景点" },
+                    new MockEntity{ Id = (int)ComboLocationEnum.Hotel, ShortName="住宿",FullName = "住宿" },
+                    new MockEntity{ Id = (int)ComboLocationEnum.Dining, ShortName="餐厅",FullName = "餐厅" },
+                    new MockEntity{ Id = (int)ComboLocationEnum.Flight, ShortName="航班",FullName = "航班" },
+                }.ToList());
+            }
+        }
+
         private static void InitializeNationList()
         {
             nationList = db.Nations.ToList();        

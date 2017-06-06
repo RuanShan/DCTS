@@ -14,7 +14,7 @@ namespace DCTS
     
     public partial class City
     {
-        public long id { get; set; }
+        public int id { get; set; }
         public long nationId { get; set; }
         public string title { get; set; }
         public string localTitle { get; set; }

@@ -30,7 +30,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="uint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="code" Type="varchar" MaxLength="24" />
           <Property Name="nationId" Type="uint" Nullable="false" />
           <Property Name="nationCode" Type="varchar" Nullable="false" MaxLength="12" />
@@ -173,7 +173,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="uint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="code" Type="varchar" MaxLength="12" />
           <Property Name="title" Type="varchar" Nullable="false" MaxLength="45" />
           <Property Name="localTitle" Type="varchar" MaxLength="45" />
@@ -359,7 +359,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Type="Int64" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Type="Int64" Name="nationId" Nullable="false" />
           <Property Type="String" Name="title" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="localTitle" MaxLength="45" FixedLength="false" Unicode="false" />
@@ -372,7 +372,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Type="Int64" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Type="String" Name="title" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="localTitle" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="code" MaxLength="12" FixedLength="false" Unicode="false" />

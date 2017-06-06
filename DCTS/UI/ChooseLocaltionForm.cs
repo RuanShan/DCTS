@@ -25,12 +25,7 @@ namespace DCTS.UI
         {
             InitializeComponent();
             this.dataGridView1.AutoGenerateColumns = false;
-            locationTypeList = new List<MockEntity>();
-
-            locationTypeList.Add(new MockEntity { Id = (int)ComboLocationEnum.Scenic, FullName = "景点" });
-            locationTypeList.Add(new MockEntity { Id = (int)ComboLocationEnum.Hotel, FullName = "住宿" });
-            locationTypeList.Add(new MockEntity { Id = (int)ComboLocationEnum.Dining, FullName = "餐厅" });
-            locationTypeList.Add(new MockEntity { Id = (int)ComboLocationEnum.Flight, FullName = "机场" });
+            locationTypeList = GlobalCache.LocationTypeList;
         }
 
         // 初始化过滤条件数据
@@ -73,7 +68,8 @@ namespace DCTS.UI
             int size = 5000;
             //int offset = (pager1.PageCurrent > 1 ? pager1.OffSet(pager1.PageCurrent - 1) : 0);
 
-            int[] availableLocationTypes = { (int)ComboLocationEnum.Scenic, (int)ComboLocationEnum.Dining, (int)ComboLocationEnum.Hotel };
+            var availableLocationTypes = locationTypeList.Select(o => o.Id).ToList();
+
             var query = ctx.ComboLocations.Where(o => availableLocationTypes.Contains(o.ltype));
 
             if (locationType > 0)

@@ -70,6 +70,7 @@ namespace DCTS.UI
             {
                 tripsControl = new TripListControl();
                 tripsControl.Dock = DockStyle.Fill;
+                tripsControl.CommandRequestEvent += new EventHandler(OnCommandRequest);
             }
             var eventArgs = new CommandRequestEventArgs(CommandRequestEnum.TripList);
             OnCommandRequest(tripsControl, eventArgs);

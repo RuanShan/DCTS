@@ -36,11 +36,7 @@ namespace DCTS.UI
 
             localtionForm = new ChooseLocaltionForm();
 
-            var locationTypeList = new []{ 
-                new { Id = (int)ComboLocationEnum.Blank, FullName = "空白页" },
-                new { Id = (int)ComboLocationEnum.Scenic, FullName = "景点" },
-                new { Id = (int)ComboLocationEnum.Hotel, FullName = "住宿" },
-                new { Id = (int)ComboLocationEnum.Dining, FullName = "餐厅" }}.ToList();
+            var locationTypeList = GlobalCache.LocationTypeList;
 
             this.locationTypeColumn.DisplayMember = "FullName";
             this.locationTypeColumn.ValueMember = "Id";
