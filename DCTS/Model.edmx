@@ -101,6 +101,21 @@
           <Property Name="end_at" Type="datetime" />
           <Property Name="cover_id" Type="int" Nullable="false" />
           <Property Name="schedule" Type="varchar" MaxLength="2048" />
+          <Property Name="flight_no" Type="varchar" MaxLength="45" />
+          <Property Name="flight_from" Type="varchar" MaxLength="45" />
+          <Property Name="flight_to" Type="varchar" MaxLength="45" />
+          <Property Name="flight_layover" Type="tinyint" Nullable="false" />
+          <Property Name="flight_start_at" Type="datetime" />
+          <Property Name="flight_end_at" Type="datetime" />
+          <Property Name="flight2_start_at" Type="datetime" />
+          <Property Name="flight2_end_at" Type="datetime" />
+          <Property Name="flight2_from" Type="varchar" MaxLength="45" />
+          <Property Name="flight2_to" Type="varchar" MaxLength="45" />
+          <Property Name="flight2_no" Type="varchar" MaxLength="45" />
+          <Property Name="airport_from" Type="varchar" MaxLength="45" />
+          <Property Name="airport_to" Type="varchar" MaxLength="45" />
+          <Property Name="airport2_from" Type="varchar" MaxLength="45" />
+          <Property Name="airport2_to" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="Dinings">
           <Key>
@@ -412,6 +427,21 @@
           <Property Type="DateTime" Name="end_at" />
           <Property Type="Int32" Name="cover_id" Nullable="false" />
           <Property Type="String" Name="schedule" MaxLength="2048" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="flight_no" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="flight_from" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="flight_to" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="SByte" Name="flight_layover" Nullable="false" />
+          <Property Type="DateTime" Name="flight_start_at" />
+          <Property Type="DateTime" Name="flight_end_at" />
+          <Property Type="DateTime" Name="flight2_start_at" />
+          <Property Type="DateTime" Name="flight2_end_at" />
+          <Property Type="String" Name="flight2_from" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="flight2_to" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="flight2_no" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="airport_from" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="airport_to" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="airport2_from" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="airport2_to" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="locationId1">
           <End Type="DctsModel.ComboLocation" Role="ComboLocation" Multiplicity="1" />
@@ -658,6 +688,21 @@
           <EntitySetMapping Name="DayLocations">
             <EntityTypeMapping TypeName="DctsModel.DayLocation">
               <MappingFragment StoreEntitySet="DayLocations">
+                <ScalarProperty Name="airport2_to" ColumnName="airport2_to" />
+                <ScalarProperty Name="airport2_from" ColumnName="airport2_from" />
+                <ScalarProperty Name="airport_to" ColumnName="airport_to" />
+                <ScalarProperty Name="airport_from" ColumnName="airport_from" />
+                <ScalarProperty Name="flight2_no" ColumnName="flight2_no" />
+                <ScalarProperty Name="flight2_to" ColumnName="flight2_to" />
+                <ScalarProperty Name="flight2_from" ColumnName="flight2_from" />
+                <ScalarProperty Name="flight2_end_at" ColumnName="flight2_end_at" />
+                <ScalarProperty Name="flight2_start_at" ColumnName="flight2_start_at" />
+                <ScalarProperty Name="flight_end_at" ColumnName="flight_end_at" />
+                <ScalarProperty Name="flight_start_at" ColumnName="flight_start_at" />
+                <ScalarProperty Name="flight_layover" ColumnName="flight_layover" />
+                <ScalarProperty Name="flight_to" ColumnName="flight_to" />
+                <ScalarProperty Name="flight_from" ColumnName="flight_from" />
+                <ScalarProperty Name="flight_no" ColumnName="flight_no" />
                 <ScalarProperty Name="schedule" ColumnName="schedule" />
                 <ScalarProperty Name="cover_id" ColumnName="cover_id" />
                 <ScalarProperty Name="end_at" ColumnName="end_at" />

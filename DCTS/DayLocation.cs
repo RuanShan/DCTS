@@ -26,6 +26,21 @@ namespace DCTS
         public Nullable<System.DateTime> end_at { get; set; }
         public int cover_id { get; set; }
         public string schedule { get; set; }
+        public string flight_no { get; set; }
+        public string flight_from { get; set; }
+        public string flight_to { get; set; }
+        public sbyte flight_layover { get; set; }
+        public Nullable<System.DateTime> flight_start_at { get; set; }
+        public Nullable<System.DateTime> flight_end_at { get; set; }
+        public Nullable<System.DateTime> flight2_start_at { get; set; }
+        public Nullable<System.DateTime> flight2_end_at { get; set; }
+        public string flight2_from { get; set; }
+        public string flight2_to { get; set; }
+        public string flight2_no { get; set; }
+        public string airport_from { get; set; }
+        public string airport_to { get; set; }
+        public string airport2_from { get; set; }
+        public string airport2_to { get; set; }
     
         public virtual ComboLocation ComboLocation { get; set; }
         public virtual Trip Trip { get; set; }
