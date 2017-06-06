@@ -41,6 +41,11 @@ namespace DCTS
         public string airport_to { get; set; }
         public string airport2_from { get; set; }
         public string airport2_to { get; set; }
+        public string flight_ticket { get; set; }
+        public int flight_company { get; set; }
+        public string tips { get; set; }
+        public string memo { get; set; }
+        public string route { get; set; }
     
         public virtual ComboLocation ComboLocation { get; set; }
         public virtual Trip Trip { get; set; }

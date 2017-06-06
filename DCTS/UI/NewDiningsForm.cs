@@ -45,10 +45,10 @@ namespace DCTS.UI
                 this.localTitleTextBox.Text = obj.title;
                 //this.openAtDateTimePicker.Text = obj.open_at.ToString();
                 //this.closeAtDateTimePicker.Text = obj.close_at.ToString();
-
-                long folername = obj.id / 1000;
-                string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\location_" + ComboLocationEnum.Dining.ToString().ToLower() + "\\" + folername + "\\", obj.img);
-                pictureBox1.ImageLocation = lcoalPath;
+                if (obj.img != null)
+                {
+                    pictureBox1.ImageLocation = EntityPathConfig.LocationImagePath(obj);
+                }
             }
         }
 

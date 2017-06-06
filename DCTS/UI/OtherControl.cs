@@ -28,15 +28,12 @@ namespace DCTS.UI
         {
             InitializeComponent();
             this.dataGridChanges = new Hashtable();
-            // pager1.Bind();
             dataGridView.AutoGenerateColumns = false;
-            pager1.PageCurrent = 1;
         }
 
         public void BeginActive()
         {
-            pager1.Bind();
-
+            InitializeDataGridView();
         }
         
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -85,8 +82,7 @@ namespace DCTS.UI
 
         private void btfind_Click(object sender, EventArgs e)
         {
-            pager1.PageCurrent = 1;
-            pager1.Bind();
+           
         }
 
         private void dataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -167,15 +163,17 @@ namespace DCTS.UI
         // 初始化DataGridView的数据源, 
         private int InitializeDataGridView(int pageCurrent = 1)
         {
-           
-            int count = 0;
-            int pageSize = pager1.PageSize;
+
+            int[] otherLocationType = { (int)ComboLocationEnum.Letter, (int)ComboLocationEnum.Preparation, (int)ComboLocationEnum.Google };
+
 
             using (var ctx = new DctsEntities())
             {
-                List<ComboLocation> list = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Letter || o.ltype == (int)ComboLocationEnum.Preparation || o.ltype == (int)ComboLocationEnum.Google).ToList();
+                List<ComboLocation> list = ctx.ComboLocations.Where(o => otherLocationType.Contains( o.ltype )).ToList();
+                  
+                // var list = Paginate(pageCurrent, pageSize, title);
 
-                
+
                 this.dataGridView.DataSource = list;
             }
             return 1;
@@ -185,7 +183,8 @@ namespace DCTS.UI
         {
             DataGridViewColumn column = dataGridView.Columns[e.ColumnIndex];
 
-            if (column == AddColumn1)
+            if (column == this.downloadColumn1)
+
             {
 
                 var row = dataGridView.Rows[e.RowIndex];
@@ -218,12 +217,14 @@ namespace DCTS.UI
                 BeginActive();
 
             }
-            else if (column == DownColumn1)
+            else if (column == this.uploadColumn1)
+
             {
                 string strFileName = String.Empty;
 
                 var row = dataGridView.Rows[e.RowIndex];
                 var model = row.DataBoundItem as ComboLocation;
+
                 FolderBrowserDialog dialog = new FolderBrowserDialog();
                 dialog.Description = "请选择下载路径";
                 if (dialog.ShowDialog() == DialogResult.OK)
