@@ -48,7 +48,7 @@
             // openFileDialog1
             // 
             this.openFileDialog1.Filter = "Doc(*.doc,*.docx)|*.doc;*.docx";
-            this.openFileDialog1.Title = "请选择国家文件";
+            this.openFileDialog1.Title = "请选择文件";
             // 
             // cancelButton
             // 
