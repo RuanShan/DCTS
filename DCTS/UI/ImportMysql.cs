@@ -47,19 +47,21 @@ namespace DCTS.CustomComponents
             {
                 Dictionary<string, string> setting = DBConfiguration.ConnectionSettings();
 
-                string sql = SqlPath.SetupSql;
-                string mysql = Path.Combine( pathTextBox.Text, "bin", "mysql");
-                string cmd = mysql + " -u " + setting["user id"] + " -p " + setting["password"] + setting["database"] + " <" + sql;
+                string setupSql = SqlPath.SetupSql;
+                string seedSql = SqlPath.SeedSql;
+                //string mysql = Path.Combine( pathTextBox.Text, "bin", "mysql");
+                //string cmd = mysql + " -u " + setting["user id"] + " -p " + setting["password"] + setting["database"] + " <" + setupSql;
 
                 
 
                 using(MySqlConnection conn = new MySqlConnection( DBConfiguration.GetConnectionString() ))
                 {
-
                     MySqlScript script = new MySqlScript(conn);
-
-                    script.Query = File.ReadAllText(sql);
-
+                    //加载表结构
+                    script.Query = File.ReadAllText(setupSql);
+                    script.Execute();
+                    //加载基本数据
+                    script.Query = File.ReadAllText(seedSql);
                     script.Execute();
                 }
                 

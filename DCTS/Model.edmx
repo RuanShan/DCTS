@@ -82,6 +82,8 @@
           <Property Name="birthday" Type="datetime" />
           <Property Name="enname" Type="varchar" MaxLength="128" />
           <Property Name="passport" Type="varchar" MaxLength="45" />
+          <Property Name="created_at" Type="datetime" Nullable="false" />
+          <Property Name="updated_at" Type="datetime" />
         </EntityType>
         <EntityType Name="DayLocations">
           <Key>
@@ -490,6 +492,8 @@
           <Property Type="DateTime" Name="birthday" />
           <Property Type="String" Name="enname" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="passport" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="created_at" Nullable="false" />
+          <Property Type="DateTime" Name="updated_at" />
         </EntityType>
         <EntityType Name="LocationImage">
           <Key>
@@ -686,6 +690,8 @@
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="DctsModel.Customer">
               <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
                 <ScalarProperty Name="passport" ColumnName="passport" />
                 <ScalarProperty Name="enname" ColumnName="enname" />
                 <ScalarProperty Name="birthday" ColumnName="birthday" />

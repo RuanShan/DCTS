@@ -57,18 +57,18 @@
             // 
             // passporttexbox
             // 
-            this.passporttexbox.Location = new System.Drawing.Point(118, 140);
+            this.passporttexbox.Location = new System.Drawing.Point(94, 139);
             this.passporttexbox.Name = "passporttexbox";
-            this.passporttexbox.Size = new System.Drawing.Size(233, 20);
-            this.passporttexbox.TabIndex = 8;
+            this.passporttexbox.Size = new System.Drawing.Size(233, 21);
+            this.passporttexbox.TabIndex = 4;
             // 
             // cancelButton
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.No;
-            this.cancelButton.Location = new System.Drawing.Point(561, 243);
+            this.cancelButton.Location = new System.Drawing.Point(554, 197);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 25);
-            this.cancelButton.TabIndex = 18;
+            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.TabIndex = 6;
             this.cancelButton.Text = "取消";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
@@ -76,10 +76,10 @@
             // saveButton
             // 
             this.saveButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
-            this.saveButton.Location = new System.Drawing.Point(480, 243);
+            this.saveButton.Location = new System.Drawing.Point(473, 197);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(75, 25);
-            this.saveButton.TabIndex = 17;
+            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.TabIndex = 5;
             this.saveButton.Text = "保存";
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
@@ -87,27 +87,27 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(361, 82);
+            this.label5.Location = new System.Drawing.Point(337, 83);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(55, 13);
+            this.label5.Size = new System.Drawing.Size(53, 12);
             this.label5.TabIndex = 4;
             this.label5.Text = "英文名称";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(81, 109);
+            this.label4.Location = new System.Drawing.Point(57, 111);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(31, 13);
+            this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 4;
             this.label4.Text = "生日";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(385, 108);
+            this.label3.Location = new System.Drawing.Point(361, 111);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(31, 13);
+            this.label3.Size = new System.Drawing.Size(29, 12);
             this.label3.TabIndex = 4;
             this.label3.Text = "性别";
             // 
@@ -115,27 +115,27 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(12, 26);
+            this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(12, 21);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(681, 44);
+            this.label2.Size = new System.Drawing.Size(666, 41);
             this.label2.TabIndex = 3;
             this.label2.Text = "新建客户";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ennameTextBox
             // 
-            this.ennameTextBox.Location = new System.Drawing.Point(420, 78);
+            this.ennameTextBox.Location = new System.Drawing.Point(396, 79);
             this.ennameTextBox.Name = "ennameTextBox";
-            this.ennameTextBox.Size = new System.Drawing.Size(233, 20);
-            this.ennameTextBox.TabIndex = 3;
+            this.ennameTextBox.Size = new System.Drawing.Size(233, 21);
+            this.ennameTextBox.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(81, 78);
+            this.label1.Location = new System.Drawing.Point(57, 83);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(31, 13);
+            this.label1.Size = new System.Drawing.Size(29, 12);
             this.label1.TabIndex = 0;
             this.label1.Text = "姓名";
             // 
@@ -150,18 +150,18 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(62, 140);
+            this.label7.Location = new System.Drawing.Point(38, 143);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(55, 13);
+            this.label7.Size = new System.Drawing.Size(53, 12);
             this.label7.TabIndex = 10;
             this.label7.Text = "护照号码";
             // 
             // nameTextBox
             // 
-            this.nameTextBox.Location = new System.Drawing.Point(120, 75);
+            this.nameTextBox.Location = new System.Drawing.Point(96, 79);
             this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(233, 20);
-            this.nameTextBox.TabIndex = 36;
+            this.nameTextBox.Size = new System.Drawing.Size(233, 21);
+            this.nameTextBox.TabIndex = 0;
             // 
             // genderComboBox
             // 
@@ -169,24 +169,24 @@
             this.genderComboBox.Items.AddRange(new object[] {
             "男",
             "女"});
-            this.genderComboBox.Location = new System.Drawing.Point(420, 104);
+            this.genderComboBox.Location = new System.Drawing.Point(396, 107);
             this.genderComboBox.Name = "genderComboBox";
-            this.genderComboBox.Size = new System.Drawing.Size(233, 21);
-            this.genderComboBox.TabIndex = 1;
+            this.genderComboBox.Size = new System.Drawing.Size(233, 20);
+            this.genderComboBox.TabIndex = 3;
             // 
             // birthdayTextBox
             // 
             this.birthdayTextBox.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.birthdayTextBox.Location = new System.Drawing.Point(120, 105);
+            this.birthdayTextBox.Location = new System.Drawing.Point(96, 107);
             this.birthdayTextBox.Name = "birthdayTextBox";
-            this.birthdayTextBox.Size = new System.Drawing.Size(233, 20);
-            this.birthdayTextBox.TabIndex = 38;
+            this.birthdayTextBox.Size = new System.Drawing.Size(233, 21);
+            this.birthdayTextBox.TabIndex = 2;
             // 
             // NewCustomerForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(706, 289);
+            this.ClientSize = new System.Drawing.Size(691, 256);
             this.Controls.Add(this.birthdayTextBox);
             this.Controls.Add(this.nameTextBox);
             this.Controls.Add(this.passporttexbox);
