@@ -163,8 +163,6 @@ namespace DCTS.UI
         // 初始化DataGridView的数据源, 
         private int InitializeDataGridView(int pageCurrent = 1)
         {
-<<<<<<< HEAD
-            string title = (this.keywordTextBox.Text != NoOptionSelected ? this.keywordTextBox.Text : string.Empty);
 
             int[] otherLocationType = { (int)ComboLocationEnum.Letter, (int)ComboLocationEnum.Preparation, (int)ComboLocationEnum.Google };
 
@@ -175,17 +173,7 @@ namespace DCTS.UI
                   
                 // var list = Paginate(pageCurrent, pageSize, title);
 
-=======
-           
-            int count = 0;
-            int pageSize = pager1.PageSize;
 
-            using (var ctx = new DctsEntities())
-            {
-                List<ComboLocation> list = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Letter || o.ltype == (int)ComboLocationEnum.Preparation || o.ltype == (int)ComboLocationEnum.Google).ToList();
-
-                
->>>>>>> ef1825ec87ccb334290495faeeedf1893beb27b9
                 this.dataGridView.DataSource = list;
             }
             return 1;
@@ -195,11 +183,8 @@ namespace DCTS.UI
         {
             DataGridViewColumn column = dataGridView.Columns[e.ColumnIndex];
 
-<<<<<<< HEAD
             if (column == this.downloadColumn1)
-=======
-            if (column == AddColumn1)
->>>>>>> ef1825ec87ccb334290495faeeedf1893beb27b9
+
             {
 
                 var row = dataGridView.Rows[e.RowIndex];
@@ -232,26 +217,20 @@ namespace DCTS.UI
                 BeginActive();
 
             }
-<<<<<<< HEAD
             else if (column == this.uploadColumn1)
-=======
-            else if (column == DownColumn1)
->>>>>>> ef1825ec87ccb334290495faeeedf1893beb27b9
+
             {
                 string strFileName = String.Empty;
 
                 var row = dataGridView.Rows[e.RowIndex];
                 var model = row.DataBoundItem as ComboLocation;
-<<<<<<< HEAD
-                string msg = string.Format("确定删除<{0}>？", model.title);
-=======
+
                 FolderBrowserDialog dialog = new FolderBrowserDialog();
                 dialog.Description = "请选择下载路径";
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     strFileName = dialog.SelectedPath;
                 }
->>>>>>> ef1825ec87ccb334290495faeeedf1893beb27b9
 
                 if (strFileName.Length > 0)
                 {
