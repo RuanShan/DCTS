@@ -233,15 +233,13 @@ namespace DCTS.UI
             #region  new
             if (dataGridView.Columns[e.ColumnIndex] == this.imgColumn1)
             {
-                if (hotelList != null && e.RowIndex < hotelList.Count)
+                if (e.RowIndex < dataGridView.Rows.Count)
                 {
 
                     ComboLocation selectedItem = dataGridView.Rows[e.RowIndex].DataBoundItem as ComboLocation;
-                    long folername = selectedItem.id / 1000;
                     if (selectedItem.img != null && selectedItem.img != "")
                     {
-                      
-                        string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\location_" + ComboLocationEnum.Hotel.ToString().ToLower() + "\\" + folername + "\\", selectedItem.img);
+                        string lcoalPath = EntityPathConfig.LocationImagePath(selectedItem);
                         e.Value = GetImage1(lcoalPath);
                     }
                 }
@@ -252,8 +250,6 @@ namespace DCTS.UI
         }
         public System.Drawing.Image GetImage1(string path)
         {
-            //C:\mysteap\work_office\ProjectOut\RuanShanLvYou\DCTS\DCTS\bin\Debug\\data\images\locations\0\QQ截图20170105225656.png
-            //C:\mysteap\work_office\ProjectOut\RuanShanLvYou\DCTS\DCTS\bin\Debug\data\images\location_scenic\0
             if (File.Exists(path))
             {
 
