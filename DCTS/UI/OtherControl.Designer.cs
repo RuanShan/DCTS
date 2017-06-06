@@ -46,10 +46,10 @@
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.idColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nationColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.titleColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.word = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.deleteColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.editColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.AddColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.DownColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -67,10 +67,10 @@
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idColumn1,
-            this.nationColumn1,
+            this.titleColumn1,
             this.word,
-            this.deleteColumn1,
-            this.editColumn1});
+            this.AddColumn1,
+            this.DownColumn1});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -198,11 +198,11 @@
             this.idColumn1.Name = "idColumn1";
             this.idColumn1.Width = 60;
             // 
-            // nationColumn1
+            // titleColumn1
             // 
-            this.nationColumn1.DataPropertyName = "name";
-            this.nationColumn1.HeaderText = "名称";
-            this.nationColumn1.Name = "nationColumn1";
+            this.titleColumn1.DataPropertyName = "title";
+            this.titleColumn1.HeaderText = "名称";
+            this.titleColumn1.Name = "titleColumn1";
             // 
             // word
             // 
@@ -210,27 +210,27 @@
             this.word.HeaderText = "word";
             this.word.Name = "word";
             // 
-            // deleteColumn1
+            // AddColumn1
             // 
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(2, 12, 1, 12);
-            this.deleteColumn1.DefaultCellStyle = dataGridViewCellStyle1;
-            this.deleteColumn1.HeaderText = "";
-            this.deleteColumn1.Name = "deleteColumn1";
-            this.deleteColumn1.Text = "上传";
-            this.deleteColumn1.UseColumnTextForButtonValue = true;
-            this.deleteColumn1.Width = 60;
+            this.AddColumn1.DefaultCellStyle = dataGridViewCellStyle1;
+            this.AddColumn1.HeaderText = "";
+            this.AddColumn1.Name = "AddColumn1";
+            this.AddColumn1.Text = "上传";
+            this.AddColumn1.UseColumnTextForButtonValue = true;
+            this.AddColumn1.Width = 60;
             // 
-            // editColumn1
+            // DownColumn1
             // 
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(2, 12, 2, 12);
-            this.editColumn1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.editColumn1.HeaderText = "";
-            this.editColumn1.Name = "editColumn1";
-            this.editColumn1.Text = "下载";
-            this.editColumn1.UseColumnTextForButtonValue = true;
-            this.editColumn1.Width = 60;
+            this.DownColumn1.DefaultCellStyle = dataGridViewCellStyle2;
+            this.DownColumn1.HeaderText = "";
+            this.DownColumn1.Name = "DownColumn1";
+            this.DownColumn1.Text = "下载";
+            this.DownColumn1.UseColumnTextForButtonValue = true;
+            this.DownColumn1.Width = 60;
             // 
             // OtherControl
             // 
@@ -269,9 +269,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.DataGridViewTextBoxColumn idColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nationColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn titleColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn word;
-        private System.Windows.Forms.DataGridViewButtonColumn deleteColumn1;
-        private System.Windows.Forms.DataGridViewButtonColumn editColumn1;
+        private System.Windows.Forms.DataGridViewButtonColumn AddColumn1;
+        private System.Windows.Forms.DataGridViewButtonColumn DownColumn1;
     }
 }
