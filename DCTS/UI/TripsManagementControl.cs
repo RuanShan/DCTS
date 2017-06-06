@@ -22,7 +22,7 @@ namespace DCTS.UI
         CustomerTripListControl bookControl;
         EditCustomerTripDaysControl editCustomerTripControl;
         NationsControl nationsControl;
-
+        OtherControl otherControl;
         public TripsManagementControl()
         {
             InitializeComponent();
@@ -183,6 +183,20 @@ namespace DCTS.UI
             this.mainPanel.Controls.Clear();
             this.mainPanel.Controls.Add(nationsControl);
 
+        }
+
+        private void otherToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (otherControl == null)
+            {
+                otherControl = new OtherControl();
+                otherControl.Dock = DockStyle.Fill;
+            }
+            this.otherControl.BeginActive();
+            this.mainPanel.Controls.Clear();
+            this.mainPanel.Controls.Add(otherControl);
+
+            
         }
 
     }

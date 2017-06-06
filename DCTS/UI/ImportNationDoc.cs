@@ -104,7 +104,7 @@ namespace DCTS.CustomComponents
                             {
                                 string serverimg = file.Replace(imageName + "\\", "");
 
-                                var locations = ctx.ComboLocations.Where(o => o.word == serverimg).ToList();
+                                var locations = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Country && o.word == serverimg).ToList();
                                 //如果存在复制到相应的文件夹中
                                 if (locations != null && locations.Count != 0)
                                 {

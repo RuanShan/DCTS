@@ -18,7 +18,7 @@ using DCTS.Uti;
 
 namespace DCTS.UI
 {
-    public partial class NationsControl : UserControl
+    public partial class OtherControl : UserControl
     {
         private Hashtable dataGridChanges = null;
         private static string NoOptionSelected = "所有";
@@ -26,7 +26,7 @@ namespace DCTS.UI
         private SortableBindingList<ComboLocation> sortabledinningsOrderList;
         int RowRemark = 0;
         string sqlfilter = "";
-        public NationsControl()
+        public OtherControl()
         {
             InitializeComponent();
             this.dataGridChanges = new Hashtable();
@@ -40,9 +40,7 @@ namespace DCTS.UI
             pager1.Bind();
 
         }
-
-
-
+        
         private void newButton_Click(object sender, EventArgs e)
         {
             var form = new NewNationForm("create", null);
@@ -71,6 +69,7 @@ namespace DCTS.UI
             }
             InitializeDataGridView();
         }
+
         private List<long> GetOrderIdsBySelectedGridCell()
         {
 
@@ -84,6 +83,7 @@ namespace DCTS.UI
 
             return order_ids;
         }
+
         private IEnumerable<DataGridViewRow> GetSelectedRowsBySelectedCells(DataGridView dgv)
         {
             List<DataGridViewRow> rows = new List<DataGridViewRow>();
@@ -99,8 +99,7 @@ namespace DCTS.UI
             pager1.PageCurrent = 1;
             pager1.Bind();
         }
-
-
+        
         private void dataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow row = dataGridView.Rows[e.RowIndex];
@@ -146,8 +145,7 @@ namespace DCTS.UI
             #endregion
 
         }
-
-
+        
         private void dataGridView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
             DataGridViewRow dgrSingle = dataGridView.Rows[e.RowIndex];
@@ -158,9 +156,7 @@ namespace DCTS.UI
                 dataGridChanges[cell_key] = dgrSingle.Cells[e.ColumnIndex].Value;
             }
         }
-
-
-
+        
         private int pager1_EventPaging(EventPagingArg e)
         {
 
@@ -211,7 +207,7 @@ namespace DCTS.UI
 
         }
 
-        // 初始化DataGridView的数据源, 分页事件调用
+        // 初始化DataGridView的数据源, 
         private int InitializeDataGridView(int pageCurrent = 1)
         {
             string title = (this.keywordTextBox.Text != NoOptionSelected ? this.keywordTextBox.Text : string.Empty);
@@ -221,14 +217,12 @@ namespace DCTS.UI
 
             using (var ctx = new DctsEntities())
             {
-                //分页需要数据总数
-                count = Count(ComboLocationEnum.Country, title);
+                
+              //   var list = Paginate(pageCurrent, pageSize, title);
 
-                var list = Paginate(pageCurrent, pageSize, title);
-
-                this.dataGridView.DataSource = list;
+                //this.dataGridView.DataSource = list;
             }
-            return count;
+            return 1;
         }
         private static int Count(ComboLocationEnum locationType, string title)
         {
@@ -250,38 +244,7 @@ namespace DCTS.UI
             }
             return count;
         }
-        private static List<ComboLocation> Paginate(int currentPage = 1, int pageSize = 25, string title = "")
-        {
-            // 如果数据为0，分页控件，设置currentPage = 0; 这回导致下面查询异常
-            if (currentPage <= 0)
-            {
-                currentPage = 1;
-            }
-            List<ComboLocation> list = new List<ComboLocation>();
-
-            using (var ctx = new DctsEntities())
-            {
-
-                var query = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Country && o.nation != null);
-
-
-                if (title.Length > 0)
-                {
-                    query = query.Where(o => o.city.Contains(title));
-                }
-
-                if (pageSize > 0)
-                {
-                    int offset = (currentPage - 1) * pageSize;
-
-                    query = query.OrderBy(o => o.id).Skip(offset).Take(pageSize);
-                }
-                list = query.ToList();
-
-            }
-            return list;
-        }
-
+     
         // 根据当前选择条件，构造查询语句
         private string BuildSql()
         {
