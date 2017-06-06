@@ -35,9 +35,14 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.修改ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.idColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nationColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tips = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.word = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.editColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.deleteColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.uploadColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.downloadColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.newButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.keywordTextBox = new System.Windows.Forms.TextBox();
@@ -50,16 +55,7 @@
             this.pager1 = new DCTS.CustomComponents.Pager();
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.idColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nationColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tips = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.word = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.editColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.deleteColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.uploadColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.downloadColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
-            this.contextMenuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
@@ -101,27 +97,76 @@
             this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellContentClick);
             this.dataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView_CellFormatting);
             // 
-            // contextMenuStrip1
+            // idColumn1
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.修改ToolStripMenuItem,
-            this.deleteToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(147, 48);
+            this.idColumn1.DataPropertyName = "id";
+            this.idColumn1.HeaderText = "序号";
+            this.idColumn1.Name = "idColumn1";
+            this.idColumn1.Width = 60;
             // 
-            // 修改ToolStripMenuItem
+            // nationColumn1
             // 
-            this.修改ToolStripMenuItem.Name = "修改ToolStripMenuItem";
-            this.修改ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
-            this.修改ToolStripMenuItem.Text = "编辑";
-            this.修改ToolStripMenuItem.Click += new System.EventHandler(this.修改ToolStripMenuItem_Click_1);
+            this.nationColumn1.DataPropertyName = "nation";
+            this.nationColumn1.HeaderText = "国家";
+            this.nationColumn1.Name = "nationColumn1";
             // 
-            // deleteToolStripMenuItem
+            // tips
             // 
-            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
-            this.deleteToolStripMenuItem.Text = "删除此条住宿";
-            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            this.tips.DataPropertyName = "tips";
+            this.tips.HeaderText = "tips";
+            this.tips.Name = "tips";
+            // 
+            // word
+            // 
+            this.word.DataPropertyName = "word";
+            this.word.HeaderText = "模板文档";
+            this.word.Name = "word";
+            // 
+            // editColumn1
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(2, 12, 2, 12);
+            this.editColumn1.DefaultCellStyle = dataGridViewCellStyle1;
+            this.editColumn1.HeaderText = "";
+            this.editColumn1.Name = "editColumn1";
+            this.editColumn1.Text = "编辑";
+            this.editColumn1.UseColumnTextForButtonValue = true;
+            this.editColumn1.Width = 60;
+            // 
+            // deleteColumn1
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(2, 12, 1, 12);
+            this.deleteColumn1.DefaultCellStyle = dataGridViewCellStyle2;
+            this.deleteColumn1.HeaderText = "";
+            this.deleteColumn1.Name = "deleteColumn1";
+            this.deleteColumn1.Text = "删除";
+            this.deleteColumn1.UseColumnTextForButtonValue = true;
+            this.deleteColumn1.Width = 60;
+            // 
+            // uploadColumn1
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(2, 12, 1, 12);
+            this.uploadColumn1.DefaultCellStyle = dataGridViewCellStyle3;
+            this.uploadColumn1.HeaderText = "";
+            this.uploadColumn1.Name = "uploadColumn1";
+            this.uploadColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.uploadColumn1.Text = "上传";
+            this.uploadColumn1.UseColumnTextForButtonValue = true;
+            this.uploadColumn1.Width = 60;
+            // 
+            // downloadColumn1
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(2, 12, 1, 12);
+            this.downloadColumn1.DefaultCellStyle = dataGridViewCellStyle4;
+            this.downloadColumn1.HeaderText = "";
+            this.downloadColumn1.Name = "downloadColumn1";
+            this.downloadColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.downloadColumn1.Text = "下载";
+            this.downloadColumn1.UseColumnTextForButtonValue = true;
+            this.downloadColumn1.Width = 60;
             // 
             // newButton
             // 
@@ -197,8 +242,8 @@
             // saveFileDialog1
             // 
             this.saveFileDialog1.DefaultExt = "xslx";
-            this.saveFileDialog1.Filter = "EXCEL文件(*.xls,*.xlsx)|*.xls;*.xlsx";
-            this.saveFileDialog1.Title = "导出国家数据";
+            this.saveFileDialog1.Filter = "Doc(*.doc,*.docx)|*.doc;*.docx";
+            this.saveFileDialog1.Title = "导出数据";
             // 
             // openFileDialog1
             // 
@@ -229,77 +274,6 @@
             this.bindingSource1.DataSource = this.entityDataSource1;
             this.bindingSource1.Position = 0;
             // 
-            // idColumn1
-            // 
-            this.idColumn1.DataPropertyName = "id";
-            this.idColumn1.HeaderText = "序号";
-            this.idColumn1.Name = "idColumn1";
-            this.idColumn1.Width = 60;
-            // 
-            // nationColumn1
-            // 
-            this.nationColumn1.DataPropertyName = "nation";
-            this.nationColumn1.HeaderText = "国家";
-            this.nationColumn1.Name = "nationColumn1";
-            // 
-            // tips
-            // 
-            this.tips.DataPropertyName = "tips";
-            this.tips.HeaderText = "tips";
-            this.tips.Name = "tips";
-            // 
-            // word
-            // 
-            this.word.DataPropertyName = "word";
-            this.word.HeaderText = "模板文档";
-            this.word.Name = "word";
-            // 
-            // editColumn1
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(2, 12, 2, 12);
-            this.editColumn1.DefaultCellStyle = dataGridViewCellStyle1;
-            this.editColumn1.HeaderText = "";
-            this.editColumn1.Name = "editColumn1";
-            this.editColumn1.Text = "编辑";
-            this.editColumn1.UseColumnTextForButtonValue = true;
-            this.editColumn1.Width = 60;
-            // 
-            // deleteColumn1
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(2, 12, 1, 12);
-            this.deleteColumn1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.deleteColumn1.HeaderText = "";
-            this.deleteColumn1.Name = "deleteColumn1";
-            this.deleteColumn1.Text = "删除";
-            this.deleteColumn1.UseColumnTextForButtonValue = true;
-            this.deleteColumn1.Width = 60;
-            // 
-            // uploadColumn1
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(2, 12, 1, 12);
-            this.uploadColumn1.DefaultCellStyle = dataGridViewCellStyle3;
-            this.uploadColumn1.HeaderText = "";
-            this.uploadColumn1.Name = "uploadColumn1";
-            this.uploadColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.uploadColumn1.Text = "上传";
-            this.uploadColumn1.UseColumnTextForButtonValue = true;
-            this.uploadColumn1.Width = 60;
-            // 
-            // downloadColumn1
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(2, 12, 1, 12);
-            this.downloadColumn1.DefaultCellStyle = dataGridViewCellStyle4;
-            this.downloadColumn1.HeaderText = "";
-            this.downloadColumn1.Name = "downloadColumn1";
-            this.downloadColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.downloadColumn1.Text = "下载";
-            this.downloadColumn1.UseColumnTextForButtonValue = true;
-            this.downloadColumn1.Width = 60;
-            // 
             // NationsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -314,7 +288,6 @@
             this.Size = new System.Drawing.Size(688, 405);
             this.Resize += new System.EventHandler(this.NationsControl_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
-            this.contextMenuStrip1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
@@ -332,11 +305,8 @@
         private CustomComponents.EntityDataSource entityDataSource1;
         private System.Windows.Forms.TextBox keywordTextBox;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.BindingSource bindingSource1;
         private CustomComponents.Pager pager1;
-        private System.Windows.Forms.ToolStripMenuItem 修改ToolStripMenuItem;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btdown;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;

@@ -146,7 +146,7 @@ namespace DCTS.UI
             #endregion
 
         }
-        
+
         private void dataGridView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
             DataGridViewRow dgrSingle = dataGridView.Rows[e.RowIndex];
@@ -157,7 +157,7 @@ namespace DCTS.UI
                 dataGridChanges[cell_key] = dgrSingle.Cells[e.ColumnIndex].Value;
             }
         }
-        
+
         private int pager1_EventPaging(EventPagingArg e)
         {
 
@@ -165,17 +165,7 @@ namespace DCTS.UI
             return count;
         }
 
-        private void 修改ToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            int i = this.dataGridView.CurrentRow.Index;
-            ComboLocation selectedItem = nationlList[i];
-            var form = new NewNationForm("Edit", selectedItem);
-            if (form.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
-            {
-                InitializeDataGridView();
-            }
-        }
-
+      
         private void btdown_Click(object sender, EventArgs e)
         {
 
@@ -331,56 +321,54 @@ namespace DCTS.UI
 
             if (column == this.uploadColumn1)
             {
-              
-
-
                 var row = dataGridView.Rows[e.RowIndex];
+                string strFileName = String.Empty;
 
                 var model = row.DataBoundItem as ComboLocation;
-                openFileDialog1.Filter = "DOCX(*.doc,*.docx)|*.doc;*.docx"; //文件类型
+                // openFileDialog1.Filter = "DOCX(*.doc,*.docx)|*.doc;*.docx"; //文件类型
                 if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    if (openFileDialog1.FileName == "")
-                        return;
-
-                    model.word = openFileDialog1.FileName;
+                    strFileName = openFileDialog1.FileName;
                 }
-                using (var ctx = new DctsEntities())
+                if (strFileName.Length > 0)
                 {
-                    ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
-                    if (lastLocation != null)
+                    using (var ctx = new DctsEntities())
                     {
-                        long newId = lastLocation.id + 1;
-
-                        long idStart = newId / 1000 * 1000;
-                        long idEnd = idStart + 1000;
-                        bool existSamedoc = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Country && o.word == openFileDialog1.SafeFileName && o.id > idStart && o.id < idEnd).Count() > 0);
-                        if (existSamedoc)
+                        ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
+                        if (lastLocation != null)
                         {
-                            MessageBox.Show(string.Format("文件名<{0}>已在, 请使用其他文件名！", model.word));
-                            return;
+                            long newId = lastLocation.id + 1;
+
+                            long idStart = newId / 1000 * 1000;
+                            long idEnd = idStart + 1000;
+                            bool existSamedoc = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Country && o.word == openFileDialog1.SafeFileName && o.id > idStart && o.id < idEnd).Count() > 0);
+                            if (existSamedoc)
+                            {
+                                MessageBox.Show(string.Format("文件名<{0}>已在, 请使用其他文件名！", model.word));
+                                return;
+                            }
                         }
+
+
+                        bool hasDoc = (openFileDialog1.FileName.Length > 0);
+                        string docFilePath = this.openFileDialog1.FileName;
+
+                        ComboLocation obj = ctx.ComboLocations.Find(Convert.ToInt32(model.id));
+                        obj.nation = model.nation;
+                        obj.ltype = model.ltype;
+                        obj.tips = model.tips;
+                        obj.word = "";
+                        if (hasDoc)
+                        {
+                            obj.word = openFileDialog1.SafeFileName;
+                            string copyToPath = EntityPathConfig.LocationWordPath(obj);
+
+
+                            if (!File.Exists(copyToPath))
+                                File.Copy(docFilePath, copyToPath, true);
+                        }
+                        ctx.SaveChanges();
                     }
-
-
-                    bool hasDoc = (openFileDialog1.FileName.Length > 0);
-                    string docFilePath = this.openFileDialog1.FileName;
-
-                    ComboLocation obj = ctx.ComboLocations.Find(Convert.ToInt32(model.id));
-                    obj.nation = model.nation;
-                    obj.ltype = model.ltype;
-                    obj.tips = model.tips;
-                    obj.word = "";
-                    if (hasDoc)
-                    {
-                        obj.word = openFileDialog1.SafeFileName;
-                        string copyToPath = EntityPathConfig.LocationWordPath(obj);
-
-
-                        if (!File.Exists(copyToPath))
-                            File.Copy(docFilePath, copyToPath, true);
-                    }
-                    ctx.SaveChanges();
                 }
                 BeginActive();
 
@@ -392,13 +380,12 @@ namespace DCTS.UI
                 var row = dataGridView.Rows[e.RowIndex];
                 var model = row.DataBoundItem as ComboLocation;
 
-                FolderBrowserDialog dialog = new FolderBrowserDialog();
-                dialog.Description = "请选择下载路径";
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    strFileName = dialog.SelectedPath;
-                }
 
+                saveFileDialog1.FileName = model.word;
+                if (saveFileDialog1.ShowDialog(this) == DialogResult.OK)
+                {
+                    strFileName = saveFileDialog1.FileName.ToString();
+                }
                 if (strFileName.Length > 0)
                 {
                     using (var ctx = new DctsEntities())
@@ -409,7 +396,7 @@ namespace DCTS.UI
                             string copyToPath = EntityPathConfig.LocationWordPath(item);
                             if (File.Exists(copyToPath))
                             {
-                                File.Copy(copyToPath, strFileName + "\\" + item.word.ToString());
+                                File.Copy(copyToPath, strFileName);
                                 MessageBox.Show("下载完成！");
                             }
                         }

@@ -30,9 +30,13 @@ namespace DCTS.UI
 
                 this.textBox6.Text = obj.tips;
                 long folername = obj.id / 1000;
-                string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\export\\words" + "\\" + folername + "\\", obj.word);
                 if (obj.word != null && obj.word != "")
-                    this.docPathTextBox.Text = lcoalPath;
+                {
+                    string copyToPath = EntityPathConfig.LocationWordPath(obj);
+
+
+                    this.docPathTextBox.Text = copyToPath;
+                }
             }
         }
 
