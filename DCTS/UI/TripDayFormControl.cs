@@ -17,20 +17,36 @@ namespace DCTS.UI
             InitializeComponent();
         }
 
-        public void FillModelByForm(Trip trip)
+        public void FillModelByForm(TripDay trip)
         {
             trip.title = this.titleTextBox.Text;
-            trip.days = Convert.ToInt32(this.daysNumericUpDown.Value);
 
-            trip.memo = this.memoTextBox.Text;             
+            trip.tips = this.tipsTextBox.Text;
+
+            trip.schedule = this.scheduleTextBox.Text;
         }
 
-        public void FillFormByModel(Trip trip)
+        public void FillFormByModel(TripDay trip)
         {
 
             this.titleTextBox.Text = trip.title;
-            this.daysNumericUpDown.Value = trip.days;
-            this.memoTextBox.Text = trip.memo;
+            this.tipsTextBox.Text = trip.tips;
+            this.scheduleTextBox.Text = trip.schedule;
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void titleTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TripDayFormControl_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

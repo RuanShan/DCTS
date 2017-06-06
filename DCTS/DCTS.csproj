@@ -124,10 +124,14 @@
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Bus\ComboLoactionBusiness.cs" />
+<<<<<<< HEAD
     <EmbeddedResource Include="UI\OtherControl.resx">
       <DependentUpon>OtherControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Bus\CustomerTripWordExporterEx.csx" />
+=======
+    <Compile Include="Bus\CustomerTripWordExporterEx.cs" />
+>>>>>>> origin/master
     <Compile Include="Bus\CustomerTripWordExporter.cs" />
     <Compile Include="Bus\TripWordExporterEx.cs" />
     <Compile Include="Bus\CSVStreamReader.cs" />
@@ -201,6 +205,12 @@
       <DependentUpon>ChooseLocaltionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\CommandRequest.cs" />
+    <Compile Include="UI\EditCustomerTripDayForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\EditCustomerTripDayForm.Designer.cs">
+      <DependentUpon>EditCustomerTripDayForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\EditCustomerTripDaysControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -475,6 +485,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ChooseLocaltionForm.resx">
       <DependentUpon>ChooseLocaltionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\EditCustomerTripDayForm.resx">
+      <DependentUpon>EditCustomerTripDayForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\EditCustomerTripDaysControl.resx">
       <DependentUpon>EditCustomerTripDaysControl.cs</DependentUpon>

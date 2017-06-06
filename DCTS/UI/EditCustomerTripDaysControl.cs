@@ -303,5 +303,25 @@ namespace DCTS.UI
 
             }
         }
+
+        private void dayDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var tripDay = GetSelectedTripDay();
+            if (tripDay != null)
+            {
+                var editDayForm = new EditCustomerTripDayForm(tripDay.id);
+
+                if (editDayForm.ShowDialog() == DialogResult.Yes)
+                {
+                    InitializeDataSource(tripDay.day);
+                }
+            }
+        }
     }
 }

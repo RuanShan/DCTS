@@ -47,6 +47,8 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
+            this.label7 = new System.Windows.Forms.Label();
+            this.startAtDateTimePicker = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.daysNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).BeginInit();
@@ -55,7 +57,7 @@
             // findTemplateButton
             // 
             this.findTemplateButton.Enabled = false;
-            this.findTemplateButton.Location = new System.Drawing.Point(460, 106);
+            this.findTemplateButton.Location = new System.Drawing.Point(480, 110);
             this.findTemplateButton.Name = "findTemplateButton";
             this.findTemplateButton.Size = new System.Drawing.Size(45, 23);
             this.findTemplateButton.TabIndex = 36;
@@ -65,7 +67,7 @@
             // findCustomerButton
             // 
             this.findCustomerButton.Enabled = false;
-            this.findCustomerButton.Location = new System.Drawing.Point(460, 70);
+            this.findCustomerButton.Location = new System.Drawing.Point(480, 74);
             this.findCustomerButton.Name = "findCustomerButton";
             this.findCustomerButton.Size = new System.Drawing.Size(45, 23);
             this.findCustomerButton.TabIndex = 35;
@@ -75,7 +77,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(30, 177);
+            this.label5.Location = new System.Drawing.Point(325, 151);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 12);
             this.label5.TabIndex = 30;
@@ -83,20 +85,20 @@
             // 
             // daysNumericUpDown
             // 
-            this.daysNumericUpDown.Location = new System.Drawing.Point(65, 175);
+            this.daysNumericUpDown.Location = new System.Drawing.Point(360, 147);
             this.daysNumericUpDown.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
             this.daysNumericUpDown.Name = "daysNumericUpDown";
-            this.daysNumericUpDown.Size = new System.Drawing.Size(120, 21);
+            this.daysNumericUpDown.Size = new System.Drawing.Size(165, 21);
             this.daysNumericUpDown.TabIndex = 29;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(30, 211);
+            this.label3.Location = new System.Drawing.Point(50, 228);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 12);
             this.label3.TabIndex = 27;
@@ -104,7 +106,7 @@
             // 
             // titleTextBox
             // 
-            this.titleTextBox.Location = new System.Drawing.Point(65, 143);
+            this.titleTextBox.Location = new System.Drawing.Point(85, 186);
             this.titleTextBox.Name = "titleTextBox";
             this.titleTextBox.Size = new System.Drawing.Size(440, 21);
             this.titleTextBox.TabIndex = 26;
@@ -112,16 +114,16 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(30, 146);
+            this.label2.Location = new System.Drawing.Point(26, 189);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 12);
+            this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 25;
-            this.label2.Text = "名称";
+            this.label2.Text = "行程标题";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(30, 111);
+            this.label4.Location = new System.Drawing.Point(50, 115);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 34;
@@ -130,7 +132,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(30, 76);
+            this.label6.Location = new System.Drawing.Point(50, 80);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(29, 12);
             this.label6.TabIndex = 33;
@@ -139,7 +141,7 @@
             // customerComboBox
             // 
             this.customerComboBox.FormattingEnabled = true;
-            this.customerComboBox.Location = new System.Drawing.Point(65, 73);
+            this.customerComboBox.Location = new System.Drawing.Point(85, 77);
             this.customerComboBox.Name = "customerComboBox";
             this.customerComboBox.Size = new System.Drawing.Size(389, 20);
             this.customerComboBox.TabIndex = 32;
@@ -147,7 +149,7 @@
             // tripComboBox
             // 
             this.tripComboBox.FormattingEnabled = true;
-            this.tripComboBox.Location = new System.Drawing.Point(65, 108);
+            this.tripComboBox.Location = new System.Drawing.Point(85, 112);
             this.tripComboBox.Name = "tripComboBox";
             this.tripComboBox.Size = new System.Drawing.Size(389, 20);
             this.tripComboBox.TabIndex = 31;
@@ -155,7 +157,7 @@
             // cancelButton
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.No;
-            this.cancelButton.Location = new System.Drawing.Point(430, 306);
+            this.cancelButton.Location = new System.Drawing.Point(450, 323);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 5;
@@ -165,7 +167,7 @@
             // saveButton
             // 
             this.saveButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
-            this.saveButton.Location = new System.Drawing.Point(349, 306);
+            this.saveButton.Location = new System.Drawing.Point(369, 323);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 5;
@@ -180,12 +182,12 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(524, 41);
             this.label1.TabIndex = 0;
-            this.label1.Text = "新建路书";
+            this.label1.Text = "新建客户行程";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // memoTextBox
             // 
-            this.memoTextBox.Location = new System.Drawing.Point(65, 208);
+            this.memoTextBox.Location = new System.Drawing.Point(85, 225);
             this.memoTextBox.Multiline = true;
             this.memoTextBox.Name = "memoTextBox";
             this.memoTextBox.Size = new System.Drawing.Size(440, 82);
@@ -203,11 +205,29 @@
             // 
             this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(26, 151);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(53, 12);
+            this.label7.TabIndex = 37;
+            this.label7.Text = "开始时间";
+            // 
+            // startAtDateTimePicker
+            // 
+            this.startAtDateTimePicker.Location = new System.Drawing.Point(85, 147);
+            this.startAtDateTimePicker.Name = "startAtDateTimePicker";
+            this.startAtDateTimePicker.Size = new System.Drawing.Size(165, 21);
+            this.startAtDateTimePicker.TabIndex = 38;
+            // 
             // NewCustomerTripForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(548, 358);
+            this.ClientSize = new System.Drawing.Size(567, 381);
+            this.Controls.Add(this.startAtDateTimePicker);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.findTemplateButton);
             this.Controls.Add(this.findCustomerButton);
             this.Controls.Add(this.label5);
@@ -224,7 +244,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.memoTextBox);
             this.Name = "NewCustomerTripForm";
-            this.Text = "新建路书";
+            this.Text = "新建客户行程";
             ((System.ComponentModel.ISupportInitialize)(this.daysNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).EndInit();
@@ -253,5 +273,7 @@
         private System.Windows.Forms.Button findCustomerButton;
         private System.Windows.Forms.Button findTemplateButton;
         private CustomComponents.EntityDataSource entityDataSource1;
+        private System.Windows.Forms.DateTimePicker startAtDateTimePicker;
+        private System.Windows.Forms.Label label7;
     }
 }
