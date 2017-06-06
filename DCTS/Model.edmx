@@ -104,7 +104,7 @@
           <Property Name="flight_no" Type="varchar" MaxLength="45" />
           <Property Name="flight_from" Type="varchar" MaxLength="45" />
           <Property Name="flight_to" Type="varchar" MaxLength="45" />
-          <Property Name="flight_layover" Type="tinyint" Nullable="false" />
+          <Property Name="flight_layover" Type="bool" Nullable="false" />
           <Property Name="flight_start_at" Type="datetime" />
           <Property Name="flight_end_at" Type="datetime" />
           <Property Name="flight2_start_at" Type="datetime" />
@@ -435,7 +435,7 @@
           <Property Type="String" Name="flight_no" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="flight_from" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="flight_to" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Type="SByte" Name="flight_layover" Nullable="false" />
+          <Property Type="Boolean" Name="flight_layover" Nullable="false" />
           <Property Type="DateTime" Name="flight_start_at" />
           <Property Type="DateTime" Name="flight_end_at" />
           <Property Type="DateTime" Name="flight2_start_at" />

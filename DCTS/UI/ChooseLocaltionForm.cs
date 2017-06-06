@@ -30,6 +30,7 @@ namespace DCTS.UI
             locationTypeList.Add(new MockEntity { Id = (int)ComboLocationEnum.Scenic, FullName = "景点" });
             locationTypeList.Add(new MockEntity { Id = (int)ComboLocationEnum.Hotel, FullName = "住宿" });
             locationTypeList.Add(new MockEntity { Id = (int)ComboLocationEnum.Dining, FullName = "餐厅" });
+            locationTypeList.Add(new MockEntity { Id = (int)ComboLocationEnum.Flight, FullName = "机场" });
         }
 
         // 初始化过滤条件数据

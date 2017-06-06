@@ -29,7 +29,7 @@ namespace DCTS
         public string flight_no { get; set; }
         public string flight_from { get; set; }
         public string flight_to { get; set; }
-        public sbyte flight_layover { get; set; }
+        public bool flight_layover { get; set; }
         public Nullable<System.DateTime> flight_start_at { get; set; }
         public Nullable<System.DateTime> flight_end_at { get; set; }
         public Nullable<System.DateTime> flight2_start_at { get; set; }

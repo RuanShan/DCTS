@@ -325,6 +325,7 @@
             this.editLocationButton.TabIndex = 18;
             this.editLocationButton.Text = "编辑";
             this.editLocationButton.UseVisualStyleBackColor = true;
+            this.editLocationButton.Click += new System.EventHandler(this.editLocationButton_Click);
             // 
             // EditCustomerTripDaysControl
             // 
