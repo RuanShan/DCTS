@@ -30,9 +30,13 @@ namespace DCTS.UI
 
                 this.textBox6.Text = obj.tips;
                 long folername = obj.id / 1000;
-                string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\export\\words" + "\\" + folername + "\\", obj.word);
                 if (obj.word != null && obj.word != "")
-                    this.docPathTextBox.Text = lcoalPath;
+                {
+                    string copyToPath = EntityPathConfig.LocationWordPath(obj);
+                    //string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\export\\words" + "\\" + folername + "\\", obj.word);
+
+                    this.docPathTextBox.Text = copyToPath;
+                }
             }
         }
 
@@ -41,10 +45,10 @@ namespace DCTS.UI
             var ctx = this.entityDataSource1.DbContext as DctsEntities;
             var nationList = DCTS.DB.GlobalCache.NationList;
         }
-        
+
         private void saveButton_Click(object sender, EventArgs e)
         {
-            
+
             using (var ctx = new DctsEntities())
             {
                 try
@@ -103,7 +107,7 @@ namespace DCTS.UI
                         }
                         if (hasDoc)
                         {
-                            string copyToPath = EntityPathConfig.LocationWordPath(obj );
+                            string copyToPath = EntityPathConfig.LocationWordPath(obj);
                             if (!File.Exists(copyToPath))
                                 File.Copy(docFilePath, copyToPath);
                         }
@@ -121,8 +125,8 @@ namespace DCTS.UI
                         if (hasDoc)
                         {
                             obj.word = copyfilename;
-                            string copyToPath = EntityPathConfig.LocationWordPath(obj );
-                         
+                            string copyToPath = EntityPathConfig.LocationWordPath(obj);
+
 
                             if (!File.Exists(copyToPath))
                                 File.Copy(docFilePath, copyToPath);
@@ -218,8 +222,8 @@ namespace DCTS.UI
             openFileDialog1.Filter = "DOCX(*.doc,*.docx)|*.doc;*.docx"; //文件类型
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-               this.docPathTextBox.Text = openFileDialog1.FileName;
-                
+                this.docPathTextBox.Text = openFileDialog1.FileName;
+
             }
         }
 

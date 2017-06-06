@@ -149,16 +149,7 @@ namespace DCTS.UI
             return count;
         }
 
-        private void 修改ToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            int i = this.dataGridView.CurrentRow.Index;
-            ComboLocation selectedItem = nationlList[i];
-            var form = new NewNationForm("Edit", selectedItem);
-            if (form.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
-            {
-                InitializeDataGridView();
-            }
-        }
+     
 
         // 初始化DataGridView的数据源, 
         private int InitializeDataGridView(int pageCurrent = 1)
@@ -187,34 +178,37 @@ namespace DCTS.UI
             {
 
                 var row = dataGridView.Rows[e.RowIndex];
+                string strFileName = String.Empty;
 
                 var model = row.DataBoundItem as ComboLocation;
-                openFileDialog1.Filter = "DOCX(*.doc,*.docx)|*.doc;*.docx"; //文件类型
+                //openFileDialog1.Filter = "DOCX(*.doc,*.docx)|*.doc;*.docx"; //文件类型
                 if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    if (openFileDialog1.FileName == "")
-                        return;
-                    model.word = openFileDialog1.FileName;
+
+                    strFileName = openFileDialog1.FileName;
                 }
-                using (var ctx = new DctsEntities())
+                if (strFileName.Length > 0)
                 {
-                    bool hasDoc = (openFileDialog1.FileName.Length > 0);
-                    string docFilePath = this.openFileDialog1.FileName;
-
-                    ComboLocation obj = ctx.ComboLocations.Find(Convert.ToInt32(model.id));
-                    obj.title = model.title;
-                    obj.ltype = model.ltype;
-                    
-                    if (hasDoc)
+                    using (var ctx = new DctsEntities())
                     {
-                        obj.word = openFileDialog1.SafeFileName;
-                        string copyToPath = EntityPathConfig.LocationWordPath(obj);
-                        
+                        bool hasDoc = (openFileDialog1.FileName.Length > 0);
+                        string docFilePath = this.openFileDialog1.FileName;
 
-                        if (!File.Exists(copyToPath))
-                            File.Copy(docFilePath, copyToPath , true);
+                        ComboLocation obj = ctx.ComboLocations.Find(Convert.ToInt32(model.id));
+                        obj.title = model.title;
+                        obj.ltype = model.ltype;
+
+                        if (hasDoc)
+                        {
+                            obj.word = openFileDialog1.SafeFileName;
+                            string copyToPath = EntityPathConfig.LocationWordPath(obj);
+
+
+                            if (!File.Exists(copyToPath))
+                                File.Copy(docFilePath, copyToPath, true);
+                        }
+                        ctx.SaveChanges();
                     }
-                    ctx.SaveChanges();
                 }
                 BeginActive();
 
@@ -226,11 +220,11 @@ namespace DCTS.UI
                 var row = dataGridView.Rows[e.RowIndex];
                 var model = row.DataBoundItem as ComboLocation;
 
-                FolderBrowserDialog dialog = new FolderBrowserDialog();
-                dialog.Description = "请选择下载路径";
-                if (dialog.ShowDialog() == DialogResult.OK)
+
+                saveFileDialog1.FileName = model.word;
+                if (saveFileDialog1.ShowDialog(this) == DialogResult.OK)
                 {
-                    strFileName = dialog.SelectedPath;
+                    strFileName = saveFileDialog1.FileName.ToString();
                 }
 
                 if (strFileName.Length > 0)
@@ -243,7 +237,7 @@ namespace DCTS.UI
                             string copyToPath = EntityPathConfig.LocationWordPath(item);
                             if (File.Exists(copyToPath))
                             {
-                                File.Copy(copyToPath, strFileName + "\\" + item.word.ToString());
+                                File.Copy(copyToPath, strFileName  );
                                 MessageBox.Show("下载完成！");
                             }
                             else
