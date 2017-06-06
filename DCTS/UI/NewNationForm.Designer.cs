@@ -47,10 +47,9 @@
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "PNG(*.png)JPEG(*.jpg,*.jpeg,*.jpe,*.jfif)GIF(*.gif)BMP(*.bmp)|*.png;*.jpg;*.jpeg;" +
     "*.jpe;*.jfif;*.gif;*.bmp";
-            this.openFileDialog1.Title = "请选择住宿图片文件";
+            this.openFileDialog1.Title = "请选择国家文件";
             // 
             // cancelButton
             // 

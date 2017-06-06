@@ -217,7 +217,8 @@ namespace DCTS.UI
 
             using (var ctx = new DctsEntities())
             {
-                
+                List<ComboLocation> list = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Letter || o.ltype == (int)ComboLocationEnum.Country||o.ltype == (int)ComboLocationEnum.Country).ToList();
+                  
               //   var list = Paginate(pageCurrent, pageSize, title);
 
                 //this.dataGridView.DataSource = list;
@@ -252,9 +253,7 @@ namespace DCTS.UI
             string sql = string.Empty;
             var title = this.keywordTextBox.Text;
             string conditions = "";
-
-
-
+            
             if (title.Length > 0)
             {
                 conditions = conditions + " AND " + string.Format("(`nation` like '%{0}%')", title);
