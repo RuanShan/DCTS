@@ -267,7 +267,7 @@ namespace DCTS.UI
         {
             DataGridViewColumn column = dataGridView.Columns[e.ColumnIndex];
 
-            if (column == editColumn1)
+            if (column == this.downloadColumn1)
             {
                 var row = dataGridView.Rows[e.RowIndex];
 
@@ -279,7 +279,7 @@ namespace DCTS.UI
                     BeginActive();
                 }
             }
-            else if (column == deleteColumn1)
+            else if (column == this.uploadColumn1)
             {
                 var row = dataGridView.Rows[e.RowIndex];
                 var model = row.DataBoundItem as ComboLocation;

@@ -47,8 +47,8 @@
             this.idColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nationColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.word = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.deleteColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.editColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.uploadColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.downloadColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -68,8 +68,8 @@
             this.idColumn1,
             this.nationColumn1,
             this.word,
-            this.deleteColumn1,
-            this.editColumn1});
+            this.uploadColumn1,
+            this.downloadColumn1});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -184,37 +184,39 @@
             // 
             // nationColumn1
             // 
-            this.nationColumn1.DataPropertyName = "name";
+            this.nationColumn1.DataPropertyName = "title";
             this.nationColumn1.HeaderText = "名称";
             this.nationColumn1.Name = "nationColumn1";
+            this.nationColumn1.Width = 200;
             // 
             // word
             // 
             this.word.DataPropertyName = "word";
             this.word.HeaderText = "模板文档";
             this.word.Name = "word";
+            this.word.Width = 180;
             // 
-            // deleteColumn1
+            // uploadColumn1
             // 
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(2, 12, 1, 12);
-            this.deleteColumn1.DefaultCellStyle = dataGridViewCellStyle1;
-            this.deleteColumn1.HeaderText = "";
-            this.deleteColumn1.Name = "deleteColumn1";
-            this.deleteColumn1.Text = "上传";
-            this.deleteColumn1.UseColumnTextForButtonValue = true;
-            this.deleteColumn1.Width = 60;
+            this.uploadColumn1.DefaultCellStyle = dataGridViewCellStyle1;
+            this.uploadColumn1.HeaderText = "";
+            this.uploadColumn1.Name = "uploadColumn1";
+            this.uploadColumn1.Text = "上传";
+            this.uploadColumn1.UseColumnTextForButtonValue = true;
+            this.uploadColumn1.Width = 60;
             // 
-            // editColumn1
+            // downloadColumn1
             // 
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(2, 12, 2, 12);
-            this.editColumn1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.editColumn1.HeaderText = "";
-            this.editColumn1.Name = "editColumn1";
-            this.editColumn1.Text = "下载";
-            this.editColumn1.UseColumnTextForButtonValue = true;
-            this.editColumn1.Width = 60;
+            this.downloadColumn1.DefaultCellStyle = dataGridViewCellStyle2;
+            this.downloadColumn1.HeaderText = "";
+            this.downloadColumn1.Name = "downloadColumn1";
+            this.downloadColumn1.Text = "下载";
+            this.downloadColumn1.UseColumnTextForButtonValue = true;
+            this.downloadColumn1.Width = 60;
             // 
             // OtherControl
             // 
@@ -252,7 +254,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn idColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn nationColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn word;
-        private System.Windows.Forms.DataGridViewButtonColumn deleteColumn1;
-        private System.Windows.Forms.DataGridViewButtonColumn editColumn1;
+        private System.Windows.Forms.DataGridViewButtonColumn uploadColumn1;
+        private System.Windows.Forms.DataGridViewButtonColumn downloadColumn1;
     }
 }
