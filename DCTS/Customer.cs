@@ -20,5 +20,7 @@ namespace DCTS
         public Nullable<System.DateTime> birthday { get; set; }
         public string enname { get; set; }
         public string passport { get; set; }
+        public System.DateTime created_at { get; set; }
+        public Nullable<System.DateTime> updated_at { get; set; }
     }
 }

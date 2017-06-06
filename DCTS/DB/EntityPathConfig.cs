@@ -246,6 +246,12 @@ namespace DCTS.DB
                 return Path.Combine(BasePath,  "setup.sql"); 
             }
         }
-            
+        public static string SeedSql
+        {
+            get
+            {
+                return Path.Combine(BasePath, "seed.sql");
+            }
+        }            
     }
 }

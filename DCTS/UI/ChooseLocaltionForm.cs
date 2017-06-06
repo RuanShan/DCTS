@@ -72,7 +72,9 @@ namespace DCTS.UI
             int size = 5000;
             //int offset = (pager1.PageCurrent > 1 ? pager1.OffSet(pager1.PageCurrent - 1) : 0);
 
-            var query = ctx.ComboLocations.Where(o=>o.ltype!= (int)ComboLocationEnum.Blank);
+            int[] availableLocationTypes = { (int)ComboLocationEnum.Scenic, (int)ComboLocationEnum.Dining, (int)ComboLocationEnum.Hotel };
+            var query = ctx.ComboLocations.Where(o => availableLocationTypes.Contains(o.ltype));
+
             if (locationType > 0)
             {
                 query = query.Where(o => o.ltype == locationType);
