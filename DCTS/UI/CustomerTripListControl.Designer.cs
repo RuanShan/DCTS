@@ -185,7 +185,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(124, 50);
             this.label2.TabIndex = 6;
-            this.label2.Text = "路书列表";
+            this.label2.Text = "行程列表";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // downloadButton

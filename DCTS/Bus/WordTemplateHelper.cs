@@ -1,4 +1,5 @@
 ﻿using DCTS.DB;
+using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using System;
@@ -62,6 +63,18 @@ namespace DCTS.Bus
             }
         }
 
+        public static void ReplaceText<T>(T node, string key, string val) where T : OpenXmlElement
+        {
+
+            foreach (var text in node.Descendants<Text>())
+            {
+                if (text.Text.Contains(key))
+                {
+                    text.Text = text.Text.Replace(key, val);
+                }
+            }
+        }
+
         //Open Xml SDK Word模板开发最佳实践(Best Practice)
         //http://www.cnblogs.com/pengzhen/p/3823980.html?utm_source=tuicool&utm_medium=referral
         public static void ReplaceTextWithProperty<T>( WordprocessingDocument doc, string[] keys, T entity)
@@ -115,9 +128,9 @@ namespace DCTS.Bus
             return string.Join("|",cities);
         }
 
-        public static string DisplayDayLocations(List<DayLocation> locations)
+        public static string DisplayDayLocations(List<DayLocation> locations, string seperator="|")
         {
-            var titles = locations.Select(o => o.ComboLocation.title).Distinct().ToArray();
+            var titles = locations.Select(o => o.ComboLocation).Where(o=>o.ltype != (int) ComboLocationEnum.Blank).Select(o=>o.title).Distinct().ToArray();
 
             return string.Join("|", titles);
         }
@@ -126,6 +139,17 @@ namespace DCTS.Bus
             var titles = locations.Where(o=>o.ComboLocation.ltype == (int) ComboLocationEnum.Hotel).Select(o => o.ComboLocation.title).Distinct().ToArray();
 
             return string.Join("|", titles);
-        }        
+        }
+
+        public static string DisplayLongWeekDay(DateTime date)
+        {
+            return String.Format("{0:dddd}", date);
+        }
+        public static string DisplayDate(DateTime date)
+        {
+            return String.Format("{0:yyyy年MM月dd日}", date);
+        }
+
+        
     }
 }
