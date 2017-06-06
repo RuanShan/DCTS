@@ -109,11 +109,10 @@ namespace DCTS.UI
             //处理图片
             if (scenic.img.Length > 0)
             {
-                if (scenic.id > 0 && scenic.img != "\"\"")
-                {
+                if (scenic.id > 0 )
+                {                    
                     this.imgPathTextBox.Text = scenic.img;
-                    long folername = scenic.id / 1000;
-                    string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\location_" + ComboLocationEnum.Scenic.ToString().ToLower() + "\\" + folername + "\\", scenic.img);
+                    string lcoalPath = EntityPathConfig.LocationImagePath(scenic);
                     pictureBox1.ImageLocation = lcoalPath;
                 }
             }
@@ -167,11 +166,7 @@ namespace DCTS.UI
                 ComboLocation lastLocation = db.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
                 if (lastLocation != null)
                 {
-                    long newId = lastLocation.id + 1;
-
-                    long idStart = newId / 1000 * 1000;
-                    long idEnd = idStart + 1000;
-                    existSameImage = (db.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Scenic && o.img == imgFileName && o.id > idStart && o.id < idEnd && o.id != scenicId).Count() > 0);
+                    existSameImage = (db.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Scenic && o.img == imgFileName && o.id != scenicId).Count() > 0);
                 }
                 if (existSameImage)
                 {

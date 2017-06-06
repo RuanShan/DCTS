@@ -15,17 +15,18 @@ namespace DCTS.UI
 {
     public partial class NewHotelForm : BaseModalForm
     {
-        private long changeid;
+        private long ModelId { get; set;}
+
         public NewHotelForm(string maintype, ComboLocation obj)
         {
             InitializeComponent();
             InitializeDataSource();
-            changeid = 0;
+            ModelId = 0;
             if (maintype == "Edit")
             {
                 label2.Text = "编辑住宿";
                 this.Text = "编辑住宿";
-                changeid = obj.id;
+                ModelId = obj.id;
                 //obj.ltype = (int)ComboLocationEnum.Hotel;
                 this.nationComboBox.Text = obj.nation;
                 this.cityComboBox.Text = obj.city;
@@ -44,9 +45,10 @@ namespace DCTS.UI
                 parking.Text = obj.parking;
                 reception.Text = obj.reception;
                 kitchen.Text = obj.kitchen;
-                long folername = obj.id / 1000;
-                string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\location_" + ComboLocationEnum.Hotel.ToString().ToLower() + "\\" + folername + "\\", obj.img);
-                pictureBox1.ImageLocation = lcoalPath;
+                if (obj.img != null)
+                {
+                    pictureBox1.ImageLocation = EntityPathConfig.LocationImagePath(obj);
+                } 
             }
         }
 
@@ -92,26 +94,17 @@ namespace DCTS.UI
                     {
                         copyfilename = Path.GetFileName(imgFilePath);
 
-                        ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
-                        if (lastLocation != null)
-                        {
-                            long newId = lastLocation.id + 1;
-
-                            long idStart = newId / 1000 * 1000;
-                            long idEnd = idStart + 1000;
-                            existSameImage = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Hotel && o.img == copyfilename && o.id > idStart && o.id < idEnd).Count() > 0);
-                        }
+                        existSameImage = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Hotel && o.img == copyfilename && o.id!=ModelId).Count() > 0);
 
                     }
                     bool hastitle = (titleTextBox.Text.Length > 0);
                     if (hastitle)
                     {
-                        ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
-                        if (lastLocation != null)
-                            nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Hotel && o.title == titleTextBox.Text).Count() > 0);
+
+                        nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Hotel && o.title == titleTextBox.Text && o.id != ModelId).Count() > 0);
                     }
                     #endregion
-                    if (changeid == 0)
+                    if (ModelId == 0)
                     {
                         if (existSameImage)
                         {
@@ -158,7 +151,7 @@ namespace DCTS.UI
                     {
 
 
-                        ComboLocation obj = ctx.ComboLocations.Find(Convert.ToInt32(changeid));
+                        ComboLocation obj = ctx.ComboLocations.Find(Convert.ToInt32(ModelId));
 
                         obj.ltype = (int)ComboLocationEnum.Hotel;
                         obj.nation = this.nationComboBox.Text;
@@ -185,9 +178,8 @@ namespace DCTS.UI
 
                         if (hasImg)
                         {
-                            string copyToPath = EntityPathConfig.LocationImagePath(obj);
-                            if (!File.Exists(copyToPath))        
-                            File.Copy(imgFilePath, copyToPath);
+                            string copyToPath = EntityPathConfig.LocationImagePath(obj);                            
+                            File.Copy(imgFilePath, copyToPath, true);
                         }
                     }
                 }
@@ -202,51 +194,7 @@ namespace DCTS.UI
 
         }
 
-
-        private string imagefolderNewMethod(long filename)
-        {
-            string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\locations", "");
-
-            if (Directory.Exists(lcoalPath))
-            {
-            }
-            else
-            {
-                DirectoryInfo directoryInfo = new DirectoryInfo(lcoalPath);
-                directoryInfo.Create();
-            }
-
-
-            string copypathto = "";
-
-            //List<string> Alist = GetFileName(lcoalPath);
-            string[] dirs = Directory.GetDirectories(lcoalPath + "\\");
-
-
-            DirectoryInfo dir = new DirectoryInfo(lcoalPath);
-            //  FileInfo[] fil = dir.GetFiles();
-            DirectoryInfo[] dii = dir.GetDirectories();
-            int ishad = 0;
-            foreach (DirectoryInfo f in dii)
-            {
-                if (f.Name == filename.ToString())
-                {
-                    copypathto = lcoalPath + "\\" + filename.ToString();
-
-                    ishad++;
-
-                }
-            }
-            if (ishad == 0)
-            {
-                Directory.CreateDirectory(lcoalPath + "\\" + filename.ToString());
-                copypathto = lcoalPath + "\\" + filename.ToString();
-
-            }
-
-            return copypathto;
-        }
-
+     
         private List<string> GetFileName(string dirPath)
         {
             List<string> FileNameList = new List<string>();
@@ -300,7 +248,7 @@ namespace DCTS.UI
                     if (lastLocation != null)
                         nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Hotel && o.title == titleTextBox.Text).Count() > 0);
 
-                    if (changeid == 0)
+                    if (ModelId == 0)
                     {
                         if (nameishave == true || this.titleTextBox.Text.Length > 100)
                             errorProvider1.SetError(titleTextBox, String.Format("错误：请检查名称的长度或是否已存在 {0}", titleTextBox.Text));

@@ -131,7 +131,8 @@ namespace DCTS.CustomComponents
                                 city.title = location.city;
                                 city.nationCode = nation.code;
                                 city.code = "";
-                                ctx.Cities.Add(city);                            
+                                ctx.Cities.Add(city);
+                                this.CityList.Add(city);
 
                             }
 

@@ -37,11 +37,11 @@ namespace DCTS.DB
 
         private static void InitializeNationList()
         {
-            nationList = db.Nations.Where(o => o.enabled).ToList();        
+            nationList = db.Nations.ToList();        
         }
         private static void InitializeCityList()
         {
-            cityList = db.Cities.Where(o => o.enabled).ToList();
+            cityList = db.Cities.ToList();
         }
     }
 
