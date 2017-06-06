@@ -22,6 +22,7 @@ namespace DCTS.UI
         CustomerTripListControl bookControl;
         EditCustomerTripDaysControl editCustomerTripControl;
         NationsControl nationsControl;
+        AirportControl airportControl;
         OtherControl otherControl;
         public TripsManagementControl()
         {
@@ -197,6 +198,18 @@ namespace DCTS.UI
             this.mainPanel.Controls.Add(otherControl);
 
             
+        }
+
+        private void airportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (airportControl == null)
+            {
+                airportControl = new AirportControl();
+                airportControl.Dock = DockStyle.Fill;
+            }
+            this.airportControl.BeginActive();
+            this.mainPanel.Controls.Clear();
+            this.mainPanel.Controls.Add(airportControl);
         }
 
     }

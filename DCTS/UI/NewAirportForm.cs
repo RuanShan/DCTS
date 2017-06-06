@@ -13,20 +13,20 @@ using DCTS.DB;
 
 namespace DCTS.UI
 {
-    public partial class NewNationForm : BaseModalForm
+    public partial class NewAirportForm : BaseModalForm
     {
         private long changeid;
-        public NewNationForm(string maintype, ComboLocation obj)
+        public NewAirportForm(string maintype, ComboLocation obj)
         {
             InitializeComponent();
             InitializeDataSource();
             changeid = 0;
             if (maintype == "Edit")
             {
-                label2.Text = "编辑国家";
-                this.Text = "编辑国家";
+                label2.Text = "编辑机场";
+                this.Text = "编辑机场";
                 changeid = obj.id;
-                this.titleTextBox.Text = obj.nation;
+                this.titleTextBox.Text = obj.title;
 
                 this.textBox6.Text = obj.tips;
                 long folername = obj.id / 1000;
@@ -41,10 +41,10 @@ namespace DCTS.UI
             var ctx = this.entityDataSource1.DbContext as DctsEntities;
             var nationList = DCTS.DB.GlobalCache.NationList;
         }
-        
+
         private void saveButton_Click(object sender, EventArgs e)
         {
-            
+
             using (var ctx = new DctsEntities())
             {
                 try
@@ -66,7 +66,7 @@ namespace DCTS.UI
 
                             long idStart = newId / 1000 * 1000;
                             long idEnd = idStart + 1000;
-                            existSamedoc = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Country && o.word == copyfilename && o.id > idStart && o.id < idEnd).Count() > 0);
+                            existSamedoc = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Flight && o.word == copyfilename && o.id > idStart && o.id < idEnd).Count() > 0);
                         }
 
                     }
@@ -75,7 +75,7 @@ namespace DCTS.UI
                     {
                         ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
                         if (lastLocation != null)
-                            nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Country && o.word == openFileDialog1.SafeFileName && o.title == titleTextBox.Text).Count() > 0);
+                            nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Flight && o.word == openFileDialog1.SafeFileName && o.title == titleTextBox.Text).Count() > 0);
                     }
                     #endregion
                     if (changeid == 0)
@@ -86,10 +86,9 @@ namespace DCTS.UI
                             return;
                         }
                         var obj = ctx.ComboLocations.Create();
-                        obj.ltype = (int)ComboLocationEnum.Country;
-                        obj.nation = this.titleTextBox.Text;
+                        obj.ltype = (int)ComboLocationEnum.Flight;
+                        obj.title = this.titleTextBox.Text;
 
-                        //obj.word = copyfilename;
                         obj.word = copyfilename; ;
 
                         obj.tips = this.textBox6.Text;
@@ -103,7 +102,7 @@ namespace DCTS.UI
                         }
                         if (hasDoc)
                         {
-                            string copyToPath = EntityPathConfig.LocationWordPath(obj );
+                            string copyToPath = EntityPathConfig.LocationWordPath(obj);
                             if (!File.Exists(copyToPath))
                                 File.Copy(docFilePath, copyToPath);
                         }
@@ -111,18 +110,15 @@ namespace DCTS.UI
                     else
                     {
                         ComboLocation obj = ctx.ComboLocations.Find(Convert.ToInt32(changeid));
-                        obj.nation = this.titleTextBox.Text;
-                        obj.ltype = (int)ComboLocationEnum.Country;
+                        obj.title = this.titleTextBox.Text;
+                        obj.ltype = (int)ComboLocationEnum.Flight;
                         obj.word = "";
                         obj.tips = this.textBox6.Text;
-                        //ctx.ComboLocations.Add(obj);
-
 
                         if (hasDoc)
                         {
                             obj.word = copyfilename;
-                            string copyToPath = EntityPathConfig.LocationWordPath(obj );
-                         
+                            string copyToPath = EntityPathConfig.LocationWordPath(obj);
 
                             if (!File.Exists(copyToPath))
                                 File.Copy(docFilePath, copyToPath);
@@ -218,8 +214,8 @@ namespace DCTS.UI
             openFileDialog1.Filter = "DOCX(*.doc,*.docx)|*.doc;*.docx"; //文件类型
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-               this.docPathTextBox.Text = openFileDialog1.FileName;
-                
+                this.docPathTextBox.Text = openFileDialog1.FileName;
+
             }
         }
 
@@ -244,7 +240,7 @@ namespace DCTS.UI
                 {
                     ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
                     if (lastLocation != null)
-                        nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Country && o.title == titleTextBox.Text).Count() > 0);
+                        nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Flight && o.title == titleTextBox.Text).Count() > 0);
 
                     if (changeid == 0)
                     {
