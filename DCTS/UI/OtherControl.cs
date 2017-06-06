@@ -30,15 +30,12 @@ namespace DCTS.UI
         {
             InitializeComponent();
             this.dataGridChanges = new Hashtable();
-            // pager1.Bind();
             dataGridView.AutoGenerateColumns = false;
-            pager1.PageCurrent = 1;
         }
 
         public void BeginActive()
         {
-            pager1.Bind();
-
+            InitializeDataGridView();
         }
         
         private void newButton_Click(object sender, EventArgs e)
@@ -96,8 +93,7 @@ namespace DCTS.UI
 
         private void btfind_Click(object sender, EventArgs e)
         {
-            pager1.PageCurrent = 1;
-            pager1.Bind();
+           
         }
         
         private void dataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -212,16 +208,16 @@ namespace DCTS.UI
         {
             string title = (this.keywordTextBox.Text != NoOptionSelected ? this.keywordTextBox.Text : string.Empty);
 
-            int count = 0;
-            int pageSize = pager1.PageSize;
+            int[] otherLocationType = { (int)ComboLocationEnum.Letter, (int)ComboLocationEnum.Preparation, (int)ComboLocationEnum.Google };
+
 
             using (var ctx = new DctsEntities())
             {
-                List<ComboLocation> list = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Letter || o.ltype == (int)ComboLocationEnum.Country||o.ltype == (int)ComboLocationEnum.Country).ToList();
+                List<ComboLocation> list = ctx.ComboLocations.Where(o => otherLocationType.Contains( o.ltype )).ToList();
                   
-              //   var list = Paginate(pageCurrent, pageSize, title);
+                // var list = Paginate(pageCurrent, pageSize, title);
 
-                //this.dataGridView.DataSource = list;
+                this.dataGridView.DataSource = list;
             }
             return 1;
         }
@@ -287,7 +283,7 @@ namespace DCTS.UI
             {
                 var row = dataGridView.Rows[e.RowIndex];
                 var model = row.DataBoundItem as ComboLocation;
-                string msg = string.Format("确定删除国家<{0}>？", model.nation);
+                string msg = string.Format("确定删除<{0}>？", model.title);
 
                 if (MessageHelper.DeleteConfirm(msg))
                 {

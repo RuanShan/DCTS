@@ -267,14 +267,14 @@ namespace DCTS.UI
 
                 if (title.Length > 0)
                 {
-                    query = query.Where(o => o.city.Contains(title));
+                    query = query.Where(o => o.title.Contains(title));
                 }
 
                 if (pageSize > 0)
                 {
                     int offset = (currentPage - 1) * pageSize;
 
-                    query = query.OrderBy(o => o.id).Skip(offset).Take(pageSize);
+                    query = query.OrderBy(o => o.nation).Skip(offset).Take(pageSize);
                 }
                 list = query.ToList();
 

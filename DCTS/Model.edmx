@@ -116,6 +116,11 @@
           <Property Name="airport_to" Type="varchar" MaxLength="45" />
           <Property Name="airport2_from" Type="varchar" MaxLength="45" />
           <Property Name="airport2_to" Type="varchar" MaxLength="45" />
+          <Property Name="flight_ticket" Type="varchar" MaxLength="45" />
+          <Property Name="flight_company" Type="int" Nullable="false" />
+          <Property Name="tips" Type="varchar" MaxLength="1024" />
+          <Property Name="memo" Type="varchar" MaxLength="1024" />
+          <Property Name="route" Type="varchar" MaxLength="1024" />
         </EntityType>
         <EntityType Name="Dinings">
           <Key>
@@ -442,6 +447,11 @@
           <Property Type="String" Name="airport_to" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="airport2_from" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="airport2_to" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="flight_ticket" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="flight_company" Nullable="false" />
+          <Property Type="String" Name="tips" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="memo" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="route" MaxLength="1024" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="locationId1">
           <End Type="DctsModel.ComboLocation" Role="ComboLocation" Multiplicity="1" />
@@ -688,6 +698,11 @@
           <EntitySetMapping Name="DayLocations">
             <EntityTypeMapping TypeName="DctsModel.DayLocation">
               <MappingFragment StoreEntitySet="DayLocations">
+                <ScalarProperty Name="route" ColumnName="route" />
+                <ScalarProperty Name="memo" ColumnName="memo" />
+                <ScalarProperty Name="tips" ColumnName="tips" />
+                <ScalarProperty Name="flight_company" ColumnName="flight_company" />
+                <ScalarProperty Name="flight_ticket" ColumnName="flight_ticket" />
                 <ScalarProperty Name="airport2_to" ColumnName="airport2_to" />
                 <ScalarProperty Name="airport2_from" ColumnName="airport2_from" />
                 <ScalarProperty Name="airport_to" ColumnName="airport_to" />

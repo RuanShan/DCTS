@@ -39,6 +39,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.progressMsgLabel = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -49,9 +50,9 @@
             // cancelButton
             // 
             this.cancelButton.Enabled = false;
-            this.cancelButton.Location = new System.Drawing.Point(275, 187);
+            this.cancelButton.Location = new System.Drawing.Point(275, 173);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 25);
+            this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 13;
             this.cancelButton.Text = "取消";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -59,9 +60,9 @@
             // 
             // importButton
             // 
-            this.importButton.Location = new System.Drawing.Point(187, 187);
+            this.importButton.Location = new System.Drawing.Point(187, 173);
             this.importButton.Name = "importButton";
-            this.importButton.Size = new System.Drawing.Size(75, 25);
+            this.importButton.Size = new System.Drawing.Size(75, 23);
             this.importButton.TabIndex = 12;
             this.importButton.Text = "导入";
             this.importButton.UseVisualStyleBackColor = true;
@@ -70,24 +71,24 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 74);
+            this.label1.Location = new System.Drawing.Point(27, 68);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 13);
+            this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 11;
-            this.label1.Text = "文件路径";
+            this.label1.Text = "文档路径";
             // 
             // pathTextBox
             // 
-            this.pathTextBox.Location = new System.Drawing.Point(86, 70);
+            this.pathTextBox.Location = new System.Drawing.Point(86, 65);
             this.pathTextBox.Name = "pathTextBox";
-            this.pathTextBox.Size = new System.Drawing.Size(302, 20);
+            this.pathTextBox.Size = new System.Drawing.Size(302, 21);
             this.pathTextBox.TabIndex = 10;
             // 
             // openFileBtton
             // 
-            this.openFileBtton.Location = new System.Drawing.Point(394, 68);
+            this.openFileBtton.Location = new System.Drawing.Point(394, 63);
             this.openFileBtton.Name = "openFileBtton";
-            this.openFileBtton.Size = new System.Drawing.Size(44, 25);
+            this.openFileBtton.Size = new System.Drawing.Size(44, 23);
             this.openFileBtton.TabIndex = 9;
             this.openFileBtton.Text = "选择";
             this.openFileBtton.UseVisualStyleBackColor = true;
@@ -104,9 +105,9 @@
             // closeButton
             // 
             this.closeButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.closeButton.Location = new System.Drawing.Point(363, 187);
+            this.closeButton.Location = new System.Drawing.Point(363, 173);
             this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(75, 25);
+            this.closeButton.Size = new System.Drawing.Size(75, 23);
             this.closeButton.TabIndex = 17;
             this.closeButton.Text = "关闭";
             this.closeButton.UseVisualStyleBackColor = true;
@@ -114,35 +115,45 @@
             // 
             // label2
             // 
-            this.label2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(6, 24);
+            this.label2.Font = new System.Drawing.Font("SimSun", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(6, 22);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(458, 25);
+            this.label2.Size = new System.Drawing.Size(458, 23);
             this.label2.TabIndex = 16;
-            this.label2.Text = "导入国家数据";
+            this.label2.Text = "导入国家文档模板";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // progressMsgLabel
             // 
             this.progressMsgLabel.AutoSize = true;
-            this.progressMsgLabel.Location = new System.Drawing.Point(29, 108);
+            this.progressMsgLabel.Location = new System.Drawing.Point(29, 100);
             this.progressMsgLabel.Name = "progressMsgLabel";
-            this.progressMsgLabel.Size = new System.Drawing.Size(24, 13);
+            this.progressMsgLabel.Size = new System.Drawing.Size(23, 12);
             this.progressMsgLabel.TabIndex = 15;
             this.progressMsgLabel.Text = "0/0";
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(29, 127);
+            this.progressBar1.Location = new System.Drawing.Point(29, 117);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(409, 25);
+            this.progressBar1.Size = new System.Drawing.Size(409, 23);
             this.progressBar1.TabIndex = 14;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(84, 89);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(245, 12);
+            this.label3.TabIndex = 18;
+            this.label3.Text = "Word文档文件名应与国家名称一致，才能导入";
             // 
             // ImportNationDoc
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(465, 249);
+            this.ClientSize = new System.Drawing.Size(465, 230);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.importButton);
             this.Controls.Add(this.label1);
@@ -158,7 +169,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "国家数据导入";
+            this.Text = "国家文档模板导入";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -177,5 +188,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label progressMsgLabel;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label label3;
     }
 }
