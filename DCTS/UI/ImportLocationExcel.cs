@@ -148,6 +148,7 @@ namespace DCTS.CustomComponents
                                 existsLocation.latlng = location.latlng;
                                 existsLocation.local_address = location.local_address;
                                 existsLocation.route = location.route;
+                                existsLocation.img = location.img;
                                 // 格式定义11:00-22:00
                                 //obj.open_at = Convert.ToDateTime(temp1[1]);
                                 //obj.close_at = Convert.ToDateTime(temp1[1]);

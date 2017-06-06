@@ -40,9 +40,8 @@ namespace DCTS.CustomComponents
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
-
-            //bool success = Execute(pathTextBox.Text, worker, e);
-            bool success = NewMethod(worker, e);
+            bool isReplace = this.replaceRadioButton.Checked;
+            bool success = NewMethod(worker, e, isReplace);
         }
 
         private void openFileBtton_Click(object sender, EventArgs e)
@@ -89,26 +88,26 @@ namespace DCTS.CustomComponents
             }
         }
 
-        private bool NewMethod(BackgroundWorker worker, DoWorkEventArgs e)
+        private bool NewMethod(BackgroundWorker worker, DoWorkEventArgs e, bool isReplace)
         {
             WorkerArgument arg = e.Argument as WorkerArgument;
             bool success = true;
             try
             {
                 string imageName = this.pathTextBox.Text;
-                string[] strs = System.IO.Directory.GetFiles(imageName);
-                {
-                    int rowCount = strs.Length;
+                var strs = System.IO.Directory.GetFiles(imageName).Where(file => file.ToLower().EndsWith("jpg") || file.ToLower().EndsWith("gif") || file.ToLower().EndsWith("jpeg") || file.ToLower().EndsWith("png")).ToList();
+
+                    int rowCount = strs.Count;
                     arg.OrderCount = rowCount;
-                    int i = 0;
+                    decimal i = 0;
                     int progress = 0;
+                    int copiedCount = 0;
                     using (var ctx = new DctsEntities())
                     {
                         foreach (string file in strs)
                         {
                             System.IO.FileInfo fi = new System.IO.FileInfo(file);
 
-                            if (fi.Extension == ".jpg" || fi.Extension == ".gif" || fi.Extension == ".bmp" || fi.Extension == ".png" || fi.Extension == ".jpeg")
                             {
                                 string serverimg = file.Replace(imageName + "\\", "");
 
@@ -119,20 +118,27 @@ namespace DCTS.CustomComponents
                                     string copyToPath = EntityPathConfig.LocationImagePath(locations[0]);
                                     if (File.Exists(copyToPath))
                                     {
-                                        e.Result = "导入[" + file + "]在系统中已存在";
-                                        throw new Exception("导入[" + file + "]在系统中已存在");
-                                        //  e.Cancel = true;
+                                        if (isReplace)
+                                        {
+                                            File.Copy(file, copyToPath, true);
+                                            copiedCount++;
+                                        }
                                     }
                                     else
+                                    {
                                         File.Copy(file, copyToPath, true);
+                                        copiedCount++;
+                                    }
                                 }
                             }
+                            progress =Convert.ToInt32( i++ / rowCount * 100);
+                            backgroundWorker1.ReportProgress(progress, arg);
+
                         }
-                        backgroundWorker1.ReportProgress(progress, arg);
                     }
-                }
+               
                 backgroundWorker1.ReportProgress(100, arg);
-                e.Result = string.Format("{0} 条正常导入成功", strs.Length);
+                e.Result = string.Format("{0} 条正常导入成功", copiedCount);
             }
             catch (DbEntityValidationException exception)
             {

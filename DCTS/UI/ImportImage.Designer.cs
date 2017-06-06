@@ -39,6 +39,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.progressMsgLabel = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.noReplaceRadioButton = new System.Windows.Forms.RadioButton();
+            this.replaceRadioButton = new System.Windows.Forms.RadioButton();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -49,9 +53,9 @@
             // cancelButton
             // 
             this.cancelButton.Enabled = false;
-            this.cancelButton.Location = new System.Drawing.Point(275, 187);
+            this.cancelButton.Location = new System.Drawing.Point(275, 173);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 25);
+            this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 13;
             this.cancelButton.Text = "取消";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -59,9 +63,9 @@
             // 
             // importButton
             // 
-            this.importButton.Location = new System.Drawing.Point(187, 187);
+            this.importButton.Location = new System.Drawing.Point(187, 173);
             this.importButton.Name = "importButton";
-            this.importButton.Size = new System.Drawing.Size(75, 25);
+            this.importButton.Size = new System.Drawing.Size(75, 23);
             this.importButton.TabIndex = 12;
             this.importButton.Text = "导入";
             this.importButton.UseVisualStyleBackColor = true;
@@ -70,24 +74,24 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 74);
+            this.label1.Location = new System.Drawing.Point(27, 68);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 13);
+            this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 11;
             this.label1.Text = "文件路径";
             // 
             // pathTextBox
             // 
-            this.pathTextBox.Location = new System.Drawing.Point(86, 70);
+            this.pathTextBox.Location = new System.Drawing.Point(86, 65);
             this.pathTextBox.Name = "pathTextBox";
-            this.pathTextBox.Size = new System.Drawing.Size(302, 20);
+            this.pathTextBox.Size = new System.Drawing.Size(302, 21);
             this.pathTextBox.TabIndex = 10;
             // 
             // openFileBtton
             // 
-            this.openFileBtton.Location = new System.Drawing.Point(394, 68);
+            this.openFileBtton.Location = new System.Drawing.Point(394, 63);
             this.openFileBtton.Name = "openFileBtton";
-            this.openFileBtton.Size = new System.Drawing.Size(44, 25);
+            this.openFileBtton.Size = new System.Drawing.Size(44, 23);
             this.openFileBtton.TabIndex = 9;
             this.openFileBtton.Text = "选择";
             this.openFileBtton.UseVisualStyleBackColor = true;
@@ -104,9 +108,9 @@
             // closeButton
             // 
             this.closeButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.closeButton.Location = new System.Drawing.Point(363, 187);
+            this.closeButton.Location = new System.Drawing.Point(363, 173);
             this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(75, 25);
+            this.closeButton.Size = new System.Drawing.Size(75, 23);
             this.closeButton.TabIndex = 17;
             this.closeButton.Text = "关闭";
             this.closeButton.UseVisualStyleBackColor = true;
@@ -114,10 +118,10 @@
             // 
             // label2
             // 
-            this.label2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(6, 24);
+            this.label2.Font = new System.Drawing.Font("SimSun", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(6, 22);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(458, 25);
+            this.label2.Size = new System.Drawing.Size(458, 23);
             this.label2.TabIndex = 16;
             this.label2.Text = "导入图片数据";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -125,24 +129,56 @@
             // progressMsgLabel
             // 
             this.progressMsgLabel.AutoSize = true;
-            this.progressMsgLabel.Location = new System.Drawing.Point(29, 108);
+            this.progressMsgLabel.Location = new System.Drawing.Point(29, 116);
             this.progressMsgLabel.Name = "progressMsgLabel";
-            this.progressMsgLabel.Size = new System.Drawing.Size(24, 13);
+            this.progressMsgLabel.Size = new System.Drawing.Size(23, 12);
             this.progressMsgLabel.TabIndex = 15;
             this.progressMsgLabel.Text = "0/0";
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(29, 127);
+            this.progressBar1.Location = new System.Drawing.Point(29, 133);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(409, 25);
+            this.progressBar1.Size = new System.Drawing.Size(409, 23);
             this.progressBar1.TabIndex = 14;
             // 
-            // ImportHotelCSV
+            // noReplaceRadioButton
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.noReplaceRadioButton.AutoSize = true;
+            this.noReplaceRadioButton.Checked = true;
+            this.noReplaceRadioButton.Location = new System.Drawing.Point(167, 13);
+            this.noReplaceRadioButton.Name = "noReplaceRadioButton";
+            this.noReplaceRadioButton.Size = new System.Drawing.Size(107, 16);
+            this.noReplaceRadioButton.TabIndex = 19;
+            this.noReplaceRadioButton.TabStop = true;
+            this.noReplaceRadioButton.Text = "不覆盖存在图片";
+            this.noReplaceRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // replaceRadioButton
+            // 
+            this.replaceRadioButton.AutoSize = true;
+            this.replaceRadioButton.Location = new System.Drawing.Point(29, 13);
+            this.replaceRadioButton.Name = "replaceRadioButton";
+            this.replaceRadioButton.Size = new System.Drawing.Size(95, 16);
+            this.replaceRadioButton.TabIndex = 20;
+            this.replaceRadioButton.Text = "覆盖存在图片";
+            this.replaceRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.noReplaceRadioButton);
+            this.groupBox1.Controls.Add(this.replaceRadioButton);
+            this.groupBox1.Location = new System.Drawing.Point(86, 88);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(302, 35);
+            this.groupBox1.TabIndex = 21;
+            this.groupBox1.TabStop = false;
+            // 
+            // ImportImage
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(465, 249);
+            this.ClientSize = new System.Drawing.Size(465, 230);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.importButton);
             this.Controls.Add(this.label1);
@@ -152,13 +188,16 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.progressMsgLabel);
             this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.groupBox1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "ImportHotelCSV";
+            this.Name = "ImportImage";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "图片数据导入";
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -177,5 +216,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label progressMsgLabel;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.RadioButton noReplaceRadioButton;
+        private System.Windows.Forms.RadioButton replaceRadioButton;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

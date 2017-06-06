@@ -56,6 +56,7 @@ namespace DCTS.DB
           { "recommended_dishes", "recommended_dishes"}, {"推荐菜单", "recommended_dishes" },
           { "tips", "tips"},        {"小贴士", "tips" },
           { "guidance", "guidance"}, {"游玩方式", "guidance" },          
+          { "word", "word"}, {"Word模板", "word" },          
          
     
         };
