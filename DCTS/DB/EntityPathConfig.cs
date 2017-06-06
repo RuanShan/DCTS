@@ -46,7 +46,7 @@ namespace DCTS.DB
 
             CreateFolder(folderPath);
 
-            string fullPath = Path.Combine(folderPath, location.title);
+            string fullPath = Path.Combine(folderPath, location.word);
 
             return fullPath;
         }

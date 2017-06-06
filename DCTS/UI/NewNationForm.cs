@@ -90,7 +90,7 @@ namespace DCTS.UI
                         obj.nation = this.titleTextBox.Text;
 
                         //obj.word = copyfilename;
-                        obj.word = obj.id.ToString() + ".docx";
+                        obj.word = copyfilename; ;
 
                         obj.tips = this.textBox6.Text;
                         ctx.ComboLocations.Add(obj);
@@ -103,7 +103,7 @@ namespace DCTS.UI
                         }
                         if (hasDoc)
                         {
-                            string copyToPath = EntityPathConfig.TripWordFilePath(obj.id);
+                            string copyToPath = EntityPathConfig.LocationWordPath(obj );
                             if (!File.Exists(copyToPath))
                                 File.Copy(docFilePath, copyToPath);
                         }
@@ -120,8 +120,9 @@ namespace DCTS.UI
 
                         if (hasDoc)
                         {
-                            string copyToPath = EntityPathConfig.TripWordFilePath(obj.id);
-                            obj.word = obj.id.ToString() + ".docx";
+                            obj.word = copyfilename;
+                            string copyToPath = EntityPathConfig.LocationWordPath(obj );
+                         
 
                             if (!File.Exists(copyToPath))
                                 File.Copy(docFilePath, copyToPath);

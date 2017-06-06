@@ -21,9 +21,9 @@ namespace DCTS.UI
     public partial class OtherControl : UserControl
     {
         private Hashtable dataGridChanges = null;
-       
+
         private List<ComboLocation> nationlList = null;
-       
+
         public OtherControl()
         {
             InitializeComponent();
@@ -35,7 +35,7 @@ namespace DCTS.UI
         {
             InitializeDataGridView();
         }
-        
+
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show(" 确定删除 ?", "删除确认", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
@@ -82,7 +82,7 @@ namespace DCTS.UI
 
         private void btfind_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void dataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -159,7 +159,7 @@ namespace DCTS.UI
                 InitializeDataGridView();
             }
         }
-        
+
         // 初始化DataGridView的数据源, 
         private int InitializeDataGridView(int pageCurrent = 1)
         {
@@ -169,8 +169,8 @@ namespace DCTS.UI
 
             using (var ctx = new DctsEntities())
             {
-                List<ComboLocation> list = ctx.ComboLocations.Where(o => otherLocationType.Contains( o.ltype )).ToList();
-                  
+                List<ComboLocation> list = ctx.ComboLocations.Where(o => otherLocationType.Contains(o.ltype)).ToList();
+
                 // var list = Paginate(pageCurrent, pageSize, title);
 
 
@@ -178,13 +178,12 @@ namespace DCTS.UI
             }
             return 1;
         }
-         
+
         private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewColumn column = dataGridView.Columns[e.ColumnIndex];
 
-            if (column == this.downloadColumn1)
-
+            if (column == this.uploadColumn1)
             {
 
                 var row = dataGridView.Rows[e.RowIndex];
@@ -193,6 +192,8 @@ namespace DCTS.UI
                 openFileDialog1.Filter = "DOCX(*.doc,*.docx)|*.doc;*.docx"; //文件类型
                 if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
+                    if (openFileDialog1.FileName == "")
+                        return;
                     model.word = openFileDialog1.FileName;
                 }
                 using (var ctx = new DctsEntities())
@@ -203,22 +204,22 @@ namespace DCTS.UI
                     ComboLocation obj = ctx.ComboLocations.Find(Convert.ToInt32(model.id));
                     obj.title = model.title;
                     obj.ltype = model.ltype;
-                    obj.word = "";
+                    
                     if (hasDoc)
                     {
-                        string copyToPath = EntityPathConfig.LocationWordPath(obj);
                         obj.word = openFileDialog1.SafeFileName;
+                        string copyToPath = EntityPathConfig.LocationWordPath(obj);
+                        
 
                         if (!File.Exists(copyToPath))
-                            File.Copy(docFilePath, copyToPath + ".docx", true);
+                            File.Copy(docFilePath, copyToPath , true);
                     }
                     ctx.SaveChanges();
                 }
                 BeginActive();
 
             }
-            else if (column == this.uploadColumn1)
-
+            else if (column == this.downloadColumn1)
             {
                 string strFileName = String.Empty;
 
@@ -240,20 +241,20 @@ namespace DCTS.UI
                         foreach (ComboLocation item in list)
                         {
                             string copyToPath = EntityPathConfig.LocationWordPath(item);
-                            if (File.Exists(copyToPath + ".docx"))
+                            if (File.Exists(copyToPath))
                             {
-                                File.Copy(copyToPath + ".docx", strFileName + "\\" + item.word.ToString());
+                                File.Copy(copyToPath, strFileName + "\\" + item.word.ToString());
                                 MessageBox.Show("下载完成！");
                             }
+                            else
+                                MessageBox.Show("无数据可以下载，请重新上传");
+
+
+
                         }
                     }
                 }
-
-
             }
-
-
-
         }
 
         private void NationsControl_Resize(object sender, EventArgs e)
