@@ -18,12 +18,12 @@ using DCTS.Uti;
 
 namespace DCTS.UI
 {
-    public partial class OtherControl : UserControl
+    public partial class SuppliersControl : UserControl
     {
 
         private List<ComboLocation> nationlList = null;
 
-        public OtherControl()
+        public SuppliersControl()
         {
             InitializeComponent();
             dataGridView.AutoGenerateColumns = false;

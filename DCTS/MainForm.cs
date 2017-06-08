@@ -18,6 +18,7 @@ namespace DCTS
     {
         TripsManagementControl tripsManagementControl;
         CustomersControl customersControl;
+        SuppliersControl suppliersControl;
         AboutBox aboutbox;
 
         public MainForm()
@@ -157,6 +158,19 @@ namespace DCTS
             this.customersControl.BeginActive();
             this.mainPanel.Controls.Clear();
             this.mainPanel.Controls.Add(customersControl);
+        }
+
+        private void suppliersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            if (suppliersControl == null)
+            {
+                suppliersControl = new SuppliersControl();
+                suppliersControl.Dock = DockStyle.Fill;
+            }
+            this.suppliersControl.BeginActive();
+            this.mainPanel.Controls.Clear();
+            this.mainPanel.Controls.Add(suppliersControl);
         }
 
 

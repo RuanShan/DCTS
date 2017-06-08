@@ -1,6 +1,6 @@
 ﻿namespace DCTS.UI
 {
-    partial class OtherControl
+    partial class SuppliersControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -38,13 +38,19 @@
             this.word = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uploadColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.downloadColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.airTagPage = new System.Windows.Forms.TabPage();
+            this.insuranceTagPage = new System.Windows.Forms.TabPage();
+            this.rantalTabPage = new System.Windows.Forms.TabPage();
+            this.wifiTabPage = new System.Windows.Forms.TabPage();
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
+            this.tabControl1.SuspendLayout();
+            this.airTagPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,9 +59,6 @@
             this.dataGridView.AllowUserToAddRows = false;
             this.dataGridView.AllowUserToDeleteRows = false;
             this.dataGridView.AllowUserToResizeRows = false;
-            this.dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idColumn1,
@@ -72,12 +75,13 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridView.Location = new System.Drawing.Point(8, 149);
+            this.dataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView.Location = new System.Drawing.Point(3, 3);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowHeadersVisible = false;
             this.dataGridView.RowTemplate.Height = 50;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.Size = new System.Drawing.Size(672, 213);
+            this.dataGridView.Size = new System.Drawing.Size(658, 262);
             this.dataGridView.TabIndex = 0;
             this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellContentClick);
             // 
@@ -123,24 +127,14 @@
             this.downloadColumn1.UseColumnTextForButtonValue = true;
             this.downloadColumn1.Width = 60;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Location = new System.Drawing.Point(8, 55);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(672, 84);
-            this.groupBox1.TabIndex = 11;
-            this.groupBox1.TabStop = false;
-            // 
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.Location = new System.Drawing.Point(3, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(124, 50);
+            this.label2.Size = new System.Drawing.Size(256, 50);
             this.label2.TabIndex = 14;
-            this.label2.Text = "其他列表";
+            this.label2.Text = "服务供应商管理";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // saveFileDialog1
@@ -154,6 +148,60 @@
             this.openFileDialog1.Filter = "Doc(*.doc,*.docx)|*.doc;*.docx";
             this.openFileDialog1.Title = "请选择文件";
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Controls.Add(this.airTagPage);
+            this.tabControl1.Controls.Add(this.insuranceTagPage);
+            this.tabControl1.Controls.Add(this.rantalTabPage);
+            this.tabControl1.Controls.Add(this.wifiTabPage);
+            this.tabControl1.Location = new System.Drawing.Point(8, 69);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(672, 294);
+            this.tabControl1.TabIndex = 15;
+            // 
+            // airTagPage
+            // 
+            this.airTagPage.Controls.Add(this.dataGridView);
+            this.airTagPage.Location = new System.Drawing.Point(4, 22);
+            this.airTagPage.Name = "airTagPage";
+            this.airTagPage.Padding = new System.Windows.Forms.Padding(3);
+            this.airTagPage.Size = new System.Drawing.Size(664, 268);
+            this.airTagPage.TabIndex = 0;
+            this.airTagPage.Text = "航空公司";
+            this.airTagPage.UseVisualStyleBackColor = true;
+            // 
+            // insuranceTagPage
+            // 
+            this.insuranceTagPage.Location = new System.Drawing.Point(4, 22);
+            this.insuranceTagPage.Name = "insuranceTagPage";
+            this.insuranceTagPage.Padding = new System.Windows.Forms.Padding(3);
+            this.insuranceTagPage.Size = new System.Drawing.Size(664, 229);
+            this.insuranceTagPage.TabIndex = 1;
+            this.insuranceTagPage.Text = "保险公司";
+            this.insuranceTagPage.UseVisualStyleBackColor = true;
+            // 
+            // rantalTabPage
+            // 
+            this.rantalTabPage.Location = new System.Drawing.Point(4, 22);
+            this.rantalTabPage.Name = "rantalTabPage";
+            this.rantalTabPage.Size = new System.Drawing.Size(664, 229);
+            this.rantalTabPage.TabIndex = 2;
+            this.rantalTabPage.Text = "租车公司";
+            this.rantalTabPage.UseVisualStyleBackColor = true;
+            // 
+            // wifiTabPage
+            // 
+            this.wifiTabPage.Location = new System.Drawing.Point(4, 22);
+            this.wifiTabPage.Name = "wifiTabPage";
+            this.wifiTabPage.Size = new System.Drawing.Size(664, 229);
+            this.wifiTabPage.TabIndex = 3;
+            this.wifiTabPage.Text = "WIFI";
+            this.wifiTabPage.UseVisualStyleBackColor = true;
+            // 
             // entityDataSource1
             // 
             this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
@@ -163,17 +211,18 @@
             this.bindingSource1.DataSource = this.entityDataSource1;
             this.bindingSource1.Position = 0;
             // 
-            // OtherControl
+            // SuppliersControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.dataGridView);
-            this.Name = "OtherControl";
+            this.Name = "SuppliersControl";
             this.Size = new System.Drawing.Size(688, 374);
             this.Resize += new System.EventHandler(this.NationsControl_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.airTagPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
 
@@ -182,7 +231,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView;
-        private System.Windows.Forms.GroupBox groupBox1;
         private CustomComponents.EntityDataSource entityDataSource1;
         private System.Windows.Forms.BindingSource bindingSource1;
         private System.Windows.Forms.Label label2;
@@ -194,5 +242,10 @@
         private System.Windows.Forms.DataGridViewButtonColumn downloadColumn1;
 
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage airTagPage;
+        private System.Windows.Forms.TabPage insuranceTagPage;
+        private System.Windows.Forms.TabPage rantalTabPage;
+        private System.Windows.Forms.TabPage wifiTabPage;
     }
 }

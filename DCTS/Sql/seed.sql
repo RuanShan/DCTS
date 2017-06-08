@@ -242,8 +242,11 @@ INSERT INTO `Nations` (`id`, `title`, `code`) VALUES
 (239, '智利', 'CHL'),
 (240, '中非共和国', 'CAF');
 
-  
+ 
 INSERT INTO `ComboLocations` (`ltype`, `title`) VALUES (0, '这是一个空白页'),
+(16, '飞机'),
+(17, '火车'),
+(18, '租车'),
 (101, '一封信'),
 (103, '出行必备'),
 (120, '线上查询说明'),
