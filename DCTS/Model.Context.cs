@@ -25,9 +25,6 @@ namespace DCTS
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<Dining> Dinings { get; set; }
-        public DbSet<Hotel> Hotels { get; set; }
-        public DbSet<Scenic> Scenics { get; set; }
         public DbSet<Trip> Trips { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Nation> Nations { get; set; }
@@ -36,5 +33,8 @@ namespace DCTS
         public DbSet<TripDay> TripDays { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<LocationImage> LocationImages { get; set; }
+        public DbSet<Schedule> Schedules { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
     }
 }

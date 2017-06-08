@@ -92,7 +92,7 @@ CREATE TABLE `Customers` (
   `birthday` datetime DEFAULT NULL COMMENT '生日',
   `enname` varchar(128) DEFAULT NULL COMMENT '英文姓名',
   `passport` varchar(45) DEFAULT NULL COMMENT '护照号码',
-  `created_at` datetime NOT NULL,
+  `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -119,12 +119,28 @@ CREATE TABLE `DayLocations` (
   `end_at` datetime DEFAULT NULL,
   `cover_id` int(11) NOT NULL DEFAULT '0' COMMENT '封面图片',
   `schedule` varchar(2048) DEFAULT NULL COMMENT '行程计划\n无法仅仅使用每天行程作为每一项, 比如, 仅仅有景点浏览开始时间,没有离开酒店的出发时间.\n或者何时去机场,火车站等.这是一个自定义项  时间||活动//时间||活动',
+  `flight_no` varchar(45) DEFAULT NULL,
+  `flight_from` varchar(45) DEFAULT NULL,
+  `flight_to` varchar(45) DEFAULT NULL,
+  `flight_layover` tinyint(4) NOT NULL DEFAULT '0',
+  `flight_start_at` datetime DEFAULT NULL,
+  `flight_end_at` datetime DEFAULT NULL,
+  `flight2_start_at` datetime DEFAULT NULL,
+  `flight2_end_at` datetime DEFAULT NULL,
+  `flight2_from` varchar(45) DEFAULT NULL,
+  `flight2_to` varchar(45) DEFAULT NULL,
+  `flight2_no` varchar(45) DEFAULT NULL,
+  `airport_from` varchar(45) DEFAULT NULL,
+  `airport_to` varchar(45) DEFAULT NULL,
+  `airport2_from` varchar(45) DEFAULT NULL,
+  `airport2_to` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `trip_id_idx` (`trip_id`),
   KEY `day_id_idx` (`day_id`),
   CONSTRAINT `fk_day_id` FOREIGN KEY (`day_id`) REFERENCES `TripDays` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=134 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=136 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
 
 
 --

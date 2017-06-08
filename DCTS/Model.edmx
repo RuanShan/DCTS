@@ -10,13 +10,17 @@
           <EntitySet Name="ComboLocations" EntityType="DctsModel.Store.ComboLocations" store:Type="Tables" Schema="dcts_dev" />
           <EntitySet Name="Customers" EntityType="DctsModel.Store.Customers" store:Type="Tables" Schema="dcts_dev" />
           <EntitySet Name="DayLocations" EntityType="DctsModel.Store.DayLocations" store:Type="Tables" Schema="dcts_dev" />
-          <EntitySet Name="Dinings" EntityType="DctsModel.Store.Dinings" store:Type="Tables" Schema="dcts_dev" />
-          <EntitySet Name="Hotels" EntityType="DctsModel.Store.Hotels" store:Type="Tables" Schema="dcts_dev" />
           <EntitySet Name="LocationImages" EntityType="DctsModel.Store.LocationImages" store:Type="Tables" Schema="dcts_dev" />
           <EntitySet Name="Nations" EntityType="DctsModel.Store.Nations" store:Type="Tables" Schema="dcts_dev" />
-          <EntitySet Name="Scenics" EntityType="DctsModel.Store.Scenics" store:Type="Tables" Schema="dcts_dev" />
+          <EntitySet Name="Schedules" EntityType="DctsModel.Store.Schedules" store:Type="Tables" Schema="dcts_dev" />
+          <EntitySet Name="Suppliers" EntityType="DctsModel.Store.Suppliers" store:Type="Tables" Schema="dcts_dev" />
+          <EntitySet Name="Tickets" EntityType="DctsModel.Store.Tickets" store:Type="Tables" Schema="dcts_dev" />
           <EntitySet Name="TripDays" EntityType="DctsModel.Store.TripDays" store:Type="Tables" Schema="dcts_dev" />
           <EntitySet Name="Trips" EntityType="DctsModel.Store.Trips" store:Type="Tables" Schema="dcts_dev" />
+          <AssociationSet Name="fk_customer" Association="DctsModel.Store.fk_customer">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Tickets" EntitySet="Tickets" />
+          </AssociationSet>
           <AssociationSet Name="fk_day_id" Association="DctsModel.Store.fk_day_id">
             <End Role="TripDays" EntitySet="TripDays" />
             <End Role="DayLocations" EntitySet="DayLocations" />
@@ -24,6 +28,14 @@
           <AssociationSet Name="fk_location" Association="DctsModel.Store.fk_location">
             <End Role="ComboLocations" EntitySet="ComboLocations" />
             <End Role="LocationImages" EntitySet="LocationImages" />
+          </AssociationSet>
+          <AssociationSet Name="fk_supplier" Association="DctsModel.Store.fk_supplier">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="Tickets" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tripday" Association="DctsModel.Store.fk_tripday">
+            <End Role="TripDays" EntitySet="TripDays" />
+            <End Role="Schedules" EntitySet="Schedules" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Cities">
@@ -122,44 +134,6 @@
           <Property Name="memo" Type="varchar" MaxLength="1024" />
           <Property Name="route" Type="varchar" MaxLength="1024" />
         </EntityType>
-        <EntityType Name="Dinings">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="uint" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="nation" Type="varchar" MaxLength="45" />
-          <Property Name="city" Type="varchar" MaxLength="45" />
-          <Property Name="area" Type="varchar" MaxLength="45" />
-          <Property Name="title" Type="varchar" MaxLength="45" />
-          <Property Name="dishes" Type="varchar" MaxLength="45" />
-          <Property Name="img" Type="varchar" MaxLength="45" />
-          <Property Name="latlng" Type="varchar" MaxLength="45" />
-          <Property Name="reach" Type="varchar" MaxLength="45" />
-          <Property Name="address" Type="varchar" MaxLength="45" />
-          <Property Name="recommendedDishes" Type="varchar" MaxLength="45" />
-          <Property Name="tips" Type="varchar" MaxLength="45" />
-        </EntityType>
-        <EntityType Name="Hotels">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="uint" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="nation" Type="varchar" MaxLength="45" />
-          <Property Name="city" Type="varchar" MaxLength="45" />
-          <Property Name="title" Type="varchar" MaxLength="45" />
-          <Property Name="localTitle" Type="varchar" MaxLength="45" />
-          <Property Name="img" Type="varchar" MaxLength="45" />
-          <Property Name="room" Type="varchar" MaxLength="45" />
-          <Property Name="dinner" Type="varchar" MaxLength="45" />
-          <Property Name="address" Type="varchar" MaxLength="45" />
-          <Property Name="latlng" Type="varchar" MaxLength="45" />
-          <Property Name="contact" Type="varchar" MaxLength="45" />
-          <Property Name="wifi" Type="varchar" MaxLength="45" />
-          <Property Name="parking" Type="varchar" MaxLength="45" />
-          <Property Name="reception" Type="varchar" MaxLength="45" />
-          <Property Name="kitchen" Type="varchar" MaxLength="45" />
-          <Property Name="tips" Type="varchar" MaxLength="45" />
-        </EntityType>
         <EntityType Name="LocationImages">
           <Key>
             <PropertyRef Name="id" />
@@ -179,22 +153,53 @@
           <Property Name="localTitle" Type="varchar" MaxLength="45" />
           <Property Name="enabled" Type="bool" Nullable="false" />
         </EntityType>
-        <EntityType Name="Scenics">
+        <EntityType Name="Schedules">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="uint" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="nation" Type="varchar" MaxLength="45" />
-          <Property Name="city" Type="varchar" MaxLength="45" />
-          <Property Name="title" Type="varchar" MaxLength="1024" />
-          <Property Name="localTitle" Type="varchar" MaxLength="45" />
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="tripday_id" Type="int" Nullable="false" />
+          <Property Name="start_at" Type="datetime" />
+          <Property Name="end_at" Type="datetime" />
+          <Property Name="title" Type="varchar" MaxLength="45" />
+          <Property Name="desc" Type="varchar" MaxLength="1024" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="updated_at" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Suppliers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="stype" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" />
           <Property Name="img" Type="varchar" MaxLength="45" />
-          <Property Name="latlng" Type="varchar" MaxLength="45" />
-          <Property Name="localAdd" Type="varchar" MaxLength="45" />
-          <Property Name="openAt" Type="datetime" />
-          <Property Name="closeAt" Type="datetime" />
-          <Property Name="ticket" Type="varchar" MaxLength="45" />
-          <Property Name="tips" Type="varchar" MaxLength="1024" />
+          <Property Name="csh" Type="varchar" MaxLength="45" />
+          <Property Name="memo" Type="varchar" MaxLength="1024" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="updated_at" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Tickets">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="daylocation_id" Type="int" Nullable="false" />
+          <Property Name="customer_id" Type="int" Nullable="false" />
+          <Property Name="supplier_id" Type="int" Nullable="false" />
+          <Property Name="num" Type="varchar" MaxLength="45" />
+          <Property Name="route" Type="varchar" MaxLength="1024" />
+          <Property Name="memo" Type="varchar" MaxLength="1024" />
+          <Property Name="requirement" Type="varchar" MaxLength="1024" />
+          <Property Name="service_no" Type="varchar" MaxLength="45" />
+          <Property Name="overlay" Type="tinyint" />
+          <Property Name="start_at" Type="datetime" />
+          <Property Name="end_at" Type="datetime" />
+          <Property Name="from_place" Type="varchar" MaxLength="45" />
+          <Property Name="to_place" Type="varchar" MaxLength="45" />
+          <Property Name="from_address" Type="varchar" MaxLength="512" />
+          <Property Name="to_address" Type="varchar" MaxLength="512" />
+          <Property Name="rules" Type="varchar" MaxLength="1024" />
         </EntityType>
         <EntityType Name="TripDays">
           <Key>
@@ -223,6 +228,18 @@
           <Property Name="end_at" Type="datetime" />
           <Property Name="cover_id" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="fk_customer">
+          <End Role="Customers" Type="DctsModel.Store.Customers" Multiplicity="1" />
+          <End Role="Tickets" Type="DctsModel.Store.Tickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tickets">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_day_id">
           <End Role="TripDays" Type="DctsModel.Store.TripDays" Multiplicity="1" />
           <End Role="DayLocations" Type="DctsModel.Store.DayLocations" Multiplicity="*" />
@@ -247,14 +264,35 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_supplier">
+          <End Role="Suppliers" Type="DctsModel.Store.Suppliers" Multiplicity="1" />
+          <End Role="Tickets" Type="DctsModel.Store.Tickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tickets">
+              <PropertyRef Name="supplier_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tripday">
+          <End Role="TripDays" Type="DctsModel.Store.TripDays" Multiplicity="1" />
+          <End Role="Schedules" Type="DctsModel.Store.Schedules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TripDays">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Schedules">
+              <PropertyRef Name="tripday_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DctsModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
         <EntityContainer Name="DctsEntities" p1:LazyLoadingEnabled="true">
-          <EntitySet Name="Dinings" EntityType="DctsModel.Dining" />
-          <EntitySet Name="Hotels" EntityType="DctsModel.Hotel" />
-          <EntitySet Name="Scenics" EntityType="DctsModel.Scenic" />
           <EntitySet Name="Trips" EntityType="DctsModel.Trip" />
           <EntitySet Name="Cities" EntityType="DctsModel.City" />
           <EntitySet Name="Nations" EntityType="DctsModel.Nation" />
@@ -283,62 +321,22 @@
             <End Role="ComboLocation" EntitySet="ComboLocations" />
             <End Role="LocationImage" EntitySet="LocationImages" />
           </AssociationSet>
+          <EntitySet Name="Schedules" EntityType="DctsModel.Schedule" />
+          <EntitySet Name="Suppliers" EntityType="DctsModel.Supplier" />
+          <EntitySet Name="Tickets" EntityType="DctsModel.Ticket" />
+          <AssociationSet Name="fk_customer" Association="DctsModel.fk_customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Ticket" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tripday" Association="DctsModel.fk_tripday">
+            <End Role="TripDay" EntitySet="TripDays" />
+            <End Role="Schedule" EntitySet="Schedules" />
+          </AssociationSet>
+          <AssociationSet Name="fk_supplier" Association="DctsModel.fk_supplier">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="Ticket" EntitySet="Tickets" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Dining">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="nation" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="city" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="area" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="title" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="dishes" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="img" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="latlng" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="reach" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="address" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="recommendedDishes" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="tips" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="Hotel">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="nation" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="city" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="title" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="localTitle" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="img" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="room" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="dinner" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="address" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="latlng" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="contact" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="wifi" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="parking" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="reception" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="kitchen" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="tips" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="Scenic">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="nation" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="city" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="title" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="localTitle" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="img" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="latlng" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="localAdd" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="openAt" Type="DateTime" />
-          <Property Name="closeAt" Type="DateTime" />
-          <Property Name="ticket" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="tips" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-        </EntityType>
         <EntityType Name="Trip">
           <Key>
             <PropertyRef Name="id" />
@@ -493,6 +491,7 @@
           <Property Type="String" Name="tips" MaxLength="1024" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="schedule" MaxLength="2048" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="cover_id" Nullable="false" />
+          <NavigationProperty Name="Schedules" Relationship="DctsModel.fk_tripday" FromRole="TripDay" ToRole="Schedule" />
         </EntityType>
         <Association Name="dayId">
           <End Type="DctsModel.TripDay" Role="TripDay" Multiplicity="1">
@@ -534,6 +533,7 @@
           <Property Type="String" Name="passport" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Type="DateTime" Name="created_at" Nullable="false" />
           <Property Type="DateTime" Name="updated_at" />
+          <NavigationProperty Name="Tickets" Relationship="DctsModel.fk_customer" FromRole="Customer" ToRole="Ticket" />
         </EntityType>
         <EntityType Name="LocationImage">
           <Key>
@@ -557,70 +557,100 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="tripday_id" Nullable="false" />
+          <Property Type="DateTime" Name="start_at" />
+          <Property Type="DateTime" Name="end_at" />
+          <Property Type="String" Name="title" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="desc" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="created_at" />
+          <Property Type="DateTime" Name="updated_at" />
+          <NavigationProperty Name="TripDay" Relationship="DctsModel.fk_tripday" FromRole="Schedule" ToRole="TripDay" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="stype" Nullable="false" />
+          <Property Type="String" Name="name" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="img" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="csh" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="memo" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="created_at" />
+          <Property Type="DateTime" Name="updated_at" />
+          <NavigationProperty Name="Tickets" Relationship="DctsModel.fk_supplier" FromRole="Supplier" ToRole="Ticket" />
+        </EntityType>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="daylocation_id" Nullable="false" />
+          <Property Type="Int32" Name="customer_id" Nullable="false" />
+          <Property Type="Int32" Name="supplier_id" Nullable="false" />
+          <Property Type="String" Name="num" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="route" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="memo" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="requirement" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="service_no" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="SByte" Name="overlay" />
+          <Property Type="DateTime" Name="start_at" />
+          <Property Type="DateTime" Name="end_at" />
+          <Property Type="String" Name="from_place" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="to_place" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="from_address" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="to_address" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="rules" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Customer" Relationship="DctsModel.fk_customer" FromRole="Ticket" ToRole="Customer" />
+          <NavigationProperty Name="Supplier" Relationship="DctsModel.fk_supplier" FromRole="Ticket" ToRole="Supplier" />
+        </EntityType>
+        <Association Name="fk_customer">
+          <End Type="DctsModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="DctsModel.Ticket" Role="Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tripday">
+          <End Type="DctsModel.TripDay" Role="TripDay" Multiplicity="1" />
+          <End Type="DctsModel.Schedule" Role="Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TripDay">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="tripday_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_supplier">
+          <End Type="DctsModel.Supplier" Role="Supplier" Multiplicity="1" />
+          <End Type="DctsModel.Ticket" Role="Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="supplier_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DctsModelStoreContainer" CdmEntityContainer="DctsEntities">
-          <EntitySetMapping Name="Dinings">
-            <EntityTypeMapping TypeName="DctsModel.Dining">
-              <MappingFragment StoreEntitySet="Dinings">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="nation" ColumnName="nation" />
-                <ScalarProperty Name="city" ColumnName="city" />
-                <ScalarProperty Name="area" ColumnName="area" />
-                <ScalarProperty Name="title" ColumnName="title" />
-                <ScalarProperty Name="dishes" ColumnName="dishes" />
-                <ScalarProperty Name="img" ColumnName="img" />
-                <ScalarProperty Name="latlng" ColumnName="latlng" />
-                <ScalarProperty Name="reach" ColumnName="reach" />
-                <ScalarProperty Name="address" ColumnName="address" />
-                <ScalarProperty Name="recommendedDishes" ColumnName="recommendedDishes" />
-                <ScalarProperty Name="tips" ColumnName="tips" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Hotels">
-            <EntityTypeMapping TypeName="DctsModel.Hotel">
-              <MappingFragment StoreEntitySet="Hotels">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="nation" ColumnName="nation" />
-                <ScalarProperty Name="city" ColumnName="city" />
-                <ScalarProperty Name="title" ColumnName="title" />
-                <ScalarProperty Name="localTitle" ColumnName="localTitle" />
-                <ScalarProperty Name="img" ColumnName="img" />
-                <ScalarProperty Name="room" ColumnName="room" />
-                <ScalarProperty Name="dinner" ColumnName="dinner" />
-                <ScalarProperty Name="address" ColumnName="address" />
-                <ScalarProperty Name="latlng" ColumnName="latlng" />
-                <ScalarProperty Name="contact" ColumnName="contact" />
-                <ScalarProperty Name="wifi" ColumnName="wifi" />
-                <ScalarProperty Name="parking" ColumnName="parking" />
-                <ScalarProperty Name="reception" ColumnName="reception" />
-                <ScalarProperty Name="kitchen" ColumnName="kitchen" />
-                <ScalarProperty Name="tips" ColumnName="tips" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Scenics">
-            <EntityTypeMapping TypeName="DctsModel.Scenic">
-              <MappingFragment StoreEntitySet="Scenics">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="nation" ColumnName="nation" />
-                <ScalarProperty Name="city" ColumnName="city" />
-                <ScalarProperty Name="title" ColumnName="title" />
-                <ScalarProperty Name="localTitle" ColumnName="localTitle" />
-                <ScalarProperty Name="img" ColumnName="img" />
-                <ScalarProperty Name="latlng" ColumnName="latlng" />
-                <ScalarProperty Name="localAdd" ColumnName="localAdd" />
-                <ScalarProperty Name="openAt" ColumnName="openAt" />
-                <ScalarProperty Name="closeAt" ColumnName="closeAt" />
-                <ScalarProperty Name="ticket" ColumnName="ticket" />
-                <ScalarProperty Name="tips" ColumnName="tips" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Trips">
             <EntityTypeMapping TypeName="DctsModel.Trip">
               <MappingFragment StoreEntitySet="Trips">
@@ -767,6 +797,57 @@
                 <ScalarProperty Name="memo" ColumnName="memo" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="location_id" ColumnName="location_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schedules">
+            <EntityTypeMapping TypeName="DctsModel.Schedule">
+              <MappingFragment StoreEntitySet="Schedules">
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="desc" ColumnName="desc" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="end_at" ColumnName="end_at" />
+                <ScalarProperty Name="start_at" ColumnName="start_at" />
+                <ScalarProperty Name="tripday_id" ColumnName="tripday_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suppliers">
+            <EntityTypeMapping TypeName="DctsModel.Supplier">
+              <MappingFragment StoreEntitySet="Suppliers">
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="memo" ColumnName="memo" />
+                <ScalarProperty Name="csh" ColumnName="csh" />
+                <ScalarProperty Name="img" ColumnName="img" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="stype" ColumnName="stype" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tickets">
+            <EntityTypeMapping TypeName="DctsModel.Ticket">
+              <MappingFragment StoreEntitySet="Tickets">
+                <ScalarProperty Name="rules" ColumnName="rules" />
+                <ScalarProperty Name="to_address" ColumnName="to_address" />
+                <ScalarProperty Name="from_address" ColumnName="from_address" />
+                <ScalarProperty Name="to_place" ColumnName="to_place" />
+                <ScalarProperty Name="from_place" ColumnName="from_place" />
+                <ScalarProperty Name="end_at" ColumnName="end_at" />
+                <ScalarProperty Name="start_at" ColumnName="start_at" />
+                <ScalarProperty Name="overlay" ColumnName="overlay" />
+                <ScalarProperty Name="service_no" ColumnName="service_no" />
+                <ScalarProperty Name="requirement" ColumnName="requirement" />
+                <ScalarProperty Name="memo" ColumnName="memo" />
+                <ScalarProperty Name="route" ColumnName="route" />
+                <ScalarProperty Name="num" ColumnName="num" />
+                <ScalarProperty Name="supplier_id" ColumnName="supplier_id" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="daylocation_id" ColumnName="daylocation_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

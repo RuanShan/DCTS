@@ -4,23 +4,26 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="76933a9ea6684110b1ae0ae88bfb71e2" Name="Diagram1" ZoomLevel="75">
-        <EntityTypeShape EntityType="DctsModel.Dining" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DctsModel.Hotel" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DctsModel.Scenic" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DctsModel.Trip" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DctsModel.City" Width="1.5" PointX="6.5" PointY="0.75" />
-        <EntityTypeShape EntityType="DctsModel.Nation" Width="1.5" PointX="10.565858272167787" PointY="17.639409490693087" />
-        <EntityTypeShape EntityType="DctsModel.ComboLocation" Width="1.5" PointX="8.375" PointY="0.625" />
-        <EntityTypeShape EntityType="DctsModel.DayLocation" Width="1.5" PointX="4.875" PointY="9.5" />
+      <Diagram DiagramId="76933a9ea6684110b1ae0ae88bfb71e2" Name="Diagram1" ZoomLevel="59">
+        <EntityTypeShape EntityType="DctsModel.Trip" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DctsModel.City" Width="1.5" PointX="0.75" PointY="1" />
+        <EntityTypeShape EntityType="DctsModel.Nation" Width="1.5" PointX="2.5" PointY="1" />
+        <EntityTypeShape EntityType="DctsModel.ComboLocation" Width="1.5" PointX="7.875" PointY="4.375" />
+        <EntityTypeShape EntityType="DctsModel.DayLocation" Width="1.5" PointX="4.875" PointY="4.375" />
         <AssociationConnector Association="DctsModel.locationId1" />
         <AssociationConnector Association="DctsModel.tripId1" />
-        <EntityTypeShape EntityType="DctsModel.TripDay" Width="1.5" PointX="3.125" PointY="5.75" />
+        <EntityTypeShape EntityType="DctsModel.TripDay" Width="1.5" PointX="0.75" PointY="8.125" />
         <AssociationConnector Association="DctsModel.dayId" />
         <AssociationConnector Association="DctsModel.tripdays1" />
-        <EntityTypeShape EntityType="DctsModel.Customer" Width="1.5" PointX="9.875" PointY="9.5" />
-        <EntityTypeShape EntityType="DctsModel.LocationImage" Width="1.5" PointX="10.5" PointY="0.75" />
+        <EntityTypeShape EntityType="DctsModel.Customer" Width="1.5" PointX="9.875" PointY="8.125" />
+        <EntityTypeShape EntityType="DctsModel.LocationImage" Width="1.5" PointX="10.25" PointY="4.375" />
         <AssociationConnector Association="DctsModel.fk_location" />
+        <EntityTypeShape EntityType="DctsModel.Schedule" Width="1.5" PointX="2.875" PointY="12.5" />
+        <EntityTypeShape EntityType="DctsModel.Supplier" Width="1.5" PointX="14.375" PointY="8.125" />
+        <EntityTypeShape EntityType="DctsModel.Ticket" Width="1.5" PointX="12.125" PointY="8.125" />
+        <AssociationConnector Association="DctsModel.fk_customer" />
+        <AssociationConnector Association="DctsModel.fk_tripday" />
+        <AssociationConnector Association="DctsModel.fk_supplier" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

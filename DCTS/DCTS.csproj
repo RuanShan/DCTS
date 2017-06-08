@@ -135,7 +135,6 @@
     <Compile Include="Bus\TripWordExporterEx.cs" />
     <Compile Include="Bus\CSVStreamReader.cs" />
     <Compile Include="Bus\LocationExporter.cs" />
-    <Compile Include="Bus\ScenicDbHelper.cs" />
     <Compile Include="Bus\TripBusiness.cs" />
     <Compile Include="Bus\TripWordExporter.cs" />
     <Compile Include="Bus\WordTemplateHelper.cs" />
@@ -176,19 +175,19 @@
     <Compile Include="DB\EntityPathConfig.cs" />
     <Compile Include="DB\GlobalCache.cs" />
     <Compile Include="DB\MockEntity.cs" />
-    <Compile Include="Dining.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Hotel.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="LocationImage.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Nation.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Scenic.cs">
+    <Compile Include="Schedule.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Supplier.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ticket.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Trip.cs">

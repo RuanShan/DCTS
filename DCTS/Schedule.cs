@@ -12,19 +12,17 @@ namespace DCTS
     using System;
     using System.Collections.Generic;
     
-    public partial class Dining
+    public partial class Schedule
     {
-        public long id { get; set; }
-        public string nation { get; set; }
-        public string city { get; set; }
-        public string area { get; set; }
+        public int id { get; set; }
+        public int tripday_id { get; set; }
+        public Nullable<System.DateTime> start_at { get; set; }
+        public Nullable<System.DateTime> end_at { get; set; }
         public string title { get; set; }
-        public string dishes { get; set; }
-        public string img { get; set; }
-        public string latlng { get; set; }
-        public string reach { get; set; }
-        public string address { get; set; }
-        public string recommendedDishes { get; set; }
-        public string tips { get; set; }
+        public string desc { get; set; }
+        public Nullable<System.DateTime> created_at { get; set; }
+        public Nullable<System.DateTime> updated_at { get; set; }
+    
+        public virtual TripDay TripDay { get; set; }
     }
 }

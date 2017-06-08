@@ -14,6 +14,11 @@ namespace DCTS
     
     public partial class Customer
     {
+        public Customer()
+        {
+            this.Tickets = new HashSet<Ticket>();
+        }
+    
         public int id { get; set; }
         public string name { get; set; }
         public string gender { get; set; }
@@ -22,5 +27,7 @@ namespace DCTS
         public string passport { get; set; }
         public System.DateTime created_at { get; set; }
         public Nullable<System.DateTime> updated_at { get; set; }
+    
+        public virtual ICollection<Ticket> Tickets { get; set; }
     }
 }

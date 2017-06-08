@@ -12,19 +12,22 @@ namespace DCTS
     using System;
     using System.Collections.Generic;
     
-    public partial class Scenic
+    public partial class Supplier
     {
-        public long id { get; set; }
-        public string nation { get; set; }
-        public string city { get; set; }
-        public string title { get; set; }
-        public string localTitle { get; set; }
+        public Supplier()
+        {
+            this.Tickets = new HashSet<Ticket>();
+        }
+    
+        public int id { get; set; }
+        public int stype { get; set; }
+        public string name { get; set; }
         public string img { get; set; }
-        public string latlng { get; set; }
-        public string localAdd { get; set; }
-        public Nullable<System.DateTime> openAt { get; set; }
-        public Nullable<System.DateTime> closeAt { get; set; }
-        public string ticket { get; set; }
-        public string tips { get; set; }
+        public string csh { get; set; }
+        public string memo { get; set; }
+        public Nullable<System.DateTime> created_at { get; set; }
+        public Nullable<System.DateTime> updated_at { get; set; }
+    
+        public virtual ICollection<Ticket> Tickets { get; set; }
     }
 }
