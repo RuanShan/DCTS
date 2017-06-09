@@ -47,7 +47,7 @@ namespace DCTS.UI
             this.nationComboBox.ValueMember = "ShortName";
             this.nationComboBox.DataSource = nations;
 
-
+                
             // 活动分类列
             var locationTypeListForColumn = locationTypeList.Select(o => new { Id = (int)o.Id, FullName = o.FullName }).ToList();
 

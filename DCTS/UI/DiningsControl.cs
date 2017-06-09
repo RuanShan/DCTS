@@ -387,5 +387,15 @@ namespace DCTS.UI
             }
         }
 
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void keywordTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

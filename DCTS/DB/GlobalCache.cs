@@ -35,8 +35,10 @@ namespace DCTS.DB
             }
         }
 
-        public static List<MockEntity> LocationTypeList{
-            get{
+        public static List<MockEntity> LocationTypeList
+        {
+            get
+            {
                 return (new[]{ 
                     new MockEntity{ Id = (int)ComboLocationEnum.Blank, ShortName="空白页", FullName = "空白页" },
                     new MockEntity{ Id = (int)ComboLocationEnum.Scenic,ShortName="景点", FullName = "景点" },
@@ -46,10 +48,23 @@ namespace DCTS.DB
                 }.ToList());
             }
         }
-
+        public static List<MockEntity> Supplier_LocationTypeList
+        {
+            get
+            {
+            
+                return (new[]{ 
+                    new MockEntity{ Id = (int)SupplierEnum.Air, ShortName="航空公司", FullName = "航空公司" },
+                    new MockEntity{ Id = (int)SupplierEnum.Insurance,ShortName="保险公司", FullName = "保险公司" },
+                    new MockEntity{ Id = (int)SupplierEnum.Rental, ShortName="租车公司",FullName = "租车公司" },
+                    new MockEntity{ Id = (int)SupplierEnum.WIFI, ShortName="WIFI",FullName = "WIFI" },
+                
+                }.ToList());
+            }
+        }
         private static void InitializeNationList()
         {
-            nationList = db.Nations.ToList();        
+            nationList = db.Nations.ToList();
         }
         private static void InitializeCityList()
         {

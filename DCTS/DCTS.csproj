@@ -31,7 +31,7 @@
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -429,6 +429,12 @@
     <Compile Include="UI\NewAirportForm.Designer.cs">
       <DependentUpon>NewAirportForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\NewSupplierForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\NewSupplierForm.Designer.cs">
+      <DependentUpon>NewSupplierForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Uti\EFIntercepterLogging.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -621,6 +627,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\NewAirportForm.resx">
       <DependentUpon>NewAirportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\NewSupplierForm.resx">
+      <DependentUpon>NewSupplierForm.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

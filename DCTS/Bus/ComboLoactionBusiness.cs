@@ -98,6 +98,19 @@ namespace DCTS.Bus
             }
 
         }
+        public static void Supplier_Delete(long id)
+        {
+            using (var ctx = new DctsEntities())
+            {
+                var model = ctx.Suppliers.Find(id);
+              
+                ctx.Suppliers.Remove(model);
+                ctx.SaveChanges();
+            }
+
+        }
+
+
         public static void Customer_Delete(long id)
         {
             using (var ctx = new DctsEntities())
