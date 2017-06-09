@@ -110,6 +110,7 @@ namespace DCTS.UI
 
                         obj.img = imgFileName;
                         obj.csh = this.cshtextbox.Text;
+                        obj.updated_at = DateTime.Now;
 
                         ctx.SaveChanges();
                         if (hasImg)
@@ -128,6 +129,7 @@ namespace DCTS.UI
 
                         obj.img = imgFileName;
                         obj.csh = this.cshtextbox.Text;
+                        obj.created_at = DateTime.Now;
 
                         ctx.Suppliers.Add(obj);
                         if (nameishave == false && this.titleTextBox.Text.Length <= 100)
