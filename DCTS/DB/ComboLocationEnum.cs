@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DCTS.DB
 {
-   
+    //                       飞机, WIFI, 租车, 保险
+    public enum SupplierEnum{ Air=11, WIFI=19, Rental=18, Insurance=21 }
     public enum ComboLocationEnum
     {   // 空白页，   景点，   餐厅，  住宿，  国家， 火车，飞机（机票说明）,                    租车
         Blank = 0, Scenic = 1, Dining = 5, Hotel = 9, Country = 10, Airport=11, Flight = 16, Train = 17, Rental = 18, WIFI = 19,
