@@ -435,6 +435,12 @@
     <Compile Include="UI\NewSupplierForm.Designer.cs">
       <DependentUpon>NewSupplierForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\NewScheduleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\NewScheduleForm.Designer.cs">
+      <DependentUpon>NewScheduleForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Uti\EFIntercepterLogging.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -630,6 +636,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\NewSupplierForm.resx">
       <DependentUpon>NewSupplierForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\NewScheduleForm.resx">
+      <DependentUpon>NewScheduleForm.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

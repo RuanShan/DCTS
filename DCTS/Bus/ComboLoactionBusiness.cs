@@ -109,7 +109,17 @@ namespace DCTS.Bus
             }
 
         }
+        public static void Schedules_Delete(long id)
+        {
+            using (var ctx = new DctsEntities())
+            {
+                var model = ctx.Schedules.Find(id);
 
+                ctx.Schedules.Remove(model);
+                ctx.SaveChanges();
+            }
+
+        }
 
         public static void Customer_Delete(long id)
         {
