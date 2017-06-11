@@ -55,15 +55,12 @@ namespace DCTS.UI
 
 
         }
-
-
-
+        
         private void TripDayFormControl_Load(object sender, EventArgs e)
         {
 
         }
-
-
+        
         private void dataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             var ctx = this.entityDataSource2.DbContext as DctsEntities;
@@ -98,7 +95,7 @@ namespace DCTS.UI
             using (var ctx = new DctsEntities())
             {
                 //分页需要数据总数
-                count = Count(ComboLocationEnum.Country, title);
+                count = Count(TripItem.id, title);
 
                 var list = Paginate(pageCurrent, pageSize, title);
 
@@ -106,15 +103,15 @@ namespace DCTS.UI
             }
             return count;
         }
-        private static int Count(ComboLocationEnum locationType, string title)
+        private static int Count(int tyid, string title)
         {
             int count = 0;
             using (var ctx = new DctsEntities())
             {
                 var query = ctx.Schedules.AsQueryable();
-                if ((int)locationType > 0)
+                if (tyid > 0)
                 {
-                    query = query.Where(o => o.tripday_id == (int)ComboLocationEnum.Country);
+                    query = query.Where(o => o.tripday_id == tyid);
 
                 }
 
