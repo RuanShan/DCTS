@@ -31,6 +31,10 @@ namespace DCTS
         public string from_address { get; set; }
         public string to_address { get; set; }
         public string rules { get; set; }
+        public string title { get; set; }
+        public Nullable<int> days { get; set; }
+        public string breakfirst { get; set; }
+        public string parking { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual Supplier Supplier { get; set; }
