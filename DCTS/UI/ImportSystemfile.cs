@@ -21,7 +21,7 @@ namespace DCTS.CustomComponents
     public partial class ImportSystemfile : Form
     {
         List<string> listfile = new List<string>();
-
+        string strFileName = String.Empty;
         public ImportSystemfile()
         {
             InitializeComponent();
@@ -31,55 +31,13 @@ namespace DCTS.CustomComponents
 
         private void openFileBtton_Click_1(object sender, EventArgs e)
         {
-            string strFileName = String.Empty;
-            ImageList imageListSmall = new ImageList();
+            strFileName = String.Empty;
 
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 strFileName = openFileDialog1.FileName;
             }
-            if (strFileName.Length > 0)
-            {
-                int i = 0;
 
-                string[] fs = openFileDialog1.FileNames;
-                foreach (string ff in fs)
-                {
-                    imageListSmall.Images.Add(Bitmap.FromFile(fs[i]));
-                    //ListViewItem lvi = new ListViewItem();
-                    //this.listView1.SmallImageList = file.FullName;
-                    //lvi.Text = new FileInfo(ff).Name;
-                    //this.listView1.Items.Add(lvi);  
-                    //listBox1.Items.Add(new FileInfo(ff).Name);
-                    i++;
-                }
-                #region 绑定数据图片
-                this.listView1.View = View.LargeIcon;
- 
-                this.listView1.Columns.Add("列标题1", 5200, HorizontalAlignment.Left); //一步添加 
-                this.listView1.Columns.Add("列标题1", 5200, HorizontalAlignment.Left); //一步添加 
-                listView1.LargeImageList = imageListSmall;
-                //ListFiles(new DirectoryInfo(strFileName));
-                this.listView1.BeginUpdate();   //数据更新，UI暂时挂起，直到EndUpdate绘制控件，可以有效避免闪烁并大大提高加载速度  
-                i = 0;
-                fs = openFileDialog1.FileNames;
-                foreach (string ff in fs)
-                {
-                    ListViewItem lvi = new ListViewItem();
-
-                    lvi.ImageIndex = i;     //通过与imageList绑定，显示imageList中第i项图标  
-
-                    lvi.Text = new FileInfo(ff).Name;
-
-                    //lvi.SubItems.Add("第2列,第" + j+ "行");
-
-
-                    this.listView1.Items.Add(lvi);
-                    i++;
-                }
-                this.listView1.EndUpdate();  //结束数据处理，UI界面一次性绘制。  
-                #endregion
-            }
         }
         public void ListFiles(FileSystemInfo info)
         {
@@ -92,7 +50,7 @@ namespace DCTS.CustomComponents
             ch.TextAlign = HorizontalAlignment.Left;   //设置列的对齐方式  
 
             this.listView1.Columns.Add(ch);    //将列头添加到ListView控件
-            
+
             if (!info.Exists) return;
             DirectoryInfo dir = info as DirectoryInfo;
             //不是目录 
@@ -122,6 +80,107 @@ namespace DCTS.CustomComponents
                     ListFiles(files[i]);
                 }
             }
+        }
+
+        private void import_Click(object sender, EventArgs e)
+        {
+            if (strFileName.Length > 0)
+            {
+                //  imagedockin();
+                bool isReplace = this.replaceRadioButton.Checked;
+
+                string[] fs = openFileDialog1.FileNames;
+                int copiedCount = 0;
+
+                using (var ctx = new DctsEntities())
+                {
+                    int imageindex = 0;
+
+                    foreach (string ff in fs)
+                    {
+                        {
+                            string serverimg = new FileInfo(ff).Name;
+                            var locations = ctx.LocationImages.Where(o => o.name == serverimg).ToList();
+                            //如果存在复制到相应的文件夹中
+                            if (locations != null && locations.Count != 0)
+                            {
+                                string copyToPath = EntityPathConfig.newlocationimagepath(locations[0]);
+                                if (File.Exists(copyToPath))
+                                {
+                                    if (isReplace)
+                                    {
+                                        File.Copy(fs[imageindex], copyToPath, true);
+                                        copiedCount++;
+                                    }
+                                }
+                                else
+                                {
+                                    File.Copy(fs[imageindex], copyToPath, true);
+                                    copiedCount++;
+                                }
+                            }
+                            else
+                            {
+
+                                var obj = ctx.LocationImages.Create();
+                                obj.name = serverimg;
+
+
+                                ctx.SaveChanges();
+                     
+                            }
+                        }
+                        imageindex++;
+                    }
+                }
+            }
+
+
+        }
+
+        private void imagedockin()
+        {
+            ImageList imageListSmall = new ImageList();
+
+            int i = 0;
+
+            string[] fs = openFileDialog1.FileNames;
+            foreach (string ff in fs)
+            {
+                imageListSmall.Images.Add(Bitmap.FromFile(fs[i]));
+                //ListViewItem lvi = new ListViewItem();
+                //this.listView1.SmallImageList = file.FullName;
+                //lvi.Text = new FileInfo(ff).Name;
+                //this.listView1.Items.Add(lvi);  
+                //listBox1.Items.Add(new FileInfo(ff).Name);
+                i++;
+            }
+            #region 绑定数据图片
+            this.listView1.View = View.LargeIcon;
+
+            this.listView1.Columns.Add("列标题1", 5200, HorizontalAlignment.Left); //一步添加 
+            this.listView1.Columns.Add("列标题1", 5200, HorizontalAlignment.Left); //一步添加 
+            listView1.LargeImageList = imageListSmall;
+            //ListFiles(new DirectoryInfo(strFileName));
+            this.listView1.BeginUpdate();   //数据更新，UI暂时挂起，直到EndUpdate绘制控件，可以有效避免闪烁并大大提高加载速度  
+            i = 0;
+            fs = openFileDialog1.FileNames;
+            foreach (string ff in fs)
+            {
+                ListViewItem lvi = new ListViewItem();
+
+                lvi.ImageIndex = i;     //通过与imageList绑定，显示imageList中第i项图标  
+
+                lvi.Text = new FileInfo(ff).Name;
+
+                //lvi.SubItems.Add("第2列,第" + j+ "行");
+
+
+                this.listView1.Items.Add(lvi);
+                i++;
+            }
+            this.listView1.EndUpdate();  //结束数据处理，UI界面一次性绘制。  
+            #endregion
         }
 
     }

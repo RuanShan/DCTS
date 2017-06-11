@@ -69,6 +69,14 @@ namespace DCTS.DB
             CreateFolder(path);
             return path;
         }
+        public static string newlocationimagebasepath(LocationImage location)
+        {
+            ComboLocationEnum type = (ComboLocationEnum)location.location_id;
+            string path = Path.Combine(ImageBasePath, "location_" + type.ToString().ToLower());
+            CreateFolder(path);
+            return path;
+        }
+
 
         public  static string LocationImagePath( ComboLocation location )
         {
@@ -79,6 +87,18 @@ namespace DCTS.DB
             CreateFolder(folderPath);
 
             string fullPath = Path.Combine(folderPath, location.img);
+
+            return fullPath;
+        }
+        public static string newlocationimagepath(LocationImage location)
+        {
+
+            string basePath = newlocationimagebasepath(location);
+            string folderPath = Path.Combine(basePath, (location.id / 1000 * 1000).ToString());
+
+            CreateFolder(folderPath);
+
+            string fullPath = Path.Combine(folderPath, location.name);
 
             return fullPath;
         }
