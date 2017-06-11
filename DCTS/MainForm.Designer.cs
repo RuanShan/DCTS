@@ -34,6 +34,9 @@
             this.tripsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.客户信息ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.CustomersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.服务商信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.suppliersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importSuppliersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importScenicExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.导入图片信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,9 +49,6 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.entityDataSource = new DCTS.CustomComponents.EntityDataSource(this.components);
-            this.服务商信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.suppliersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importSuppliersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -96,6 +96,28 @@
             this.CustomersToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.CustomersToolStripMenuItem.Text = "客户管理";
             this.CustomersToolStripMenuItem.Click += new System.EventHandler(this.CustomersToolStripMenuItem_Click);
+            // 
+            // 服务商信息ToolStripMenuItem
+            // 
+            this.服务商信息ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.suppliersToolStripMenuItem,
+            this.importSuppliersToolStripMenuItem});
+            this.服务商信息ToolStripMenuItem.Name = "服务商信息ToolStripMenuItem";
+            this.服务商信息ToolStripMenuItem.Size = new System.Drawing.Size(80, 21);
+            this.服务商信息ToolStripMenuItem.Text = "服务商信息";
+            // 
+            // suppliersToolStripMenuItem
+            // 
+            this.suppliersToolStripMenuItem.Name = "suppliersToolStripMenuItem";
+            this.suppliersToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.suppliersToolStripMenuItem.Text = "基本信息维护";
+            this.suppliersToolStripMenuItem.Click += new System.EventHandler(this.suppliersToolStripMenuItem_Click);
+            // 
+            // importSuppliersToolStripMenuItem
+            // 
+            this.importSuppliersToolStripMenuItem.Name = "importSuppliersToolStripMenuItem";
+            this.importSuppliersToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.importSuppliersToolStripMenuItem.Text = "数据导入";
             // 
             // 设置ToolStripMenuItem
             // 
@@ -191,28 +213,6 @@
             // entityDataSource
             // 
             this.entityDataSource.DbContextType = typeof(DCTS.DctsEntities);
-            // 
-            // 服务商信息ToolStripMenuItem
-            // 
-            this.服务商信息ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.suppliersToolStripMenuItem,
-            this.importSuppliersToolStripMenuItem});
-            this.服务商信息ToolStripMenuItem.Name = "服务商信息ToolStripMenuItem";
-            this.服务商信息ToolStripMenuItem.Size = new System.Drawing.Size(80, 21);
-            this.服务商信息ToolStripMenuItem.Text = "服务商信息";
-            // 
-            // suppliersToolStripMenuItem
-            // 
-            this.suppliersToolStripMenuItem.Name = "suppliersToolStripMenuItem";
-            this.suppliersToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.suppliersToolStripMenuItem.Text = "基本信息维护";
-            this.suppliersToolStripMenuItem.Click += new System.EventHandler(this.suppliersToolStripMenuItem_Click);
-            // 
-            // importSuppliersToolStripMenuItem
-            // 
-            this.importSuppliersToolStripMenuItem.Name = "importSuppliersToolStripMenuItem";
-            this.importSuppliersToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.importSuppliersToolStripMenuItem.Text = "数据导入";
             // 
             // MainForm
             // 
