@@ -54,7 +54,7 @@ namespace DCTS.UI
                     {
 
                         var obj = ctx.Schedules.Create();
-                        obj.tripday_id = 80;// NewTripItem.trip_id;
+                        obj.tripday_id = NewTripItem.id;// 80;// NewTripItem.trip_id;
                         obj.title = textBox6.Text;
                         obj.start_at = this.dateTimePicker1.Value;
                         obj.created_at = DateTime.Now;
@@ -74,7 +74,7 @@ namespace DCTS.UI
                     {
                         Schedule obj = ctx.Schedules.Find(Convert.ToInt32(changeid));
                         obj.title = this.textBox6.Text;
-                        obj.tripday_id = NewTripItem.trip_id;
+                        obj.tripday_id = NewTripItem.id;
 
                         obj.start_at = this.dateTimePicker1.Value;
                         obj.updated_at = DateTime.Now;

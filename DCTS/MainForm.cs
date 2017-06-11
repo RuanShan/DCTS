@@ -19,6 +19,7 @@ namespace DCTS
         TripsManagementControl tripsManagementControl;
         CustomersControl customersControl;
         SuppliersControl suppliersControl;
+        ImportSystemfile importSystemfile;
         AboutBox aboutbox;
 
         public MainForm()
@@ -171,6 +172,23 @@ namespace DCTS
             this.suppliersControl.BeginActive();
             this.mainPanel.Controls.Clear();
             this.mainPanel.Controls.Add(suppliersControl);
+        }
+
+        private void importSuppliersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+     
+            try
+            {
+                var form = new ImportSystemfile();
+                if (form.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
+                {
+                }
+
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.ToString());
+            }
         }
 
 
