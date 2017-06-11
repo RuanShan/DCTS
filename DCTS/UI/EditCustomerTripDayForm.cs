@@ -25,7 +25,7 @@ namespace DCTS.UI
         private void saveButton_Click(object sender, EventArgs e)
         {
             var ctx = this.entityDataSource1.DbContext as DctsEntities;
-            this.tripDayFormControl1.FillModelByForm(this.model);
+            //this.tripDayFormControl1.FillModelByForm(this.model);
             ctx.SaveChanges();
         }
 
@@ -33,7 +33,7 @@ namespace DCTS.UI
         {
             var ctx = this.entityDataSource1.DbContext as DctsEntities;
             this.model = ctx.TripDays.Find(ModelId);
-            this.tripDayFormControl1.FillFormByModel(this.model);
+            //this.tripDayFormControl1.FillFormByModel(this.model);
         }
 
 

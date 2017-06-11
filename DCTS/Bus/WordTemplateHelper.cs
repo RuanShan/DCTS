@@ -1,9 +1,11 @@
 ﻿using DCTS.DB;
 using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Drawing.Wordprocessing;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -59,6 +61,7 @@ namespace DCTS.Bus
                 if (text.Text.Contains(key))
                 {
                     text.Text = text.Text.Replace(key, val);
+                    break;
                 }
             }
         }
@@ -71,6 +74,7 @@ namespace DCTS.Bus
                 if (text.Text.Contains(key))
                 {
                     text.Text = text.Text.Replace(key, val);
+                    break;
                 }
             }
         }
@@ -97,6 +101,113 @@ namespace DCTS.Bus
             }
         }
 
+        //https://www.codeproject.com/articles/187928/imageupdater
+        /// <summary>
+        /// Updates the image in an image placeholder
+        /// </summary>
+        /// <param name="placeholderName">Image placeholder tag name</param>
+        /// <param name="newImage">physical path to the new image file</param>
+        public static void UpdateImage(WordprocessingDocument doc, string imageRelID, string newImage)
+        {
+            // Get the id of the image placeholder
+            string relId = imageRelID;
+
+            // Get the Imagepart
+            ImagePart imagePart = (ImagePart)doc.MainDocumentPart.GetPartById(relId);
+
+            imagePart.FeedData(File.Open(newImage, FileMode.Open, FileAccess.Read, FileShare.ReadWrite));
+
+        }
+        //上面的代码用于在某个 sdt 元素下面查找匹配内容控件ID所使用的图像资源id。然后我们根据该资源id来获取placeholder image的大小：
+        internal static void GetPlaceholderImageSize(WordprocessingDocument doc, string relID, out int width, out int height)
+        {
+            width = -1;
+            height = -1;
+
+            // Loop through all Drawing elements in the document
+            foreach (Drawing d in doc.MainDocumentPart.Document.Descendants<Drawing>().ToList())
+            {
+                // Loop through all the pictures (Blip) in the document
+                if (d.Descendants<DocumentFormat.OpenXml.Drawing.Blip>().ToList().Any(b => b.Embed.ToString() == relID))
+                {
+                    // The document size is in EMU. 1 pixel = 9525 EMU
+
+                    // The size of the image placeholder is located in the EXTENT element
+                    Extent e = d.Descendants<Extent>().FirstOrDefault();
+                    if (null != e)
+                    {
+                        width = (int)(e.Cx / 9525);
+                        height = (int)(e.Cy / 9525);
+                    }
+
+                    if (width == -1)
+                    {
+                        // The size of the image is located in the EXTENTS element
+                        var e2 = d.Descendants<DocumentFormat.OpenXml.Drawing.Extents>().FirstOrDefault();
+                        if (null != e2)
+                        {
+                            width = (int)(e2.Cx / 9525);
+                            height = (int)(e2.Cy / 9525);
+                        }
+                    }
+                }
+            }
+        }
+        /// <summary>
+        /// Resize the image in an image placeholder
+        /// </summary>
+        /// <param name="placeholderName">Image placeholder tag name</param>
+        /// <param name="newImage">physical path to the new image file</param>
+        public static void ResizeImage(WordprocessingDocument doc, string imageRelID, string newImage)
+        {
+            // Get the id of the image placeholder
+            string relID = imageRelID;
+
+            // Load the new image into a bitmap object
+            Bitmap bitmap = new Bitmap(newImage);
+            Image img = bitmap;
+            int width = 0; int height = 0;
+            GetPlaceholderImageSize(doc, imageRelID, out width, out height);
+            int newWidth = width; //宽度保持一致
+            int newHeight = img.Height / img.Width * newWidth;    //设置高度保持比例
+
+            // Loop through all Drawing elements in the document
+            foreach (Drawing d in doc.MainDocumentPart.Document.Descendants<Drawing>().ToList())
+            {
+                // Loop through all the pictures (Blip) in the document
+                foreach (var b in d.Descendants<DocumentFormat.OpenXml.Drawing.Blip>().ToList())
+                {
+                    // Have we found the correct pciture?
+                    if (b.Embed.ToString() == relID)
+                    {
+                        // Yes we have
+
+                        // The size of the image placeholder is located in the EXTENT element
+                        Extent e = d.Descendants<Extent>().FirstOrDefault();
+
+                        // The document expects the size in EMU. 1 pixel = 9525 EMU
+                        long imageWidthEMU = (long)(newWidth * 9525);
+                        long imageHeightEMU = (long)(newHeight * 9525);
+
+                        // change the size of the image placeholder
+                        e.Cx = imageWidthEMU;
+                        e.Cy = imageHeightEMU;
+
+
+                        // The size of the image is located in the EXTENTS element
+                        var e2 = d.Descendants<DocumentFormat.OpenXml.Drawing.Extents>().FirstOrDefault();
+
+                        // change the size of the image itself
+                        e2.Cx = imageWidthEMU;
+                        e2.Cy = imageHeightEMU;
+
+                        break;
+                        // save the changes
+                        //mainDocPart.Document.Save();
+                    }
+                }
+            }
+        }
 
         public static string DisplayOpeningHours(ComboLocation location)
         {

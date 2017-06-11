@@ -441,12 +441,6 @@
     <Compile Include="UI\NewScheduleForm.Designer.cs">
       <DependentUpon>NewScheduleForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\ImportSystemfile.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\ImportSystemfile.Designer.cs">
-      <DependentUpon>ImportSystemfile.cs</DependentUpon>
-    </Compile>
     <Compile Include="Uti\EFIntercepterLogging.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -646,9 +640,6 @@
     <EmbeddedResource Include="UI\NewScheduleForm.resx">
       <DependentUpon>NewScheduleForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\ImportSystemfile.resx">
-      <DependentUpon>ImportSystemfile.cs</DependentUpon>
-    </EmbeddedResource>
     <EntityDeploy Include="Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model.Designer.cs</LastGenOutput>
@@ -677,6 +668,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="templates\location_airport.docx" />
     <None Include="templates\location_blank.docx" />
     <None Include="templates\day-summary.docx" />
     <None Include="templates\location_dining.docx" />

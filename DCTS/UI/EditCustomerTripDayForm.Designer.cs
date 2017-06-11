@@ -35,7 +35,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.tripDayFormControl1 = new DCTS.UI.TripDayFormControl();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -99,13 +98,6 @@
             this.label4.TabIndex = 11;
             this.label4.Text = "天数";
             // 
-            // tripDayFormControl1
-            // 
-            this.tripDayFormControl1.Location = new System.Drawing.Point(27, 61);
-            this.tripDayFormControl1.Name = "tripDayFormControl1";
-            this.tripDayFormControl1.Size = new System.Drawing.Size(507, 290);
-            this.tripDayFormControl1.TabIndex = 15;
-            // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
@@ -125,7 +117,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.tripDayFormControl1);
             this.Name = "EditCustomerTripDayForm";
             this.Text = "编辑某天详细";
             this.Load += new System.EventHandler(this.EditTripForm_Load);
@@ -145,6 +136,5 @@
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Label label4;
         private CustomComponents.EntityDataSource entityDataSource1;
-        private TripDayFormControl tripDayFormControl1;
     }
 }
