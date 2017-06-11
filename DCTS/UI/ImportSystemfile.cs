@@ -54,11 +54,11 @@ namespace DCTS.CustomComponents
                     i++;
                 }
                 #region 绑定数据图片
-                this.listView1.View = View.SmallIcon;
+                this.listView1.View = View.LargeIcon;
  
-                this.listView1.Columns.Add("列标题1", 120, HorizontalAlignment.Left); //一步添加 
-                this.listView1.Columns.Add("列标题1", 120, HorizontalAlignment.Left); //一步添加 
-                listView1.SmallImageList = imageListSmall;
+                this.listView1.Columns.Add("列标题1", 5200, HorizontalAlignment.Left); //一步添加 
+                this.listView1.Columns.Add("列标题1", 5200, HorizontalAlignment.Left); //一步添加 
+                listView1.LargeImageList = imageListSmall;
                 //ListFiles(new DirectoryInfo(strFileName));
                 this.listView1.BeginUpdate();   //数据更新，UI暂时挂起，直到EndUpdate绘制控件，可以有效避免闪烁并大大提高加载速度  
                 i = 0;
