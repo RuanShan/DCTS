@@ -103,22 +103,35 @@
             this.suppliersToolStripMenuItem,
             this.importSuppliersToolStripMenuItem});
             this.服务商信息ToolStripMenuItem.Name = "服务商信息ToolStripMenuItem";
+<<<<<<< HEAD
+            this.服务商信息ToolStripMenuItem.Size = new System.Drawing.Size(80, 21);
+=======
             this.服务商信息ToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
+>>>>>>> 3349e77a960015b0392289faeedaa9a500100070
             this.服务商信息ToolStripMenuItem.Text = "服务商信息";
             // 
             // suppliersToolStripMenuItem
             // 
             this.suppliersToolStripMenuItem.Name = "suppliersToolStripMenuItem";
+<<<<<<< HEAD
+            this.suppliersToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+=======
             this.suppliersToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+>>>>>>> 3349e77a960015b0392289faeedaa9a500100070
             this.suppliersToolStripMenuItem.Text = "基本信息维护";
             this.suppliersToolStripMenuItem.Click += new System.EventHandler(this.suppliersToolStripMenuItem_Click);
             // 
             // importSuppliersToolStripMenuItem
             // 
             this.importSuppliersToolStripMenuItem.Name = "importSuppliersToolStripMenuItem";
+<<<<<<< HEAD
+            this.importSuppliersToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.importSuppliersToolStripMenuItem.Text = "数据导入";
+=======
             this.importSuppliersToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.importSuppliersToolStripMenuItem.Text = "数据导入";
             this.importSuppliersToolStripMenuItem.Click += new System.EventHandler(this.importSuppliersToolStripMenuItem_Click);
+>>>>>>> 3349e77a960015b0392289faeedaa9a500100070
             // 
             // 设置ToolStripMenuItem
             // 
