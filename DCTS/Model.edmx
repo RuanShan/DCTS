@@ -187,6 +187,7 @@
           <Property Name="daylocation_id" Type="int" Nullable="false" />
           <Property Name="customer_id" Type="int" Nullable="false" />
           <Property Name="supplier_id" Type="int" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="45" />
           <Property Name="num" Type="varchar" MaxLength="45" />
           <Property Name="route" Type="varchar" MaxLength="1024" />
           <Property Name="memo" Type="varchar" MaxLength="1024" />
@@ -200,6 +201,9 @@
           <Property Name="from_address" Type="varchar" MaxLength="512" />
           <Property Name="to_address" Type="varchar" MaxLength="512" />
           <Property Name="rules" Type="varchar" MaxLength="1024" />
+          <Property Name="days" Type="int" />
+          <Property Name="breakfirst" Type="varchar" MaxLength="45" />
+          <Property Name="parking" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="TripDays">
           <Key>
@@ -608,6 +612,10 @@
           <Property Type="String" Name="rules" MaxLength="1024" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Customer" Relationship="DctsModel.fk_customer" FromRole="Ticket" ToRole="Customer" />
           <NavigationProperty Name="Supplier" Relationship="DctsModel.fk_supplier" FromRole="Ticket" ToRole="Supplier" />
+          <Property Type="String" Name="title" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="days" />
+          <Property Type="String" Name="breakfirst" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="parking" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="fk_customer">
           <End Type="DctsModel.Customer" Role="Customer" Multiplicity="1" />
@@ -832,6 +840,10 @@
           <EntitySetMapping Name="Tickets">
             <EntityTypeMapping TypeName="DctsModel.Ticket">
               <MappingFragment StoreEntitySet="Tickets">
+                <ScalarProperty Name="parking" ColumnName="parking" />
+                <ScalarProperty Name="breakfirst" ColumnName="breakfirst" />
+                <ScalarProperty Name="days" ColumnName="days" />
+                <ScalarProperty Name="title" ColumnName="title" />
                 <ScalarProperty Name="rules" ColumnName="rules" />
                 <ScalarProperty Name="to_address" ColumnName="to_address" />
                 <ScalarProperty Name="from_address" ColumnName="from_address" />

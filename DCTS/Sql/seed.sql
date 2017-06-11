@@ -250,7 +250,8 @@ INSERT INTO `ComboLocations` (`ltype`, `title`) VALUES (0, '这是一个空白�
 (101, '一封信'),
 (103, '出行必备'),
 (120, '线上查询说明'),
-(126, 'Google使用说明');
+(126, 'Google使用说明'),
+(222, '单页封面');
 
 INSERT INTO `ComboLocations` (`ltype`, `title`, `local_title`) VALUES
 (10, '中国', '1'),
