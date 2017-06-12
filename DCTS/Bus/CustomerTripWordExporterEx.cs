@@ -59,17 +59,19 @@ namespace DCTS.Bus
                     // 处理路书行程概要
 
                     HandleTripSummary(tripSumaryTemplate);
-
-                    foreach (var day in this.days)
+                    if (false)
                     {
-                        HandleDaySummary(daySumaryTemplate, day);
-                        //处理每天行程概要
-						var daylocations = dayLocations.Where(o => o.day_id == day.id).ToList();
-
-                        foreach (var dl in daylocations)
+                        foreach (var day in this.days)
                         {
+                            HandleDaySummary(daySumaryTemplate, day);
+                            //处理每天行程概要
+                            var daylocations = dayLocations.Where(o => o.day_id == day.id).ToList();
 
-							HandleLocation(  dl );
+                            foreach (var dl in daylocations)
+                            {
+
+                                HandleLocation(dl);
+                            }
                         }
                     }
                    //合并文档
@@ -137,20 +139,44 @@ namespace DCTS.Bus
                         WordTemplateHelper.ReplaceText<TableRow>(rowCopy, "%day_cities%", WordTemplateHelper.DisplayDayCities(locations));
 
                         var cell = rowCopy.Elements<TableCell>().ElementAt(3);
+                         
                         var pattern = cell.Descendants<Paragraph>().Last();
                         var titles = locations.Select(o => o.ComboLocation.title).Distinct().ToArray();
+                        var patternNumPr = pattern.Descendants<NumberingProperties>().Last();
+                        int newNumId = Convert.ToInt32(string.Format("{0:yyyy}{1}", DateTime.Now, i));
+                        if (patternNumPr != null)
+                        {
+                            // copy AbstractNum Numbering as well
+                            var numIn = tripSumary.MainDocumentPart.NumberingDefinitionsPart.Numbering.Descendants<NumberingInstance>().Where(o => o.NumberID.Value == patternNumPr.NumberingId.Val).FirstOrDefault();
+                            var absNum = tripSumary.MainDocumentPart.NumberingDefinitionsPart.Numbering.Descendants<AbstractNum>().Where(o => o.AbstractNumberId.Value == numIn.AbstractNumId.Val).FirstOrDefault();
+
+                            var clonedAbsNum = absNum.CloneNode(true) as AbstractNum;
+                            var clonedNumIn = numIn.CloneNode(true) as NumberingInstance;
+                            clonedAbsNum.AbstractNumberId = newNumId;
+                            clonedNumIn.NumberID = newNumId;
+                            clonedNumIn.AbstractNumId.Val = newNumId;
+                            LevelOverride levelOverride = new LevelOverride() { LevelIndex = 0 };
+                            levelOverride.Append(new StartOverrideNumberingValue() { Val = 1 });
+                            numIn.Append(levelOverride);
+                            absNum.InsertAfterSelf(clonedAbsNum);
+                            numIn.InsertAfterSelf(clonedNumIn);
+                         }
                         for (int j = 0; j < titles.Count(); j++)
                         {
                             var t = titles[j];
                             var cloned = pattern.CloneNode(true) as Paragraph;
+                            var numPr = cloned.Descendants<NumberingProperties>().Last();
+                            numPr.NumberingId.Val = newNumId;
                             WordTemplateHelper.ReplaceText<Paragraph>(cloned, "%day_location%", t);
                             //if (j > 0)
                             //{
                             //    pattern.InsertBeforeSelf(new Break());
                             //}
-                            pattern.InsertBeforeSelf(cloned);                            
+                            cell.AppendChild(cloned);
+                            //pattern.InsertBeforeSelf(cloned);                            
                         }
-                        pattern.Remove();
+                        // should not remove it at all, or docx mass up, malfunction
+                        pattern.RemoveAllChildren();
                         WordTemplateHelper.ReplaceText<TableRow>(rowCopy, "%day_hotel%", WordTemplateHelper.DisplayDayHotel(locations));
 
                         dayTable.AppendChild(rowCopy);
@@ -166,7 +192,8 @@ namespace DCTS.Bus
                 Console.WriteLine("\tError, couldn't find table with caption ORDER_TABLE in document");
             }
             tripSumary.Save();
-
+            string path = EntityPathConfig.TripWordFilePath(TripId, "summary");
+            tripSumary.SaveAs(path);
             this.filledTemplates.Add(tripSumary);
             this.filledTemplateStreams.Add(stream);
             

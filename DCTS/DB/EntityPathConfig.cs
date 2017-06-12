@@ -133,9 +133,9 @@ namespace DCTS.DB
             return path;
         }
 
-        public static string TripWordFilePath(long tripId)
+        public static string TripWordFilePath(long tripId, string style = "")
         { 
-            return Path.Combine(TripWordFolderPath(tripId), string.Format("{0}.docx", tripId));
+            return Path.Combine(TripWordFolderPath(tripId), string.Format("{0}{1}.docx", tripId, style));
         }
 
         private static void CreateFolder(string path)
