@@ -49,48 +49,7 @@ namespace DCTS.CustomComponents
             }
 
         }
-        public void ListFiles(FileSystemInfo info)
-        {
-            ColumnHeader ch = new ColumnHeader();
-
-            ch.Text = "列标题1";   //设置列标题  
-
-            ch.Width = 120;    //设置列宽度  
-
-            ch.TextAlign = HorizontalAlignment.Left;   //设置列的对齐方式  
-
-            this.listView1.Columns.Add(ch);    //将列头添加到ListView控件
-
-            if (!info.Exists) return;
-            DirectoryInfo dir = info as DirectoryInfo;
-            //不是目录 
-            if (dir == null) return;
-            FileSystemInfo[] files = dir.GetFileSystemInfos();
-            for (int i = 0; i < files.Length; i++)
-            {
-                FileInfo file = files[i] as FileInfo;
-                //是文件 
-                if (file != null)
-                {
-                    //Console.WriteLine(file.FullName + "/t " + file.Length);
-                    if (file.FullName.Substring(file.FullName.LastIndexOf(".")) == ".jpg")
-                    //此处为显示JPG格式，不加IF可遍历所有格式的文件
-                    {
-                        ListViewItem lvi = new ListViewItem();
-                        //   this.listView1.SmallImageList = file.FullName; 
-                        lvi.Text = file.FullName;
-                        this.listView1.Items.Add(lvi);
-
-                        //MessageBox.Show(file.FullName.Substring(file.FullName.LastIndexOf(".")));
-                    }
-                }
-                //对于子目录，进行递归调用 
-                else
-                {
-                    ListFiles(files[i]);
-                }
-            }
-        }
+     
 
         private void import_Click(object sender, EventArgs e)
         {
@@ -160,9 +119,7 @@ namespace DCTS.CustomComponents
                         imageindex++;
                     }
                     BeginActive();
-
-
-
+                    
                 }
             }
 

@@ -19,7 +19,7 @@ namespace DCTS
         TripsManagementControl tripsManagementControl;
         CustomersControl customersControl;
         SuppliersControl suppliersControl;
-        ImportSystemfile importSystemfile;
+        //ImportSystemfile importSystemfile;
         AboutBox aboutbox;
 
         public MainForm()
