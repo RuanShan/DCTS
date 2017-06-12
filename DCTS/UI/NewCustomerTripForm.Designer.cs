@@ -29,24 +29,24 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
             this.findTemplateButton = new System.Windows.Forms.Button();
             this.findCustomerButton = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
@@ -68,16 +68,6 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.airTagPage = new System.Windows.Forms.TabPage();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.hotalTabPage = new System.Windows.Forms.TabPage();
-            this.hotalDataGridView = new System.Windows.Forms.DataGridView();
-            this.insuranceTagPage = new System.Windows.Forms.TabPage();
-            this.InsuranceGridView = new System.Windows.Forms.DataGridView();
-            this.rantalTabPage = new System.Windows.Forms.TabPage();
-            this.RentalGridView = new System.Windows.Forms.DataGridView();
-            this.wifiTabPage = new System.Windows.Forms.TabPage();
-            this.WIFIGridView = new System.Windows.Forms.DataGridView();
-            this.activityTabPage = new System.Windows.Forms.TabPage();
-            this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.StypeColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.numColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -87,6 +77,8 @@
             this.endAtColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.editColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.deleteColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.hotalTabPage = new System.Windows.Forms.TabPage();
+            this.hotalDataGridView = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -94,11 +86,15 @@
             this.parkingColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewButtonColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.dataGridViewButtonColumn2 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.insuranceTagPage = new System.Windows.Forms.TabPage();
+            this.InsuranceGridView = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dav2Edit = new System.Windows.Forms.DataGridViewButtonColumn();
             this.dav2Delete = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.rantalTabPage = new System.Windows.Forms.TabPage();
+            this.RentalGridView = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -108,6 +104,8 @@
             this.endAtColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dav3Edit = new System.Windows.Forms.DataGridViewButtonColumn();
             this.dav3Delete = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.wifiTabPage = new System.Windows.Forms.TabPage();
+            this.WIFIGridView = new System.Windows.Forms.DataGridView();
             this.fromPlacedataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toPlaceDataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -115,6 +113,7 @@
             this.daysColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EditWifi = new System.Windows.Forms.DataGridViewButtonColumn();
             this.DeleteWifli = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.activityTabPage = new System.Windows.Forms.TabPage();
             this.activityDataGridView = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -123,6 +122,7 @@
             this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewButtonColumn3 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.dataGridViewButtonColumn4 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.daysNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -143,109 +143,111 @@
             // findTemplateButton
             // 
             this.findTemplateButton.Enabled = false;
-            this.findTemplateButton.Location = new System.Drawing.Point(367, 103);
+            this.findTemplateButton.Location = new System.Drawing.Point(367, 112);
             this.findTemplateButton.Name = "findTemplateButton";
-            this.findTemplateButton.Size = new System.Drawing.Size(45, 23);
+            this.findTemplateButton.Size = new System.Drawing.Size(45, 25);
             this.findTemplateButton.TabIndex = 36;
             this.findTemplateButton.Text = "选择";
             this.findTemplateButton.UseVisualStyleBackColor = true;
+            this.findTemplateButton.Click += new System.EventHandler(this.findTemplateButton_Click);
             // 
             // findCustomerButton
             // 
             this.findCustomerButton.Enabled = false;
-            this.findCustomerButton.Location = new System.Drawing.Point(367, 74);
+            this.findCustomerButton.Location = new System.Drawing.Point(367, 80);
             this.findCustomerButton.Name = "findCustomerButton";
-            this.findCustomerButton.Size = new System.Drawing.Size(45, 23);
+            this.findCustomerButton.Size = new System.Drawing.Size(45, 25);
             this.findCustomerButton.TabIndex = 35;
             this.findCustomerButton.Text = "选择";
             this.findCustomerButton.UseVisualStyleBackColor = true;
+            this.findCustomerButton.Click += new System.EventHandler(this.findCustomerButton_Click);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(658, 134);
+            this.label5.Location = new System.Drawing.Point(658, 145);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(29, 12);
+            this.label5.Size = new System.Drawing.Size(31, 13);
             this.label5.TabIndex = 30;
             this.label5.Text = "天数";
             // 
             // daysNumericUpDown
             // 
-            this.daysNumericUpDown.Location = new System.Drawing.Point(693, 130);
+            this.daysNumericUpDown.Location = new System.Drawing.Point(693, 141);
             this.daysNumericUpDown.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
             this.daysNumericUpDown.Name = "daysNumericUpDown";
-            this.daysNumericUpDown.Size = new System.Drawing.Size(165, 21);
+            this.daysNumericUpDown.Size = new System.Drawing.Size(165, 20);
             this.daysNumericUpDown.TabIndex = 29;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(52, 154);
+            this.label3.Location = new System.Drawing.Point(52, 167);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 12);
+            this.label3.Size = new System.Drawing.Size(31, 13);
             this.label3.TabIndex = 27;
             this.label3.Text = "备注";
             // 
             // titleTextBox
             // 
-            this.titleTextBox.Location = new System.Drawing.Point(87, 129);
+            this.titleTextBox.Location = new System.Drawing.Point(87, 140);
             this.titleTextBox.Name = "titleTextBox";
-            this.titleTextBox.Size = new System.Drawing.Size(325, 21);
+            this.titleTextBox.Size = new System.Drawing.Size(325, 20);
             this.titleTextBox.TabIndex = 26;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(28, 132);
+            this.label2.Location = new System.Drawing.Point(28, 143);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 12);
+            this.label2.Size = new System.Drawing.Size(55, 13);
             this.label2.TabIndex = 25;
             this.label2.Text = "行程标题";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(50, 106);
+            this.label4.Location = new System.Drawing.Point(50, 115);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 12);
+            this.label4.Size = new System.Drawing.Size(31, 13);
             this.label4.TabIndex = 34;
             this.label4.Text = "模板";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(50, 80);
+            this.label6.Location = new System.Drawing.Point(50, 87);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(29, 12);
+            this.label6.Size = new System.Drawing.Size(31, 13);
             this.label6.TabIndex = 33;
             this.label6.Text = "客户";
             // 
             // customerComboBox
             // 
             this.customerComboBox.FormattingEnabled = true;
-            this.customerComboBox.Location = new System.Drawing.Point(85, 77);
+            this.customerComboBox.Location = new System.Drawing.Point(85, 83);
             this.customerComboBox.Name = "customerComboBox";
-            this.customerComboBox.Size = new System.Drawing.Size(276, 20);
+            this.customerComboBox.Size = new System.Drawing.Size(276, 21);
             this.customerComboBox.TabIndex = 32;
             // 
             // tripComboBox
             // 
             this.tripComboBox.FormattingEnabled = true;
-            this.tripComboBox.Location = new System.Drawing.Point(85, 103);
+            this.tripComboBox.Location = new System.Drawing.Point(85, 112);
             this.tripComboBox.Name = "tripComboBox";
-            this.tripComboBox.Size = new System.Drawing.Size(276, 20);
+            this.tripComboBox.Size = new System.Drawing.Size(276, 21);
             this.tripComboBox.TabIndex = 31;
             // 
             // cancelButton
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.No;
-            this.cancelButton.Location = new System.Drawing.Point(776, 458);
+            this.cancelButton.Location = new System.Drawing.Point(776, 496);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.Size = new System.Drawing.Size(75, 25);
             this.cancelButton.TabIndex = 5;
             this.cancelButton.Text = "取消";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -253,9 +255,9 @@
             // saveButton
             // 
             this.saveButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
-            this.saveButton.Location = new System.Drawing.Point(695, 458);
+            this.saveButton.Location = new System.Drawing.Point(695, 496);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.Size = new System.Drawing.Size(75, 25);
             this.saveButton.TabIndex = 5;
             this.saveButton.Text = "保存";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -263,20 +265,20 @@
             // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(23, 20);
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(23, 22);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(859, 41);
+            this.label1.Size = new System.Drawing.Size(859, 44);
             this.label1.TabIndex = 0;
             this.label1.Text = "新建客户行程";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // memoTextBox
             // 
-            this.memoTextBox.Location = new System.Drawing.Point(85, 156);
+            this.memoTextBox.Location = new System.Drawing.Point(85, 169);
             this.memoTextBox.Multiline = true;
             this.memoTextBox.Name = "memoTextBox";
-            this.memoTextBox.Size = new System.Drawing.Size(773, 54);
+            this.memoTextBox.Size = new System.Drawing.Size(773, 58);
             this.memoTextBox.TabIndex = 28;
             // 
             // errorProvider1
@@ -286,17 +288,17 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(426, 134);
+            this.label7.Location = new System.Drawing.Point(426, 145);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(53, 12);
+            this.label7.Size = new System.Drawing.Size(55, 13);
             this.label7.TabIndex = 37;
             this.label7.Text = "开始时间";
             // 
             // startAtDateTimePicker
             // 
-            this.startAtDateTimePicker.Location = new System.Drawing.Point(485, 130);
+            this.startAtDateTimePicker.Location = new System.Drawing.Point(485, 141);
             this.startAtDateTimePicker.Name = "startAtDateTimePicker";
-            this.startAtDateTimePicker.Size = new System.Drawing.Size(165, 21);
+            this.startAtDateTimePicker.Size = new System.Drawing.Size(165, 20);
             this.startAtDateTimePicker.TabIndex = 38;
             // 
             // tabControl1
@@ -310,10 +312,10 @@
             this.tabControl1.Controls.Add(this.rantalTabPage);
             this.tabControl1.Controls.Add(this.wifiTabPage);
             this.tabControl1.Controls.Add(this.activityTabPage);
-            this.tabControl1.Location = new System.Drawing.Point(85, 218);
+            this.tabControl1.Location = new System.Drawing.Point(85, 236);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(773, 234);
+            this.tabControl1.Size = new System.Drawing.Size(773, 254);
             this.tabControl1.TabIndex = 39;
             // 
             // airTagPage
@@ -322,7 +324,7 @@
             this.airTagPage.Location = new System.Drawing.Point(4, 22);
             this.airTagPage.Name = "airTagPage";
             this.airTagPage.Padding = new System.Windows.Forms.Padding(3);
-            this.airTagPage.Size = new System.Drawing.Size(765, 208);
+            this.airTagPage.Size = new System.Drawing.Size(765, 228);
             this.airTagPage.TabIndex = 0;
             this.airTagPage.Text = "交通信息";
             this.airTagPage.UseVisualStyleBackColor = true;
@@ -343,206 +345,23 @@
             this.endAtColumn1,
             this.editColumn1,
             this.deleteColumn1});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle21.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle21.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle21.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
+            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView.DefaultCellStyle = dataGridViewCellStyle21;
             this.dataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView.Location = new System.Drawing.Point(3, 3);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowHeadersVisible = false;
             this.dataGridView.RowTemplate.Height = 50;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.Size = new System.Drawing.Size(759, 202);
+            this.dataGridView.Size = new System.Drawing.Size(759, 222);
             this.dataGridView.TabIndex = 0;
-            // 
-            // hotalTabPage
-            // 
-            this.hotalTabPage.Controls.Add(this.hotalDataGridView);
-            this.hotalTabPage.Location = new System.Drawing.Point(4, 22);
-            this.hotalTabPage.Name = "hotalTabPage";
-            this.hotalTabPage.Size = new System.Drawing.Size(765, 208);
-            this.hotalTabPage.TabIndex = 4;
-            this.hotalTabPage.Text = "住宿信息";
-            this.hotalTabPage.UseVisualStyleBackColor = true;
-            // 
-            // hotalDataGridView
-            // 
-            this.hotalDataGridView.AllowUserToAddRows = false;
-            this.hotalDataGridView.AllowUserToDeleteRows = false;
-            this.hotalDataGridView.AllowUserToResizeRows = false;
-            this.hotalDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.hotalDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn17,
-            this.dataGridViewTextBoxColumn18,
-            this.dataGridViewTextBoxColumn19,
-            this.dataGridViewTextBoxColumn20,
-            this.parkingColumn1,
-            this.dataGridViewButtonColumn1,
-            this.dataGridViewButtonColumn2});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.hotalDataGridView.DefaultCellStyle = dataGridViewCellStyle6;
-            this.hotalDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.hotalDataGridView.Location = new System.Drawing.Point(0, 0);
-            this.hotalDataGridView.Name = "hotalDataGridView";
-            this.hotalDataGridView.RowHeadersVisible = false;
-            this.hotalDataGridView.RowTemplate.Height = 50;
-            this.hotalDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.hotalDataGridView.Size = new System.Drawing.Size(765, 208);
-            this.hotalDataGridView.TabIndex = 2;
-            // 
-            // insuranceTagPage
-            // 
-            this.insuranceTagPage.Controls.Add(this.InsuranceGridView);
-            this.insuranceTagPage.Location = new System.Drawing.Point(4, 22);
-            this.insuranceTagPage.Name = "insuranceTagPage";
-            this.insuranceTagPage.Padding = new System.Windows.Forms.Padding(3);
-            this.insuranceTagPage.Size = new System.Drawing.Size(765, 208);
-            this.insuranceTagPage.TabIndex = 1;
-            this.insuranceTagPage.Text = "保险信息";
-            this.insuranceTagPage.UseVisualStyleBackColor = true;
-            // 
-            // InsuranceGridView
-            // 
-            this.InsuranceGridView.AllowUserToAddRows = false;
-            this.InsuranceGridView.AllowUserToDeleteRows = false;
-            this.InsuranceGridView.AllowUserToResizeRows = false;
-            this.InsuranceGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.InsuranceGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5,
-            this.dav2Edit,
-            this.dav2Delete});
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle9.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.InsuranceGridView.DefaultCellStyle = dataGridViewCellStyle9;
-            this.InsuranceGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.InsuranceGridView.Location = new System.Drawing.Point(3, 3);
-            this.InsuranceGridView.Name = "InsuranceGridView";
-            this.InsuranceGridView.RowHeadersVisible = false;
-            this.InsuranceGridView.RowTemplate.Height = 50;
-            this.InsuranceGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.InsuranceGridView.Size = new System.Drawing.Size(759, 202);
-            this.InsuranceGridView.TabIndex = 1;
-            // 
-            // rantalTabPage
-            // 
-            this.rantalTabPage.Controls.Add(this.RentalGridView);
-            this.rantalTabPage.Location = new System.Drawing.Point(4, 22);
-            this.rantalTabPage.Name = "rantalTabPage";
-            this.rantalTabPage.Size = new System.Drawing.Size(765, 208);
-            this.rantalTabPage.TabIndex = 2;
-            this.rantalTabPage.Text = "租车信息";
-            this.rantalTabPage.UseVisualStyleBackColor = true;
-            // 
-            // RentalGridView
-            // 
-            this.RentalGridView.AllowUserToAddRows = false;
-            this.RentalGridView.AllowUserToDeleteRows = false;
-            this.RentalGridView.AllowUserToResizeRows = false;
-            this.RentalGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.RentalGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn7,
-            this.dataGridViewTextBoxColumn8,
-            this.dataGridViewTextBoxColumn9,
-            this.dataGridViewTextBoxColumn10,
-            this.startAtColumn1,
-            this.toPlaceColumn1,
-            this.endAtColumn4,
-            this.dav3Edit,
-            this.dav3Delete});
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.RentalGridView.DefaultCellStyle = dataGridViewCellStyle12;
-            this.RentalGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.RentalGridView.Location = new System.Drawing.Point(0, 0);
-            this.RentalGridView.Name = "RentalGridView";
-            this.RentalGridView.RowHeadersVisible = false;
-            this.RentalGridView.RowTemplate.Height = 50;
-            this.RentalGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.RentalGridView.Size = new System.Drawing.Size(765, 208);
-            this.RentalGridView.TabIndex = 1;
-            // 
-            // wifiTabPage
-            // 
-            this.wifiTabPage.Controls.Add(this.WIFIGridView);
-            this.wifiTabPage.Location = new System.Drawing.Point(4, 22);
-            this.wifiTabPage.Name = "wifiTabPage";
-            this.wifiTabPage.Size = new System.Drawing.Size(765, 208);
-            this.wifiTabPage.TabIndex = 3;
-            this.wifiTabPage.Text = "WIFI";
-            this.wifiTabPage.UseVisualStyleBackColor = true;
-            // 
-            // WIFIGridView
-            // 
-            this.WIFIGridView.AllowUserToAddRows = false;
-            this.WIFIGridView.AllowUserToDeleteRows = false;
-            this.WIFIGridView.AllowUserToResizeRows = false;
-            this.WIFIGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.WIFIGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.fromPlacedataGridViewTextBoxColumn5,
-            this.dataGridViewTextBoxColumn13,
-            this.toPlaceDataGridViewTextBoxColumn14,
-            this.endAtDataGridViewTextBoxColumn15,
-            this.daysColumn5,
-            this.EditWifi,
-            this.DeleteWifli});
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle15.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.WIFIGridView.DefaultCellStyle = dataGridViewCellStyle15;
-            this.WIFIGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.WIFIGridView.Location = new System.Drawing.Point(0, 0);
-            this.WIFIGridView.Name = "WIFIGridView";
-            this.WIFIGridView.RowHeadersVisible = false;
-            this.WIFIGridView.RowTemplate.Height = 50;
-            this.WIFIGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.WIFIGridView.Size = new System.Drawing.Size(765, 208);
-            this.WIFIGridView.TabIndex = 1;
-            // 
-            // activityTabPage
-            // 
-            this.activityTabPage.Controls.Add(this.activityDataGridView);
-            this.activityTabPage.Location = new System.Drawing.Point(4, 22);
-            this.activityTabPage.Name = "activityTabPage";
-            this.activityTabPage.Size = new System.Drawing.Size(765, 208);
-            this.activityTabPage.TabIndex = 5;
-            this.activityTabPage.Text = "活动信息";
-            this.activityTabPage.UseVisualStyleBackColor = true;
-            // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = null;
             // 
             // StypeColumn1
             // 
@@ -585,9 +404,9 @@
             // 
             // editColumn1
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(2, 12, 1, 12);
-            this.editColumn1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle19.Padding = new System.Windows.Forms.Padding(2, 12, 1, 12);
+            this.editColumn1.DefaultCellStyle = dataGridViewCellStyle19;
             this.editColumn1.HeaderText = "";
             this.editColumn1.Name = "editColumn1";
             this.editColumn1.Text = "编辑";
@@ -596,14 +415,56 @@
             // 
             // deleteColumn1
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(2, 12, 2, 12);
-            this.deleteColumn1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle20.Padding = new System.Windows.Forms.Padding(2, 12, 2, 12);
+            this.deleteColumn1.DefaultCellStyle = dataGridViewCellStyle20;
             this.deleteColumn1.HeaderText = "";
             this.deleteColumn1.Name = "deleteColumn1";
             this.deleteColumn1.Text = "删除";
             this.deleteColumn1.UseColumnTextForButtonValue = true;
             this.deleteColumn1.Width = 60;
+            // 
+            // hotalTabPage
+            // 
+            this.hotalTabPage.Controls.Add(this.hotalDataGridView);
+            this.hotalTabPage.Location = new System.Drawing.Point(4, 22);
+            this.hotalTabPage.Name = "hotalTabPage";
+            this.hotalTabPage.Size = new System.Drawing.Size(765, 228);
+            this.hotalTabPage.TabIndex = 4;
+            this.hotalTabPage.Text = "住宿信息";
+            this.hotalTabPage.UseVisualStyleBackColor = true;
+            // 
+            // hotalDataGridView
+            // 
+            this.hotalDataGridView.AllowUserToAddRows = false;
+            this.hotalDataGridView.AllowUserToDeleteRows = false;
+            this.hotalDataGridView.AllowUserToResizeRows = false;
+            this.hotalDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.hotalDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn17,
+            this.dataGridViewTextBoxColumn18,
+            this.dataGridViewTextBoxColumn19,
+            this.dataGridViewTextBoxColumn20,
+            this.parkingColumn1,
+            this.dataGridViewButtonColumn1,
+            this.dataGridViewButtonColumn2});
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle24.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle24.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
+            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.hotalDataGridView.DefaultCellStyle = dataGridViewCellStyle24;
+            this.hotalDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.hotalDataGridView.Location = new System.Drawing.Point(0, 0);
+            this.hotalDataGridView.Name = "hotalDataGridView";
+            this.hotalDataGridView.RowHeadersVisible = false;
+            this.hotalDataGridView.RowTemplate.Height = 50;
+            this.hotalDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.hotalDataGridView.Size = new System.Drawing.Size(765, 228);
+            this.hotalDataGridView.TabIndex = 2;
             // 
             // dataGridViewTextBoxColumn17
             // 
@@ -637,9 +498,9 @@
             // 
             // dataGridViewButtonColumn1
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(2, 12, 1, 12);
-            this.dataGridViewButtonColumn1.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle22.Padding = new System.Windows.Forms.Padding(2, 12, 1, 12);
+            this.dataGridViewButtonColumn1.DefaultCellStyle = dataGridViewCellStyle22;
             this.dataGridViewButtonColumn1.HeaderText = "";
             this.dataGridViewButtonColumn1.Name = "dataGridViewButtonColumn1";
             this.dataGridViewButtonColumn1.Text = "编辑";
@@ -648,14 +509,55 @@
             // 
             // dataGridViewButtonColumn2
             // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(2, 12, 2, 12);
-            this.dataGridViewButtonColumn2.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle23.Padding = new System.Windows.Forms.Padding(2, 12, 2, 12);
+            this.dataGridViewButtonColumn2.DefaultCellStyle = dataGridViewCellStyle23;
             this.dataGridViewButtonColumn2.HeaderText = "";
             this.dataGridViewButtonColumn2.Name = "dataGridViewButtonColumn2";
             this.dataGridViewButtonColumn2.Text = "删除";
             this.dataGridViewButtonColumn2.UseColumnTextForButtonValue = true;
             this.dataGridViewButtonColumn2.Width = 60;
+            // 
+            // insuranceTagPage
+            // 
+            this.insuranceTagPage.Controls.Add(this.InsuranceGridView);
+            this.insuranceTagPage.Location = new System.Drawing.Point(4, 22);
+            this.insuranceTagPage.Name = "insuranceTagPage";
+            this.insuranceTagPage.Padding = new System.Windows.Forms.Padding(3);
+            this.insuranceTagPage.Size = new System.Drawing.Size(765, 228);
+            this.insuranceTagPage.TabIndex = 1;
+            this.insuranceTagPage.Text = "保险信息";
+            this.insuranceTagPage.UseVisualStyleBackColor = true;
+            // 
+            // InsuranceGridView
+            // 
+            this.InsuranceGridView.AllowUserToAddRows = false;
+            this.InsuranceGridView.AllowUserToDeleteRows = false;
+            this.InsuranceGridView.AllowUserToResizeRows = false;
+            this.InsuranceGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.InsuranceGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5,
+            this.dav2Edit,
+            this.dav2Delete});
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle27.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle27.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle27.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle27.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
+            dataGridViewCellStyle27.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle27.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.InsuranceGridView.DefaultCellStyle = dataGridViewCellStyle27;
+            this.InsuranceGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.InsuranceGridView.Location = new System.Drawing.Point(3, 3);
+            this.InsuranceGridView.Name = "InsuranceGridView";
+            this.InsuranceGridView.RowHeadersVisible = false;
+            this.InsuranceGridView.RowTemplate.Height = 50;
+            this.InsuranceGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.InsuranceGridView.Size = new System.Drawing.Size(759, 222);
+            this.InsuranceGridView.TabIndex = 1;
             // 
             // dataGridViewTextBoxColumn3
             // 
@@ -677,9 +579,9 @@
             // 
             // dav2Edit
             // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(2, 12, 1, 12);
-            this.dav2Edit.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle25.Padding = new System.Windows.Forms.Padding(2, 12, 1, 12);
+            this.dav2Edit.DefaultCellStyle = dataGridViewCellStyle25;
             this.dav2Edit.HeaderText = "";
             this.dav2Edit.Name = "dav2Edit";
             this.dav2Edit.Text = "编辑";
@@ -688,14 +590,58 @@
             // 
             // dav2Delete
             // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.Padding = new System.Windows.Forms.Padding(2, 12, 2, 12);
-            this.dav2Delete.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle26.Padding = new System.Windows.Forms.Padding(2, 12, 2, 12);
+            this.dav2Delete.DefaultCellStyle = dataGridViewCellStyle26;
             this.dav2Delete.HeaderText = "";
             this.dav2Delete.Name = "dav2Delete";
             this.dav2Delete.Text = "删除";
             this.dav2Delete.UseColumnTextForButtonValue = true;
             this.dav2Delete.Width = 60;
+            // 
+            // rantalTabPage
+            // 
+            this.rantalTabPage.Controls.Add(this.RentalGridView);
+            this.rantalTabPage.Location = new System.Drawing.Point(4, 22);
+            this.rantalTabPage.Name = "rantalTabPage";
+            this.rantalTabPage.Size = new System.Drawing.Size(765, 228);
+            this.rantalTabPage.TabIndex = 2;
+            this.rantalTabPage.Text = "租车信息";
+            this.rantalTabPage.UseVisualStyleBackColor = true;
+            // 
+            // RentalGridView
+            // 
+            this.RentalGridView.AllowUserToAddRows = false;
+            this.RentalGridView.AllowUserToDeleteRows = false;
+            this.RentalGridView.AllowUserToResizeRows = false;
+            this.RentalGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.RentalGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn7,
+            this.dataGridViewTextBoxColumn8,
+            this.dataGridViewTextBoxColumn9,
+            this.dataGridViewTextBoxColumn10,
+            this.startAtColumn1,
+            this.toPlaceColumn1,
+            this.endAtColumn4,
+            this.dav3Edit,
+            this.dav3Delete});
+            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle30.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle30.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle30.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle30.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
+            dataGridViewCellStyle30.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle30.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.RentalGridView.DefaultCellStyle = dataGridViewCellStyle30;
+            this.RentalGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.RentalGridView.Location = new System.Drawing.Point(0, 0);
+            this.RentalGridView.Name = "RentalGridView";
+            this.RentalGridView.RowHeadersVisible = false;
+            this.RentalGridView.RowTemplate.Height = 50;
+            this.RentalGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.RentalGridView.Size = new System.Drawing.Size(765, 228);
+            this.RentalGridView.TabIndex = 1;
             // 
             // dataGridViewTextBoxColumn7
             // 
@@ -739,9 +685,9 @@
             // 
             // dav3Edit
             // 
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle10.Padding = new System.Windows.Forms.Padding(2, 12, 1, 12);
-            this.dav3Edit.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle28.Padding = new System.Windows.Forms.Padding(2, 12, 1, 12);
+            this.dav3Edit.DefaultCellStyle = dataGridViewCellStyle28;
             this.dav3Edit.HeaderText = "";
             this.dav3Edit.Name = "dav3Edit";
             this.dav3Edit.Text = "编辑";
@@ -750,14 +696,56 @@
             // 
             // dav3Delete
             // 
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle11.Padding = new System.Windows.Forms.Padding(2, 12, 2, 12);
-            this.dav3Delete.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle29.Padding = new System.Windows.Forms.Padding(2, 12, 2, 12);
+            this.dav3Delete.DefaultCellStyle = dataGridViewCellStyle29;
             this.dav3Delete.HeaderText = "";
             this.dav3Delete.Name = "dav3Delete";
             this.dav3Delete.Text = "删除";
             this.dav3Delete.UseColumnTextForButtonValue = true;
             this.dav3Delete.Width = 60;
+            // 
+            // wifiTabPage
+            // 
+            this.wifiTabPage.Controls.Add(this.WIFIGridView);
+            this.wifiTabPage.Location = new System.Drawing.Point(4, 22);
+            this.wifiTabPage.Name = "wifiTabPage";
+            this.wifiTabPage.Size = new System.Drawing.Size(765, 228);
+            this.wifiTabPage.TabIndex = 3;
+            this.wifiTabPage.Text = "WIFI";
+            this.wifiTabPage.UseVisualStyleBackColor = true;
+            // 
+            // WIFIGridView
+            // 
+            this.WIFIGridView.AllowUserToAddRows = false;
+            this.WIFIGridView.AllowUserToDeleteRows = false;
+            this.WIFIGridView.AllowUserToResizeRows = false;
+            this.WIFIGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.WIFIGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.fromPlacedataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn13,
+            this.toPlaceDataGridViewTextBoxColumn14,
+            this.endAtDataGridViewTextBoxColumn15,
+            this.daysColumn5,
+            this.EditWifi,
+            this.DeleteWifli});
+            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle33.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle33.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle33.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle33.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
+            dataGridViewCellStyle33.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle33.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle33.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.WIFIGridView.DefaultCellStyle = dataGridViewCellStyle33;
+            this.WIFIGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.WIFIGridView.Location = new System.Drawing.Point(0, 0);
+            this.WIFIGridView.Name = "WIFIGridView";
+            this.WIFIGridView.RowHeadersVisible = false;
+            this.WIFIGridView.RowTemplate.Height = 50;
+            this.WIFIGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.WIFIGridView.Size = new System.Drawing.Size(765, 228);
+            this.WIFIGridView.TabIndex = 1;
             // 
             // fromPlacedataGridViewTextBoxColumn5
             // 
@@ -790,9 +778,9 @@
             // 
             // EditWifi
             // 
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle13.Padding = new System.Windows.Forms.Padding(2, 12, 1, 12);
-            this.EditWifi.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle31.Padding = new System.Windows.Forms.Padding(2, 12, 1, 12);
+            this.EditWifi.DefaultCellStyle = dataGridViewCellStyle31;
             this.EditWifi.HeaderText = "";
             this.EditWifi.Name = "EditWifi";
             this.EditWifi.Text = "编辑";
@@ -801,14 +789,24 @@
             // 
             // DeleteWifli
             // 
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle14.Padding = new System.Windows.Forms.Padding(2, 12, 2, 12);
-            this.DeleteWifli.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle32.Padding = new System.Windows.Forms.Padding(2, 12, 2, 12);
+            this.DeleteWifli.DefaultCellStyle = dataGridViewCellStyle32;
             this.DeleteWifli.HeaderText = "";
             this.DeleteWifli.Name = "DeleteWifli";
             this.DeleteWifli.Text = "删除";
             this.DeleteWifli.UseColumnTextForButtonValue = true;
             this.DeleteWifli.Width = 60;
+            // 
+            // activityTabPage
+            // 
+            this.activityTabPage.Controls.Add(this.activityDataGridView);
+            this.activityTabPage.Location = new System.Drawing.Point(4, 22);
+            this.activityTabPage.Name = "activityTabPage";
+            this.activityTabPage.Size = new System.Drawing.Size(765, 228);
+            this.activityTabPage.TabIndex = 5;
+            this.activityTabPage.Text = "活动信息";
+            this.activityTabPage.UseVisualStyleBackColor = true;
             // 
             // activityDataGridView
             // 
@@ -824,22 +822,22 @@
             this.dataGridViewTextBoxColumn15,
             this.dataGridViewButtonColumn3,
             this.dataGridViewButtonColumn4});
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle18.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.activityDataGridView.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle36.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle36.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle36.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle36.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
+            dataGridViewCellStyle36.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle36.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle36.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.activityDataGridView.DefaultCellStyle = dataGridViewCellStyle36;
             this.activityDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.activityDataGridView.Location = new System.Drawing.Point(0, 0);
             this.activityDataGridView.Name = "activityDataGridView";
             this.activityDataGridView.RowHeadersVisible = false;
             this.activityDataGridView.RowTemplate.Height = 50;
             this.activityDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.activityDataGridView.Size = new System.Drawing.Size(765, 208);
+            this.activityDataGridView.Size = new System.Drawing.Size(765, 228);
             this.activityDataGridView.TabIndex = 1;
             // 
             // dataGridViewTextBoxColumn2
@@ -872,9 +870,9 @@
             // 
             // dataGridViewButtonColumn3
             // 
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle16.Padding = new System.Windows.Forms.Padding(2, 12, 1, 12);
-            this.dataGridViewButtonColumn3.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle34.Padding = new System.Windows.Forms.Padding(2, 12, 1, 12);
+            this.dataGridViewButtonColumn3.DefaultCellStyle = dataGridViewCellStyle34;
             this.dataGridViewButtonColumn3.HeaderText = "";
             this.dataGridViewButtonColumn3.Name = "dataGridViewButtonColumn3";
             this.dataGridViewButtonColumn3.Text = "编辑";
@@ -883,20 +881,24 @@
             // 
             // dataGridViewButtonColumn4
             // 
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle17.Padding = new System.Windows.Forms.Padding(2, 12, 2, 12);
-            this.dataGridViewButtonColumn4.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle35.Padding = new System.Windows.Forms.Padding(2, 12, 2, 12);
+            this.dataGridViewButtonColumn4.DefaultCellStyle = dataGridViewCellStyle35;
             this.dataGridViewButtonColumn4.HeaderText = "";
             this.dataGridViewButtonColumn4.Name = "dataGridViewButtonColumn4";
             this.dataGridViewButtonColumn4.Text = "删除";
             this.dataGridViewButtonColumn4.UseColumnTextForButtonValue = true;
             this.dataGridViewButtonColumn4.Width = 60;
             // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = null;
+            // 
             // NewCustomerTripForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(894, 501);
+            this.ClientSize = new System.Drawing.Size(894, 543);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.startAtDateTimePicker);
             this.Controls.Add(this.label7);

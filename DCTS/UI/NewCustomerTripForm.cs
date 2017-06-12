@@ -90,5 +90,15 @@ namespace DCTS.UI
 
             }
         }
+
+        private void findCustomerButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void findTemplateButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
