@@ -49,7 +49,7 @@ namespace DCTS.Bus
                 var tripSumaryTemplate = WordprocessingDocument.Open(LocationTemplate.TripSumaryPath,false);
                 var daySumaryTemplate = WordprocessingDocument.Open(LocationTemplate.DaySumaryPath, false);
 
-                //copy templates/base as template
+                //cloned templates/base as template
                 string layout = LocationTemplate.LayoutRelativePath;
                 string tripPath = EntityPathConfig.TripWordFilePath(this.TripId);
                 File.Copy(layout, tripPath,true);
@@ -137,20 +137,20 @@ namespace DCTS.Bus
                         WordTemplateHelper.ReplaceText<TableRow>(rowCopy, "%day_cities%", WordTemplateHelper.DisplayDayCities(locations));
 
                         var cell = rowCopy.Elements<TableCell>().ElementAt(3);
-                        var runPattern = cell.Descendants<Run>().Last();
+                        var pattern = cell.Descendants<Paragraph>().Last();
                         var titles = locations.Select(o => o.ComboLocation.title).Distinct().ToArray();
                         for (int j = 0; j < titles.Count(); j++)
                         {
                             var t = titles[j];
-                            var runCopy = runPattern.CloneNode(true) as Run;
-                            WordTemplateHelper.ReplaceText<Run>(runCopy, "%day_location%", t);
-                            if (j > 0)
-                            {
-                                runPattern.InsertBeforeSelf(new Break());
-                            }
-                            runPattern.InsertBeforeSelf(runCopy);                            
+                            var cloned = pattern.CloneNode(true) as Paragraph;
+                            WordTemplateHelper.ReplaceText<Paragraph>(cloned, "%day_location%", t);
+                            //if (j > 0)
+                            //{
+                            //    pattern.InsertBeforeSelf(new Break());
+                            //}
+                            pattern.InsertBeforeSelf(cloned);                            
                         }
-                        runPattern.Remove();
+                        pattern.Remove();
                         WordTemplateHelper.ReplaceText<TableRow>(rowCopy, "%day_hotel%", WordTemplateHelper.DisplayDayHotel(locations));
 
                         dayTable.AppendChild(rowCopy);
