@@ -124,6 +124,9 @@
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Bus\ComboLoactionBusiness.cs" />
+    <EmbeddedResource Include="UI\ImportSystemfile.resx">
+      <DependentUpon>ImportSystemfile.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\SuppliersControl.resx">
       <DependentUpon>SuppliersControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -206,6 +209,12 @@
       <DependentUpon>ChooseLocaltionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\CommandRequest.cs" />
+    <Compile Include="UI\ImportSystemfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ImportSystemfile.Designer.cs">
+      <DependentUpon>ImportSystemfile.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\SuppliersControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
