@@ -35,6 +35,8 @@ namespace DCTS
         public Nullable<int> days { get; set; }
         public string breakfirst { get; set; }
         public string parking { get; set; }
+        public string baggage_weight_limit { get; set; }
+        public int trip_id { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual Supplier Supplier { get; set; }

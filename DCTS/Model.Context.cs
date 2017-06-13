@@ -36,5 +36,6 @@ namespace DCTS
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<TripCustomer> TripCustomers { get; set; }
     }
 }

@@ -18,19 +18,16 @@ namespace DCTS.UI
     {
         private Hashtable dataGridChanges = null;
         private static string NoOptionSelected = "所有";
-        int trip_Id = 0;
         TripDay TripItem;
 
         public TripDayFormControl()
         {
             InitializeComponent();
             dataGridView.AutoGenerateColumns = false;
-            pager1.PageCurrent = 1;
 
         }
         public void BeginActive()
         {
-            pager1.Bind();
 
         }
         public void FillModelByForm(TripDay trip)
@@ -41,7 +38,6 @@ namespace DCTS.UI
             TripItem = trip;
 
             //  trip.schedule = this.scheduleTextBox.Text;
-
 
         }
 
@@ -87,17 +83,12 @@ namespace DCTS.UI
         // 初始化DataGridView的数据源, 分页事件调用
         private int InitializeDataGridView(int pageCurrent = 1)
         {
-            string title = (this.keywordTextBox.Text != NoOptionSelected ? this.keywordTextBox.Text : string.Empty);
-
             int count = 0;
-            int pageSize = pager1.PageSize;
 
             using (var ctx = new DctsEntities())
             {
-                //分页需要数据总数
-                count = Count(TripItem.id, title);
 
-                var list = Paginate(pageCurrent, pageSize, title);
+                var list = ctx.Schedules.Where(o => o.tripday_id == TripItem.id);
 
                 this.dataGridView.DataSource = list;
             }
@@ -122,37 +113,6 @@ namespace DCTS.UI
                 count = query.Count();
             }
             return count;
-        }
-        private static List<Schedule> Paginate(int currentPage = 1, int pageSize = 25, string title = "")
-        {
-            // 如果数据为0，分页控件，设置currentPage = 0; 这回导致下面查询异常
-            if (currentPage <= 0)
-            {
-                currentPage = 1;
-            }
-            List<Schedule> list = new List<Schedule>();
-
-            using (var ctx = new DctsEntities())
-            {
-
-                var query = ctx.Schedules.Where(o => o.tripday_id != null);
-
-
-                if (title.Length > 0)
-                {
-                    query = query.Where(o => o.title.Contains(title));
-                }
-
-                if (pageSize > 0)
-                {
-                    int offset = (currentPage - 1) * pageSize;
-
-                    query = query.OrderBy(o => o.start_at).Skip(offset).Take(pageSize);
-                }
-                list = query.ToList();
-
-            }
-            return list;
         }
 
         private void newButton_Click(object sender, EventArgs e)
@@ -198,16 +158,11 @@ namespace DCTS.UI
             }
         }
 
-        private int pager1_EventPaging(CustomComponents.EventPagingArg e)
-        {
-            int count = InitializeDataGridView(e.PageCurrent);
-            return count;
-        }
+
 
         private void btfind_Click(object sender, EventArgs e)
         {
-            pager1.PageCurrent = 1;
-            pager1.Bind();
+
         }
 
     }

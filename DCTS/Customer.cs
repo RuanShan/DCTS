@@ -17,6 +17,7 @@ namespace DCTS
         public Customer()
         {
             this.Tickets = new HashSet<Ticket>();
+            this.TripCustomers = new HashSet<TripCustomer>();
         }
     
         public int id { get; set; }
@@ -29,5 +30,6 @@ namespace DCTS
         public Nullable<System.DateTime> updated_at { get; set; }
     
         public virtual ICollection<Ticket> Tickets { get; set; }
+        public virtual ICollection<TripCustomer> TripCustomers { get; set; }
     }
 }
