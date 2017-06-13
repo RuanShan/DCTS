@@ -168,8 +168,8 @@ namespace DCTS.Bus
             Image img = bitmap;
             int width = 0; int height = 0;
             GetPlaceholderImageSize(doc, imageRelID, out width, out height);
-            int newWidth = width; //宽度保持一致
-            int newHeight = img.Height / img.Width * newWidth;    //设置高度保持比例
+            float newWidth = width; //宽度保持一致
+            float newHeight = newWidth*img.Height / img.Width ;    //设置高度保持比例
 
             // Loop through all Drawing elements in the document
             foreach (Drawing d in doc.MainDocumentPart.Document.Descendants<Drawing>().ToList())

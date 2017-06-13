@@ -90,7 +90,7 @@ namespace DCTS.UI
                             return;
                         }
                         var obj = ctx.ComboLocations.Create();
-                        obj.ltype = (int)ComboLocationEnum.Flight;
+                        obj.ltype = (int)ComboLocationEnum.Airport;
                         obj.title = this.titleTextBox.Text;
 
                         obj.word = copyfilename; ;
