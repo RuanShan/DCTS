@@ -25,15 +25,24 @@ namespace DCTS.UI
         private void saveButton_Click(object sender, EventArgs e)
         {
             var ctx = this.entityDataSource1.DbContext as DctsEntities;
+<<<<<<< HEAD
+           //this.tripDayFormControl1.FillModelByForm(this.model);
+=======
             this.FillModelByForm(this.Model);
+>>>>>>> origin/master
             ctx.SaveChanges();
         }
 
         private void EditTripForm_Load(object sender, EventArgs e)
         {
             var ctx = this.entityDataSource1.DbContext as DctsEntities;
+<<<<<<< HEAD
+            this.model = ctx.TripDays.Find(ModelId);
+           //this.tripDayFormControl1.FillFormByModel(this.model);
+=======
             this.Model = ctx.TripDays.Find(ModelId);
             this.FillFormByModel(this.Model);
+>>>>>>> origin/master
         }
 
         // 初始化DataGridView的数据源, 分页事件调用

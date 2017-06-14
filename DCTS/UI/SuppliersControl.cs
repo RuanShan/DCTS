@@ -50,11 +50,11 @@ namespace DCTS.UI
             var locationTypeListForComboBox = locationTypeList.Select(o => new MockEntity { Id = o.Id, FullName = o.FullName }).ToList();
 
             // 活动分类
-            this.nationComboBox.DisplayMember = "FullName";
-            this.nationComboBox.ValueMember = "Id";
-            this.nationComboBox.DataSource = locationTypeListForComboBox;
+            //this.nationComboBox.DisplayMember = "FullName";
+            //this.nationComboBox.ValueMember = "Id";
+            //this.nationComboBox.DataSource = locationTypeListForComboBox;
         }
-      
+
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -63,8 +63,8 @@ namespace DCTS.UI
         // 初始化DataGridView的数据源, 
         private int InitializeDataGridView(int pageCurrent = 1)
         {
-            string Suppliername = (this.nationComboBox.Text != NoOptionSelected ? this.nationComboBox.Text : string.Empty);
-            
+            string Suppliername =""; //(this.nationComboBox.Text != NoOptionSelected ? this.nationComboBox.Text : string.Empty);
+
             string title = (this.keywordTextBox.Text != NoOptionSelected ? this.keywordTextBox.Text : string.Empty);
 
             int count = 0;
@@ -76,36 +76,46 @@ namespace DCTS.UI
 
             using (var ctx = new DctsEntities())
             {
-                int ty = Convert.ToInt32(this.nationComboBox.SelectedValue);
+                int ty = 0;// Convert.ToInt32(this.nationComboBox.SelectedValue);
 
                 //分页需要数据总数
                 count = Count(ty, title);
 
-                var list = Paginate(ComboLocationEnum.Dining, pageCurrent, pageSize, ty, "", title);
+                var list = Paginate( pageCurrent, pageSize, ty, "", title);
 
 
 
                 //List<Supplier> list = ctx.Suppliers.Where(o => otherLocationType.Contains(o.stype)).ToList();
+                int page = this.tabControl1.SelectedIndex;
 
-                var Airfiltered = list.FindAll(s => s.stype == (int)SupplierEnum.Air);
-
+                if (page == 0)
+                {
+                    var Airfiltered = list.FindAll(s => s.stype == (int)SupplierEnum.Air);
+               
                 this.dataGridView.DataSource = Airfiltered;
+                }
+                if (page == 1)
+                {
+                    var Insurancefiltered = list.FindAll(s => s.stype == (int)SupplierEnum.Insurance);
 
-                var Insurancefiltered = list.FindAll(s => s.stype == (int)SupplierEnum.Insurance);
+                    this.InsuranceGridView.DataSource = Insurancefiltered;
+                }
+                if (page == 2)
+                {
+                    var Rentalfiltered = list.FindAll(s => s.stype == (int)SupplierEnum.Rental);
 
-                this.InsuranceGridView.DataSource = Insurancefiltered;
+                    this.RentalGridView.DataSource = Rentalfiltered;
+                }
+                if (page == 3)
+                {
+                    var WIFIfiltered = list.FindAll(s => s.stype == (int)SupplierEnum.WIFI);
 
-                var Rentalfiltered = list.FindAll(s => s.stype == (int)SupplierEnum.Rental);
-
-                this.RentalGridView.DataSource = Rentalfiltered;
-
-                var WIFIfiltered = list.FindAll(s => s.stype == (int)SupplierEnum.WIFI);
-
-                this.WIFIGridView.DataSource = WIFIfiltered;
+                    this.WIFIGridView.DataSource = WIFIfiltered;
+                }
             }
             return 1;
         }
-        private static int Count( int nation, string title)
+        private static int Count(int nation, string title)
         {
             int count = 0;
             using (var ctx = new DctsEntities())
@@ -118,7 +128,7 @@ namespace DCTS.UI
 
                     query = query.Where(o => o.stype == ty);
 
-                }               
+                }
                 if (title.Length > 0)
                 {
                     query = query.Where(o => o.name.Contains(title));
@@ -127,7 +137,7 @@ namespace DCTS.UI
             }
             return count;
         }
-        private static List<Supplier> Paginate(ComboLocationEnum locationType, int currentPage = 1, int pageSize = 25, int nation=0, string city = "", string title = "")
+        private static List<Supplier> Paginate( int currentPage = 1, int pageSize = 25, int nation = 0, string city = "", string title = "")
         {
             // 如果数据为0，分页控件，设置currentPage = 0; 这回导致下面查询异常
             if (currentPage <= 0)
@@ -144,11 +154,11 @@ namespace DCTS.UI
 
                 //var query = ctx.Suppliers.Where(o => o.stype == (int)locationType);
 
-                if (nation> 0)
+                if (nation > 0)
                 {
-                    query = query.Where(o => o.stype ==  nation);
+                    query = query.Where(o => o.stype == nation);
                 }
-              
+
                 if (title.Length > 0)
                 {
                     query = query.Where(o => o.name.Contains(title));
@@ -184,7 +194,7 @@ namespace DCTS.UI
             else if (s == 3)
                 column = WIFIGridView.Columns[e.ColumnIndex];
 
-            if (column == editColumn1 || column == EditWifi || column == dav3Edit || column == dav2Edit  )
+            if (column == editColumn1 || column == EditWifi || column == dav3Edit || column == dav2Edit)
             {
                 var row = dataGridView.Rows[e.RowIndex];
 
@@ -267,17 +277,17 @@ namespace DCTS.UI
         {
 
             pager2.PageCurrent = 1;
-        
+
             pager2.Bind();
         }
 
         private int pager2_EventPaging(EventPagingArg e)
         {
-      
+
 
             int count = InitializeDataGridView(e.PageCurrent);
             return count;
-       
+
         }
     }
 }

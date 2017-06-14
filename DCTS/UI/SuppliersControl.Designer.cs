@@ -87,8 +87,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.label3 = new System.Windows.Forms.Label();
-            this.nationComboBox = new System.Windows.Forms.ComboBox();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
             this.pager2 = new DCTS.CustomComponents.Pager();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
@@ -547,7 +545,7 @@
             // 
             // btfind
             // 
-            this.btfind.Location = new System.Drawing.Point(410, 47);
+            this.btfind.Location = new System.Drawing.Point(413, 81);
             this.btfind.Name = "btfind";
             this.btfind.Size = new System.Drawing.Size(75, 25);
             this.btfind.TabIndex = 18;
@@ -572,24 +570,6 @@
             // 
             this.bindingSource1.DataSource = this.entityDataSource1;
             this.bindingSource1.Position = 0;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(33, 51);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(31, 13);
-            this.label3.TabIndex = 21;
-            this.label3.Text = "国家";
-            // 
-            // nationComboBox
-            // 
-            this.nationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.nationComboBox.FormattingEnabled = true;
-            this.nationComboBox.Location = new System.Drawing.Point(69, 47);
-            this.nationComboBox.Name = "nationComboBox";
-            this.nationComboBox.Size = new System.Drawing.Size(192, 21);
-            this.nationComboBox.TabIndex = 20;
             // 
             // bindingNavigator1
             // 
@@ -634,8 +614,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pager2);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.nationComboBox);
             this.Controls.Add(this.keywordTextBox);
             this.Controls.Add(this.btfind);
             this.Controls.Add(this.label1);
@@ -711,8 +689,6 @@
         private System.Windows.Forms.TextBox keywordTextBox;
         private System.Windows.Forms.Button btfind;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox nationComboBox;
         private System.Windows.Forms.BindingNavigator bindingNavigator1;
         private CustomComponents.Pager pager2;
     }
