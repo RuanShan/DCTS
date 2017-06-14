@@ -77,6 +77,8 @@ namespace DCTS.UI
                             trip.TripDays.Add(tripDay);
                         }
                     }
+                    ctx.Tickets.AddRange(TicketList);
+
                     ctx.SaveChanges();
                 }
                 else
@@ -97,10 +99,7 @@ namespace DCTS.UI
                     }
                     ctx.Trips.Add(trip);
 
-                    //
-                    //   var location = ctx.Suppliers.Where(o => o.name == ).First();
-
-                   ctx.Tickets.AddRange(TicketList);
+                    ctx.Tickets.AddRange(TicketList);
 
 
                     ctx.SaveChanges();
@@ -133,36 +132,27 @@ namespace DCTS.UI
                 var location = ctx.Suppliers.Where(o => o.name == model.title).First();
                 model.supplier_id = location.id;
                 model.customer_id = Convert.ToInt32(customerComboBox.SelectedValue);
-               
-              
+
+                //住宿
+                int s = this.tabControl1.SelectedIndex;
+                if (s == 1)
+                {
+                    location = ctx.Suppliers.Where(o => o.name == "缺省住宿服务商").First();
+                    model.supplier_id = location.id;
+                    model.customer_id = Convert.ToInt32(customerComboBox.SelectedValue);
+                }
+                //活动
+                else if (s == 5)
+                {
+                    location = ctx.Suppliers.Where(o => o.name == "缺省活动服务商").First();
+                    model.supplier_id = location.id;
+                    model.customer_id = Convert.ToInt32(customerComboBox.SelectedValue);
+                }
             }
-
-            //if (TicketList.Count == 0)
-            {
-                //Ticket item = new Ticket();
-                //item.title = dataGridView.Rows[e.RowIndex].Cells["titleColumn1"].EditedFormattedValue.ToString();
-                //if (dataGridView.Rows[e.RowIndex].Cells["start_at1Column1"].Value != null && dataGridView.Rows[e.RowIndex].Cells["start_at1Column1"].ToString() != "")
-                //    item.start_at = Convert.ToDateTime(dataGridView.Rows[e.RowIndex].Cells["start_at1Column1"].EditedFormattedValue.ToString());
-                //item.from_place = dataGridView.Rows[e.RowIndex].Cells["from_placeColumn1"].EditedFormattedValue.ToString();
-                //if (dataGridView.Rows[e.RowIndex].Cells["start_atColumn1"].Value != null && dataGridView.Rows[e.RowIndex].Cells["start_atColumn1"].ToString() != "")
-                //    item.start_at = Convert.ToDateTime(dataGridView.Rows[e.RowIndex].Cells["start_atColumn1"].EditedFormattedValue.ToString());
-                //item.to_place = dataGridView.Rows[e.RowIndex].Cells["to_placeColumn1"].EditedFormattedValue.ToString();
-                //if (dataGridView.Rows[e.RowIndex].Cells["end_atColumn1"].Value != null && dataGridView.Rows[e.RowIndex].Cells["end_atColumn1"].ToString() != "")
-                //    item.end_at = Convert.ToDateTime(dataGridView.Rows[e.RowIndex].Cells["end_atColumn1"].EditedFormattedValue.ToString());
-                //if (dataGridView.Rows[e.RowIndex].Cells["daysColumn1"].Value != null && dataGridView.Rows[e.RowIndex].Cells["daysColumn1"].ToString() != "")
-                //    item.days = Convert.ToInt32(dataGridView.Rows[e.RowIndex].Cells["daysColumn1"].EditedFormattedValue.ToString());
-                //行李额
-                // item.service_no = dataGridView.Rows[e.RowIndex].Cells["titleColumn1"].EditedFormattedValue.ToString();
-
-                //  TicketList.Add(model);
-            }
-
         }
 
         private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
-
 
 
         }
@@ -173,15 +163,31 @@ namespace DCTS.UI
             sortableticketList = new SortableBindingList<Ticket>(TicketList.ToList());
             this.bindingSource1.DataSource = this.sortableticketList;
             dataGridView.AutoGenerateColumns = false;
+            string filter = "";
+            //var location = ctx.Suppliers.Where(o => o.name == model.title).First();
+            //model.supplier_id = location.id;
+             
+            //  filter += " (期号>='" + shipper + "')";
+
+            bindingSource1.Filter = filter;
+
             this.dataGridView.DataSource = this.bindingSource1;
+
+
+
             hotalDataGridView.AutoGenerateColumns = false;
             this.hotalDataGridView.DataSource = this.bindingSource1;
+
+
             InsuranceGridView.AutoGenerateColumns = false;
             this.InsuranceGridView.DataSource = this.bindingSource1;
+
             RentalGridView.AutoGenerateColumns = false;
             this.RentalGridView.DataSource = this.bindingSource1;
+
             WIFIGridView.AutoGenerateColumns = false;
             this.WIFIGridView.DataSource = this.bindingSource1;
+
             activityDataGridView.AutoGenerateColumns = false;
             this.activityDataGridView.DataSource = this.bindingSource1;
 
@@ -197,25 +203,16 @@ namespace DCTS.UI
             using (var ctx = new DctsEntities())
             {
                 int s = this.tabControl1.SelectedIndex;
-                if (s == 0)
+                //if (s == 0)
                 {
                     Ticket item = new Ticket();
-                    item.supplier_id = (int)ComboLocationEnum.TrainList;
-                 
+                    //  item.supplier_id = (int)ComboLocationEnum.TrainList;
+
                     TicketList.Add(item);
                     BeginActive();
 
                 }
-                else if (s == 1)
-                {
 
-                    var location = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Train).First();
-
-                    Ticket item = new Ticket();
-                    TicketList.Add(item);
-                    BeginActive();
-
-                }
             }
 
         }
