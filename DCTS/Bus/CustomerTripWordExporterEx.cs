@@ -30,7 +30,7 @@ namespace DCTS.Bus
             using (var ctx = new DctsEntities())
             {
                 trip = ctx.Trips.Find(TripId);
-                days = trip.TripDays.ToList();
+                days = ctx.TripDays.Include("Schedules").Where(o => o.trip_id == TripId).OrderBy(o => o.day).ToList();
                 dayLocations = ctx.DayLocations.Include("TripDay").Include("ComboLocation").Where(o => o.trip_id == TripId).OrderBy(o => o.TripDay.day).ThenBy(o => o.position).ToList();
             }
 
@@ -59,7 +59,6 @@ namespace DCTS.Bus
                     // 处理路书行程概要
 
                     HandleTripSummary(tripSumaryTemplate);
-                    if (false)
                     {
                         foreach (var day in this.days)
                         {
@@ -192,8 +191,8 @@ namespace DCTS.Bus
                 Console.WriteLine("\tError, couldn't find table with caption ORDER_TABLE in document");
             }
             tripSumary.Save();
-            string path = EntityPathConfig.TripWordFilePath(TripId, "summary");
-            tripSumary.SaveAs(path);
+            //string path = EntityPathConfig.TripWordFilePath(TripId, "summary");
+            //tripSumary.SaveAs(path);
             this.filledTemplates.Add(tripSumary);
             this.filledTemplateStreams.Add(stream);
             
@@ -238,24 +237,29 @@ namespace DCTS.Bus
                 {
                     //get the Pattern row for duplication
                     var rowPattern = rows.Last();
-                    for (int i = 0; i < locations.Count; i++)
+                    var schedules = day.Schedules.OrderBy(o => o.start_at).ToList();
+                    foreach (var schedule in schedules)
                     {
-                        var dl = locations[i];
-                        if (dl.ComboLocation.ltype == (int)ComboLocationEnum.Blank) 
-                        {
-                            continue;
-                        }
-						var start_at = dl.start_at.GetValueOrDefault();
-                        var schedule = ((dl.schedule != null) && (dl.schedule.Length > 0)) ? dl.schedule : dl.ComboLocation.title;
-
                         var rowCopy = rowPattern.CloneNode(true) as TableRow;
-                        WordTemplateHelper.ReplaceText<TableRow>(rowCopy, "LocationStartAt", String.Format("{0:HH:mm}", start_at));
-                        WordTemplateHelper.ReplaceText<TableRow>(rowCopy, "LocationSchedule", schedule);
+                        WordTemplateHelper.ReplaceText<TableRow>(rowCopy, "%schedule_start_at%", String.Format("{0:HH:mm}", schedule.start_at));
+                        WordTemplateHelper.ReplaceText<TableRow>(rowCopy, "%schedule_title%", schedule.title);
                         dayTable.AppendChild(rowCopy);
                     }
                     rowPattern.Remove();
                 }
             }
+            var patternTip = mainDoc.Descendants<Paragraph>().Where(o => o.InnerText.Contains("%day_tip%")).LastOrDefault();
+            if (patternTip != null && day.tips != null)
+            {
+                foreach (string line in day.tips.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    var tipCopy = patternTip.CloneNode(true) as Paragraph;
+                    WordTemplateHelper.ReplaceText<Paragraph>(tipCopy, "%day_tip%", line);
+                    patternTip.InsertBeforeSelf(tipCopy);
+                }
+                patternTip.Remove();
+            }
+
             sumary.Save();
 
             this.filledTemplates.Add(sumary);

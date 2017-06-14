@@ -9,9 +9,12 @@ namespace DCTS.DB
 {
     public class GlobalCache
     {
+        static DctsEntities db = new DctsEntities();
         static List<Nation> nationList = null;
         static List<City> cityList = null;
-        static DctsEntities db = new DctsEntities();
+        static ComboLocation flightLocation = null;
+        static ComboLocation rentalLocation = null;
+        static ComboLocation trainLocation = null;
 
         public static List<Nation> NationList
         {
@@ -32,6 +35,34 @@ namespace DCTS.DB
                 { InitializeCityList(); }
 
                 return cityList;
+            }
+        }
+
+        public static ComboLocation FlightLocation
+        {
+            get
+            {
+                if (flightLocation == null)
+                { InitializeLocations(); }
+                return flightLocation;
+            }
+        }
+        public static ComboLocation RentalLocation
+        {
+            get
+            {
+                if (rentalLocation == null)
+                { InitializeLocations(); }
+                return rentalLocation;
+            }
+        }
+        public static ComboLocation TrainLocation
+        {
+            get
+            {
+                if (trainLocation == null)
+                { InitializeLocations(); }
+                return trainLocation;
             }
         }
 
@@ -70,6 +101,14 @@ namespace DCTS.DB
         {
             cityList = db.Cities.ToList();
         }
+
+        private static void InitializeLocations()
+        {
+            flightLocation = db.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Flight).First();
+            rentalLocation = db.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Rental).First();
+            trainLocation = db.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Train).First();
+        }
+
     }
 
 
