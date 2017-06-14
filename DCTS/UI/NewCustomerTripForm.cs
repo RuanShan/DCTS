@@ -166,8 +166,8 @@ namespace DCTS.UI
             string filter = "";
             //var location = ctx.Suppliers.Where(o => o.name == model.title).First();
             //model.supplier_id = location.id;
-             
-            //  filter += " (期号>='" + shipper + "')";
+
+            //  filter += " (supplier_id>='" + shipper + "')";
 
             bindingSource1.Filter = filter;
 
