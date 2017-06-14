@@ -199,6 +199,9 @@
     <Compile Include="Trip.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="TripCustomer.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="TripDay.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
