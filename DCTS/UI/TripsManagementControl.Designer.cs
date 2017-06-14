@@ -35,12 +35,13 @@
             this.scenicsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dinningsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hotelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.activityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.NationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.airportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.activityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.其他ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.imagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -70,6 +71,7 @@
             this.activityToolStripMenuItem,
             this.NationToolStripMenuItem,
             this.airportToolStripMenuItem,
+            this.imagesToolStripMenuItem,
             this.其他ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -116,6 +118,12 @@
             this.hotelsToolStripMenuItem.Text = "住宿";
             this.hotelsToolStripMenuItem.Click += new System.EventHandler(this.hotelsToolStripMenuItem_Click);
             // 
+            // activityToolStripMenuItem
+            // 
+            this.activityToolStripMenuItem.Name = "activityToolStripMenuItem";
+            this.activityToolStripMenuItem.Size = new System.Drawing.Size(85, 29);
+            this.activityToolStripMenuItem.Text = "活动";
+            // 
             // NationToolStripMenuItem
             // 
             this.NationToolStripMenuItem.Name = "NationToolStripMenuItem";
@@ -129,12 +137,6 @@
             this.airportToolStripMenuItem.Size = new System.Drawing.Size(85, 29);
             this.airportToolStripMenuItem.Text = "机场";
             this.airportToolStripMenuItem.Click += new System.EventHandler(this.airportToolStripMenuItem_Click);
-            // 
-            // activityToolStripMenuItem
-            // 
-            this.activityToolStripMenuItem.Name = "activityToolStripMenuItem";
-            this.activityToolStripMenuItem.Size = new System.Drawing.Size(85, 29);
-            this.activityToolStripMenuItem.Text = "活动";
             // 
             // 其他ToolStripMenuItem
             // 
@@ -159,6 +161,12 @@
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(44, 17);
             this.toolStripStatusLabel1.Text = "状态条";
             this.toolStripStatusLabel1.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
+            // 
+            // imagesToolStripMenuItem
+            // 
+            this.imagesToolStripMenuItem.Name = "imagesToolStripMenuItem";
+            this.imagesToolStripMenuItem.Size = new System.Drawing.Size(85, 29);
+            this.imagesToolStripMenuItem.Text = "素材";
             // 
             // TripsManagementControl
             // 
@@ -193,5 +201,6 @@
         private System.Windows.Forms.ToolStripMenuItem 其他ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem airportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem activityToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem imagesToolStripMenuItem;
     }
 }

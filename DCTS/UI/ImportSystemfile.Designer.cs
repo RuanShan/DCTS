@@ -30,33 +30,48 @@
         {
             this.components = new System.ComponentModel.Container();
             this.listView1 = new System.Windows.Forms.ListView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.label1 = new System.Windows.Forms.Label();
             this.pathTextBox = new System.Windows.Forms.TextBox();
             this.openFileBtton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.pager1 = new DCTS.CustomComponents.Pager();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
             this.import = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.noReplaceRadioButton = new System.Windows.Forms.RadioButton();
             this.replaceRadioButton = new System.Windows.Forms.RadioButton();
-            this.pager1 = new DCTS.CustomComponents.Pager();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.contextMenuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.groupBox2.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // listView1
             // 
             this.listView1.ContextMenuStrip = this.contextMenuStrip1;
-            this.listView1.Location = new System.Drawing.Point(12, 19);
+            this.listView1.Location = new System.Drawing.Point(12, 18);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(823, 302);
+            this.listView1.Size = new System.Drawing.Size(823, 279);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deleteToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(125, 26);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.deleteToolStripMenuItem.Text = "删除此条";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // openFileDialog1
             // 
@@ -69,24 +84,24 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 32);
+            this.label1.Location = new System.Drawing.Point(18, 30);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 13);
+            this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 14;
             this.label1.Text = "文件路径";
             // 
             // pathTextBox
             // 
-            this.pathTextBox.Location = new System.Drawing.Point(77, 28);
+            this.pathTextBox.Location = new System.Drawing.Point(77, 26);
             this.pathTextBox.Name = "pathTextBox";
-            this.pathTextBox.Size = new System.Drawing.Size(302, 20);
+            this.pathTextBox.Size = new System.Drawing.Size(302, 21);
             this.pathTextBox.TabIndex = 13;
             // 
             // openFileBtton
             // 
-            this.openFileBtton.Location = new System.Drawing.Point(385, 27);
+            this.openFileBtton.Location = new System.Drawing.Point(385, 25);
             this.openFileBtton.Name = "openFileBtton";
-            this.openFileBtton.Size = new System.Drawing.Size(44, 25);
+            this.openFileBtton.Size = new System.Drawing.Size(44, 23);
             this.openFileBtton.TabIndex = 12;
             this.openFileBtton.Text = "选择";
             this.openFileBtton.UseVisualStyleBackColor = true;
@@ -96,12 +111,27 @@
             // 
             this.groupBox1.Controls.Add(this.pager1);
             this.groupBox1.Controls.Add(this.listView1);
-            this.groupBox1.Location = new System.Drawing.Point(21, 58);
+            this.groupBox1.Location = new System.Drawing.Point(21, 54);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(841, 367);
+            this.groupBox1.Size = new System.Drawing.Size(841, 339);
             this.groupBox1.TabIndex = 16;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "系统内文件";
+            // 
+            // pager1
+            // 
+            this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pager1.AutoSize = true;
+            this.pager1.Location = new System.Drawing.Point(0, 302);
+            this.pager1.Name = "pager1";
+            this.pager1.NMax = 0;
+            this.pager1.PageCount = 0;
+            this.pager1.PageCurrent = 1;
+            this.pager1.PageSize = 300;
+            this.pager1.Size = new System.Drawing.Size(829, 31);
+            this.pager1.TabIndex = 16;
+            this.pager1.EventPaging += new DCTS.CustomComponents.EventPagingHandler(this.pager1_EventPaging);
             // 
             // bindingNavigator1
             // 
@@ -127,9 +157,9 @@
             // 
             // import
             // 
-            this.import.Location = new System.Drawing.Point(799, 27);
+            this.import.Location = new System.Drawing.Point(799, 25);
             this.import.Name = "import";
-            this.import.Size = new System.Drawing.Size(44, 25);
+            this.import.Size = new System.Drawing.Size(44, 23);
             this.import.TabIndex = 17;
             this.import.Text = "导入";
             this.import.UseVisualStyleBackColor = true;
@@ -139,9 +169,9 @@
             // 
             this.groupBox2.Controls.Add(this.noReplaceRadioButton);
             this.groupBox2.Controls.Add(this.replaceRadioButton);
-            this.groupBox2.Location = new System.Drawing.Point(491, 19);
+            this.groupBox2.Location = new System.Drawing.Point(491, 18);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(302, 38);
+            this.groupBox2.Size = new System.Drawing.Size(302, 35);
             this.groupBox2.TabIndex = 22;
             this.groupBox2.TabStop = false;
             // 
@@ -149,9 +179,9 @@
             // 
             this.noReplaceRadioButton.AutoSize = true;
             this.noReplaceRadioButton.Checked = true;
-            this.noReplaceRadioButton.Location = new System.Drawing.Point(167, 14);
+            this.noReplaceRadioButton.Location = new System.Drawing.Point(167, 13);
             this.noReplaceRadioButton.Name = "noReplaceRadioButton";
-            this.noReplaceRadioButton.Size = new System.Drawing.Size(109, 17);
+            this.noReplaceRadioButton.Size = new System.Drawing.Size(107, 16);
             this.noReplaceRadioButton.TabIndex = 19;
             this.noReplaceRadioButton.TabStop = true;
             this.noReplaceRadioButton.Text = "不覆盖存在图片";
@@ -160,47 +190,18 @@
             // replaceRadioButton
             // 
             this.replaceRadioButton.AutoSize = true;
-            this.replaceRadioButton.Location = new System.Drawing.Point(29, 14);
+            this.replaceRadioButton.Location = new System.Drawing.Point(29, 13);
             this.replaceRadioButton.Name = "replaceRadioButton";
-            this.replaceRadioButton.Size = new System.Drawing.Size(97, 17);
+            this.replaceRadioButton.Size = new System.Drawing.Size(95, 16);
             this.replaceRadioButton.TabIndex = 20;
             this.replaceRadioButton.Text = "覆盖存在图片";
             this.replaceRadioButton.UseVisualStyleBackColor = true;
             // 
-            // pager1
-            // 
-            this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pager1.AutoSize = true;
-            this.pager1.Location = new System.Drawing.Point(0, 327);
-            this.pager1.Name = "pager1";
-            this.pager1.NMax = 0;
-            this.pager1.PageCount = 0;
-            this.pager1.PageCurrent = 1;
-            this.pager1.PageSize = 300;
-            this.pager1.Size = new System.Drawing.Size(829, 34);
-            this.pager1.TabIndex = 16;
-            this.pager1.EventPaging += new DCTS.CustomComponents.EventPagingHandler(this.pager1_EventPaging);
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.deleteToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 48);
-            // 
-            // deleteToolStripMenuItem
-            // 
-            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.deleteToolStripMenuItem.Text = "删除此条";
-            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
-            // 
             // ImportSystemfile
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(874, 455);
+            this.ClientSize = new System.Drawing.Size(874, 420);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.import);
             this.Controls.Add(this.groupBox1);
@@ -214,12 +215,12 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "系统图片素材管理";
+            this.contextMenuStrip1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -241,6 +242,7 @@
         private System.Windows.Forms.RadioButton replaceRadioButton;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
 
     }
 }
