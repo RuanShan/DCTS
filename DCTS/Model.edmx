@@ -15,6 +15,7 @@
           <EntitySet Name="Schedules" EntityType="DctsModel.Store.Schedules" store:Type="Tables" Schema="dcts_dev" />
           <EntitySet Name="Suppliers" EntityType="DctsModel.Store.Suppliers" store:Type="Tables" Schema="dcts_dev" />
           <EntitySet Name="Tickets" EntityType="DctsModel.Store.Tickets" store:Type="Tables" Schema="dcts_dev" />
+          <EntitySet Name="TripCustomers" EntityType="DctsModel.Store.TripCustomers" store:Type="Tables" Schema="dcts_dev" />
           <EntitySet Name="TripDays" EntityType="DctsModel.Store.TripDays" store:Type="Tables" Schema="dcts_dev" />
           <EntitySet Name="Trips" EntityType="DctsModel.Store.Trips" store:Type="Tables" Schema="dcts_dev" />
           <AssociationSet Name="fk_customer" Association="DctsModel.Store.fk_customer">
@@ -32,6 +33,14 @@
           <AssociationSet Name="fk_supplier" Association="DctsModel.Store.fk_supplier">
             <End Role="Suppliers" EntitySet="Suppliers" />
             <End Role="Tickets" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tripcustomer_customer" Association="DctsModel.Store.fk_tripcustomer_customer">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="TripCustomers" EntitySet="TripCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tripcustomer_trip" Association="DctsModel.Store.fk_tripcustomer_trip">
+            <End Role="Trips" EntitySet="Trips" />
+            <End Role="TripCustomers" EntitySet="TripCustomers" />
           </AssociationSet>
           <AssociationSet Name="fk_tripday" Association="DctsModel.Store.fk_tripday">
             <End Role="TripDays" EntitySet="TripDays" />
@@ -178,6 +187,7 @@
           <Property Name="memo" Type="varchar" MaxLength="1024" />
           <Property Name="created_at" Type="datetime" />
           <Property Name="updated_at" Type="datetime" />
+          <Property Name="baggage_weight_limit" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="Tickets">
           <Key>
@@ -187,6 +197,7 @@
           <Property Name="daylocation_id" Type="int" Nullable="false" />
           <Property Name="customer_id" Type="int" Nullable="false" />
           <Property Name="supplier_id" Type="int" Nullable="false" />
+          <Property Name="trip_id" Type="int" Nullable="false" />
           <Property Name="title" Type="varchar" MaxLength="45" />
           <Property Name="num" Type="varchar" MaxLength="45" />
           <Property Name="route" Type="varchar" MaxLength="1024" />
@@ -204,6 +215,15 @@
           <Property Name="days" Type="int" />
           <Property Name="breakfirst" Type="varchar" MaxLength="45" />
           <Property Name="parking" Type="varchar" MaxLength="45" />
+          <Property Name="baggage_weight_limit" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="TripCustomers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="trip_id" Type="int" />
+          <Property Name="customer_id" Type="int" />
         </EntityType>
         <EntityType Name="TripDays">
           <Key>
@@ -280,6 +300,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_tripcustomer_customer">
+          <End Role="Customers" Type="DctsModel.Store.Customers" Multiplicity="0..1" />
+          <End Role="TripCustomers" Type="DctsModel.Store.TripCustomers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TripCustomers">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tripcustomer_trip">
+          <End Role="Trips" Type="DctsModel.Store.Trips" Multiplicity="0..1" />
+          <End Role="TripCustomers" Type="DctsModel.Store.TripCustomers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trips">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TripCustomers">
+              <PropertyRef Name="trip_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_tripday">
           <End Role="TripDays" Type="DctsModel.Store.TripDays" Multiplicity="1" />
           <End Role="Schedules" Type="DctsModel.Store.Schedules" Multiplicity="*" />
@@ -340,6 +384,15 @@
             <End Role="Supplier" EntitySet="Suppliers" />
             <End Role="Ticket" EntitySet="Tickets" />
           </AssociationSet>
+          <EntitySet Name="TripCustomers" EntityType="DctsModel.TripCustomer" />
+          <AssociationSet Name="fk_tripcustomer_customer" Association="DctsModel.fk_tripcustomer_customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="TripCustomer" EntitySet="TripCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tripcustomer_trip" Association="DctsModel.fk_tripcustomer_trip">
+            <End Role="Trip" EntitySet="Trips" />
+            <End Role="TripCustomer" EntitySet="TripCustomers" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Trip">
           <Key>
@@ -356,6 +409,7 @@
           <Property Type="DateTime" Name="start_at" />
           <Property Type="DateTime" Name="end_at" />
           <Property Type="Int32" Name="cover_id" Nullable="false" />
+          <NavigationProperty Name="TripCustomers" Relationship="DctsModel.fk_tripcustomer_trip" FromRole="Trip" ToRole="TripCustomer" />
         </EntityType>
         <EntityType Name="City">
           <Key>
@@ -538,6 +592,7 @@
           <Property Type="DateTime" Name="created_at" Nullable="false" />
           <Property Type="DateTime" Name="updated_at" />
           <NavigationProperty Name="Tickets" Relationship="DctsModel.fk_customer" FromRole="Customer" ToRole="Ticket" />
+          <NavigationProperty Name="TripCustomers" Relationship="DctsModel.fk_tripcustomer_customer" FromRole="Customer" ToRole="TripCustomer" />
         </EntityType>
         <EntityType Name="LocationImage">
           <Key>
@@ -588,6 +643,7 @@
           <Property Type="DateTime" Name="created_at" />
           <Property Type="DateTime" Name="updated_at" />
           <NavigationProperty Name="Tickets" Relationship="DctsModel.fk_supplier" FromRole="Supplier" ToRole="Ticket" />
+          <Property Type="String" Name="baggage_weight_limit" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Ticket">
           <Key>
@@ -616,6 +672,8 @@
           <Property Type="Int32" Name="days" />
           <Property Type="String" Name="breakfirst" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="parking" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="baggage_weight_limit" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="trip_id" Nullable="false" />
         </EntityType>
         <Association Name="fk_customer">
           <End Type="DctsModel.Customer" Role="Customer" Multiplicity="1" />
@@ -650,6 +708,40 @@
             </Principal>
             <Dependent Role="Ticket">
               <PropertyRef Name="supplier_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TripCustomer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="trip_id" />
+          <Property Type="Int32" Name="customer_id" />
+          <NavigationProperty Name="Customer" Relationship="DctsModel.fk_tripcustomer_customer" FromRole="TripCustomer" ToRole="Customer" />
+          <NavigationProperty Name="Trip" Relationship="DctsModel.fk_tripcustomer_trip" FromRole="TripCustomer" ToRole="Trip" />
+        </EntityType>
+        <Association Name="fk_tripcustomer_customer">
+          <End Type="DctsModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="DctsModel.TripCustomer" Role="TripCustomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TripCustomer">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tripcustomer_trip">
+          <End Type="DctsModel.Trip" Role="Trip" Multiplicity="0..1" />
+          <End Type="DctsModel.TripCustomer" Role="TripCustomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trip">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TripCustomer">
+              <PropertyRef Name="trip_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -826,6 +918,7 @@
           <EntitySetMapping Name="Suppliers">
             <EntityTypeMapping TypeName="DctsModel.Supplier">
               <MappingFragment StoreEntitySet="Suppliers">
+                <ScalarProperty Name="baggage_weight_limit" ColumnName="baggage_weight_limit" />
                 <ScalarProperty Name="updated_at" ColumnName="updated_at" />
                 <ScalarProperty Name="created_at" ColumnName="created_at" />
                 <ScalarProperty Name="memo" ColumnName="memo" />
@@ -840,6 +933,8 @@
           <EntitySetMapping Name="Tickets">
             <EntityTypeMapping TypeName="DctsModel.Ticket">
               <MappingFragment StoreEntitySet="Tickets">
+                <ScalarProperty Name="trip_id" ColumnName="trip_id" />
+                <ScalarProperty Name="baggage_weight_limit" ColumnName="baggage_weight_limit" />
                 <ScalarProperty Name="parking" ColumnName="parking" />
                 <ScalarProperty Name="breakfirst" ColumnName="breakfirst" />
                 <ScalarProperty Name="days" ColumnName="days" />
@@ -860,6 +955,15 @@
                 <ScalarProperty Name="supplier_id" ColumnName="supplier_id" />
                 <ScalarProperty Name="customer_id" ColumnName="customer_id" />
                 <ScalarProperty Name="daylocation_id" ColumnName="daylocation_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TripCustomers">
+            <EntityTypeMapping TypeName="DctsModel.TripCustomer">
+              <MappingFragment StoreEntitySet="TripCustomers">
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="trip_id" ColumnName="trip_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -27,6 +27,7 @@ namespace DCTS
         public string memo { get; set; }
         public Nullable<System.DateTime> created_at { get; set; }
         public Nullable<System.DateTime> updated_at { get; set; }
+        public string baggage_weight_limit { get; set; }
     
         public virtual ICollection<Ticket> Tickets { get; set; }
     }

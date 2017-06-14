@@ -18,6 +18,7 @@ namespace DCTS
         {
             this.DayLocations = new HashSet<DayLocation>();
             this.TripDays = new HashSet<TripDay>();
+            this.TripCustomers = new HashSet<TripCustomer>();
         }
     
         public int id { get; set; }
@@ -32,5 +33,6 @@ namespace DCTS
     
         public virtual ICollection<DayLocation> DayLocations { get; set; }
         public virtual ICollection<TripDay> TripDays { get; set; }
+        public virtual ICollection<TripCustomer> TripCustomers { get; set; }
     }
 }
