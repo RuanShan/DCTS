@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DCTS.Uti;
+using DCTS.CustomComponents;
 
 namespace DCTS.UI
 {
@@ -24,19 +25,21 @@ namespace DCTS.UI
         NationsControl nationsControl;
         AirportControl airportControl;
         OtherControl otherControl;
+        ActivityControl activityControl;
+        ImportSystemfile importSystemfile;
         public TripsManagementControl()
         {
             InitializeComponent();
 
             InitUserControls();
-            
-         }
+
+        }
 
         private void InitUserControls()
         {
 
             //LogHelper.WriteLog("Start initialize main control");
-             
+
             editTripControl = new EditTripDaysControl();
             editTripControl.Dock = DockStyle.Fill;
             this.editTripControl.CommandRequestEvent += new EventHandler(OnCommandRequest);
@@ -46,7 +49,7 @@ namespace DCTS.UI
 
             this.editCustomerTripControl.CommandRequestEvent += new EventHandler(OnCommandRequest);
 
-            
+
 
             bookToolStripMenuItem_Click(this, new EventArgs());
         }
@@ -57,7 +60,7 @@ namespace DCTS.UI
             {
                 scenicsControl = new ScenicsControl();
                 scenicsControl.Dock = DockStyle.Fill;
-             }
+            }
             this.scenicsControl.BeginActive();
             this.mainPanel.Controls.Clear();
             this.mainPanel.Controls.Add(scenicsControl);
@@ -104,7 +107,7 @@ namespace DCTS.UI
                 this.mainPanel.Controls.Clear();
                 this.mainPanel.Controls.Add(bookControl);
             }
-            
+
 
             if (commandEventArgs.Command == CommandRequestEnum.EditCustomerTripDays)
             {
@@ -114,13 +117,13 @@ namespace DCTS.UI
                 editCustomerTripControl.BeginActive();
             }
 
-            
+
 
             Console.WriteLine("Sub1 receives the OnCommandRequest event.");
-        } 
+        }
 
 
-        
+
         private void dinningsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (dinningsControl == null)
@@ -173,7 +176,7 @@ namespace DCTS.UI
 
         }
 
-        
+
         private void NationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (nationsControl == null)
@@ -198,7 +201,7 @@ namespace DCTS.UI
             this.mainPanel.Controls.Clear();
             this.mainPanel.Controls.Add(otherControl);
 
-            
+
         }
 
         private void airportToolStripMenuItem_Click(object sender, EventArgs e)
@@ -211,6 +214,34 @@ namespace DCTS.UI
             this.airportControl.BeginActive();
             this.mainPanel.Controls.Clear();
             this.mainPanel.Controls.Add(airportControl);
+        }
+
+        private void activityToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (activityControl == null)
+            {
+                activityControl = new ActivityControl();
+                activityControl.Dock = DockStyle.Fill;
+            }
+            this.activityControl.BeginActive();
+            this.mainPanel.Controls.Clear();
+            this.mainPanel.Controls.Add(activityControl);
+
+
+        }
+
+        private void imagesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (importSystemfile == null)
+            {
+                importSystemfile = new ImportSystemfile();
+                importSystemfile.Dock = DockStyle.Fill;
+            }
+            this.importSystemfile.BeginActive();
+            this.mainPanel.Controls.Clear();
+            this.mainPanel.Controls.Add(importSystemfile);
+
+
         }
 
     }

@@ -155,6 +155,9 @@ namespace DCTS.CustomComponents
 
             this.listView1.Columns.Add("文件", 5200, HorizontalAlignment.Left); //一步添加 
             listView1.LargeImageList = imageListSmall;
+            //new size 
+            listView1.Bounds = new Rectangle(new Point(10, 10), new Size(300, 200));
+
             //ListFiles(new DirectoryInfo(strFileName));
             this.listView1.BeginUpdate();   //数据更新，UI暂时挂起，直到EndUpdate绘制控件，可以有效避免闪烁并大大提高加载速度  
             i = 0;

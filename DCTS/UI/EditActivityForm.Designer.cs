@@ -1,6 +1,6 @@
 ﻿namespace DCTS.UI
 {
-    partial class EditScenicForm
+    partial class EditActivityForm
     {
         /// <summary>
         /// Required designer variable.
@@ -31,12 +31,9 @@
             this.components = new System.ComponentModel.Container();
             this.cancelButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.scenicFormControl1 = new DCTS.UI.ScenicFormControl();
             this.label2 = new System.Windows.Forms.Label();
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
-            this.scenicFormControl2 = new DCTS.UI.ScenicFormControl();
-            this.panel1.SuspendLayout();
+            this.activityFormControl1 = new DCTS.UI.ActivityFormControl();
             this.SuspendLayout();
             // 
             // cancelButton
@@ -61,26 +58,6 @@
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.scenicFormControl2);
-            this.panel1.Controls.Add(this.scenicFormControl1);
-            this.panel1.Location = new System.Drawing.Point(27, 70);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(636, 375);
-            this.panel1.TabIndex = 5;
-            // 
-            // scenicFormControl1
-            // 
-            this.scenicFormControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scenicFormControl1.Location = new System.Drawing.Point(0, 0);
-            this.scenicFormControl1.Name = "scenicFormControl1";
-            this.scenicFormControl1.Size = new System.Drawing.Size(636, 375);
-            this.scenicFormControl1.TabIndex = 0;
-            // 
             // label2
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -90,34 +67,32 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(671, 44);
             this.label2.TabIndex = 4;
-            this.label2.Text = "编辑景点";
+            this.label2.Text = "编辑活动";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // entityDataSource1
             // 
             this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
             // 
-            // scenicFormControl2
+            // activityFormControl1
             // 
-            this.scenicFormControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scenicFormControl2.Location = new System.Drawing.Point(0, 0);
-            this.scenicFormControl2.Name = "scenicFormControl2";
-            this.scenicFormControl2.Size = new System.Drawing.Size(636, 375);
-            this.scenicFormControl2.TabIndex = 1;
+            this.activityFormControl1.Location = new System.Drawing.Point(17, 50);
+            this.activityFormControl1.Name = "activityFormControl1";
+            this.activityFormControl1.Size = new System.Drawing.Size(643, 407);
+            this.activityFormControl1.TabIndex = 16;
             // 
-            // EditScenicForm
+            // EditActivityForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(695, 525);
+            this.Controls.Add(this.activityFormControl1);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.saveButton);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.label2);
-            this.Name = "EditScenicForm";
-            this.Text = "编辑景点";
+            this.Name = "EditActivityForm";
+            this.Text = "编辑活动";
             this.Load += new System.EventHandler(this.EditScenicForm_Load);
-            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -125,11 +100,9 @@
         #endregion
 
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button saveButton;
-        private ScenicFormControl scenicFormControl1;
         private CustomComponents.EntityDataSource entityDataSource1;
-        private ScenicFormControl scenicFormControl2;
+        private ActivityFormControl activityFormControl1;
     }
 }

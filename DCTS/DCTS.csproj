@@ -453,6 +453,30 @@
     <Compile Include="UI\NewScheduleForm.Designer.cs">
       <DependentUpon>NewScheduleForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\ActivityControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\ActivityControl.Designer.cs">
+      <DependentUpon>ActivityControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ActivityFormControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\ActivityFormControl.Designer.cs">
+      <DependentUpon>ActivityFormControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\NewActivityForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\NewActivityForm.Designer.cs">
+      <DependentUpon>NewActivityForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\EditActivityForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\EditActivityForm.Designer.cs">
+      <DependentUpon>EditActivityForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Uti\EFIntercepterLogging.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -652,6 +676,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\NewScheduleForm.resx">
       <DependentUpon>NewScheduleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ActivityControl.resx">
+      <DependentUpon>ActivityControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ActivityFormControl.resx">
+      <DependentUpon>ActivityFormControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\NewActivityForm.resx">
+      <DependentUpon>NewActivityForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\EditActivityForm.resx">
+      <DependentUpon>EditActivityForm.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
