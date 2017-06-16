@@ -1,42 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Data.Entity.Validation;
 using System.Drawing;
-using System.Globalization;
-using System.IO;
+using System.Data;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ComLib;
-using ComLib.CsvParse;
-using DCTS.Bus;
+using System.Data.Entity;
+using DCTS.CustomComponents;
+using System.Collections;
 using DCTS.DB;
+using MySql.Data.MySqlClient;
+using System.IO;
 using DCTS.Uti;
+using DCTS.Bus;
+using NPOI.XWPF.UserModel;
+using NPOI.OpenXmlFormats.Wordprocessing;
+using NPOI.OpenXmlFormats.Dml.WordProcessing;
+using NPOI.OpenXmlFormats.Dml;
+using System.Configuration;
+using ComLib.Models;
+using System.Reflection;
 
-namespace DCTS.CustomComponents
+namespace DCTS.UI
 {
-    public partial class ImportSystemfile : Form
+    public partial class ImportSystemfiles : UserControl
     {
-        public List<string> listfile = new List<string>();
-        List<LocationImage> listpage;
-        public string strFileName = String.Empty;
-        public ImportSystemfile()
+        List<string> listfile = new List<string>();
+        string strFileName = String.Empty;
+
+        public ImportSystemfiles()
         {
             InitializeComponent();
             pager1.PageCurrent = 1;
             BeginActive();
-
-        }
-        public void BeginActive()
-        {
-            this.listView1.Clear();  //从控件中移除所有项和列（包括列表头）。
-
-            pager1.Bind();
-
         }
         private void openFileBtton_Click_1(object sender, EventArgs e)
         {
@@ -46,12 +44,8 @@ namespace DCTS.CustomComponents
             {
                 strFileName = openFileDialog1.FileName;
                 pathTextBox.Text = strFileName;
-
             }
-
         }
-
-
         private void import_Click(object sender, EventArgs e)
         {
             if (strFileName.Length > 0)
@@ -127,12 +121,16 @@ namespace DCTS.CustomComponents
 
         }
 
+
+        private void ImportSystemfiles_Resize(object sender, EventArgs e)
+        {
+        
+        }
         private void imagedockin(List<LocationImage> list)
         {
             ImageList imageListSmall = new ImageList();
             int i = 0;
-            //string[] fs = openFileDialog1.FileNames;
-            //foreach (string ff in fs)
+   
             foreach (LocationImage item in list)
             {
 
@@ -142,29 +140,21 @@ namespace DCTS.CustomComponents
 
                     imageListSmall.Images.Add(Bitmap.FromFile(ImageLocation));
                 }
-                // imageListSmall.Images.Add(Bitmap.FromFile(fs[i]));
-
-                //ListViewItem lvi = new ListViewItem();
-                //this.listView1.SmallImageList = file.FullName;
-                //lvi.Text = new FileInfo(ff).Name;
-                //this.listView1.Items.Add(lvi);  
-                //listBox1.Items.Add(new FileInfo(ff).Name);
+            
                 i++;
             }
             #region 绑定数据图片
             this.listView1.View = View.LargeIcon;
-            listView1.CheckBoxes = true;
 
             this.listView1.Columns.Add("文件", 5200, HorizontalAlignment.Left); //一步添加 
             listView1.LargeImageList = imageListSmall;
             //new size 
-            listView1.Bounds = new Rectangle(new Point(10, 10), new Size(300, 200));
-
-            //ListFiles(new DirectoryInfo(strFileName));
+            // listView1.Bounds = new Rectangle(new Point(10, 10), new Size(300, 200));
+            listView1.CheckBoxes = true;
+         
             this.listView1.BeginUpdate();   //数据更新，UI暂时挂起，直到EndUpdate绘制控件，可以有效避免闪烁并大大提高加载速度  
             i = 0;
-            //fs = openFileDialog1.FileNames;
-            //foreach (string ff in fs)
+          
             foreach (LocationImage item in list)
             {
                 ListViewItem lvi = new ListViewItem();
@@ -183,7 +173,6 @@ namespace DCTS.CustomComponents
             #endregion
         }
 
-
         private int InitializeDataGridView(int pageCurrent = 1)
         {
             string title = "";
@@ -197,10 +186,8 @@ namespace DCTS.CustomComponents
                 var location = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.PageImage).First();
 
                 count = Count(location.id, title);
-                listpage = new List<LocationImage>();
-                var list = Paginate(pageCurrent, pageSize, title);
-                listpage = list;
 
+                var list = Paginate(pageCurrent, pageSize, title);
                 imagedockin(list);
 
             }
@@ -261,8 +248,6 @@ namespace DCTS.CustomComponents
         {
             int count = InitializeDataGridView(e.PageCurrent);
             return count;
-
-
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -289,31 +274,13 @@ namespace DCTS.CustomComponents
                 }
             }
         }
-
-        private void listView1_ItemChecked(object sender, ItemCheckedEventArgs e)
+        public void BeginActive()
         {
-      
-        }
+            this.listView1.Clear();  //从控件中移除所有项和列（包括列表头）。
 
-        private void listView1_DoubleClick(object sender, EventArgs e)
-        {
-            listfile = new List<string>();
-            string item = this.listView1.SelectedItems[0].Text;
-            if (this.listView1.CheckedItems.Count > 0)
-            {
-                strFileName = this.listView1.SelectedItems[0].Text;
-                string ImageLocation = EntityPathConfig.newlocationimagepath(listpage[this.listView1.SelectedItems[0].StateImageIndex - 1]);
-                listfile.Add(strFileName);
-                listfile.Add(ImageLocation);
-                this.Close();
-
-            }
-        }
-        public void FillModelByForm(Trip trip)
-        {
+            pager1.Bind();
 
         }
-
 
     }
 }

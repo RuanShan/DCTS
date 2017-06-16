@@ -26,7 +26,7 @@ namespace DCTS.UI
         AirportControl airportControl;
         OtherControl otherControl;
         ActivityControl activityControl;
-        ImportSystemfile importSystemfile;
+        ImportSystemfiles importSystemfile;
         public TripsManagementControl()
         {
             InitializeComponent();
@@ -234,7 +234,7 @@ namespace DCTS.UI
         {
             if (importSystemfile == null)
             {
-                importSystemfile = new ImportSystemfile();
+                importSystemfile = new ImportSystemfiles();
                 importSystemfile.Dock = DockStyle.Fill;
             }
             this.importSystemfile.BeginActive();

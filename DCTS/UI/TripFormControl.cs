@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DCTS.CustomComponents;
+using DCTS.DB;
 
 namespace DCTS.UI
 {
@@ -22,7 +24,16 @@ namespace DCTS.UI
             trip.title = this.titleTextBox.Text;
             trip.days = Convert.ToInt32(this.daysNumericUpDown.Value);
 
-            trip.memo = this.memoTextBox.Text;             
+            trip.memo = this.memoTextBox.Text;
+         
+            using (var ctx = new DctsEntities())
+            {
+                var location = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.PageImage).First();
+
+                var query = ctx.LocationImages.Where(o => o.location_id == (int)location.id && o.name == imgPathTextBox.Text);
+                List<LocationImage> list = query.ToList();
+                trip.cover_id = list[0].id;
+            }
         }
 
         public void FillFormByModel(Trip trip)
@@ -31,6 +42,24 @@ namespace DCTS.UI
             this.titleTextBox.Text = trip.title;
             this.daysNumericUpDown.Value = trip.days;
             this.memoTextBox.Text = trip.memo;
+        }
+
+        private void findFileButton_Click(object sender, EventArgs e)
+        {
+            var form = new ImportSystemfile();
+            form.ShowDialog();
+
+
+            //if (form.ShowDialog() == DialogResult.Yes)
+            {
+                List<string> reference = form.listfile;
+                imgPathTextBox.Text = reference[0];
+
+                pictureBox1.ImageLocation = reference[1];
+
+
+
+            }
         }
     }
 }

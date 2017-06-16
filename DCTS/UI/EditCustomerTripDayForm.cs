@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DCTS.DB;
 
 namespace DCTS.UI
 {
@@ -64,6 +65,13 @@ namespace DCTS.UI
             Model.title = this.titleTextBox.Text;
 
             Model.tips = this.tipsTextBox.Text;
+            using (var ctx = new DctsEntities())
+            {
+                var location = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.PageImage).First();
+                var query = ctx.LocationImages.Where(o => o.location_id == (int)location.id && o.name == imgPathTextBox.Text);
+                List<LocationImage> list = query.ToList();
+                Model.cover_id = list[0].id;
+            }
             Model = tripDay;
             //  trip.schedule = this.scheduleTextBox.Text;
         }
@@ -149,6 +157,17 @@ namespace DCTS.UI
                     this.bindingSource1.Position = idx + 1;
                     this.scheduleDataGridView.Refresh();
                 }
+            }
+        }
+
+        private void findFileButton_Click(object sender, EventArgs e)
+        {
+            var form = new ImportSystemfile();
+            form.ShowDialog();         
+            {
+                List<string> reference = form.listfile;
+                imgPathTextBox.Text = reference[0];
+                pictureBox1.ImageLocation = reference[1];
             }
         }
     }

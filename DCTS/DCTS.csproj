@@ -477,6 +477,12 @@
     <Compile Include="UI\EditActivityForm.Designer.cs">
       <DependentUpon>EditActivityForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\ImportSystemfiles.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\ImportSystemfiles.Designer.cs">
+      <DependentUpon>ImportSystemfiles.cs</DependentUpon>
+    </Compile>
     <Compile Include="Uti\EFIntercepterLogging.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -688,6 +694,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\EditActivityForm.resx">
       <DependentUpon>EditActivityForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ImportSystemfiles.resx">
+      <DependentUpon>ImportSystemfiles.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
