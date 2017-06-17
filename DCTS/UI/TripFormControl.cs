@@ -25,7 +25,7 @@ namespace DCTS.UI
             trip.days = Convert.ToInt32(this.daysNumericUpDown.Value);
 
             trip.memo = this.memoTextBox.Text;
-         
+
             using (var ctx = new DctsEntities())
             {
                 var location = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.PageImage).First();
@@ -46,17 +46,19 @@ namespace DCTS.UI
 
         private void findFileButton_Click(object sender, EventArgs e)
         {
-            var form = new ImportSystemfile();
+            var form = new SelectSystemfile();
             form.ShowDialog();
 
 
             //if (form.ShowDialog() == DialogResult.Yes)
             {
                 List<string> reference = form.listfile;
-                imgPathTextBox.Text = reference[0];
+                if (reference.Count > 0)
+                {
+                    imgPathTextBox.Text = reference[0];
 
-                pictureBox1.ImageLocation = reference[1];
-
+                    pictureBox1.ImageLocation = reference[1];
+                }
 
 
             }

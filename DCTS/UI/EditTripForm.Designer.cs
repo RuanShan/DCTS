@@ -109,6 +109,7 @@
             this.tripFormControl1.Name = "tripFormControl1";
             this.tripFormControl1.Size = new System.Drawing.Size(526, 311);
             this.tripFormControl1.TabIndex = 15;
+            this.tripFormControl1.Load += new System.EventHandler(this.tripFormControl1_Load);
             // 
             // entityDataSource1
             // 

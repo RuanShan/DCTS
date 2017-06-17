@@ -38,6 +38,11 @@ namespace DCTS.UI
             this.tripFormControl1.daysNumericUpDown.ReadOnly = true;
         }
 
+        private void tripFormControl1_Load(object sender, EventArgs e)
+        {
+
+        }
+
 
        
     }

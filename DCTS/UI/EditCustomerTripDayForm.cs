@@ -162,12 +162,15 @@ namespace DCTS.UI
 
         private void findFileButton_Click(object sender, EventArgs e)
         {
-            var form = new ImportSystemfile();
+            var form = new SelectSystemfile();
             form.ShowDialog();         
             {
                 List<string> reference = form.listfile;
-                imgPathTextBox.Text = reference[0];
-                pictureBox1.ImageLocation = reference[1];
+                if (reference.Count > 0)
+                {
+                    imgPathTextBox.Text = reference[0];
+                    pictureBox1.ImageLocation = reference[1];
+                }
             }
         }
     }
