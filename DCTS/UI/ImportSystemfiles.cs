@@ -121,11 +121,11 @@ namespace DCTS.UI
 
         }
 
-
         private void ImportSystemfiles_Resize(object sender, EventArgs e)
         {
 
         }
+
         private void imagedockin(List<LocationImage> list)
         {
             ImageList imageListSmall = new ImageList();
