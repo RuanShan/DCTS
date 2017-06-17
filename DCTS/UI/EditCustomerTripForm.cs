@@ -1,4 +1,5 @@
-﻿using DCTS.CustomComponents;
+﻿using DCTS.Bus;
+using DCTS.CustomComponents;
 using DCTS.DB;
 using DCTS.Uti;
 using Equin.ApplicationFramework;
@@ -22,6 +23,7 @@ namespace DCTS.UI
         List<Ticket> deletedTicketList;
         List<Customer> customerList;
         List<Nation> nationList;
+        private List<ComboLocation> airportList;
 
         SupplierEnum supplierType;
         private BindingListView<Ticket> ticketView;
@@ -62,7 +64,10 @@ namespace DCTS.UI
 
             //行程客户
             this.customerList = this.trip.TripCustomers.Select(o => o.Customer).ToList();
+            string countryNames = this.trip.countries != null ? this.trip.countries : string.Empty;
+            this.nationList = GlobalCache.NationList.Where(o => countryNames.Contains(o.title)).ToList();
 
+            airportList = ComboLoactionBusiness.TypedLocation(ctx, ComboLocationEnum.Airport);
 
             SetTicketDateGridViewDataSource();
         }
@@ -80,6 +85,32 @@ namespace DCTS.UI
         {
             ticketView = new BindingListView<Ticket>(this.ticketList);
             //行程客户
+     
+            //this.flightCustomerBindingSource.DataSource = this.customerList;
+            this.flightCustomerColumn.DisplayMember = "name";
+            this.flightCustomerColumn.ValueMember = "id";
+            this.flightCustomerColumn.DataSource = this.customerList;
+
+            this.hotelCustomerColumn.DisplayMember = "name";
+            this.hotelCustomerColumn.ValueMember = "id";
+            this.hotelCustomerColumn.DataSource = this.customerList;
+       
+            var names = nationList.Select(o => o.title).ToArray();
+            var airports = airportList.Where(o => names.Contains(o.nation)).ToList();
+            airports.Insert(0, new ComboLocation() { id = 0, title = "请选择机场" });
+            this.fromAirportColumn.DisplayMember = "title";
+            this.fromAirportColumn.ValueMember = "id";
+            this.fromAirportColumn.DataSource = airports;
+            this.toAirportColumn.DisplayMember = "title";
+            this.toAirportColumn.ValueMember = "id";
+            this.toAirportColumn.DataSource = airports;
+
+
+            //飞机
+            flightSupplierColumn.DisplayMember = "name";
+            flightSupplierColumn.ValueMember = "id";
+            flightSupplierColumn.DataSource = GetSuppliersByType(SupplierEnum.Flight);
+
 
             var view = ticketView;
             SetTicketViewFilter();
@@ -90,12 +121,6 @@ namespace DCTS.UI
             this.RentalGridView.DataSource = view;
             this.WIFIGridView.DataSource = view;
             this.activityDataGridView.DataSource = view;
-
-            //飞机
-            flightSupplierColumn.DisplayMember = "name";
-            flightSupplierColumn.ValueMember = "id";
-            flightSupplierColumn.DataSource = GetSuppliersByType(SupplierEnum.Flight);
-
 
         }
 
@@ -209,7 +234,8 @@ namespace DCTS.UI
             ctx.Tickets.RemoveRange(deletedTicketList.Where(o=>o.id>0).ToArray());
             
             ctx.SaveChanges();
-
+            deletedTicketList.Clear();
+            MessageHelper.InfoBox("成功保存！");
         }
 
         private DataGridView GetDataGridViewBySupplierType()

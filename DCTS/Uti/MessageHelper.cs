@@ -25,5 +25,9 @@ namespace DCTS.Uti
             return MessageBox.Show(msg, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
+        public static DialogResult InfoBox(string msg)
+        {
+            return MessageBox.Show(msg, "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }

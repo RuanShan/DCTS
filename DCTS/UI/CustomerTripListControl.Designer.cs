@@ -29,10 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.addTripButton = new System.Windows.Forms.Button();
             this.tripDataGridView = new System.Windows.Forms.DataGridView();
+            this.exportWordButton = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.downloadButton = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
+            this.fullEditButton = new System.Windows.Forms.Button();
             this.IdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.daysColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tripTitleColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,12 +48,6 @@
             this.editTripColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.copyTripColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.deleteTripColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.exportWordButton = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.downloadButton = new System.Windows.Forms.Button();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
-            this.fullEditButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tripDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -81,92 +81,25 @@
             this.editTripColumn1,
             this.copyTripColumn1,
             this.deleteTripColumn1});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.tripDataGridView.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.tripDataGridView.DefaultCellStyle = dataGridViewCellStyle1;
             this.tripDataGridView.Location = new System.Drawing.Point(9, 53);
             this.tripDataGridView.Name = "tripDataGridView";
             this.tripDataGridView.RowHeadersVisible = false;
-            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
-            this.tripDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            this.tripDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.tripDataGridView.RowTemplate.Height = 34;
             this.tripDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.tripDataGridView.Size = new System.Drawing.Size(864, 289);
             this.tripDataGridView.TabIndex = 3;
             this.tripDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tripDataGridView_CellContentClick);
-            // 
-            // IdColumn
-            // 
-            this.IdColumn.DataPropertyName = "id";
-            this.IdColumn.HeaderText = "ID";
-            this.IdColumn.Name = "IdColumn";
-            this.IdColumn.Width = 80;
-            // 
-            // daysColumn1
-            // 
-            this.daysColumn1.DataPropertyName = "days";
-            this.daysColumn1.HeaderText = "天数";
-            this.daysColumn1.Name = "daysColumn1";
-            this.daysColumn1.Width = 80;
-            // 
-            // tripTitleColumn1
-            // 
-            this.tripTitleColumn1.DataPropertyName = "title";
-            this.tripTitleColumn1.HeaderText = "名称";
-            this.tripTitleColumn1.Name = "tripTitleColumn1";
-            this.tripTitleColumn1.Width = 300;
-            // 
-            // tripMemoColumn1
-            // 
-            this.tripMemoColumn1.DataPropertyName = "memo";
-            this.tripMemoColumn1.HeaderText = "备注";
-            this.tripMemoColumn1.Name = "tripMemoColumn1";
-            this.tripMemoColumn1.Width = 260;
-            // 
-            // wordCreatedAtColumn
-            // 
-            this.wordCreatedAtColumn.DataPropertyName = "word_created_at";
-            this.wordCreatedAtColumn.HeaderText = "路书生成时间";
-            this.wordCreatedAtColumn.Name = "wordCreatedAtColumn";
-            this.wordCreatedAtColumn.Width = 120;
-            // 
-            // editTripDaysColumn1
-            // 
-            this.editTripDaysColumn1.HeaderText = " ";
-            this.editTripDaysColumn1.Name = "editTripDaysColumn1";
-            this.editTripDaysColumn1.Text = "设置";
-            this.editTripDaysColumn1.UseColumnTextForButtonValue = true;
-            this.editTripDaysColumn1.Width = 60;
-            // 
-            // editTripColumn1
-            // 
-            this.editTripColumn1.HeaderText = "";
-            this.editTripColumn1.Name = "editTripColumn1";
-            this.editTripColumn1.Text = "编辑";
-            this.editTripColumn1.UseColumnTextForButtonValue = true;
-            this.editTripColumn1.Width = 60;
-            // 
-            // copyTripColumn1
-            // 
-            this.copyTripColumn1.HeaderText = " ";
-            this.copyTripColumn1.Name = "copyTripColumn1";
-            this.copyTripColumn1.Text = "复制";
-            this.copyTripColumn1.UseColumnTextForButtonValue = true;
-            this.copyTripColumn1.Width = 60;
-            // 
-            // deleteTripColumn1
-            // 
-            this.deleteTripColumn1.HeaderText = " ";
-            this.deleteTripColumn1.Name = "deleteTripColumn1";
-            this.deleteTripColumn1.Text = "删除";
-            this.deleteTripColumn1.UseColumnTextForButtonValue = true;
-            this.deleteTripColumn1.Width = 60;
             // 
             // exportWordButton
             // 
@@ -219,6 +152,73 @@
             this.fullEditButton.UseVisualStyleBackColor = true;
             this.fullEditButton.Click += new System.EventHandler(this.fullEditButton_Click);
             // 
+            // IdColumn
+            // 
+            this.IdColumn.DataPropertyName = "id";
+            this.IdColumn.HeaderText = "ID";
+            this.IdColumn.Name = "IdColumn";
+            this.IdColumn.Width = 80;
+            // 
+            // daysColumn1
+            // 
+            this.daysColumn1.DataPropertyName = "days";
+            this.daysColumn1.HeaderText = "天数";
+            this.daysColumn1.Name = "daysColumn1";
+            this.daysColumn1.Width = 80;
+            // 
+            // tripTitleColumn1
+            // 
+            this.tripTitleColumn1.DataPropertyName = "title";
+            this.tripTitleColumn1.HeaderText = "名称";
+            this.tripTitleColumn1.Name = "tripTitleColumn1";
+            this.tripTitleColumn1.Width = 300;
+            // 
+            // tripMemoColumn1
+            // 
+            this.tripMemoColumn1.DataPropertyName = "memo";
+            this.tripMemoColumn1.HeaderText = "备注";
+            this.tripMemoColumn1.Name = "tripMemoColumn1";
+            this.tripMemoColumn1.Width = 260;
+            // 
+            // wordCreatedAtColumn
+            // 
+            this.wordCreatedAtColumn.DataPropertyName = "word_created_at";
+            this.wordCreatedAtColumn.HeaderText = "路书生成时间";
+            this.wordCreatedAtColumn.Name = "wordCreatedAtColumn";
+            this.wordCreatedAtColumn.Width = 120;
+            // 
+            // editTripDaysColumn1
+            // 
+            this.editTripDaysColumn1.HeaderText = " ";
+            this.editTripDaysColumn1.Name = "editTripDaysColumn1";
+            this.editTripDaysColumn1.Text = "详细";
+            this.editTripDaysColumn1.UseColumnTextForButtonValue = true;
+            this.editTripDaysColumn1.Width = 60;
+            // 
+            // editTripColumn1
+            // 
+            this.editTripColumn1.HeaderText = "";
+            this.editTripColumn1.Name = "editTripColumn1";
+            this.editTripColumn1.Text = "编辑";
+            this.editTripColumn1.UseColumnTextForButtonValue = true;
+            this.editTripColumn1.Width = 60;
+            // 
+            // copyTripColumn1
+            // 
+            this.copyTripColumn1.HeaderText = " ";
+            this.copyTripColumn1.Name = "copyTripColumn1";
+            this.copyTripColumn1.Text = "复制";
+            this.copyTripColumn1.UseColumnTextForButtonValue = true;
+            this.copyTripColumn1.Width = 60;
+            // 
+            // deleteTripColumn1
+            // 
+            this.deleteTripColumn1.HeaderText = " ";
+            this.deleteTripColumn1.Name = "deleteTripColumn1";
+            this.deleteTripColumn1.Text = "删除";
+            this.deleteTripColumn1.UseColumnTextForButtonValue = true;
+            this.deleteTripColumn1.Width = 60;
+            // 
             // CustomerTripListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -246,6 +246,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button downloadButton;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private CustomComponents.EntityDataSource entityDataSource1;
+        private System.Windows.Forms.Button fullEditButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn daysColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn tripTitleColumn1;
@@ -255,7 +257,5 @@
         private System.Windows.Forms.DataGridViewButtonColumn editTripColumn1;
         private System.Windows.Forms.DataGridViewButtonColumn copyTripColumn1;
         private System.Windows.Forms.DataGridViewButtonColumn deleteTripColumn1;
-        private CustomComponents.EntityDataSource entityDataSource1;
-        private System.Windows.Forms.Button fullEditButton;
     }
 }

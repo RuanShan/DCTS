@@ -56,7 +56,7 @@ namespace DCTS.UI
 
             bindingSource1.DataSource = this.scheduleList;
             this.scheduleDataGridView.DataSource = bindingSource1;
-            
+
             return 0;
         }
 
@@ -81,6 +81,18 @@ namespace DCTS.UI
             Model = tripDay;
             this.titleTextBox.Text = Model.title;
             this.tipsTextBox.Text = Model.tips;
+
+            //读取图片位置
+            using (var ctx = new DctsEntities())
+            {
+                var query = ctx.LocationImages.Where(o => o.id == Model.cover_id);
+
+                string ImageLocation = EntityPathConfig.newlocationimagepath(query.ToList()[0]);
+                imgPathTextBox.Text = query.ToList()[0].name;
+                pictureBox1.ImageLocation = ImageLocation;
+
+            }
+
             //this.scheduleTextBox.Text = trip.schedule;
             InitializeDataGridView();
 
@@ -95,8 +107,8 @@ namespace DCTS.UI
         private void newButton_Click(object sender, EventArgs e)
         {
             var trip = this.Model.Trip;
-            var startAt = trip.start_at.Value.AddDays( this.Model.day -1 );
-            Schedule newSchedule = new Schedule() { tripday_id= Model.id, start_at = startAt, created_at = DateTime.Now };
+            var startAt = trip.start_at.Value.AddDays(this.Model.day - 1);
+            Schedule newSchedule = new Schedule() { tripday_id = Model.id, start_at = startAt, created_at = DateTime.Now };
             this.bindingSource1.Add(newSchedule);
             this.scheduleDataGridView.Refresh();
         }
@@ -150,7 +162,7 @@ namespace DCTS.UI
             if (schedule != null)
             {
                 int idx = bindingSource1.IndexOf(schedule);
-                if (idx < bindingSource1.Count-1)
+                if (idx < bindingSource1.Count - 1)
                 {
                     bindingSource1.Remove(schedule);
                     bindingSource1.Insert(idx + 1, schedule);
@@ -163,7 +175,7 @@ namespace DCTS.UI
         private void findFileButton_Click(object sender, EventArgs e)
         {
             var form = new SelectSystemfile();
-            form.ShowDialog();         
+            form.ShowDialog();
             {
                 List<string> reference = form.listfile;
                 if (reference.Count > 0)
