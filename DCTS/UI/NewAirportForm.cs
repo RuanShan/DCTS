@@ -80,7 +80,7 @@ namespace DCTS.UI
 
                             long idStart = newId / 1000 * 1000;
                             long idEnd = idStart + 1000;
-                            existSamedoc = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Airport && o.word == copyfilename && o.id > idStart && o.id < idEnd).Count() > 0);
+                            existSamedoc = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Airport && o.word == copyfilename).Count() > 0);
                         }
 
                     }
