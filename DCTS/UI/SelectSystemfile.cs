@@ -209,7 +209,11 @@ namespace DCTS.CustomComponents
             if (this.listView1.CheckedItems.Count > 0)
             {
                 strFileName = this.listView1.SelectedItems[0].Text;
-                string ImageLocation = EntityPathConfig.newlocationimagepath(listpage[this.listView1.SelectedItems[0].StateImageIndex - 1]);
+                var itemfind = listpage.Find(s => s.name == this.listView1.SelectedItems[0].Text);
+
+                string ImageLocation = EntityPathConfig.newlocationimagepath(itemfind);
+
+
                 listfile.Add(strFileName);
                 listfile.Add(ImageLocation);
                 this.Close();
