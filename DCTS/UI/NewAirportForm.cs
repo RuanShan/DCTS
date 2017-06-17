@@ -80,7 +80,11 @@ namespace DCTS.UI
 
                             long idStart = newId / 1000 * 1000;
                             long idEnd = idStart + 1000;
-                            existSamedoc = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Airport && o.word == copyfilename).Count() > 0);
+                            if (changeid == 0)
+                                existSamedoc = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Airport && o.word == copyfilename).Count() > 0);
+                            else
+                                existSamedoc = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Airport && o.word == copyfilename && o.id != changeid).Count() > 0);
+
                         }
 
                     }
@@ -124,10 +128,16 @@ namespace DCTS.UI
                     }
                     else
                     {
+                        if (existSamedoc)
+                        {
+                            MessageBox.Show(string.Format("文件名<{0}>已在, 请使用其他文件名！", copyfilename));
+                            return;
+                        }
+
                         ComboLocation obj = ctx.ComboLocations.Find(Convert.ToInt32(changeid));
                         obj.title = this.titleTextBox.Text;
                         obj.nation = this.nationComboBox.Text;
-                        obj.city = this.cityTextBox.Text;                         
+                        obj.city = this.cityTextBox.Text;
                         obj.word = "";
                         obj.tips = this.tipsTextBox.Text;
 
