@@ -146,4 +146,5 @@ https://msdn.microsoft.com/en-us/data/jj574232
  change any unsigned columns in mysql to signed. EF doesn't support unsigned
 http://stackoverflow.com/questions/22138579/ef6mysql-error-inserting-2-related-objects-in-a-single-savechanges
 
-
+========================================
+https://github.com/waynebloss/BindingListView

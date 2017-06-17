@@ -11,27 +11,30 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DCTS.CustomComponents;
 using DCTS.Uti;
+using Equin.ApplicationFramework;
 
 namespace DCTS.UI
 {
     public partial class NewCustomerTripForm : BaseModalForm
     {
-        private SortableBindingList<Ticket> sortableticketList;
+        private DataTable ticketTable;
+        private DataView ticketDataView;
+        private List<Ticket> ticketList;
+        private BindingListView<Ticket> ticketView;
         ChooseCustomersForm customerForm;
         ChooseCountries countryForm;
         List<Customer> customerList;
         List<Nation> nationList;
         SupplierEnum supplierType;
         private List<Supplier> supplierList;
-        private List<Supplier> flightCompanies;
-        private List<Supplier> trainCompanies;
+
         private List<ComboLocation> airportList;
 
         public NewCustomerTripForm()
         {
             InitializeComponent();
 
-            sortableticketList = new SortableBindingList<Ticket>();
+            ticketList = new List<Ticket>();
             customerList = new List<Customer>();
             nationList = new List<Nation>();
 
@@ -46,6 +49,10 @@ namespace DCTS.UI
             countryForm = new ChooseCountries();
 
             supplierType = SupplierEnum.Flight;
+
+            ticketView = new BindingListView<Ticket>(new List<Ticket>());
+            ticketTable = ExcelUtility.ToDataTable<Ticket>(new List<Ticket>());
+            ticketDataView = ticketTable.AsDataView();
             InitializeDataSource();
         }
 
@@ -111,7 +118,7 @@ namespace DCTS.UI
                         }
                     }
                     
-                    trip.Tickets.Concat(this.sortableticketList);
+                    trip.Tickets.Concat(this.ticketView);
 
                     ctx.SaveChanges();
                 }
@@ -131,11 +138,11 @@ namespace DCTS.UI
                         tripDay.title = String.Format("第{0}天", i + 1);
                         trip.TripDays.Add(tripDay);
                     }
-                    foreach (var ticket in sortableticketList)
+                    foreach (var ticket in ticketView)
                     {
-                        trip.Tickets.Add(ticket);
+                        trip.Tickets.Add(ticket);                                                                
                     }
-                    //trip.Tickets.Concat(sortableticketList);
+                    //trip.Tickets.Concat(ticketList);
 
                     ctx.Trips.Add(trip);
                     ctx.SaveChanges();
@@ -182,28 +189,17 @@ namespace DCTS.UI
             fromAirportBindingSource.DataSource = this.airportList;
             toAirportBindingSource.DataSource = this.airportList;
 
-
-            this.ticketBindingSource.DataSource = this.sortableticketList;
+            //this.ticketBindingSource.DataSource = this.ticketTable;
+            var view = ticketView;
             SetTicketViewFilter();
 
 
-            this.flightDataGridView.DataSource = this.ticketBindingSource;
-
-            //hotalDataGridView.AutoGenerateColumns = false;
-            this.hotalDataGridView.DataSource = this.ticketBindingSource;
-
-
-            //InsuranceGridView.AutoGenerateColumns = false;
-            this.InsuranceGridView.DataSource = this.ticketBindingSource;
-
-            //RentalGridView.AutoGenerateColumns = false;
-            this.RentalGridView.DataSource = this.ticketBindingSource;
-
-            //WIFIGridView.AutoGenerateColumns = false;
-            this.WIFIGridView.DataSource = this.ticketBindingSource;
-
-            //activityDataGridView.AutoGenerateColumns = false;
-            this.activityDataGridView.DataSource = this.ticketBindingSource;
+            this.flightDataGridView.DataSource = view;
+            this.hotalDataGridView.DataSource = view;
+            this.InsuranceGridView.DataSource = view;
+            this.RentalGridView.DataSource = view;
+            this.WIFIGridView.DataSource = view;
+            this.activityDataGridView.DataSource = view;
 
 
             //飞机
@@ -244,7 +240,16 @@ namespace DCTS.UI
 
             int cid = customerList.First().id;
             int sid = suppliers.First().id;
-            var ticket = new Ticket() { ttype=(int)supplierType, customer_id =cid,  supplier_id = sid, start_at = DateTime.Now, end_at = DateTime.Now };
+            var objectView = ticketView.AddNew();
+            
+            var ticket = objectView.Object;
+            //var ticket = ticketDataView.AddNew();
+
+            ticket.ttype = (int)supplierType;
+            ticket.customer_id = cid;
+            ticket.supplier_id = sid;
+            ticket.start_at = DateTime.Now;
+            ticket.end_at = DateTime.Now;
 
             if (supplierType == SupplierEnum.Flight)
             {               
@@ -257,7 +262,16 @@ namespace DCTS.UI
             {
                 //supplier is required for filter
             }
-            this.ticketBindingSource.Add(ticket);
+            ticketView.EndNew(ticketView.Count - 1);
+
+        }
+        private void deleteFlightButton_Click(object sender, EventArgs e)
+        {
+            var view = GetDataGridViewBySupplierType();
+            var objectView = view.CurrentRow.DataBoundItem as ObjectView<Ticket>;
+            
+            this.ticketView.DataSource.Remove(objectView.Object);
+            this.ticketView.Refresh();
         }
 
         private void customersTextBox2_TextChanged(object sender, EventArgs e)
@@ -298,8 +312,12 @@ namespace DCTS.UI
 
 
         private void SetTicketViewFilter()
-        {             
-            ticketBindingSource.Filter = string.Format("ttype={0}", (int)supplierType);
+        {
+            //ticketBindingSource.DataSource = this.ticketList.Where(o => o.ttype == (int)this.supplierType).ToList();
+            ticketView.RemoveFilter();
+            ticketView.ApplyFilter(delegate(Ticket ticket) { return ticket.ttype == (int)this.supplierType; });
+            //ticketView.Refresh();
+            //ticketDataView.RowFilter = string.Format("ttype={0}", (int)this.supplierType);
         }
 
         private void ticketTabControl_TabIndexChanged(object sender, EventArgs e)
@@ -367,7 +385,7 @@ namespace DCTS.UI
                             this.supplierType = SupplierEnum.Insurance;
                         }
                         else
-                            if (ticketTabControl.SelectedTab == this.rantalTabPage)
+                            if (ticketTabControl.SelectedTab == this.rentalTabPage)
                             {
                                 this.supplierType = SupplierEnum.Rental;
                             }
@@ -382,13 +400,32 @@ namespace DCTS.UI
                                         this.supplierType = SupplierEnum.Activity;
                                     }
             Console.WriteLine("selected tab {0}, current supplierType={1}", ticketTabControl.SelectedTab.Text, this.supplierType);
+            
             SetTicketViewFilter();
 
         }
 
-        private void deleteFlightButton_Click(object sender, EventArgs e)
+        private DataGridView GetDataGridViewBySupplierType()
         {
-
+            DataGridView view = null;
+            switch( (supplierType) )
+            {
+                case SupplierEnum.Flight:
+                    view= this.flightDataGridView;
+                    break;
+                case SupplierEnum.Hotal:
+                    view = this.hotalDataGridView;
+                    break;
+                case SupplierEnum.Insurance:
+                    view = this.InsuranceGridView;
+                    break;
+                case SupplierEnum.Rental:
+                    view = this.RentalGridView;
+                    break;
+                
+            }
+            return view;
         }
+
     }
 }

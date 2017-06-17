@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             this.customersTextBox2 = new System.Windows.Forms.TextBox();
@@ -43,18 +43,64 @@
             this.ticketTabControl = new System.Windows.Forms.TabControl();
             this.flightTabPage = new System.Windows.Forms.TabPage();
             this.flightDataGridView = new System.Windows.Forms.DataGridView();
+            this.flightCustomerColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.flightSupplierColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.service_no1Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fromAirportColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.start_at1Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toAirportColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.end_atColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.baggageColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.trainTabPage = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.trainCustomerColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hotalTabPage = new System.Windows.Forms.TabPage();
             this.hotalDataGridView = new System.Windows.Forms.DataGridView();
+            this.hotelCustomerColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.start_atCloumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.daysColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cityColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.titlxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dinnerColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.parkingColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.insuranceTagPage = new System.Windows.Forms.TabPage();
             this.InsuranceGridView = new System.Windows.Forms.DataGridView();
-            this.rantalTabPage = new System.Windows.Forms.TabPage();
+            this.insuranceCustomerColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.titleTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.start_atColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.daysColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rentalTabPage = new System.Windows.Forms.TabPage();
             this.RentalGridView = new System.Windows.Forms.DataGridView();
+            this.rentalCustomerColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.numColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.titleColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rulesColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.from_addressColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.start_atColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.to_addressColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.end_atColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.wifiTabPage = new System.Windows.Forms.TabPage();
             this.WIFIGridView = new System.Windows.Forms.DataGridView();
+            this.wifiCustomerColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.from_addressColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.start_atColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.to_addressColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.end_atColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.daysColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dayColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.activityTabPage = new System.Windows.Forms.TabPage();
             this.activityDataGridView = new System.Windows.Forms.DataGridView();
+            this.ActivityCustomerColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.start_atColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.daysColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.from_placeColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rulesColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.overlayColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.deleteFlightButton = new System.Windows.Forms.Button();
             this.addFlightButton1 = new System.Windows.Forms.Button();
             this.startAtDateTimePicker = new System.Windows.Forms.DateTimePicker();
@@ -80,55 +126,9 @@
             this.toAirportBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.flightCustomerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.trainCustomerBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.flightCustomerColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.flightSupplierColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.service_no1Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fromAirportColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.start_at1Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toAirportColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.end_atColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.baggageColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.trainCustomerColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
-            this.insuranceCustomerColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.titleTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.start_atColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.daysColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ActivityCustomerColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.start_atColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.daysColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.from_placeColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rulesColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.overlayColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rentalCustomerColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.numColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.titleColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rulesColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.from_addressColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.start_atColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.to_addressColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.end_atColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.wifiCustomerColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.from_addressColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.start_atColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.to_addressColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.end_atColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.daysColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dayColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hotelCustomerColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.start_atCloumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.daysColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cityColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.titlxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dinnerColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.parkingColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ticketTabControl.SuspendLayout();
             this.flightTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.flightDataGridView)).BeginInit();
@@ -138,7 +138,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.hotalDataGridView)).BeginInit();
             this.insuranceTagPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.InsuranceGridView)).BeginInit();
-            this.rantalTabPage.SuspendLayout();
+            this.rentalTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RentalGridView)).BeginInit();
             this.wifiTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WIFIGridView)).BeginInit();
@@ -198,7 +198,7 @@
             this.ticketTabControl.Controls.Add(this.trainTabPage);
             this.ticketTabControl.Controls.Add(this.hotalTabPage);
             this.ticketTabControl.Controls.Add(this.insuranceTagPage);
-            this.ticketTabControl.Controls.Add(this.rantalTabPage);
+            this.ticketTabControl.Controls.Add(this.rentalTabPage);
             this.ticketTabControl.Controls.Add(this.wifiTabPage);
             this.ticketTabControl.Controls.Add(this.activityTabPage);
             this.ticketTabControl.Location = new System.Drawing.Point(85, 264);
@@ -224,6 +224,7 @@
             // 
             this.flightDataGridView.AllowUserToAddRows = false;
             this.flightDataGridView.AllowUserToDeleteRows = false;
+            this.flightDataGridView.AllowUserToOrderColumns = true;
             this.flightDataGridView.AllowUserToResizeRows = false;
             this.flightDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.flightDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -235,15 +236,15 @@
             this.toAirportColumn,
             this.end_atColumn1,
             this.baggageColumn1});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.flightDataGridView.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle9.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.flightDataGridView.DefaultCellStyle = dataGridViewCellStyle9;
             this.flightDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flightDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.flightDataGridView.Location = new System.Drawing.Point(3, 3);
@@ -255,6 +256,70 @@
             this.flightDataGridView.TabIndex = 0;
             this.flightDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellValueChanged);
             this.flightDataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.flightDataGridView_DataError);
+            // 
+            // flightCustomerColumn
+            // 
+            this.flightCustomerColumn.DataPropertyName = "customer_id";
+            this.flightCustomerColumn.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.flightCustomerColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.flightCustomerColumn.HeaderText = "客户";
+            this.flightCustomerColumn.Name = "flightCustomerColumn";
+            this.flightCustomerColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.flightCustomerColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // flightSupplierColumn
+            // 
+            this.flightSupplierColumn.DataPropertyName = "supplier_id";
+            this.flightSupplierColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.flightSupplierColumn.HeaderText = "航空公司";
+            this.flightSupplierColumn.Name = "flightSupplierColumn";
+            this.flightSupplierColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.flightSupplierColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // service_no1Column1
+            // 
+            this.service_no1Column1.DataPropertyName = "num";
+            this.service_no1Column1.HeaderText = "航班号";
+            this.service_no1Column1.Name = "service_no1Column1";
+            // 
+            // fromAirportColumn
+            // 
+            this.fromAirportColumn.DataPropertyName = "from_location_id";
+            this.fromAirportColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.fromAirportColumn.HeaderText = "出发地";
+            this.fromAirportColumn.Name = "fromAirportColumn";
+            this.fromAirportColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.fromAirportColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // start_at1Column1
+            // 
+            this.start_at1Column1.DataPropertyName = "start_at";
+            this.start_at1Column1.HeaderText = "出发时间";
+            this.start_at1Column1.Name = "start_at1Column1";
+            this.start_at1Column1.Width = 120;
+            // 
+            // toAirportColumn
+            // 
+            this.toAirportColumn.DataPropertyName = "to_location_id";
+            this.toAirportColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.toAirportColumn.HeaderText = "抵达地";
+            this.toAirportColumn.Name = "toAirportColumn";
+            this.toAirportColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.toAirportColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // end_atColumn1
+            // 
+            this.end_atColumn1.DataPropertyName = "end_at";
+            this.end_atColumn1.HeaderText = "抵达时间";
+            this.end_atColumn1.Name = "end_atColumn1";
+            this.end_atColumn1.Width = 120;
+            // 
+            // baggageColumn1
+            // 
+            this.baggageColumn1.DataPropertyName = "baggage_weight_limit";
+            this.baggageColumn1.HeaderText = "行李额";
+            this.baggageColumn1.Name = "baggageColumn1";
+            this.baggageColumn1.Width = 120;
             // 
             // trainTabPage
             // 
@@ -280,15 +345,15 @@
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewTextBoxColumn5});
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle9.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
@@ -297,6 +362,47 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(877, 156);
             this.dataGridView1.TabIndex = 1;
+            // 
+            // trainCustomerColumn
+            // 
+            this.trainCustomerColumn.HeaderText = "客户";
+            this.trainCustomerColumn.Name = "trainCustomerColumn";
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "num";
+            this.dataGridViewTextBoxColumn1.HeaderText = "车次";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "from_place";
+            this.dataGridViewTextBoxColumn2.HeaderText = "出发地";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "start_at";
+            this.dataGridViewTextBoxColumn3.HeaderText = "出发时间";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.Width = 120;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "to_place";
+            this.dataGridViewTextBoxColumn4.HeaderText = "抵达地";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "end_at";
+            this.dataGridViewTextBoxColumn5.HeaderText = "抵达时间";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.Width = 120;
             // 
             // hotalTabPage
             // 
@@ -322,23 +428,64 @@
             this.titlxColumn2,
             this.dinnerColumn2,
             this.parkingColumn2});
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle10.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.hotalDataGridView.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle11.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.hotalDataGridView.DefaultCellStyle = dataGridViewCellStyle11;
             this.hotalDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.hotalDataGridView.Location = new System.Drawing.Point(0, 0);
             this.hotalDataGridView.Name = "hotalDataGridView";
             this.hotalDataGridView.RowHeadersVisible = false;
-            this.hotalDataGridView.RowTemplate.Height = 50;
+            this.hotalDataGridView.RowTemplate.Height = 23;
             this.hotalDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.hotalDataGridView.Size = new System.Drawing.Size(883, 162);
             this.hotalDataGridView.TabIndex = 2;
+            // 
+            // hotelCustomerColumn
+            // 
+            this.hotelCustomerColumn.HeaderText = "客户";
+            this.hotelCustomerColumn.Name = "hotelCustomerColumn";
+            // 
+            // start_atCloumn
+            // 
+            this.start_atCloumn.DataPropertyName = "start_at";
+            this.start_atCloumn.HeaderText = "入住";
+            this.start_atCloumn.Name = "start_atCloumn";
+            // 
+            // daysColumn2
+            // 
+            this.daysColumn2.DataPropertyName = "days";
+            this.daysColumn2.HeaderText = "晚";
+            this.daysColumn2.Name = "daysColumn2";
+            // 
+            // cityColumn2
+            // 
+            this.cityColumn2.DataPropertyName = "city";
+            this.cityColumn2.HeaderText = "城市";
+            this.cityColumn2.Name = "cityColumn2";
+            // 
+            // titlxColumn2
+            // 
+            this.titlxColumn2.DataPropertyName = "title";
+            this.titlxColumn2.HeaderText = "酒店";
+            this.titlxColumn2.Name = "titlxColumn2";
+            // 
+            // dinnerColumn2
+            // 
+            this.dinnerColumn2.DataPropertyName = "dinner";
+            this.dinnerColumn2.HeaderText = "早餐";
+            this.dinnerColumn2.Name = "dinnerColumn2";
+            // 
+            // parkingColumn2
+            // 
+            this.parkingColumn2.DataPropertyName = "parking";
+            this.parkingColumn2.HeaderText = "停车位";
+            this.parkingColumn2.Name = "parkingColumn2";
             // 
             // insuranceTagPage
             // 
@@ -362,33 +509,56 @@
             this.titleTextBoxColumn3,
             this.start_atColumn3,
             this.daysColumn3});
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle11.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.InsuranceGridView.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle12.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.InsuranceGridView.DefaultCellStyle = dataGridViewCellStyle12;
             this.InsuranceGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.InsuranceGridView.Location = new System.Drawing.Point(3, 3);
             this.InsuranceGridView.Name = "InsuranceGridView";
             this.InsuranceGridView.RowHeadersVisible = false;
-            this.InsuranceGridView.RowTemplate.Height = 50;
+            this.InsuranceGridView.RowTemplate.Height = 23;
             this.InsuranceGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.InsuranceGridView.Size = new System.Drawing.Size(877, 156);
             this.InsuranceGridView.TabIndex = 1;
             // 
-            // rantalTabPage
+            // insuranceCustomerColumn
             // 
-            this.rantalTabPage.Controls.Add(this.RentalGridView);
-            this.rantalTabPage.Location = new System.Drawing.Point(4, 22);
-            this.rantalTabPage.Name = "rantalTabPage";
-            this.rantalTabPage.Size = new System.Drawing.Size(883, 162);
-            this.rantalTabPage.TabIndex = 2;
-            this.rantalTabPage.Text = "租车信息";
-            this.rantalTabPage.UseVisualStyleBackColor = true;
+            this.insuranceCustomerColumn.HeaderText = "客户";
+            this.insuranceCustomerColumn.Name = "insuranceCustomerColumn";
+            // 
+            // titleTextBoxColumn3
+            // 
+            this.titleTextBoxColumn3.DataPropertyName = "title";
+            this.titleTextBoxColumn3.HeaderText = "保险名称";
+            this.titleTextBoxColumn3.Name = "titleTextBoxColumn3";
+            // 
+            // start_atColumn3
+            // 
+            this.start_atColumn3.DataPropertyName = "start_at";
+            this.start_atColumn3.HeaderText = "生效日";
+            this.start_atColumn3.Name = "start_atColumn3";
+            // 
+            // daysColumn3
+            // 
+            this.daysColumn3.DataPropertyName = "days";
+            this.daysColumn3.HeaderText = "天数";
+            this.daysColumn3.Name = "daysColumn3";
+            // 
+            // rentalTabPage
+            // 
+            this.rentalTabPage.Controls.Add(this.RentalGridView);
+            this.rentalTabPage.Location = new System.Drawing.Point(4, 22);
+            this.rentalTabPage.Name = "rentalTabPage";
+            this.rentalTabPage.Size = new System.Drawing.Size(883, 162);
+            this.rentalTabPage.TabIndex = 2;
+            this.rentalTabPage.Text = "租车信息";
+            this.rentalTabPage.UseVisualStyleBackColor = true;
             // 
             // RentalGridView
             // 
@@ -405,15 +575,15 @@
             this.start_atColumn4,
             this.to_addressColumn4,
             this.end_atColumn4});
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.RentalGridView.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.RentalGridView.DefaultCellStyle = dataGridViewCellStyle8;
             this.RentalGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RentalGridView.Location = new System.Drawing.Point(0, 0);
             this.RentalGridView.Name = "RentalGridView";
@@ -422,6 +592,53 @@
             this.RentalGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.RentalGridView.Size = new System.Drawing.Size(883, 162);
             this.RentalGridView.TabIndex = 1;
+            // 
+            // rentalCustomerColumn1
+            // 
+            this.rentalCustomerColumn1.HeaderText = "客户";
+            this.rentalCustomerColumn1.Name = "rentalCustomerColumn1";
+            // 
+            // numColumn4
+            // 
+            this.numColumn4.DataPropertyName = "num";
+            this.numColumn4.HeaderText = "提车单号";
+            this.numColumn4.Name = "numColumn4";
+            // 
+            // titleColumn4
+            // 
+            this.titleColumn4.DataPropertyName = "title";
+            this.titleColumn4.HeaderText = "租车公司";
+            this.titleColumn4.Name = "titleColumn4";
+            // 
+            // rulesColumn4
+            // 
+            this.rulesColumn4.DataPropertyName = "rules";
+            this.rulesColumn4.HeaderText = "车型组";
+            this.rulesColumn4.Name = "rulesColumn4";
+            // 
+            // from_addressColumn4
+            // 
+            this.from_addressColumn4.DataPropertyName = "from_address";
+            this.from_addressColumn4.HeaderText = "取车地点";
+            this.from_addressColumn4.Name = "from_addressColumn4";
+            // 
+            // start_atColumn4
+            // 
+            this.start_atColumn4.DataPropertyName = "start_at";
+            this.start_atColumn4.HeaderText = "取车时间";
+            this.start_atColumn4.Name = "start_atColumn4";
+            // 
+            // to_addressColumn4
+            // 
+            this.to_addressColumn4.DataPropertyName = "to_address";
+            this.to_addressColumn4.HeaderText = "还车地点";
+            this.to_addressColumn4.Name = "to_addressColumn4";
+            // 
+            // end_atColumn4
+            // 
+            this.end_atColumn4.DataPropertyName = "end_at";
+            this.end_atColumn4.HeaderText = "还车时间";
+            this.end_atColumn4.Name = "end_atColumn4";
             // 
             // wifiTabPage
             // 
@@ -465,6 +682,47 @@
             this.WIFIGridView.Size = new System.Drawing.Size(883, 162);
             this.WIFIGridView.TabIndex = 1;
             // 
+            // wifiCustomerColumn
+            // 
+            this.wifiCustomerColumn.HeaderText = "客户";
+            this.wifiCustomerColumn.Name = "wifiCustomerColumn";
+            // 
+            // from_addressColumn5
+            // 
+            this.from_addressColumn5.DataPropertyName = "from_address";
+            this.from_addressColumn5.HeaderText = "提取点";
+            this.from_addressColumn5.Name = "from_addressColumn5";
+            // 
+            // start_atColumn5
+            // 
+            this.start_atColumn5.DataPropertyName = "start_at";
+            this.start_atColumn5.HeaderText = "日期";
+            this.start_atColumn5.Name = "start_atColumn5";
+            // 
+            // to_addressColumn5
+            // 
+            this.to_addressColumn5.DataPropertyName = "to_address";
+            this.to_addressColumn5.HeaderText = "归还点";
+            this.to_addressColumn5.Name = "to_addressColumn5";
+            // 
+            // end_atColumn5
+            // 
+            this.end_atColumn5.DataPropertyName = "end_at";
+            this.end_atColumn5.HeaderText = "日期";
+            this.end_atColumn5.Name = "end_atColumn5";
+            // 
+            // daysColumn5
+            // 
+            this.daysColumn5.DataPropertyName = "days";
+            this.daysColumn5.HeaderText = "天数";
+            this.daysColumn5.Name = "daysColumn5";
+            // 
+            // dayColumn5
+            // 
+            this.dayColumn5.DataPropertyName = "days";
+            this.dayColumn5.HeaderText = "境外时长";
+            this.dayColumn5.Name = "dayColumn5";
+            // 
             // activityTabPage
             // 
             this.activityTabPage.Controls.Add(this.activityDataGridView);
@@ -505,6 +763,41 @@
             this.activityDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.activityDataGridView.Size = new System.Drawing.Size(883, 162);
             this.activityDataGridView.TabIndex = 1;
+            // 
+            // ActivityCustomerColumn1
+            // 
+            this.ActivityCustomerColumn1.HeaderText = "客户";
+            this.ActivityCustomerColumn1.Name = "ActivityCustomerColumn1";
+            // 
+            // start_atColumn6
+            // 
+            this.start_atColumn6.DataPropertyName = "start_at";
+            this.start_atColumn6.HeaderText = "日期";
+            this.start_atColumn6.Name = "start_atColumn6";
+            // 
+            // daysColumn6
+            // 
+            this.daysColumn6.DataPropertyName = "days";
+            this.daysColumn6.HeaderText = "时间";
+            this.daysColumn6.Name = "daysColumn6";
+            // 
+            // from_placeColumn6
+            // 
+            this.from_placeColumn6.DataPropertyName = "from_place";
+            this.from_placeColumn6.HeaderText = "城市";
+            this.from_placeColumn6.Name = "from_placeColumn6";
+            // 
+            // rulesColumn6
+            // 
+            this.rulesColumn6.DataPropertyName = "rules";
+            this.rulesColumn6.HeaderText = "活动项目";
+            this.rulesColumn6.Name = "rulesColumn6";
+            // 
+            // overlayColumn6
+            // 
+            this.overlayColumn6.DataPropertyName = "overlay";
+            this.overlayColumn6.HeaderText = "换票人";
+            this.overlayColumn6.Name = "overlayColumn6";
             // 
             // deleteFlightButton
             // 
@@ -683,111 +976,6 @@
             // 
             this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
             // 
-            // flightCustomerColumn
-            // 
-            this.flightCustomerColumn.DataPropertyName = "customer_id";
-            this.flightCustomerColumn.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.flightCustomerColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.flightCustomerColumn.HeaderText = "客户";
-            this.flightCustomerColumn.Name = "flightCustomerColumn";
-            this.flightCustomerColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.flightCustomerColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // flightSupplierColumn
-            // 
-            this.flightSupplierColumn.DataPropertyName = "supplier_id";
-            this.flightSupplierColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.flightSupplierColumn.HeaderText = "航空公司";
-            this.flightSupplierColumn.Name = "flightSupplierColumn";
-            this.flightSupplierColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.flightSupplierColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // service_no1Column1
-            // 
-            this.service_no1Column1.DataPropertyName = "num";
-            this.service_no1Column1.HeaderText = "航班号";
-            this.service_no1Column1.Name = "service_no1Column1";
-            // 
-            // fromAirportColumn
-            // 
-            this.fromAirportColumn.DataPropertyName = "from_location_id";
-            this.fromAirportColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.fromAirportColumn.HeaderText = "出发地";
-            this.fromAirportColumn.Name = "fromAirportColumn";
-            this.fromAirportColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.fromAirportColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // start_at1Column1
-            // 
-            this.start_at1Column1.DataPropertyName = "start_at";
-            this.start_at1Column1.HeaderText = "出发时间";
-            this.start_at1Column1.Name = "start_at1Column1";
-            this.start_at1Column1.Width = 120;
-            // 
-            // toAirportColumn
-            // 
-            this.toAirportColumn.DataPropertyName = "to_location_id";
-            this.toAirportColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.toAirportColumn.HeaderText = "抵达地";
-            this.toAirportColumn.Name = "toAirportColumn";
-            this.toAirportColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.toAirportColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // end_atColumn1
-            // 
-            this.end_atColumn1.DataPropertyName = "end_at";
-            this.end_atColumn1.HeaderText = "抵达时间";
-            this.end_atColumn1.Name = "end_atColumn1";
-            this.end_atColumn1.Width = 120;
-            // 
-            // baggageColumn1
-            // 
-            this.baggageColumn1.DataPropertyName = "baggage_weight_limit";
-            this.baggageColumn1.HeaderText = "行李额";
-            this.baggageColumn1.Name = "baggageColumn1";
-            this.baggageColumn1.Width = 120;
-            // 
-            // trainCustomerColumn
-            // 
-            this.trainCustomerColumn.HeaderText = "客户";
-            this.trainCustomerColumn.Name = "trainCustomerColumn";
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "num";
-            this.dataGridViewTextBoxColumn1.HeaderText = "车次";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "from_place";
-            this.dataGridViewTextBoxColumn2.HeaderText = "出发地";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "start_at";
-            this.dataGridViewTextBoxColumn3.HeaderText = "出发时间";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.Width = 120;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "to_place";
-            this.dataGridViewTextBoxColumn4.HeaderText = "抵达地";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "end_at";
-            this.dataGridViewTextBoxColumn5.HeaderText = "抵达时间";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.Width = 120;
-            // 
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -815,193 +1003,6 @@
             this.label9.Size = new System.Drawing.Size(29, 12);
             this.label9.TabIndex = 27;
             this.label9.Text = "主题";
-            // 
-            // insuranceCustomerColumn
-            // 
-            this.insuranceCustomerColumn.HeaderText = "客户";
-            this.insuranceCustomerColumn.Name = "insuranceCustomerColumn";
-            // 
-            // titleTextBoxColumn3
-            // 
-            this.titleTextBoxColumn3.DataPropertyName = "title";
-            this.titleTextBoxColumn3.HeaderText = "保险名称";
-            this.titleTextBoxColumn3.Name = "titleTextBoxColumn3";
-            // 
-            // start_atColumn3
-            // 
-            this.start_atColumn3.DataPropertyName = "start_at";
-            this.start_atColumn3.HeaderText = "生效日";
-            this.start_atColumn3.Name = "start_atColumn3";
-            // 
-            // daysColumn3
-            // 
-            this.daysColumn3.DataPropertyName = "days";
-            this.daysColumn3.HeaderText = "天数";
-            this.daysColumn3.Name = "daysColumn3";
-            // 
-            // ActivityCustomerColumn1
-            // 
-            this.ActivityCustomerColumn1.HeaderText = "客户";
-            this.ActivityCustomerColumn1.Name = "ActivityCustomerColumn1";
-            // 
-            // start_atColumn6
-            // 
-            this.start_atColumn6.DataPropertyName = "start_at";
-            this.start_atColumn6.HeaderText = "日期";
-            this.start_atColumn6.Name = "start_atColumn6";
-            // 
-            // daysColumn6
-            // 
-            this.daysColumn6.DataPropertyName = "days";
-            this.daysColumn6.HeaderText = "时间";
-            this.daysColumn6.Name = "daysColumn6";
-            // 
-            // from_placeColumn6
-            // 
-            this.from_placeColumn6.DataPropertyName = "from_place";
-            this.from_placeColumn6.HeaderText = "城市";
-            this.from_placeColumn6.Name = "from_placeColumn6";
-            // 
-            // rulesColumn6
-            // 
-            this.rulesColumn6.DataPropertyName = "rules";
-            this.rulesColumn6.HeaderText = "活动项目";
-            this.rulesColumn6.Name = "rulesColumn6";
-            // 
-            // overlayColumn6
-            // 
-            this.overlayColumn6.DataPropertyName = "overlay";
-            this.overlayColumn6.HeaderText = "换票人";
-            this.overlayColumn6.Name = "overlayColumn6";
-            // 
-            // rentalCustomerColumn1
-            // 
-            this.rentalCustomerColumn1.HeaderText = "客户";
-            this.rentalCustomerColumn1.Name = "rentalCustomerColumn1";
-            // 
-            // numColumn4
-            // 
-            this.numColumn4.DataPropertyName = "num";
-            this.numColumn4.HeaderText = "提车单号";
-            this.numColumn4.Name = "numColumn4";
-            // 
-            // titleColumn4
-            // 
-            this.titleColumn4.DataPropertyName = "title";
-            this.titleColumn4.HeaderText = "租车公司";
-            this.titleColumn4.Name = "titleColumn4";
-            // 
-            // rulesColumn4
-            // 
-            this.rulesColumn4.DataPropertyName = "rules";
-            this.rulesColumn4.HeaderText = "车型组";
-            this.rulesColumn4.Name = "rulesColumn4";
-            // 
-            // from_addressColumn4
-            // 
-            this.from_addressColumn4.DataPropertyName = "from_address";
-            this.from_addressColumn4.HeaderText = "取车地点";
-            this.from_addressColumn4.Name = "from_addressColumn4";
-            // 
-            // start_atColumn4
-            // 
-            this.start_atColumn4.DataPropertyName = "start_at";
-            this.start_atColumn4.HeaderText = "取车时间";
-            this.start_atColumn4.Name = "start_atColumn4";
-            // 
-            // to_addressColumn4
-            // 
-            this.to_addressColumn4.DataPropertyName = "to_address";
-            this.to_addressColumn4.HeaderText = "还车地点";
-            this.to_addressColumn4.Name = "to_addressColumn4";
-            // 
-            // end_atColumn4
-            // 
-            this.end_atColumn4.DataPropertyName = "end_at";
-            this.end_atColumn4.HeaderText = "还车时间";
-            this.end_atColumn4.Name = "end_atColumn4";
-            // 
-            // wifiCustomerColumn
-            // 
-            this.wifiCustomerColumn.HeaderText = "客户";
-            this.wifiCustomerColumn.Name = "wifiCustomerColumn";
-            // 
-            // from_addressColumn5
-            // 
-            this.from_addressColumn5.DataPropertyName = "from_address";
-            this.from_addressColumn5.HeaderText = "提取点";
-            this.from_addressColumn5.Name = "from_addressColumn5";
-            // 
-            // start_atColumn5
-            // 
-            this.start_atColumn5.DataPropertyName = "start_at";
-            this.start_atColumn5.HeaderText = "日期";
-            this.start_atColumn5.Name = "start_atColumn5";
-            // 
-            // to_addressColumn5
-            // 
-            this.to_addressColumn5.DataPropertyName = "to_address";
-            this.to_addressColumn5.HeaderText = "归还点";
-            this.to_addressColumn5.Name = "to_addressColumn5";
-            // 
-            // end_atColumn5
-            // 
-            this.end_atColumn5.DataPropertyName = "end_at";
-            this.end_atColumn5.HeaderText = "日期";
-            this.end_atColumn5.Name = "end_atColumn5";
-            // 
-            // daysColumn5
-            // 
-            this.daysColumn5.DataPropertyName = "days";
-            this.daysColumn5.HeaderText = "天数";
-            this.daysColumn5.Name = "daysColumn5";
-            // 
-            // dayColumn5
-            // 
-            this.dayColumn5.DataPropertyName = "days";
-            this.dayColumn5.HeaderText = "境外时长";
-            this.dayColumn5.Name = "dayColumn5";
-            // 
-            // hotelCustomerColumn
-            // 
-            this.hotelCustomerColumn.HeaderText = "客户";
-            this.hotelCustomerColumn.Name = "hotelCustomerColumn";
-            // 
-            // start_atCloumn
-            // 
-            this.start_atCloumn.DataPropertyName = "start_at";
-            this.start_atCloumn.HeaderText = "入住";
-            this.start_atCloumn.Name = "start_atCloumn";
-            // 
-            // daysColumn2
-            // 
-            this.daysColumn2.DataPropertyName = "days";
-            this.daysColumn2.HeaderText = "晚";
-            this.daysColumn2.Name = "daysColumn2";
-            // 
-            // cityColumn2
-            // 
-            this.cityColumn2.DataPropertyName = "city";
-            this.cityColumn2.HeaderText = "城市";
-            this.cityColumn2.Name = "cityColumn2";
-            // 
-            // titlxColumn2
-            // 
-            this.titlxColumn2.DataPropertyName = "title";
-            this.titlxColumn2.HeaderText = "酒店";
-            this.titlxColumn2.Name = "titlxColumn2";
-            // 
-            // dinnerColumn2
-            // 
-            this.dinnerColumn2.DataPropertyName = "dinner";
-            this.dinnerColumn2.HeaderText = "早餐";
-            this.dinnerColumn2.Name = "dinnerColumn2";
-            // 
-            // parkingColumn2
-            // 
-            this.parkingColumn2.DataPropertyName = "parking";
-            this.parkingColumn2.HeaderText = "停车位";
-            this.parkingColumn2.Name = "parkingColumn2";
             // 
             // NewCustomerTripForm
             // 
@@ -1045,7 +1046,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.hotalDataGridView)).EndInit();
             this.insuranceTagPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.InsuranceGridView)).EndInit();
-            this.rantalTabPage.ResumeLayout(false);
+            this.rentalTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.RentalGridView)).EndInit();
             this.wifiTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.WIFIGridView)).EndInit();
@@ -1089,7 +1090,7 @@
         private System.Windows.Forms.TabPage hotalTabPage;
         private System.Windows.Forms.TabPage insuranceTagPage;
         private System.Windows.Forms.DataGridView InsuranceGridView;
-        private System.Windows.Forms.TabPage rantalTabPage;
+        private System.Windows.Forms.TabPage rentalTabPage;
         private System.Windows.Forms.DataGridView RentalGridView;
         private System.Windows.Forms.TabPage wifiTabPage;
         private System.Windows.Forms.DataGridView WIFIGridView;
