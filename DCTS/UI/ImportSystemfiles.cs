@@ -121,11 +121,11 @@ namespace DCTS.UI
 
         }
 
-
         private void ImportSystemfiles_Resize(object sender, EventArgs e)
         {
 
         }
+
         private void imagedockin(List<LocationImage> list)
         {
             ImageList imageListSmall = new ImageList();
@@ -150,7 +150,7 @@ namespace DCTS.UI
             listView1.LargeImageList = imageListSmall;
             //new size 
             // listView1.Bounds = new Rectangle(new Point(10, 10), new Size(300, 200));
-            listView1.CheckBoxes = true;
+            //listView1.CheckBoxes = true;
 
             this.listView1.BeginUpdate();   //数据更新，UI暂时挂起，直到EndUpdate绘制控件，可以有效避免闪烁并大大提高加载速度  
             i = 0;
@@ -284,6 +284,47 @@ namespace DCTS.UI
 
             pager1.Bind();
 
+        }
+
+        private void deleteToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            using (var ctx = new DctsEntities())
+            {
+                if (this.listView1.SelectedIndices.Count > 0)
+                {
+
+                    string name = this.listView1.SelectedItems[0].Text;
+
+                    var location = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.PageImage).First();
+
+                    var query = ctx.LocationImages.Where(o => o.location_id == (int)location.id && o.name == name);
+                    List<LocationImage> list = query.ToList();
+                    if (list.Count < 1)
+                        return;
+
+                    string msg = string.Format("确定删除<{0}>？", list[0].name);
+
+                    if (MessageHelper.DeleteConfirm(msg))
+                    {
+                        int coverid = list[0].id;
+
+                        var querynew = ctx.LocationImages.Where(o => o.id == coverid);
+                        if (querynew != null && querynew.ToList().Count > 0)
+                        {
+                            string ImageLocation = EntityPathConfig.newlocationimagepath(querynew.ToList()[0]);
+                            File.Delete(ImageLocation);
+
+                        }
+
+                        ComboLoactionBusiness.locaimageDelete(list[0].id);
+
+
+
+
+                        BeginActive();
+                    }
+                }
+            }
         }
 
     }

@@ -42,6 +42,18 @@ namespace DCTS.UI
             this.titleTextBox.Text = trip.title;
             this.daysNumericUpDown.Value = trip.days;
             this.memoTextBox.Text = trip.memo;
+            //读取图片位置
+            using (var ctx = new DctsEntities())
+            {
+                var query = ctx.LocationImages.Where(o => o.id == trip.cover_id);
+                if (query.Count() > 0)
+                {
+                    string ImageLocation = EntityPathConfig.newlocationimagepath(query.ToList()[0]);
+                    imgPathTextBox.Text = query.ToList()[0].name;
+                    pictureBox1.ImageLocation = ImageLocation;
+                }
+
+            }
         }
 
         private void findFileButton_Click(object sender, EventArgs e)

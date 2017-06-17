@@ -86,10 +86,12 @@ namespace DCTS.UI
             using (var ctx = new DctsEntities())
             {
                 var query = ctx.LocationImages.Where(o => o.id == Model.cover_id);
-
-                string ImageLocation = EntityPathConfig.newlocationimagepath(query.ToList()[0]);
-                imgPathTextBox.Text = query.ToList()[0].name;
-                pictureBox1.ImageLocation = ImageLocation;
+                if (query != null && query.ToList().Count > 0)
+                {
+                    string ImageLocation = EntityPathConfig.newlocationimagepath(query.ToList()[0]);
+                    imgPathTextBox.Text = query.ToList()[0].name;
+                    pictureBox1.ImageLocation = ImageLocation;
+                }
 
             }
 
