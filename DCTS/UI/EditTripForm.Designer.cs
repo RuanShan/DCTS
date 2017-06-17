@@ -44,9 +44,9 @@
             // cancelButton
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.No;
-            this.cancelButton.Location = new System.Drawing.Point(443, 246);
+            this.cancelButton.Location = new System.Drawing.Point(443, 382);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.Size = new System.Drawing.Size(75, 25);
             this.cancelButton.TabIndex = 13;
             this.cancelButton.Text = "取消";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -54,9 +54,9 @@
             // saveButton
             // 
             this.saveButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
-            this.saveButton.Location = new System.Drawing.Point(362, 246);
+            this.saveButton.Location = new System.Drawing.Point(362, 382);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.Size = new System.Drawing.Size(75, 25);
             this.saveButton.TabIndex = 14;
             this.saveButton.Text = "保存";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -65,27 +65,27 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(-48, 120);
+            this.label3.Location = new System.Drawing.Point(-48, 130);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 12);
+            this.label3.Size = new System.Drawing.Size(31, 13);
             this.label3.TabIndex = 10;
             this.label3.Text = "备注";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(-48, 62);
+            this.label2.Location = new System.Drawing.Point(-48, 67);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 12);
+            this.label2.Size = new System.Drawing.Size(31, 13);
             this.label2.TabIndex = 8;
             this.label2.Text = "名称";
             // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(1, 17);
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(1, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(589, 41);
+            this.label1.Size = new System.Drawing.Size(589, 44);
             this.label1.TabIndex = 7;
             this.label1.Text = "编辑模板";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -97,17 +97,17 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(-48, 91);
+            this.label4.Location = new System.Drawing.Point(-48, 99);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 12);
+            this.label4.Size = new System.Drawing.Size(31, 13);
             this.label4.TabIndex = 11;
             this.label4.Text = "天数";
             // 
             // tripFormControl1
             // 
-            this.tripFormControl1.Location = new System.Drawing.Point(34, 71);
+            this.tripFormControl1.Location = new System.Drawing.Point(36, 65);
             this.tripFormControl1.Name = "tripFormControl1";
-            this.tripFormControl1.Size = new System.Drawing.Size(526, 169);
+            this.tripFormControl1.Size = new System.Drawing.Size(526, 311);
             this.tripFormControl1.TabIndex = 15;
             // 
             // entityDataSource1
@@ -116,9 +116,9 @@
             // 
             // EditTripForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(592, 311);
+            this.ClientSize = new System.Drawing.Size(588, 424);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.label3);

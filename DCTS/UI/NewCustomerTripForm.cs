@@ -179,12 +179,13 @@ namespace DCTS.UI
 
         public void SetTicketDateGridViewDataSource()
         {
-            SetTicketViewFilter();
             fromAirportBindingSource.DataSource = this.airportList;
             toAirportBindingSource.DataSource = this.airportList;
 
+
             this.ticketBindingSource.DataSource = this.sortableticketList;
-            //flightDataGridView.AutoGenerateColumns = false;
+            SetTicketViewFilter();
+
 
             this.flightDataGridView.DataSource = this.ticketBindingSource;
 
