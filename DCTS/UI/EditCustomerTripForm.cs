@@ -20,6 +20,8 @@ namespace DCTS.UI
         Trip trip;
         List<Ticket> ticketList;
         List<Ticket> deletedTicketList;
+        List<Customer> customerList;
+        List<Nation> nationList;
 
         SupplierEnum supplierType;
         private BindingListView<Ticket> ticketView;
@@ -58,6 +60,9 @@ namespace DCTS.UI
             this.tripFormControl1.FillFormByModel(trip);
             this.tripFormControl1.daysNumericUpDown.ReadOnly = true;
 
+            //行程客户
+            this.customerList = this.trip.TripCustomers.Select(o => o.Customer).ToList();
+
 
             SetTicketDateGridViewDataSource();
         }
@@ -74,6 +79,7 @@ namespace DCTS.UI
         public void SetTicketDateGridViewDataSource()
         {
             ticketView = new BindingListView<Ticket>(this.ticketList);
+            //行程客户
 
             var view = ticketView;
             SetTicketViewFilter();
@@ -89,6 +95,7 @@ namespace DCTS.UI
             flightSupplierColumn.DisplayMember = "name";
             flightSupplierColumn.ValueMember = "id";
             flightSupplierColumn.DataSource = GetSuppliersByType(SupplierEnum.Flight);
+
 
         }
 
