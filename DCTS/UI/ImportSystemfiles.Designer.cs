@@ -105,6 +105,7 @@
             // 
             // listView1
             // 
+            this.listView1.ContextMenuStrip = this.contextMenuStrip1;
             this.listView1.Location = new System.Drawing.Point(0, 13);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(703, 354);
@@ -188,13 +189,14 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deleteToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(123, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 48);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.deleteToolStripMenuItem.Text = "删除此条";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click_1);
             // 
             // ImportSystemfiles
             // 
