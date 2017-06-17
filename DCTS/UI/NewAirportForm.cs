@@ -90,7 +90,7 @@ namespace DCTS.UI
                             return;
                         }
                         var obj = ctx.ComboLocations.Create();
-                        obj.ltype = (int)ComboLocationEnum.Airport;
+                        obj.ltype = (int)ComboLocationEnum.Flight;
                         obj.title = this.titleTextBox.Text;
 
                         obj.word = copyfilename; ;
@@ -124,7 +124,7 @@ namespace DCTS.UI
                             obj.word = copyfilename;
                             string copyToPath = EntityPathConfig.LocationWordPath(obj);
 
-                            if (!File.Exists(copyToPath))
+                            if (!File.Exists(copyToPath) && File.Exists(docFilePath))
                                 File.Copy(docFilePath, copyToPath);
                         }
                         ctx.SaveChanges();

@@ -215,7 +215,7 @@ namespace DCTS.UI
             using (var ctx = new DctsEntities())
             {
 
-                var query = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Airport && o.title != null);
+                var query = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Flight && o.title != null);
 
 
                 if (title.Length > 0)
