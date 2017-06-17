@@ -133,6 +133,9 @@
     <EmbeddedResource Include="UI\ChooseCustomersForm.resx">
       <DependentUpon>ChooseCustomersForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\EditCustomerTripForm.resx">
+      <DependentUpon>EditCustomerTripForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\NewCustomerFlightForm.resx">
       <DependentUpon>NewCustomerFlightForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -238,6 +241,12 @@
       <DependentUpon>ChooseLocaltionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\CommandRequest.cs" />
+    <Compile Include="UI\EditCustomerTripForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\EditCustomerTripForm.Designer.cs">
+      <DependentUpon>EditCustomerTripForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\NewCustomerFlightForm.cs">
       <SubType>Form</SubType>
     </Compile>

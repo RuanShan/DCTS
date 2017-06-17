@@ -103,6 +103,10 @@ namespace DCTS.UI
             {
                 this.routeTextBox.Text = activity.route;
             }
+            if (activity.open_close_more != null)
+            {
+                this.openCloseTextBox.Text = activity.open_close_more;
+            }
 
             //处理图片
             if (activity.img.Length > 0)
@@ -131,6 +135,7 @@ namespace DCTS.UI
             activity.local_address = this.localAddressTextBox.Text;
             activity.route = this.routeTextBox.Text;
             activity.img = this.imgPathTextBox.Text;
+            activity.open_close_more = this.openCloseTextBox.Text;
             return activity;
         }
 

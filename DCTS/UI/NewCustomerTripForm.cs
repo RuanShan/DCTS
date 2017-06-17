@@ -17,8 +17,6 @@ namespace DCTS.UI
 {
     public partial class NewCustomerTripForm : BaseModalForm
     {
-        private DataTable ticketTable;
-        private DataView ticketDataView;
         private List<Ticket> ticketList;
         private BindingListView<Ticket> ticketView;
         ChooseCustomersForm customerForm;
@@ -51,8 +49,6 @@ namespace DCTS.UI
             supplierType = SupplierEnum.Flight;
 
             ticketView = new BindingListView<Ticket>(new List<Ticket>());
-            ticketTable = ExcelUtility.ToDataTable<Ticket>(new List<Ticket>());
-            ticketDataView = ticketTable.AsDataView();
             InitializeDataSource();
         }
 
@@ -71,10 +67,12 @@ namespace DCTS.UI
 
             SetTicketDateGridViewDataSource();
             InitializeDataSourceByCustomers();
+            InitializeDataSourceByNations();
         }
 
         private void InitializeDataSourceByCustomers()
         {
+
             //this.flightCustomerBindingSource.DataSource = this.customerList;
             this.flightCustomerColumn.DisplayMember = "name";
             this.flightCustomerColumn.ValueMember = "id";
@@ -87,7 +85,15 @@ namespace DCTS.UI
 
         private void InitializeDataSourceByNations()
         {
-
+            var names = nationList.Select(o => o.title).ToArray();
+            var airports = airportList.Where(o => names.Contains(o.nation)).ToList();
+            airports.Insert(0, new ComboLocation() { id = 0, title = "请选择机场" });
+            this.fromAirportColumn.DisplayMember = "title";
+            this.fromAirportColumn.ValueMember = "id";
+            this.fromAirportColumn.DataSource = airports;
+            this.toAirportColumn.DisplayMember = "title";
+            this.toAirportColumn.ValueMember = "id";
+            this.toAirportColumn.DataSource = airports;
 
         }
 
@@ -186,13 +192,8 @@ namespace DCTS.UI
 
         public void SetTicketDateGridViewDataSource()
         {
-            fromAirportBindingSource.DataSource = this.airportList;
-            toAirportBindingSource.DataSource = this.airportList;
-
-            //this.ticketBindingSource.DataSource = this.ticketTable;
             var view = ticketView;
             SetTicketViewFilter();
-
 
             this.flightDataGridView.DataSource = view;
             this.hotalDataGridView.DataSource = view;
@@ -201,19 +202,10 @@ namespace DCTS.UI
             this.WIFIGridView.DataSource = view;
             this.activityDataGridView.DataSource = view;
 
-
             //飞机
             flightSupplierColumn.DisplayMember = "name";
             flightSupplierColumn.ValueMember = "id";
             flightSupplierColumn.DataSource = GetSuppliersByType(SupplierEnum.Flight);
-
-
-            this.fromAirportColumn.DisplayMember = "title";
-            this.fromAirportColumn.ValueMember = "id";
-            this.fromAirportColumn.DataSource = this.fromAirportBindingSource;
-            this.toAirportColumn.DisplayMember = "title";
-            this.toAirportColumn.ValueMember = "id";
-            this.toAirportColumn.DataSource = this.toAirportBindingSource;
 
         }
 
@@ -243,20 +235,18 @@ namespace DCTS.UI
             var objectView = ticketView.AddNew();
             
             var ticket = objectView.Object;
-            //var ticket = ticketDataView.AddNew();
-
             ticket.ttype = (int)supplierType;
             ticket.customer_id = cid;
+            //supplier is required for filter
             ticket.supplier_id = sid;
             ticket.start_at = DateTime.Now;
             ticket.end_at = DateTime.Now;
 
             if (supplierType == SupplierEnum.Flight)
             {               
-                var airport = fromAirportBindingSource.Current as ComboLocation;                    
-                //supplier is required for filter
-                ticket.from_location_id= airport.id;
-                ticket.to_location_id = airport.id;
+                //var airport = fromAirportBindingSource.Current as ComboLocation;                    
+                //ticket.from_location_id= airport.id;
+                //ticket.to_location_id = airport.id;
             }
             if (supplierType == SupplierEnum.Hotal)
             {
@@ -306,8 +296,8 @@ namespace DCTS.UI
             // nation='nation.title'
             string filter = BuildBindingSourceFilter<Nation>(nationList, "nation","title");
 
-            fromAirportBindingSource.Filter = filter;
-            toAirportBindingSource.Filter = filter;
+            InitializeDataSourceByNations();
+           
         }
 
 
@@ -318,11 +308,6 @@ namespace DCTS.UI
             ticketView.ApplyFilter(delegate(Ticket ticket) { return ticket.ttype == (int)this.supplierType; });
             //ticketView.Refresh();
             //ticketDataView.RowFilter = string.Format("ttype={0}", (int)this.supplierType);
-        }
-
-        private void ticketTabControl_TabIndexChanged(object sender, EventArgs e)
-        {
-           
         }
 
         private List<Supplier> GetSuppliersByType( SupplierEnum supplierEnum)

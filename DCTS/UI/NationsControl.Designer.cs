@@ -49,7 +49,6 @@
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.idColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nationColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tips = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.word = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.editColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.uploadColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
@@ -72,7 +71,6 @@
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idColumn1,
             this.nationColumn1,
-            this.tips,
             this.word,
             this.editColumn1,
             this.uploadColumn1,
@@ -215,18 +213,14 @@
             this.nationColumn1.DataPropertyName = "nation";
             this.nationColumn1.HeaderText = "国家";
             this.nationColumn1.Name = "nationColumn1";
-            // 
-            // tips
-            // 
-            this.tips.DataPropertyName = "tips";
-            this.tips.HeaderText = "tips";
-            this.tips.Name = "tips";
+            this.nationColumn1.Width = 200;
             // 
             // word
             // 
             this.word.DataPropertyName = "word";
             this.word.HeaderText = "模板文档";
             this.word.Name = "word";
+            this.word.Width = 200;
             // 
             // editColumn1
             // 
@@ -313,7 +307,6 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.DataGridViewTextBoxColumn idColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn nationColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tips;
         private System.Windows.Forms.DataGridViewTextBoxColumn word;
         private System.Windows.Forms.DataGridViewButtonColumn editColumn1;
         private System.Windows.Forms.DataGridViewButtonColumn uploadColumn1;

@@ -23,9 +23,7 @@ namespace DCTS.UI
         private Hashtable dataGridChanges = null;
         private static string NoOptionSelected = "所有";
         private List<ComboLocation> nationlList = null;
-        private SortableBindingList<ComboLocation> sortabledinningsOrderList;
-        int RowRemark = 0;
-        string sqlfilter = "";
+
         public AirportControl()
         {
             InitializeComponent();
@@ -215,7 +213,7 @@ namespace DCTS.UI
             using (var ctx = new DctsEntities())
             {
 
-                var query = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Flight && o.title != null);
+                var query = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Airport && o.title != null);
 
 
                 if (title.Length > 0)

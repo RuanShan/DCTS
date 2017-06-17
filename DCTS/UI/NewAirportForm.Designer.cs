@@ -35,7 +35,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.findFileButton = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.tipsTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.docPathTextBox = new System.Windows.Forms.TextBox();
             this.titleTextBox = new System.Windows.Forms.TextBox();
@@ -104,13 +104,13 @@
             this.label6.TabIndex = 7;
             this.label6.Text = "Word";
             // 
-            // textBox6
+            // tipsTextBox
             // 
-            this.textBox6.Location = new System.Drawing.Point(118, 142);
-            this.textBox6.Multiline = true;
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(520, 52);
-            this.textBox6.TabIndex = 16;
+            this.tipsTextBox.Location = new System.Drawing.Point(118, 142);
+            this.tipsTextBox.Multiline = true;
+            this.tipsTextBox.Name = "tipsTextBox";
+            this.tipsTextBox.Size = new System.Drawing.Size(520, 52);
+            this.tipsTextBox.TabIndex = 16;
             // 
             // label2
             // 
@@ -203,7 +203,7 @@
             this.Controls.Add(this.label11);
             this.Controls.Add(this.findFileButton);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.textBox6);
+            this.Controls.Add(this.tipsTextBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.docPathTextBox);
             this.Controls.Add(this.titleTextBox);
@@ -225,7 +225,7 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.TextBox docPathTextBox;
         private System.Windows.Forms.Button findFileButton;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox tipsTextBox;
         private System.Windows.Forms.Label label11;
         private CustomComponents.EntityDataSource entityDataSource1;
         private System.Windows.Forms.Button cancelButton;

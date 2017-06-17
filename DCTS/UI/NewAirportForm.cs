@@ -29,8 +29,9 @@ namespace DCTS.UI
                 this.Text = "编辑机场";
                 changeid = obj.id;
                 this.titleTextBox.Text = obj.title;
-
-                this.textBox6.Text = obj.tips;
+                this.nationComboBox.Text = obj.nation;
+                this.cityTextBox.Text = obj.city;
+                this.tipsTextBox.Text = obj.tips;
 
                 if (obj.word != null && obj.word != "")
                 {
@@ -99,13 +100,13 @@ namespace DCTS.UI
                             return;
                         }
                         var obj = ctx.ComboLocations.Create();
-                        obj.ltype = (int)ComboLocationEnum.Flight;
+                        obj.ltype = (int)ComboLocationEnum.Airport;
                         obj.title = this.titleTextBox.Text;
                         obj.nation = this.nationComboBox.Text;
                         obj.city = this.cityTextBox.Text;
                         obj.word = copyfilename; ;
 
-                        obj.tips = this.textBox6.Text;
+                        obj.tips = this.tipsTextBox.Text;
                         ctx.ComboLocations.Add(obj);
                         if (nameishave == false && this.titleTextBox.Text.Length <= 100)
                             ctx.SaveChanges();
@@ -128,7 +129,7 @@ namespace DCTS.UI
                         obj.nation = this.nationComboBox.Text;
                         obj.city = this.cityTextBox.Text;                         
                         obj.word = "";
-                        obj.tips = this.textBox6.Text;
+                        obj.tips = this.tipsTextBox.Text;
 
                         if (hasDoc)
                         {
@@ -153,69 +154,7 @@ namespace DCTS.UI
         }
 
 
-        private string imagefolderNewMethod(long filename)
-        {
-            string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\locations", "");
 
-            if (Directory.Exists(lcoalPath))
-            {
-            }
-            else
-            {
-                DirectoryInfo directoryInfo = new DirectoryInfo(lcoalPath);
-                directoryInfo.Create();
-            }
-
-
-            string copypathto = "";
-
-            //List<string> Alist = GetFileName(lcoalPath);
-            string[] dirs = Directory.GetDirectories(lcoalPath + "\\");
-
-
-            DirectoryInfo dir = new DirectoryInfo(lcoalPath);
-            //  FileInfo[] fil = dir.GetFiles();
-            DirectoryInfo[] dii = dir.GetDirectories();
-            int ishad = 0;
-            foreach (DirectoryInfo f in dii)
-            {
-                if (f.Name == filename.ToString())
-                {
-                    copypathto = lcoalPath + "\\" + filename.ToString();
-
-                    ishad++;
-
-                }
-            }
-            if (ishad == 0)
-            {
-                Directory.CreateDirectory(lcoalPath + "\\" + filename.ToString());
-                copypathto = lcoalPath + "\\" + filename.ToString();
-
-            }
-
-            return copypathto;
-        }
-
-        private List<string> GetFileName(string dirPath)
-        {
-            List<string> FileNameList = new List<string>();
-            ArrayList list = new ArrayList();
-
-            if (Directory.Exists(dirPath))
-            {
-                list.AddRange(Directory.GetFiles(dirPath));
-            }
-            if (list.Count > 0)
-            {
-                foreach (object item in list)
-                {
-                    FileNameList.Add(item.ToString().Replace(dirPath + "\\", ""));
-                }
-            }
-
-            return FileNameList;
-        }
         private void findFileButton_Click(object sender, EventArgs e)
         {
 

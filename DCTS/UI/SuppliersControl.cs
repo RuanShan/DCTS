@@ -236,17 +236,15 @@ namespace DCTS.UI
 
         private void NationsControl_Resize(object sender, EventArgs e)
         {  //                                                   id
-            //int s = this.tabControl1.SelectedIndex;
 
-            //if (s == 0)
-            //{
+            
             //    StypeColumn1.Width = dataGridView.ClientSize.Width - 60 - 100 * 3 - 280 - 200 - 100 - 60 * 2 - 3;
             //    //是否包含滚动条
             //    if (!(this.dataGridView.DisplayedRowCount(false) == this.dataGridView.RowCount))
             //    {
             //        StypeColumn1.Width -= 18;
             //    }
-            //}
+      
         }
 
         private void newButton_Click(object sender, EventArgs e)

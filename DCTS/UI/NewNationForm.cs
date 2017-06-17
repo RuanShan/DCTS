@@ -146,69 +146,7 @@ namespace DCTS.UI
         }
 
 
-        private string imagefolderNewMethod(long filename)
-        {
-            string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\images\\locations", "");
 
-            if (Directory.Exists(lcoalPath))
-            {
-            }
-            else
-            {
-                DirectoryInfo directoryInfo = new DirectoryInfo(lcoalPath);
-                directoryInfo.Create();
-            }
-
-
-            string copypathto = "";
-
-            //List<string> Alist = GetFileName(lcoalPath);
-            string[] dirs = Directory.GetDirectories(lcoalPath + "\\");
-
-
-            DirectoryInfo dir = new DirectoryInfo(lcoalPath);
-            //  FileInfo[] fil = dir.GetFiles();
-            DirectoryInfo[] dii = dir.GetDirectories();
-            int ishad = 0;
-            foreach (DirectoryInfo f in dii)
-            {
-                if (f.Name == filename.ToString())
-                {
-                    copypathto = lcoalPath + "\\" + filename.ToString();
-
-                    ishad++;
-
-                }
-            }
-            if (ishad == 0)
-            {
-                Directory.CreateDirectory(lcoalPath + "\\" + filename.ToString());
-                copypathto = lcoalPath + "\\" + filename.ToString();
-
-            }
-
-            return copypathto;
-        }
-
-        private List<string> GetFileName(string dirPath)
-        {
-            List<string> FileNameList = new List<string>();
-            ArrayList list = new ArrayList();
-
-            if (Directory.Exists(dirPath))
-            {
-                list.AddRange(Directory.GetFiles(dirPath));
-            }
-            if (list.Count > 0)
-            {
-                foreach (object item in list)
-                {
-                    FileNameList.Add(item.ToString().Replace(dirPath + "\\", ""));
-                }
-            }
-
-            return FileNameList;
-        }
         private void findFileButton_Click(object sender, EventArgs e)
         {
 
