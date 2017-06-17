@@ -179,30 +179,30 @@ namespace DCTS.UI
 
         public void SetTicketDateGridViewDataSource()
         {
+            SetTicketViewFilter();
             fromAirportBindingSource.DataSource = this.airportList;
             toAirportBindingSource.DataSource = this.airportList;
 
             this.ticketBindingSource.DataSource = this.sortableticketList;
-            flightDataGridView.AutoGenerateColumns = false;
-            SetTicketViewFilter();
+            //flightDataGridView.AutoGenerateColumns = false;
 
             this.flightDataGridView.DataSource = this.ticketBindingSource;
 
-            hotalDataGridView.AutoGenerateColumns = false;
-            //this.hotalDataGridView.DataSource = this.ticketBindingSource;
+            //hotalDataGridView.AutoGenerateColumns = false;
+            this.hotalDataGridView.DataSource = this.ticketBindingSource;
 
 
-            InsuranceGridView.AutoGenerateColumns = false;
-            //this.InsuranceGridView.DataSource = this.ticketBindingSource;
+            //InsuranceGridView.AutoGenerateColumns = false;
+            this.InsuranceGridView.DataSource = this.ticketBindingSource;
 
-            RentalGridView.AutoGenerateColumns = false;
-            //this.RentalGridView.DataSource = this.ticketBindingSource;
+            //RentalGridView.AutoGenerateColumns = false;
+            this.RentalGridView.DataSource = this.ticketBindingSource;
 
-            WIFIGridView.AutoGenerateColumns = false;
-            //this.WIFIGridView.DataSource = this.ticketBindingSource;
+            //WIFIGridView.AutoGenerateColumns = false;
+            this.WIFIGridView.DataSource = this.ticketBindingSource;
 
-            activityDataGridView.AutoGenerateColumns = false;
-            //this.activityDataGridView.DataSource = this.ticketBindingSource;
+            //activityDataGridView.AutoGenerateColumns = false;
+            this.activityDataGridView.DataSource = this.ticketBindingSource;
 
 
             //飞机
@@ -382,6 +382,7 @@ namespace DCTS.UI
                                     }
             Console.WriteLine("selected tab {0}, current supplierType={1}", ticketTabControl.SelectedTab.Text, this.supplierType);
             SetTicketViewFilter();
+
         }
 
         private void deleteFlightButton_Click(object sender, EventArgs e)
