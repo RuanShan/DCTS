@@ -12,6 +12,8 @@ namespace DCTS.UI
 {
     public partial class BaseModalForm : Form
     {
+        public static string Any = "所有";
+
         public BaseModalForm()
         {
             InitializeComponent();

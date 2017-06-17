@@ -12,12 +12,17 @@ namespace DCTS.Uti
         public static bool DeleteConfirm(string msg)
         {
 
-            return MessageBox.Show(msg, "刪除確認", MessageBoxButtons.YesNo) == DialogResult.Yes;
+            return MessageBox.Show(msg, "删除确认", MessageBoxButtons.YesNo) == DialogResult.Yes;
         }
 
         public static DialogResult ErrorBox(string msg)
         {
             return MessageBox.Show(msg, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        public static DialogResult AlertBox(string msg)
+        {
+            return MessageBox.Show(msg, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
     }

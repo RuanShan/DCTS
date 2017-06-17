@@ -20,7 +20,7 @@ namespace DCTS.DB
         {
             get
             {
-                if (nationList == null)
+                // 暂时不要緩存，用戶可能随时添加
                 { InitializeNationList(); }
 
                 return nationList;
@@ -31,7 +31,7 @@ namespace DCTS.DB
         {
             get
             {
-                if (cityList == null)
+                // 暂时不要緩存，用戶可能随时添加
                 { InitializeCityList(); }
 
                 return cityList;
@@ -85,7 +85,7 @@ namespace DCTS.DB
             {
             
                 return (new[]{ 
-                    new MockEntity{ Id = (int)SupplierEnum.Air, ShortName="航空公司", FullName = "航空公司" },
+                    new MockEntity{ Id = (int)SupplierEnum.Flight, ShortName="航空公司", FullName = "航空公司" },
                     new MockEntity{ Id = (int)SupplierEnum.Insurance,ShortName="保险公司", FullName = "保险公司" },
                     new MockEntity{ Id = (int)SupplierEnum.Rental, ShortName="租车公司",FullName = "租车公司" },
                     new MockEntity{ Id = (int)SupplierEnum.WIFI, ShortName="WIFI",FullName = "WIFI" },

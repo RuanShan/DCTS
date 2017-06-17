@@ -329,9 +329,7 @@ namespace DCTS.UI
                 DialogResult result = DialogResult.No;
                 if (dayLocation.ltype == (int)ComboLocationEnum.Flight)
                 {
-                    var form = new EditCustomerFlightForm(dayLocation.id);
-
-                    result = form.ShowDialog();
+                    
                 }
 
                 if (result == DialogResult.Yes)

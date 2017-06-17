@@ -202,5 +202,12 @@ namespace DCTS.Bus
             return existSameImage;
         }
 
+
+        public static List<ComboLocation> TypedLocation(DctsEntities ctx, ComboLocationEnum locationType)
+        {
+            var query = ctx.ComboLocations.Where(o => o.ltype == (int)locationType);
+
+            return query.ToList();
+        }
     }
 }

@@ -15,7 +15,9 @@ namespace DCTS.UI
 {
     public partial class NewAirportForm : BaseModalForm
     {
+        static string Any = "所有";
         private long changeid;
+
         public NewAirportForm(string maintype, ComboLocation obj)
         {
             InitializeComponent();
@@ -29,7 +31,7 @@ namespace DCTS.UI
                 this.titleTextBox.Text = obj.title;
 
                 this.textBox6.Text = obj.tips;
-                long folername = obj.id / 1000;
+
                 if (obj.word != null && obj.word != "")
                 {
                     string copyToPath = EntityPathConfig.LocationWordPath(obj);
@@ -44,6 +46,13 @@ namespace DCTS.UI
         {
             var ctx = this.entityDataSource1.DbContext as DctsEntities;
             var nationList = DCTS.DB.GlobalCache.NationList;
+
+            // 国家
+            var nations = nationList.Select(o => new MockEntity { Id = o.id, ShortName = o.code, FullName = o.title }).ToList();
+            nations.Insert(0, new MockEntity { Id = 0, ShortName = "", FullName = Any });
+            this.nationComboBox.DisplayMember = "FullName";
+            this.nationComboBox.ValueMember = "ShortName";
+            this.nationComboBox.DataSource = nations;
         }
 
         private void saveButton_Click(object sender, EventArgs e)
@@ -92,7 +101,8 @@ namespace DCTS.UI
                         var obj = ctx.ComboLocations.Create();
                         obj.ltype = (int)ComboLocationEnum.Airport;
                         obj.title = this.titleTextBox.Text;
-
+                        obj.nation = this.nationComboBox.Text;
+                        obj.city = this.cityTextBox.Text;
                         obj.word = copyfilename; ;
 
                         obj.tips = this.textBox6.Text;
@@ -115,7 +125,8 @@ namespace DCTS.UI
                     {
                         ComboLocation obj = ctx.ComboLocations.Find(Convert.ToInt32(changeid));
                         obj.title = this.titleTextBox.Text;
-                        obj.ltype = (int)ComboLocationEnum.Flight;
+                        obj.nation = this.nationComboBox.Text;
+                        obj.city = this.cityTextBox.Text;                         
                         obj.word = "";
                         obj.tips = this.textBox6.Text;
 

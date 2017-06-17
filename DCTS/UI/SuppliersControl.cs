@@ -71,7 +71,7 @@ namespace DCTS.UI
             int pageSize = pager2.PageSize;
 
 
-            int[] otherLocationType = { (int)SupplierEnum.Air, (int)SupplierEnum.Insurance, (int)SupplierEnum.Rental, (int)SupplierEnum.WIFI };
+            int[] otherLocationType = { (int)SupplierEnum.Flight, (int)SupplierEnum.Insurance, (int)SupplierEnum.Rental, (int)SupplierEnum.WIFI };
 
 
             using (var ctx = new DctsEntities())
@@ -90,7 +90,7 @@ namespace DCTS.UI
 
                 if (page == 0)
                 {
-                    var Airfiltered = list.FindAll(s => s.stype == (int)SupplierEnum.Air);
+                    var Airfiltered = list.FindAll(s => s.stype == (int)SupplierEnum.Flight);
                
                 this.dataGridView.DataSource = Airfiltered;
                 }
@@ -148,7 +148,7 @@ namespace DCTS.UI
 
             using (var ctx = new DctsEntities())
             {
-                int[] otherLocationType = { (int)SupplierEnum.Air, (int)SupplierEnum.Insurance, (int)SupplierEnum.Rental, (int)SupplierEnum.WIFI };
+                int[] otherLocationType = { (int)SupplierEnum.Flight, (int)SupplierEnum.Insurance, (int)SupplierEnum.Rental, (int)SupplierEnum.WIFI };
 
                 var query = ctx.Suppliers.Where(o => otherLocationType.Contains(o.stype));
 

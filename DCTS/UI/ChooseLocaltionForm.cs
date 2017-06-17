@@ -13,7 +13,6 @@ namespace DCTS.UI
 {
     public partial class ChooseLocaltionForm : BaseModalForm
     {
-        static string Any = "所有";
         List<MockEntity> locationTypeList;
 
         List<ComboLocation> comboLocationList;

@@ -124,6 +124,15 @@
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Bus\ComboLoactionBusiness.cs" />
+    <EmbeddedResource Include="UI\ChooseCountries.resx">
+      <DependentUpon>ChooseCountries.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ChooseCustomersForm.resx">
+      <DependentUpon>ChooseCustomersForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\NewCustomerFlightForm.resx">
+      <DependentUpon>NewCustomerFlightForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\ImportSystemfile.resx">
       <DependentUpon>ImportSystemfile.cs</DependentUpon>
     </EmbeddedResource>
@@ -138,6 +147,7 @@
     </EmbeddedResource>
     <Compile Include="Bus\CustomerTripWordExporterEx.cs" />
     <Compile Include="Bus\CustomerTripWordExporter.cs" />
+    <Compile Include="Bus\SupplierBusiness.cs" />
     <Compile Include="Bus\TripWordExporterEx.cs" />
     <Compile Include="Bus\CSVStreamReader.cs" />
     <Compile Include="Bus\LocationExporter.cs" />
@@ -179,6 +189,7 @@
     <Compile Include="DB\DBContextExtension.cs" />
     <Compile Include="DB\DiningLocation.cs" />
     <Compile Include="DB\EntityPathConfig.cs" />
+    <Compile Include="DB\FlightTicket.cs" />
     <Compile Include="DB\GlobalCache.cs" />
     <Compile Include="DB\MockEntity.cs" />
     <Compile Include="LocationImage.cs">
@@ -205,6 +216,18 @@
     <Compile Include="TripDay.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="UI\ChooseCountries.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ChooseCountries.Designer.cs">
+      <DependentUpon>ChooseCountries.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ChooseCustomersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ChooseCustomersForm.Designer.cs">
+      <DependentUpon>ChooseCustomersForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\ChooseLocaltionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -212,6 +235,12 @@
       <DependentUpon>ChooseLocaltionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\CommandRequest.cs" />
+    <Compile Include="UI\NewCustomerFlightForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\NewCustomerFlightForm.Designer.cs">
+      <DependentUpon>NewCustomerFlightForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\ImportSystemfile.cs">
       <SubType>Form</SubType>
     </Compile>

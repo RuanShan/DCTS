@@ -32,43 +32,26 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.cancelButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.flightFromTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.customerTextBox = new System.Windows.Forms.TextBox();
             this.flightCompanyComboBox = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.flightToTextBox = new System.Windows.Forms.TextBox();
-            this.flightStartDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.flightEndDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.flightNoTextBox = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.airportFromTextBox = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.airportToTextBox = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.flightLayoverCheckBox = new System.Windows.Forms.CheckBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.flight2StartDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.flight2EndDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.airport2FromTextBox5 = new System.Windows.Forms.TextBox();
-            this.airport2ToTextBox = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.flight2NoTextBox = new System.Windows.Forms.TextBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.ticketNumColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fromPlaceColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toPlaceColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.startAtColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.endAtColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fromAddressColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toAddressColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.newButton1 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -81,7 +64,7 @@
             // cancelButton
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.No;
-            this.cancelButton.Location = new System.Drawing.Point(595, 435);
+            this.cancelButton.Location = new System.Drawing.Point(708, 412);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 6;
@@ -92,7 +75,7 @@
             // saveButton
             // 
             this.saveButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
-            this.saveButton.Location = new System.Drawing.Point(514, 435);
+            this.saveButton.Location = new System.Drawing.Point(627, 412);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 5;
@@ -100,19 +83,10 @@
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(34, 54);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(41, 12);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "始发地";
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(57, 115);
+            this.label3.Location = new System.Drawing.Point(24, 118);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 4;
@@ -125,22 +99,15 @@
             this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.Location = new System.Drawing.Point(12, 21);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(713, 41);
+            this.label2.Size = new System.Drawing.Size(821, 41);
             this.label2.TabIndex = 3;
             this.label2.Text = "客户机票信息";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // flightFromTextBox
-            // 
-            this.flightFromTextBox.Location = new System.Drawing.Point(81, 50);
-            this.flightFromTextBox.Name = "flightFromTextBox";
-            this.flightFromTextBox.Size = new System.Drawing.Size(233, 21);
-            this.flightFromTextBox.TabIndex = 1;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(81, 85);
+            this.label1.Location = new System.Drawing.Point(48, 88);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(29, 12);
             this.label1.TabIndex = 0;
@@ -154,283 +121,133 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // customerTextBox
-            // 
-            this.customerTextBox.Location = new System.Drawing.Point(116, 81);
-            this.customerTextBox.Name = "customerTextBox";
-            this.customerTextBox.Size = new System.Drawing.Size(233, 21);
-            this.customerTextBox.TabIndex = 0;
-            // 
             // flightCompanyComboBox
             // 
             this.flightCompanyComboBox.FormattingEnabled = true;
             this.flightCompanyComboBox.Items.AddRange(new object[] {
             "男",
             "女"});
-            this.flightCompanyComboBox.Location = new System.Drawing.Point(116, 111);
+            this.flightCompanyComboBox.Location = new System.Drawing.Point(83, 114);
             this.flightCompanyComboBox.Name = "flightCompanyComboBox";
             this.flightCompanyComboBox.Size = new System.Drawing.Size(233, 20);
             this.flightCompanyComboBox.TabIndex = 3;
             // 
-            // label6
+            // dataGridView1
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(355, 54);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(41, 12);
-            this.label6.TabIndex = 12;
-            this.label6.Text = "目的地";
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeColumns = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ticketNumColumn1,
+            this.fromPlaceColumn1,
+            this.toPlaceColumn1,
+            this.startAtColumn1,
+            this.endAtColumn1,
+            this.fromAddressColumn1,
+            this.toAddressColumn1});
+            this.dataGridView1.Location = new System.Drawing.Point(83, 150);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.RowTemplate.Height = 23;
+            this.dataGridView1.Size = new System.Drawing.Size(700, 218);
+            this.dataGridView1.TabIndex = 17;
             // 
-            // flightToTextBox
+            // ticketNumColumn1
             // 
-            this.flightToTextBox.Location = new System.Drawing.Point(402, 50);
-            this.flightToTextBox.Name = "flightToTextBox";
-            this.flightToTextBox.Size = new System.Drawing.Size(233, 21);
-            this.flightToTextBox.TabIndex = 11;
+            this.ticketNumColumn1.HeaderText = "航班号";
+            this.ticketNumColumn1.Name = "ticketNumColumn1";
             // 
-            // flightStartDateTimePicker
+            // fromPlaceColumn1
             // 
-            this.flightStartDateTimePicker.CustomFormat = "yyyy-MM-dd HH:mm:ss";
-            this.flightStartDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.flightStartDateTimePicker.Location = new System.Drawing.Point(81, 79);
-            this.flightStartDateTimePicker.Name = "flightStartDateTimePicker";
-            this.flightStartDateTimePicker.Size = new System.Drawing.Size(233, 21);
-            this.flightStartDateTimePicker.TabIndex = 13;
+            this.fromPlaceColumn1.HeaderText = "始发地";
+            this.fromPlaceColumn1.Name = "fromPlaceColumn1";
             // 
-            // label8
+            // toPlaceColumn1
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(22, 83);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(53, 12);
-            this.label8.TabIndex = 14;
-            this.label8.Text = "起飞时间";
+            this.toPlaceColumn1.HeaderText = "目的地";
+            this.toPlaceColumn1.Name = "toPlaceColumn1";
             // 
-            // label9
+            // startAtColumn1
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(343, 83);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(53, 12);
-            this.label9.TabIndex = 14;
-            this.label9.Text = "到达时间";
+            this.startAtColumn1.HeaderText = "起飞时间";
+            this.startAtColumn1.Name = "startAtColumn1";
             // 
-            // flightEndDateTimePicker
+            // endAtColumn1
             // 
-            this.flightEndDateTimePicker.CustomFormat = "yyyy-MM-dd HH:mm:ss";
-            this.flightEndDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.flightEndDateTimePicker.Location = new System.Drawing.Point(402, 79);
-            this.flightEndDateTimePicker.Name = "flightEndDateTimePicker";
-            this.flightEndDateTimePicker.Size = new System.Drawing.Size(233, 21);
-            this.flightEndDateTimePicker.TabIndex = 13;
+            this.endAtColumn1.HeaderText = "到达时间";
+            this.endAtColumn1.Name = "endAtColumn1";
             // 
-            // flightNoTextBox
+            // fromAddressColumn1
             // 
-            this.flightNoTextBox.Location = new System.Drawing.Point(81, 20);
-            this.flightNoTextBox.Name = "flightNoTextBox";
-            this.flightNoTextBox.Size = new System.Drawing.Size(233, 21);
-            this.flightNoTextBox.TabIndex = 1;
+            this.fromAddressColumn1.HeaderText = "始发地机场";
+            this.fromAddressColumn1.Name = "fromAddressColumn1";
             // 
-            // label10
+            // toAddressColumn1
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(34, 24);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(41, 12);
-            this.label10.TabIndex = 4;
-            this.label10.Text = "航班号";
+            this.toAddressColumn1.HeaderText = "目的地机场";
+            this.toAddressColumn1.Name = "toAddressColumn1";
             // 
-            // airportFromTextBox
+            // newButton1
             // 
-            this.airportFromTextBox.Location = new System.Drawing.Point(81, 109);
-            this.airportFromTextBox.Name = "airportFromTextBox";
-            this.airportFromTextBox.Size = new System.Drawing.Size(233, 21);
-            this.airportFromTextBox.TabIndex = 1;
+            this.newButton1.Location = new System.Drawing.Point(80, 375);
+            this.newButton1.Name = "newButton1";
+            this.newButton1.Size = new System.Drawing.Size(30, 23);
+            this.newButton1.TabIndex = 18;
+            this.newButton1.Text = "+";
+            this.newButton1.UseVisualStyleBackColor = true;
             // 
-            // label11
+            // button1
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(10, 113);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(65, 12);
-            this.label11.TabIndex = 4;
-            this.label11.Text = "始发地机场";
+            this.button1.Location = new System.Drawing.Point(116, 374);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(30, 23);
+            this.button1.TabIndex = 18;
+            this.button1.Text = "-";
+            this.button1.UseVisualStyleBackColor = true;
             // 
-            // airportToTextBox
+            // label4
             // 
-            this.airportToTextBox.Location = new System.Drawing.Point(402, 109);
-            this.airportToTextBox.Name = "airportToTextBox";
-            this.airportToTextBox.Size = new System.Drawing.Size(233, 21);
-            this.airportToTextBox.TabIndex = 11;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(24, 154);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 12);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "航班信息";
             // 
-            // label12
+            // comboBox1
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(331, 113);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(65, 12);
-            this.label12.TabIndex = 12;
-            this.label12.Text = "目的地机场";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.flightStartDateTimePicker);
-            this.groupBox1.Controls.Add(this.flightEndDateTimePicker);
-            this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Controls.Add(this.flightToTextBox);
-            this.groupBox1.Controls.Add(this.airportToTextBox);
-            this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.flightNoTextBox);
-            this.groupBox1.Controls.Add(this.flightFromTextBox);
-            this.groupBox1.Controls.Add(this.airportFromTextBox);
-            this.groupBox1.Location = new System.Drawing.Point(35, 141);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(663, 146);
-            this.groupBox1.TabIndex = 15;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "航班信息";
-            // 
-            // flightLayoverCheckBox
-            // 
-            this.flightLayoverCheckBox.AutoSize = true;
-            this.flightLayoverCheckBox.Location = new System.Drawing.Point(368, 114);
-            this.flightLayoverCheckBox.Name = "flightLayoverCheckBox";
-            this.flightLayoverCheckBox.Size = new System.Drawing.Size(72, 16);
-            this.flightLayoverCheckBox.TabIndex = 16;
-            this.flightLayoverCheckBox.Text = "是否转机";
-            this.flightLayoverCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.flight2StartDateTimePicker);
-            this.groupBox2.Controls.Add(this.flight2EndDateTimePicker);
-            this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.label13);
-            this.groupBox2.Controls.Add(this.airport2FromTextBox5);
-            this.groupBox2.Controls.Add(this.airport2ToTextBox);
-            this.groupBox2.Controls.Add(this.label15);
-            this.groupBox2.Controls.Add(this.label16);
-            this.groupBox2.Controls.Add(this.label17);
-            this.groupBox2.Controls.Add(this.flight2NoTextBox);
-            this.groupBox2.Location = new System.Drawing.Point(35, 295);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(663, 121);
-            this.groupBox2.TabIndex = 15;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "转机信息";
-            // 
-            // flight2StartDateTimePicker
-            // 
-            this.flight2StartDateTimePicker.CustomFormat = "yyyy-MM-dd HH:mm:ss";
-            this.flight2StartDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.flight2StartDateTimePicker.Location = new System.Drawing.Point(80, 51);
-            this.flight2StartDateTimePicker.Name = "flight2StartDateTimePicker";
-            this.flight2StartDateTimePicker.Size = new System.Drawing.Size(233, 21);
-            this.flight2StartDateTimePicker.TabIndex = 13;
-            // 
-            // flight2EndDateTimePicker
-            // 
-            this.flight2EndDateTimePicker.CustomFormat = "yyyy-MM-dd HH:mm:ss";
-            this.flight2EndDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.flight2EndDateTimePicker.Location = new System.Drawing.Point(402, 51);
-            this.flight2EndDateTimePicker.Name = "flight2EndDateTimePicker";
-            this.flight2EndDateTimePicker.Size = new System.Drawing.Size(233, 21);
-            this.flight2EndDateTimePicker.TabIndex = 13;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(22, 55);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(53, 12);
-            this.label7.TabIndex = 14;
-            this.label7.Text = "起飞时间";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(343, 55);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(53, 12);
-            this.label13.TabIndex = 14;
-            this.label13.Text = "到达时间";
-            // 
-            // airport2FromTextBox5
-            // 
-            this.airport2FromTextBox5.Location = new System.Drawing.Point(80, 82);
-            this.airport2FromTextBox5.Name = "airport2FromTextBox5";
-            this.airport2FromTextBox5.Size = new System.Drawing.Size(233, 21);
-            this.airport2FromTextBox5.TabIndex = 11;
-            // 
-            // airport2ToTextBox
-            // 
-            this.airport2ToTextBox.Location = new System.Drawing.Point(402, 82);
-            this.airport2ToTextBox.Name = "airport2ToTextBox";
-            this.airport2ToTextBox.Size = new System.Drawing.Size(233, 21);
-            this.airport2ToTextBox.TabIndex = 11;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(331, 86);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(65, 12);
-            this.label15.TabIndex = 12;
-            this.label15.Text = "目的地机场";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(34, 86);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(41, 12);
-            this.label16.TabIndex = 12;
-            this.label16.Text = "目的地";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(34, 27);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(41, 12);
-            this.label17.TabIndex = 4;
-            this.label17.Text = "航班号";
-            // 
-            // flight2NoTextBox
-            // 
-            this.flight2NoTextBox.Location = new System.Drawing.Point(81, 24);
-            this.flight2NoTextBox.Name = "flight2NoTextBox";
-            this.flight2NoTextBox.Size = new System.Drawing.Size(233, 21);
-            this.flight2NoTextBox.TabIndex = 1;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "男",
+            "女"});
+            this.comboBox1.Location = new System.Drawing.Point(83, 85);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(233, 20);
+            this.comboBox1.TabIndex = 3;
             // 
             // EditCustomerFlightForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(738, 470);
-            this.Controls.Add(this.flightLayoverCheckBox);
-            this.Controls.Add(this.customerTextBox);
+            this.ClientSize = new System.Drawing.Size(846, 470);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.newButton1);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.saveButton);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.flightCompanyComboBox);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
             this.Name = "EditCustomerFlightForm";
             this.Text = "编辑机票信息";
             this.Load += new System.EventHandler(this.EditCustomerFlightForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -441,39 +258,23 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox flightFromTextBox;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private CustomComponents.EntityDataSource entityDataSource1;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private System.Windows.Forms.TextBox customerTextBox;
         private System.Windows.Forms.ComboBox flightCompanyComboBox;
-        private System.Windows.Forms.DateTimePicker flightEndDateTimePicker;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.DateTimePicker flightStartDateTimePicker;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox airportToTextBox;
-        private System.Windows.Forms.TextBox flightToTextBox;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox airportFromTextBox;
-        private System.Windows.Forms.TextBox flightNoTextBox;
-        private System.Windows.Forms.CheckBox flightLayoverCheckBox;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DateTimePicker flight2StartDateTimePicker;
-        private System.Windows.Forms.DateTimePicker flight2EndDateTimePicker;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox airport2FromTextBox5;
-        private System.Windows.Forms.TextBox airport2ToTextBox;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TextBox flight2NoTextBox;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ticketNumColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fromPlaceColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn toPlaceColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn startAtColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn endAtColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fromAddressColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn toAddressColumn1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button newButton1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
