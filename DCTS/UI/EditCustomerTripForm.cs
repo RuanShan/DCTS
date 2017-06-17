@@ -1,5 +1,6 @@
 ﻿using DCTS.CustomComponents;
 using DCTS.DB;
+using DCTS.Uti;
 using Equin.ApplicationFramework;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,8 @@ namespace DCTS.UI
         public long TripId { get; set; }
         Trip trip;
         List<Ticket> ticketList;
+        List<Ticket> deletedTicketList;
+
         SupplierEnum supplierType;
         private BindingListView<Ticket> ticketView;
         private List<Supplier> supplierList;
@@ -27,7 +30,14 @@ namespace DCTS.UI
             InitializeComponent();
             TripId = tripId;
             supplierType = SupplierEnum.Flight;
-            ticketView = new BindingListView<Ticket>(new List<Ticket>());
+            deletedTicketList = new List<Ticket>();
+
+            flightDataGridView.AutoGenerateColumns = false;
+            hotalDataGridView.AutoGenerateColumns = false;
+            InsuranceGridView.AutoGenerateColumns = false;
+            RentalGridView.AutoGenerateColumns = false;
+            WIFIGridView.AutoGenerateColumns = false;
+            activityDataGridView.AutoGenerateColumns = false;
         }
 
         private void saveButton_Click(object sender, EventArgs e)
@@ -47,6 +57,9 @@ namespace DCTS.UI
 
             this.tripFormControl1.FillFormByModel(trip);
             this.tripFormControl1.daysNumericUpDown.ReadOnly = true;
+
+
+            SetTicketDateGridViewDataSource();
         }
 
         #region 处理票务信息
@@ -60,6 +73,8 @@ namespace DCTS.UI
         
         public void SetTicketDateGridViewDataSource()
         {
+            ticketView = new BindingListView<Ticket>(this.ticketList);
+
             var view = ticketView;
             SetTicketViewFilter();
 
@@ -124,9 +139,96 @@ namespace DCTS.UI
 
         }
 
+        private void addFlightButton1_Click(object sender, EventArgs e)
+        {
+
+            var suppliers = supplierList.Where(o => (o.stype == (int)supplierType)).ToList();
+
+            if (suppliers.Count == 0)
+            {
+                MessageHelper.AlertBox(string.Format("请先录入{0}服务商！", supplierType));
+                return;
+            }
+
+            int cid = trip.customer_id; // customerList.First().id;
+            int sid = suppliers.First().id;
+            var objectView = ticketView.AddNew();
+
+            var ticket = objectView.Object;
+            ticket.ttype = (int)supplierType;
+            ticket.customer_id = cid;
+            //supplier is required for filter
+            ticket.supplier_id = sid;
+            ticket.start_at = DateTime.Now;
+            ticket.end_at = DateTime.Now;
+
+            if (supplierType == SupplierEnum.Flight)
+            {
+                //var airport = fromAirportBindingSource.Current as ComboLocation;                    
+                //ticket.from_location_id= airport.id;
+                //ticket.to_location_id = airport.id;
+            }
+            if (supplierType == SupplierEnum.Hotal)
+            {
+                //supplier is required for filter
+            }
+            ticketView.EndNew(ticketView.Count - 1);
+        }
+
+        private void deleteFlightButton_Click(object sender, EventArgs e)
+        {
+            var view = GetDataGridViewBySupplierType();
+            var objectView = view.CurrentRow.DataBoundItem as ObjectView<Ticket>;
+
+            this.deletedTicketList.Add(objectView.Object);
+            this.ticketView.DataSource.Remove(objectView.Object);
+            this.ticketView.Refresh();
+
+        }
+        
+        #endregion
+
+        private void saveTicketButton_Click(object sender, EventArgs e)
+        {
+            var ctx = this.entityDataSource1.DbContext as DctsEntities;
+
+            // 保存及添加
+            foreach (var ticket in ticketView)
+            {
+                trip.Tickets.Add(ticket);
+            }
+
+            // 删除
+            ctx.Tickets.RemoveRange(deletedTicketList.Where(o=>o.id>0).ToArray());
+            
+            ctx.SaveChanges();
+
+        }
+
+        private DataGridView GetDataGridViewBySupplierType()
+        {
+            DataGridView view = null;
+            switch ((supplierType))
+            {
+                case SupplierEnum.Flight:
+                    view = this.flightDataGridView;
+                    break;
+                case SupplierEnum.Hotal:
+                    view = this.hotalDataGridView;
+                    break;
+                case SupplierEnum.Insurance:
+                    view = this.InsuranceGridView;
+                    break;
+                case SupplierEnum.Rental:
+                    view = this.RentalGridView;
+                    break;
+
+            }
+            return view;
+        }
 
         #endregion
 
-        #endregion
+
     }
 }
