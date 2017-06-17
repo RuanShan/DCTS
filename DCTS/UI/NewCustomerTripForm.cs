@@ -113,6 +113,7 @@ namespace DCTS.UI
                     trip.start_at = this.startAtDateTimePicker.Value;
                     trip.title = this.titleTextBox.Text;
                     trip.memo = this.memoTextBox.Text;
+                    trip.countries = this.nationTextBox.Text;
                     if (trip.days < days)
                     {
                         for (int i = days; i < trip.days; i++)
@@ -136,6 +137,7 @@ namespace DCTS.UI
                     trip.start_at = this.startAtDateTimePicker.Value;
                     trip.memo = this.memoTextBox.Text;
                     trip.days = Convert.ToInt32(this.daysNumericUpDown.Value);
+                    trip.countries = this.nationTextBox.Text;
 
                     for (int i = 0; i < trip.days; i++)
                     {
