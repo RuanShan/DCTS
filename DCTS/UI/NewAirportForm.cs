@@ -80,7 +80,7 @@ namespace DCTS.UI
 
                             long idStart = newId / 1000 * 1000;
                             long idEnd = idStart + 1000;
-                            existSamedoc = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Flight && o.word == copyfilename && o.id > idStart && o.id < idEnd).Count() > 0);
+                            existSamedoc = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Airport && o.word == copyfilename && o.id > idStart && o.id < idEnd).Count() > 0);
                         }
 
                     }
@@ -89,7 +89,7 @@ namespace DCTS.UI
                     {
                         ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
                         if (lastLocation != null)
-                            nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Flight && o.word == openFileDialog1.SafeFileName && o.title == titleTextBox.Text).Count() > 0);
+                            nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Airport && o.word == openFileDialog1.SafeFileName && o.title == titleTextBox.Text).Count() > 0);
                     }
                     #endregion
                     if (changeid == 0)
@@ -194,7 +194,7 @@ namespace DCTS.UI
                 {
                     ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
                     if (lastLocation != null)
-                        nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Flight && o.title == titleTextBox.Text).Count() > 0);
+                        nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Airport && o.title == titleTextBox.Text).Count() > 0);
 
                     if (changeid == 0)
                     {

@@ -173,7 +173,7 @@ namespace DCTS.UI
             using (var ctx = new DctsEntities())
             {
                 //分页需要数据总数
-                count = Count(ComboLocationEnum.Flight, title);
+                count = Count(ComboLocationEnum.Airport, title);
 
                 var list = Paginate(pageCurrent, pageSize, title);
 
@@ -189,7 +189,7 @@ namespace DCTS.UI
                 var query = ctx.ComboLocations.AsQueryable();
                 if ((int)locationType > 0)
                 {
-                    query = query.Where(o => o.ltype == (int)ComboLocationEnum.Flight);
+                    query = query.Where(o => o.ltype == (int)ComboLocationEnum.Airport);
 
                 }
 
