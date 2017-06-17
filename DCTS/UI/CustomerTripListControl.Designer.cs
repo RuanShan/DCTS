@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.addTripButton = new System.Windows.Forms.Button();
             this.tripDataGridView = new System.Windows.Forms.DataGridView();
             this.IdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,6 +47,7 @@
             this.downloadButton = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
+            this.fullEditButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tripDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,20 +81,20 @@
             this.editTripColumn1,
             this.copyTripColumn1,
             this.deleteTripColumn1});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.tripDataGridView.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.tripDataGridView.DefaultCellStyle = dataGridViewCellStyle3;
             this.tripDataGridView.Location = new System.Drawing.Point(9, 53);
             this.tripDataGridView.Name = "tripDataGridView";
             this.tripDataGridView.RowHeadersVisible = false;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
-            this.tripDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            this.tripDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.tripDataGridView.RowTemplate.Height = 34;
             this.tripDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.tripDataGridView.Size = new System.Drawing.Size(864, 289);
@@ -208,10 +209,21 @@
             // 
             this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
             // 
+            // fullEditButton
+            // 
+            this.fullEditButton.Location = new System.Drawing.Point(555, 18);
+            this.fullEditButton.Name = "fullEditButton";
+            this.fullEditButton.Size = new System.Drawing.Size(75, 23);
+            this.fullEditButton.TabIndex = 7;
+            this.fullEditButton.Text = "票务编辑";
+            this.fullEditButton.UseVisualStyleBackColor = true;
+            this.fullEditButton.Click += new System.EventHandler(this.fullEditButton_Click);
+            // 
             // CustomerTripListControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.fullEditButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.downloadButton);
             this.Controls.Add(this.exportWordButton);
@@ -244,5 +256,6 @@
         private System.Windows.Forms.DataGridViewButtonColumn copyTripColumn1;
         private System.Windows.Forms.DataGridViewButtonColumn deleteTripColumn1;
         private CustomComponents.EntityDataSource entityDataSource1;
+        private System.Windows.Forms.Button fullEditButton;
     }
 }

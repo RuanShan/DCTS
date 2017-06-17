@@ -149,6 +149,10 @@ namespace DCTS.UI
                         trip.Tickets.Add(ticket);                                                                
                     }
                     //trip.Tickets.Concat(ticketList);
+                    foreach (var customer in customerList)
+                    { 
+                        trip.TripCustomers.Add( new TripCustomer(){ customer_id = customer.id});
+                    }
 
                     ctx.Trips.Add(trip);
                     ctx.SaveChanges();

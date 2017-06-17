@@ -230,7 +230,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="trip_id" Type="int" />
           <Property Name="customer_id" Type="int" />
         </EntityType>

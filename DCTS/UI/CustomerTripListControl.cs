@@ -118,11 +118,11 @@ namespace DCTS.UI
         }
 
 
-        private long SelectedTripId
+        private int SelectedTripId
         {
             get
             {
-                long id = 0;
+                int id = 0;
                 var row = tripDataGridView.CurrentRow;
                 if (row != null)
                 {
@@ -186,6 +186,14 @@ namespace DCTS.UI
         private void TripListControl_Resize(object sender, EventArgs e)
         {
             tripTitleColumn1.Width = tripDataGridView.ClientSize.Width - 80 * 2 - 260 - 120 - 60 * 4 -3;
+
+        }
+
+        private void fullEditButton_Click(object sender, EventArgs e)
+        {
+            int tid = SelectedTripId;
+            var form = new EditCustomerTripForm(tid);
+            form.ShowDialog();
 
         }
 
