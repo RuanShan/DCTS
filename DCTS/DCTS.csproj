@@ -524,6 +524,12 @@
     <Compile Include="UI\ImportSystemfiles.Designer.cs">
       <DependentUpon>ImportSystemfiles.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\SelectSystemfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\SelectSystemfile.Designer.cs">
+      <DependentUpon>SelectSystemfile.cs</DependentUpon>
+    </Compile>
     <Compile Include="Uti\EFIntercepterLogging.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -738,6 +744,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ImportSystemfiles.resx">
       <DependentUpon>ImportSystemfiles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\SelectSystemfile.resx">
+      <DependentUpon>SelectSystemfile.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
