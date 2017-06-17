@@ -39,9 +39,6 @@ namespace DCTS.CustomComponents
 
         }
 
-
-
-
         private void imagedockin(List<LocationImage> list)
         {
             ImageList imageListSmall = new ImageList();
@@ -61,7 +58,7 @@ namespace DCTS.CustomComponents
             }
             #region 绑定数据图片
             this.listView1.View = View.LargeIcon;
-            listView1.CheckBoxes = true;
+            //listView1.CheckBoxes = true;
 
             this.listView1.Columns.Add("文件", 5200, HorizontalAlignment.Left); //一步添加 
             listView1.LargeImageList = imageListSmall;
@@ -90,7 +87,6 @@ namespace DCTS.CustomComponents
             this.listView1.EndUpdate();  //结束数据处理，UI界面一次性绘制。  
             #endregion
         }
-
 
         private int InitializeDataGridView(int pageCurrent = 1)
         {
@@ -187,7 +183,7 @@ namespace DCTS.CustomComponents
                     var query = ctx.LocationImages.Where(o => o.location_id == (int)location.id && o.name == name);
                     List<LocationImage> list = query.ToList();
 
-                    string msg = string.Format("确定删除国家<{0}>？", list[0].name);
+                    string msg = string.Format("确定删除<{0}>？", list[0].name);
 
                     if (MessageHelper.DeleteConfirm(msg))
                     {
@@ -205,9 +201,10 @@ namespace DCTS.CustomComponents
         private void listView1_DoubleClick(object sender, EventArgs e)
         {
             listfile = new List<string>();
-            string item = this.listView1.SelectedItems[0].Text;
-            if (this.listView1.CheckedItems.Count > 0)
+            if (this.listView1.SelectedItems.Count > 0)
             {
+                string item = this.listView1.SelectedItems[0].Text;
+
                 strFileName = this.listView1.SelectedItems[0].Text;
                 var itemfind = listpage.Find(s => s.name == this.listView1.SelectedItems[0].Text);
 
