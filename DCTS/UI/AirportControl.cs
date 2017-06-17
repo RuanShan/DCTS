@@ -161,7 +161,7 @@ namespace DCTS.UI
             int count = InitializeDataGridView(e.PageCurrent);
             return count;
         }
-         
+
         // 初始化DataGridView的数据源, 分页事件调用
         private int InitializeDataGridView(int pageCurrent = 1)
         {
@@ -173,7 +173,7 @@ namespace DCTS.UI
             using (var ctx = new DctsEntities())
             {
                 //分页需要数据总数
-                count = Count(ComboLocationEnum.Flight, title);
+                count = Count(ComboLocationEnum.Airport, title);
 
                 var list = Paginate(pageCurrent, pageSize, title);
 
@@ -189,7 +189,7 @@ namespace DCTS.UI
                 var query = ctx.ComboLocations.AsQueryable();
                 if ((int)locationType > 0)
                 {
-                    query = query.Where(o => o.ltype == (int)ComboLocationEnum.Flight);
+                    query = query.Where(o => o.ltype == (int)ComboLocationEnum.Airport);
 
                 }
 
@@ -293,6 +293,8 @@ namespace DCTS.UI
                 {
                     strFileName = openFileDialog1.FileName;
                 }
+                if (strFileName == "")
+                    return;
 
 
                 if (strFileName.Length > 0)
@@ -306,7 +308,7 @@ namespace DCTS.UI
 
                             long idStart = newId / 1000 * 1000;
                             long idEnd = idStart + 1000;
-                            bool existSamedoc = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Flight && o.word == openFileDialog1.SafeFileName && o.id > idStart && o.id < idEnd).Count() > 0);
+                            bool existSamedoc = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Airport && o.word == openFileDialog1.SafeFileName && o.id != model.id).Count() > 0);
                             if (existSamedoc)
                             {
                                 MessageBox.Show(string.Format("文件名<" + openFileDialog1.SafeFileName + ">已在, 请使用其他文件名！", model.word));

@@ -38,25 +38,25 @@ namespace DCTS.CustomComponents
             pager1.Bind();
 
         }
-     
 
 
-      
+
+
         private void imagedockin(List<LocationImage> list)
         {
             ImageList imageListSmall = new ImageList();
             int i = 0;
-         
+
             foreach (LocationImage item in list)
             {
 
                 if (item.name != null)
                 {
                     string ImageLocation = EntityPathConfig.newlocationimagepath(item);
-
-                    imageListSmall.Images.Add(Bitmap.FromFile(ImageLocation));
+                    if (File.Exists(ImageLocation))
+                        imageListSmall.Images.Add(Bitmap.FromFile(ImageLocation));
                 }
-        
+
                 i++;
             }
             #region 绑定数据图片
@@ -66,22 +66,26 @@ namespace DCTS.CustomComponents
             this.listView1.Columns.Add("文件", 5200, HorizontalAlignment.Left); //一步添加 
             listView1.LargeImageList = imageListSmall;
             //new size 
-            listView1.Bounds = new Rectangle(new Point(10, 10), new Size(300, 200));
+            //   listView1.Bounds = new Rectangle(new Point(10, 10), new Size(300, 200));
 
-  
+
             this.listView1.BeginUpdate();   //数据更新，UI暂时挂起，直到EndUpdate绘制控件，可以有效避免闪烁并大大提高加载速度  
             i = 0;
-    
+
             foreach (LocationImage item in list)
             {
-                ListViewItem lvi = new ListViewItem();
+                string ImageLocation = EntityPathConfig.newlocationimagepath(item);
+                if (File.Exists(ImageLocation))
+                {
+                    ListViewItem lvi = new ListViewItem();
 
-                lvi.ImageIndex = i;     //通过与imageList绑定，显示imageList中第i项图标  
+                    lvi.ImageIndex = i;     //通过与imageList绑定，显示imageList中第i项图标  
 
-                lvi.Text = item.name;
+                    lvi.Text = item.name;
 
-                this.listView1.Items.Add(lvi);
-                i++;
+                    this.listView1.Items.Add(lvi);
+                    i++;
+                }
             }
             this.listView1.EndUpdate();  //结束数据处理，UI界面一次性绘制。  
             #endregion
@@ -195,7 +199,7 @@ namespace DCTS.CustomComponents
         }
 
         private void listView1_ItemChecked(object sender, ItemCheckedEventArgs e)
-        {      
+        {
         }
 
         private void listView1_DoubleClick(object sender, EventArgs e)
