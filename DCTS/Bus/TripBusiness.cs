@@ -43,8 +43,12 @@ namespace DCTS.Bus
 
                 string sqlRemoveDays = string.Format("DELETE FROM TripDays WHERE TripDays.trip_id={0}", trip_id);
                 string sqlRemoveLocations = string.Format("DELETE FROM DayLocations WHERE DayLocations.trip_id={0}", trip_id);
+                string sqlRemoveTickets = string.Format("DELETE FROM Tickets WHERE Tickets.trip_id={0}", trip_id);
+                string sqlRemoveTripCustomers = string.Format("DELETE FROM TripCustomers WHERE TripCustomers.trip_id={0}", trip_id);
                 ctx.Database.ExecuteSqlCommand(sqlRemoveLocations);
                 ctx.Database.ExecuteSqlCommand(sqlRemoveDays);
+                ctx.Database.ExecuteSqlCommand(sqlRemoveTickets);
+                ctx.Database.ExecuteSqlCommand(sqlRemoveTripCustomers);
                 ctx.Trips.Remove(trip);
                 ctx.SaveChanges();
             }
