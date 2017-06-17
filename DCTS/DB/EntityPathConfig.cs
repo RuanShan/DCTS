@@ -13,10 +13,11 @@ namespace DCTS.DB
 
         public static string DataBasePath
         {
-            get {
+            get
+            {
                 string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "data");
                 CreateFolder(path);
-                return path;                
+                return path;
             }
         }
 
@@ -54,10 +55,11 @@ namespace DCTS.DB
 
         public static string ImageBasePath
         {
-            get {
+            get
+            {
                 string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "data", "images");
                 CreateFolder(path);
-                return path;                
+                return path;
             }
         }
 
@@ -71,14 +73,16 @@ namespace DCTS.DB
         }
         public static string newlocationimagebasepath(LocationImage location)
         {
-            ComboLocationEnum type = (ComboLocationEnum)location.location_id;
+          //  ComboLocationEnum type = (ComboLocationEnum)location.location_id;
+            ComboLocationEnum type = ComboLocationEnum.PageImage;
+
             string path = Path.Combine(ImageBasePath, "location_" + type.ToString().ToLower());
             CreateFolder(path);
             return path;
         }
 
 
-        public  static string LocationImagePath( ComboLocation location )
+        public static string LocationImagePath(ComboLocation location)
         {
 
             string basePath = LocationImageBasePath(location);
@@ -126,7 +130,7 @@ namespace DCTS.DB
 
         public static string TripWordFolderPath(long tripId)
         {
-            
+
             string basePath = @"data\export\words";
             string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, basePath, (tripId / 1000).ToString());
             CreateFolder(path);
@@ -134,7 +138,7 @@ namespace DCTS.DB
         }
 
         public static string TripWordFilePath(long tripId, string style = "")
-        { 
+        {
             return Path.Combine(TripWordFolderPath(tripId), string.Format("{0}{1}.docx", tripId, style));
         }
 
@@ -199,7 +203,7 @@ namespace DCTS.DB
             get
             {
                 return Path.Combine(TemplatePath, DaySumaryName);
-             }
+            }
         }
 
         public static string DaySumaryPath
@@ -211,10 +215,12 @@ namespace DCTS.DB
         }
 
 
-        public static string DinningDetailRelativePath { 
-            get {
+        public static string DinningDetailRelativePath
+        {
+            get
+            {
                 return Path.Combine(TemplatePath, DinningDetailName);
-            } 
+            }
         }
 
         public static string DinningDetailPath
@@ -225,10 +231,12 @@ namespace DCTS.DB
             }
         }
 
-        public static string ScenicDetailRelativePath { 
-            get {
+        public static string ScenicDetailRelativePath
+        {
+            get
+            {
                 return Path.Combine(TemplatePath, ScenicDetailName);
-             } 
+            }
         }
 
         public static string ScenicDetailPath
@@ -239,10 +247,12 @@ namespace DCTS.DB
             }
         }
 
-        public static string HotelDetailRelativePath { 
-            get {
-                return Path.Combine(TemplatePath, HotelDetailName); 
-            } 
+        public static string HotelDetailRelativePath
+        {
+            get
+            {
+                return Path.Combine(TemplatePath, HotelDetailName);
+            }
         }
 
         public static string HotelDetailPath
@@ -253,7 +263,7 @@ namespace DCTS.DB
             }
         }
 
-        private static void CreateFolder( string path )
+        private static void CreateFolder(string path)
         {
             if (!Directory.Exists(path))
             {
@@ -263,7 +273,7 @@ namespace DCTS.DB
 
         private static string BuildTemplateNameByLocationType(ComboLocationEnum type)
         {
-            return  "location_" + type.ToString().ToLower()+".docx";
+            return "location_" + type.ToString().ToLower() + ".docx";
 
         }
     }
@@ -282,8 +292,9 @@ namespace DCTS.DB
 
         public static string SetupSql
         {
-            get {
-                return Path.Combine(BasePath,  "setup.sql"); 
+            get
+            {
+                return Path.Combine(BasePath, "setup.sql");
             }
         }
         public static string SeedSql
@@ -292,6 +303,6 @@ namespace DCTS.DB
             {
                 return Path.Combine(BasePath, "seed.sql");
             }
-        }            
+        }
     }
 }
