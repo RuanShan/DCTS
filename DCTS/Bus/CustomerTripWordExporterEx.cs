@@ -167,15 +167,24 @@ namespace DCTS.Bus
                             clonedNumIn.AbstractNumId.Val = newNumId;
                             LevelOverride levelOverride = new LevelOverride() { LevelIndex = 0 };
                             levelOverride.Append(new StartOverrideNumberingValue() { Val = 1 });
-                            numIn.Append(levelOverride);
+                            clonedNumIn.Append(levelOverride);
                             absNum.InsertAfterSelf(clonedAbsNum);
                             numIn.InsertAfterSelf(clonedNumIn);
                          }
                         for (int j = 0; j < titles.Count(); j++)
                         {
                             var t = titles[j];
+                            Paragraph cloned  = null;
                             // 如果是最后一个就不用clone, 直接使用pattern
-                            var cloned = (j < titles.Count() - 1 ? (pattern.CloneNode(true) as Paragraph) : pattern);
+                            var isLast = (j == titles.Count() - 1);
+                            if (isLast)
+                            {
+                                cloned = pattern;
+                            }
+                            else {
+                                cloned = pattern.CloneNode(true) as Paragraph;
+                                pattern.InsertBeforeSelf(cloned); 
+                            }
                             var numPr = cloned.Descendants<NumberingProperties>().Last();
                             numPr.NumberingId.Val = newNumId;
                             WordTemplateHelper.ReplaceText<Paragraph>(cloned, "%day_location%", t);
@@ -183,7 +192,6 @@ namespace DCTS.Bus
                             //{
                             //    pattern.InsertBeforeSelf(new Break());
                             //}
-                            cell.AppendChild(cloned);
                             //pattern.InsertBeforeSelf(cloned);                            
                         }
                         // should not remove it at all, or docx mass up, malfunction
@@ -191,6 +199,7 @@ namespace DCTS.Bus
                         {
                             pattern.RemoveAllChildren();
                         }
+                        
                         WordTemplateHelper.ReplaceText<TableRow>(rowCopy, "%day_hotel%", WordTemplateHelper.DisplayDayHotel(locations));
 
                         dayTable.AppendChild(rowCopy);
