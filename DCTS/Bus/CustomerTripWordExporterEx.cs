@@ -209,6 +209,24 @@ namespace DCTS.Bus
                     rowPattern.Remove();
 
                 }
+                // 处理图片
+                var locationImage = locationImages.Where(o => o.id == trip.cover_id).FirstOrDefault();
+
+                if (locationImage != null)
+                {
+                    var image = tripSumary.MainDocumentPart.ImageParts.FirstOrDefault();
+                    //Image img = duplicated.Images[0];
+
+                    string imagePath = EntityPathConfig.newlocationimagepath(locationImage);
+                    if (image != null && File.Exists(imagePath))
+                    {
+                        string relID = tripSumary.MainDocumentPart.GetIdOfPart(image);
+                        //image.FeedData(File.Open(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite));
+                        WordTemplateHelper.UpdateImage(tripSumary, relID, imagePath);
+                        //不要调整尺寸，下面的内容会分页不准。
+                        //WordTemplateHelper.ResizeImage(sumary, relID, imagePath);
+                    }
+                }
             }
             else
             {
