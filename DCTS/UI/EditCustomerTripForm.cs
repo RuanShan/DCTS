@@ -90,6 +90,29 @@ namespace DCTS.UI
             this.flightCustomerColumn.DisplayMember = "name";
             this.flightCustomerColumn.ValueMember = "id";
             this.flightCustomerColumn.DataSource = this.customerList;
+            //保险
+            this.insuranceCustomerColumn.DisplayMember = "name";
+            this.insuranceCustomerColumn.ValueMember = "id";
+            this.insuranceCustomerColumn.DataSource = this.customerList;
+            //
+            //火车
+            this.trainCustomerColumn.DisplayMember = "name";
+            this.trainCustomerColumn.ValueMember = "id";
+            this.trainCustomerColumn.DataSource = this.customerList;
+            //住宿
+            this.hotelCustomerColumn.DisplayMember = "name";
+            this.hotelCustomerColumn.ValueMember = "id";
+            this.hotelCustomerColumn.DataSource = this.customerList;
+            //wifi
+            this.wifiCustomerColumn.DisplayMember = "name";
+            this.wifiCustomerColumn.ValueMember = "id";
+            this.wifiCustomerColumn.DataSource = this.customerList;
+
+            //租车
+            this.rentalCustomerColumn1.DisplayMember = "name";
+            this.rentalCustomerColumn1.ValueMember = "id";
+            this.rentalCustomerColumn1.DataSource = this.customerList;
+
 
             this.hotelCustomerColumn.DisplayMember = "name";
             this.hotelCustomerColumn.ValueMember = "id";
@@ -168,7 +191,7 @@ namespace DCTS.UI
                                         this.supplierType = SupplierEnum.Activity;
                                     }
             Console.WriteLine("selected tab {0}, current supplierType={1}", ticketTabControl.SelectedTab.Text, this.supplierType);
-
+            SetTicketViewFilter();
         }
 
         private void addFlightButton1_Click(object sender, EventArgs e)
