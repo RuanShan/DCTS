@@ -20,6 +20,7 @@ namespace DCTS.Bus
         Trip trip;
         List<TripDay> days;
         List<DayLocation> dayLocations;
+        List<LocationImage> locationImages;
         List<WordprocessingDocument> filledTemplates;
         List<MemoryStream> filledTemplateStreams = new List<MemoryStream>();
 
@@ -32,6 +33,16 @@ namespace DCTS.Bus
                 trip = ctx.Trips.Find(TripId);
                 days = ctx.TripDays.Include("Schedules").Where(o => o.trip_id == TripId).OrderBy(o => o.day).ToList();
                 dayLocations = ctx.DayLocations.Include("TripDay").Include("ComboLocation").Where(o => o.trip_id == TripId).OrderBy(o => o.TripDay.day).ThenBy(o => o.position).ToList();
+
+                var coverIds = new List<int>();
+                if (trip.cover_id > 0)
+                {
+                    coverIds.Add(trip.cover_id);
+                }
+               
+                coverIds.AddRange(days.Where(o => o.cover_id > 0).Select(o => o.cover_id).ToList());
+
+                locationImages = ctx.LocationImages.Where(o => coverIds.Contains(o.id)).ToList();
             }
 
             filledTemplates = new List<WordprocessingDocument>();
@@ -163,7 +174,8 @@ namespace DCTS.Bus
                         for (int j = 0; j < titles.Count(); j++)
                         {
                             var t = titles[j];
-                            var cloned = pattern.CloneNode(true) as Paragraph;
+                            // 如果是最后一个就不用clone, 直接使用pattern
+                            var cloned = (j < titles.Count() - 1 ? (pattern.CloneNode(true) as Paragraph) : pattern);
                             var numPr = cloned.Descendants<NumberingProperties>().Last();
                             numPr.NumberingId.Val = newNumId;
                             WordTemplateHelper.ReplaceText<Paragraph>(cloned, "%day_location%", t);
@@ -175,7 +187,10 @@ namespace DCTS.Bus
                             //pattern.InsertBeforeSelf(cloned);                            
                         }
                         // should not remove it at all, or docx mass up, malfunction
-                        pattern.RemoveAllChildren();
+                        if (titles.Count() == 0)
+                        {
+                            pattern.RemoveAllChildren();
+                        }
                         WordTemplateHelper.ReplaceText<TableRow>(rowCopy, "%day_hotel%", WordTemplateHelper.DisplayDayHotel(locations));
 
                         dayTable.AppendChild(rowCopy);
@@ -260,6 +275,25 @@ namespace DCTS.Bus
                 patternTip.Remove();
             }
 
+
+            // 处理图片
+            var locationImage = locationImages.Where(o => o.id == day.cover_id).FirstOrDefault();
+
+            if (locationImage != null)
+            {
+                var image = sumary.MainDocumentPart.ImageParts.LastOrDefault();
+                //Image img = duplicated.Images[0];
+
+                string imagePath = EntityPathConfig.newlocationimagepath(locationImage);
+                if (image != null && File.Exists(imagePath))
+                {
+                    string relID = sumary.MainDocumentPart.GetIdOfPart(image);
+                    //image.FeedData(File.Open(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite));
+                    WordTemplateHelper.UpdateImage(sumary, relID, imagePath);
+                    //不要调整尺寸，下面的内容会分页不准。
+                    //WordTemplateHelper.ResizeImage(sumary, relID, imagePath);
+                }
+            }
             sumary.Save();
 
             this.filledTemplates.Add(sumary);
