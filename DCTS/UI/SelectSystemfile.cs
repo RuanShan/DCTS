@@ -51,7 +51,10 @@ namespace DCTS.CustomComponents
                 {
                     string ImageLocation = EntityPathConfig.newlocationimagepath(item);
                     if (File.Exists(ImageLocation))
+                    {
+                        imageListSmall.ImageSize = new Size(58, 58);
                         imageListSmall.Images.Add(Bitmap.FromFile(ImageLocation));
+                    }
                 }
 
                 i++;
@@ -219,6 +222,27 @@ namespace DCTS.CustomComponents
         }
         public void FillModelByForm(Trip trip)
         {
+
+        }
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            listfile = new List<string>();
+            if (this.listView1.SelectedItems.Count > 0)
+            {
+                string item = this.listView1.SelectedItems[0].Text;
+
+                strFileName = this.listView1.SelectedItems[0].Text;
+                var itemfind = listpage.Find(s => s.name == this.listView1.SelectedItems[0].Text);
+
+                string ImageLocation = EntityPathConfig.newlocationimagepath(itemfind);
+
+
+                listfile.Add(strFileName);
+                listfile.Add(ImageLocation);
+                this.Close();
+
+            }
 
         }
 

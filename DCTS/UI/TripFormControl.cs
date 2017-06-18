@@ -32,7 +32,8 @@ namespace DCTS.UI
 
                 var query = ctx.LocationImages.Where(o => o.location_id == (int)location.id && o.name == imgPathTextBox.Text);
                 List<LocationImage> list = query.ToList();
-                trip.cover_id = list[0].id;
+                if (list.Count > 0)
+                    trip.cover_id = list[0].id;
             }
         }
 

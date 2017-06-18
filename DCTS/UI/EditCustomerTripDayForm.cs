@@ -70,7 +70,8 @@ namespace DCTS.UI
                 var location = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.PageImage).First();
                 var query = ctx.LocationImages.Where(o => o.location_id == (int)location.id && o.name == imgPathTextBox.Text);
                 List<LocationImage> list = query.ToList();
-                Model.cover_id = list[0].id;
+                if (list.Count > 0)
+                    Model.cover_id = list[0].id;
             }
             Model = tripDay;
             //  trip.schedule = this.scheduleTextBox.Text;
