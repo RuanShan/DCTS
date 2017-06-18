@@ -138,7 +138,10 @@ namespace DCTS.UI
                 {
                     string ImageLocation = EntityPathConfig.newlocationimagepath(item);
                     if (File.Exists(ImageLocation))
+                    {
+                        imageListSmall.ImageSize = new Size(58, 58);
                         imageListSmall.Images.Add(Bitmap.FromFile(ImageLocation));
+                    }
                 }
 
                 i++;
@@ -325,6 +328,13 @@ namespace DCTS.UI
                     }
                 }
             }
+        }
+
+        private void ImportSystemfiles_Load(object sender, EventArgs e)
+        {
+            //this.listView1.Dock = DockStyle.Fill;
+            //listView1.View = View.LargeIcon;
+            //listView1.LargeImageList = this.imagelist;
         }
 
     }
