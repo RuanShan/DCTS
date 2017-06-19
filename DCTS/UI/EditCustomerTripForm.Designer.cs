@@ -42,6 +42,8 @@
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button(); 
             this.label11 = new System.Windows.Forms.Label();
             this.nationTextBox = new System.Windows.Forms.TextBox();
             this.chooseCountryButton = new System.Windows.Forms.Button();
@@ -182,6 +184,26 @@
             this.label4.TabIndex = 11;
             this.label4.Text = "天数";
             // 
+            // saveButton
+            // 
+            this.saveButton.Location = new System.Drawing.Point(362, 398);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(75, 25);
+            this.saveButton.TabIndex = 14;
+            this.saveButton.Text = "保存";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.No;
+            this.cancelButton.Location = new System.Drawing.Point(443, 398);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(75, 25);
+            this.cancelButton.TabIndex = 13;
+            this.cancelButton.Text = "取消";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            // 
             // entityDataSource1
             // 
             this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
@@ -228,6 +250,7 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本信息";
             this.tabPage1.UseVisualStyleBackColor = true;
+
             // 
             // label11
             // 
