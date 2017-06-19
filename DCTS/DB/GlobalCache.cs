@@ -86,6 +86,7 @@ namespace DCTS.DB
             
                 return (new[]{ 
                     new MockEntity{ Id = (int)SupplierEnum.Flight, ShortName="航空公司", FullName = "航空公司" },
+                    new MockEntity{ Id = (int)SupplierEnum.Train,ShortName="交通公司", FullName = "交通公司" },
                     new MockEntity{ Id = (int)SupplierEnum.Insurance,ShortName="保险公司", FullName = "保险公司" },
                     new MockEntity{ Id = (int)SupplierEnum.Rental, ShortName="租车公司",FullName = "租车公司" },
                     new MockEntity{ Id = (int)SupplierEnum.WIFI, ShortName="WIFI",FullName = "WIFI" },

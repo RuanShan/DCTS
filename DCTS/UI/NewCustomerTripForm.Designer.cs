@@ -116,7 +116,6 @@
             this.insuranceTitleColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.start_atColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.daysColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.rentalCustomerColumn1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.rentalSupplierColumn4 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.numColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -125,6 +124,7 @@
             this.start_atColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.to_addressColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.end_atColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.ActivityCustomerColumn1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.start_atColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.activityCityColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -975,10 +975,6 @@
             this.daysColumn3.HeaderText = "天数";
             this.daysColumn3.Name = "daysColumn3";
             // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
-            // 
             // rentalCustomerColumn1
             // 
             this.rentalCustomerColumn1.DataPropertyName = "customer_id";
@@ -1038,6 +1034,10 @@
             this.end_atColumn4.Name = "end_atColumn4";
             this.end_atColumn4.Width = 120;
             // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
+            // 
             // ActivityCustomerColumn1
             // 
             this.ActivityCustomerColumn1.DataPropertyName = "customer_id";
@@ -1072,7 +1072,7 @@
             // 
             // overlayColumn6
             // 
-            this.overlayColumn6.DataPropertyName = "overlay";
+            this.overlayColumn6.DataPropertyName = "parking";
             this.overlayColumn6.HeaderText = "换票人";
             this.overlayColumn6.Name = "overlayColumn6";
             // 

@@ -82,17 +82,10 @@ namespace DCTS.UI
             this.flightCustomerColumn.ValueMember = "id";
             this.flightCustomerColumn.DataSource = this.customerList;
 
-            this.hotelCustomerColumn.DisplayMember = "name";
-            this.hotelCustomerColumn.ValueMember = "id";
-            this.hotelCustomerColumn.DataSource = this.customerList;
-
             //保险
-
             this.insuranceCustomerColumn.DisplayMember = "name";
             this.insuranceCustomerColumn.ValueMember = "id";
             this.insuranceCustomerColumn.DataSource = this.customerList;
-
-
             //火车
             this.trainCustomerColumn.DisplayMember = "name";
             this.trainCustomerColumn.ValueMember = "id";

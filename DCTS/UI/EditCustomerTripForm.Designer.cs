@@ -129,12 +129,12 @@
             this.dayColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.activityTabPage = new System.Windows.Forms.TabPage();
             this.activityDataGridView = new System.Windows.Forms.DataGridView();
+            this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.ActivityCustomerColumn1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.start_atColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.activityCityColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rulesColumn6 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.overlayColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.daysNumericUpDown)).BeginInit();
@@ -515,7 +515,7 @@
             this.ticketTabControl.SelectedIndex = 0;
             this.ticketTabControl.Size = new System.Drawing.Size(982, 312);
             this.ticketTabControl.TabIndex = 54;
-            this.ticketTabControl.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
+            this.ticketTabControl.Selected += new System.Windows.Forms.TabControlEventHandler(this.ticketTabControl_Selected);
             // 
             // flightTabPage
             // 
@@ -1139,6 +1139,10 @@
             this.activityDataGridView.Size = new System.Drawing.Size(968, 280);
             this.activityDataGridView.TabIndex = 1;
             // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
+            // 
             // ActivityCustomerColumn1
             // 
             this.ActivityCustomerColumn1.DataPropertyName = "customer_id";
@@ -1163,7 +1167,7 @@
             // 
             // rulesColumn6
             // 
-            this.rulesColumn6.DataPropertyName = "rules";
+            this.rulesColumn6.DataPropertyName = "to_location_id";
             this.rulesColumn6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rulesColumn6.HeaderText = "活动项目";
             this.rulesColumn6.Name = "rulesColumn6";
@@ -1173,13 +1177,9 @@
             // 
             // overlayColumn6
             // 
-            this.overlayColumn6.DataPropertyName = "overlay";
+            this.overlayColumn6.DataPropertyName = "parking";
             this.overlayColumn6.HeaderText = "换票人";
             this.overlayColumn6.Name = "overlayColumn6";
-            // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
             // 
             // EditCustomerTripForm
             // 
