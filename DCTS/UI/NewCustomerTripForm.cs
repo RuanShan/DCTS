@@ -140,14 +140,14 @@ namespace DCTS.UI
                 //酒店
                 using (var ctx = new DctsEntities())
                 {
-                    //List<ComboLocation> List = ctx.ComboLocations.ToList();
-                    //var names1 = cityList.Select(o => o.title).ToArray();
-                    //var hotellist = List.Where(o => names1.Contains(o.city) && o.ltype == (int)ComboLocationEnum.Hotel).ToList();
+                    List<ComboLocation> List = ctx.ComboLocations.ToList();
+                    var names1 = cityList.Select(o => o.title).ToArray();
+                    var hotellist = List.Where(o => names1.Contains(o.city) && o.ltype == (int)ComboLocationEnum.Hotel).ToList();
 
-                    //var hotel = hotellist.Select(o => new MockEntity { Id = o.id, FullName = o.title }).ToList();
-                    //this.titlxColumn2.DisplayMember = "FullName";
-                    //this.titlxColumn2.ValueMember = "Id";
-                    //this.titlxColumn2.DataSource = hotel;
+                    var hotel = hotellist.Select(o => new MockEntity { Id = o.id, FullName = o.title }).ToList();
+                    this.titlxColumn2.DisplayMember = "FullName";
+                    this.titlxColumn2.ValueMember = "Id";
+                    this.titlxColumn2.DataSource = hotel;
 
 
                 }
