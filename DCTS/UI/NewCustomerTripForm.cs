@@ -125,33 +125,43 @@ namespace DCTS.UI
 
             //城市
             //string code =.ToString();
-
-            var nationList1 = DCTS.DB.GlobalCache.NationList;
-            var codelist = nationList1.FindAll(o => o.title == nationTextBox.Text);
-            if (codelist != null && codelist.Count > 0)
+            using (var ctx = new DctsEntities())
             {
-                var cityList = DCTS.DB.GlobalCache.CityList;
-                cityList = cityList.Where(o => o.nationCode == codelist.First().code).ToList();
-                var cities = cityList.Select(o => new MockEntity { Id = o.id, FullName = o.title }).ToList();
-                this.cityColumn2.DisplayMember = "FullName";
-                this.cityColumn2.ValueMember = "Id";
-                this.cityColumn2.DataSource = cities;
+                List<ComboLocation> List = ctx.ComboLocations.ToList();
 
-                //酒店
-                using (var ctx = new DctsEntities())
+                var nationList1 = DCTS.DB.GlobalCache.NationList;
+                var codelist = nationList1.FindAll(o => o.title == nationTextBox.Text);
+                if (codelist != null && codelist.Count > 0)
                 {
-                    List<ComboLocation> List = ctx.ComboLocations.ToList();
+                    var cityList = DCTS.DB.GlobalCache.CityList;
+                    cityList = cityList.Where(o => o.nationCode == codelist.First().code).ToList();
+                    var cities = cityList.Select(o => new MockEntity { Id = o.id, FullName = o.title }).ToList();
+                    this.cityColumn2.DisplayMember = "FullName";
+                    this.cityColumn2.ValueMember = "FullName";
+                    this.cityColumn2.DataSource = cities;
+
+                    //酒店
+
+
                     var names1 = cityList.Select(o => o.title).ToArray();
                     var hotellist = List.Where(o => names1.Contains(o.city) && o.ltype == (int)ComboLocationEnum.Hotel).ToList();
 
                     var hotel = hotellist.Select(o => new MockEntity { Id = o.id, FullName = o.title }).ToList();
                     this.titlxColumn2.DisplayMember = "FullName";
-                    this.titlxColumn2.ValueMember = "Id";
+                    this.titlxColumn2.ValueMember = "FullName";
                     this.titlxColumn2.DataSource = hotel;
 
+                    //活动项目
+                    var activelist = List.Where(o => names1.Contains(o.city) && o.ltype == (int)ComboLocationEnum.Activity).ToList();
+                    var active = activelist.Select(o => new MockEntity { Id = o.id, FullName = o.title }).ToList();
+                    this.rulesColumn6.DisplayMember = "FullName";
+                    this.rulesColumn6.ValueMember = "FullName";
+                    this.rulesColumn6.DataSource = active;
 
                 }
             }
+           
+
         }
 
         private void saveButton_Click(object sender, EventArgs e)
@@ -279,7 +289,15 @@ namespace DCTS.UI
             flightSupplierColumn.ValueMember = "id";
             flightSupplierColumn.DataSource = GetSuppliersByType(SupplierEnum.Flight);
 
+            //保险
+            titleTextBoxColumn3.DisplayMember = "name";
+            titleTextBoxColumn3.ValueMember = "name";
+            titleTextBoxColumn3.DataSource = GetSuppliersByType(SupplierEnum.Insurance);
 
+            //租车公司
+            titleColumn4.DisplayMember = "name";
+            titleColumn4.ValueMember = "name";
+            titleColumn4.DataSource = GetSuppliersByType(SupplierEnum.Rental);
 
         }
 
@@ -515,6 +533,18 @@ namespace DCTS.UI
 
 
             }
+        }
+
+        private void activityDataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            bool handle;
+            if (activityDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.Equals(DBNull.Value))
+            {
+                handle = true;
+            }
+            else
+                handle = false;
+            e.Cancel = handle;
         }
 
     }

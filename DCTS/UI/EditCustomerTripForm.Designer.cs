@@ -36,16 +36,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.cancelButton = new System.Windows.Forms.Button();
-            this.saveButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.label4 = new System.Windows.Forms.Label();
-            this.tripFormControl1 = new DCTS.UI.TripFormControl();
-            this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.deleteFlightButton = new System.Windows.Forms.Button();
@@ -76,30 +73,21 @@
             this.insuranceTagPage = new System.Windows.Forms.TabPage();
             this.InsuranceGridView = new System.Windows.Forms.DataGridView();
             this.insuranceCustomerColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.titleTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.titleTextBoxColumn3 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.start_atColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.daysColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rentalTabPage = new System.Windows.Forms.TabPage();
             this.RentalGridView = new System.Windows.Forms.DataGridView();
-            this.wifiTabPage = new System.Windows.Forms.TabPage();
-            this.WIFIGridView = new System.Windows.Forms.DataGridView();
-            this.activityTabPage = new System.Windows.Forms.TabPage();
-            this.activityDataGridView = new System.Windows.Forms.DataGridView();
-            this.hotelCustomerColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.start_atCloumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.daysColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cityColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.titlxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dinnerColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.parkingColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rentalCustomerColumn1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.numColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.titleColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.titleColumn4 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.rulesColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.from_addressColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.start_atColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.to_addressColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.end_atColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.wifiTabPage = new System.Windows.Forms.TabPage();
+            this.WIFIGridView = new System.Windows.Forms.DataGridView();
             this.wifiCustomerColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.from_addressColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.start_atColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -107,12 +95,23 @@
             this.end_atColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.daysColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dayColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.activityTabPage = new System.Windows.Forms.TabPage();
+            this.activityDataGridView = new System.Windows.Forms.DataGridView();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.hotelCustomerColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.start_atCloumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.daysColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cityColumn2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.titlxColumn2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dinnerColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.parkingColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ActivityCustomerColumn1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.start_atColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.daysColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rulesColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rulesColumn6 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.overlayColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            this.tripFormControl1 = new DCTS.UI.TripFormControl();
+            this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -132,27 +131,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.WIFIGridView)).BeginInit();
             this.activityTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.activityDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // cancelButton
-            // 
-            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.No;
-            this.cancelButton.Location = new System.Drawing.Point(443, 398);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 25);
-            this.cancelButton.TabIndex = 13;
-            this.cancelButton.Text = "取消";
-            this.cancelButton.UseVisualStyleBackColor = true;
-            // 
-            // saveButton
-            // 
-            this.saveButton.Location = new System.Drawing.Point(362, 398);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(75, 25);
-            this.saveButton.TabIndex = 14;
-            this.saveButton.Text = "保存";
-            this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // label3
             // 
@@ -172,10 +152,6 @@
             this.label2.TabIndex = 8;
             this.label2.Text = "名称";
             // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -184,17 +160,6 @@
             this.label4.Size = new System.Drawing.Size(31, 13);
             this.label4.TabIndex = 11;
             this.label4.Text = "天数";
-            // 
-            // tripFormControl1
-            // 
-            this.tripFormControl1.Location = new System.Drawing.Point(16, 33);
-            this.tripFormControl1.Name = "tripFormControl1";
-            this.tripFormControl1.Size = new System.Drawing.Size(493, 311);
-            this.tripFormControl1.TabIndex = 15;
-            // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
             // 
             // tabControl1
             // 
@@ -219,6 +184,26 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本信息";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // saveButton
+            // 
+            this.saveButton.Location = new System.Drawing.Point(362, 398);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(75, 25);
+            this.saveButton.TabIndex = 14;
+            this.saveButton.Text = "保存";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.No;
+            this.cancelButton.Location = new System.Drawing.Point(443, 398);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(75, 25);
+            this.cancelButton.TabIndex = 13;
+            this.cancelButton.Text = "取消";
+            this.cancelButton.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
@@ -591,6 +576,8 @@
             this.titleTextBoxColumn3.DataPropertyName = "title";
             this.titleTextBoxColumn3.HeaderText = "保险名称";
             this.titleTextBoxColumn3.Name = "titleTextBoxColumn3";
+            this.titleTextBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.titleTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // start_atColumn3
             // 
@@ -646,6 +633,59 @@
             this.RentalGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.RentalGridView.Size = new System.Drawing.Size(981, 313);
             this.RentalGridView.TabIndex = 1;
+            this.RentalGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.RentalGridView_DataError);
+            // 
+            // rentalCustomerColumn1
+            // 
+            this.rentalCustomerColumn1.DataPropertyName = "customer_id";
+            this.rentalCustomerColumn1.HeaderText = "客户";
+            this.rentalCustomerColumn1.Name = "rentalCustomerColumn1";
+            this.rentalCustomerColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.rentalCustomerColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // numColumn4
+            // 
+            this.numColumn4.DataPropertyName = "num";
+            this.numColumn4.HeaderText = "提车单号";
+            this.numColumn4.Name = "numColumn4";
+            // 
+            // titleColumn4
+            // 
+            this.titleColumn4.DataPropertyName = "title";
+            this.titleColumn4.HeaderText = "租车公司";
+            this.titleColumn4.Name = "titleColumn4";
+            this.titleColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.titleColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // rulesColumn4
+            // 
+            this.rulesColumn4.DataPropertyName = "rules";
+            this.rulesColumn4.HeaderText = "车型组";
+            this.rulesColumn4.Name = "rulesColumn4";
+            // 
+            // from_addressColumn4
+            // 
+            this.from_addressColumn4.DataPropertyName = "from_place";
+            this.from_addressColumn4.HeaderText = "取车地点";
+            this.from_addressColumn4.Name = "from_addressColumn4";
+            // 
+            // start_atColumn4
+            // 
+            this.start_atColumn4.DataPropertyName = "start_at";
+            this.start_atColumn4.HeaderText = "取车时间";
+            this.start_atColumn4.Name = "start_atColumn4";
+            // 
+            // to_addressColumn4
+            // 
+            this.to_addressColumn4.DataPropertyName = "to_place";
+            this.to_addressColumn4.HeaderText = "还车地点";
+            this.to_addressColumn4.Name = "to_addressColumn4";
+            // 
+            // end_atColumn4
+            // 
+            this.end_atColumn4.DataPropertyName = "end_at";
+            this.end_atColumn4.HeaderText = "还车时间";
+            this.end_atColumn4.Name = "end_atColumn4";
             // 
             // wifiTabPage
             // 
@@ -689,138 +729,6 @@
             this.WIFIGridView.Size = new System.Drawing.Size(981, 313);
             this.WIFIGridView.TabIndex = 1;
             // 
-            // activityTabPage
-            // 
-            this.activityTabPage.Controls.Add(this.activityDataGridView);
-            this.activityTabPage.Location = new System.Drawing.Point(4, 22);
-            this.activityTabPage.Name = "activityTabPage";
-            this.activityTabPage.Size = new System.Drawing.Size(981, 313);
-            this.activityTabPage.TabIndex = 5;
-            this.activityTabPage.Text = "活动信息";
-            this.activityTabPage.UseVisualStyleBackColor = true;
-            // 
-            // activityDataGridView
-            // 
-            this.activityDataGridView.AllowUserToAddRows = false;
-            this.activityDataGridView.AllowUserToDeleteRows = false;
-            this.activityDataGridView.AllowUserToResizeRows = false;
-            this.activityDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.activityDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ActivityCustomerColumn1,
-            this.start_atColumn6,
-            this.daysColumn6,
-            this.rulesColumn6,
-            this.overlayColumn6});
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.activityDataGridView.DefaultCellStyle = dataGridViewCellStyle7;
-            this.activityDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.activityDataGridView.Location = new System.Drawing.Point(0, 0);
-            this.activityDataGridView.Name = "activityDataGridView";
-            this.activityDataGridView.RowHeadersVisible = false;
-            this.activityDataGridView.RowTemplate.Height = 50;
-            this.activityDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.activityDataGridView.Size = new System.Drawing.Size(981, 313);
-            this.activityDataGridView.TabIndex = 1;
-            // 
-            // hotelCustomerColumn
-            // 
-            this.hotelCustomerColumn.DataPropertyName = "customer_id";
-            this.hotelCustomerColumn.HeaderText = "客户";
-            this.hotelCustomerColumn.Name = "hotelCustomerColumn";
-            // 
-            // start_atCloumn
-            // 
-            this.start_atCloumn.DataPropertyName = "start_at";
-            this.start_atCloumn.HeaderText = "入住";
-            this.start_atCloumn.Name = "start_atCloumn";
-            // 
-            // daysColumn2
-            // 
-            this.daysColumn2.DataPropertyName = "days";
-            this.daysColumn2.HeaderText = "晚";
-            this.daysColumn2.Name = "daysColumn2";
-            // 
-            // cityColumn2
-            // 
-            this.cityColumn2.DataPropertyName = "city";
-            this.cityColumn2.HeaderText = "城市";
-            this.cityColumn2.Name = "cityColumn2";
-            // 
-            // titlxColumn2
-            // 
-            this.titlxColumn2.DataPropertyName = "title";
-            this.titlxColumn2.HeaderText = "酒店";
-            this.titlxColumn2.Name = "titlxColumn2";
-            // 
-            // dinnerColumn2
-            // 
-            this.dinnerColumn2.DataPropertyName = "breakfirst";
-            this.dinnerColumn2.HeaderText = "早餐";
-            this.dinnerColumn2.Name = "dinnerColumn2";
-            // 
-            // parkingColumn2
-            // 
-            this.parkingColumn2.DataPropertyName = "parking";
-            this.parkingColumn2.HeaderText = "停车位";
-            this.parkingColumn2.Name = "parkingColumn2";
-            // 
-            // rentalCustomerColumn1
-            // 
-            this.rentalCustomerColumn1.DataPropertyName = "customer_id";
-            this.rentalCustomerColumn1.HeaderText = "客户";
-            this.rentalCustomerColumn1.Name = "rentalCustomerColumn1";
-            this.rentalCustomerColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.rentalCustomerColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // numColumn4
-            // 
-            this.numColumn4.DataPropertyName = "num";
-            this.numColumn4.HeaderText = "提车单号";
-            this.numColumn4.Name = "numColumn4";
-            // 
-            // titleColumn4
-            // 
-            this.titleColumn4.DataPropertyName = "title";
-            this.titleColumn4.HeaderText = "租车公司";
-            this.titleColumn4.Name = "titleColumn4";
-            // 
-            // rulesColumn4
-            // 
-            this.rulesColumn4.DataPropertyName = "rules";
-            this.rulesColumn4.HeaderText = "车型组";
-            this.rulesColumn4.Name = "rulesColumn4";
-            // 
-            // from_addressColumn4
-            // 
-            this.from_addressColumn4.DataPropertyName = "from_place";
-            this.from_addressColumn4.HeaderText = "取车地点";
-            this.from_addressColumn4.Name = "from_addressColumn4";
-            // 
-            // start_atColumn4
-            // 
-            this.start_atColumn4.DataPropertyName = "start_at";
-            this.start_atColumn4.HeaderText = "取车时间";
-            this.start_atColumn4.Name = "start_atColumn4";
-            // 
-            // to_addressColumn4
-            // 
-            this.to_addressColumn4.DataPropertyName = "to_place";
-            this.to_addressColumn4.HeaderText = "还车地点";
-            this.to_addressColumn4.Name = "to_addressColumn4";
-            // 
-            // end_atColumn4
-            // 
-            this.end_atColumn4.DataPropertyName = "end_at";
-            this.end_atColumn4.HeaderText = "还车时间";
-            this.end_atColumn4.Name = "end_atColumn4";
-            // 
             // wifiCustomerColumn
             // 
             this.wifiCustomerColumn.DataPropertyName = "customer_id";
@@ -863,6 +771,97 @@
             this.dayColumn5.HeaderText = "境外时长";
             this.dayColumn5.Name = "dayColumn5";
             // 
+            // activityTabPage
+            // 
+            this.activityTabPage.Controls.Add(this.activityDataGridView);
+            this.activityTabPage.Location = new System.Drawing.Point(4, 22);
+            this.activityTabPage.Name = "activityTabPage";
+            this.activityTabPage.Size = new System.Drawing.Size(981, 313);
+            this.activityTabPage.TabIndex = 5;
+            this.activityTabPage.Text = "活动信息";
+            this.activityTabPage.UseVisualStyleBackColor = true;
+            // 
+            // activityDataGridView
+            // 
+            this.activityDataGridView.AllowUserToAddRows = false;
+            this.activityDataGridView.AllowUserToDeleteRows = false;
+            this.activityDataGridView.AllowUserToResizeRows = false;
+            this.activityDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.activityDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ActivityCustomerColumn1,
+            this.start_atColumn6,
+            this.daysColumn6,
+            this.rulesColumn6,
+            this.overlayColumn6});
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.activityDataGridView.DefaultCellStyle = dataGridViewCellStyle7;
+            this.activityDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.activityDataGridView.Location = new System.Drawing.Point(0, 0);
+            this.activityDataGridView.Name = "activityDataGridView";
+            this.activityDataGridView.RowHeadersVisible = false;
+            this.activityDataGridView.RowTemplate.Height = 50;
+            this.activityDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.activityDataGridView.Size = new System.Drawing.Size(981, 313);
+            this.activityDataGridView.TabIndex = 1;
+            this.activityDataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.activityDataGridView_DataError);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // hotelCustomerColumn
+            // 
+            this.hotelCustomerColumn.DataPropertyName = "customer_id";
+            this.hotelCustomerColumn.HeaderText = "客户";
+            this.hotelCustomerColumn.Name = "hotelCustomerColumn";
+            // 
+            // start_atCloumn
+            // 
+            this.start_atCloumn.DataPropertyName = "start_at";
+            this.start_atCloumn.HeaderText = "入住";
+            this.start_atCloumn.Name = "start_atCloumn";
+            // 
+            // daysColumn2
+            // 
+            this.daysColumn2.DataPropertyName = "days";
+            this.daysColumn2.HeaderText = "晚";
+            this.daysColumn2.Name = "daysColumn2";
+            // 
+            // cityColumn2
+            // 
+            this.cityColumn2.DataPropertyName = "city";
+            this.cityColumn2.HeaderText = "城市";
+            this.cityColumn2.Name = "cityColumn2";
+            this.cityColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.cityColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // titlxColumn2
+            // 
+            this.titlxColumn2.DataPropertyName = "title";
+            this.titlxColumn2.HeaderText = "酒店";
+            this.titlxColumn2.Name = "titlxColumn2";
+            this.titlxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.titlxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // dinnerColumn2
+            // 
+            this.dinnerColumn2.DataPropertyName = "breakfirst";
+            this.dinnerColumn2.HeaderText = "早餐";
+            this.dinnerColumn2.Name = "dinnerColumn2";
+            // 
+            // parkingColumn2
+            // 
+            this.parkingColumn2.DataPropertyName = "parking";
+            this.parkingColumn2.HeaderText = "停车位";
+            this.parkingColumn2.Name = "parkingColumn2";
+            // 
             // ActivityCustomerColumn1
             // 
             this.ActivityCustomerColumn1.DataPropertyName = "customer_id";
@@ -888,12 +887,25 @@
             this.rulesColumn6.DataPropertyName = "rules";
             this.rulesColumn6.HeaderText = "活动项目";
             this.rulesColumn6.Name = "rulesColumn6";
+            this.rulesColumn6.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.rulesColumn6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // overlayColumn6
             // 
             this.overlayColumn6.DataPropertyName = "overlay";
             this.overlayColumn6.HeaderText = "换票人";
             this.overlayColumn6.Name = "overlayColumn6";
+            // 
+            // tripFormControl1
+            // 
+            this.tripFormControl1.Location = new System.Drawing.Point(16, 33);
+            this.tripFormControl1.Name = "tripFormControl1";
+            this.tripFormControl1.Size = new System.Drawing.Size(493, 311);
+            this.tripFormControl1.TabIndex = 15;
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
             // 
             // EditCustomerTripForm
             // 
@@ -907,7 +919,6 @@
             this.Name = "EditCustomerTripForm";
             this.Text = "编辑行程";
             this.Load += new System.EventHandler(this.EditTripForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
@@ -927,6 +938,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.WIFIGridView)).EndInit();
             this.activityTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.activityDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -973,31 +985,12 @@
         private System.Windows.Forms.Button deleteFlightButton;
         private System.Windows.Forms.Button addFlightButton1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridViewComboBoxColumn insuranceCustomerColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn titleTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn start_atColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn daysColumn3;
         private System.Windows.Forms.DataGridViewComboBoxColumn trainCustomerColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewComboBoxColumn hotelCustomerColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn start_atCloumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn daysColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cityColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn titlxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dinnerColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn parkingColumn2;
-        private System.Windows.Forms.DataGridViewComboBoxColumn rentalCustomerColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn numColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn titleColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn rulesColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn from_addressColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn start_atColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn to_addressColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn end_atColumn4;
         private System.Windows.Forms.DataGridViewComboBoxColumn wifiCustomerColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn from_addressColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn start_atColumn5;
@@ -1005,10 +998,29 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn end_atColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn daysColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dayColumn5;
+        private System.Windows.Forms.DataGridViewComboBoxColumn insuranceCustomerColumn;
+        private System.Windows.Forms.DataGridViewComboBoxColumn titleTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn start_atColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn daysColumn3;
+        private System.Windows.Forms.DataGridViewComboBoxColumn rentalCustomerColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn numColumn4;
+        private System.Windows.Forms.DataGridViewComboBoxColumn titleColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rulesColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn from_addressColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn start_atColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn to_addressColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn end_atColumn4;
+        private System.Windows.Forms.DataGridViewComboBoxColumn hotelCustomerColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn start_atCloumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn daysColumn2;
+        private System.Windows.Forms.DataGridViewComboBoxColumn cityColumn2;
+        private System.Windows.Forms.DataGridViewComboBoxColumn titlxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dinnerColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn parkingColumn2;
         private System.Windows.Forms.DataGridViewComboBoxColumn ActivityCustomerColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn start_atColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn daysColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn rulesColumn6;
+        private System.Windows.Forms.DataGridViewComboBoxColumn rulesColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn overlayColumn6;
     }
 }
