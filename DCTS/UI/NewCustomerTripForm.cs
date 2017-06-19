@@ -81,6 +81,34 @@ namespace DCTS.UI
             this.hotelCustomerColumn.DisplayMember = "name";
             this.hotelCustomerColumn.ValueMember = "id";
             this.hotelCustomerColumn.DataSource = this.customerList;
+
+            //保险
+
+            this.insuranceCustomerColumn.DisplayMember = "name";
+            this.insuranceCustomerColumn.ValueMember = "id";
+            this.insuranceCustomerColumn.DataSource = this.customerList;
+
+
+            //火车
+            this.trainCustomerColumn.DisplayMember = "name";
+            this.trainCustomerColumn.ValueMember = "id";
+            this.trainCustomerColumn.DataSource = this.customerList;
+            //住宿
+            this.hotelCustomerColumn.DisplayMember = "name";
+            this.hotelCustomerColumn.ValueMember = "id";
+            this.hotelCustomerColumn.DataSource = this.customerList;
+            //wifi
+            this.wifiCustomerColumn.DisplayMember = "name";
+            this.wifiCustomerColumn.ValueMember = "id";
+            this.wifiCustomerColumn.DataSource = this.customerList;
+            //租车
+            this.rentalCustomerColumn1.DisplayMember = "name";
+            this.rentalCustomerColumn1.ValueMember = "id";
+            this.rentalCustomerColumn1.DataSource = this.customerList;
+            //活动
+            this.ActivityCustomerColumn1.DisplayMember = "name";
+            this.ActivityCustomerColumn1.ValueMember = "id";
+            this.ActivityCustomerColumn1.DataSource = this.customerList;
         }
 
         private void InitializeDataSourceByNations()
@@ -94,6 +122,45 @@ namespace DCTS.UI
             this.toAirportColumn.DisplayMember = "title";
             this.toAirportColumn.ValueMember = "id";
             this.toAirportColumn.DataSource = airports;
+
+            //城市
+            //string code =.ToString();
+            using (var ctx = new DctsEntities())
+            {
+                List<ComboLocation> List = ctx.ComboLocations.ToList();
+
+                var nationList1 = DCTS.DB.GlobalCache.NationList;
+                var codelist = nationList1.FindAll(o => o.title == nationTextBox.Text);
+                if (codelist != null && codelist.Count > 0)
+                {
+                    var cityList = DCTS.DB.GlobalCache.CityList;
+                    cityList = cityList.Where(o => o.nationCode == codelist.First().code).ToList();
+                    var cities = cityList.Select(o => new MockEntity { Id = o.id, FullName = o.title }).ToList();
+                    this.cityColumn2.DisplayMember = "FullName";
+                    this.cityColumn2.ValueMember = "FullName";
+                    this.cityColumn2.DataSource = cities;
+
+                    //酒店
+
+
+                    var names1 = cityList.Select(o => o.title).ToArray();
+                    var hotellist = List.Where(o => names1.Contains(o.city) && o.ltype == (int)ComboLocationEnum.Hotel).ToList();
+
+                    var hotel = hotellist.Select(o => new MockEntity { Id = o.id, FullName = o.title }).ToList();
+                    this.titlxColumn2.DisplayMember = "FullName";
+                    this.titlxColumn2.ValueMember = "FullName";
+                    this.titlxColumn2.DataSource = hotel;
+
+                    //活动项目
+                    var activelist = List.Where(o => names1.Contains(o.city) && o.ltype == (int)ComboLocationEnum.Activity).ToList();
+                    var active = activelist.Select(o => new MockEntity { Id = o.id, FullName = o.title }).ToList();
+                    this.rulesColumn6.DisplayMember = "FullName";
+                    this.rulesColumn6.ValueMember = "FullName";
+                    this.rulesColumn6.DataSource = active;
+
+                }
+            }
+           
 
         }
 
@@ -114,6 +181,7 @@ namespace DCTS.UI
                     trip.title = this.titleTextBox.Text;
                     trip.memo = this.memoTextBox.Text;
                     trip.countries = this.nationTextBox.Text;
+
                     if (trip.days < days)
                     {
                         for (int i = days; i < trip.days; i++)
@@ -124,9 +192,13 @@ namespace DCTS.UI
                             trip.TripDays.Add(tripDay);
                         }
                     }
-                    trip.end_at = trip.start_at.Value.AddDays(trip.days - 1);
 
-                    trip.Tickets.Concat(this.ticketView);
+                    foreach (var ticket in ticketView)
+                    {
+
+                        trip.Tickets.Add(ticket);
+                    }
+                    //trip.Tickets.Concat(this.ticketView);
 
                     ctx.SaveChanges();
                 }
@@ -151,18 +223,22 @@ namespace DCTS.UI
                     }
                     foreach (var ticket in ticketView)
                     {
-                        trip.Tickets.Add(ticket);                                                                
+                        trip.Tickets.Add(ticket);
                     }
                     //trip.Tickets.Concat(ticketList);
                     foreach (var customer in customerList)
-                    { 
-                        trip.TripCustomers.Add( new TripCustomer(){ customer_id = customer.id});
+                    {
+                        trip.TripCustomers.Add(new TripCustomer() { customer_id = customer.id });
                     }
 
                     ctx.Trips.Add(trip);
                     ctx.SaveChanges();
                     //创建票务对应的Location
-                    
+                    if (supplierType == SupplierEnum.Insurance)
+                    {
+                        // trip.DayLocations = (int)SupplierEnum.Insurance;
+
+                    }
                     ctx.SaveChanges();
                 }
                 //交通信息
@@ -178,7 +254,7 @@ namespace DCTS.UI
                 var list = customerForm.SelectedCustomers();
 
                 this.customerList.AddRange(list);
-                this.customersTextBox2.Text = string.Join( ",", customerList.Select(o => o.name).ToList());
+                this.customersTextBox2.Text = string.Join(",", customerList.Select(o => o.name).ToList());
             }
         }
 
@@ -189,7 +265,7 @@ namespace DCTS.UI
 
         private void dataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-           
+
         }
 
         private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -216,6 +292,16 @@ namespace DCTS.UI
             flightSupplierColumn.ValueMember = "id";
             flightSupplierColumn.DataSource = GetSuppliersByType(SupplierEnum.Flight);
 
+            //保险
+            titleTextBoxColumn3.DisplayMember = "name";
+            titleTextBoxColumn3.ValueMember = "name";
+            titleTextBoxColumn3.DataSource = GetSuppliersByType(SupplierEnum.Insurance);
+
+            //租车公司
+            titleColumn4.DisplayMember = "name";
+            titleColumn4.ValueMember = "name";
+            titleColumn4.DataSource = GetSuppliersByType(SupplierEnum.Rental);
+
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -226,7 +312,8 @@ namespace DCTS.UI
 
         private void addFlightButton1_Click(object sender, EventArgs e)
         {
-            if (this.customerList.Count == 0) {
+            if (this.customerList.Count == 0)
+            {
                 MessageHelper.AlertBox("请先选择客户！");
                 return;
             }
@@ -235,14 +322,14 @@ namespace DCTS.UI
 
             if (suppliers.Count == 0)
             {
-                MessageHelper.AlertBox( string.Format("请先录入{0}服务商！", supplierType));
+                MessageHelper.AlertBox(string.Format("请先录入{0}服务商！", supplierType));
                 return;
             }
 
             int cid = customerList.First().id;
             int sid = suppliers.First().id;
             var objectView = ticketView.AddNew();
-            
+
             var ticket = objectView.Object;
             ticket.ttype = (int)supplierType;
             ticket.customer_id = cid;
@@ -252,7 +339,7 @@ namespace DCTS.UI
             ticket.end_at = DateTime.Now;
 
             if (supplierType == SupplierEnum.Flight)
-            {               
+            {
                 //var airport = fromAirportBindingSource.Current as ComboLocation;                    
                 //ticket.from_location_id= airport.id;
                 //ticket.to_location_id = airport.id;
@@ -261,6 +348,15 @@ namespace DCTS.UI
             {
                 //supplier is required for filter
             }
+            if (supplierType == SupplierEnum.Insurance)
+            {
+
+
+            }
+
+
+
+
             ticketView.EndNew(ticketView.Count - 1);
 
         }
@@ -268,7 +364,7 @@ namespace DCTS.UI
         {
             var view = GetDataGridViewBySupplierType();
             var objectView = view.CurrentRow.DataBoundItem as ObjectView<Ticket>;
-            
+
             this.ticketView.DataSource.Remove(objectView.Object);
             this.ticketView.Refresh();
         }
@@ -303,10 +399,10 @@ namespace DCTS.UI
 
             nationTextBox.Text = string.Join(",", nationList.Select(o => o.title).ToList());
             // nation='nation.title'
-            string filter = BuildBindingSourceFilter<Nation>(nationList, "nation","title");
+            string filter = BuildBindingSourceFilter<Nation>(nationList, "nation", "title");
 
             InitializeDataSourceByNations();
-           
+
         }
 
 
@@ -319,18 +415,19 @@ namespace DCTS.UI
             //ticketDataView.RowFilter = string.Format("ttype={0}", (int)this.supplierType);
         }
 
-        private List<Supplier> GetSuppliersByType( SupplierEnum supplierEnum)
+        private List<Supplier> GetSuppliersByType(SupplierEnum supplierEnum)
         {
             return this.supplierList.Where(o => o.stype == (int)supplierEnum).ToList();
         }
 
         // 'keyName=valName' obj.valName
-        private string BuildBindingSourceFilter<T>(List<T> list, string keyName, string valName ){
+        private string BuildBindingSourceFilter<T>(List<T> list, string keyName, string valName)
+        {
             var filter = string.Empty;
-             var type = typeof(T);
+            var type = typeof(T);
             if (list.Count > 0)
             {
-                var first= list.First();
+                var first = list.First();
 
                 var val = type.GetProperty(valName).GetValue(first);
 
@@ -340,7 +437,8 @@ namespace DCTS.UI
                     var conditions = list.Select(o => string.Format("{0}='{1}'", keyName, type.GetProperty(valName).GetValue(o))).ToList();
                     filter = string.Join(" OR ", conditions);
                 }
-                else {
+                else
+                {
                     var conditions = list.Select(o => string.Format("{0}={1}", keyName, type.GetProperty(valName).GetValue(o))).ToList();
                     filter = string.Join(" OR ", conditions);
                 }
@@ -348,7 +446,7 @@ namespace DCTS.UI
             return filter;
         }
 
- 
+
 
         private void flightDataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
@@ -394,7 +492,7 @@ namespace DCTS.UI
                                         this.supplierType = SupplierEnum.Activity;
                                     }
             Console.WriteLine("selected tab {0}, current supplierType={1}", ticketTabControl.SelectedTab.Text, this.supplierType);
-            
+
             SetTicketViewFilter();
 
         }
@@ -402,10 +500,10 @@ namespace DCTS.UI
         private DataGridView GetDataGridViewBySupplierType()
         {
             DataGridView view = null;
-            switch( (supplierType) )
+            switch ((supplierType))
             {
                 case SupplierEnum.Flight:
-                    view= this.flightDataGridView;
+                    view = this.flightDataGridView;
                     break;
                 case SupplierEnum.Hotal:
                     view = this.hotalDataGridView;
@@ -416,9 +514,40 @@ namespace DCTS.UI
                 case SupplierEnum.Rental:
                     view = this.RentalGridView;
                     break;
-                
+
             }
             return view;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var form = new SelectSystemfile();
+            form.ShowDialog();
+
+
+
+            {
+                List<string> reference = form.listfile;
+                if (reference.Count > 0)
+                {
+
+                    pictureBox1.ImageLocation = reference[1];
+                }
+
+
+            }
+        }
+
+        private void activityDataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            bool handle;
+            if (activityDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.Equals(DBNull.Value))
+            {
+                handle = true;
+            }
+            else
+                handle = false;
+            e.Cancel = handle;
         }
 
     }
