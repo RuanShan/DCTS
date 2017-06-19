@@ -15,7 +15,7 @@ namespace DCTS.UI
 {
     public partial class NewHotelForm : BaseModalForm
     {
-        private long ModelId { get; set;}
+        private long ModelId { get; set; }
 
         public NewHotelForm(string maintype, ComboLocation obj)
         {
@@ -48,7 +48,7 @@ namespace DCTS.UI
                 if (obj.img != null)
                 {
                     pictureBox1.ImageLocation = EntityPathConfig.LocationImagePath(obj);
-                } 
+                }
             }
         }
 
@@ -174,10 +174,19 @@ namespace DCTS.UI
                         obj.kitchen = kitchen.Text;
                         obj.tips = this.textBox6.Text;
                         //ctx.ComboLocations.Add(obj);
+                        if (hasImg)
+                        {
+
+                            string imgFileName = Path.GetFileName(imgFilePath);
+
+                            obj.img = imgFileName;
+                        }
+
                         ctx.SaveChanges();
 
                         if (hasImg)
                         {
+                            imgFilePath = pictureBox1.ImageLocation;
                             string copyToPath = EntityPathConfig.LocationImagePath(obj);                            
                             File.Copy(imgFilePath, copyToPath, true);
                         }
@@ -194,11 +203,11 @@ namespace DCTS.UI
 
         }
 
-     
+
         private void findFileButton_Click(object sender, EventArgs e)
         {
 
-          //  openFileDialog1.Filter = "PNG(*.png)|*.png|JPEG(*.jpg,*.jpeg,*.jpe,*.jfif)|*.jpg;*.jpeg;*.jpe;*.jfif|GIF(*.gif)|*.gif"; //文件类型
+            //  openFileDialog1.Filter = "PNG(*.png)|*.png|JPEG(*.jpg,*.jpeg,*.jpe,*.jfif)|*.jpg;*.jpeg;*.jpe;*.jfif|GIF(*.gif)|*.gif"; //文件类型
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 this.imgPathTextBox.Text = openFileDialog1.FileName;

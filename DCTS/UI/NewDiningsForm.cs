@@ -94,7 +94,7 @@ namespace DCTS.UI
                         imgFileName = Path.GetFileName(imgFilePath);
 
                         existSameImage = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Dining && o.img == imgFileName && o.id != ModelId).Count() > 0);
-                        
+
                     }
                     bool hastitle = (localTitleTextBox.Text.Length > 0);
                     if (hastitle)
@@ -139,7 +139,7 @@ namespace DCTS.UI
                             {
                                 string copyToPath = EntityPathConfig.LocationImagePath(obj);
                                 if (!File.Exists(copyToPath))
-                                File.Copy(imgFilePath, copyToPath);
+                                    File.Copy(imgFilePath, copyToPath);
                             }
                         }
                         else
@@ -173,8 +173,9 @@ namespace DCTS.UI
                             ModelId = obj.id;
                             if (hasImg)
                             {
+                                imgFilePath = pictureBox1.ImageLocation;
                                 string copyToPath = EntityPathConfig.LocationImagePath(obj);
-                                File.Copy(imgFilePath, copyToPath,true);
+                                File.Copy(imgFilePath, copyToPath, true);
                             }
                         }
                         istrue = true;
@@ -194,11 +195,11 @@ namespace DCTS.UI
         private void findFileButton_Click(object sender, EventArgs e)
         {
 
-           // openFileDialog1.Filter = "PNG(*.png)|*.png|JPEG(*.jpg,*.jpeg,*.jpe,*.jfif)|*.jpg;*.jpeg;*.jpe;*.jfif|GIF(*.gif)|*.gif"; //文件类型
+            // openFileDialog1.Filter = "PNG(*.png)|*.png|JPEG(*.jpg,*.jpeg,*.jpe,*.jfif)|*.jpg;*.jpeg;*.jpe;*.jfif|GIF(*.gif)|*.gif"; //文件类型
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 this.imgPathTextBox.Text = openFileDialog1.FileName;
-                   pictureBox1.ImageLocation = openFileDialog1.FileName;
+                pictureBox1.ImageLocation = openFileDialog1.FileName;
             }
         }
 
