@@ -42,6 +42,7 @@ namespace DCTS.CustomComponents
         private void imagedockin(List<LocationImage> list)
         {
             ImageList imageListSmall = new ImageList();
+
             int i = 0;
 
             foreach (LocationImage item in list)
@@ -52,8 +53,15 @@ namespace DCTS.CustomComponents
                     string ImageLocation = EntityPathConfig.newlocationimagepath(item);
                     if (File.Exists(ImageLocation))
                     {
+                        //  imageListSmall.ColorDepth = ColorDepth.Depth32Bit;
                         imageListSmall.ImageSize = new Size(58, 58);
-                        imageListSmall.Images.Add(Bitmap.FromFile(ImageLocation));
+
+                        imageListSmall.Images.Add(new System.Drawing.Bitmap(ImageLocation));
+
+                        //一次添加多个图片
+                        // imageListSmall.Images.AddStrip(Image.FromFile(ImageLocation));
+                        //  imageListSmall.Images.Add(Bitmap.FromFile(ImageLocation));
+
                     }
                 }
 
