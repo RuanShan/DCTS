@@ -530,6 +530,7 @@
     <Compile Include="UI\SelectSystemfile.Designer.cs">
       <DependentUpon>SelectSystemfile.cs</DependentUpon>
     </Compile>
+    <Compile Include="Uti\DistinctExtension.cs" />
     <Compile Include="Uti\EFIntercepterLogging.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

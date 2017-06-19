@@ -28,6 +28,8 @@ namespace DCTS.UI
         SupplierEnum supplierType;
         private BindingListView<Ticket> ticketView;
         private List<Supplier> supplierList;
+        ChooseCustomersForm customerForm;
+        ChooseCountries countryForm;
 
         public EditCustomerTripForm(long tripId)
         {
@@ -42,14 +44,12 @@ namespace DCTS.UI
             RentalGridView.AutoGenerateColumns = false;
             WIFIGridView.AutoGenerateColumns = false;
             activityDataGridView.AutoGenerateColumns = false;
+
+            customerForm = new ChooseCustomersForm();
+            countryForm = new ChooseCountries();
         }
 
-        private void saveButton_Click(object sender, EventArgs e)
-        {
-            var ctx = this.entityDataSource1.DbContext as DctsEntities;
-            this.tripFormControl1.FillModelByForm(this.trip);
-            ctx.SaveChanges();
-        }
+
 
         private void EditTripForm_Load(object sender, EventArgs e)
         {
@@ -59,9 +59,6 @@ namespace DCTS.UI
             this.ticketList = trip.Tickets.ToList();
             this.supplierList = ctx.Suppliers.ToList();
 
-            this.tripFormControl1.FillFormByModel(trip);
-            this.tripFormControl1.daysNumericUpDown.ReadOnly = true;
-
             //行程客户
             this.customerList = this.trip.TripCustomers.Select(o => o.Customer).ToList();
             string countryNames = this.trip.countries != null ? this.trip.countries : string.Empty;
@@ -69,8 +66,85 @@ namespace DCTS.UI
 
             airportList = ComboLoactionBusiness.TypedLocation(ctx, ComboLocationEnum.Airport);
 
+            this.FillFormByModel(trip);
+
             SetTicketDateGridViewDataSource();
         }
+
+        #region 基本信息
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            var ctx = this.entityDataSource1.DbContext as DctsEntities;
+            this.FillModelByForm(this.trip);
+            ctx.SaveChanges();
+            MessageHelper.InfoBox("成功保存！");
+
+        }
+
+        #region 关联界面和数据
+
+        public void FillModelByForm(Trip trip)
+        {
+            trip.title = this.titleTextBox.Text;
+            trip.days = Convert.ToInt32(this.daysNumericUpDown.Value);
+            trip.start_at = this.startAtDateTimePicker.Value;
+            trip.memo = this.memoTextBox.Text;
+            trip.end_at = trip.start_at.Value.AddDays(trip.days - 1);
+            trip.countries = this.nationTextBox.Text;
+            using (var ctx = new DctsEntities())
+            {
+                var location = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.PageImage).First();
+
+                var query = ctx.LocationImages.Where(o => o.location_id == (int)location.id && o.name == imgPathTextBox.Text);
+                List<LocationImage> list = query.ToList();
+                if (list.Count > 0)
+                {
+                    trip.cover_id = list[0].id;
+                }
+            }
+
+            var tripCustomers = trip.TripCustomers.ToList();
+            var oriCustomerIds = tripCustomers.Select(o => o.customer_id).ToList();
+            var curCustomerIds = customerList.Select(o=>o.id).ToList();
+            var deleteTripCustomer = tripCustomers.Where(o => !curCustomerIds.Contains(o.customer_id)).ToList();
+            var newCustomerIds = curCustomerIds.Where(o => !oriCustomerIds.Contains(o)).ToList();
+            foreach (var cid in newCustomerIds)
+            {
+                trip.TripCustomers.Add(new TripCustomer() { customer_id = cid });                
+            }
+            foreach (var tc in deleteTripCustomer)
+            {
+                trip.TripCustomers.Remove(tc);
+            }
+        }
+
+        public void FillFormByModel(Trip trip)
+        {
+
+            this.titleTextBox.Text = trip.title;
+            this.daysNumericUpDown.Value = trip.days;
+            this.memoTextBox.Text = trip.memo;
+            this.startAtDateTimePicker.Value = trip.start_at.GetValueOrDefault(DateTime.Now);
+            this.nationTextBox.Text = trip.countries;
+            this.customersTextBox2.Text = string.Join(",", customerList.Select(o => o.name).ToArray() );
+            //读取图片位置
+            using (var ctx = new DctsEntities())
+            {
+                var query = ctx.LocationImages.Where(o => o.id == trip.cover_id);
+                if (query.Count() > 0)
+                {
+                    string ImageLocation = EntityPathConfig.newlocationimagepath(query.ToList()[0]);
+                    imgPathTextBox.Text = query.ToList()[0].name;
+                    pictureBox1.ImageLocation = ImageLocation;
+                }
+
+            }
+        }
+
+        #endregion
+
+        #endregion
 
         #region 处理票务信息
 
@@ -168,6 +242,7 @@ namespace DCTS.UI
                                         this.supplierType = SupplierEnum.Activity;
                                     }
             Console.WriteLine("selected tab {0}, current supplierType={1}", ticketTabControl.SelectedTab.Text, this.supplierType);
+            SetTicketViewFilter();
 
         }
 
@@ -262,6 +337,74 @@ namespace DCTS.UI
 
         #endregion
 
+
+        private void findFileButton_Click(object sender, EventArgs e)
+        {
+            var form = new SelectSystemfile();
+            form.ShowDialog();
+
+
+            //if (form.ShowDialog() == DialogResult.Yes)
+            {
+                List<string> reference = form.listfile;
+                if (reference.Count > 0)
+                {
+                    imgPathTextBox.Text = reference[0];
+
+                    pictureBox1.ImageLocation = reference[1];
+                }
+
+
+            }
+        }
+
+        private void findCustomerButton_Click(object sender, EventArgs e)
+        {
+            if (customerForm.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
+            {
+                var list = customerForm.SelectedCustomers();
+
+                this.customerList.AddRange(list);
+                this.customersTextBox2.Text = string.Join(",", customerList.Select(o => o.name).ToList());
+            }
+        }
+
+        private void customersTextBox2_TextChanged(object sender, EventArgs e)
+        {
+            var cnames = customersTextBox2.Text.Split(",，".ToArray()).Distinct();
+
+            customerList = customerList.Where(o => cnames.Contains(o.name)).ToList();
+
+            customersTextBox2.Text = string.Join(",", customerList.Select(o => o.name).ToList());
+        }
+
+        private void tabControl1_Selected(object sender, TabControlEventArgs e)
+        {
+            if (this.tabControl1.SelectedTab == this.ticketTabPage)
+            {
+                SetTicketDateGridViewDataSource();
+            }
+        }
+
+        private void chooseCountryButton_Click(object sender, EventArgs e)
+        {
+            if (countryForm.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
+            {
+                var list = countryForm.SelectedNations();
+
+                this.nationList.AddRange(list);
+                this.nationTextBox.Text = string.Join(",", nationList.Select(o => o.title).ToList());
+            }
+        }
+
+        private void nationTextBox_TextChanged(object sender, EventArgs e)
+        {
+            var cnames = nationTextBox.Text.Split(",，".ToArray()).Distinct();
+
+            nationList = nationList.Where(o => cnames.Contains(o.title)).ToList();
+
+            nationTextBox.Text = string.Join(",", nationList.Select(o => o.title).ToList());           
+        }
 
     }
 }

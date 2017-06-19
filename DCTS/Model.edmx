@@ -231,8 +231,8 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="trip_id" Type="int" />
-          <Property Name="customer_id" Type="int" />
+          <Property Name="trip_id" Type="int" Nullable="false" />
+          <Property Name="customer_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TripDays">
           <Key>
@@ -323,7 +323,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_tripcustomer_customer">
-          <End Role="Customers" Type="DctsModel.Store.Customers" Multiplicity="0..1" />
+          <End Role="Customers" Type="DctsModel.Store.Customers" Multiplicity="1" />
           <End Role="TripCustomers" Type="DctsModel.Store.TripCustomers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customers">
@@ -335,7 +335,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_tripcustomer_trip">
-          <End Role="Trips" Type="DctsModel.Store.Trips" Multiplicity="0..1" />
+          <End Role="Trips" Type="DctsModel.Store.Trips" Multiplicity="1" />
           <End Role="TripCustomers" Type="DctsModel.Store.TripCustomers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Trips">
@@ -750,13 +750,13 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Type="Int32" Name="id" Nullable="false" />
-          <Property Type="Int32" Name="trip_id" />
-          <Property Type="Int32" Name="customer_id" />
+          <Property Type="Int32" Name="trip_id" Nullable="false" />
+          <Property Type="Int32" Name="customer_id" Nullable="false" />
           <NavigationProperty Name="Customer" Relationship="DctsModel.fk_tripcustomer_customer" FromRole="TripCustomer" ToRole="Customer" />
           <NavigationProperty Name="Trip" Relationship="DctsModel.fk_tripcustomer_trip" FromRole="TripCustomer" ToRole="Trip" />
         </EntityType>
         <Association Name="fk_tripcustomer_customer">
-          <End Type="DctsModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="DctsModel.Customer" Role="Customer" Multiplicity="1" />
           <End Type="DctsModel.TripCustomer" Role="TripCustomer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customer">
@@ -768,7 +768,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_tripcustomer_trip">
-          <End Type="DctsModel.Trip" Role="Trip" Multiplicity="0..1" />
+          <End Type="DctsModel.Trip" Role="Trip" Multiplicity="1" />
           <End Type="DctsModel.TripCustomer" Role="TripCustomer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Trip">

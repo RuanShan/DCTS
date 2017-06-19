@@ -15,8 +15,8 @@ namespace DCTS
     public partial class TripCustomer
     {
         public int id { get; set; }
-        public Nullable<int> trip_id { get; set; }
-        public Nullable<int> customer_id { get; set; }
+        public int trip_id { get; set; }
+        public int customer_id { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual Trip Trip { get; set; }

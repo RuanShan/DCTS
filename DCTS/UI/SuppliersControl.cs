@@ -34,13 +34,11 @@ namespace DCTS.UI
             dataGridView.AutoGenerateColumns = false;
             locationTypeList = GlobalCache.Supplier_LocationTypeList;
             InitializeDataSource();
-            pager2.PageCurrent = 1;
         }
         public void BeginActive()
         {
             InitializeDataSource();
             InitializeDataGridView();
-            pager2.Bind();
 
         }
         public void InitializeDataSource()
@@ -68,8 +66,6 @@ namespace DCTS.UI
             string title = (this.keywordTextBox.Text != NoOptionSelected ? this.keywordTextBox.Text : string.Empty);
 
             int count = 0;
-            int pageSize = pager2.PageSize;
-
 
             int[] otherLocationType = { (int)SupplierEnum.Flight, (int)SupplierEnum.Insurance, (int)SupplierEnum.Rental, (int)SupplierEnum.WIFI };
 
@@ -81,7 +77,7 @@ namespace DCTS.UI
                 //分页需要数据总数
                 count = Count(ty, title);
 
-                var list = Paginate( pageCurrent, pageSize, ty, "", title);
+                var list = Paginate( pageCurrent, 100, ty, "", title);
 
 
 
@@ -273,10 +269,8 @@ namespace DCTS.UI
 
         private void btfind_Click(object sender, EventArgs e)
         {
-
-            pager2.PageCurrent = 1;
-
-            pager2.Bind();
+            InitializeDataGridView();
+          
         }
 
         private int pager2_EventPaging(EventPagingArg e)

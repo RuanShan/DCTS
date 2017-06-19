@@ -7,8 +7,9 @@ using System.Text.RegularExpressions;
 using DocumentFormat.OpenXml.Packaging;
 using DCTS.DB;
 using System.IO;
-using WindowsBitmap = System.Drawing.Bitmap;
 using DocumentFormat.OpenXml.Wordprocessing;
+using DCTS.Uti;
+using System.Collections;
 
 namespace DCTS.Bus
 {
@@ -23,6 +24,10 @@ namespace DCTS.Bus
         List<LocationImage> locationImages;
         List<WordprocessingDocument> filledTemplates;
         List<MemoryStream> filledTemplateStreams = new List<MemoryStream>();
+        List<Ticket> ticketList;
+        List<ComboLocation> ticketLocations;
+        List<Supplier> supplierList;
+        List<Customer> customerList;
 
         public CustomerTripWordExporterEx(long trip_id)
         {
@@ -33,7 +38,7 @@ namespace DCTS.Bus
                 trip = ctx.Trips.Find(TripId);
                 days = ctx.TripDays.Include("Schedules").Where(o => o.trip_id == TripId).OrderBy(o => o.day).ToList();
                 dayLocations = ctx.DayLocations.Include("TripDay").Include("ComboLocation").Where(o => o.trip_id == TripId).OrderBy(o => o.TripDay.day).ThenBy(o => o.position).ToList();
-
+                ticketList = trip.Tickets.ToList();
                 var coverIds = new List<int>();
                 if (trip.cover_id > 0)
                 {
@@ -43,6 +48,18 @@ namespace DCTS.Bus
                 coverIds.AddRange(days.Where(o => o.cover_id > 0).Select(o => o.cover_id).ToList());
 
                 locationImages = ctx.LocationImages.Where(o => coverIds.Contains(o.id)).ToList();
+
+                var locationIds = new List<int>();
+                locationIds.AddRange(ticketList.Select(o => o.from_location_id).ToArray());
+                locationIds.AddRange(ticketList.Select(o => o.to_location_id).ToArray());
+                locationIds = locationIds.Where(o => o > 0).ToList();
+
+                ticketLocations = ctx.ComboLocations.Where(o => locationIds.Contains(o.id)).ToList();
+                
+                var supplierIds = ticketList.Select(o=> o.supplier_id).ToArray();
+                supplierList = ctx.Suppliers.Where(o => supplierIds.Contains(o.id)).ToList();
+
+                customerList = trip.TripCustomers.Select(o => o.Customer).ToList();
             }
 
             filledTemplates = new List<WordprocessingDocument>();
@@ -50,15 +67,27 @@ namespace DCTS.Bus
         }
 
 
-
+        //导出word
         public bool ExportWord( )
         {
             var sources = new List<WordprocessingDocument>();
 
             using (var db = new DctsEntities())
             {
-                var tripSumaryTemplate = WordprocessingDocument.Open(LocationTemplate.TripSumaryPath,false);
-                var daySumaryTemplate = WordprocessingDocument.Open(LocationTemplate.DaySumaryPath, false);
+                // 准备模板
+                Dictionary<ComboLocationEnum, WordprocessingDocument> tmplDict = new Dictionary<ComboLocationEnum, WordprocessingDocument>();
+                ComboLocationEnum[] templateTypes = { ComboLocationEnum.TripSummary, ComboLocationEnum.DaySummary, ComboLocationEnum.Flight, ComboLocationEnum.Train,
+                                                    ComboLocationEnum.DeepOnline, ComboLocationEnum.FlightList};
+                foreach (var type in templateTypes)
+                {
+                    var path = LocationTemplate.GetPath(type);
+                    var template = WordprocessingDocument.Open(path, false);
+                    tmplDict[type] = template;
+
+                }
+                
+                var tripSumaryTemplate = tmplDict[ComboLocationEnum.TripSummary];
+                var daySumaryTemplate = tmplDict[ComboLocationEnum.DaySummary]; 
 
                 //cloned templates/base as template
                 string layout = LocationTemplate.LayoutRelativePath;
@@ -67,22 +96,26 @@ namespace DCTS.Bus
 
                 using (WordprocessingDocument document = WordprocessingDocument.Open(tripPath, true) )
                 {
+                    // 初识国家
+                    // Google使用说明
                     // 处理路书行程概要
-
                     HandleTripSummary(tripSumaryTemplate);
                     {
                         foreach (var day in this.days)
                         {
-                            HandleDaySummary(daySumaryTemplate, day);
                             //处理每天行程概要
+                            HandleDaySummary(daySumaryTemplate, day);
+                            //处理每天的票务
+                            HandleDayTickets(tmplDict,day);
                             var daylocations = dayLocations.Where(o => o.day_id == day.id).ToList();
-
                             foreach (var dl in daylocations)
                             {
-
                                 HandleLocation(dl);
                             }
                         }
+                        //线上查询说明
+                        //机票列表
+                        HanldeFlightTicketList(tmplDict, this.ticketList);
                     }
                    //合并文档
                     WordTemplateHelper.MergeDoc(filledTemplateStreams, document);
@@ -93,13 +126,14 @@ namespace DCTS.Bus
 
                 trip.word_created_at = DateTime.Now;
 
-                daySumaryTemplate.Close();
-                tripSumaryTemplate.Close();
+                foreach (var kv in tmplDict)
+                {
+                    kv.Value.Close();
+                }
                 db.SaveChanges();
             }
             return true;
         }
-
 
         // params
         //   doc: 添加行程概览到路书
@@ -240,8 +274,10 @@ namespace DCTS.Bus
             
         }
 
+        //处理每日行程
         public void HandleDaySummary(WordprocessingDocument template, TripDay day)
         {
+
             string[] keys = { "day" };
             string[] specKeys = { "day_date", "day_locations", "day_lweekday" };
             var stream = new MemoryStream();
@@ -327,7 +363,7 @@ namespace DCTS.Bus
             this.filledTemplateStreams.Add(stream);
         }
 
-
+        //处理每个地点
         public void HandleLocation( DayLocation dayLocation)
         {
             string[] locationKeys = {"nation","city", "area", "title", "local_title", "address", "local_address", "latlng", "route", "contact", "tips",
@@ -396,9 +432,183 @@ namespace DCTS.Bus
 
         }
 
+        public void HandleDayTickets(Dictionary<ComboLocationEnum, WordprocessingDocument> tmplDict, TripDay tripDay)
+        {
+            var date = this.trip.start_at.GetValueOrDefault().AddDays(tripDay.day - 1);
 
+            var dayTickets = ticketList.Where(o => o.start_at.Value.Date == date.Date).ToList();
 
-        
+            var groupedTickets = dayTickets.Distinct((p, p1) => p.start_at == p1.start_at).GroupBy(o => o.ttype);
+
+            foreach (var group in groupedTickets)
+            {
+                if (group.Key == (int)SupplierEnum.Flight)
+                {
+                    HanldeFlightTickets(tmplDict, group.ToList());
+
+                }
+            }
+
+        }
+        // 处理每日机票
+        public void HanldeFlightTickets(Dictionary<ComboLocationEnum, WordprocessingDocument> tmplDict, List<Ticket> tickets)
+        {
+            WordprocessingDocument ticketTemplate = tmplDict[ComboLocationEnum.Flight];
+            string[] specKeys = { "ticket_date", "tick_from_city", "tick_to_city", "tick_from_airport", "tick_to_airport", "tick_start_time", "tick_end_time" };
+            var stream = new MemoryStream();
+            var template = ticketTemplate.Clone(stream, true) as WordprocessingDocument;
+            List<int> airportIds = new List<int>();
+            
+            var mainDoc = template.MainDocumentPart.Document;
+            //look for one specific table here
+            Table table = mainDoc.Body.Descendants<Table>().LastOrDefault();
+            if (table != null)
+            {
+                for (var i = 0; i < tickets.Count; i++)
+                {
+                    var ticket = tickets[i];
+                    var supplier = this.supplierList.First(o=>o.id == ticket.supplier_id);
+                    var cloned = table.CloneNode(true) as Table;
+                    var from_location = ticketLocations.FirstOrDefault(o => o.id == ticket.from_location_id);
+                    var to_location = ticketLocations.FirstOrDefault(o => o.id == ticket.to_location_id);
+                    if (from_location != null && to_location != null)
+                    {
+                        WordTemplateHelper.ReplaceText<Table>(cloned, "%ticket_num%", ticket.num);
+                        WordTemplateHelper.ReplaceText<Table>(cloned, "%ticket_date%", WordTemplateHelper.DisplayDate(ticket.start_at.GetValueOrDefault()));
+                        WordTemplateHelper.ReplaceText<Table>(cloned, "%ticket_from_city%", from_location.city);
+                        WordTemplateHelper.ReplaceText<Table>(cloned, "%ticket_to_city%", to_location.city);
+                        WordTemplateHelper.ReplaceText<Table>(cloned, "%ticket_from_airport%", from_location.title);
+                        WordTemplateHelper.ReplaceText<Table>(cloned, "%ticket_to_airport%", to_location.title);
+                        WordTemplateHelper.ReplaceText<Table>(cloned, "%ticket_start_time%", WordTemplateHelper.DisplayTime(ticket.start_at.GetValueOrDefault()));
+                        WordTemplateHelper.ReplaceText<Table>(cloned, "%ticket_end_time%", WordTemplateHelper.DisplayTime(ticket.end_at.GetValueOrDefault()));
+                        //替换图片
+                        if( supplier.img != null )
+                        {
+                            string file = EntityPathConfig.Supplier_LocationImagePath(supplier);
+                            if (File.Exists(file))
+                            {
+                                string relId = WordTemplateHelper.InsertPicture(template, file);
+                                var blip = cloned.Descendants<DocumentFormat.OpenXml.Drawing.Blip>().FirstOrDefault();
+                                blip.Embed.InnerText = relId;                                
+                            }
+                        }
+                        airportIds.Add( ticket.from_location_id);
+                        airportIds.Add( ticket.to_location_id);
+                    }
+                    if (i != 0)
+                    {
+                        table.InsertBeforeSelf( new Paragraph(new DocumentFormat.OpenXml.Wordprocessing.Run(new DocumentFormat.OpenXml.Wordprocessing.Break() { Type = BreakValues.TextWrapping })));
+                    }
+                    table.InsertBeforeSelf(cloned);
+                }
+                table.Remove();
+            }
+            //由于未知原因，以下保存的文档是可读的，template.SaveAs(path)， 但是 template.Save(); 再由 MergeDoc 产生的文档不可读。
+            //所以这里新创建MemoryStream，再clone。
+            template.Save();
+            // 机票文档
+            MemoryStream newStream = new MemoryStream();
+            template.Clone(newStream);            
+            stream.Close();
+            this.filledTemplates.Add(template);
+            this.filledTemplateStreams.Add(newStream);
+            
+            // 机场文档
+            foreach (var aid in airportIds.Distinct())
+            { 
+                var location = ticketLocations.Find( o=>o.id == aid);
+                if (location.word != null && File.Exists(EntityPathConfig.LocationWordPath(location)))
+                {
+                    var airportStream = new MemoryStream(File.ReadAllBytes(EntityPathConfig.LocationWordPath(location)));
+                    this.filledTemplateStreams.Add(airportStream);
+                }
+            }
+
+        }
+
+        // 处理电子机票列表
+        public void HanldeFlightTicketList(Dictionary<ComboLocationEnum, WordprocessingDocument> tmplDict, List<Ticket> tickets)
+        {
+            WordprocessingDocument ticketTemplate = tmplDict[ComboLocationEnum.FlightList];
+            string[] specKeys = { "ticket_date", "tick_from_city", "tick_to_city", "tick_from_airport", "tick_to_airport", "tick_start_time", "tick_end_time" };
+            var stream = new MemoryStream();
+            var template = ticketTemplate.Clone(stream, true) as WordprocessingDocument;
+            var customerIds = tickets.Select(o => o.customer_id).ToList();
+            var supplierIds = tickets.Select(o=>o.supplier_id).ToList();
+            var customers = this.customerList.Where(o => customerIds.Contains(o.id)).ToList();
+            var mainDoc = template.MainDocumentPart.Document;
+            
+            var supplierNames = this.supplierList.Where(o => supplierIds.Contains(o.id)).Select(o=>o.name).ToList();
+            WordTemplateHelper.ReplaceText<Document>(mainDoc, "%supplier_names%", string.Join("/", supplierNames ));
+
+            Table customerTable = mainDoc.Body.Descendants<Table>().ElementAt(1);
+            if (customerTable != null)
+            {
+                var rowPattern = customerTable.Elements<TableRow>().Last();
+                if (rowPattern != null)
+                {
+                    for (var i = 0; i < customers.Count; i++)
+                    {
+                        var customer = customers[i];
+                        var cloned = rowPattern.CloneNode(true) as TableRow;
+                        WordTemplateHelper.ReplaceText<TableRow>(cloned, "%customer_i%", (i+1).ToString());
+                        WordTemplateHelper.ReplaceText<TableRow>(cloned, "%customer_name%", customer.name);
+                        WordTemplateHelper.ReplaceText<TableRow>(cloned, "%customer_enname%", customer.enname);
+                        WordTemplateHelper.ReplaceText<TableRow>(cloned, "%customer_passport%", customer.passport);
+                        rowPattern.InsertBeforeSelf(cloned);
+                    }
+                    rowPattern.Remove();
+                }
+            }
+          
+            Table ticketTable = mainDoc.Body.Descendants<Table>().ElementAt(2);
+            //处理机票
+            if (ticketTable != null)
+            {
+                var rowPattern = ticketTable.Elements<TableRow>().Last();
+                if( rowPattern != null)
+                {
+                    for (var i = 0; i < tickets.Count; i++)
+                    {
+                        var ticket = tickets[i];
+                        var cloned = rowPattern.CloneNode(true) as TableRow;
+                        var from_location = ticketLocations.FirstOrDefault(o => o.id == ticket.from_location_id);
+                        var to_location = ticketLocations.FirstOrDefault(o => o.id == ticket.to_location_id);
+                        if (from_location != null && to_location != null)
+                        {
+                            WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_i%", (i + 1).ToString());
+                            WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_date%", string.Format("{0:MMdd}",ticket.start_at.GetValueOrDefault()));
+                            WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_num%", ticket.num);
+                            //0601
+                            WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_from_city%", from_location.city);
+                            WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_to_city%", to_location.city);
+
+                            WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_start_time%", WordTemplateHelper.DisplayTime(ticket.start_at.GetValueOrDefault()));
+                            string endAt = ( ticket.start_at.Value.Date == ticket.end_at.Value.Date ? string.Format("{0:HH:mm}",ticket.end_at.Value) : string.Format("{0:HH:mm}+1",ticket.end_at.Value));
+                            WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_end_time%", endAt);
+                         
+                        }
+                     
+                        rowPattern.InsertBeforeSelf(cloned);
+                    }
+                    rowPattern.Remove();
+                }
+            }
+          
+
+            template.Save();
+            this.filledTemplates.Add(template);
+            this.filledTemplateStreams.Add(stream);
+
+        }
+
+        ~CustomerTripWordExporterEx()
+        {
+            foreach (var stream in filledTemplateStreams)
+            {
+                stream.Close();
+            }
+        }
 
     }
 }

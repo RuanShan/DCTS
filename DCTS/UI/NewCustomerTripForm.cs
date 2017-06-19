@@ -124,7 +124,8 @@ namespace DCTS.UI
                             trip.TripDays.Add(tripDay);
                         }
                     }
-                    
+                    trip.end_at = trip.start_at.Value.AddDays(trip.days - 1);
+
                     trip.Tickets.Concat(this.ticketView);
 
                     ctx.SaveChanges();
@@ -137,6 +138,8 @@ namespace DCTS.UI
                     trip.start_at = this.startAtDateTimePicker.Value;
                     trip.memo = this.memoTextBox.Text;
                     trip.days = Convert.ToInt32(this.daysNumericUpDown.Value);
+                    trip.end_at = trip.start_at.Value.AddDays(trip.days - 1);
+
                     trip.countries = this.nationTextBox.Text;
 
                     for (int i = 0; i < trip.days; i++)

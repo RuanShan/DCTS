@@ -51,7 +51,9 @@ namespace DCTS.UI
         private int InitializeDataGridView(int pageCurrent = 1)
         {
 
-            int[] otherLocationType = { (int)ComboLocationEnum.Letter, (int)ComboLocationEnum.Preparation, (int)ComboLocationEnum.Google, (int)ComboLocationEnum.Flight, (int)ComboLocationEnum.Train, (int)ComboLocationEnum.Rental };
+            int[] otherLocationType = { (int)ComboLocationEnum.Letter, (int)ComboLocationEnum.Preparation, (int)ComboLocationEnum.Google, (int)ComboLocationEnum.Flight, (int)ComboLocationEnum.Train, (int)ComboLocationEnum.Rental ,
+                                          (int)ComboLocationEnum.FlightList, (int)ComboLocationEnum.HotelList, (int)ComboLocationEnum.RentalList, (int)ComboLocationEnum.OtherList, (int)ComboLocationEnum.InsuranceList
+                                      };
 
 
             using (var ctx = new DctsEntities())

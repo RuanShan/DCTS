@@ -53,6 +53,22 @@ namespace DCTS.Bus
             document.MainDocumentPart.Document.Body.Append(pageBreakParagraph);
         }
 
+        // return relid
+        public static string InsertPicture(WordprocessingDocument document, string fileName)
+        {
+
+            MainDocumentPart mainPart = document.MainDocumentPart;
+
+            ImagePart imagePart = mainPart.AddImagePart(ImagePartType.Jpeg);
+
+            using (FileStream stream = new FileStream(fileName, FileMode.Open))
+            {
+                imagePart.FeedData(stream);
+            }
+
+            return mainPart.GetIdOfPart(imagePart);
+        }
+
         public static void ReplaceText(WordprocessingDocument doc, string key, string val)
         {
             var body = doc.MainDocumentPart.Document.Body;
@@ -223,10 +239,11 @@ namespace DCTS.Bus
         public static string DisplayStartAndEndTime(Trip trip)
         {
             string str = string.Empty;
-            if (trip.start_at != null && trip.end_at != null)
+            if (trip.start_at != null )
             {
+                var end_at = trip.start_at.Value.AddDays(trip.days - 1);
                 //2017年6月1日~6月15日                
-                str = String.Format("{0:yyyy年M月d日}~{1:M月d日}", trip.start_at, trip.end_at);
+                str = String.Format("{0:yyyy年M月d日}~{1:M月d日}", trip.start_at, end_at);
             }
 
             return str;
@@ -259,6 +276,10 @@ namespace DCTS.Bus
         public static string DisplayDate(DateTime date)
         {
             return String.Format("{0:yyyy年MM月dd日}", date);
+        }
+        public static string DisplayTime(DateTime time)
+        {
+            return String.Format("{0:HH:mm}", time);
         }
 
         

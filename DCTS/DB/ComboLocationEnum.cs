@@ -14,11 +14,13 @@ namespace DCTS.DB
         Blank = 0, Scenic = 1, Dining = 5, Activity=8, Hotel = 9, Country = 10, Airport = 11, Flight = 16, Train = 17, Rental = 18, WIFI = 19,
         //  一封信，目录， 出行必备, Google,
         Letter = 101, Index = 102, Preparation = 103, Google = 126,
-        //  线上查询说明，机票列表，酒店列表，租车列表，交通列表，活动列表，                           保险，退税
-        DeepOnline = 120, AirList = 121, HotelList = 122, CarList = 123, TrainList = 125, ActivityList=127, InsuranceList = 129, TaxReturn = 181, 
+        //  线上查询说明，机票列表，酒店列表，租车列表，交通列表，活动列表，                           保险，退税     票务说明   
+        DeepOnline = 120, FlightList = 121, HotelList = 122, RentalList = 123, TrainList = 125, ActivityList = 126, OtherList = 128, InsuranceList = 129, TaxReturn = 181, 
 
         //单页封面
-        PageImage = 222
+        PageImage = 222,
+        //doc模板使用
+        DaySummary, TripSummary
          
     }
 

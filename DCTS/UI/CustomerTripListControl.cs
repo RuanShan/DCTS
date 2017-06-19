@@ -75,8 +75,8 @@ namespace DCTS.UI
                 var row = tripDataGridView.Rows[e.RowIndex];
                 var trip = row.DataBoundItem as Trip;
 
-                var form = new EditTripForm(trip.id);
-                if (form.ShowDialog() == DialogResult.Yes)
+                int tid = SelectedTripId;
+                var form = new EditCustomerTripForm(tid);
                 {
                     BeginActive();
                 }
@@ -184,8 +184,8 @@ namespace DCTS.UI
         }
 
         private void TripListControl_Resize(object sender, EventArgs e)
-        {
-            tripTitleColumn1.Width = tripDataGridView.ClientSize.Width - 80 * 2 - 260 - 120 - 60 * 4 -3;
+        {  //                                                                  出发日期
+            tripTitleColumn1.Width = tripDataGridView.ClientSize.Width - 80 * 2 - 120 - 260 - 120 - 60 * 4 - 3;
 
         }
 

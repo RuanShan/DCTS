@@ -185,7 +185,7 @@ namespace DCTS.UI
 
         private void TripListControl_Resize(object sender, EventArgs e)
         {
-            tripTitleColumn1.Width = tripDataGridView.ClientSize.Width - 80 * 2 - 260 - 120 - 60 * 4 -3;
+            tripTitleColumn1.Width = tripDataGridView.ClientSize.Width - 80 * 2 - 260  - 60 * 4 -3;
 
         }
 

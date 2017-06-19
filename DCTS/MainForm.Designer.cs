@@ -36,17 +36,15 @@
             this.CustomersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.服务商信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.suppliersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importSuppliersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importScenicExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.导入图片信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ImportnationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.初始化ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.entityDataSource = new DCTS.CustomComponents.EntityDataSource(this.components);
-            this.nationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,7 +74,7 @@
             // tripsToolStripMenuItem
             // 
             this.tripsToolStripMenuItem.Name = "tripsToolStripMenuItem";
-            this.tripsToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.tripsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.tripsToolStripMenuItem.Text = "路书";
             this.tripsToolStripMenuItem.Click += new System.EventHandler(this.tripsToolStripMenuItem_Click);
             // 
@@ -91,7 +89,7 @@
             // CustomersToolStripMenuItem
             // 
             this.CustomersToolStripMenuItem.Name = "CustomersToolStripMenuItem";
-            this.CustomersToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.CustomersToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.CustomersToolStripMenuItem.Text = "客户管理";
             this.CustomersToolStripMenuItem.Click += new System.EventHandler(this.CustomersToolStripMenuItem_Click);
             // 
@@ -99,8 +97,7 @@
             // 
             this.服务商信息ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.suppliersToolStripMenuItem,
-            this.nationsToolStripMenuItem,
-            this.importSuppliersToolStripMenuItem});
+            this.nationsToolStripMenuItem});
             this.服务商信息ToolStripMenuItem.Name = "服务商信息ToolStripMenuItem";
             this.服务商信息ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
             this.服务商信息ToolStripMenuItem.Text = "基础信息";
@@ -112,19 +109,18 @@
             this.suppliersToolStripMenuItem.Text = "服务商信息";
             this.suppliersToolStripMenuItem.Click += new System.EventHandler(this.suppliersToolStripMenuItem_Click);
             // 
-            // importSuppliersToolStripMenuItem
+            // nationsToolStripMenuItem
             // 
-            this.importSuppliersToolStripMenuItem.Name = "importSuppliersToolStripMenuItem";
-            this.importSuppliersToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.importSuppliersToolStripMenuItem.Text = "素材图片";
-            this.importSuppliersToolStripMenuItem.Click += new System.EventHandler(this.importSuppliersToolStripMenuItem_Click);
+            this.nationsToolStripMenuItem.Enabled = false;
+            this.nationsToolStripMenuItem.Name = "nationsToolStripMenuItem";
+            this.nationsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.nationsToolStripMenuItem.Text = "国家城市信息";
             // 
             // 设置ToolStripMenuItem
             // 
             this.设置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.importScenicExcelToolStripMenuItem,
             this.导入图片信息ToolStripMenuItem,
-            this.ImportnationToolStripMenuItem,
             this.初始化ToolStripMenuItem});
             this.设置ToolStripMenuItem.Name = "设置ToolStripMenuItem";
             this.设置ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
@@ -145,13 +141,6 @@
             this.导入图片信息ToolStripMenuItem.Text = "导入图片文件";
             this.导入图片信息ToolStripMenuItem.Click += new System.EventHandler(this.导入图片信息ToolStripMenuItem_Click);
             // 
-            // ImportnationToolStripMenuItem
-            // 
-            this.ImportnationToolStripMenuItem.Name = "ImportnationToolStripMenuItem";
-            this.ImportnationToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
-            this.ImportnationToolStripMenuItem.Text = "导入国家信息";
-            this.ImportnationToolStripMenuItem.Click += new System.EventHandler(this.ImportnationToolStripMenuItem_Click);
-            // 
             // 初始化ToolStripMenuItem
             // 
             this.初始化ToolStripMenuItem.Name = "初始化ToolStripMenuItem";
@@ -170,7 +159,7 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aboutToolStripMenuItem.Text = "关于";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -186,12 +175,6 @@
             // entityDataSource
             // 
             this.entityDataSource.DbContextType = typeof(DCTS.DctsEntities);
-            // 
-            // nationsToolStripMenuItem
-            // 
-            this.nationsToolStripMenuItem.Name = "nationsToolStripMenuItem";
-            this.nationsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.nationsToolStripMenuItem.Text = "国家城市信息";
             // 
             // MainForm
             // 
@@ -226,10 +209,8 @@
         private System.Windows.Forms.ToolStripMenuItem 初始化ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 导入图片信息ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CustomersToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ImportnationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 服务商信息ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem suppliersToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem importSuppliersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nationsToolStripMenuItem;
     }
 }
