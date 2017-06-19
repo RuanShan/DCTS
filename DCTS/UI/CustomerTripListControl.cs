@@ -77,6 +77,7 @@ namespace DCTS.UI
 
                 int tid = SelectedTripId;
                 var form = new EditCustomerTripForm(tid);
+                form.ShowDialog();
                 {
                     BeginActive();
                 }

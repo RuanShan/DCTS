@@ -185,6 +185,25 @@ namespace DCTS.UI
             flightSupplierColumn.ValueMember = "id";
             flightSupplierColumn.DataSource = GetSuppliersByType(SupplierEnum.Flight);
 
+            //飞机
+            flightSupplierColumn.DisplayMember = "name";
+            flightSupplierColumn.ValueMember = "id";
+            flightSupplierColumn.DataSource = GetSuppliersByType(SupplierEnum.Flight);
+
+            //保险
+            insuranceSupplierColumn.DisplayMember = "name";
+            insuranceSupplierColumn.ValueMember = "id";
+            insuranceSupplierColumn.DataSource = GetSuppliersByType(SupplierEnum.Insurance);
+
+            //租车公司
+            rentalSupplierColumn4.DisplayMember = "name";
+            rentalSupplierColumn4.ValueMember = "id";
+            rentalSupplierColumn4.DataSource = GetSuppliersByType(SupplierEnum.Rental);
+            //WIFI
+            wifiSupplierColumn.DisplayMember = "name";
+            wifiSupplierColumn.ValueMember = "id";
+            wifiSupplierColumn.DataSource = GetSuppliersByType(SupplierEnum.WIFI);
+
 
             var view = ticketView;
             SetTicketViewFilter();
