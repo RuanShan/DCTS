@@ -77,7 +77,8 @@ namespace DCTS.Bus
                 // 准备模板
                 Dictionary<ComboLocationEnum, WordprocessingDocument> tmplDict = new Dictionary<ComboLocationEnum, WordprocessingDocument>();
                 ComboLocationEnum[] templateTypes = { ComboLocationEnum.TripSummary, ComboLocationEnum.DaySummary, ComboLocationEnum.Flight, ComboLocationEnum.Train,
-                                                    ComboLocationEnum.DeepOnline, ComboLocationEnum.FlightList};
+                                                    ComboLocationEnum.DeepOnline, ComboLocationEnum.FlightList, ComboLocationEnum.HotelList, ComboLocationEnum.RentalList,
+                                                    ComboLocationEnum.InsuranceList, ComboLocationEnum.OtherList};
                 foreach (var type in templateTypes)
                 {
                     var path = LocationTemplate.GetPath(type);
@@ -110,12 +111,25 @@ namespace DCTS.Bus
                             var daylocations = dayLocations.Where(o => o.day_id == day.id).ToList();
                             foreach (var dl in daylocations)
                             {
-                                HandleLocation(dl);
+                                HandleLocation(dl.ComboLocation);
                             }
                         }
                         //线上查询说明
                         //机票列表
-                        HanldeFlightTicketList(tmplDict, this.ticketList);
+                        var tickets = this.ticketList.Where(o=>o.ttype == (int)SupplierEnum.Flight).ToList();
+                        HanldeFlightTicketList(tmplDict, tickets);
+                        //酒店列表
+                        tickets = this.ticketList.Where(o=>o.ttype == (int)SupplierEnum.Hotal).ToList();
+                        HanldeHotelTicketList(tmplDict, tickets);
+                        //租车列表
+                        tickets = this.ticketList.Where(o => o.ttype == (int)SupplierEnum.Rental).ToList();
+                        HanldeRentalTicketList(tmplDict, tickets);
+                        //保险列表
+                        tickets = this.ticketList.Where(o => o.ttype == (int)SupplierEnum.Insurance).ToList();
+                        HanldeInsuranceTicketList(tmplDict, tickets);
+                        //交通及活动列表
+                        tickets = this.ticketList.Where(o => o.ttype == (int)SupplierEnum.Activity || o.ttype == (int)SupplierEnum.Train).ToList();
+                        HanldeOtherTicketList(tmplDict, tickets);
                     }
                    //合并文档
                     WordTemplateHelper.MergeDoc(filledTemplateStreams, document);
@@ -151,7 +165,7 @@ namespace DCTS.Bus
                 string wrappedKey = "%" + key + "%";
                 if (key == "trip_startend")
                 {
-                    WordTemplateHelper.ReplaceText(tripSumary, wrappedKey, WordTemplateHelper.DisplayStartAndEndTime(trip));
+                    WordTemplateHelper.ReplaceText(tripSumary, wrappedKey, WordTemplateHelper.DisplayStartAndEndDate(trip));
                 }
             }
 
@@ -364,7 +378,7 @@ namespace DCTS.Bus
         }
 
         //处理每个地点
-        public void HandleLocation( DayLocation dayLocation)
+        public void HandleLocation( ComboLocation combolocation)
         {
             string[] locationKeys = {"nation","city", "area", "title", "local_title", "address", "local_address", "latlng", "route", "contact", "tips",
                               // 景点
@@ -377,7 +391,7 @@ namespace DCTS.Bus
             string[] specKeys = { "openning_hours" };
             var wrappedKeys = locationKeys.Select(o => "%" + o + "%").ToList();
 
-            var location = dayLocation.ComboLocation;
+            var location = combolocation;
             var locationType = (ComboLocationEnum)location.ltype;
             string templatePath = LocationTemplate.GetPath(location);
 
@@ -446,6 +460,17 @@ namespace DCTS.Bus
                 {
                     HanldeFlightTickets(tmplDict, group.ToList());
 
+                }
+                if (group.Key == (int)SupplierEnum.Hotal)
+                {
+                    foreach (var ticket in group.ToList())
+                    {
+                        var combolocation = ticketLocations.FirstOrDefault(o => o.id == ticket.to_location_id);
+                        if (combolocation != null)
+                        {
+                            HandleLocation(combolocation);
+                        }
+                    }
                 }
             }
 
@@ -595,6 +620,212 @@ namespace DCTS.Bus
                 }
             }
           
+
+            template.Save();
+            this.filledTemplates.Add(template);
+            this.filledTemplateStreams.Add(stream);
+
+        }
+
+        // 处理酒店列表
+        public void HanldeHotelTicketList(Dictionary<ComboLocationEnum, WordprocessingDocument> tmplDict, List<Ticket> tickets)
+        {
+            WordprocessingDocument ticketTemplate = tmplDict[ComboLocationEnum.HotelList];
+            string[] specKeys = { "ticket_date", "ticket_from_city", "ticket_to_city", "ticket_from_airport", "ticket_to_airport", "ticket_start_time", "ticket_end_time" };
+            var stream = new MemoryStream();
+            var template = ticketTemplate.Clone(stream, true) as WordprocessingDocument;
+            var customerIds = tickets.Select(o => o.customer_id).ToList();
+            var supplierIds = tickets.Select(o => o.supplier_id).ToList();
+            var customers = this.customerList.Where(o => customerIds.Contains(o.id)).ToList();
+            var mainDoc = template.MainDocumentPart.Document;
+
+
+            Table ticketTable = mainDoc.Body.Descendants<Table>().LastOrDefault();
+            //处理机票
+            if (ticketTable != null)
+            {
+                var rowPattern = ticketTable.Elements<TableRow>().Last();
+                if (rowPattern != null)
+                {
+                    for (var i = 0; i < tickets.Count; i++)
+                    {
+                        var ticket = tickets[i];
+                        var cloned = rowPattern.CloneNode(true) as TableRow;
+                        var to_location = ticketLocations.FirstOrDefault(o => o.id == ticket.to_location_id);
+                        if ( to_location != null)
+                        {
+                            WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_i%", (i + 1).ToString());
+                            //0607-0609
+                            var end_at = ticket.start_at.GetValueOrDefault(DateTime.Now).AddDays(ticket.days - 1);
+                            var s = String.Format("{0:MM.dd}-{1:MM.dd}", ticket.start_at, end_at);
+                            WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_startenddate%", s);
+                            WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_days%", ticket.days.ToString());
+                            //0601
+                            WordTemplateHelper.ReplaceText<TableRow>(cloned, "%location_city%", to_location.city);
+
+                            WordTemplateHelper.ReplaceText<TableRow>(cloned, "%location_title%", to_location.title);
+                            WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_breakfirst%", ticket.breakfirst);
+
+                        }
+
+                        rowPattern.InsertBeforeSelf(cloned);
+                    }
+                    rowPattern.Remove();
+                }
+            }
+
+
+            template.Save();
+            this.filledTemplates.Add(template);
+            this.filledTemplateStreams.Add(stream);
+
+        }
+
+        // 处理租车列表
+        public void HanldeRentalTicketList(Dictionary<ComboLocationEnum, WordprocessingDocument> tmplDict, List<Ticket> tickets)
+        {
+            WordprocessingDocument ticketTemplate = tmplDict[ComboLocationEnum.RentalList];
+            string[] specKeys = { "ticket_date", "ticket_from_city", "ticket_to_city", "ticket_from_airport", "ticket_to_airport", "ticket_start_time", "ticket_end_time" };
+            var stream = new MemoryStream();
+            var template = ticketTemplate.Clone(stream, true) as WordprocessingDocument;
+            var customerIds = tickets.Select(o => o.customer_id).ToList();
+            var supplierIds = tickets.Select(o => o.supplier_id).ToList();
+            var customers = this.customerList.Where(o => customerIds.Contains(o.id)).ToList();
+            var mainDoc = template.MainDocumentPart.Document;
+
+            var supplierNames = this.supplierList.Where(o => supplierIds.Contains(o.id)).Select(o => o.name).ToList();
+            WordTemplateHelper.ReplaceText<Document>(mainDoc, "%supplier_names%", string.Join("/", supplierNames));
+
+            Table ticketTable = mainDoc.Body.Descendants<Table>().LastOrDefault();
+            //处理租车
+            if (ticketTable != null)
+            {
+                var rowPattern = ticketTable.Elements<TableRow>().Last();
+                if (rowPattern != null)
+                {
+                    for (var i = 0; i < tickets.Count; i++)
+                    {
+                        var ticket = tickets[i];
+                        var cloned = rowPattern.CloneNode(true) as TableRow;
+                        
+                        var end_at = ticket.start_at.GetValueOrDefault(DateTime.Now).AddDays(ticket.days - 1);
+                        //2017.06.07-06.09            
+                        var s = String.Format("{0:MM.dd}~{1:MM.dd}", ticket.start_at, end_at);
+                        WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_i%", (i + 1).ToString());
+                        WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_startenddate%", s);
+                        s = String.Format("{0:HH:mm}/{1:HH:mm}", ticket.start_at, end_at);
+                        WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_startendtime%",s);
+                        //0601
+                        s = string.Format("{0}/{1}", ticket.from_place, ticket.to_place);
+                        WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_fromtoplace%", s);
+                        rowPattern.InsertBeforeSelf(cloned);
+                    }
+                    rowPattern.Remove();
+                }
+            }
+
+
+            template.Save();
+            this.filledTemplates.Add(template);
+            this.filledTemplateStreams.Add(stream);
+
+        }
+
+        // 处理保险列表
+        public void HanldeInsuranceTicketList(Dictionary<ComboLocationEnum, WordprocessingDocument> tmplDict, List<Ticket> tickets)
+        {
+            WordprocessingDocument ticketTemplate = tmplDict[ComboLocationEnum.InsuranceList];
+            var stream = new MemoryStream();
+            var template = ticketTemplate.Clone(stream, true) as WordprocessingDocument;
+            var customerIds = tickets.Select(o => o.customer_id).ToList();
+            var supplierIds = tickets.Select(o => o.supplier_id).ToList();
+            var customers = this.customerList.Where(o => customerIds.Contains(o.id)).ToList();
+            var mainDoc = template.MainDocumentPart.Document;
+            var supplier = this.supplierList.Where(o => supplierIds.Contains(o.id)).FirstOrDefault();
+            if (supplier != null)
+            {
+                WordTemplateHelper.ReplaceText<Document>(mainDoc, "%supplier_name%", supplier.name);
+                WordTemplateHelper.ReplaceText<Document>(mainDoc, "%supplier_csh%", supplier.csh);
+                var ticket = tickets.FirstOrDefault();
+                if (ticket != null)
+                {
+                    WordTemplateHelper.ReplaceText<Document>(mainDoc, "%ticket_title%", ticket.title);                    
+                }
+                Table customerTable = mainDoc.Body.Descendants<Table>().ElementAt(1);
+                if (customerTable != null)
+                {
+                    var rowPattern = customerTable.Elements<TableRow>().Last();
+                    if (rowPattern != null)
+                    {
+                        for (var i = 0; i < customers.Count; i++)
+                        {
+                            var customer = customers[i];
+                            var cloned = rowPattern.CloneNode(true) as TableRow;
+                            WordTemplateHelper.ReplaceText<TableRow>(cloned, "%customer_i%", (i + 1).ToString());
+                            WordTemplateHelper.ReplaceText<TableRow>(cloned, "%customer_name%", customer.name);
+                            WordTemplateHelper.ReplaceText<TableRow>(cloned, "%customer_enname%", customer.enname);
+                            WordTemplateHelper.ReplaceText<TableRow>(cloned, "%customer_passport%", customer.passport);
+                            rowPattern.InsertBeforeSelf(cloned);
+                        }
+                        rowPattern.Remove();
+                    }
+                }
+
+            }
+            template.Save();
+            this.filledTemplates.Add(template);
+            this.filledTemplateStreams.Add(stream);
+
+        }
+
+
+        // 处理活动列表
+        public void HanldeOtherTicketList(Dictionary<ComboLocationEnum, WordprocessingDocument> tmplDict, List<Ticket> tickets)
+        {
+            WordprocessingDocument ticketTemplate = tmplDict[ComboLocationEnum.OtherList];
+            var stream = new MemoryStream();
+            var template = ticketTemplate.Clone(stream, true) as WordprocessingDocument;
+            var customerIds = tickets.Select(o => o.customer_id).ToList();
+            var supplierIds = tickets.Select(o => o.supplier_id).ToList();
+            var customers = this.customerList.Where(o => customerIds.Contains(o.id)).ToList();
+            var mainDoc = template.MainDocumentPart.Document;
+
+            Table ticketTable = mainDoc.Body.Descendants<Table>().ElementAt(1);
+            //处理活动
+            if (ticketTable != null)
+            {
+                var rowPattern = ticketTable.Elements<TableRow>().Last();
+                if (rowPattern != null)
+                {
+                    for (var i = 0; i < tickets.Count; i++)
+                    {
+                        var ticket = tickets[i];
+                        var cloned = rowPattern.CloneNode(true) as TableRow;
+                        var to_location = ticketLocations.FirstOrDefault(o => o.id == ticket.to_location_id);
+                        if (to_location != null)
+                        {
+                            var s = ( ticket.ttype ==(int) SupplierEnum.Activity ? "活动" : "火车");
+                            WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_type%", s);
+                            var end_at = ticket.start_at.GetValueOrDefault(DateTime.Now).AddDays(ticket.days - 1);
+                            if( ticket.ttype ==(int) SupplierEnum.Train)
+                            {
+                                s =  string.Format("{0:yyyy.MM.dd HHmm}-{1:HHmm}",ticket.start_at, end_at);
+                            }else{
+                                s =  string.Format("{0:yyyy.MM.dd}",ticket.start_at);
+                            }
+                            WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_fulldatetime%", s);
+                            WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_num%", ticket.num );
+                            //0601
+                            WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_fromto%", string.Format("{0}-{1}", ticket.from_place, ticket.to_place));
+ 
+                        }
+
+                        rowPattern.InsertBeforeSelf(cloned);
+                    }
+                    rowPattern.Remove();
+                }
+            }
+
 
             template.Save();
             this.filledTemplates.Add(template);

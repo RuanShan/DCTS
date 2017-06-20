@@ -24,7 +24,7 @@ namespace DCTS.UI
         private static string NoOptionSelected = "所有";
         private List<Customer> CustomerList = null;
         private SortableBindingList<Customer> sortabledinningsOrderList;
-        int RowRemark = 0;
+
         string sqlfilter = "";
         public CustomersControl()
         {
@@ -388,7 +388,7 @@ namespace DCTS.UI
             {
                 var row = dataGridView.Rows[e.RowIndex];
                 var model = row.DataBoundItem as Customer;
-                string msg = string.Format("确定删除餐厅<{0}>？", model.name);
+                string msg = string.Format("确定删除<{0}>？", model.name);
 
                 if (MessageHelper.DeleteConfirm(msg))
                 {
@@ -403,11 +403,11 @@ namespace DCTS.UI
 
         private void CustomersControl_Resize(object sender, EventArgs e)
         {  //                                                   id
-            name.Width = dataGridView.ClientSize.Width - 60 - 100 * 3 - 280 - 200 - 100 - 60 * 2 - 3;
+            //name.Width = dataGridView.ClientSize.Width - 60 - 100 * 3 - 280 - 200 - 100 - 60 * 2 - 3;
             //是否包含滚动条
-            if (!(this.dataGridView.DisplayedRowCount(false) == this.dataGridView.RowCount))
+            //if (!(this.dataGridView.DisplayedRowCount(false) == this.dataGridView.RowCount))
             {
-                name.Width -= 18;
+            //    name.Width -= 18;
             }
 
         }

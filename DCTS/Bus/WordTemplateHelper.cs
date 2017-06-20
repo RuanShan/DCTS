@@ -236,7 +236,7 @@ namespace DCTS.Bus
             return str;
         }
 
-        public static string DisplayStartAndEndTime(Trip trip)
+        public static string DisplayStartAndEndDate(Trip trip)
         {
             string str = string.Empty;
             if (trip.start_at != null )
@@ -244,6 +244,19 @@ namespace DCTS.Bus
                 var end_at = trip.start_at.Value.AddDays(trip.days - 1);
                 //2017年6月1日~6月15日                
                 str = String.Format("{0:yyyy年M月d日}~{1:M月d日}", trip.start_at, end_at);
+            }
+
+            return str;
+        }
+
+        public static string DisplayStartAndEndDate(Ticket ticket)
+        {
+            string str = string.Empty;
+            if (ticket.start_at != null)
+            {
+                var end_at = ticket.start_at.GetValueOrDefault(DateTime.Now).AddDays(ticket.days - 1);
+                //2017.06.07-06.09            
+                str = String.Format("{0:yyyy.MM.dd}~{1:MM.dd}", ticket.start_at, end_at);
             }
 
             return str;

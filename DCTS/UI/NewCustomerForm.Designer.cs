@@ -57,7 +57,7 @@
             // 
             // passporttexbox
             // 
-            this.passporttexbox.Location = new System.Drawing.Point(94, 139);
+            this.passporttexbox.Location = new System.Drawing.Point(96, 139);
             this.passporttexbox.Name = "passporttexbox";
             this.passporttexbox.Size = new System.Drawing.Size(233, 21);
             this.passporttexbox.TabIndex = 4;
@@ -96,7 +96,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(57, 111);
+            this.label4.Location = new System.Drawing.Point(62, 113);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 4;
@@ -105,7 +105,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(361, 111);
+            this.label3.Location = new System.Drawing.Point(361, 113);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 12);
             this.label3.TabIndex = 4;
@@ -133,7 +133,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(57, 83);
+            this.label1.Location = new System.Drawing.Point(62, 83);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(29, 12);
             this.label1.TabIndex = 0;
@@ -169,7 +169,7 @@
             this.genderComboBox.Items.AddRange(new object[] {
             "男",
             "女"});
-            this.genderComboBox.Location = new System.Drawing.Point(396, 107);
+            this.genderComboBox.Location = new System.Drawing.Point(396, 109);
             this.genderComboBox.Name = "genderComboBox";
             this.genderComboBox.Size = new System.Drawing.Size(233, 20);
             this.genderComboBox.TabIndex = 3;
@@ -177,7 +177,7 @@
             // birthdayTextBox
             // 
             this.birthdayTextBox.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.birthdayTextBox.Location = new System.Drawing.Point(96, 107);
+            this.birthdayTextBox.Location = new System.Drawing.Point(96, 109);
             this.birthdayTextBox.Name = "birthdayTextBox";
             this.birthdayTextBox.Size = new System.Drawing.Size(233, 21);
             this.birthdayTextBox.TabIndex = 2;

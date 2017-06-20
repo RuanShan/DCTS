@@ -153,7 +153,7 @@
           </Key>
           <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="location_id" Type="int" Nullable="false" />
-          <Property Name="name" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="128" />
           <Property Name="memo" Type="varchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="Nations">
@@ -218,7 +218,7 @@
           <Property Name="from_location_id" Type="int" Nullable="false" />
           <Property Name="to_location_id" Type="int" Nullable="false" />
           <Property Name="rules" Type="varchar" MaxLength="1024" />
-          <Property Name="days" Type="int" />
+          <Property Name="days" Type="int" Nullable="false" />
           <Property Name="city" Type="varchar" MaxLength="45" />
           <Property Name="breakfirst" Type="varchar" MaxLength="45" />
           <Property Name="parking" Type="varchar" MaxLength="45" />
@@ -695,7 +695,7 @@
           <NavigationProperty Name="Customer" Relationship="DctsModel.fk_customer" FromRole="Ticket" ToRole="Customer" />
           <NavigationProperty Name="Supplier" Relationship="DctsModel.fk_supplier" FromRole="Ticket" ToRole="Supplier" />
           <Property Type="String" Name="title" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="days" />
+          <Property Type="Int32" Name="days" Nullable="false" />
           <Property Type="String" Name="breakfirst" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="parking" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="baggage_weight_limit" MaxLength="45" FixedLength="false" Unicode="false" />
