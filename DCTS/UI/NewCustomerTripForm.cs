@@ -42,6 +42,7 @@ namespace DCTS.UI
             RentalGridView.AutoGenerateColumns = false;
             WIFIGridView.AutoGenerateColumns = false;
             activityDataGridView.AutoGenerateColumns = false;
+            trainDataGridView.AutoGenerateColumns = false;
 
             customerForm = new ChooseCustomersForm();
             countryForm = new ChooseCountries();
@@ -171,6 +172,7 @@ namespace DCTS.UI
             this.RentalGridView.DataSource = view;
             this.WIFIGridView.DataSource = view;
             this.activityDataGridView.DataSource = view;
+            this.trainDataGridView.DataSource = view;
 
             //飞机
             flightSupplierColumn.DisplayMember = "name";
@@ -223,10 +225,9 @@ namespace DCTS.UI
                         }
                     }
 
-                    foreach (var ticket in ticketView)
+                    foreach (var ticket in ticketView.DataSource)
                     {
-
-                        trip.Tickets.Add(ticket);
+                        trip.Tickets.Add(ticket as Ticket);
                     }
                     //trip.Tickets.Concat(this.ticketView);
 
@@ -251,9 +252,9 @@ namespace DCTS.UI
                         tripDay.title = String.Format("第{0}天", i + 1);
                         trip.TripDays.Add(tripDay);
                     }
-                    foreach (var ticket in ticketView)
+                    foreach (var ticket in ticketView.DataSource)
                     {
-                        trip.Tickets.Add(ticket);
+                        trip.Tickets.Add(ticket as Ticket);
                     }
                     //trip.Tickets.Concat(ticketList);
                     foreach (var customer in customerList)
@@ -364,10 +365,13 @@ namespace DCTS.UI
         private void deleteFlightButton_Click(object sender, EventArgs e)
         {
             var view = GetDataGridViewBySupplierType();
-            var objectView = view.CurrentRow.DataBoundItem as ObjectView<Ticket>;
+            if (view.CurrentRow != null)
+            {
+                var objectView = view.CurrentRow.DataBoundItem as ObjectView<Ticket>;
 
-            this.ticketView.DataSource.Remove(objectView.Object);
-            this.ticketView.Refresh();
+                this.ticketView.DataSource.Remove(objectView.Object);
+                this.ticketView.Refresh();
+            }
         }
 
         private void customersTextBox2_TextChanged(object sender, EventArgs e)
@@ -506,6 +510,9 @@ namespace DCTS.UI
                 case SupplierEnum.Flight:
                     view = this.flightDataGridView;
                     break;
+                case SupplierEnum.Train:
+                    view = this.trainDataGridView;
+                    break;
                 case SupplierEnum.Hotal:
                     view = this.hotalDataGridView;
                     break;
@@ -515,7 +522,12 @@ namespace DCTS.UI
                 case SupplierEnum.Rental:
                     view = this.RentalGridView;
                     break;
-
+                case SupplierEnum.WIFI:
+                    view = this.WIFIGridView;
+                    break;
+                case SupplierEnum.Activity:
+                    view = this.activityDataGridView;
+                    break;
             }
             return view;
         }

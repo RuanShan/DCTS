@@ -65,13 +65,6 @@
             this.saveButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.ticketTabPage = new System.Windows.Forms.TabPage();
-            this.label12 = new System.Windows.Forms.Label();
-            this.deleteFlightButton = new System.Windows.Forms.Button();
-            this.addFlightButton1 = new System.Windows.Forms.Button();
-            this.saveTicketButton = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
             this.ticketTabControl = new System.Windows.Forms.TabControl();
             this.flightTabPage = new System.Windows.Forms.TabPage();
             this.flightDataGridView = new System.Windows.Forms.DataGridView();
@@ -84,7 +77,7 @@
             this.end_atColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.baggageColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.trainTabPage = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.trainDataGridView = new System.Windows.Forms.DataGridView();
             this.trainCustomerColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
@@ -129,24 +122,29 @@
             this.dayColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.activityTabPage = new System.Windows.Forms.TabPage();
             this.activityDataGridView = new System.Windows.Forms.DataGridView();
-            this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.ActivityCustomerColumn1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.start_atColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.activityCityColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rulesColumn6 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.overlayColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label12 = new System.Windows.Forms.Label();
+            this.deleteFlightButton = new System.Windows.Forms.Button();
+            this.addFlightButton1 = new System.Windows.Forms.Button();
+            this.saveTicketButton = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.daysNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.ticketTabPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).BeginInit();
             this.ticketTabControl.SuspendLayout();
             this.flightTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.flightDataGridView)).BeginInit();
             this.trainTabPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trainDataGridView)).BeginInit();
             this.hotalTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.hotalDataGridView)).BeginInit();
             this.insuranceTagPage.SuspendLayout();
@@ -157,6 +155,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.WIFIGridView)).BeginInit();
             this.activityTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.activityDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).BeginInit();
             this.SuspendLayout();
             // 
             // label3
@@ -438,66 +438,6 @@
             this.ticketTabPage.Text = "行程票务";
             this.ticketTabPage.UseVisualStyleBackColor = true;
             // 
-            // label12
-            // 
-            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label12.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label12.Location = new System.Drawing.Point(6, 12);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(987, 38);
-            this.label12.TabIndex = 53;
-            this.label12.Text = "编辑票务信息";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // deleteFlightButton
-            // 
-            this.deleteFlightButton.Location = new System.Drawing.Point(56, 382);
-            this.deleteFlightButton.Name = "deleteFlightButton";
-            this.deleteFlightButton.Size = new System.Drawing.Size(38, 23);
-            this.deleteFlightButton.TabIndex = 44;
-            this.deleteFlightButton.Text = "-";
-            this.deleteFlightButton.UseVisualStyleBackColor = true;
-            this.deleteFlightButton.Click += new System.EventHandler(this.deleteFlightButton_Click);
-            // 
-            // addFlightButton1
-            // 
-            this.addFlightButton1.Location = new System.Drawing.Point(12, 382);
-            this.addFlightButton1.Name = "addFlightButton1";
-            this.addFlightButton1.Size = new System.Drawing.Size(38, 23);
-            this.addFlightButton1.TabIndex = 43;
-            this.addFlightButton1.Text = "+";
-            this.addFlightButton1.UseVisualStyleBackColor = true;
-            this.addFlightButton1.Click += new System.EventHandler(this.addFlightButton1_Click);
-            // 
-            // saveTicketButton
-            // 
-            this.saveTicketButton.Location = new System.Drawing.Point(797, 382);
-            this.saveTicketButton.Name = "saveTicketButton";
-            this.saveTicketButton.Size = new System.Drawing.Size(75, 23);
-            this.saveTicketButton.TabIndex = 42;
-            this.saveTicketButton.Text = "保存";
-            this.saveTicketButton.UseVisualStyleBackColor = true;
-            this.saveTicketButton.Click += new System.EventHandler(this.saveTicketButton_Click);
-            // 
-            // button2
-            // 
-            this.button2.DialogResult = System.Windows.Forms.DialogResult.No;
-            this.button2.Location = new System.Drawing.Point(878, 382);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 41;
-            this.button2.Text = "取消";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            // 
-            // errorProvider2
-            // 
-            this.errorProvider2.ContainerControl = this;
-            // 
             // ticketTabControl
             // 
             this.ticketTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -628,7 +568,7 @@
             // 
             // trainTabPage
             // 
-            this.trainTabPage.Controls.Add(this.dataGridView1);
+            this.trainTabPage.Controls.Add(this.trainDataGridView);
             this.trainTabPage.Location = new System.Drawing.Point(4, 22);
             this.trainTabPage.Name = "trainTabPage";
             this.trainTabPage.Padding = new System.Windows.Forms.Padding(3);
@@ -637,13 +577,13 @@
             this.trainTabPage.Text = "交通信息";
             this.trainTabPage.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // trainDataGridView
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.trainDataGridView.AllowUserToAddRows = false;
+            this.trainDataGridView.AllowUserToDeleteRows = false;
+            this.trainDataGridView.AllowUserToResizeRows = false;
+            this.trainDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.trainDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.trainCustomerColumn,
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2,
@@ -658,16 +598,16 @@
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(968, 280);
-            this.dataGridView1.TabIndex = 1;
+            this.trainDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            this.trainDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.trainDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.trainDataGridView.Location = new System.Drawing.Point(3, 3);
+            this.trainDataGridView.Name = "trainDataGridView";
+            this.trainDataGridView.RowHeadersVisible = false;
+            this.trainDataGridView.RowTemplate.Height = 23;
+            this.trainDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.trainDataGridView.Size = new System.Drawing.Size(968, 280);
+            this.trainDataGridView.TabIndex = 1;
             // 
             // trainCustomerColumn
             // 
@@ -1139,10 +1079,6 @@
             this.activityDataGridView.Size = new System.Drawing.Size(968, 280);
             this.activityDataGridView.TabIndex = 1;
             // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
-            // 
             // ActivityCustomerColumn1
             // 
             this.ActivityCustomerColumn1.DataPropertyName = "customer_id";
@@ -1181,6 +1117,70 @@
             this.overlayColumn6.HeaderText = "换票人";
             this.overlayColumn6.Name = "overlayColumn6";
             // 
+            // label12
+            // 
+            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label12.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label12.Location = new System.Drawing.Point(6, 12);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(987, 38);
+            this.label12.TabIndex = 53;
+            this.label12.Text = "编辑票务信息";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // deleteFlightButton
+            // 
+            this.deleteFlightButton.Location = new System.Drawing.Point(56, 382);
+            this.deleteFlightButton.Name = "deleteFlightButton";
+            this.deleteFlightButton.Size = new System.Drawing.Size(38, 23);
+            this.deleteFlightButton.TabIndex = 44;
+            this.deleteFlightButton.Text = "-";
+            this.deleteFlightButton.UseVisualStyleBackColor = true;
+            this.deleteFlightButton.Click += new System.EventHandler(this.deleteFlightButton_Click);
+            // 
+            // addFlightButton1
+            // 
+            this.addFlightButton1.Location = new System.Drawing.Point(12, 382);
+            this.addFlightButton1.Name = "addFlightButton1";
+            this.addFlightButton1.Size = new System.Drawing.Size(38, 23);
+            this.addFlightButton1.TabIndex = 43;
+            this.addFlightButton1.Text = "+";
+            this.addFlightButton1.UseVisualStyleBackColor = true;
+            this.addFlightButton1.Click += new System.EventHandler(this.addFlightButton1_Click);
+            // 
+            // saveTicketButton
+            // 
+            this.saveTicketButton.Location = new System.Drawing.Point(797, 382);
+            this.saveTicketButton.Name = "saveTicketButton";
+            this.saveTicketButton.Size = new System.Drawing.Size(75, 23);
+            this.saveTicketButton.TabIndex = 42;
+            this.saveTicketButton.Text = "保存";
+            this.saveTicketButton.UseVisualStyleBackColor = true;
+            this.saveTicketButton.Click += new System.EventHandler(this.saveTicketButton_Click);
+            // 
+            // button2
+            // 
+            this.button2.DialogResult = System.Windows.Forms.DialogResult.No;
+            this.button2.Location = new System.Drawing.Point(878, 382);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 41;
+            this.button2.Text = "取消";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // errorProvider2
+            // 
+            this.errorProvider2.ContainerControl = this;
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
+            // 
             // EditCustomerTripForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1199,13 +1199,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.daysNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ticketTabPage.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).EndInit();
             this.ticketTabControl.ResumeLayout(false);
             this.flightTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.flightDataGridView)).EndInit();
             this.trainTabPage.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trainDataGridView)).EndInit();
             this.hotalTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.hotalDataGridView)).EndInit();
             this.insuranceTagPage.ResumeLayout(false);
@@ -1216,6 +1214,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.WIFIGridView)).EndInit();
             this.activityTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.activityDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1272,7 +1272,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn end_atColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn baggageColumn1;
         private System.Windows.Forms.TabPage trainTabPage;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView trainDataGridView;
         private System.Windows.Forms.DataGridViewComboBoxColumn trainCustomerColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewTextBoxColumn2;

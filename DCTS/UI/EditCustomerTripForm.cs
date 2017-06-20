@@ -44,6 +44,7 @@ namespace DCTS.UI
             RentalGridView.AutoGenerateColumns = false;
             WIFIGridView.AutoGenerateColumns = false;
             activityDataGridView.AutoGenerateColumns = false;
+            trainDataGridView.AutoGenerateColumns = false;
 
             customerForm = new ChooseCustomersForm();
             countryForm = new ChooseCountries();
@@ -270,6 +271,7 @@ namespace DCTS.UI
             this.RentalGridView.DataSource = view;
             this.WIFIGridView.DataSource = view;
             this.activityDataGridView.DataSource = view;
+            this.trainDataGridView.DataSource = view;
 
         }
 
@@ -398,6 +400,9 @@ namespace DCTS.UI
                 case SupplierEnum.Flight:
                     view = this.flightDataGridView;
                     break;
+                case SupplierEnum.Train:
+                    view = this.trainDataGridView;
+                    break;
                 case SupplierEnum.Hotal:
                     view = this.hotalDataGridView;
                     break;
@@ -407,7 +412,12 @@ namespace DCTS.UI
                 case SupplierEnum.Rental:
                     view = this.RentalGridView;
                     break;
-
+                case SupplierEnum.WIFI:
+                    view = this.WIFIGridView;
+                    break;
+                case SupplierEnum.Activity:
+                    view = this.activityDataGridView;
+                    break;
             }
             return view;
         }
