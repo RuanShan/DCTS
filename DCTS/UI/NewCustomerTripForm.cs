@@ -52,6 +52,7 @@ namespace DCTS.UI
             InitializeDataSource();
         }
 
+        // 取得窗口需要的数据
         private void InitializeDataSource()
         {
             var ctx = this.entityDataSource1.DbContext as DctsEntities;
@@ -70,6 +71,9 @@ namespace DCTS.UI
             InitializeDataSourceByNations();
         }
 
+        #region 设置数据源
+
+        //初始化依赖于客户的数据
         private void InitializeDataSourceByCustomers()
         {
 
@@ -78,17 +82,10 @@ namespace DCTS.UI
             this.flightCustomerColumn.ValueMember = "id";
             this.flightCustomerColumn.DataSource = this.customerList;
 
-            this.hotelCustomerColumn.DisplayMember = "name";
-            this.hotelCustomerColumn.ValueMember = "id";
-            this.hotelCustomerColumn.DataSource = this.customerList;
-
             //保险
-
             this.insuranceCustomerColumn.DisplayMember = "name";
             this.insuranceCustomerColumn.ValueMember = "id";
             this.insuranceCustomerColumn.DataSource = this.customerList;
-
-
             //火车
             this.trainCustomerColumn.DisplayMember = "name";
             this.trainCustomerColumn.ValueMember = "id";
@@ -111,10 +108,11 @@ namespace DCTS.UI
             this.ActivityCustomerColumn1.DataSource = this.customerList;
         }
 
+        //初始化依赖于国家的数据
         private void InitializeDataSourceByNations()
         {
-            var names = nationList.Select(o => o.title).ToArray();
-            var airports = airportList.Where(o => names.Contains(o.nation)).ToList();
+            var nationNames = nationList.Select(o => o.title).ToArray();
+            var airports = airportList.Where(o => nationNames.Contains(o.nation)).ToList();
             airports.Insert(0, new ComboLocation() { id = 0, title = "请选择机场" });
             this.fromAirportColumn.DisplayMember = "title";
             this.fromAirportColumn.ValueMember = "id";
@@ -127,7 +125,7 @@ namespace DCTS.UI
             //string code =.ToString();
             using (var ctx = new DctsEntities())
             {
-                List<ComboLocation> List = ctx.ComboLocations.ToList();
+                List<ComboLocation> locations = ctx.ComboLocations.Where(o => nationNames.Contains(o.nation)).ToList();
 
                 var nationList1 = DCTS.DB.GlobalCache.NationList;
                 var codelist = nationList1.FindAll(o => o.title == nationTextBox.Text);
@@ -142,27 +140,59 @@ namespace DCTS.UI
 
                     //酒店
 
-
-                    var names1 = cityList.Select(o => o.title).ToArray();
-                    var hotellist = List.Where(o => names1.Contains(o.city) && o.ltype == (int)ComboLocationEnum.Hotel).ToList();
-
-                    var hotel = hotellist.Select(o => new MockEntity { Id = o.id, FullName = o.title }).ToList();
-                    this.titlxColumn2.DisplayMember = "FullName";
-                    this.titlxColumn2.ValueMember = "FullName";
-                    this.titlxColumn2.DataSource = hotel;
+                    var hotellist = locations.Where(o => o.ltype == (int)ComboLocationEnum.Hotel).ToList();
+                    hotellist.Insert(0, new ComboLocation() { id = 0, title = "请选择酒店" });
+                    this.titlxColumn2.DisplayMember = "title";
+                    this.titlxColumn2.ValueMember = "id";
+                    this.titlxColumn2.DataSource = hotellist;
 
                     //活动项目
-                    var activelist = List.Where(o => names1.Contains(o.city) && o.ltype == (int)ComboLocationEnum.Activity).ToList();
-                    var active = activelist.Select(o => new MockEntity { Id = o.id, FullName = o.title }).ToList();
-                    this.rulesColumn6.DisplayMember = "FullName";
-                    this.rulesColumn6.ValueMember = "FullName";
-                    this.rulesColumn6.DataSource = active;
+                    var activelist = locations.Where(o => o.ltype == (int)ComboLocationEnum.Activity).ToList();
+                    activelist.Insert(0, new ComboLocation() { id = 0, title = "请选择活动" });
+                    this.rulesColumn6.DisplayMember = "title";
+                    this.rulesColumn6.ValueMember = "id";
+                    this.rulesColumn6.DataSource = activelist;
 
                 }
             }
            
 
         }
+
+        //设置票务表格的数据源，以及相应列的数据源
+        public void SetTicketDateGridViewDataSource()
+        {
+            var view = ticketView;
+            SetTicketViewFilter();
+
+            this.flightDataGridView.DataSource = view;
+            this.hotalDataGridView.DataSource = view;
+            this.InsuranceGridView.DataSource = view;
+            this.RentalGridView.DataSource = view;
+            this.WIFIGridView.DataSource = view;
+            this.activityDataGridView.DataSource = view;
+
+            //飞机
+            flightSupplierColumn.DisplayMember = "name";
+            flightSupplierColumn.ValueMember = "id";
+            flightSupplierColumn.DataSource = GetSuppliersByType(SupplierEnum.Flight);
+
+            //保险
+            insuranceSupplierColumn.DisplayMember = "name";
+            insuranceSupplierColumn.ValueMember = "id";
+            insuranceSupplierColumn.DataSource = GetSuppliersByType(SupplierEnum.Insurance);
+
+            //租车公司
+            rentalSupplierColumn4.DisplayMember = "name";
+            rentalSupplierColumn4.ValueMember = "id";
+            rentalSupplierColumn4.DataSource = GetSuppliersByType(SupplierEnum.Rental);
+            //WIFI
+            wifiSupplierColumn.DisplayMember = "name";
+            wifiSupplierColumn.ValueMember = "id";
+            wifiSupplierColumn.DataSource = GetSuppliersByType(SupplierEnum.WIFI);
+        }
+
+        #endregion
 
         private void saveButton_Click(object sender, EventArgs e)
         {
@@ -274,36 +304,6 @@ namespace DCTS.UI
 
         }
 
-
-        public void SetTicketDateGridViewDataSource()
-        {
-            var view = ticketView;
-            SetTicketViewFilter();
-
-            this.flightDataGridView.DataSource = view;
-            this.hotalDataGridView.DataSource = view;
-            this.InsuranceGridView.DataSource = view;
-            this.RentalGridView.DataSource = view;
-            this.WIFIGridView.DataSource = view;
-            this.activityDataGridView.DataSource = view;
-
-            //飞机
-            flightSupplierColumn.DisplayMember = "name";
-            flightSupplierColumn.ValueMember = "id";
-            flightSupplierColumn.DataSource = GetSuppliersByType(SupplierEnum.Flight);
-
-            //保险
-            titleTextBoxColumn3.DisplayMember = "name";
-            titleTextBoxColumn3.ValueMember = "name";
-            titleTextBoxColumn3.DataSource = GetSuppliersByType(SupplierEnum.Insurance);
-
-            //租车公司
-            titleColumn4.DisplayMember = "name";
-            titleColumn4.ValueMember = "name";
-            titleColumn4.DataSource = GetSuppliersByType(SupplierEnum.Rental);
-
-        }
-
         private void cancelButton_Click(object sender, EventArgs e)
         {
 
@@ -360,6 +360,7 @@ namespace DCTS.UI
             ticketView.EndNew(ticketView.Count - 1);
 
         }
+        
         private void deleteFlightButton_Click(object sender, EventArgs e)
         {
             var view = GetDataGridViewBySupplierType();
@@ -548,6 +549,11 @@ namespace DCTS.UI
             else
                 handle = false;
             e.Cancel = handle;
+        }
+
+        private void NewCustomerTripForm_Load(object sender, EventArgs e)
+        {
+
         }
 
     }

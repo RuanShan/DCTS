@@ -165,10 +165,23 @@ namespace DCTS.UI
             this.flightCustomerColumn.ValueMember = "id";
             this.flightCustomerColumn.DataSource = this.customerList;
 
+
+            //火车
+            this.trainCustomerColumn.DisplayMember = "name";
+            this.trainCustomerColumn.ValueMember = "id";
+            this.trainCustomerColumn.DataSource = this.customerList;
+            //住宿
             this.hotelCustomerColumn.DisplayMember = "name";
             this.hotelCustomerColumn.ValueMember = "id";
             this.hotelCustomerColumn.DataSource = this.customerList;
-       
+           
+            //活动
+            this.ActivityCustomerColumn1.DisplayMember = "name";
+            this.ActivityCustomerColumn1.ValueMember = "id";
+            this.ActivityCustomerColumn1.DataSource = this.customerList;
+
+
+            // 机场       
             var names = nationList.Select(o => o.title).ToArray();
             var airports = airportList.Where(o => names.Contains(o.nation)).ToList();
             airports.Insert(0, new ComboLocation() { id = 0, title = "请选择机场" });
@@ -184,6 +197,68 @@ namespace DCTS.UI
             flightSupplierColumn.DisplayMember = "name";
             flightSupplierColumn.ValueMember = "id";
             flightSupplierColumn.DataSource = GetSuppliersByType(SupplierEnum.Flight);
+
+            //保险
+            insuranceSupplierColumn.DisplayMember = "name";
+            insuranceSupplierColumn.ValueMember = "id";
+            insuranceSupplierColumn.DataSource = GetSuppliersByType(SupplierEnum.Insurance);
+            this.insuranceCustomerColumn.DisplayMember = "name";
+            this.insuranceCustomerColumn.ValueMember = "id";
+            this.insuranceCustomerColumn.DataSource = this.customerList;
+            //租车公司
+            rentalSupplierColumn4.DisplayMember = "name";
+            rentalSupplierColumn4.ValueMember = "id";
+            rentalSupplierColumn4.DataSource = GetSuppliersByType(SupplierEnum.Rental);
+            
+            this.rentalCustomerColumn1.DisplayMember = "name";
+            this.rentalCustomerColumn1.ValueMember = "id";
+            this.rentalCustomerColumn1.DataSource = this.customerList;
+            
+            //WIFI
+            wifiSupplierColumn.DisplayMember = "name";
+            wifiSupplierColumn.ValueMember = "id";
+            wifiSupplierColumn.DataSource = GetSuppliersByType(SupplierEnum.WIFI);
+ 
+            this.wifiCustomerColumn.DisplayMember = "name";
+            this.wifiCustomerColumn.ValueMember = "id";
+            this.wifiCustomerColumn.DataSource = this.customerList;
+
+            //城市
+            //string code =.ToString();
+            using (var ctx = new DctsEntities())
+            {
+                var nationNames = nationList.Select(o => o.title).ToArray();
+
+                List<ComboLocation> locations = ctx.ComboLocations.Where(o => nationNames.Contains(o.nation)).ToList();
+
+                var nationList1 = DCTS.DB.GlobalCache.NationList;
+                var codelist = nationList1.FindAll(o => o.title == nationTextBox.Text);
+                if (codelist != null && codelist.Count > 0)
+                {
+                    var cityList = DCTS.DB.GlobalCache.CityList;
+                    cityList = cityList.Where(o => o.nationCode == codelist.First().code).ToList();
+                    var cities = cityList.Select(o => new MockEntity { Id = o.id, FullName = o.title }).ToList();
+                    this.cityColumn2.DisplayMember = "FullName";
+                    this.cityColumn2.ValueMember = "FullName";
+                    this.cityColumn2.DataSource = cities;
+
+                    //酒店
+
+                    var hotellist = locations.Where(o => o.ltype == (int)ComboLocationEnum.Hotel).ToList();
+                    hotellist.Insert(0, new ComboLocation() { id = 0, title = "请选择酒店" });
+                    this.titlxColumn2.DisplayMember = "title";
+                    this.titlxColumn2.ValueMember = "id";
+                    this.titlxColumn2.DataSource = hotellist;
+
+                    //活动项目
+                    var activelist = locations.Where(o => o.ltype == (int)ComboLocationEnum.Activity).ToList();
+                    activelist.Insert(0, new ComboLocation() { id = 0, title = "请选择活动" });
+                    this.rulesColumn6.DisplayMember = "title";
+                    this.rulesColumn6.ValueMember = "id";
+                    this.rulesColumn6.DataSource = activelist;
+
+                }
+            }
 
 
             var view = ticketView;
@@ -298,11 +373,13 @@ namespace DCTS.UI
         private void saveTicketButton_Click(object sender, EventArgs e)
         {
             var ctx = this.entityDataSource1.DbContext as DctsEntities;
-
-            // 保存及添加
-            foreach (var ticket in ticketView)
+            
+            //ticketView.RemoveFilter();
+            // 使用 DataSource 移除过滤，否则其他TAB页数据无法保存
+            
+            foreach (var ticket in ticketView.DataSource)
             {
-                trip.Tickets.Add(ticket);
+                trip.Tickets.Add(ticket as Ticket);
             }
 
             // 删除

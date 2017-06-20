@@ -21,9 +21,12 @@ namespace DCTS.UI
     public partial class SuppliersControl : UserControl
     {
         private static string NoOptionSelected = "所有";
-        private List<ComboLocation> nationlList = null;
+
         private Hashtable dataGridChanges = null;
         List<MockEntity> locationTypeList;
+        List<Supplier> supplierList;
+        SupplierEnum supplierType;
+
         public SuppliersControl()
         {
             InitializeComponent();
@@ -31,8 +34,11 @@ namespace DCTS.UI
             InsuranceGridView.AutoGenerateColumns = false;
             RentalGridView.AutoGenerateColumns = false;
             WIFIGridView.AutoGenerateColumns = false;
-            dataGridView.AutoGenerateColumns = false;
+            flightDataGridView.AutoGenerateColumns = false;
+            trainDataGridView.AutoGenerateColumns = false;
             locationTypeList = GlobalCache.Supplier_LocationTypeList;
+            supplierType = SupplierEnum.Flight;
+
             InitializeDataSource();
         }
         public void BeginActive()
@@ -45,12 +51,28 @@ namespace DCTS.UI
         {
             var ctx = this.entityDataSource1.DbContext as DctsEntities;
             var nationList = DCTS.DB.GlobalCache.NationList;
-            var locationTypeListForComboBox = locationTypeList.Select(o => new MockEntity { Id = o.Id, FullName = o.FullName }).ToList();
+             
 
-            // 活动分类
-            //this.nationComboBox.DisplayMember = "FullName";
-            //this.nationComboBox.ValueMember = "Id";
-            //this.nationComboBox.DataSource = locationTypeListForComboBox;
+            // 分类
+            this.stypeColumn.DisplayMember = "FullName";
+            this.stypeColumn.ValueMember = "Id";
+            this.stypeColumn.DataSource = locationTypeList;
+            // 分类
+            this.stypeColumn2.DisplayMember = "FullName";
+            this.stypeColumn2.ValueMember = "Id";
+            this.stypeColumn2.DataSource = locationTypeList;
+            // 分类
+            this.stypeColumn3.DisplayMember = "FullName";
+            this.stypeColumn3.ValueMember = "Id";
+            this.stypeColumn3.DataSource = locationTypeList;
+            // 分类
+            this.stypeColumn4.DisplayMember = "FullName";
+            this.stypeColumn4.ValueMember = "Id";
+            this.stypeColumn4.DataSource = locationTypeList;
+            // 分类
+            this.stypeColumn5.DisplayMember = "FullName";
+            this.stypeColumn5.ValueMember = "Id";
+            this.stypeColumn5.DataSource = locationTypeList;
         }
 
 
@@ -61,55 +83,47 @@ namespace DCTS.UI
         // 初始化DataGridView的数据源, 
         private int InitializeDataGridView(int pageCurrent = 1)
         {
-            string Suppliername =""; //(this.nationComboBox.Text != NoOptionSelected ? this.nationComboBox.Text : string.Empty);
 
-            string title = (this.keywordTextBox.Text != NoOptionSelected ? this.keywordTextBox.Text : string.Empty);
+            string keyword = (this.keywordTextBox.Text != NoOptionSelected ? this.keywordTextBox.Text : string.Empty);
 
-            int count = 0;
+            
 
-            int[] otherLocationType = { (int)SupplierEnum.Flight, (int)SupplierEnum.Insurance, (int)SupplierEnum.Rental, (int)SupplierEnum.WIFI };
+            int[] otherLocationType = { (int)SupplierEnum.Flight, (int)SupplierEnum.Train, (int)SupplierEnum.Insurance, (int)SupplierEnum.Rental, (int)SupplierEnum.WIFI };
 
 
             using (var ctx = new DctsEntities())
             {
-                int ty = 0;// Convert.ToInt32(this.nationComboBox.SelectedValue);
-
+                //int ty = 0;// Convert.ToInt32(this.nationComboBox.SelectedValue);
                 //分页需要数据总数
-                count = Count(ty, title);
-
-                var list = Paginate( pageCurrent, 100, ty, "", title);
-
-
-
-                //List<Supplier> list = ctx.Suppliers.Where(o => otherLocationType.Contains(o.stype)).ToList();
-                int page = this.tabControl1.SelectedIndex;
-
-                if (page == 0)
+                //count = Count(ty, title);
+                //var list = Paginate( pageCurrent, 100, ty, "", title);
+                var query = ctx.Suppliers.AsQueryable();
+                if (keyword.Length > 0)
                 {
-                    var Airfiltered = list.FindAll(s => s.stype == (int)SupplierEnum.Flight);
+                    query = query.Where(o => o.name.Contains(keyword));
+                }
+
+                supplierList = query.ToList();
+                
+                var Airfiltered = supplierList.FindAll(s => s.stype == (int)SupplierEnum.Flight);
                
-                this.dataGridView.DataSource = Airfiltered;
-                }
-                if (page == 1)
-                {
-                    var Insurancefiltered = list.FindAll(s => s.stype == (int)SupplierEnum.Insurance);
+                this.flightDataGridView.DataSource = Airfiltered;
+                
+                var Insurancefiltered = supplierList.FindAll(s => s.stype == (int)SupplierEnum.Insurance);
 
-                    this.InsuranceGridView.DataSource = Insurancefiltered;
-                }
-                if (page == 2)
-                {
-                    var Rentalfiltered = list.FindAll(s => s.stype == (int)SupplierEnum.Rental);
+                this.InsuranceGridView.DataSource = Insurancefiltered;
+               
+                var Rentalfiltered = supplierList.FindAll(s => s.stype == (int)SupplierEnum.Rental);
 
-                    this.RentalGridView.DataSource = Rentalfiltered;
-                }
-                if (page == 3)
-                {
-                    var WIFIfiltered = list.FindAll(s => s.stype == (int)SupplierEnum.WIFI);
+                this.RentalGridView.DataSource = Rentalfiltered;
+                
+                var WIFIfiltered = supplierList.FindAll(s => s.stype == (int)SupplierEnum.WIFI);
 
-                    this.WIFIGridView.DataSource = WIFIfiltered;
-                }
+                this.WIFIGridView.DataSource = WIFIfiltered;
+                this.trainDataGridView.DataSource = supplierList.FindAll(s => s.stype == (int)SupplierEnum.Train); ;
+
             }
-            return 1;
+            return 0;
         }
         private static int Count(int nation, string title)
         {
@@ -180,26 +194,13 @@ namespace DCTS.UI
 
         private void Edit(DataGridViewCellEventArgs e)
         {
-            DataGridViewColumn column = dataGridView.Columns[e.ColumnIndex];
-            int s = this.tabControl1.SelectedIndex;
+            var dgv = GetDataGridViewBySupplierType();
+            var column = dgv.Columns[e.ColumnIndex];
 
-            if (s == 1)
-                column = InsuranceGridView.Columns[e.ColumnIndex];
-            else if (s == 2)
-                column = RentalGridView.Columns[e.ColumnIndex];
-            else if (s == 3)
-                column = WIFIGridView.Columns[e.ColumnIndex];
 
-            if (column == editColumn1 || column == EditWifi || column == dav3Edit || column == dav2Edit)
+            if (column == editFlightColumn || column == editWifiColumn || column == editInsuranceColumn || column == editTrainColumn || column == editRentalColumn)
             {
-                var row = dataGridView.Rows[e.RowIndex];
-
-                if (s == 1)
-                    row = InsuranceGridView.Rows[e.RowIndex];
-                else if (s == 2)
-                    row = RentalGridView.Rows[e.RowIndex];
-                else if (s == 3)
-                    row = WIFIGridView.Rows[e.RowIndex];
+                var row = dgv.Rows[e.RowIndex];
 
                 var model = row.DataBoundItem as Supplier;
 
@@ -209,18 +210,11 @@ namespace DCTS.UI
                     BeginActive();
                 }
             }
-            else if (column == deleteColumn1 || column == DeleteWifli || column == dav3Delete || column == dav2Delete)
+            else if (column == deleteFlightColumn || column == deleteWifiColumn || column == deleteInsuranceColumn || column == deleteTrainColumn || column == deleteRentalColumn)
             {
-                var row = dataGridView.Rows[e.RowIndex];
-                if (s == 1)
-                    row = InsuranceGridView.Rows[e.RowIndex];
-                else if (s == 2)
-                    row = RentalGridView.Rows[e.RowIndex];
-                else if (s == 3)
-                    row = WIFIGridView.Rows[e.RowIndex];
-
+                var row = dgv.Rows[e.RowIndex];
                 var model = row.DataBoundItem as Supplier;
-                string msg = string.Format("确定删除餐厅<{0}>？", model.name);
+                string msg = string.Format("确定删除服务商<{0}>？", model.name);
 
                 if (MessageHelper.DeleteConfirm(msg))
                 {
@@ -273,13 +267,59 @@ namespace DCTS.UI
           
         }
 
-        private int pager2_EventPaging(EventPagingArg e)
+        private void tabControl1_Selected(object sender, TabControlEventArgs e)
         {
+            if (supplierTabControl.SelectedTab == this.flightTabPage)
+            {
+                this.supplierType = SupplierEnum.Flight;
+            }
+            else
+                if (supplierTabControl.SelectedTab == this.trainTabPage)
+                {
+                    this.supplierType = SupplierEnum.Train;
+                }               
+                    else
+                        if (supplierTabControl.SelectedTab == this.insuranceTagPage)
+                        {
+                            this.supplierType = SupplierEnum.Insurance;
+                        }
+                        else
+                            if (supplierTabControl.SelectedTab == this.rentalTabPage)
+                            {
+                                this.supplierType = SupplierEnum.Rental;
+                            }
+                            else
+                                if (supplierTabControl.SelectedTab == this.wifiTabPage)
+                                {
+                                    this.supplierType = SupplierEnum.WIFI;
+                                }
+                                
+        }
 
 
-            int count = InitializeDataGridView(e.PageCurrent);
-            return count;
+        private DataGridView GetDataGridViewBySupplierType()
+        {
+            DataGridView view = null;
+            switch ((supplierType))
+            {
+                case SupplierEnum.Flight:
+                    view = this.flightDataGridView;
+                    break;
+                case SupplierEnum.Train:
+                    view = this.trainDataGridView;
+                    break;
+                case SupplierEnum.Insurance:
+                    view = this.InsuranceGridView;
+                    break;
+                case SupplierEnum.Rental:
+                    view = this.RentalGridView;
+                    break;
+                case SupplierEnum.WIFI:
+                    view = this.WIFIGridView;
+                    break;
 
+            }
+            return view;
         }
     }
 }
