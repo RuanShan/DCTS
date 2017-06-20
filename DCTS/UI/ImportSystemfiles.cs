@@ -34,7 +34,7 @@ namespace DCTS.UI
         {
             InitializeComponent();
             pager1.PageCurrent = 1;
-            BeginActive();
+          //  BeginActive();
         }
         private void openFileBtton_Click_1(object sender, EventArgs e)
         {
@@ -113,7 +113,7 @@ namespace DCTS.UI
                         }
                         imageindex++;
                     }
-                    BeginActive();
+                    InitializeDataSource();
 
                 }
             }
@@ -139,7 +139,7 @@ namespace DCTS.UI
                     string ImageLocation = EntityPathConfig.newlocationimagepath(item);
                     if (File.Exists(ImageLocation))
                     {
-                        imageListSmall.ImageSize = new Size(58, 58);
+                        imageListSmall.ImageSize = new Size(188, 188);
                         imageListSmall.Images.Add(new System.Drawing.Bitmap(ImageLocation));
                         //imageListSmall.Images.Add(Bitmap.FromFile(ImageLocation));
                     }
@@ -277,19 +277,25 @@ namespace DCTS.UI
                     if (MessageHelper.DeleteConfirm(msg))
                     {
                         ComboLoactionBusiness.locaimageDelete(list[0].id);
-                        BeginActive();
+                        InitializeDataSource();
                     }
                 }
             }
         }
         public void BeginActive()
         {
+        //    this.listView1.Clear();  //从控件中移除所有项和列（包括列表头）。
+
+        //    pager1.Bind();
+
+        }
+        public void InitializeDataSource()
+        {
             this.listView1.Clear();  //从控件中移除所有项和列（包括列表头）。
 
             pager1.Bind();
 
         }
-
         private void deleteToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             using (var ctx = new DctsEntities())
@@ -327,7 +333,7 @@ namespace DCTS.UI
 
                         }
                     }
-                    BeginActive();
+                    InitializeDataSource();
 
                 }
             }
@@ -338,6 +344,7 @@ namespace DCTS.UI
             //this.listView1.Dock = DockStyle.Fill;
             //listView1.View = View.LargeIcon;
             //listView1.LargeImageList = this.imagelist;
+            InitializeDataSource();
         }
 
     }
