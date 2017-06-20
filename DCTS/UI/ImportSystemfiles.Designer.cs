@@ -32,6 +32,9 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.noReplaceRadioButton = new System.Windows.Forms.RadioButton();
             this.replaceRadioButton = new System.Windows.Forms.RadioButton();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.import = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -43,9 +46,6 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.imagelist = new System.Windows.Forms.ImageList(this.components);
-            this.button3 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button4 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -87,6 +87,33 @@
             this.replaceRadioButton.TabIndex = 20;
             this.replaceRadioButton.Text = "覆盖存在图片";
             this.replaceRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(285, 12);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(44, 23);
+            this.button4.TabIndex = 27;
+            this.button4.Text = "导入";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.import_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(-50, 7);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(44, 23);
+            this.button3.TabIndex = 23;
+            this.button3.Text = "选择";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.openFileBtton_Click_1);
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(-309, 8);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(253, 21);
+            this.textBox2.TabIndex = 24;
             // 
             // import
             // 
@@ -135,7 +162,7 @@
             this.pager1.NMax = 0;
             this.pager1.PageCount = 0;
             this.pager1.PageCurrent = 1;
-            this.pager1.PageSize = 150;
+            this.pager1.PageSize = 80;
             this.pager1.Size = new System.Drawing.Size(692, 25);
             this.pager1.TabIndex = 16;
             this.pager1.EventPaging += new DCTS.CustomComponents.EventPagingHandler(this.pager1_EventPaging);
@@ -192,33 +219,6 @@
             this.imagelist.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
             this.imagelist.ImageSize = new System.Drawing.Size(16, 16);
             this.imagelist.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(-50, 7);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(44, 23);
-            this.button3.TabIndex = 23;
-            this.button3.Text = "选择";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.openFileBtton_Click_1);
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(-309, 8);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(253, 21);
-            this.textBox2.TabIndex = 24;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(285, 12);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(44, 23);
-            this.button4.TabIndex = 27;
-            this.button4.Text = "导入";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.import_Click);
             // 
             // label1
             // 
