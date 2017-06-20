@@ -55,6 +55,9 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.openCloseTextBox = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.docPathTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -62,7 +65,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(28, 319);
+            this.label13.Location = new System.Drawing.Point(28, 338);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(55, 13);
             this.label13.TabIndex = 41;
@@ -70,7 +73,7 @@
             // 
             // routeTextBox
             // 
-            this.routeTextBox.Location = new System.Drawing.Point(85, 315);
+            this.routeTextBox.Location = new System.Drawing.Point(85, 334);
             this.routeTextBox.Multiline = true;
             this.routeTextBox.Name = "routeTextBox";
             this.routeTextBox.Size = new System.Drawing.Size(518, 56);
@@ -95,7 +98,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(28, 388);
+            this.label11.Location = new System.Drawing.Point(28, 407);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(51, 13);
             this.label11.TabIndex = 33;
@@ -104,7 +107,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(4, 287);
+            this.label8.Location = new System.Drawing.Point(4, 306);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(79, 13);
             this.label8.TabIndex = 32;
@@ -164,7 +167,7 @@
             // 
             // tipsTextBox
             // 
-            this.tipsTextBox.Location = new System.Drawing.Point(85, 381);
+            this.tipsTextBox.Location = new System.Drawing.Point(85, 400);
             this.tipsTextBox.Multiline = true;
             this.tipsTextBox.Name = "tipsTextBox";
             this.tipsTextBox.Size = new System.Drawing.Size(518, 56);
@@ -172,7 +175,7 @@
             // 
             // localAddressTextBox
             // 
-            this.localAddressTextBox.Location = new System.Drawing.Point(85, 283);
+            this.localAddressTextBox.Location = new System.Drawing.Point(85, 302);
             this.localAddressTextBox.Name = "localAddressTextBox";
             this.localAddressTextBox.Size = new System.Drawing.Size(518, 20);
             this.localAddressTextBox.TabIndex = 9;
@@ -275,10 +278,40 @@
             this.openCloseTextBox.Size = new System.Drawing.Size(233, 108);
             this.openCloseTextBox.TabIndex = 44;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(571, 274);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(32, 25);
+            this.button1.TabIndex = 46;
+            this.button1.Text = "...";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(46, 286);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(33, 13);
+            this.label9.TabIndex = 47;
+            this.label9.Text = "Word";
+            // 
+            // docPathTextBox
+            // 
+            this.docPathTextBox.Location = new System.Drawing.Point(85, 279);
+            this.docPathTextBox.Name = "docPathTextBox";
+            this.docPathTextBox.Size = new System.Drawing.Size(480, 20);
+            this.docPathTextBox.TabIndex = 45;
+            this.docPathTextBox.TextChanged += new System.EventHandler(this.docPathTextBox_TextChanged);
+            // 
             // ActivityFormControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.docPathTextBox);
             this.Controls.Add(this.openCloseTextBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pictureBox1);
@@ -341,5 +374,8 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TextBox openCloseTextBox;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox docPathTextBox;
     }
 }
