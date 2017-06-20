@@ -19,6 +19,7 @@ namespace DCTS
         TripsManagementControl tripsManagementControl;
         CustomersControl customersControl;
         SuppliersControl suppliersControl;
+        NewNationsControl newNationsControl;
         //ImportSystemfile importSystemfile;
         AboutBox aboutbox;
 
@@ -189,6 +190,19 @@ namespace DCTS
             {
                 MessageBox.Show(err.ToString());
             }
+        }
+
+        private void nationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            if (newNationsControl == null)
+            {
+                newNationsControl = new NewNationsControl();
+                newNationsControl.Dock = DockStyle.Fill;
+            }
+            this.newNationsControl.BeginActive();
+            this.mainPanel.Controls.Clear();
+            this.mainPanel.Controls.Add(newNationsControl);
         }
 
 
