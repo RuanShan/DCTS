@@ -259,8 +259,8 @@ namespace DCTS.UI
 
         private void ScenicsControl_Resize(object sender, EventArgs e)
         {
-            //                                                   id
-            titleColumn1.Width = dataGridView.ClientSize.Width - 60 - 100 * 3 - 280 - 200 - 100 - 60 * 2 - 3;
+            //                                                   id                                           word
+            titleColumn1.Width = dataGridView.ClientSize.Width - 60 - 100 * 3 - 280 - 200 - 100 - 60 * 2 - 3 -100;
             //是否包含滚动条
             if (!(this.dataGridView.DisplayedRowCount(false) == this.dataGridView.RowCount))
             {

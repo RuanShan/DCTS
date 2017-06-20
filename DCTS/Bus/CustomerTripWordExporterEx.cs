@@ -461,7 +461,7 @@ namespace DCTS.Bus
                     HanldeFlightTickets(tmplDict, group.ToList());
 
                 }
-                if (group.Key == (int)SupplierEnum.Hotal)
+                if (group.Key == (int)SupplierEnum.Hotal || group.Key == (int)SupplierEnum.Activity)
                 {
                     foreach (var ticket in group.ToList())
                     {
@@ -475,6 +475,7 @@ namespace DCTS.Bus
             }
 
         }
+        
         // 处理每日机票
         public void HanldeFlightTickets(Dictionary<ComboLocationEnum, WordprocessingDocument> tmplDict, List<Ticket> tickets)
         {

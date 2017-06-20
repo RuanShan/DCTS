@@ -166,6 +166,15 @@ namespace DCTS.DB
         public static string GetPath(ComboLocation location)
         {
             ComboLocationEnum type = (ComboLocationEnum)location.ltype;
+            if (location.word != null)
+            {
+                string path = EntityPathConfig.LocationWordPath(location);
+                if( File.Exists( path ))
+                {
+                    return path;
+                }
+            }
+
             return GetPath(type);
 
         }
