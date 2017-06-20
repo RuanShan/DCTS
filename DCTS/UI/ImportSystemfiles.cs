@@ -140,7 +140,8 @@ namespace DCTS.UI
                     if (File.Exists(ImageLocation))
                     {
                         imageListSmall.ImageSize = new Size(58, 58);
-                        imageListSmall.Images.Add(Bitmap.FromFile(ImageLocation));
+                        imageListSmall.Images.Add(new System.Drawing.Bitmap(ImageLocation));
+                        //imageListSmall.Images.Add(Bitmap.FromFile(ImageLocation));
                     }
                 }
 
@@ -295,37 +296,39 @@ namespace DCTS.UI
             {
                 if (this.listView1.SelectedIndices.Count > 0)
                 {
-
-                    string name = this.listView1.SelectedItems[0].Text;
-
-                    var location = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.PageImage).First();
-
-                    var query = ctx.LocationImages.Where(o => o.location_id == (int)location.id && o.name == name);
-                    List<LocationImage> list = query.ToList();
-                    if (list.Count < 1)
-                        return;
-
-                    string msg = string.Format("确定删除<{0}>？", list[0].name);
+                    string msg = string.Format("确定删除<{0}>？", "");
 
                     if (MessageHelper.DeleteConfirm(msg))
                     {
-                        int coverid = list[0].id;
-
-                        var querynew = ctx.LocationImages.Where(o => o.id == coverid);
-                        if (querynew != null && querynew.ToList().Count > 0)
+                        for (int i = 0; i < listView1.SelectedIndices.Count; i++)
                         {
-                            string ImageLocation = EntityPathConfig.newlocationimagepath(querynew.ToList()[0]);
-                            File.Delete(ImageLocation);
+                            string name = this.listView1.SelectedItems[i].Text;
+
+                            var location = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.PageImage).First();
+
+                            var query = ctx.LocationImages.Where(o => o.location_id == (int)location.id && o.name == name);
+                            List<LocationImage> list = query.ToList();
+                            if (list.Count < 1)
+                                return;
+
+
+                            int coverid = list[0].id;
+
+                            var querynew = ctx.LocationImages.Where(o => o.id == coverid);
+                            if (querynew != null && querynew.ToList().Count > 0)
+                            {
+                                string ImageLocation = EntityPathConfig.newlocationimagepath(querynew.ToList()[0]);
+                                File.Delete(ImageLocation);
+
+                            }
+
+                            ComboLoactionBusiness.locaimageDelete(list[0].id);
+
 
                         }
-
-                        ComboLoactionBusiness.locaimageDelete(list[0].id);
-
-
-
-
-                        BeginActive();
                     }
+                    BeginActive();
+
                 }
             }
         }

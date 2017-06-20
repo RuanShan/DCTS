@@ -144,7 +144,7 @@
             this.pager1.NMax = 0;
             this.pager1.PageCount = 0;
             this.pager1.PageCurrent = 1;
-            this.pager1.PageSize = 300;
+            this.pager1.PageSize = 150;
             this.pager1.Size = new System.Drawing.Size(703, 27);
             this.pager1.TabIndex = 16;
             this.pager1.EventPaging += new DCTS.CustomComponents.EventPagingHandler(this.pager1_EventPaging);
