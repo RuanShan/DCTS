@@ -39,9 +39,9 @@
             // cancelButton
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.No;
-            this.cancelButton.Location = new System.Drawing.Point(538, 463);
+            this.cancelButton.Location = new System.Drawing.Point(544, 483);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 25);
+            this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 14;
             this.cancelButton.Text = "取消";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -50,9 +50,9 @@
             // saveButton
             // 
             this.saveButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
-            this.saveButton.Location = new System.Drawing.Point(457, 463);
+            this.saveButton.Location = new System.Drawing.Point(463, 483);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(75, 25);
+            this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 15;
             this.saveButton.Text = "保存";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -62,10 +62,10 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(12, 16);
+            this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(12, 15);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(671, 44);
+            this.label2.Size = new System.Drawing.Size(671, 41);
             this.label2.TabIndex = 4;
             this.label2.Text = "编辑活动";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -76,16 +76,16 @@
             // 
             // activityFormControl1
             // 
-            this.activityFormControl1.Location = new System.Drawing.Point(17, 50);
+            this.activityFormControl1.Location = new System.Drawing.Point(17, 46);
             this.activityFormControl1.Name = "activityFormControl1";
-            this.activityFormControl1.Size = new System.Drawing.Size(643, 407);
+            this.activityFormControl1.Size = new System.Drawing.Size(643, 431);
             this.activityFormControl1.TabIndex = 16;
             // 
             // EditActivityForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(695, 525);
+            this.ClientSize = new System.Drawing.Size(695, 527);
             this.Controls.Add(this.activityFormControl1);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.saveButton);
