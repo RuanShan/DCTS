@@ -29,3 +29,9 @@ LOCK TABLES `DayLocations` WRITE;
 INSERT INTO `DayLocations` VALUES (110,0,NULL,0,1,6,0,72,NULL,NULL,0,NULL),(111,0,NULL,0,1,6,0,73,NULL,NULL,0,NULL),(112,0,NULL,0,1,6,343,74,NULL,NULL,0,NULL),(125,0,NULL,0,2,6,271,74,NULL,NULL,0,NULL),(126,0,NULL,0,1,6,309,70,NULL,NULL,0,NULL),(127,0,NULL,0,2,6,271,70,NULL,NULL,0,NULL),(128,0,NULL,0,3,6,425,70,NULL,NULL,0,NULL),(129,0,NULL,0,4,6,425,70,NULL,NULL,0,NULL),(130,0,NULL,0,5,6,0,70,NULL,NULL,0,NULL);
 /*!40000 ALTER TABLE `DayLocations` ENABLE KEYS */;
 UNLOCK TABLES;
+
+INSERT INTO `Customer` (`name`, `pasword`) VALUES
+ ('customer1', '001'), ('customer2', '002'),('customer3', '003'),('customer4', '004'),('customer5', '005'),
+ ('customer6', '006'), ('customer7', '007'),('customer8', '008'),('customer9', '009'),('customer10', '010'),
+  ('customer11', '0011'), ('customer12', '0012'),('customer13', '0013'),('customer14', '0014'),('customer15', '0015'),
+ ('customer16', '0016'), ('customer17', '0017'),('customer18', '0018'),('customer19', '0019'),('customer20', '020');
