@@ -28,17 +28,23 @@ namespace DCTS.CustomComponents
         {
             InitializeComponent();
             pager1.PageCurrent = 1;
-            BeginActive();
+            //   BeginActive();
 
         }
         public void BeginActive()
+        {
+            //this.listView1.Clear();  //从控件中移除所有项和列（包括列表头）。
+
+            //pager1.Bind();
+
+        }
+        public void InitializeDataSource()
         {
             this.listView1.Clear();  //从控件中移除所有项和列（包括列表头）。
 
             pager1.Bind();
 
         }
-
         private void imagedockin(List<LocationImage> list)
         {
             ImageList imageListSmall = new ImageList();
@@ -54,7 +60,7 @@ namespace DCTS.CustomComponents
                     if (File.Exists(ImageLocation))
                     {
                         //  imageListSmall.ColorDepth = ColorDepth.Depth32Bit;
-                        imageListSmall.ImageSize = new Size(58, 58);
+                        imageListSmall.ImageSize = new Size(188, 188);
 
                         imageListSmall.Images.Add(new System.Drawing.Bitmap(ImageLocation));
 
@@ -199,7 +205,7 @@ namespace DCTS.CustomComponents
                     if (MessageHelper.DeleteConfirm(msg))
                     {
                         ComboLoactionBusiness.locaimageDelete(list[0].id);
-                        BeginActive();
+                        InitializeDataSource();
                     }
                 }
             }
@@ -252,6 +258,11 @@ namespace DCTS.CustomComponents
 
             }
 
+        }
+
+        private void SelectSystemfile_Load(object sender, EventArgs e)
+        {
+            InitializeDataSource();
         }
 
 

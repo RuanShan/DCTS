@@ -163,7 +163,11 @@
             this.pager1.PageCount = 0;
             this.pager1.PageCurrent = 1;
             this.pager1.PageSize = 20;
+<<<<<<< HEAD
             this.pager1.Size = new System.Drawing.Size(692, 25);
+=======
+            this.pager1.Size = new System.Drawing.Size(703, 27);
+>>>>>>> 6e19762ecefb2f67e387228f5890211d85f2869c
             this.pager1.TabIndex = 16;
             this.pager1.EventPaging += new DCTS.CustomComponents.EventPagingHandler(this.pager1_EventPaging);
             // 
