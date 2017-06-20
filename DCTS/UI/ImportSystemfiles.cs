@@ -272,7 +272,7 @@ namespace DCTS.UI
                     var query = ctx.LocationImages.Where(o => o.location_id == (int)location.id && o.name == name);
                     List<LocationImage> list = query.ToList();
 
-                    string msg = string.Format("确定删除国家<{0}>？", list[0].name);
+                    string msg = string.Format("确定删除<{0}>？", list[0].name);
 
                     if (MessageHelper.DeleteConfirm(msg))
                     {
@@ -296,7 +296,7 @@ namespace DCTS.UI
             {
                 if (this.listView1.SelectedIndices.Count > 0)
                 {
-                    string msg = string.Format("确定删除<{0}>？", "");
+                    string msg = "确定删除选择的文件吗？" ;
 
                     if (MessageHelper.DeleteConfirm(msg))
                     {
