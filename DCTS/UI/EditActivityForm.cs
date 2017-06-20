@@ -41,7 +41,18 @@ namespace DCTS.UI
 
                 activity.img = imgFileName;
             }
-            
+            //word
+            string wordFilePath = activity.word;
+
+            bool hasword = (activity.word != originalActivity.word);
+            if (hasword)
+            {
+
+                string wordFileName = Path.GetFileName(wordFilePath);
+
+                activity.word = wordFileName;
+            }
+
             ctx.SaveChanges();
 
             if (hasImg)
@@ -61,7 +72,7 @@ namespace DCTS.UI
             var ctx = this.entityDataSource1.DbContext as DctsEntities;
 
             this.activity = ctx.ComboLocations.Find(ActivityId);
-            this.originalActivity = new ComboLocation() { img = activity.img };
+            this.originalActivity = new ComboLocation() { img = activity.img, word = activity.word };
             this.activityFormControl1.FillFormByModel(activity);
 
 

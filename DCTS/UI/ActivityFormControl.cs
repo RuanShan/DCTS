@@ -30,7 +30,7 @@ namespace DCTS.UI
             this.nationComboBox.DisplayMember = "title";
             this.nationComboBox.ValueMember = "code";
             this.nationComboBox.DataSource = nationList;
-          
+
 
         }
 
@@ -116,6 +116,15 @@ namespace DCTS.UI
                     this.imgPathTextBox.Text = activity.img;
                     string lcoalPath = EntityPathConfig.LocationImagePath(activity);
                     pictureBox1.ImageLocation = lcoalPath;
+                }
+            }
+            //处理word
+            if (activity.word != null && activity.word.Length > 0)
+            {
+                if (activity.id > 0)
+                {
+                    this.docPathTextBox.Text = activity.word;
+
                 }
             }
         }
@@ -222,34 +231,40 @@ namespace DCTS.UI
         private void docPathTextBox_TextChanged(object sender, EventArgs e)
         {
             #region new
-            using (var ctx = new DctsEntities())
+            string wordFilePath = this.docPathTextBox.Text;
+
+            bool hasImg = (wordFilePath.Length > 0);
+            if (hasImg && wordFilePath != "\"\"")
             {
-                string docFilePath = this.docPathTextBox.Text;
-                string copyfilename = "";
-                bool hasDoc = (docFilePath.Length > 0);
-                bool existSamedoc = false;            
-                if (hasDoc)
+                using (var ctx = new DctsEntities())
                 {
-                    copyfilename = Path.GetFileName(docFilePath);
-
-                    ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
-                    if (lastLocation != null)
+                    string docFilePath = this.docPathTextBox.Text;
+                    string copyfilename = "";
+                    bool hasDoc = (docFilePath.Length > 0);
+                    bool existSamedoc = false;
+                    if (hasDoc)
                     {
-                        long newId = lastLocation.id + 1;
+                        copyfilename = Path.GetFileName(docFilePath);
 
-                        long idStart = newId / 1000 * 1000;
-                        long idEnd = idStart + 1000;
-                        existSamedoc = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Activity && o.word == copyfilename && o.id > idStart && o.id < idEnd).Count() > 0);
+                        ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
+                        if (lastLocation != null)
+                        {
+                            long newId = lastLocation.id + 1;
+
+                            long idStart = newId / 1000 * 1000;
+                            long idEnd = idStart + 1000;
+                            existSamedoc = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Activity && o.word == copyfilename && o.id != activityId).Count() > 0);
+                        }
+
                     }
-
-                }
-                if (existSamedoc)
-                {
-                    this.errorProvider1.SetError(this.docPathTextBox, string.Format("文件名<{0}>已在, 请使用其他文件名！", docPathTextBox.Text));
-                }
-                else
-                {
-                    this.errorProvider1.SetError(this.docPathTextBox, string.Empty);
+                    if (existSamedoc)
+                    {
+                        this.errorProvider1.SetError(this.docPathTextBox, string.Format("文件名<{0}>已在, 请使用其他文件名！", docPathTextBox.Text));
+                    }
+                    else
+                    {
+                        this.errorProvider1.SetError(this.docPathTextBox, string.Empty);
+                    }
                 }
             }
             #endregion

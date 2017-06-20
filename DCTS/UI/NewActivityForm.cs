@@ -63,8 +63,8 @@ namespace DCTS.UI
                     if (activity.word.Length > 0)
                     {
                         string wordPath = activity.word;
-                        string imgFileName = Path.GetFileName(wordPath);
-                        activity.word = imgFileName;
+                        string wordFileName = Path.GetFileName(wordPath);
+                        activity.word = wordFileName;
 
                         string copyToPath = EntityPathConfig.LocationWordPath(activity);
 
