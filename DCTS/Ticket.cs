@@ -30,7 +30,7 @@ namespace DCTS
         public string to_place { get; set; }
         public string rules { get; set; }
         public string title { get; set; }
-        public Nullable<int> days { get; set; }
+        public int days { get; set; }
         public string breakfirst { get; set; }
         public string parking { get; set; }
         public string baggage_weight_limit { get; set; }

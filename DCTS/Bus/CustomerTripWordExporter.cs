@@ -182,7 +182,7 @@ namespace DCTS.Bus
 
                 if (key == "trip_startend")
                 {
-                    tripSumary.ReplaceText(wrappedKey, WordTemplateHelper.DisplayStartAndEndTime(trip));
+                    tripSumary.ReplaceText(wrappedKey, WordTemplateHelper.DisplayStartAndEndDate(trip));
                 }
             }
 
