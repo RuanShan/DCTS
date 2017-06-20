@@ -135,6 +135,7 @@ namespace DCTS.UI
             activity.local_address = this.localAddressTextBox.Text;
             activity.route = this.routeTextBox.Text;
             activity.img = this.imgPathTextBox.Text;
+            activity.word = this.docPathTextBox.Text;
             activity.open_close_more = this.openCloseTextBox.Text;
             return activity;
         }
@@ -206,6 +207,52 @@ namespace DCTS.UI
                     }
                 }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Filter = "DOCX(*.doc,*.docx)|*.doc;*.docx"; //文件类型
+            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                this.docPathTextBox.Text = openFileDialog1.FileName;
+
+            }
+        }
+
+        private void docPathTextBox_TextChanged(object sender, EventArgs e)
+        {
+            #region new
+            using (var ctx = new DctsEntities())
+            {
+                string docFilePath = this.docPathTextBox.Text;
+                string copyfilename = "";
+                bool hasDoc = (docFilePath.Length > 0);
+                bool existSamedoc = false;            
+                if (hasDoc)
+                {
+                    copyfilename = Path.GetFileName(docFilePath);
+
+                    ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
+                    if (lastLocation != null)
+                    {
+                        long newId = lastLocation.id + 1;
+
+                        long idStart = newId / 1000 * 1000;
+                        long idEnd = idStart + 1000;
+                        existSamedoc = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Activity && o.word == copyfilename && o.id > idStart && o.id < idEnd).Count() > 0);
+                    }
+
+                }
+                if (existSamedoc)
+                {
+                    this.errorProvider1.SetError(this.docPathTextBox, string.Format("文件名<{0}>已在, 请使用其他文件名！", docPathTextBox.Text));
+                }
+                else
+                {
+                    this.errorProvider1.SetError(this.docPathTextBox, string.Empty);
+                }
+            }
+            #endregion
         }
     }
 }

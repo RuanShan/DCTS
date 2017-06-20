@@ -60,7 +60,16 @@ namespace DCTS.UI
                         string copyToPath = EntityPathConfig.LocationImagePath(activity);
                         File.Copy(imgPath, copyToPath);
                     }
+                    if (activity.word.Length > 0)
+                    {
+                        string wordPath = activity.word;
+                        string imgFileName = Path.GetFileName(wordPath);
+                        activity.word = imgFileName;
 
+                        string copyToPath = EntityPathConfig.LocationWordPath(activity);
+
+                        File.Copy(wordPath, copyToPath);
+                    }
                     Saved = true;
                 }
             }
