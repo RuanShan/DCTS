@@ -530,6 +530,18 @@
     <Compile Include="UI\SelectSystemfile.Designer.cs">
       <DependentUpon>SelectSystemfile.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\NewNationsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\NewNationsControl.Designer.cs">
+      <DependentUpon>NewNationsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\NewNationsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\NewNationsForm.Designer.cs">
+      <DependentUpon>NewNationsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Uti\DistinctExtension.cs" />
     <Compile Include="Uti\EFIntercepterLogging.cs" />
     <Compile Include="MainForm.cs">
@@ -748,6 +760,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\SelectSystemfile.resx">
       <DependentUpon>SelectSystemfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\NewNationsControl.resx">
+      <DependentUpon>NewNationsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\NewNationsForm.resx">
+      <DependentUpon>NewNationsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

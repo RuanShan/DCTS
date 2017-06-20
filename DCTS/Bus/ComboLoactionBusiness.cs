@@ -98,6 +98,19 @@ namespace DCTS.Bus
             }
 
         }
+
+        public static void nationsDelete(long id)
+        {
+            using (var ctx = new DctsEntities())
+            {
+                var model = ctx.Nations.Find(id);
+               
+                ctx.Nations.Remove(model);
+                ctx.SaveChanges();
+            }
+
+        }
+
         public static void locaimageDelete(long id)
         {
             using (var ctx = new DctsEntities())
