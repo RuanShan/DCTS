@@ -228,8 +228,8 @@ namespace DCTS.UI
                 if (e.RowIndex < grid.Rows.Count)
                 {
                     ComboLocation selectedItem = grid.Rows[e.RowIndex].DataBoundItem as ComboLocation;
-                    long folername = selectedItem.id / 1000;
-                    if (selectedItem.img != null && selectedItem.img != "" && selectedItem.img != "\"\"")
+
+                    if (selectedItem.img != null && selectedItem.img != "" )
                     {
                         string lcoalPath = EntityPathConfig.LocationImagePath(selectedItem);
 

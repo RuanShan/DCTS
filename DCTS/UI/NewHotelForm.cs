@@ -84,7 +84,7 @@ namespace DCTS.UI
                 try
                 {
                     //  string copyfilename = Path.GetFileName(this.imgPathTextBox.Text);
-                    #region new
+                    #region 检查图片是否存在
                     string imgFilePath = this.imgPathTextBox.Text;
                     string copyfilename = "";
                     bool hasImg = (imgFilePath.Length > 0);
@@ -100,7 +100,6 @@ namespace DCTS.UI
                     bool hastitle = (titleTextBox.Text.Length > 0);
                     if (hastitle)
                     {
-
                         nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Hotel && o.title == titleTextBox.Text && o.id != ModelId).Count() > 0);
                     }
                     #endregion
@@ -149,8 +148,6 @@ namespace DCTS.UI
                     }
                     else
                     {
-
-
                         ComboLocation obj = ctx.ComboLocations.Find(Convert.ToInt32(ModelId));
 
                         obj.ltype = (int)ComboLocationEnum.Hotel;

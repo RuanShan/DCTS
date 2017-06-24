@@ -167,7 +167,7 @@ namespace DCTS.Bus
             return str;
         }
 
-
+        //检验新的location,字段是否正确。
         public static bool Validate(ComboLocation location)
         {
             bool valid = true;
@@ -178,20 +178,24 @@ namespace DCTS.Bus
             {
                 if (title.Length == 0)
                 {
-                    throw new DbEntityValidationException("景点名称不能为空");
+                    throw new DbEntityValidationException("名称不能为空");
                 }
 
                 if (ExistsLocationTitle(ctx, title))
                 {
-                    throw new DbEntityValidationException(string.Format("景点名称<{0}>已存在。", title));            
+                    throw new DbEntityValidationException(string.Format("名称<{0}>已存在。", title));            
                 }
+                if (ExistsLocationTitle(ctx, title))
+                {
+                    throw new DbEntityValidationException(string.Format("名称<{0}>已存在。", title));
+                } 
                 if (img.Length > 0)
                 {
                     string imgFileName = Path.GetFileName(img);
 
                     if (ExistsLocationImageName(ctx, img))
                     {
-                        throw new DbEntityValidationException(string.Format("景点图片<{0}>已存在。", imgFileName));                                    
+                        throw new DbEntityValidationException(string.Format("图片<{0}>已存在。", imgFileName));                                    
                     }
                 }
 

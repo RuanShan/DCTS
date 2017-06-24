@@ -49,10 +49,8 @@ namespace DCTS.UI
                     ComboLoactionBusiness.Validate(scenic);
 
                     ctx.ComboLocations.Add(scenic);
-                   
-                    ctx.SaveChanges();
 
-                    if (scenic.img.Length>0)
+                    if (scenic.img.Length > 0)
                     {
                         string imgPath = scenic.img;
                         string imgFileName = Path.GetFileName(imgPath);
@@ -60,8 +58,11 @@ namespace DCTS.UI
                         string copyToPath = EntityPathConfig.LocationImagePath(scenic);
                         File.Copy(imgPath, copyToPath);
                     }
+                    
+                    ctx.SaveChanges();
 
                     Saved = true;
+                    this.Close();
                 }
             }
             catch (DbEntityValidationException exception)
