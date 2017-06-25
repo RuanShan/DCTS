@@ -302,22 +302,16 @@ namespace DCTS.Bus
 			var date = this.trip.start_at.GetValueOrDefault().AddDays(day.day - 1);
             var locations = this.dayLocations.Where(o => o.day_id == day.id).ToList();
 
-            foreach (string key in specKeys)
-            {
-                string wrappedKey = "%" + key + "%";
-                if (key == "day_date")//2017年6月1日
-                {
-                    WordTemplateHelper.ReplaceText(sumary, wrappedKey, WordTemplateHelper.DisplayDate( date));
-                }
-                if (key == "day_lweekday")//星期四
-                {					
-                    WordTemplateHelper.ReplaceText(sumary, wrappedKey, WordTemplateHelper.DisplayLongWeekDay(date ));
-                }
-                if (key == "day_locations")//北京-阿姆斯特丹-罗马
-                {
-                    WordTemplateHelper.ReplaceText(sumary, wrappedKey, WordTemplateHelper.DisplayDayLocations(locations, "-"));
-                }
-            }
+            
+            //2017年6月1日
+            WordTemplateHelper.ReplaceText(sumary, "%day_date%", WordTemplateHelper.DisplayDate(date));                 
+            //星期四
+            WordTemplateHelper.ReplaceText(sumary, "%day_lweekday%", WordTemplateHelper.DisplayLongWeekDay(date));
+            //北京-阿姆斯特丹-罗马
+            WordTemplateHelper.ReplaceText(sumary, "%day_cities%", string.Join("-", locations.Select(o=>o.ComboLocation.city).ToArray()));
+            //北京-阿姆斯特丹-罗马
+            //WordTemplateHelper.ReplaceText(sumary, "%day_locations%", WordTemplateHelper.DisplayDayLocations(locations, "-"));                 
+            
             var mainDoc = sumary.MainDocumentPart.Document;
 
 			Table dayTable = mainDoc.Body.Descendants<Table>().LastOrDefault();
@@ -335,7 +329,8 @@ namespace DCTS.Bus
                         var rowCopy = rowPattern.CloneNode(true) as TableRow;
                         WordTemplateHelper.ReplaceText<TableRow>(rowCopy, "%schedule_start_at%", String.Format("{0:HH:mm}", schedule.start_at));
                         WordTemplateHelper.ReplaceText<TableRow>(rowCopy, "%schedule_title%", schedule.title);
-                        dayTable.AppendChild(rowCopy);
+                        rowPattern.InsertBeforeSelf(rowCopy);
+
                     }
                     rowPattern.Remove();
                 }
