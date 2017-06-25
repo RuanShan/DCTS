@@ -93,7 +93,8 @@ namespace DCTS.UI
                 var model = row.DataBoundItem as ComboLocation;
 
                 var form = new EditScenicForm(model.id);
-                if (form.ShowDialog() == DialogResult.Yes)
+                form.ShowDialog();
+                if ( form.Saved )
                 {
                     BeginActive();
                 }
@@ -259,8 +260,8 @@ namespace DCTS.UI
 
         private void ScenicsControl_Resize(object sender, EventArgs e)
         {
-            //                                                   id
-            titleColumn1.Width = dataGridView.ClientSize.Width - 60 - 100 * 3 - 280 - 200 - 100 - 60 * 2 - 3;
+            //                                                   id  imgName
+            titleColumn1.Width = dataGridView.ClientSize.Width - 60 - 100 - 100 * 3 - 280 - 200 - 100 - 60 * 2 - 3;
             //是否包含滚动条
             if (!(this.dataGridView.DisplayedRowCount(false) == this.dataGridView.RowCount))
             {

@@ -1,8 +1,10 @@
-﻿using DCTS.DB;
+﻿using DCTS.Bus;
+using DCTS.DB;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Validation;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -14,40 +16,50 @@ namespace DCTS.UI
 {
     public partial class EditScenicForm : BaseModalForm
     {
-        public long ScenicId { get; set; }
+        public int ScenicId { get; set; }
+        public bool Saved { get; set; }
 
         ComboLocation scenic;
         ComboLocation originalScenic;
 
-        public EditScenicForm( long scenicId)
+        public EditScenicForm(int scenicId)
         {
             InitializeComponent();
             ScenicId = scenicId;
+            Saved = false;
+
         }
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            var ctx = this.entityDataSource1.DbContext as DctsEntities;
             
-            this.scenicFormControl1.FillModelByForm(this.scenic);
-
-            string imgFilePath = scenic.img;
-
-            bool hasImg = (scenic.img != originalScenic.img);
-            if (hasImg)
+            try
             {
+                var ctx = this.entityDataSource1.DbContext as DctsEntities;
+            
+                this.scenicFormControl1.FillModelByForm(this.scenic);
 
-                string imgFileName = Path.GetFileName(imgFilePath);
+                ComboLoactionBusiness.Validate(scenic);
 
-                scenic.img = imgFileName;
+                string imgFilePath = scenic.img;
+
+                bool newImg = (scenic.img != originalScenic.img);
+                if (newImg)
+                {
+                    string imgFileName = Path.GetFileName(imgFilePath);
+                    scenic.img = imgFileName;
+                    string copyToPath = EntityPathConfig.LocationImagePath(scenic);
+                    File.Copy(imgFilePath, copyToPath, true);
+                }
+            
+                ctx.SaveChanges();
+                Saved = true;
+
+                this.Close();
             }
-            
-            ctx.SaveChanges();
-
-            if (hasImg)
+            catch (DbEntityValidationException exception)
             {
-                string copyToPath = EntityPathConfig.LocationImagePath(scenic);
-                File.Copy(imgFilePath, copyToPath, true);
+                MessageBox.Show(exception.Message);
             }
         }
 

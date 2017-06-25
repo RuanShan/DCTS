@@ -170,6 +170,8 @@ namespace DCTS.Bus
         //检验新的location,字段是否正确。
         public static bool Validate(ComboLocation location)
         {
+            //如果为新创建， id =0
+            int id = location.id;
             bool valid = true;
 
             string title = location.title;
@@ -180,22 +182,32 @@ namespace DCTS.Bus
                 {
                     throw new DbEntityValidationException("名称不能为空");
                 }
+                if (title.Length > 120)
+                {
+                    throw new DbEntityValidationException(string.Format("名称<{0}>字数超过>120。", title));
+                } 
+                var existTitle = (ctx.ComboLocations.Where(o => o.title == title && o.id != id).Count() > 0);
 
-                if (ExistsLocationTitle(ctx, title))
+                if (existTitle)
                 {
                     throw new DbEntityValidationException(string.Format("名称<{0}>已存在。", title));            
                 }
-                if (ExistsLocationTitle(ctx, title))
-                {
-                    throw new DbEntityValidationException(string.Format("名称<{0}>已存在。", title));
-                } 
+
                 if (img.Length > 0)
                 {
                     string imgFileName = Path.GetFileName(img);
-
-                    if (ExistsLocationImageName(ctx, img))
+                    //如果 imgFileName ！= img， 即 img 中包含路径信息， 修改和更新都可能发生。
+                    if (!imgFileName.Equals(img))
                     {
-                        throw new DbEntityValidationException(string.Format("图片<{0}>已存在。", imgFileName));                                    
+
+                        bool existSameImage = false;
+
+                        existSameImage = (ctx.ComboLocations.Where(o => o.ltype == location.ltype && o.img == imgFileName && o.id != id).Count() > 0);
+
+                        if (existSameImage)
+                        {
+                            throw new DbEntityValidationException(string.Format("图片<{0}>已存在。", imgFileName));                                    
+                        }
                     }
                 }
 

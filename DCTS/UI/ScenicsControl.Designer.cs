@@ -33,16 +33,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.IDColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nationColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cityColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.imgColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.titleColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.localTitleColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.serviceTimeColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ticketColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.editColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.deleteColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.newButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.keywordTextBox = new System.Windows.Forms.TextBox();
@@ -58,6 +48,17 @@
             this.pager1 = new DCTS.CustomComponents.Pager();
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.exportExcelButton = new System.Windows.Forms.Button();
+            this.IDColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nationColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cityColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.imgNameColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.imgColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.titleColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.localTitleColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.serviceTimeColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ticketColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.editColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.deleteColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -76,6 +77,7 @@
             this.IDColumn1,
             this.nationColumn1,
             this.cityColumn1,
+            this.imgNameColumn1,
             this.imgColumn1,
             this.titleColumn1,
             this.localTitleColumn1,
@@ -101,88 +103,6 @@
             this.dataGridView.TabIndex = 0;
             this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellContentClick);
             this.dataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView_CellFormatting);
-            // 
-            // IDColumn1
-            // 
-            this.IDColumn1.DataPropertyName = "id";
-            this.IDColumn1.Frozen = true;
-            this.IDColumn1.HeaderText = "序号";
-            this.IDColumn1.Name = "IDColumn1";
-            this.IDColumn1.Width = 60;
-            // 
-            // nationColumn1
-            // 
-            this.nationColumn1.DataPropertyName = "nation";
-            this.nationColumn1.HeaderText = "国家";
-            this.nationColumn1.Name = "nationColumn1";
-            // 
-            // cityColumn1
-            // 
-            this.cityColumn1.DataPropertyName = "city";
-            this.cityColumn1.HeaderText = "城市";
-            this.cityColumn1.Name = "cityColumn1";
-            // 
-            // imgColumn1
-            // 
-            this.imgColumn1.HeaderText = "图片";
-            this.imgColumn1.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.imgColumn1.Name = "imgColumn1";
-            this.imgColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.imgColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // titleColumn1
-            // 
-            this.titleColumn1.DataPropertyName = "title";
-            this.titleColumn1.HeaderText = "中文名称";
-            this.titleColumn1.Name = "titleColumn1";
-            this.titleColumn1.Width = 280;
-            // 
-            // localTitleColumn1
-            // 
-            this.localTitleColumn1.DataPropertyName = "local_title";
-            this.localTitleColumn1.HeaderText = "当地语言名称";
-            this.localTitleColumn1.Name = "localTitleColumn1";
-            this.localTitleColumn1.Width = 280;
-            // 
-            // serviceTimeColumn1
-            // 
-            this.serviceTimeColumn1.DataPropertyName = "open_close_more";
-            this.serviceTimeColumn1.HeaderText = "开放时间说明";
-            this.serviceTimeColumn1.Name = "serviceTimeColumn1";
-            this.serviceTimeColumn1.Width = 200;
-            // 
-            // ticketColumn1
-            // 
-            this.ticketColumn1.DataPropertyName = "ticket";
-            this.ticketColumn1.HeaderText = "门票";
-            this.ticketColumn1.Name = "ticketColumn1";
-            // 
-            // editColumn1
-            // 
-            this.editColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(2, 12, 2, 12);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            this.editColumn1.DefaultCellStyle = dataGridViewCellStyle1;
-            this.editColumn1.HeaderText = "";
-            this.editColumn1.Name = "editColumn1";
-            this.editColumn1.Text = "编辑";
-            this.editColumn1.UseColumnTextForButtonValue = true;
-            this.editColumn1.Width = 60;
-            // 
-            // deleteColumn
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(2, 12, 2, 12);
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            this.deleteColumn.DefaultCellStyle = dataGridViewCellStyle2;
-            this.deleteColumn.HeaderText = "";
-            this.deleteColumn.Name = "deleteColumn";
-            this.deleteColumn.Text = "删除";
-            this.deleteColumn.UseColumnTextForButtonValue = true;
-            this.deleteColumn.Width = 60;
             // 
             // newButton
             // 
@@ -321,6 +241,94 @@
             this.exportExcelButton.UseVisualStyleBackColor = true;
             this.exportExcelButton.Click += new System.EventHandler(this.exportExcelButton_Click);
             // 
+            // IDColumn1
+            // 
+            this.IDColumn1.DataPropertyName = "id";
+            this.IDColumn1.Frozen = true;
+            this.IDColumn1.HeaderText = "序号";
+            this.IDColumn1.Name = "IDColumn1";
+            this.IDColumn1.Width = 60;
+            // 
+            // nationColumn1
+            // 
+            this.nationColumn1.DataPropertyName = "nation";
+            this.nationColumn1.HeaderText = "国家";
+            this.nationColumn1.Name = "nationColumn1";
+            // 
+            // cityColumn1
+            // 
+            this.cityColumn1.DataPropertyName = "city";
+            this.cityColumn1.HeaderText = "城市";
+            this.cityColumn1.Name = "cityColumn1";
+            // 
+            // imgNameColumn1
+            // 
+            this.imgNameColumn1.DataPropertyName = "img";
+            this.imgNameColumn1.HeaderText = "图片名称";
+            this.imgNameColumn1.Name = "imgNameColumn1";
+            // 
+            // imgColumn1
+            // 
+            this.imgColumn1.HeaderText = "图片";
+            this.imgColumn1.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.imgColumn1.Name = "imgColumn1";
+            this.imgColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.imgColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // titleColumn1
+            // 
+            this.titleColumn1.DataPropertyName = "title";
+            this.titleColumn1.HeaderText = "中文名称";
+            this.titleColumn1.Name = "titleColumn1";
+            this.titleColumn1.Width = 280;
+            // 
+            // localTitleColumn1
+            // 
+            this.localTitleColumn1.DataPropertyName = "local_title";
+            this.localTitleColumn1.HeaderText = "当地语言名称";
+            this.localTitleColumn1.Name = "localTitleColumn1";
+            this.localTitleColumn1.Width = 280;
+            // 
+            // serviceTimeColumn1
+            // 
+            this.serviceTimeColumn1.DataPropertyName = "open_close_more";
+            this.serviceTimeColumn1.HeaderText = "开放时间说明";
+            this.serviceTimeColumn1.Name = "serviceTimeColumn1";
+            this.serviceTimeColumn1.Width = 200;
+            // 
+            // ticketColumn1
+            // 
+            this.ticketColumn1.DataPropertyName = "ticket";
+            this.ticketColumn1.HeaderText = "门票";
+            this.ticketColumn1.Name = "ticketColumn1";
+            // 
+            // editColumn1
+            // 
+            this.editColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(2, 12, 2, 12);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            this.editColumn1.DefaultCellStyle = dataGridViewCellStyle1;
+            this.editColumn1.HeaderText = "";
+            this.editColumn1.Name = "editColumn1";
+            this.editColumn1.Text = "编辑";
+            this.editColumn1.UseColumnTextForButtonValue = true;
+            this.editColumn1.Width = 60;
+            // 
+            // deleteColumn
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(2, 12, 2, 12);
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            this.deleteColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.deleteColumn.HeaderText = "";
+            this.deleteColumn.Name = "deleteColumn";
+            this.deleteColumn.Text = "删除";
+            this.deleteColumn.UseColumnTextForButtonValue = true;
+            this.deleteColumn.Width = 60;
+            // 
             // ScenicsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -360,9 +368,11 @@
         private CustomComponents.Pager pager1;
         private System.Windows.Forms.BindingSource bindingSource1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.Button exportExcelButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn IDColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn nationColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn cityColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn imgNameColumn1;
         private System.Windows.Forms.DataGridViewImageColumn imgColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn titleColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn localTitleColumn1;
@@ -370,6 +380,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ticketColumn1;
         private System.Windows.Forms.DataGridViewButtonColumn editColumn1;
         private System.Windows.Forms.DataGridViewButtonColumn deleteColumn;
-        private System.Windows.Forms.Button exportExcelButton;
     }
 }

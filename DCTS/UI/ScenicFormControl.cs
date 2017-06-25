@@ -158,17 +158,16 @@ namespace DCTS.UI
             bool hasImg = (imgFilePath.Length > 0);
             bool existSameImage = false;
 
-            if (hasImg && imgFilePath != "")
+            if (hasImg )
             {
 
                 imgFileName = Path.GetFileName(imgFilePath);
-
                
                 existSameImage = (db.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Scenic && o.img == imgFileName && o.id != scenicId).Count() > 0);
                 
                 if (existSameImage)
                 {
-                    this.errorProvider1.SetError(this.imgPathTextBox, string.Format("文件名<{0}>已在, 请使用其他文件名！", imgFileName));
+                    this.errorProvider1.SetError(this.imgPathTextBox, string.Format("文件名<{0}>已存在, 请使用其他文件名！", imgFileName));
                 }
                 else
                 {
@@ -179,28 +178,19 @@ namespace DCTS.UI
 
         private void titleTextBox_TextChanged(object sender, EventArgs e)
         {
-            using (var ctx = new DctsEntities())
-            {
-                bool nameishave = false;
+           
                 bool hastitle = (titleTextBox.Text.Length > 0);
                 if (hastitle)
                 {
-                    ComboLocation lastLocation = ctx.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
-                    if (lastLocation != null)
-                        nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Scenic && o.title == titleTextBox.Text).Count() > 0);
-
-                    if (scenicId == 0)
+                    if (this.titleTextBox.Text.Length > 120)
                     {
-                        if (nameishave == true || this.titleTextBox.Text.Length > 100)
-                            errorProvider1.SetError(titleTextBox, String.Format("错误：请检查名称的长度或是否已存在 {0}", titleTextBox.Text));
+                        errorProvider1.SetError(titleTextBox, String.Format("名称的长度过长，应少于120个字。", titleTextBox.Text));
                     }
-                    else
-                    {
-                        if (this.titleTextBox.Text.Length > 100)
-                            errorProvider1.SetError(titleTextBox, String.Format("错误：请检查名称的长度 {0}", titleTextBox.Text));
-                    }
+                    else {
+                        errorProvider1.SetError(titleTextBox, "");                    
+                    }                    
                 }
-            }
+            
         }
     }
 }
