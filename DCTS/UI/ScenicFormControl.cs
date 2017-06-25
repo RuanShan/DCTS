@@ -53,7 +53,6 @@ namespace DCTS.UI
             // 查询图片是否存在时使用
             this.scenicId = scenic.id;
 
-            InitializeDataSource();
 
             if (scenic.nation.Length > 0)
             {
@@ -138,6 +137,7 @@ namespace DCTS.UI
 
         private void ScenicFormControl_Load(object sender, EventArgs e)
         {
+            InitializeDataSource();
 
         }
 
