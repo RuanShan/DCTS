@@ -128,15 +128,13 @@ namespace DCTS.UI
                             string imgPath = obj.img;
                             imgFileName = Path.GetFileName(imgPath);
                             obj.img = imgFileName;
-                            //string copyToPath = EntityPathConfig.LocationImagePath(obj);
-                            //File.Copy(imgPath, copyToPath);
                         }
                         ctx.SaveChanges();
                         if (obj.img.Length > 0)
                         {
                             string imgPath = imgFilePath;
                             string copyToPath = EntityPathConfig.LocationImagePath(obj);
-                            File.Copy(imgPath, copyToPath);
+                            File.Copy(imgPath, copyToPath, true);
                         } 
 
                     }
@@ -176,9 +174,8 @@ namespace DCTS.UI
                             File.Copy(imgFilePath, copyToPath, true);
                         }
                         ctx.SaveChanges();
-
-
                     }
+                    this.Close();
                 }
                 catch (DbEntityValidationException exception)
                 {

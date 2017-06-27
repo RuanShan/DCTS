@@ -18,15 +18,14 @@ namespace DCTS.UI
     public partial class NewDiningsForm : BaseModalForm
     {
         private long ModelId { get; set; }
-        public bool istrue;
+        public bool Saved;
         ComboLocation originalDinings;
 
         public NewDiningsForm(string maintype, ComboLocation obj)
         {
             InitializeComponent();
 
-       
-            istrue = true;
+            Saved = false;
             ModelId = 0;
             if (maintype == "Edit")
             {
@@ -163,7 +162,8 @@ namespace DCTS.UI
                         }   
 
                     }
-                    istrue = true;
+                    Saved = true;
+                    this.Close();
                 }
                 catch (DbEntityValidationException exception)
                 {
@@ -193,7 +193,7 @@ namespace DCTS.UI
 
         private void NewDiningsForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //if (istrue == false)
+            //if (Saved == false)
             //    e.Cancel = true;
             //else
             //    this.Close();

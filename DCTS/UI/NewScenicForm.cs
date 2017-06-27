@@ -52,18 +52,16 @@ namespace DCTS.UI
                     string imgPath = scenic.img;
                     if (scenic.img.Length > 0)
                     {
-                   
                         string imgFileName = Path.GetFileName(imgPath);
                         scenic.img = imgFileName;
-                        //string copyToPath = EntityPathConfig.LocationImagePath(scenic);
-                        //File.Copy(imgPath, copyToPath);
                     }
                     
                     ctx.SaveChanges();
+                    //拷贝图片需要对象ID，所以这样先创建对象，再拷贝图片
                     if (scenic.img.Length > 0)
                     {             
                         string copyToPath = EntityPathConfig.LocationImagePath(scenic);
-                        File.Copy(imgPath, copyToPath);
+                        File.Copy(imgPath, copyToPath, true);
                     }
                     Saved = true;
                     this.Close();

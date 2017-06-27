@@ -95,6 +95,25 @@ namespace DCTS.Bus
                 ctx.DayLocations.RemoveRange(days);
                 ctx.ComboLocations.Remove(model);
                 ctx.SaveChanges();
+                // 检查图片是否存在？
+                if (model.img != null && model.img.Length > 0)
+                {
+                    string path = EntityPathConfig.LocationImagePath(model);
+                    if (File.Exists(path))
+                    {
+                        File.Delete(path);
+                    }
+                }
+
+                // 检查word是否存在？
+                if (model.word != null && model.word.Length > 0)
+                {
+                    string path = EntityPathConfig.LocationWordPath(model);
+                    if (File.Exists(path))
+                    {
+                        File.Delete(path);
+                    }
+                }
             }
 
         }

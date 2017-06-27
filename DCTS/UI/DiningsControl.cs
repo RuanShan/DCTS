@@ -69,7 +69,8 @@ namespace DCTS.UI
         private void newButton_Click(object sender, EventArgs e)
         {
             var form = new NewDiningsForm("create", null);
-            if (form.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
+            form.ShowDialog();
+            if (form.Saved)
             {
                 InitializeDataGridView();
             }
@@ -168,7 +169,8 @@ namespace DCTS.UI
             ComboLocation selectedItem = DinningList[i];
 
             var form = new NewDiningsForm("Edit", selectedItem);
-            if (form.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
+            form.ShowDialog();
+            if ( form.Saved)
             {
                 InitializeDataGridView();
             }
@@ -368,7 +370,8 @@ namespace DCTS.UI
                 var model = row.DataBoundItem as ComboLocation;
 
                 var form = new NewDiningsForm("Edit", model);
-                if (form.ShowDialog() == DialogResult.Yes)
+                form.ShowDialog();
+                if ( form.Saved )
                 {
                     BeginActive();
                 }
