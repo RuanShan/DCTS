@@ -58,7 +58,8 @@ namespace DCTS.UI
         private void newButton_Click(object sender, EventArgs e)
         {
             var form = new NewHotelForm("create", null);
-            if (form.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
+            form.ShowDialog();
+            if (form.Saved)
             {
                 InitializeDataGridView();
             }
@@ -302,7 +303,8 @@ namespace DCTS.UI
             int i = this.dataGridView.CurrentRow.Index;
             ComboLocation selectedItem = hotelList[i];
             var form = new NewHotelForm("Edit", selectedItem);
-            if (form.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
+            form.ShowDialog();
+            if (form.Saved)
             {
                 InitializeDataGridView();
             }
@@ -409,7 +411,8 @@ namespace DCTS.UI
                 var model = row.DataBoundItem as ComboLocation;
 
                 var form = new NewHotelForm("Edit", model);
-                if (form.ShowDialog() == DialogResult.Yes)
+                form.ShowDialog();
+                if ( form.Saved )
                 {
                     BeginActive();
                 }
@@ -418,7 +421,7 @@ namespace DCTS.UI
             {
                 var row = dataGridView.Rows[e.RowIndex];
                 var model = row.DataBoundItem as ComboLocation;
-                string msg = string.Format("确定删除餐厅<{0}>？", model.title);
+                string msg = string.Format("确定删除<{0}>？", model.title);
 
                 if (MessageHelper.DeleteConfirm(msg))
                 {

@@ -234,6 +234,21 @@ namespace DCTS.Bus
             return valid;
         }
 
+        //检验 location 是否可以被删除，主要检验外键约束，如 机场，住宿是否被票务引用，
+        public static bool ValidateForDelete(ComboLocation location)
+        {
+            int id = location.id;
+            bool valid = true;
+
+            string title = location.title;
+            string img = location.img;
+            using (var ctx = new DctsEntities())
+            {
+               //  throw new DbEntityValidationException("名称不能为空");
+            }
+            return valid;
+        }
+
         public static bool ExistsLocationTitle(DctsEntities ctx, string title)
         {
 

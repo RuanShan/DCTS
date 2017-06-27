@@ -19,12 +19,15 @@ namespace DCTS.UI
     {
         private long ModelId { get; set; }
         ComboLocation originalHotel;
+        public bool Saved { get; set; }
 
         public NewHotelForm(string maintype, ComboLocation obj)
         {
             InitializeComponent();
             InitializeDataSource();
             ModelId = 0;
+            Saved = false;
+
             if (maintype == "Edit")
             {
                 label2.Text = "编辑住宿";
@@ -50,7 +53,7 @@ namespace DCTS.UI
                 kitchen.Text = obj.kitchen;
                 this.originalHotel = new ComboLocation() { img = obj.img };
                 //处理图片
-                if (obj.img.Length > 0)
+                if (obj.img!=null && obj.img.Length > 0)
                 {
                     if (obj.id > 0)
                     {
@@ -175,6 +178,7 @@ namespace DCTS.UI
                         }
                         ctx.SaveChanges();
                     }
+                    this.Saved = true;
                     this.Close();
                 }
                 catch (DbEntityValidationException exception)

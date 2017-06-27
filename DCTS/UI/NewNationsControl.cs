@@ -152,7 +152,7 @@ namespace DCTS.UI
             {
                 var row = dataGridView.Rows[e.RowIndex];
                 var model = row.DataBoundItem as Nation;
-                string msg = string.Format("确定删除国家<{0}>？", model.title);
+                string msg = string.Format("确定删除<{0}>？", model.title);
 
                 if (MessageHelper.DeleteConfirm(msg))
                 {

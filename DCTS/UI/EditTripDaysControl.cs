@@ -154,7 +154,7 @@ namespace DCTS.UI
             var tripDay = GetSelectedTripDay();
             if (tripDay != null)
             {
-                if (MessageHelper.DeleteConfirm(string.Format("确定删除<第{0}天>的模板吗？", tripDay.day)))
+                if (MessageHelper.DeleteConfirm(string.Format("确定删除<第{0}天>吗？", tripDay.day)))
                 {
                     TripBusiness.DeleteDay(tripDay.id);
                     InitializeDataSource(tripDay.day - 1);

@@ -103,7 +103,7 @@ namespace DCTS.UI
             {
                 var row = dataGridView.Rows[e.RowIndex];
                 var model = row.DataBoundItem as ComboLocation;
-                string msg = string.Format("确定删除景点<{0}>？", model.title);
+                string msg = string.Format("确定删除<{0}>？", model.title);
 
                 if (MessageHelper.DeleteConfirm(msg))
                 {

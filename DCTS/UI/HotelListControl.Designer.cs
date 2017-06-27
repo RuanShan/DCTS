@@ -33,6 +33,22 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.idColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nationColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cityColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.imgColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.areaColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.titleColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.roomColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dinner = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.latlngColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.addressColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.reachColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contactColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.wifiColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.parkingCloumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.editColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.deleteColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.修改ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,22 +67,6 @@
             this.pager1 = new DCTS.CustomComponents.Pager();
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.idColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nationColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cityColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.imgColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.areaColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.titleColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.roomColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dinner = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.latlngColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.addressColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.reachColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contactColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.wifiColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.parkingCloumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.editColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.deleteColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -117,6 +117,117 @@
             this.dataGridView.TabIndex = 0;
             this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellContentClick);
             this.dataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView_CellFormatting);
+            // 
+            // idColumn1
+            // 
+            this.idColumn1.DataPropertyName = "id";
+            this.idColumn1.HeaderText = "序号";
+            this.idColumn1.Name = "idColumn1";
+            this.idColumn1.Width = 60;
+            // 
+            // nationColumn1
+            // 
+            this.nationColumn1.DataPropertyName = "nation";
+            this.nationColumn1.HeaderText = "国家";
+            this.nationColumn1.Name = "nationColumn1";
+            // 
+            // cityColumn1
+            // 
+            this.cityColumn1.DataPropertyName = "city";
+            this.cityColumn1.HeaderText = "城市";
+            this.cityColumn1.Name = "cityColumn1";
+            // 
+            // imgColumn1
+            // 
+            this.imgColumn1.HeaderText = "图片";
+            this.imgColumn1.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.imgColumn1.Name = "imgColumn1";
+            this.imgColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.imgColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // areaColumn1
+            // 
+            this.areaColumn1.DataPropertyName = "title";
+            this.areaColumn1.HeaderText = "中文名称";
+            this.areaColumn1.Name = "areaColumn1";
+            // 
+            // titleColumn1
+            // 
+            this.titleColumn1.DataPropertyName = "local_title";
+            this.titleColumn1.HeaderText = "英文名称";
+            this.titleColumn1.Name = "titleColumn1";
+            this.titleColumn1.Visible = false;
+            // 
+            // roomColumn1
+            // 
+            this.roomColumn1.DataPropertyName = "room";
+            this.roomColumn1.HeaderText = "房型";
+            this.roomColumn1.Name = "roomColumn1";
+            // 
+            // dinner
+            // 
+            this.dinner.DataPropertyName = "dinner";
+            this.dinner.HeaderText = "早餐";
+            this.dinner.Name = "dinner";
+            // 
+            // latlngColumn1
+            // 
+            this.latlngColumn1.DataPropertyName = "latlng";
+            this.latlngColumn1.HeaderText = "经纬度";
+            this.latlngColumn1.Name = "latlngColumn1";
+            // 
+            // addressColumn1
+            // 
+            this.addressColumn1.DataPropertyName = "address";
+            this.addressColumn1.HeaderText = "地址";
+            this.addressColumn1.Name = "addressColumn1";
+            // 
+            // reachColumn1
+            // 
+            this.reachColumn1.DataPropertyName = "local_address";
+            this.reachColumn1.HeaderText = "如何抵达";
+            this.reachColumn1.Name = "reachColumn1";
+            this.reachColumn1.Visible = false;
+            // 
+            // contactColumn1
+            // 
+            this.contactColumn1.DataPropertyName = "contact";
+            this.contactColumn1.HeaderText = "联系方式";
+            this.contactColumn1.Name = "contactColumn1";
+            // 
+            // wifiColumn1
+            // 
+            this.wifiColumn1.DataPropertyName = "wifi";
+            this.wifiColumn1.HeaderText = "WIFI";
+            this.wifiColumn1.Name = "wifiColumn1";
+            // 
+            // parkingCloumn1
+            // 
+            this.parkingCloumn1.DataPropertyName = "parking";
+            this.parkingCloumn1.HeaderText = "停车位";
+            this.parkingCloumn1.Name = "parkingCloumn1";
+            // 
+            // editColumn1
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(2, 12, 2, 12);
+            this.editColumn1.DefaultCellStyle = dataGridViewCellStyle1;
+            this.editColumn1.HeaderText = "";
+            this.editColumn1.Name = "editColumn1";
+            this.editColumn1.Text = "编辑";
+            this.editColumn1.UseColumnTextForButtonValue = true;
+            this.editColumn1.Width = 60;
+            // 
+            // deleteColumn1
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(2, 12, 1, 12);
+            this.deleteColumn1.DefaultCellStyle = dataGridViewCellStyle2;
+            this.deleteColumn1.HeaderText = "";
+            this.deleteColumn1.Name = "deleteColumn1";
+            this.deleteColumn1.Text = "删除";
+            this.deleteColumn1.UseColumnTextForButtonValue = true;
+            this.deleteColumn1.Width = 60;
             // 
             // contextMenuStrip1
             // 
@@ -268,7 +379,7 @@
             this.pager1.NMax = 0;
             this.pager1.PageCount = 0;
             this.pager1.PageCurrent = 1;
-            this.pager1.PageSize = 10;
+            this.pager1.PageSize = 25;
             this.pager1.Size = new System.Drawing.Size(672, 31);
             this.pager1.TabIndex = 13;
             this.pager1.EventPaging += new DCTS.CustomComponents.EventPagingHandler(this.pager1_EventPaging);
@@ -281,117 +392,6 @@
             // 
             this.bindingSource1.DataSource = this.entityDataSource1;
             this.bindingSource1.Position = 0;
-            // 
-            // idColumn1
-            // 
-            this.idColumn1.DataPropertyName = "id";
-            this.idColumn1.HeaderText = "序号";
-            this.idColumn1.Name = "idColumn1";
-            this.idColumn1.Width = 60;
-            // 
-            // nationColumn1
-            // 
-            this.nationColumn1.DataPropertyName = "nation";
-            this.nationColumn1.HeaderText = "国家";
-            this.nationColumn1.Name = "nationColumn1";
-            // 
-            // cityColumn1
-            // 
-            this.cityColumn1.DataPropertyName = "city";
-            this.cityColumn1.HeaderText = "城市";
-            this.cityColumn1.Name = "cityColumn1";
-            // 
-            // imgColumn1
-            // 
-            this.imgColumn1.HeaderText = "图片";
-            this.imgColumn1.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.imgColumn1.Name = "imgColumn1";
-            this.imgColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.imgColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // areaColumn1
-            // 
-            this.areaColumn1.DataPropertyName = "title";
-            this.areaColumn1.HeaderText = "中文名称";
-            this.areaColumn1.Name = "areaColumn1";
-            // 
-            // titleColumn1
-            // 
-            this.titleColumn1.DataPropertyName = "local_title";
-            this.titleColumn1.HeaderText = "英文名称";
-            this.titleColumn1.Name = "titleColumn1";
-            this.titleColumn1.Visible = false;
-            // 
-            // roomColumn1
-            // 
-            this.roomColumn1.DataPropertyName = "room";
-            this.roomColumn1.HeaderText = "房型";
-            this.roomColumn1.Name = "roomColumn1";
-            // 
-            // dinner
-            // 
-            this.dinner.DataPropertyName = "dinner";
-            this.dinner.HeaderText = "早餐";
-            this.dinner.Name = "dinner";
-            // 
-            // latlngColumn1
-            // 
-            this.latlngColumn1.DataPropertyName = "latlng";
-            this.latlngColumn1.HeaderText = "经纬度";
-            this.latlngColumn1.Name = "latlngColumn1";
-            // 
-            // addressColumn1
-            // 
-            this.addressColumn1.DataPropertyName = "address";
-            this.addressColumn1.HeaderText = "地址";
-            this.addressColumn1.Name = "addressColumn1";
-            // 
-            // reachColumn1
-            // 
-            this.reachColumn1.DataPropertyName = "local_address";
-            this.reachColumn1.HeaderText = "如何抵达";
-            this.reachColumn1.Name = "reachColumn1";
-            this.reachColumn1.Visible = false;
-            // 
-            // contactColumn1
-            // 
-            this.contactColumn1.DataPropertyName = "contact";
-            this.contactColumn1.HeaderText = "联系方式";
-            this.contactColumn1.Name = "contactColumn1";
-            // 
-            // wifiColumn1
-            // 
-            this.wifiColumn1.DataPropertyName = "wifi";
-            this.wifiColumn1.HeaderText = "WIFI";
-            this.wifiColumn1.Name = "wifiColumn1";
-            // 
-            // parkingCloumn1
-            // 
-            this.parkingCloumn1.DataPropertyName = "parking";
-            this.parkingCloumn1.HeaderText = "停车位";
-            this.parkingCloumn1.Name = "parkingCloumn1";
-            // 
-            // editColumn1
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(2, 12, 2, 12);
-            this.editColumn1.DefaultCellStyle = dataGridViewCellStyle1;
-            this.editColumn1.HeaderText = "";
-            this.editColumn1.Name = "editColumn1";
-            this.editColumn1.Text = "编辑";
-            this.editColumn1.UseColumnTextForButtonValue = true;
-            this.editColumn1.Width = 60;
-            // 
-            // deleteColumn1
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(2, 12, 1, 12);
-            this.deleteColumn1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.deleteColumn1.HeaderText = "";
-            this.deleteColumn1.Name = "deleteColumn1";
-            this.deleteColumn1.Text = "删除";
-            this.deleteColumn1.UseColumnTextForButtonValue = true;
-            this.deleteColumn1.Width = 60;
             // 
             // HotelListControl
             // 
