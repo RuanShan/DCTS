@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Validation;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DCTS.Bus;
 using DCTS.DB;
 
 namespace DCTS.UI
@@ -16,6 +18,7 @@ namespace DCTS.UI
     public partial class NewHotelForm : BaseModalForm
     {
         private long ModelId { get; set; }
+        ComboLocation originalHotel;
 
         public NewHotelForm(string maintype, ComboLocation obj)
         {
@@ -45,9 +48,16 @@ namespace DCTS.UI
                 parking.Text = obj.parking;
                 reception.Text = obj.reception;
                 kitchen.Text = obj.kitchen;
-                if (obj.img != null)
+                this.originalHotel = new ComboLocation() { img = obj.img };
+                //处理图片
+                if (obj.img.Length > 0)
                 {
-                    pictureBox1.ImageLocation = EntityPathConfig.LocationImagePath(obj);
+                    if (obj.id > 0)
+                    {
+                        this.imgPathTextBox.Text = obj.img;
+                        string lcoalPath = EntityPathConfig.LocationImagePath(obj);
+                        pictureBox1.ImageLocation = lcoalPath;
+                    }
                 }
             }
         }
@@ -86,40 +96,20 @@ namespace DCTS.UI
                     //  string copyfilename = Path.GetFileName(this.imgPathTextBox.Text);
                     #region 检查图片是否存在
                     string imgFilePath = this.imgPathTextBox.Text;
-                    string copyfilename = "";
-                    bool hasImg = (imgFilePath.Length > 0);
-                    bool existSameImage = false;
-                    bool nameishave = false;
-                    if (hasImg)
-                    {
-                        copyfilename = Path.GetFileName(imgFilePath);
+                    string imgFileName = Path.GetFileName(imgFilePath);
 
-                        existSameImage = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Hotel && o.img == copyfilename && o.id!=ModelId).Count() > 0);
-
-                    }
-                    bool hastitle = (titleTextBox.Text.Length > 0);
-                    if (hastitle)
-                    {
-                        nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Hotel && o.title == titleTextBox.Text && o.id != ModelId).Count() > 0);
-                    }
                     #endregion
                     if (ModelId == 0)
                     {
-                        if (existSameImage)
-                        {
-                            MessageBox.Show(string.Format("文件名<{0}>已在, 请使用其他文件名！", copyfilename));
-                            return;
-                        }
+
                         var obj = ctx.ComboLocations.Create();
                         obj.ltype = (int)ComboLocationEnum.Hotel;
                         obj.nation = this.nationComboBox.Text;
                         obj.city = this.cityComboBox.Text;
                         obj.title = this.titleTextBox.Text;
                         obj.local_title = this.localTitleTextBox.Text;
-                        obj.img = copyfilename;// this.imgPathTextBox.Text;
-                        //  obj.ticket = this.tickettime.Text;
-                        //obj.open_at = Convert.ToDateTime(this.openAtDateTimePicker.Text);
-                        //obj.close_at = Convert.ToDateTime(this.closeAtDateTimePicker.Text);
+                        obj.img = imgFilePath;// this.imgPathTextBox.Text;
+
                         obj.room = room.Text;
                         obj.dinner = moringTextBox.Text;
                         obj.latlng = latlng.Text;
@@ -131,20 +121,24 @@ namespace DCTS.UI
                         obj.reception = reception.Text;
                         obj.kitchen = kitchen.Text;
                         obj.tips = this.textBox6.Text;
+                        ComboLoactionBusiness.Validate(obj);
                         ctx.ComboLocations.Add(obj);
-                        if (nameishave == false && this.titleTextBox.Text.Length <= 100)
-                            ctx.SaveChanges();
-                        else
+                        if (obj.img.Length > 0)
                         {
-                            MessageBox.Show("错误：请检查名称的长度或是否已存在！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
+                            string imgPath = obj.img;
+                            imgFileName = Path.GetFileName(imgPath);
+                            obj.img = imgFileName;
+                            //string copyToPath = EntityPathConfig.LocationImagePath(obj);
+                            //File.Copy(imgPath, copyToPath);
                         }
-                        if (hasImg)
+                        ctx.SaveChanges();
+                        if (obj.img.Length > 0)
                         {
+                            string imgPath = imgFilePath;
                             string copyToPath = EntityPathConfig.LocationImagePath(obj);
-                           if (!File.Exists(copyToPath))
-                            File.Copy(imgFilePath, copyToPath);
-                        }
+                            File.Copy(imgPath, copyToPath);
+                        } 
+
                     }
                     else
                     {
@@ -155,10 +149,8 @@ namespace DCTS.UI
                         obj.city = this.cityComboBox.Text;
                         obj.title = this.titleTextBox.Text;
                         obj.local_title = this.localTitleTextBox.Text;
-                        obj.img = copyfilename;// this.imgPathTextBox.Text;
-                        //  obj.ticket = this.tickettime.Text;
-                        //obj.open_at = Convert.ToDateTime(this.openAtDateTimePicker.Text);
-                        //obj.close_at = Convert.ToDateTime(this.closeAtDateTimePicker.Text);
+                        obj.img = imgFilePath;
+
                         obj.room = room.Text;
                         obj.dinner = moringTextBox.Text;
                         obj.latlng = latlng.Text;
@@ -170,29 +162,27 @@ namespace DCTS.UI
                         obj.reception = reception.Text;
                         obj.kitchen = kitchen.Text;
                         obj.tips = this.textBox6.Text;
-                        //ctx.ComboLocations.Add(obj);
-                        if (hasImg)
+
+                        ComboLoactionBusiness.Validate(obj);
+
+                        imgFilePath = obj.img;
+
+                        bool newImg = (obj.img != originalHotel.img);
+                        if (newImg)
                         {
-
-                            string imgFileName = Path.GetFileName(imgFilePath);
-
+                            imgFileName = Path.GetFileName(imgFilePath);
                             obj.img = imgFileName;
-                        }
-
-                        ctx.SaveChanges();
-
-                        if (hasImg)
-                        {
-                            imgFilePath = pictureBox1.ImageLocation;
-                            string copyToPath = EntityPathConfig.LocationImagePath(obj);                            
+                            string copyToPath = EntityPathConfig.LocationImagePath(obj);
                             File.Copy(imgFilePath, copyToPath, true);
                         }
+                        ctx.SaveChanges();
+
+
                     }
                 }
-                catch (Exception EX)
+                catch (DbEntityValidationException exception)
                 {
-
-                    throw;
+                    MessageBox.Show(exception.Message);
                 }
 
 

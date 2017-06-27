@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Validation;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DCTS.Bus;
 using DCTS.DB;
 
 namespace DCTS.UI
@@ -17,25 +19,25 @@ namespace DCTS.UI
     {
         private long ModelId { get; set; }
         public bool istrue;
-
+        ComboLocation originalDinings;
 
         public NewDiningsForm(string maintype, ComboLocation obj)
         {
             InitializeComponent();
-            InitializeDataSource();
+
+       
             istrue = true;
             ModelId = 0;
             if (maintype == "Edit")
             {
+            
                 label2.Text = "编辑餐厅";
                 this.Text = "编辑餐厅";
                 ModelId = obj.id;
-                //obj.ltype = (int)ComboLocationEnum.Dining;
                 this.nationComboBox.Text = obj.nation;
                 this.cityComboBox.Text = obj.city;
                 this.titleTextBox.Text = obj.area;
                 this.textBox1.Text = obj.dishes;
-                //obj.img = this.imgPathTextBox.Text;
                 imgPathTextBox.Text = obj.img;
                 this.latlngTextBox.Text = obj.latlng;
                 this.textBox2.Text = obj.local_address;
@@ -43,13 +45,19 @@ namespace DCTS.UI
                 this.textBox3.Text = obj.recommended_dishes;
                 this.textBox6.Text = obj.tips;
                 this.localTitleTextBox.Text = obj.title;
-                //this.openAtDateTimePicker.Text = obj.open_at.ToString();
-                //this.closeAtDateTimePicker.Text = obj.close_at.ToString();
-                if (obj.img != null)
+                this.originalDinings = new ComboLocation() { img = obj.img };
+                //处理图片
+                if (obj.img.Length > 0)
                 {
-                    pictureBox1.ImageLocation = EntityPathConfig.LocationImagePath(obj);
+                    if (obj.id > 0)
+                    {
+                        this.imgPathTextBox.Text = obj.img;
+                        string lcoalPath = EntityPathConfig.LocationImagePath(obj);
+                        pictureBox1.ImageLocation = lcoalPath;
+                    }
                 }
             }
+            InitializeDataSource();
         }
 
         public void InitializeDataSource()
@@ -59,7 +67,7 @@ namespace DCTS.UI
             this.nationComboBox.DisplayMember = "title";
             this.nationComboBox.ValueMember = "code";
             this.nationComboBox.DataSource = nationList;
-
+ 
         }
 
         private void nationComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -84,108 +92,82 @@ namespace DCTS.UI
 
                     #region new
                     string imgFilePath = this.imgPathTextBox.Text;
-                    string imgFileName = "";
-                    bool hasImg = (imgFilePath.Length > 0);
-                    bool existSameImage = false;
-                    bool nameishave = false;
-
-                    if (hasImg)
-                    {
-                        imgFileName = Path.GetFileName(imgFilePath);
-
-                        existSameImage = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Dining && o.img == imgFileName && o.id != ModelId).Count() > 0);
-
-                    }
-                    bool hastitle = (localTitleTextBox.Text.Length > 0);
-                    if (hastitle)
-                    {
-
-                        nameishave = (ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Dining && o.title == localTitleTextBox.Text && o.id != ModelId).Count() > 0);
-                    }
-
-
+                    string imgFileName = Path.GetFileName(imgFilePath);
                     #endregion
-
-
+                  
+                    if (ModelId != 0)
                     {
-                        if (ModelId != 0)
+                 
+                        ComboLocation obj = ctx.ComboLocations.Find(Convert.ToInt32(ModelId));
+                        obj.ltype = (int)ComboLocationEnum.Dining;
+                        obj.nation = this.nationComboBox.Text;
+                        obj.city = this.cityComboBox.Text;
+                        obj.area = this.titleTextBox.Text;
+                        obj.dishes = this.textBox1.Text;
+                        obj.img = imgFilePath;
+                        obj.latlng = this.latlngTextBox.Text;
+                        obj.local_address = this.textBox2.Text;
+                        obj.address = this.localAddressTextBox.Text;
+                        obj.recommended_dishes = this.textBox3.Text;
+                        obj.tips = this.textBox6.Text;
+                        obj.title = this.localTitleTextBox.Text;
+                        obj.open_close_more = this.openCloseTextBox.Text;
+                        ComboLoactionBusiness.Validate(obj);              
+                    
+                        imgFilePath = obj.img;
+
+                        bool newImg = (obj.img != originalDinings.img);
+                        if (newImg)
                         {
-                            if (existSameImage)
-                            {
-                                istrue = false;
-                                MessageBox.Show(string.Format("文件名<{0}>已在, 请使用其他文件名！", imgFileName));
-                                return;
-
-                            }
-                            ComboLocation obj = ctx.ComboLocations.Find(Convert.ToInt32(ModelId));
-                            obj.ltype = (int)ComboLocationEnum.Dining;
-                            obj.nation = this.nationComboBox.Text;
-                            obj.city = this.cityComboBox.Text;
-                            obj.area = this.titleTextBox.Text;
-                            obj.dishes = this.textBox1.Text;
-                            //obj.img = this.imgPathTextBox.Text;
+                            imgFileName = Path.GetFileName(imgFilePath);
                             obj.img = imgFileName;
-                            obj.latlng = this.latlngTextBox.Text;
-                            obj.local_address = this.textBox2.Text;
-                            obj.address = this.localAddressTextBox.Text;
-                            obj.recommended_dishes = this.textBox3.Text;
-                            obj.tips = this.textBox6.Text;
-                            obj.title = this.localTitleTextBox.Text;
-                            obj.open_close_more = this.openCloseTextBox.Text;
-                            //obj.open_at = Convert.ToDateTime(this.openAtDateTimePicker.Text);
-                            //obj.close_at = Convert.ToDateTime(this.closeAtDateTimePicker.Text);
-                            ctx.SaveChanges();
-                            if (hasImg)
-                            {
-                                string copyToPath = EntityPathConfig.LocationImagePath(obj);
-                                if (!File.Exists(copyToPath))
-                                    File.Copy(imgFilePath, copyToPath);
-                            }
+                            string copyToPath = EntityPathConfig.LocationImagePath(obj);
+                            File.Copy(imgFilePath, copyToPath, true);
                         }
-                        else
+                        ctx.SaveChanges();
+                    }
+                    else
+                    {
+                        var obj = ctx.ComboLocations.Create();
+                        obj.ltype = (int)ComboLocationEnum.Dining;
+                        obj.nation = this.nationComboBox.Text;
+                        obj.city = this.cityComboBox.Text;
+                        obj.area = this.titleTextBox.Text;
+                        obj.dishes = this.textBox1.Text;
+                        obj.img = imgFilePath;
+                        obj.latlng = this.latlngTextBox.Text;
+                        obj.local_address = this.textBox2.Text;
+                        obj.address = this.localAddressTextBox.Text;
+                        obj.recommended_dishes = this.textBox3.Text;
+                        obj.tips = this.textBox6.Text;
+                        obj.title = this.localTitleTextBox.Text;
+                        obj.open_close_more = this.openCloseTextBox.Text;
+                        ComboLoactionBusiness.Validate(obj);
+                        ctx.ComboLocations.Add(obj);
+
+                        if (obj.img.Length > 0)
                         {
-                            var obj = ctx.ComboLocations.Create();
-                            obj.ltype = (int)ComboLocationEnum.Dining;
-                            obj.nation = this.nationComboBox.Text;
-                            obj.city = this.cityComboBox.Text;
-                            obj.area = this.titleTextBox.Text;
-                            obj.dishes = this.textBox1.Text;
-
+                            string imgPath = obj.img;
+                            imgFileName = Path.GetFileName(imgPath);
                             obj.img = imgFileName;
-                            obj.latlng = this.latlngTextBox.Text;
-                            obj.local_address = this.textBox2.Text;
-                            obj.address = this.localAddressTextBox.Text;
-                            obj.recommended_dishes = this.textBox3.Text;
-                            obj.tips = this.textBox6.Text;
-                            obj.title = this.localTitleTextBox.Text;
-                            obj.open_close_more = this.openCloseTextBox.Text;
-                            //obj.open_at = Convert.ToDateTime(this.openAtDateTimePicker.Text);
-                            //obj.close_at = Convert.ToDateTime(this.closeAtDateTimePicker.Text);
-                            ctx.ComboLocations.Add(obj);
-                            if (nameishave == false && this.localTitleTextBox.Text.Length <= 100)
-                                ctx.SaveChanges();
-                            else
-                            {
-                                MessageBox.Show("错误：请检查名称的长度或是否已存在！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                return;
+                            //string copyToPath = EntityPathConfig.LocationImagePath(obj);
+                            //File.Copy(imgPath, copyToPath);
+                        }                       
 
-                            }
-                            ModelId = obj.id;
-                            if (hasImg)
-                            {
-                                imgFilePath = pictureBox1.ImageLocation;
-                                string copyToPath = EntityPathConfig.LocationImagePath(obj);
-                                File.Copy(imgFilePath, copyToPath, true);
-                            }
-                        }
-                        istrue = true;
+                        ctx.SaveChanges();
+                        if (obj.img.Length > 0)
+                        {
+                            string imgPath = imgFilePath;                           
+                            string copyToPath = EntityPathConfig.LocationImagePath(obj);
+                            File.Copy(imgPath, copyToPath);
+                        }   
 
                     }
+                    istrue = true;
                 }
-                catch (Exception ex)
+                catch (DbEntityValidationException exception)
                 {
-
-                    throw;
+                    MessageBox.Show(exception.Message);
                 }
             }
 
@@ -242,6 +224,11 @@ namespace DCTS.UI
                     }
                 }
             }
+        }
+
+        private void NewDiningsForm_Load(object sender, EventArgs e)
+        {
+   
         }
 
 

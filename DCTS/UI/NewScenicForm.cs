@@ -49,18 +49,22 @@ namespace DCTS.UI
                     ComboLoactionBusiness.Validate(scenic);
 
                     ctx.ComboLocations.Add(scenic);
-
+                    string imgPath = scenic.img;
                     if (scenic.img.Length > 0)
                     {
-                        string imgPath = scenic.img;
+                   
                         string imgFileName = Path.GetFileName(imgPath);
                         scenic.img = imgFileName;
-                        string copyToPath = EntityPathConfig.LocationImagePath(scenic);
-                        File.Copy(imgPath, copyToPath);
+                        //string copyToPath = EntityPathConfig.LocationImagePath(scenic);
+                        //File.Copy(imgPath, copyToPath);
                     }
                     
                     ctx.SaveChanges();
-
+                    if (scenic.img.Length > 0)
+                    {             
+                        string copyToPath = EntityPathConfig.LocationImagePath(scenic);
+                        File.Copy(imgPath, copyToPath);
+                    }
                     Saved = true;
                     this.Close();
                 }
