@@ -185,8 +185,9 @@ namespace DCTS.Bus
                     for (int i = 0; i < this.days.Count; i++)
                     {
                         var day = days[i];
-                        var date = trip.start_at.GetValueOrDefault().AddDays(day.day - 1);
+                        var date = trip.start_at.GetValueOrDefault().AddDays(day.day - 1).Date;
                         var locations = this.dayLocations.Where(o => o.day_id == day.id).ToList();
+                        var tickets = this.ticketList.Where(o => o.start_at.GetValueOrDefault(DateTime.Now).Date == date).ToList();
                         //InsertRow performs a copy, so we get markup in new line ready for replacements
 
                         var rowCopy = rowPattern.CloneNode(true) as TableRow;
@@ -199,52 +200,26 @@ namespace DCTS.Bus
                         var cell = rowCopy.Elements<TableCell>().ElementAt(3);
                          
                         var pattern = cell.Descendants<Paragraph>().Last();
-                        var titles = locations.Select(o => o.ComboLocation.title).Distinct().ToArray();
-                        var patternNumPr = pattern.Descendants<NumberingProperties>().Last();
-                        int newNumId = Convert.ToInt32(string.Format("{0:yyyy}{1}", DateTime.Now, i));
-                        if (patternNumPr != null)
+                        var ticketTitles = tickets.Select(o => o.title).ToList();
+                        var scenicTitles = locations.Where(o => o.ComboLocation.ltype == (int)ComboLocationEnum.Scenic).Select(o => o.ComboLocation.title).Distinct().ToArray();
+                        ticketTitles.AddRange(scenicTitles);
+                        for (int j = 0; j < ticketTitles.Count(); j++)
                         {
-                            // copy AbstractNum Numbering as well
-                            var numIn = tripSumary.MainDocumentPart.NumberingDefinitionsPart.Numbering.Descendants<NumberingInstance>().Where(o => o.NumberID.Value == patternNumPr.NumberingId.Val).FirstOrDefault();
-                            var absNum = tripSumary.MainDocumentPart.NumberingDefinitionsPart.Numbering.Descendants<AbstractNum>().Where(o => o.AbstractNumberId.Value == numIn.AbstractNumId.Val).FirstOrDefault();
-
-                            var clonedAbsNum = absNum.CloneNode(true) as AbstractNum;
-                            var clonedNumIn = numIn.CloneNode(true) as NumberingInstance;
-                            clonedAbsNum.AbstractNumberId = newNumId;
-                            clonedNumIn.NumberID = newNumId;
-                            clonedNumIn.AbstractNumId.Val = newNumId;
-                            LevelOverride levelOverride = new LevelOverride() { LevelIndex = 0 };
-                            levelOverride.Append(new StartOverrideNumberingValue() { Val = 1 });
-                            clonedNumIn.Append(levelOverride);
-                            absNum.InsertAfterSelf(clonedAbsNum);
-                            numIn.InsertAfterSelf(clonedNumIn);
-                         }
-                        for (int j = 0; j < titles.Count(); j++)
-                        {
-                            var t = titles[j];
-                            Paragraph cloned  = null;
-                            // 如果是最后一个就不用clone, 直接使用pattern
-                            var isLast = (j == titles.Count() - 1);
-                            if (isLast)
-                            {
-                                cloned = pattern;
-                            }
-                            else {
-                                cloned = pattern.CloneNode(true) as Paragraph;
-                                pattern.InsertBeforeSelf(cloned); 
-                            }
-                            var numPr = cloned.Descendants<NumberingProperties>().Last();
-                            numPr.NumberingId.Val = newNumId;
-                            WordTemplateHelper.ReplaceText<Paragraph>(cloned, "%day_location%", t);
-                            //if (j > 0)
-                            //{
-                            //    pattern.InsertBeforeSelf(new Break());
-                            //}
-                            //pattern.InsertBeforeSelf(cloned);                            
+                            var t = ticketTitles[j];
+                            
+                            Paragraph cloned  = pattern.CloneNode(true) as Paragraph;
+                            WordTemplateHelper.ReplaceText<Paragraph>(cloned, "%day_location%", string.Format("{0}. {1}",j+1,t));
+                            pattern.InsertBeforeSelf(cloned);
                         }
-                        // should not remove it at all, or docx mass up, malfunction
-                        if (titles.Count() == 0)
+
+                        if (ticketTitles.Count > 0)
                         {
+                            pattern.Remove();
+
+                        }
+                        else
+                        {
+                            //如果没有活动，不能删除 pattern， 否则文档会出错。
                             pattern.RemoveAllChildren();
                         }
                         
@@ -828,6 +803,148 @@ namespace DCTS.Bus
             this.filledTemplateStreams.Add(stream);
 
         }
+
+
+        // params
+        //   doc: 添加行程概览到路书
+        public void HandleTripSummaryBak(WordprocessingDocument template)
+        {
+            string[] tripKeys = { "days" };
+            string[] specKeys = { "trip_startend", "trip_dayLocations" };
+            var stream = new MemoryStream();
+            var tripSumary = template.Clone(stream, true) as WordprocessingDocument;
+
+            WordTemplateHelper.ReplaceTextWithProperty<Trip>(tripSumary, tripKeys, trip);
+
+            foreach (string key in specKeys)
+            {
+                string wrappedKey = "%" + key + "%";
+                if (key == "trip_startend")
+                {
+                    WordTemplateHelper.ReplaceText(tripSumary, wrappedKey, WordTemplateHelper.DisplayStartAndEndDate(trip));
+                }
+            }
+
+            var mainDoc = tripSumary.MainDocumentPart.Document;
+            //look for one specific table here
+            Table dayTable = mainDoc.Body.Descendants<Table>().FirstOrDefault();
+            if (dayTable != null)
+            {
+                //Row 0 and 1 are Headers
+                //Row 2 is pattern
+                var rows = dayTable.Elements<TableRow>().ToList();
+                if (rows.Count > 2)
+                {
+                    //get the Pattern row for duplication
+                    var rowPattern = rows.Last();
+                    //
+                    for (int i = 0; i < this.days.Count; i++)
+                    {
+                        var day = days[i];
+                        var date = trip.start_at.GetValueOrDefault().AddDays(day.day - 1);
+                        var locations = this.dayLocations.Where(o => o.day_id == day.id).ToList();
+                        //InsertRow performs a copy, so we get markup in new line ready for replacements
+
+                        var rowCopy = rowPattern.CloneNode(true) as TableRow;
+
+                        WordTemplateHelper.ReplaceText<TableRow>(rowCopy, "%day_day%", day.day.ToString());
+                        WordTemplateHelper.ReplaceText<TableRow>(rowCopy, "%day_date%", String.Format("{0:yyyyMMdd}", date));
+                        WordTemplateHelper.ReplaceText<TableRow>(rowCopy, "%day_weekday%", String.Format("{0:ddd}", date));
+                        WordTemplateHelper.ReplaceText<TableRow>(rowCopy, "%day_cities%", WordTemplateHelper.DisplayDayCities(locations));
+
+                        var cell = rowCopy.Elements<TableCell>().ElementAt(3);
+
+                        var pattern = cell.Descendants<Paragraph>().Last();
+                        var titles = locations.Select(o => o.ComboLocation.title).Distinct().ToArray();
+                        var patternNumPr = pattern.Descendants<NumberingProperties>().Last();
+                        int newNumId = Convert.ToInt32(string.Format("{0:yyyy}{1}", DateTime.Now, i));
+                        if (patternNumPr != null)
+                        {
+                            // copy AbstractNum Numbering as well
+                            var numIn = tripSumary.MainDocumentPart.NumberingDefinitionsPart.Numbering.Descendants<NumberingInstance>().Where(o => o.NumberID.Value == patternNumPr.NumberingId.Val).FirstOrDefault();
+                            var absNum = tripSumary.MainDocumentPart.NumberingDefinitionsPart.Numbering.Descendants<AbstractNum>().Where(o => o.AbstractNumberId.Value == numIn.AbstractNumId.Val).FirstOrDefault();
+
+                            var clonedAbsNum = absNum.CloneNode(true) as AbstractNum;
+                            var clonedNumIn = numIn.CloneNode(true) as NumberingInstance;
+                            clonedAbsNum.AbstractNumberId = newNumId;
+                            clonedNumIn.NumberID = newNumId;
+                            clonedNumIn.AbstractNumId.Val = newNumId;
+                            LevelOverride levelOverride = new LevelOverride() { LevelIndex = 0 };
+                            levelOverride.Append(new StartOverrideNumberingValue() { Val = 1 });
+                            clonedNumIn.Append(levelOverride);
+                            absNum.InsertAfterSelf(clonedAbsNum);
+                            numIn.InsertAfterSelf(clonedNumIn);
+                        }
+                        for (int j = 0; j < titles.Count(); j++)
+                        {
+                            var t = titles[j];
+                            Paragraph cloned = null;
+                            // 如果是最后一个就不用clone, 直接使用pattern
+                            var isLast = (j == titles.Count() - 1);
+                            if (isLast)
+                            {
+                                cloned = pattern;
+                            }
+                            else
+                            {
+                                cloned = pattern.CloneNode(true) as Paragraph;
+                                pattern.InsertBeforeSelf(cloned);
+                            }
+                            var numPr = cloned.Descendants<NumberingProperties>().Last();
+                            numPr.NumberingId.Val = newNumId;
+                            WordTemplateHelper.ReplaceText<Paragraph>(cloned, "%day_location%", t);
+                            //if (j > 0)
+                            //{
+                            //    pattern.InsertBeforeSelf(new Break());
+                            //}
+                            //pattern.InsertBeforeSelf(cloned);                            
+                        }
+                        // should not remove it at all, or docx mass up, malfunction
+                        if (titles.Count() == 0)
+                        {
+                            pattern.RemoveAllChildren();
+                        }
+
+                        WordTemplateHelper.ReplaceText<TableRow>(rowCopy, "%day_hotel%", WordTemplateHelper.DisplayDayHotel(locations));
+
+                        dayTable.AppendChild(rowCopy);
+                    }
+
+                    //pattern row is at the end now, can be removed from table
+                    rowPattern.Remove();
+
+                }
+                // 处理图片
+                var locationImage = locationImages.Where(o => o.id == trip.cover_id).FirstOrDefault();
+
+                if (locationImage != null)
+                {
+                    var image = tripSumary.MainDocumentPart.ImageParts.FirstOrDefault();
+                    //Image img = duplicated.Images[0];
+
+                    string imagePath = EntityPathConfig.newlocationimagepath(locationImage);
+                    if (image != null && File.Exists(imagePath))
+                    {
+                        string relID = tripSumary.MainDocumentPart.GetIdOfPart(image);
+                        //image.FeedData(File.Open(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite));
+                        WordTemplateHelper.UpdateImage(tripSumary, relID, imagePath);
+                        //不要调整尺寸，下面的内容会分页不准。
+                        //WordTemplateHelper.ResizeImage(sumary, relID, imagePath);
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("\tError, couldn't find table with caption ORDER_TABLE in document");
+            }
+            tripSumary.Save();
+            //string path = EntityPathConfig.TripWordFilePath(TripId, "summary");
+            //tripSumary.SaveAs(path);
+            this.filledTemplates.Add(tripSumary);
+            this.filledTemplateStreams.Add(stream);
+
+        }
+
 
         ~CustomerTripWordExporterEx()
         {

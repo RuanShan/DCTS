@@ -381,7 +381,10 @@ namespace DCTS.UI
             
             foreach (var ticket in ticketView.DataSource)
             {
-                trip.Tickets.Add(ticket as Ticket);
+                var model = ticket as Ticket;
+                TicketBusiness.FillTitle(model, airportList);
+                trip.Tickets.Add(model);
+                
             }
 
             // 删除

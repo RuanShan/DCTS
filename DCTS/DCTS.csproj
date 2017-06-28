@@ -151,6 +151,7 @@
     <EmbeddedResource Include="UI\OtherControl.resx">
       <DependentUpon>OtherControl.cs</DependentUpon>
     </EmbeddedResource>
+    <Compile Include="Bus\TicketBusiness.cs" />
     <Compile Include="Bus\CustomerTripWordExporterEx.cs" />
     <Compile Include="Bus\CustomerTripWordExporter.cs" />
     <Compile Include="Bus\SupplierBusiness.cs" />
