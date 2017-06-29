@@ -44,6 +44,8 @@ namespace DCTS.UI
                 this.textBox3.Text = obj.recommended_dishes;
                 this.textBox6.Text = obj.tips;
                 this.localTitleTextBox.Text = obj.title;
+                this.openCloseTextBox.Text = obj.open_close_more; 
+
                 this.originalDinings = new ComboLocation() { img = obj.img };
                 //处理图片
                 if (obj.img.Length > 0)
