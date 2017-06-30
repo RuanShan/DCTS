@@ -51,7 +51,7 @@ namespace DCTS.UI
         {
             var ctx = this.entityDataSource1.DbContext as DctsEntities;
             var nationList = DCTS.DB.GlobalCache.NationList;
-             
+
 
             // 分类
             this.stypeColumn.DisplayMember = "FullName";
@@ -86,7 +86,7 @@ namespace DCTS.UI
 
             string keyword = (this.keywordTextBox.Text != NoOptionSelected ? this.keywordTextBox.Text : string.Empty);
 
-            
+
 
             int[] otherLocationType = { (int)SupplierEnum.Flight, (int)SupplierEnum.Train, (int)SupplierEnum.Insurance, (int)SupplierEnum.Rental, (int)SupplierEnum.WIFI };
 
@@ -104,19 +104,19 @@ namespace DCTS.UI
                 }
 
                 supplierList = query.ToList();
-                
+
                 var Airfiltered = supplierList.FindAll(s => s.stype == (int)SupplierEnum.Flight);
-               
+
                 this.flightDataGridView.DataSource = Airfiltered;
-                
+
                 var Insurancefiltered = supplierList.FindAll(s => s.stype == (int)SupplierEnum.Insurance);
 
                 this.InsuranceGridView.DataSource = Insurancefiltered;
-               
+
                 var Rentalfiltered = supplierList.FindAll(s => s.stype == (int)SupplierEnum.Rental);
 
                 this.RentalGridView.DataSource = Rentalfiltered;
-                
+
                 var WIFIfiltered = supplierList.FindAll(s => s.stype == (int)SupplierEnum.WIFI);
 
                 this.WIFIGridView.DataSource = WIFIfiltered;
@@ -147,7 +147,7 @@ namespace DCTS.UI
             }
             return count;
         }
-        private static List<Supplier> Paginate( int currentPage = 1, int pageSize = 25, int nation = 0, string city = "", string title = "")
+        private static List<Supplier> Paginate(int currentPage = 1, int pageSize = 25, int nation = 0, string city = "", string title = "")
         {
             // 如果数据为0，分页控件，设置currentPage = 0; 这回导致下面查询异常
             if (currentPage <= 0)
@@ -218,6 +218,20 @@ namespace DCTS.UI
 
                 if (MessageHelper.DeleteConfirm(msg))
                 {
+                    //判断在tickker
+                    //    var ticketTitles = tickets.Select(o => o.title).ToList();
+
+                    using (var ctx = new DctsEntities())
+                    {
+                        var list = ctx.Tickets.Where(o => o.supplier_id == model.id).ToList();
+                        if (list.Count > 0)
+                        {
+                            MessageBox.Show("已存在票务信息，无法删除");
+
+                            return;
+
+                        }
+                    }
                     ComboLoactionBusiness.Supplier_Delete(model.id);
                     BeginActive();
                 }
@@ -227,14 +241,14 @@ namespace DCTS.UI
         private void NationsControl_Resize(object sender, EventArgs e)
         {  //                                                   id
 
-            
+
             //    StypeColumn1.Width = dataGridView.ClientSize.Width - 60 - 100 * 3 - 280 - 200 - 100 - 60 * 2 - 3;
             //    //是否包含滚动条
             //    if (!(this.dataGridView.DisplayedRowCount(false) == this.dataGridView.RowCount))
             //    {
             //        StypeColumn1.Width -= 18;
             //    }
-      
+
         }
 
         private void newButton_Click(object sender, EventArgs e)
@@ -264,7 +278,7 @@ namespace DCTS.UI
         private void btfind_Click(object sender, EventArgs e)
         {
             InitializeDataGridView();
-          
+
         }
 
         private void tabControl1_Selected(object sender, TabControlEventArgs e)
@@ -277,23 +291,23 @@ namespace DCTS.UI
                 if (supplierTabControl.SelectedTab == this.trainTabPage)
                 {
                     this.supplierType = SupplierEnum.Train;
-                }               
+                }
+                else
+                    if (supplierTabControl.SelectedTab == this.insuranceTagPage)
+                    {
+                        this.supplierType = SupplierEnum.Insurance;
+                    }
                     else
-                        if (supplierTabControl.SelectedTab == this.insuranceTagPage)
+                        if (supplierTabControl.SelectedTab == this.rentalTabPage)
                         {
-                            this.supplierType = SupplierEnum.Insurance;
+                            this.supplierType = SupplierEnum.Rental;
                         }
                         else
-                            if (supplierTabControl.SelectedTab == this.rentalTabPage)
+                            if (supplierTabControl.SelectedTab == this.wifiTabPage)
                             {
-                                this.supplierType = SupplierEnum.Rental;
+                                this.supplierType = SupplierEnum.WIFI;
                             }
-                            else
-                                if (supplierTabControl.SelectedTab == this.wifiTabPage)
-                                {
-                                    this.supplierType = SupplierEnum.WIFI;
-                                }
-                                
+
         }
 
 

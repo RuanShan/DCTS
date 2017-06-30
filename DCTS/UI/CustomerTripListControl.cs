@@ -23,7 +23,7 @@ namespace DCTS.UI
         {
             InitializeComponent();
             this.tripDataGridView.AutoGenerateColumns = false;
-            
+
         }
 
         public void BeginActive()
@@ -41,7 +41,7 @@ namespace DCTS.UI
             using (var ctx = new DctsEntities())
             {
 
-                var query = ctx.Trips.Where(o=>o.customer_id>0).OrderBy(o=>o.id).Skip(offset).Take(pageSize);
+                var query = ctx.Trips.Where(o => o.customer_id > 0).OrderBy(o => o.id).Skip(offset).Take(pageSize);
                 var list = this.entityDataSource1.CreateView(query);
                 tripDataGridView.DataSource = list;
             }
@@ -67,9 +67,9 @@ namespace DCTS.UI
                 var row = tripDataGridView.Rows[e.RowIndex];
                 var trip = row.DataBoundItem as Trip;
 
-                var eventArgs = new CommandRequestEventArgs(CommandRequestEnum.EditCustomerTripDays, trip.id);                 
+                var eventArgs = new CommandRequestEventArgs(CommandRequestEnum.EditCustomerTripDays, trip.id);
                 this.CommandRequestEvent(this, eventArgs);
-             }
+            }
             if (column == editTripColumn1)
             {
                 var row = tripDataGridView.Rows[e.RowIndex];
@@ -89,7 +89,7 @@ namespace DCTS.UI
                 TripBusiness.Duplicate(trip.id);
                 BeginActive();
 
-             }
+            }
             else if (column == deleteTripColumn1)
             {
                 var row = tripDataGridView.Rows[e.RowIndex];
@@ -98,7 +98,21 @@ namespace DCTS.UI
 
                 if (MessageHelper.DeleteConfirm(msg))
                 {
+                    //删除 schedule 中的信息
+                    using (var ctx1 = new DctsEntities())
+                    {
 
+                        var list = ctx1.TripDays.Where(o => o.trip_id == trip.id).ToList();
+                        List<Schedule> deletedScheduleList = new List<Schedule>();
+                        for (int i = 0; i < list.Count; i++)
+                        {
+                            Schedule schedule = new Schedule();
+                            schedule.tripday_id = list[i].id;
+                            List<Schedule> scheduleList = ctx1.Schedules.Where(o => o.tripday_id == schedule.tripday_id).ToList();
+                            ctx1.Schedules.RemoveRange(scheduleList);
+                        }
+                        ctx1.SaveChanges();
+                    }
                     TripBusiness.Delete(trip.id);
 
                     BeginActive();
@@ -110,7 +124,7 @@ namespace DCTS.UI
         private void exportWordButton_Click(object sender, EventArgs e)
         {
             var exporter = new CustomerTripWordExporterEx(SelectedTripId);
-            if(  exporter.ExportWord())
+            if (exporter.ExportWord())
             {
                 MessageBox.Show("导出Word成功！");
                 BeginActive();
@@ -140,7 +154,8 @@ namespace DCTS.UI
 
         private Trip SelectedTrip
         {
-            get {
+            get
+            {
                 var row = tripDataGridView.CurrentRow;
                 var trip = row.DataBoundItem as Trip;
                 return trip;
@@ -150,7 +165,7 @@ namespace DCTS.UI
         private void downloadButton_Click(object sender, EventArgs e)
         {
             var trip = SelectedTrip;
-            if ( trip != null )
+            if (trip != null)
             {
                 if (trip.word_created_at != null)
                 {
@@ -173,7 +188,8 @@ namespace DCTS.UI
 
                     }
                 }
-                else {
+                else
+                {
                     MessageBox.Show("请先生成路书文档，然后再下载！");
                 }
             }
