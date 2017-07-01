@@ -45,12 +45,13 @@ namespace DCTS.UI
                 moringTextBox.Text = obj.dinner;
                 latlng.Text = obj.latlng;
                 address.Text = obj.address;
-                local_address.Text = obj.local_address;
+                routeTextBox.Text = obj.route;
                 contact.Text = obj.contact;
                 wifi.Text = obj.wifi;
                 parking.Text = obj.parking;
                 reception.Text = obj.reception;
                 kitchen.Text = obj.kitchen;
+                tipsTextBox.Text = obj.tips;
                 this.originalHotel = new ComboLocation() { img = obj.img };
                 //处理图片
                 if (obj.img!=null && obj.img.Length > 0)
@@ -117,13 +118,13 @@ namespace DCTS.UI
                         obj.dinner = moringTextBox.Text;
                         obj.latlng = latlng.Text;
                         obj.address = address.Text;
-                        obj.local_address = local_address.Text;
+                        obj.route = routeTextBox.Text;
                         obj.contact = contact.Text;
                         obj.wifi = wifi.Text;
                         obj.parking = parking.Text;
                         obj.reception = reception.Text;
                         obj.kitchen = kitchen.Text;
-                        obj.tips = this.textBox6.Text;
+                        obj.tips = this.tipsTextBox.Text;
                         ComboLoactionBusiness.Validate(obj);
                         ctx.ComboLocations.Add(obj);
                         if (obj.img.Length > 0)
@@ -156,13 +157,13 @@ namespace DCTS.UI
                         obj.dinner = moringTextBox.Text;
                         obj.latlng = latlng.Text;
                         obj.address = address.Text;
-                        obj.local_address = local_address.Text;
+                        obj.route = routeTextBox.Text;
                         obj.contact = contact.Text;
                         obj.wifi = wifi.Text;
                         obj.parking = parking.Text;
                         obj.reception = reception.Text;
                         obj.kitchen = kitchen.Text;
-                        obj.tips = this.textBox6.Text;
+                        obj.tips = this.tipsTextBox.Text;
 
                         ComboLoactionBusiness.Validate(obj);
 

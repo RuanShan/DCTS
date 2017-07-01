@@ -171,6 +171,11 @@ namespace DCTS.UI
             this.trainCustomerColumn.DisplayMember = "name";
             this.trainCustomerColumn.ValueMember = "id";
             this.trainCustomerColumn.DataSource = this.customerList;
+
+            this.trainSupplierColumn1.DisplayMember = "name";
+            this.trainSupplierColumn1.ValueMember = "id";
+            this.trainSupplierColumn1.DataSource = GetSuppliersByType(SupplierEnum.Train);
+
             //住宿
             this.hotelCustomerColumn.DisplayMember = "name";
             this.hotelCustomerColumn.ValueMember = "id";
@@ -382,6 +387,8 @@ namespace DCTS.UI
             foreach (var ticket in ticketView.DataSource)
             {
                 var model = ticket as Ticket;
+                // 设置票务相关的城市，在生成行程概述中使用，
+                // 飞机，交通，住宿，保险，租车，WIFI，活动
                 TicketBusiness.FillTitle(model, airportList);
                 trip.Tickets.Add(model);
                 

@@ -75,8 +75,9 @@ namespace DCTS.UI
         public void FillModelByForm(TripDay tripDay)
         {
             Model.title = this.titleTextBox.Text;
-
             Model.tips = this.tipsTextBox.Text;
+            Model.cities = this.citiesTextBox.Text;
+
             using (var ctx = new DctsEntities())
             {
                 var location = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.PageImage).First();
@@ -94,6 +95,7 @@ namespace DCTS.UI
             Model = tripDay;
             this.titleTextBox.Text = Model.title;
             this.tipsTextBox.Text = Model.tips;
+            this.citiesTextBox.Text = Model.cities;
 
             //读取图片位置
             using (var ctx = new DctsEntities())

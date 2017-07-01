@@ -111,7 +111,7 @@ namespace DCTS.Bus
                             var daylocations = dayLocations.Where(o => o.day_id == day.id).ToList();
                             foreach (var dl in daylocations)
                             {
-                                HandleLocation(dl.ComboLocation);
+                                HandleLocation(dl.ComboLocation, null);
                             }
                         }
                         //线上查询说明
@@ -181,13 +181,17 @@ namespace DCTS.Bus
                 {
                     //get the Pattern row for duplication
                     var rowPattern = rows.Last();
-                    //
+                    //交通票务类型
+                    int[] ticketTypes = { (int)SupplierEnum.Flight, (int)SupplierEnum.Activity, (int)SupplierEnum.Train, (int)SupplierEnum.Hotal };
+                    
+                    //处理每日内容
                     for (int i = 0; i < this.days.Count; i++)
                     {
                         var day = days[i];
                         var date = trip.start_at.GetValueOrDefault().AddDays(day.day - 1).Date;
                         var locations = this.dayLocations.Where(o => o.day_id == day.id).ToList();
-                        var tickets = this.ticketList.Where(o => o.start_at.GetValueOrDefault(DateTime.Now).Date == date).ToList();
+                        // 按开始时间升序排列
+                        var tickets = this.ticketList.Where(o => (o.start_at.GetValueOrDefault(DateTime.Now).Date == date) && ticketTypes.Contains(o.ttype)).OrderBy(o=>o.start_at).ToList();
                         //InsertRow performs a copy, so we get markup in new line ready for replacements
 
                         var rowCopy = rowPattern.CloneNode(true) as TableRow;
@@ -195,36 +199,98 @@ namespace DCTS.Bus
                         WordTemplateHelper.ReplaceText<TableRow>(rowCopy, "%day_day%", day.day.ToString());
                         WordTemplateHelper.ReplaceText<TableRow>(rowCopy, "%day_date%", String.Format("{0:yyyyMMdd}", date));
                         WordTemplateHelper.ReplaceText<TableRow>(rowCopy, "%day_weekday%",  String.Format("{0:ddd}", date));
-                        WordTemplateHelper.ReplaceText<TableRow>(rowCopy, "%day_cities%", WordTemplateHelper.DisplayDayCities(locations));
-
-                        var cell = rowCopy.Elements<TableCell>().ElementAt(3);
-                         
+                        
+                        //处理每日城市
+                        //var locationCities = new List<DayLocationView>();
+                        //foreach (var ticket in tickets)
+                        //{ 
+                        //    if( ticket.ttype == (int)SupplierEnum.Flight)
+                        //    {
+                        //        var from_location = ticketLocations.FirstOrDefault(o => o.id == ticket.from_location_id);
+                        //        var to_location = ticketLocations.FirstOrDefault(o => o.id == ticket.to_location_id);
+                        //        if (from_location!=null && to_location!=null)
+                        //        {
+                        //            locationCities.Add(new DayLocationView() { start_at = ticket.start_at, city = from_location.city });
+                        //            locationCities.Add(new DayLocationView() { start_at = ticket.end_at, city = to_location.city });
+                        //        }
+                        //    }
+                        //    if (ticket.ttype == (int)SupplierEnum.Activity || ticket.ttype == (int)SupplierEnum.Hotal)
+                        //    {
+                        //        var from_location = ticketLocations.FirstOrDefault(o => o.id == ticket.from_location_id);
+                        //        if (from_location != null)
+                        //        {
+                        //            locationCities.Add(new DayLocationView() { start_at = ticket.start_at, city = from_location.city });
+                        //        }
+                        //    }
+                        //    if (ticket.ttype == (int)SupplierEnum.Train)
+                        //    {
+                        //        locationCities.Add(new DayLocationView() { start_at = ticket.start_at, city = ticket.from_place });
+                        //        locationCities.Add(new DayLocationView() { start_at = ticket.end_at, city = ticket.to_place });                                
+                        //    }                            
+                        //}
+                        //foreach (var location in locations)
+                        //{
+                        //    var startAt = location.start_at.GetValueOrDefault(DateTime.Now);
+                        //    locationCities.Add(new DayLocationView() { start_at = new DateTime(date.Year, date.Month, date.Day, startAt.Hour, startAt.Minute, 0), city = location.ComboLocation.city });
+                        //}
+                        var cell = rowCopy.Elements<TableCell>().ElementAt(2);
                         var pattern = cell.Descendants<Paragraph>().Last();
-                        var ticketTitles = tickets.Select(o => o.title).ToList();
-                        var scenicTitles = locations.Where(o => o.ComboLocation.ltype == (int)ComboLocationEnum.Scenic).Select(o => o.ComboLocation.title).Distinct().ToArray();
+                        if (day.cities != null)
+                        {
+
+                            var cities = day.cities.Split("- ".ToArray());
+                            for (int j = 0; j < cities.Count(); j++)
+                            {
+                                var t = cities[j];
+                                if (j > 0)
+                                { // 插入 ‘|’
+                                    Paragraph pipe = pattern.CloneNode(true) as Paragraph;
+                                    WordTemplateHelper.ReplaceText<Paragraph>(pipe, "%day_cities%", "|");
+                                    pattern.InsertBeforeSelf(pipe);
+                                }
+                                Paragraph cloned = pattern.CloneNode(true) as Paragraph;
+                                WordTemplateHelper.ReplaceText<Paragraph>(cloned, "%day_cities%", string.Format("{0}", t));
+                                pattern.InsertBeforeSelf(cloned);
+                            }
+                            if (cities.Count() > 0)
+                            {
+                                pattern.Remove();
+                            }
+                            else {
+                                pattern.RemoveAllChildren();
+                            }
+                        }
+                        else {
+                            pattern.RemoveAllChildren();
+                        }
+
+                        //处理每日行程简略
+                        cell = rowCopy.Elements<TableCell>().ElementAt(3);                         
+                        pattern = cell.Descendants<Paragraph>().Last();
+                        var ticketTitles = tickets.Select(o => new DayLocationView(){ title = o.title, start_at = o.start_at} ).ToList();
+                        var scenicTitles = locations.Where(o => o.ComboLocation.ltype == (int)ComboLocationEnum.Scenic).Select(o => new DayLocationView(){ title = o.ComboLocation.title, start_at = o.start_at}).Distinct().ToArray();
                         ticketTitles.AddRange(scenicTitles);
+                        ticketTitles = ticketTitles.OrderBy(o => o.start_at).ToList();
                         for (int j = 0; j < ticketTitles.Count(); j++)
                         {
-                            var t = ticketTitles[j];
-                            
+                            var t = ticketTitles[j];                            
                             Paragraph cloned  = pattern.CloneNode(true) as Paragraph;
-                            WordTemplateHelper.ReplaceText<Paragraph>(cloned, "%day_location%", string.Format("{0}. {1}",j+1,t));
+                            WordTemplateHelper.ReplaceText<Paragraph>(cloned, "%day_location%", string.Format("{0}. {1}",j+1,t.title));
                             pattern.InsertBeforeSelf(cloned);
                         }
 
                         if (ticketTitles.Count > 0)
                         {
                             pattern.Remove();
-
                         }
                         else
                         {
                             //如果没有活动，不能删除 pattern， 否则文档会出错。
                             pattern.RemoveAllChildren();
                         }
-                        
+                        //处理每日住宿
                         WordTemplateHelper.ReplaceText<TableRow>(rowCopy, "%day_hotel%", WordTemplateHelper.DisplayDayHotel(locations));
-
+                        
                         dayTable.AppendChild(rowCopy);
                     }
 
@@ -283,9 +349,8 @@ namespace DCTS.Bus
             //星期四
             WordTemplateHelper.ReplaceText(sumary, "%day_lweekday%", WordTemplateHelper.DisplayLongWeekDay(date));
             //北京-阿姆斯特丹-罗马
-            WordTemplateHelper.ReplaceText(sumary, "%day_cities%", string.Join("-", locations.Select(o=>o.ComboLocation.city).ToArray()));
-            //北京-阿姆斯特丹-罗马
-            //WordTemplateHelper.ReplaceText(sumary, "%day_locations%", WordTemplateHelper.DisplayDayLocations(locations, "-"));                 
+            //string.Join("-", locations.Select(o=>o.ComboLocation.city).ToArray())
+            WordTemplateHelper.ReplaceText(sumary, "%day_cities%", (day.cities != null ? day.cities : ""));
             
             var mainDoc = sumary.MainDocumentPart.Document;
 
@@ -348,13 +413,13 @@ namespace DCTS.Bus
         }
 
         //处理每个地点
-        public void HandleLocation( ComboLocation combolocation)
+        public void HandleLocation( ComboLocation combolocation, Ticket ticket)
         {
-            string[] locationKeys = {"nation","city", "area", "title", "local_title", "address", "local_address", "latlng", "route", "contact", "tips",
+            string[] locationKeys = {"nation","city", "area", "title", "local_title", "address", "local_address", "latlng", "route", "contact", "tips", "open_close_more",
                               // 景点
                                 "open_at", "close_at", "ticket",
                                //住宿
-                               "room", "dinner", "wifi", "parking", "reception", "kitchen",
+                               "wifi", "parking", "reception", "kitchen",
                                // 
                                "recommended_dishes"
                             };
@@ -406,6 +471,50 @@ namespace DCTS.Bus
 
                         }
                     }
+
+                    if (locationType == ComboLocationEnum.Hotel && ticket != null)
+                    {
+                        // 入住时间（startenddate） 20160906-20160908， 入住晚数(days)： 2晚， 
+                        // 预定姓名(customer_name)： 张三 李四， 预订房型(room)：大床房，早餐(breakfirst)：有
+                        var startat = ticket.start_at.GetValueOrDefault(DateTime.Now);
+                        var endat = startat.AddDays(ticket.days);
+                        string startend = String.Format("{0:yyyyMMdd}-{1:yyyyMMdd}", startat, endat);
+
+                        WordTemplateHelper.ReplaceText(duplicated, "%startenddate%", startend);
+                        WordTemplateHelper.ReplaceText(duplicated, "%ticket_days%", ticket.days.ToString());
+                        WordTemplateHelper.ReplaceText(duplicated, "%ticket_room%", ticket.room);
+                        WordTemplateHelper.ReplaceText(duplicated, "%ticket_breakfirst%", ticket.breakfirst);
+                        //如果在这个时间，这个地点只有一张票，
+                        int ticketCount = this.ticketList.Where(o => o.start_at == ticket.start_at && o.to_location_id == ticket.to_location_id).Count();
+                        if (ticketCount <= 1)
+                        {
+                            Table hotelTable = duplicated.MainDocumentPart.Document.Body.Descendants<Table>().ElementAt(1);
+
+                            var nameRow = hotelTable.Elements<TableRow>().ElementAt(1);
+                            var nameCell = nameRow.Elements<TableCell>().ElementAt(1);
+                            if (nameCell != null)
+                            {
+                                var pattern = nameCell.Descendants<Paragraph>().Last();
+
+                                for (var i = 0; i < customerList.Count; i++)
+                                {
+                                    var customer = customerList[i];
+                                    var cloned = pattern.CloneNode(true) as Paragraph;
+                                    WordTemplateHelper.ReplaceText<Paragraph>(cloned, "%customer_name%", customer.name);
+                                    pattern.InsertBeforeSelf(cloned);
+                                }
+                                pattern.Remove();
+                            }
+                          
+                        }
+                        else {
+                            var customer = this.customerList.FirstOrDefault(o => o.id == ticket.customer_id);
+                            if (customer != null)
+                            {
+                                WordTemplateHelper.ReplaceText(duplicated, "%customer_name%", customer.name);  
+                            }
+                        }
+                    }
                     duplicated.Save();
                 }
 
@@ -438,7 +547,7 @@ namespace DCTS.Bus
                         var combolocation = ticketLocations.FirstOrDefault(o => o.id == ticket.to_location_id);
                         if (combolocation != null)
                         {
-                            HandleLocation(combolocation);
+                            HandleLocation(combolocation, ticket);
                         }
                     }
                 }
@@ -772,8 +881,6 @@ namespace DCTS.Bus
                     {
                         var ticket = tickets[i];
                         var cloned = rowPattern.CloneNode(true) as TableRow;
-                        var to_location = ticketLocations.FirstOrDefault(o => o.id == ticket.to_location_id);
-                        if (to_location != null)
                         {
                             var s = ( ticket.ttype ==(int) SupplierEnum.Activity ? "活动" : "火车");
                             WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_type%", s);

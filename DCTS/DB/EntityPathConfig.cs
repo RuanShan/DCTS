@@ -313,5 +313,12 @@ namespace DCTS.DB
                 return Path.Combine(BasePath, "seed.sql");
             }
         }
+        public static string UpgradeSql
+        {
+            get
+            {
+                return Path.Combine(BasePath, "upgrade.sql");
+            }
+        }
     }
 }

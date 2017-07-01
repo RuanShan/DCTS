@@ -16,6 +16,7 @@ namespace DCTS.DB
         public int location_id {get; set;}
         public int position {get; set;}
         public string title { get; set; }
+        public string city { get; set; }
         public DateTime? start_at { get; set; }
     }
 }

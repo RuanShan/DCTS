@@ -39,13 +39,13 @@ namespace DCTS.UI
                 this.textBox1.Text = obj.dishes;
                 imgPathTextBox.Text = obj.img;
                 this.latlngTextBox.Text = obj.latlng;
-                this.textBox2.Text = obj.local_address;
+                this.routeTextBox.Text = obj.local_address;
                 this.localAddressTextBox.Text = obj.address;
                 this.textBox3.Text = obj.recommended_dishes;
-                this.textBox6.Text = obj.tips;
+                this.tipsTextBox.Text = obj.tips;
                 this.localTitleTextBox.Text = obj.title;
-                this.openCloseTextBox.Text = obj.open_close_more; 
-
+                this.openCloseTextBox.Text = obj.open_close_more;
+                this.routeTextBox.Text = obj.route;
                 this.originalDinings = new ComboLocation() { img = obj.img };
                 //处理图片
                 if (obj.img.Length > 0)
@@ -107,12 +107,13 @@ namespace DCTS.UI
                         obj.dishes = this.textBox1.Text;
                         obj.img = imgFilePath;
                         obj.latlng = this.latlngTextBox.Text;
-                        obj.local_address = this.textBox2.Text;
+                        obj.local_address = this.routeTextBox.Text;
                         obj.address = this.localAddressTextBox.Text;
                         obj.recommended_dishes = this.textBox3.Text;
-                        obj.tips = this.textBox6.Text;
+                        obj.tips = this.tipsTextBox.Text;
                         obj.title = this.localTitleTextBox.Text;
                         obj.open_close_more = this.openCloseTextBox.Text;
+                        obj.route = this.routeTextBox.Text;
                         ComboLoactionBusiness.Validate(obj);              
                     
                         imgFilePath = obj.img;
@@ -137,12 +138,13 @@ namespace DCTS.UI
                         obj.dishes = this.textBox1.Text;
                         obj.img = imgFilePath;
                         obj.latlng = this.latlngTextBox.Text;
-                        obj.local_address = this.textBox2.Text;
+                        obj.local_address = this.routeTextBox.Text;
                         obj.address = this.localAddressTextBox.Text;
                         obj.recommended_dishes = this.textBox3.Text;
-                        obj.tips = this.textBox6.Text;
+                        obj.tips = this.tipsTextBox.Text;
                         obj.title = this.localTitleTextBox.Text;
                         obj.open_close_more = this.openCloseTextBox.Text;
+                        obj.route = this.routeTextBox.Text;
                         ComboLoactionBusiness.Validate(obj);
                         ctx.ComboLocations.Add(obj);
 

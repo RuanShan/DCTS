@@ -42,7 +42,7 @@
             this.label16 = new System.Windows.Forms.Label();
             this.contact = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.local_address = new System.Windows.Forms.TextBox();
+            this.routeTextBox = new System.Windows.Forms.TextBox();
             this.room = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
             this.address = new System.Windows.Forms.TextBox();
@@ -57,7 +57,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.cityComboBox = new System.Windows.Forms.ComboBox();
             this.nationComboBox = new System.Windows.Forms.ComboBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.tipsTextBox = new System.Windows.Forms.TextBox();
             this.moringTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -178,12 +178,12 @@
             this.label9.TabIndex = 24;
             this.label9.Text = "如何抵达";
             // 
-            // local_address
+            // routeTextBox
             // 
-            this.local_address.Location = new System.Drawing.Point(118, 416);
-            this.local_address.Name = "local_address";
-            this.local_address.Size = new System.Drawing.Size(520, 21);
-            this.local_address.TabIndex = 15;
+            this.routeTextBox.Location = new System.Drawing.Point(118, 416);
+            this.routeTextBox.Name = "routeTextBox";
+            this.routeTextBox.Size = new System.Drawing.Size(520, 21);
+            this.routeTextBox.TabIndex = 15;
             // 
             // room
             // 
@@ -309,13 +309,13 @@
             this.nationComboBox.TabIndex = 0;
             this.nationComboBox.SelectedIndexChanged += new System.EventHandler(this.nationComboBox_SelectedIndexChanged);
             // 
-            // textBox6
+            // tipsTextBox
             // 
-            this.textBox6.Location = new System.Drawing.Point(118, 449);
-            this.textBox6.Multiline = true;
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(520, 52);
-            this.textBox6.TabIndex = 16;
+            this.tipsTextBox.Location = new System.Drawing.Point(118, 449);
+            this.tipsTextBox.Multiline = true;
+            this.tipsTextBox.Name = "tipsTextBox";
+            this.tipsTextBox.Size = new System.Drawing.Size(520, 52);
+            this.tipsTextBox.TabIndex = 16;
             // 
             // moringTextBox
             // 
@@ -419,7 +419,7 @@
             this.Controls.Add(this.label16);
             this.Controls.Add(this.contact);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.local_address);
+            this.Controls.Add(this.routeTextBox);
             this.Controls.Add(this.room);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.address);
@@ -434,7 +434,7 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.cityComboBox);
             this.Controls.Add(this.nationComboBox);
-            this.Controls.Add(this.textBox6);
+            this.Controls.Add(this.tipsTextBox);
             this.Controls.Add(this.moringTextBox);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -471,7 +471,7 @@
         private System.Windows.Forms.TextBox imgPathTextBox;
         private System.Windows.Forms.Button findFileButton;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox tipsTextBox;
         private System.Windows.Forms.Label label11;
         private CustomComponents.EntityDataSource entityDataSource1;
         private System.Windows.Forms.Button cancelButton;
@@ -481,7 +481,7 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox address;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox local_address;
+        private System.Windows.Forms.TextBox routeTextBox;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox contact;
         private System.Windows.Forms.Label label17;

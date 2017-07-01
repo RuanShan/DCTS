@@ -45,14 +45,9 @@ namespace DCTS.CustomComponents
 
             try
             {
-                Dictionary<string, string> setting = DBConfiguration.ConnectionSettings();
 
                 string setupSql = SqlPath.SetupSql;
                 string seedSql = SqlPath.SeedSql;
-                //string mysql = Path.Combine( pathTextBox.Text, "bin", "mysql");
-                //string cmd = mysql + " -u " + setting["user id"] + " -p " + setting["password"] + setting["database"] + " <" + setupSql;
-
-                
 
                 using(MySqlConnection conn = new MySqlConnection( DBConfiguration.GetConnectionString() ))
                 {
@@ -65,18 +60,13 @@ namespace DCTS.CustomComponents
                     script.Execute();
                 }
                 
-
-                //string output = "";
-                //RunCmd(cmd, out output);
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show("异常" + ex);
                 return;
-
-                throw ex;
-            } MessageBox.Show("导入成功");
+            } 
+            MessageBox.Show("导入成功");
         }
 
 
@@ -131,6 +121,29 @@ namespace DCTS.CustomComponents
                 this.pathTextBox.Text = dialog.SelectedPath;
             }
 
+
+        }
+
+        private void upgradeButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string sql = SqlPath.UpgradeSql;
+
+                using (MySqlConnection conn = new MySqlConnection(DBConfiguration.GetConnectionString()))
+                {
+                    MySqlScript script = new MySqlScript(conn);
+                    script.Query = File.ReadAllText(sql);
+                    script.Execute();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("异常" + ex);
+                return;
+            }
+            MessageBox.Show("升级成功");
 
         }
     }

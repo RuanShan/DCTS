@@ -35,7 +35,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.routeTextBox = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.cancelButton = new System.Windows.Forms.Button();
@@ -50,7 +50,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.cityComboBox = new System.Windows.Forms.ComboBox();
             this.nationComboBox = new System.Windows.Forms.ComboBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.tipsTextBox = new System.Windows.Forms.TextBox();
             this.localAddressTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -115,13 +115,13 @@
             this.label13.TabIndex = 17;
             this.label13.Text = "如何抵达";
             // 
-            // textBox2
+            // routeTextBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(117, 372);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(518, 52);
-            this.textBox2.TabIndex = 10;
+            this.routeTextBox.Location = new System.Drawing.Point(117, 372);
+            this.routeTextBox.Multiline = true;
+            this.routeTextBox.Name = "routeTextBox";
+            this.routeTextBox.Size = new System.Drawing.Size(518, 52);
+            this.routeTextBox.TabIndex = 10;
             // 
             // label12
             // 
@@ -248,13 +248,13 @@
             this.nationComboBox.TabIndex = 0;
             this.nationComboBox.SelectedIndexChanged += new System.EventHandler(this.nationComboBox_SelectedIndexChanged);
             // 
-            // textBox6
+            // tipsTextBox
             // 
-            this.textBox6.Location = new System.Drawing.Point(117, 463);
-            this.textBox6.Multiline = true;
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(518, 52);
-            this.textBox6.TabIndex = 12;
+            this.tipsTextBox.Location = new System.Drawing.Point(117, 463);
+            this.tipsTextBox.Multiline = true;
+            this.tipsTextBox.Name = "tipsTextBox";
+            this.tipsTextBox.Size = new System.Drawing.Size(518, 52);
+            this.tipsTextBox.TabIndex = 12;
             // 
             // localAddressTextBox
             // 
@@ -349,7 +349,7 @@
             this.Controls.Add(this.label14);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.label13);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.routeTextBox);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.cancelButton);
@@ -364,7 +364,7 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.cityComboBox);
             this.Controls.Add(this.nationComboBox);
-            this.Controls.Add(this.textBox6);
+            this.Controls.Add(this.tipsTextBox);
             this.Controls.Add(this.localAddressTextBox);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -406,7 +406,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox tipsTextBox;
         private System.Windows.Forms.Label label11;
         private CustomComponents.EntityDataSource entityDataSource1;
         private System.Windows.Forms.Button cancelButton;
@@ -414,7 +414,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox routeTextBox;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.ErrorProvider errorProvider1;
