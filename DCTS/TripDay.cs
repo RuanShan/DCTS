@@ -28,6 +28,7 @@ namespace DCTS
         public string tips { get; set; }
         public string schedule { get; set; }
         public int cover_id { get; set; }
+        public string cities { get; set; }
     
         public virtual ICollection<DayLocation> DayLocations { get; set; }
         public virtual Trip Trip { get; set; }

@@ -11,9 +11,11 @@ namespace DCTS.DB
     public class MockEntity : IEquatable<MockEntity>
     {
         public int Id { get; set; }
-        public int TaxonId { get; set; } // genreId
+        public int TaxonId { get; set; }  
         public string FullName { get; set; }
         public string ShortName { get; set; }
+        //
+        public DateTime StartAt { get; set; }
 
         //https://msdn.microsoft.com/zh-cn/library/bb348436(v=vs.110).aspx
         public bool Equals(MockEntity other)

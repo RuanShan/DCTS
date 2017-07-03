@@ -68,6 +68,7 @@
             this.daysColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cityColumn2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.titlxColumn2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.roomColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dinnerColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.parkingColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.insuranceTagPage = new System.Windows.Forms.TabPage();
@@ -125,6 +126,7 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.trainCustomerColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.trainSupplierColumn1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -368,6 +370,7 @@
             this.trainDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.trainDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.trainCustomerColumn,
+            this.trainSupplierColumn1,
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn3,
@@ -414,6 +417,7 @@
             this.daysColumn2,
             this.cityColumn2,
             this.titlxColumn2,
+            this.roomColumn1,
             this.dinnerColumn2,
             this.parkingColumn2});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -474,17 +478,26 @@
             this.titlxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.titlxColumn2.Width = 180;
             // 
+            // roomColumn1
+            // 
+            this.roomColumn1.DataPropertyName = "room";
+            this.roomColumn1.HeaderText = "房型";
+            this.roomColumn1.Name = "roomColumn1";
+            this.roomColumn1.Width = 80;
+            // 
             // dinnerColumn2
             // 
             this.dinnerColumn2.DataPropertyName = "breakfirst";
             this.dinnerColumn2.HeaderText = "早餐";
             this.dinnerColumn2.Name = "dinnerColumn2";
+            this.dinnerColumn2.Width = 80;
             // 
             // parkingColumn2
             // 
             this.parkingColumn2.DataPropertyName = "parking";
             this.parkingColumn2.HeaderText = "停车位";
             this.parkingColumn2.Name = "parkingColumn2";
+            this.parkingColumn2.Width = 80;
             // 
             // insuranceTagPage
             // 
@@ -1041,6 +1054,12 @@
             this.trainCustomerColumn.HeaderText = "客户";
             this.trainCustomerColumn.Name = "trainCustomerColumn";
             // 
+            // trainSupplierColumn1
+            // 
+            this.trainSupplierColumn1.DataPropertyName = "supplier_id";
+            this.trainSupplierColumn1.HeaderText = "铁路公司";
+            this.trainSupplierColumn1.Name = "trainSupplierColumn1";
+            // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.DataPropertyName = "num";
@@ -1190,13 +1209,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.DataGridViewComboBoxColumn hotelCustomerColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn start_atCloumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn daysColumn2;
-        private System.Windows.Forms.DataGridViewComboBoxColumn cityColumn2;
-        private System.Windows.Forms.DataGridViewComboBoxColumn titlxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dinnerColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn parkingColumn2;
         private System.Windows.Forms.DataGridViewComboBoxColumn wifiCustomerColumn;
         private System.Windows.Forms.DataGridViewComboBoxColumn wifiSupplierColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn from_addressColumn5;
@@ -1223,7 +1235,16 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn activityCityColumn1;
         private System.Windows.Forms.DataGridViewComboBoxColumn rulesColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn overlayColumn6;
+        private System.Windows.Forms.DataGridViewComboBoxColumn hotelCustomerColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn start_atCloumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn daysColumn2;
+        private System.Windows.Forms.DataGridViewComboBoxColumn cityColumn2;
+        private System.Windows.Forms.DataGridViewComboBoxColumn titlxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn roomColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dinnerColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn parkingColumn2;
         private System.Windows.Forms.DataGridViewComboBoxColumn trainCustomerColumn;
+        private System.Windows.Forms.DataGridViewComboBoxColumn trainSupplierColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;

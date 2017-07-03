@@ -36,6 +36,7 @@
             this.pathTextBox = new System.Windows.Forms.TextBox();
             this.openFileBtton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.upgradeButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -56,7 +57,7 @@
             // 
             // importButton
             // 
-            this.importButton.Location = new System.Drawing.Point(226, 140);
+            this.importButton.Location = new System.Drawing.Point(233, 140);
             this.importButton.Name = "importButton";
             this.importButton.Size = new System.Drawing.Size(75, 23);
             this.importButton.TabIndex = 12;
@@ -110,11 +111,22 @@
             this.label3.Text = "所有客户数据将被删除，慎用";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // upgradeButton
+            // 
+            this.upgradeButton.Location = new System.Drawing.Point(152, 140);
+            this.upgradeButton.Name = "upgradeButton";
+            this.upgradeButton.Size = new System.Drawing.Size(75, 23);
+            this.upgradeButton.TabIndex = 22;
+            this.upgradeButton.Text = "升级";
+            this.upgradeButton.UseVisualStyleBackColor = true;
+            this.upgradeButton.Click += new System.EventHandler(this.upgradeButton_Click);
+            // 
             // ImportMysql
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(465, 190);
+            this.Controls.Add(this.upgradeButton);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pathTextBox);
@@ -144,5 +156,6 @@
         private System.Windows.Forms.TextBox pathTextBox;
         private System.Windows.Forms.Button openFileBtton;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button upgradeButton;
     }
 }

@@ -42,6 +42,7 @@ namespace DCTS
         public Nullable<System.DateTime> updated_at { get; set; }
         public int ttype { get; set; }
         public string city { get; set; }
+        public string room { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual Supplier Supplier { get; set; }

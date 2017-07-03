@@ -318,6 +318,7 @@ CREATE TABLE `TripDays` (
   `tips` varchar(1024) DEFAULT NULL COMMENT '小贴士',
   `schedule` varchar(2048) DEFAULT NULL COMMENT '行程计划\n无法仅仅使用每天行程作为每一项, 比如, 仅仅有景点浏览开始时间,没有离开酒店的出发时间.\n或者何时去机场,火车站等.这是一个自定义项  时间||活动//时间||活动',
   `cover_id` int(11) NOT NULL DEFAULT '0' COMMENT '封面图片',
+  `cities` varchar(256) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `tripdays_idx` (`trip_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8;

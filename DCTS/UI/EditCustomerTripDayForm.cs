@@ -75,8 +75,9 @@ namespace DCTS.UI
         public void FillModelByForm(TripDay tripDay)
         {
             Model.title = this.titleTextBox.Text;
-
             Model.tips = this.tipsTextBox.Text;
+            Model.cities = this.citiesTextBox.Text;
+
             using (var ctx = new DctsEntities())
             {
                 var location = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.PageImage).First();
@@ -94,6 +95,7 @@ namespace DCTS.UI
             Model = tripDay;
             this.titleTextBox.Text = Model.title;
             this.tipsTextBox.Text = Model.tips;
+            this.citiesTextBox.Text = Model.cities;
 
             //读取图片位置
             using (var ctx = new DctsEntities())
@@ -202,11 +204,6 @@ namespace DCTS.UI
         }
 
 
-        /*************时间控件选择时间时****************/
-        private void dtp_TextChange(object sender, EventArgs e)
-        {
-            scheduleDataGridView.CurrentCell.Value = dtp.Value;  //时间控件选择时间时，就把时间赋给所在的单元格  
-        }
 
         /****************单元格被单击，判断是否是放时间控件的那一列*******************/
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -222,6 +219,12 @@ namespace DCTS.UI
             }
             else
                 dtp.Visible = false;
+        }
+
+        /*************时间控件选择时间时****************/
+        private void dtp_TextChange(object sender, EventArgs e)
+        {
+            scheduleDataGridView.CurrentCell.Value = dtp.Value;  //时间控件选择时间时，就把时间赋给所在的单元格  
         }
 
         /***********当列的宽度变化时，时间控件先隐藏起来，不然单元格变大时间控件无法跟着变大哦***********/

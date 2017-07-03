@@ -25,6 +25,9 @@ namespace DCTS.UI
         ChooseLocaltionForm localtionForm;
         ComboLocation blankLocation;
 
+        DateTimePicker dtp = new DateTimePicker();  //这里实例化一个DateTimePicker控件  
+        Rectangle _Rectangle;  
+
         public EditCustomerTripDaysControl()
         {
             InitializeComponent();
@@ -41,12 +44,21 @@ namespace DCTS.UI
             this.locationTypeColumn.DisplayMember = "FullName";
             this.locationTypeColumn.ValueMember = "Id";
             this.locationTypeColumn.DataSource = locationTypeList;
+
+
+            dayDetailDataGridView.Controls.Add(dtp);  //把时间控件加入DataGridView  
+            dtp.Visible = false;  //先不让它显示  
+            dtp.ShowUpDown = true;
+            dtp.Format = DateTimePickerFormat.Custom;  //设置日期格式为2010-08-05  
+            dtp.CustomFormat = "HH:mm";
+            dtp.TextChanged += new EventHandler(dtp_TextChange); //为时间控件加入事件dtp_TextChange  
         }
 
         public void BeginActive()
         {
             dayTitleColumn.Width = dayDataGridView.ClientSize.Width - 60 - 3;
-            localtionTitleColumn.Width = dayDetailDataGridView.ClientSize.Width - 403;
+            //                                                                        StartAt
+            localtionTitleColumn.Width = dayDetailDataGridView.ClientSize.Width - 403-100;
 
             InitializeDataSource();
 
@@ -59,8 +71,34 @@ namespace DCTS.UI
                 this.blankLocation = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Blank).First();
                 this.Model = ctx.Trips.Find(ModelId);
                 this.dayList = ctx.TripDays.Where(o => o.trip_id == ModelId).OrderBy(o => o.day).ToList();
-                this.dayLocationList = ctx.DayLocations.Include("ComboLocation").Where(o => o.trip_id == ModelId).OrderBy(o => o.day_id).ThenBy(o=>o.position).ToList();                
+                this.dayLocationList = ctx.DayLocations.Include("ComboLocation").Where(o => o.trip_id == ModelId).OrderBy(o => o.day_id).ThenBy(o=>o.position).ToList();
+                // 修正 dl.start_at, datagridview 确保显示时不为空，编辑时为datetimepicker控件。
+                
+
+                foreach (var dl in this.dayLocationList)
+                {
+                    var datetime = Model.start_at.GetValueOrDefault().AddDays(dl.day - 1).Date;
+
+                    if (dl.start_at == null)
+                    {
+                        dl.start_at = datetime;
+                    }
+                    else if (dl.start_at.Value.Date != datetime)
+                    {
+                        
+                        dl.start_at = new DateTime( datetime.Year, datetime.Month, datetime.Day, dl.start_at.Value.Hour, dl.start_at.Value.Minute, 0);
+                    }
+                    ctx.SaveChanges();                                         
+                }
+
             }
+
+            var locations = this.dayLocationList.Select(o => o.ComboLocation).Distinct().ToList();
+            this.localtionTitleColumn.DisplayMember = "title";
+            this.localtionTitleColumn.ValueMember = "id";
+            this.localtionTitleColumn.DataSource = locations;
+
+
             InitializeDayListBox(selectDay, selectLocationPosition);
         }
 
@@ -98,10 +136,7 @@ namespace DCTS.UI
 
         public void InitializeDayDetailListBox( int dayId )
         {
-            var dayLocations = this.dayLocationList.Where(o => o.day_id == dayId).Select(o => new DayLocationView()
-            {
-                ltype = o.ComboLocation.ltype,
-                id = o.id, location_id = o.ComboLocation.id, title = o.ComboLocation.title, position = o.position }).OrderBy(o=>o.position).ToList();
+            var dayLocations = this.dayLocationList.Where(o => o.day_id == dayId).OrderBy(o => o.position).ToList();
             dayDetailBindingSource.DataSource = dayLocations;
             this.dayDetailDataGridView.DataSource = dayDetailBindingSource;
 
@@ -201,13 +236,13 @@ namespace DCTS.UI
         }
 
 
-        private DayLocationView GetSelectedDayLocation()
+        private DayLocation GetSelectedDayLocation()
         {
-            DayLocationView dayLocation = null;
+            DayLocation dayLocation = null;
             var row = dayDetailDataGridView.CurrentRow;
             if (row != null)
             {
-                dayLocation = row.DataBoundItem as DayLocationView;
+                dayLocation = row.DataBoundItem as DayLocation;
             }
             return dayLocation;
         }
@@ -326,20 +361,55 @@ namespace DCTS.UI
             var dayLocation = GetSelectedDayLocation();
             if (dayLocation != null)
             {
-                DialogResult result = DialogResult.No;
-                if (dayLocation.ltype == (int)ComboLocationEnum.Flight)
-                {
-                    
-                }
-
-                if (result == DialogResult.Yes)
-                {
-                    var tripDay = GetSelectedTripDay();
-                    InitializeDayDetailListBox(tripDay.id);
-                }
-
 
             }
         }
+
+        #region 每天行程详细中的时间空件
+
+        /****************单元格被单击，判断是否是放时间控件的那一列*******************/
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (dayDetailDataGridView.Columns[e.ColumnIndex] == dayStartAtColumn)
+            {
+                _Rectangle = dayDetailDataGridView.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true); //得到所在单元格位置和大小  
+                dtp.Size = new Size(_Rectangle.Width, _Rectangle.Height); //把单元格大小赋给时间控件  
+                dtp.Location = new Point(_Rectangle.X, _Rectangle.Y); //把单元格位置赋给时间控件  
+                dtp.Value = (DateTime)dayDetailDataGridView.CurrentCell.Value;
+                dtp.Visible = true;  //可以显示控件了  
+            }
+            else
+                dtp.Visible = false;
+        }
+
+        /*************时间控件选择时间时****************/
+        private void dtp_TextChange(object sender, EventArgs e)
+        {
+            dayDetailDataGridView.CurrentCell.Value = dtp.Value;  //时间控件选择时间时，就把时间赋给所在的单元格 
+            var dlv = dayDetailDataGridView.CurrentCell.OwningRow.DataBoundItem as  DayLocation;
+            var ctx = this.entityDataSource1.DbContext as DctsEntities;
+
+            DayLocation location = ctx.DayLocations.Find(dlv.id);
+            location.start_at = dtp.Value;
+            ctx.SaveChangesAsync();
+            //更新 .dayLocationList 中相应对象的值，以便刷新时， 保证时间是修改后的值。
+
+        }
+
+        /***********当列的宽度变化时，时间控件先隐藏起来，不然单元格变大时间控件无法跟着变大哦***********/
+        private void dataGridView1_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
+        {
+            dtp.Visible = false;
+
+        }
+
+        /***********滚动条滚动时，单元格位置发生变化，也得隐藏时间控件，不然时间控件位置不动就乱了********/
+        private void dataGridView1_Scroll(object sender, ScrollEventArgs e)
+        {
+            dtp.Visible = false;
+        }
+        #endregion
+
     }
 }

@@ -225,6 +225,7 @@
           <Property Name="baggage_weight_limit" Type="varchar" MaxLength="45" />
           <Property Name="created_at" Type="datetime" />
           <Property Name="updated_at" Type="datetime" />
+          <Property Name="room" Type="varchar" MaxLength="256" />
         </EntityType>
         <EntityType Name="TripCustomers">
           <Key>
@@ -240,12 +241,13 @@
           </Key>
           <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="trip_id" Type="int" Nullable="false" />
-          <Property Name="title" Type="varchar" MaxLength="256" />
+          <Property Name="title" Type="varchar" MaxLength="255" />
           <Property Name="day" Type="int" Nullable="false" />
           <Property Name="memo" Type="varchar" MaxLength="512" />
           <Property Name="tips" Type="varchar" MaxLength="1024" />
           <Property Name="schedule" Type="varchar" MaxLength="2048" />
           <Property Name="cover_id" Type="int" Nullable="false" />
+          <Property Name="cities" Type="varchar" MaxLength="256" />
         </EntityType>
         <EntityType Name="Trips">
           <Key>
@@ -419,7 +421,7 @@
             <End Role="Trip" EntitySet="Trips" />
             <End Role="Ticket" EntitySet="Tickets" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Trip">
           <Key>
             <PropertyRef Name="id" />
@@ -578,6 +580,7 @@
           <Property Type="String" Name="schedule" MaxLength="2048" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="cover_id" Nullable="false" />
           <NavigationProperty Name="Schedules" Relationship="DctsModel.fk_tripday" FromRole="TripDay" ToRole="Schedule" />
+          <Property Type="String" Name="cities" />
         </EntityType>
         <Association Name="dayId">
           <End Type="DctsModel.TripDay" Role="TripDay" Multiplicity="1">
@@ -708,6 +711,7 @@
           <Property Type="Int32" Name="ttype" Nullable="false" />
           <NavigationProperty Name="Trip" Relationship="DctsModel.fk_ticket_trip" FromRole="Ticket" ToRole="Trip" />
           <Property Type="String" Name="city" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="room" MaxLength="256" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="fk_customer">
           <End Type="DctsModel.Customer" Role="Customer" Multiplicity="1" />
@@ -791,7 +795,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -910,20 +914,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TripDays">
-            <EntityTypeMapping TypeName="DctsModel.TripDay">
-              <MappingFragment StoreEntitySet="TripDays">
-                <ScalarProperty Name="cover_id" ColumnName="cover_id" />
-                <ScalarProperty Name="schedule" ColumnName="schedule" />
-                <ScalarProperty Name="tips" ColumnName="tips" />
-                <ScalarProperty Name="memo" ColumnName="memo" />
-                <ScalarProperty Name="day" ColumnName="day" />
-                <ScalarProperty Name="title" ColumnName="title" />
-                <ScalarProperty Name="trip_id" ColumnName="trip_id" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="DctsModel.Customer">
               <MappingFragment StoreEntitySet="Customers">
@@ -980,6 +970,7 @@
           <EntitySetMapping Name="Tickets">
             <EntityTypeMapping TypeName="DctsModel.Ticket">
               <MappingFragment StoreEntitySet="Tickets">
+                <ScalarProperty Name="room" ColumnName="room" />
                 <ScalarProperty Name="city" ColumnName="city" />
                 <ScalarProperty Name="ttype" ColumnName="ttype" />
                 <ScalarProperty Name="updated_at" ColumnName="updated_at" />
@@ -1015,6 +1006,21 @@
             <EntityTypeMapping TypeName="DctsModel.TripCustomer">
               <MappingFragment StoreEntitySet="TripCustomers">
                 <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="trip_id" ColumnName="trip_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TripDays">
+            <EntityTypeMapping TypeName="IsTypeOf(DctsModel.TripDay)">
+              <MappingFragment StoreEntitySet="TripDays">
+                <ScalarProperty Name="cities" ColumnName="cities" />
+                <ScalarProperty Name="cover_id" ColumnName="cover_id" />
+                <ScalarProperty Name="schedule" ColumnName="schedule" />
+                <ScalarProperty Name="tips" ColumnName="tips" />
+                <ScalarProperty Name="memo" ColumnName="memo" />
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="title" ColumnName="title" />
                 <ScalarProperty Name="trip_id" ColumnName="trip_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>

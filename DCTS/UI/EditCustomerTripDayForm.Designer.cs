@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.findFileButton = new System.Windows.Forms.Button();
@@ -53,6 +53,9 @@
             this.formLabel = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
+            this.citiesTextBox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scheduleDataGridView)).BeginInit();
@@ -62,16 +65,16 @@
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(82, 114);
+            this.pictureBox1.Location = new System.Drawing.Point(602, 114);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(195, 77);
+            this.pictureBox1.Size = new System.Drawing.Size(221, 111);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 41;
             this.pictureBox1.TabStop = false;
             // 
             // findFileButton
             // 
-            this.findFileButton.Location = new System.Drawing.Point(283, 87);
+            this.findFileButton.Location = new System.Drawing.Point(791, 87);
             this.findFileButton.Name = "findFileButton";
             this.findFileButton.Size = new System.Drawing.Size(32, 23);
             this.findFileButton.TabIndex = 39;
@@ -82,7 +85,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(46, 92);
+            this.label6.Location = new System.Drawing.Point(566, 92);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(29, 12);
             this.label6.TabIndex = 40;
@@ -90,9 +93,9 @@
             // 
             // imgPathTextBox
             // 
-            this.imgPathTextBox.Location = new System.Drawing.Point(82, 88);
+            this.imgPathTextBox.Location = new System.Drawing.Point(602, 88);
             this.imgPathTextBox.Name = "imgPathTextBox";
-            this.imgPathTextBox.Size = new System.Drawing.Size(195, 21);
+            this.imgPathTextBox.Size = new System.Drawing.Size(183, 21);
             this.imgPathTextBox.TabIndex = 38;
             // 
             // moveDownButton1
@@ -156,30 +159,30 @@
             this.scheduleDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.start_atColumn1,
             this.titleColumn});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.scheduleDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
-            this.scheduleDataGridView.Location = new System.Drawing.Point(82, 290);
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.scheduleDataGridView.DefaultCellStyle = dataGridViewCellStyle6;
+            this.scheduleDataGridView.Location = new System.Drawing.Point(82, 258);
             this.scheduleDataGridView.Name = "scheduleDataGridView";
             this.scheduleDataGridView.RowHeadersVisible = false;
             this.scheduleDataGridView.RowTemplate.Height = 23;
             this.scheduleDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.scheduleDataGridView.Size = new System.Drawing.Size(739, 164);
+            this.scheduleDataGridView.Size = new System.Drawing.Size(739, 196);
             this.scheduleDataGridView.TabIndex = 32;
             this.scheduleDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // start_atColumn1
             // 
             this.start_atColumn1.DataPropertyName = "start_at";
-            dataGridViewCellStyle1.Format = "f";
-            dataGridViewCellStyle1.NullValue = null;
-            this.start_atColumn1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Format = "f";
+            dataGridViewCellStyle5.NullValue = null;
+            this.start_atColumn1.DefaultCellStyle = dataGridViewCellStyle5;
             this.start_atColumn1.HeaderText = "时间";
             this.start_atColumn1.Name = "start_atColumn1";
             this.start_atColumn1.Width = 140;
@@ -194,7 +197,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(23, 292);
+            this.label5.Location = new System.Drawing.Point(24, 263);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(53, 12);
             this.label5.TabIndex = 31;
@@ -202,16 +205,16 @@
             // 
             // tipsTextBox
             // 
-            this.tipsTextBox.Location = new System.Drawing.Point(82, 200);
+            this.tipsTextBox.Location = new System.Drawing.Point(82, 88);
             this.tipsTextBox.Multiline = true;
             this.tipsTextBox.Name = "tipsTextBox";
-            this.tipsTextBox.Size = new System.Drawing.Size(739, 82);
+            this.tipsTextBox.Size = new System.Drawing.Size(465, 110);
             this.tipsTextBox.TabIndex = 30;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(27, 204);
+            this.label3.Location = new System.Drawing.Point(26, 92);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 29;
@@ -271,11 +274,40 @@
             // 
             this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
             // 
+            // citiesTextBox
+            // 
+            this.citiesTextBox.Location = new System.Drawing.Point(82, 204);
+            this.citiesTextBox.Name = "citiesTextBox";
+            this.citiesTextBox.Size = new System.Drawing.Size(465, 21);
+            this.citiesTextBox.TabIndex = 43;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(48, 207);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(29, 12);
+            this.label1.TabIndex = 42;
+            this.label1.Text = "城市";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("SimSun", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(80, 228);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(110, 10);
+            this.label2.TabIndex = 44;
+            this.label2.Text = "减号“-”分隔所有城市";
+            // 
             // EditCustomerTripDayForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(889, 519);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.citiesTextBox);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.findFileButton);
             this.Controls.Add(this.label6);
@@ -330,5 +362,8 @@
         private System.Windows.Forms.Button findFileButton;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox imgPathTextBox;
+        private System.Windows.Forms.Label label2;
+        public System.Windows.Forms.TextBox citiesTextBox;
+        private System.Windows.Forms.Label label1;
     }
 }

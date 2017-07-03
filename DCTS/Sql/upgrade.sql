@@ -1,2 +1,29 @@
-﻿ALTER TABLE `dcts_dev`.`Trips` 
-ADD COLUMN `customer_id` INT NOT NULL DEFAULT 0 AFTER `word_created_at`;
+﻿DELIMITER $$
+CREATE PROCEDURE AddColCities() BEGIN
+IF NOT EXISTS(
+SELECT * FROM information_schema.COLUMNS
+WHERE COLUMN_NAME='cities' AND TABLE_NAME='TripDays'
+)
+THEN
+    ALTER TABLE `TripDays`
+    ADD COLUMN `cities` varchar(256) default NULL;
+END IF;
+END$$
+DELIMITER ; 
+CALL AddColCities();
+DROP PROCEDURE AddColCities;
+
+DELIMITER $$
+CREATE PROCEDURE AddColRoom() BEGIN
+IF NOT EXISTS(
+SELECT * FROM information_schema.COLUMNS
+WHERE COLUMN_NAME='room' AND TABLE_NAME='Tickets'
+)
+THEN
+    ALTER TABLE `Tickets`
+    ADD COLUMN `room` varchar(256) default NULL;
+END IF;
+END$$
+DELIMITER ; 
+CALL AddColRoom();
+DROP PROCEDURE AddColRoom;

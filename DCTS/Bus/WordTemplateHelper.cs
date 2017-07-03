@@ -84,7 +84,10 @@ namespace DCTS.Bus
 
         public static void ReplaceText<T>(T node, string key, string val) where T : OpenXmlElement
         {
-
+            if (val == null)
+            {
+                val = string.Empty;
+            }
             foreach (var text in node.Descendants<Text>())
             {
                 if (text.Text.Contains(key))

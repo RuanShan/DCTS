@@ -28,7 +28,7 @@
         <AssociationConnector Association="DctsModel.fk_tripcustomer_customer" />
         <AssociationConnector Association="DctsModel.fk_tripcustomer_trip" />
         <AssociationConnector Association="DctsModel.fk_ticket_trip" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
