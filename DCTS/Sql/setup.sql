@@ -271,6 +271,7 @@ CREATE TABLE `Tickets` (
   `baggage_weight_limit` varchar(45) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
+  `room` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_customer_idx` (`customer_id`),
   KEY `fk_supplier_idx` (`supplier_id`),
