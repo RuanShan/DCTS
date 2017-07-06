@@ -168,8 +168,24 @@ namespace DCTS.Bus
         {
             using (var ctx = new DctsEntities())
             {
+                var trips = new List<Trip>();
                 var model = ctx.Customers.Find(id);
-           
+                var tripCustomers = model.TripCustomers.ToList(); 
+                foreach (var tc in tripCustomers)
+                {
+                    trips.Add(tc.Trip);                    
+                }
+                ctx.TripCustomers.RemoveRange(tripCustomers);
+
+                foreach (var trip in trips)
+                {
+                    //如果当前trip没有其他Customer,则删除。
+                    if ( !trip.TripCustomers.Any(o=>o.customer_id != model.id))
+                    {                        
+                        TripBusiness.Delete(trip.id);
+                    }
+                }
+                ctx.Tickets.RemoveRange(model.Tickets);
                 ctx.Customers.Remove(model);
                 ctx.SaveChanges();
             }

@@ -45,8 +45,8 @@ namespace DCTS.UI
 
             // 初始化查询条件
             var nationList = DCTS.DB.GlobalCache.NationList;
-            var nations = nationList.Select(o => new MockEntity { Id = o.id, ShortName = o.code, FullName = o.title }).ToList();
-            nations.Insert(0, new MockEntity { Id = 0, ShortName = "", FullName = "所有" });
+            var nations = nationList.Select(o => new MockEntity { ShortName = o.code, FullName = o.title }).ToList();
+            nations.Insert(0, new MockEntity { ShortName = "", FullName = "所有" });
             this.nationComboBox.DisplayMember = "FullName";
             this.nationComboBox.ValueMember = "ShortName";
             this.nationComboBox.DataSource = nations;

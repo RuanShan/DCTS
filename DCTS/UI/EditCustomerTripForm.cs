@@ -22,7 +22,7 @@ namespace DCTS.UI
         List<Ticket> ticketList;
         List<Ticket> deletedTicketList;
         List<Customer> customerList;
-        List<Nation> nationList;
+        List<Nation> selectedNationList;
         private List<ComboLocation> airportList;
 
         SupplierEnum supplierType;
@@ -30,6 +30,7 @@ namespace DCTS.UI
         private List<Supplier> supplierList;
         ChooseCustomersForm customerForm;
         ChooseCountries countryForm;
+        public bool Saved { get; set; }
 
         public EditCustomerTripForm(long tripId)
         {
@@ -48,6 +49,7 @@ namespace DCTS.UI
 
             customerForm = new ChooseCustomersForm();
             countryForm = new ChooseCountries();
+            Saved = false;
         }
 
 
@@ -63,7 +65,7 @@ namespace DCTS.UI
             //行程客户
             this.customerList = this.trip.TripCustomers.Select(o => o.Customer).ToList();
             string countryNames = this.trip.countries != null ? this.trip.countries : string.Empty;
-            this.nationList = GlobalCache.NationList.Where(o => countryNames.Contains(o.title)).ToList();
+            this.selectedNationList = GlobalCache.NationList.Where(o => countryNames.Contains(o.title)).ToList();
 
             airportList = ComboLoactionBusiness.TypedLocation(ctx, ComboLocationEnum.Airport);
 
@@ -79,6 +81,7 @@ namespace DCTS.UI
             var ctx = this.entityDataSource1.DbContext as DctsEntities;
             this.FillModelByForm(this.trip);
             ctx.SaveChanges();
+            this.Saved = true;
             MessageHelper.InfoBox("成功保存！");
 
         }
@@ -188,7 +191,7 @@ namespace DCTS.UI
 
 
             // 机场       
-            var names = nationList.Select(o => o.title).ToArray();
+            var names = selectedNationList.Select(o => o.title).ToArray();
             var airports = airportList.Where(o => names.Contains(o.nation)).ToList();
             airports.Insert(0, new ComboLocation() { id = 0, title = "请选择机场" });
             this.fromAirportColumn.DisplayMember = "title";
@@ -233,20 +236,19 @@ namespace DCTS.UI
             //string code =.ToString();
             using (var ctx = new DctsEntities())
             {
-                var nationNames = nationList.Select(o => o.title).ToArray();
+                var nationNames = selectedNationList.Select(o => o.title).ToArray();
 
                 List<ComboLocation> locations = ctx.ComboLocations.Where(o => nationNames.Contains(o.nation)).ToList();
 
-                var nationList1 = DCTS.DB.GlobalCache.NationList;
-                var codelist = nationList1.FindAll(o => o.title == nationTextBox.Text);
-                if (codelist != null && codelist.Count > 0)
+                var allNations = DCTS.DB.GlobalCache.NationList;
+                if (selectedNationList.Count > 0)
                 {
                     var cityList = DCTS.DB.GlobalCache.CityList;
-                    cityList = cityList.Where(o => o.nationCode == codelist.First().code).ToList();
-                    var cities = cityList.Select(o => new MockEntity { Id = o.id, FullName = o.title }).ToList();
-                    this.cityColumn2.DisplayMember = "FullName";
-                    this.cityColumn2.ValueMember = "FullName";
-                    this.cityColumn2.DataSource = cities;
+                    cityList = cityList.Where(o => nationNames.Contains(o.nationCode) ).ToList();
+                    var cities = cityList.Select(o => new MockEntity {  FullName = o.title }).ToList();
+                    this.hotelCityColumn.DisplayMember = "FullName";
+                    this.hotelCityColumn.ValueMember = "FullName";
+                    this.hotelCityColumn.DataSource = cities;
 
                     //酒店
 
@@ -263,6 +265,9 @@ namespace DCTS.UI
                     this.rulesColumn6.ValueMember = "id";
                     this.rulesColumn6.DataSource = activelist;
 
+                    this.activityCityColumn.DisplayMember = "FullName";
+                    this.activityCityColumn.ValueMember = "FullName";
+                    this.activityCityColumn.DataSource = cities;
                 }
             }
 
@@ -489,8 +494,8 @@ namespace DCTS.UI
             {
                 var list = countryForm.SelectedNations();
 
-                this.nationList.AddRange(list);
-                this.nationTextBox.Text = string.Join(",", nationList.Select(o => o.title).ToList());
+                this.selectedNationList.AddRange(list);
+                this.nationTextBox.Text = string.Join(",", selectedNationList.Select(o => o.title).ToList());
             }
         }
 
@@ -498,9 +503,21 @@ namespace DCTS.UI
         {
             var cnames = nationTextBox.Text.Split(",，".ToArray()).Distinct();
 
-            nationList = nationList.Where(o => cnames.Contains(o.title)).ToList();
+            selectedNationList = selectedNationList.Where(o => cnames.Contains(o.title)).ToList();
 
-            nationTextBox.Text = string.Join(",", nationList.Select(o => o.title).ToList());           
+            nationTextBox.Text = string.Join(",", selectedNationList.Select(o => o.title).ToList());           
+        }
+
+        private void flightDataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            ;
+            ;
+        }
+
+        private void hotalDataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            ;
+            ;
         }
 
     }

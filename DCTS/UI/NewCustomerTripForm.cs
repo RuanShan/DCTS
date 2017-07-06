@@ -154,6 +154,9 @@ namespace DCTS.UI
                     this.rulesColumn6.ValueMember = "id";
                     this.rulesColumn6.DataSource = activelist;
 
+                    this.activityCityColumn.DisplayMember = "FullName";
+                    this.activityCityColumn.ValueMember = "FullName";
+                    this.activityCityColumn.DataSource = cities;
                 }
             }
            
@@ -178,6 +181,11 @@ namespace DCTS.UI
             flightSupplierColumn.DisplayMember = "name";
             flightSupplierColumn.ValueMember = "id";
             flightSupplierColumn.DataSource = GetSuppliersByType(SupplierEnum.Flight);
+
+            //铁路
+            trainSupplierColumn.DisplayMember = "name";
+            trainSupplierColumn.ValueMember = "id";
+            trainSupplierColumn.DataSource = GetSuppliersByType(SupplierEnum.Train);
 
             //保险
             insuranceSupplierColumn.DisplayMember = "name";
@@ -570,6 +578,12 @@ namespace DCTS.UI
         private void NewCustomerTripForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void trainDataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            ;
+            ;
         }
 
     }

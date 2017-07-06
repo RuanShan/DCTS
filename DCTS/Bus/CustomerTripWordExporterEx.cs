@@ -288,9 +288,28 @@ namespace DCTS.Bus
                             //如果没有活动，不能删除 pattern， 否则文档会出错。
                             pattern.RemoveAllChildren();
                         }
-                        //处理每日住宿
-                        WordTemplateHelper.ReplaceText<TableRow>(rowCopy, "%day_hotel%", WordTemplateHelper.DisplayDayHotel(locations));
-                        
+                        //处理每日住宿, 有的住宿可能是多晚，这里需要查找所有的住宿ticket
+                        var hotelTicket = this.ticketList.Where(o => o.ttype == (int)SupplierEnum.Hotal && o.start_at < date.AddDays(1)).OrderBy(o=>o.start_at).LastOrDefault();
+                        var hotelReplaced = false;
+                        if (hotelTicket !=null)
+                        {
+                            // 检查入住时间是否有效
+                            DateTime endAt = hotelTicket.start_at.Value.AddDays(  hotelTicket.days - 1);
+                            if (endAt > date)
+                            {
+                                var location = ticketLocations.Where(o => o.id == hotelTicket.to_location_id).FirstOrDefault();
+                                if (location != null)
+                                {
+                                    WordTemplateHelper.ReplaceText<TableRow>(rowCopy, "%day_hotel%", location.title);
+                                    hotelReplaced = true;
+                                }
+                            }
+                        }
+
+                        if (!hotelReplaced)
+                        {
+                            WordTemplateHelper.ReplaceText<TableRow>(rowCopy, "%day_hotel%", "");
+                        }
                         dayTable.AppendChild(rowCopy);
                     }
 

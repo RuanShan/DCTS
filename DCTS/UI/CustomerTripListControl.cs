@@ -78,6 +78,7 @@ namespace DCTS.UI
                 int tid = SelectedTripId;
                 var form = new EditCustomerTripForm(tid);
                 form.ShowDialog();
+                if( form.Saved )
                 {
                     BeginActive();
                 }
@@ -99,20 +100,7 @@ namespace DCTS.UI
                 if (MessageHelper.DeleteConfirm(msg))
                 {
                     ////删除 schedule 中的信息
-                    //using (var ctx1 = new DctsEntities())
-                    //{
-
-                    //    var list = ctx1.TripDays.Where(o => o.trip_id == trip.id).ToList();
-                    //    List<Schedule> deletedScheduleList = new List<Schedule>();
-                    //    for (int i = 0; i < list.Count; i++)
-                    //    {
-                    //        Schedule schedule = new Schedule();
-                    //        schedule.tripday_id = list[i].id;
-                    //        List<Schedule> scheduleList = ctx1.Schedules.Where(o => o.tripday_id == schedule.tripday_id).ToList();
-                    //        ctx1.Schedules.RemoveRange(scheduleList);
-                    //    }
-                    //    ctx1.SaveChanges();
-                    //}
+                    
                     TripBusiness.Delete(trip.id);
 
                     BeginActive();

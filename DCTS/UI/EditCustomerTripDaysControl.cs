@@ -77,7 +77,8 @@ namespace DCTS.UI
 
                 foreach (var dl in this.dayLocationList)
                 {
-                    var datetime = Model.start_at.GetValueOrDefault().AddDays(dl.day - 1).Date;
+                    var tripDay = dayList.Find(o => o.id == dl.day_id);
+                    var datetime = Model.start_at.GetValueOrDefault().AddDays(tripDay.day - 1).Date;
 
                     if (dl.start_at == null)
                     {

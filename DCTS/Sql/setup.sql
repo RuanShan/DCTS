@@ -198,6 +198,7 @@ DROP TABLE IF EXISTS `Schedules`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Schedules` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `trip_id` int(11) NOT NULL DEFAULT '0',
   `tripday_id` int(11) NOT NULL DEFAULT '0',
   `start_at` datetime DEFAULT NULL,
   `end_at` datetime DEFAULT NULL,

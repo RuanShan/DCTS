@@ -96,11 +96,13 @@ namespace DCTS.DB
         }
         private static void InitializeNationList()
         {
-            nationList = db.Nations.ToList();
+            var nations = db.ComboLocations.Where(o=>o.nation != null).Select(o => o.nation).Distinct().ToList();
+            nationList = nations.Select(o => new Nation() { title = o, code = o }).ToList();
         }
         private static void InitializeCityList()
         {
-            cityList = db.Cities.ToList();
+            var cities = db.ComboLocations.Where(o => o.nation != null && o.city != null && o.city != string.Empty).Select(o => new { o.city, o.nation }).Distinct().ToList();
+            cityList = cities.Select(o => new City() { title = o.city, nationCode = o.nation }).ToList();
         }
 
         private static void InitializeLocations()

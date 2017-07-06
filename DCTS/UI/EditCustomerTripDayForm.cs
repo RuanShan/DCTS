@@ -125,7 +125,7 @@ namespace DCTS.UI
         {
             var trip = this.Model.Trip;
             var startAt = trip.start_at.Value.AddDays(this.Model.day - 1);
-            Schedule newSchedule = new Schedule() { tripday_id = Model.id, start_at = startAt, created_at = DateTime.Now };
+            Schedule newSchedule = new Schedule() { trip_id= Model.trip_id, tripday_id = Model.id, start_at = startAt, created_at = DateTime.Now };
             this.bindingSource1.Add(newSchedule);
             this.scheduleDataGridView.Refresh();
         }

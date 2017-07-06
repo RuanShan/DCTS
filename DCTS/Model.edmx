@@ -178,6 +178,7 @@
           <Property Name="desc" Type="varchar" MaxLength="1024" />
           <Property Name="created_at" Type="datetime" />
           <Property Name="updated_at" Type="datetime" />
+          <Property Name="trip_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Suppliers">
           <Key>
@@ -660,6 +661,7 @@
           <Property Type="DateTime" Name="created_at" />
           <Property Type="DateTime" Name="updated_at" />
           <NavigationProperty Name="TripDay" Relationship="DctsModel.fk_tripday" FromRole="Schedule" ToRole="TripDay" />
+          <Property Type="Int32" Name="trip_id" Nullable="false" />
         </EntityType>
         <EntityType Name="Supplier">
           <Key>
@@ -941,6 +943,7 @@
           <EntitySetMapping Name="Schedules">
             <EntityTypeMapping TypeName="DctsModel.Schedule">
               <MappingFragment StoreEntitySet="Schedules">
+                <ScalarProperty Name="trip_id" ColumnName="trip_id" />
                 <ScalarProperty Name="updated_at" ColumnName="updated_at" />
                 <ScalarProperty Name="created_at" ColumnName="created_at" />
                 <ScalarProperty Name="desc" ColumnName="desc" />

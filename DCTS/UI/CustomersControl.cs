@@ -63,7 +63,7 @@ namespace DCTS.UI
 
             {
                 CustomerList = new List<Customer>();
-                var query = ctx.Customers.OrderBy(o => o.id).Skip(offset).Take(pageSize);
+                var query = ctx.Customers.Include("TripCustomers").OrderBy(o => o.id).Skip(offset).Take(pageSize);
                 CustomerList = query.ToList();
 
                 var list = this.entityDataSource1.CreateView(query);
@@ -386,9 +386,20 @@ namespace DCTS.UI
             }
             else if (column == deleteColumn1)
             {
+                var hasTrip = false;
                 var row = dataGridView.Rows[e.RowIndex];
                 var model = row.DataBoundItem as Customer;
-                string msg = string.Format("确定删除<{0}>？", model.name);
+                using (var ctx = new DctsEntities())
+                {
+                    hasTrip = ctx.TripCustomers.Any(o => o.customer_id == model.id);
+                }
+
+                if (hasTrip)
+                {
+                    MessageHelper.AlertBox("当前客户有行程信息，请先删除行程信息！");
+                    return;
+                }
+                string msg = string.Format("确定删除<{0}>吗？", model.name);
 
                 if (MessageHelper.DeleteConfirm(msg))
                 {

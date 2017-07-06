@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.idColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.yesButton2 = new System.Windows.Forms.Button();
             this.noButton1 = new System.Windows.Forms.Button();
@@ -47,28 +46,23 @@
             this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idColumn1,
             this.nameColumn1});
             this.dataGridView1.Location = new System.Drawing.Point(12, 69);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(471, 230);
             this.dataGridView1.TabIndex = 4;
             // 
-            // idColumn1
-            // 
-            this.idColumn1.DataPropertyName = "id";
-            this.idColumn1.HeaderText = "编号";
-            this.idColumn1.Name = "idColumn1";
-            // 
             // nameColumn1
             // 
             this.nameColumn1.DataPropertyName = "title";
             this.nameColumn1.HeaderText = "名称";
             this.nameColumn1.Name = "nameColumn1";
-            this.nameColumn1.Width = 360;
+            this.nameColumn1.ReadOnly = true;
+            this.nameColumn1.Width = 450;
             // 
             // yesButton2
             // 
@@ -114,7 +108,7 @@
             this.Controls.Add(this.noButton1);
             this.Controls.Add(this.label1);
             this.Name = "ChooseCountries";
-            this.Text = "ChooseCountries";
+            this.Text = "选择出行国家";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -128,7 +122,6 @@
         private System.Windows.Forms.Button noButton1;
         private System.Windows.Forms.Label label1;
         private CustomComponents.EntityDataSource entityDataSource1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameColumn1;
     }
 }

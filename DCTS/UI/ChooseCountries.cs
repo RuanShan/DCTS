@@ -22,15 +22,10 @@ namespace DCTS.UI
         // 初始化过滤条件数据
         public int InitializeDataSource()
         {
-            var ctx = this.entityDataSource1.DbContext as DctsEntities;
-           
-
-            var query = ctx.Nations.AsQueryable();
-
-            int count = query.Count();
-            this.dataGridView1.DataSource = this.entityDataSource1.CreateView(query);
+ 
+            this.dataGridView1.DataSource = DCTS.DB.GlobalCache.NationList;
             //comboLocationList     
-            return count;
+            return 0;
         }
 
       

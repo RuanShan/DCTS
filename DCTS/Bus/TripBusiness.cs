@@ -41,25 +41,17 @@ namespace DCTS.Bus
 
 
                 //删除 schedule 中的信息
-                var list = ctx.TripDays.Where(o => o.trip_id == trip_id).ToList();
-                List<Schedule> deletedScheduleList = new List<Schedule>();
-                for (int i = 0; i < list.Count; i++)
-                {
-                    Schedule schedule = new Schedule();
-                    schedule.tripday_id = list[i].id;
-                    List<Schedule> scheduleList = ctx.Schedules.Where(o => o.tripday_id == schedule.tripday_id).ToList();
-                    ctx.Schedules.RemoveRange(scheduleList);
-                }
-
 
                 //Include("TripDays").Include("DayLocations")
                 var trip = ctx.Trips.Where(o => o.id == trip_id).First();
 
+                string sqlRemoveSchedules = string.Format("DELETE FROM Schedules WHERE Schedules.trip_id={0}", trip_id);
                 string sqlRemoveDays = string.Format("DELETE FROM TripDays WHERE TripDays.trip_id={0}", trip_id);
                 string sqlRemoveLocations = string.Format("DELETE FROM DayLocations WHERE DayLocations.trip_id={0}", trip_id);
                 string sqlRemoveTickets = string.Format("DELETE FROM Tickets WHERE Tickets.trip_id={0}", trip_id);
                 string sqlRemoveTripCustomers = string.Format("DELETE FROM TripCustomers WHERE TripCustomers.trip_id={0}", trip_id);
 
+                ctx.Database.ExecuteSqlCommand(sqlRemoveSchedules);
                 ctx.Database.ExecuteSqlCommand(sqlRemoveLocations);
                 ctx.Database.ExecuteSqlCommand(sqlRemoveDays);
                 ctx.Database.ExecuteSqlCommand(sqlRemoveTickets);

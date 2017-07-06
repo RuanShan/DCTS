@@ -87,9 +87,9 @@ namespace DCTS.UI
             {
                 //this.openAtDateTimePicker.Value = (DateTime)scenic.open_at;
             }
-            if (scenic.close_at != null)
+            if (scenic.open_close_more != null)
             {
-                //this.closeAtDateTimePicker.Value = (DateTime)scenic.close_at;
+                this.openCloseTextBox.Text = scenic.open_close_more;
             }
 
             if (scenic.tips.Length > 0)
@@ -132,6 +132,7 @@ namespace DCTS.UI
             scenic.local_address = this.localAddressTextBox.Text;
             scenic.route = this.routeTextBox.Text;
             scenic.img = this.imgPathTextBox.Text;
+            scenic.open_close_more = this.openCloseTextBox.Text;
             return scenic;
         }
 

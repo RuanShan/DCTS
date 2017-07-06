@@ -22,6 +22,7 @@ namespace DCTS
         public string desc { get; set; }
         public Nullable<System.DateTime> created_at { get; set; }
         public Nullable<System.DateTime> updated_at { get; set; }
+        public int trip_id { get; set; }
     
         public virtual TripDay TripDay { get; set; }
     }
