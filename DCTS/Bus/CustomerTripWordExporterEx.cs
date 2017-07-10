@@ -16,7 +16,7 @@ namespace DCTS.Bus
     //http://www.cnblogs.com/kesalin/archive/2012/04/18/open_xml_word.html
     class CustomerTripWordExporterEx
     {
-        long TripId {get; set;}
+        long TripId { get; set; }
 
         Trip trip;
         List<TripDay> days;
@@ -44,7 +44,7 @@ namespace DCTS.Bus
                 {
                     coverIds.Add(trip.cover_id);
                 }
-               
+
                 coverIds.AddRange(days.Where(o => o.cover_id > 0).Select(o => o.cover_id).ToList());
 
                 locationImages = ctx.LocationImages.Where(o => coverIds.Contains(o.id)).ToList();
@@ -55,8 +55,8 @@ namespace DCTS.Bus
                 locationIds = locationIds.Where(o => o > 0).ToList();
 
                 ticketLocations = ctx.ComboLocations.Where(o => locationIds.Contains(o.id)).ToList();
-                
-                var supplierIds = ticketList.Select(o=> o.supplier_id).ToArray();
+
+                var supplierIds = ticketList.Select(o => o.supplier_id).ToArray();
                 supplierList = ctx.Suppliers.Where(o => supplierIds.Contains(o.id)).ToList();
 
                 customerList = trip.TripCustomers.Select(o => o.Customer).ToList();
@@ -68,7 +68,7 @@ namespace DCTS.Bus
 
 
         //导出word
-        public bool ExportWord( )
+        public bool ExportWord()
         {
             var sources = new List<WordprocessingDocument>();
 
@@ -86,16 +86,16 @@ namespace DCTS.Bus
                     tmplDict[type] = template;
 
                 }
-                
+
                 var tripSumaryTemplate = tmplDict[ComboLocationEnum.TripSummary];
-                var daySumaryTemplate = tmplDict[ComboLocationEnum.DaySummary]; 
+                var daySumaryTemplate = tmplDict[ComboLocationEnum.DaySummary];
 
                 //cloned templates/base as template
                 string layout = LocationTemplate.LayoutRelativePath;
                 string tripPath = EntityPathConfig.TripWordFilePath(this.TripId);
-                File.Copy(layout, tripPath,true);
+                File.Copy(layout, tripPath, true);
 
-                using (WordprocessingDocument document = WordprocessingDocument.Open(tripPath, true) )
+                using (WordprocessingDocument document = WordprocessingDocument.Open(tripPath, true))
                 {
                     // 初识国家
                     // Google使用说明
@@ -107,7 +107,7 @@ namespace DCTS.Bus
                             //处理每天行程概要
                             HandleDaySummary(daySumaryTemplate, day);
                             //处理每天的票务
-                            HandleDayTickets(tmplDict,day);
+                            HandleDayTickets(tmplDict, day);
                             var daylocations = dayLocations.Where(o => o.day_id == day.id).ToList();
                             foreach (var dl in daylocations)
                             {
@@ -116,10 +116,10 @@ namespace DCTS.Bus
                         }
                         //线上查询说明
                         //机票列表
-                        var tickets = this.ticketList.Where(o=>o.ttype == (int)SupplierEnum.Flight).ToList();
+                        var tickets = this.ticketList.Where(o => o.ttype == (int)SupplierEnum.Flight).ToList();
                         HanldeFlightTicketList(tmplDict, tickets);
                         //酒店列表
-                        tickets = this.ticketList.Where(o=>o.ttype == (int)SupplierEnum.Hotal).ToList();
+                        tickets = this.ticketList.Where(o => o.ttype == (int)SupplierEnum.Hotal).ToList();
                         HanldeHotelTicketList(tmplDict, tickets);
                         //租车列表
                         tickets = this.ticketList.Where(o => o.ttype == (int)SupplierEnum.Rental).ToList();
@@ -129,9 +129,10 @@ namespace DCTS.Bus
                         HanldeInsuranceTicketList(tmplDict, tickets);
                         //交通及活动列表
                         tickets = this.ticketList.Where(o => o.ttype == (int)SupplierEnum.Activity || o.ttype == (int)SupplierEnum.Train).ToList();
-                        HanldeOtherTicketList(tmplDict, tickets);
+                        if (tickets != null && tickets.Count > 0)
+                            HanldeOtherTicketList(tmplDict, tickets);
                     }
-                   //合并文档
+                    //合并文档
                     WordTemplateHelper.MergeDoc(filledTemplateStreams, document);
                     document.Save();//保存
                 }
@@ -183,7 +184,7 @@ namespace DCTS.Bus
                     var rowPattern = rows.Last();
                     //交通票务类型
                     int[] ticketTypes = { (int)SupplierEnum.Flight, (int)SupplierEnum.Activity, (int)SupplierEnum.Train, (int)SupplierEnum.Hotal };
-                    
+
                     //处理每日内容
                     for (int i = 0; i < this.days.Count; i++)
                     {
@@ -191,15 +192,15 @@ namespace DCTS.Bus
                         var date = trip.start_at.GetValueOrDefault().AddDays(day.day - 1).Date;
                         var locations = this.dayLocations.Where(o => o.day_id == day.id).ToList();
                         // 按开始时间升序排列
-                        var tickets = this.ticketList.Where(o => (o.start_at.GetValueOrDefault(DateTime.Now).Date == date) && ticketTypes.Contains(o.ttype)).OrderBy(o=>o.start_at).ToList();
+                        var tickets = this.ticketList.Where(o => (o.start_at.GetValueOrDefault(DateTime.Now).Date == date) && ticketTypes.Contains(o.ttype)).OrderBy(o => o.start_at).ToList();
                         //InsertRow performs a copy, so we get markup in new line ready for replacements
 
                         var rowCopy = rowPattern.CloneNode(true) as TableRow;
 
                         WordTemplateHelper.ReplaceText<TableRow>(rowCopy, "%day_day%", day.day.ToString());
                         WordTemplateHelper.ReplaceText<TableRow>(rowCopy, "%day_date%", String.Format("{0:yyyyMMdd}", date));
-                        WordTemplateHelper.ReplaceText<TableRow>(rowCopy, "%day_weekday%",  String.Format("{0:ddd}", date));
-                        
+                        WordTemplateHelper.ReplaceText<TableRow>(rowCopy, "%day_weekday%", String.Format("{0:ddd}", date));
+
                         //处理每日城市
                         //var locationCities = new List<DayLocationView>();
                         //foreach (var ticket in tickets)
@@ -256,27 +257,35 @@ namespace DCTS.Bus
                             {
                                 pattern.Remove();
                             }
-                            else {
+                            else
+                            {
                                 pattern.RemoveAllChildren();
                             }
                         }
-                        else {
+                        else
+                        {
                             pattern.RemoveAllChildren();
                         }
 
                         //处理每日行程简略
-                        cell = rowCopy.Elements<TableCell>().ElementAt(3);                         
+                        cell = rowCopy.Elements<TableCell>().ElementAt(3);
                         pattern = cell.Descendants<Paragraph>().Last();
-                        var ticketTitles = tickets.Select(o => new DayLocationView(){ title = o.title, start_at = o.start_at} ).ToList();
-                        var scenicTitles = locations.Where(o => o.ComboLocation.ltype == (int)ComboLocationEnum.Scenic).Select(o => new DayLocationView(){ title = o.ComboLocation.title, start_at = o.start_at}).Distinct().ToArray();
+                        var ticketTitles = tickets.Select(o => new DayLocationView() { title = o.title, start_at = o.start_at }).ToList();
+                        var scenicTitles = locations.Where(o => o.ComboLocation.ltype == (int)ComboLocationEnum.Scenic).Select(o => new DayLocationView() { title = o.ComboLocation.title, start_at = o.start_at }).Distinct().ToArray();
                         ticketTitles.AddRange(scenicTitles);
                         ticketTitles = ticketTitles.OrderBy(o => o.start_at).ToList();
+                        int index = 0;
                         for (int j = 0; j < ticketTitles.Count(); j++)
                         {
-                            var t = ticketTitles[j];                            
-                            Paragraph cloned  = pattern.CloneNode(true) as Paragraph;
-                            WordTemplateHelper.ReplaceText<Paragraph>(cloned, "%day_location%", string.Format("{0}. {1}",j+1,t.title));
-                            pattern.InsertBeforeSelf(cloned);
+                            var t = ticketTitles[j];
+                            Paragraph cloned = pattern.CloneNode(true) as Paragraph;
+                            if (t.title != null)
+                            {
+
+                                WordTemplateHelper.ReplaceText<Paragraph>(cloned, "%day_location%", string.Format("{0}. {1}", index + 1, t.title));
+                                pattern.InsertBeforeSelf(cloned);
+                                index++;
+                            }
                         }
 
                         if (ticketTitles.Count > 0)
@@ -289,12 +298,12 @@ namespace DCTS.Bus
                             pattern.RemoveAllChildren();
                         }
                         //处理每日住宿, 有的住宿可能是多晚，这里需要查找所有的住宿ticket
-                        var hotelTicket = this.ticketList.Where(o => o.ttype == (int)SupplierEnum.Hotal && o.start_at < date.AddDays(1)).OrderBy(o=>o.start_at).LastOrDefault();
+                        var hotelTicket = this.ticketList.Where(o => o.ttype == (int)SupplierEnum.Hotal && o.start_at < date.AddDays(1)).OrderBy(o => o.start_at).LastOrDefault();
                         var hotelReplaced = false;
-                        if (hotelTicket !=null)
+                        if (hotelTicket != null)
                         {
                             // 检查入住时间是否有效
-                            DateTime endAt = hotelTicket.start_at.Value.AddDays(  hotelTicket.days - 1);
+                            DateTime endAt = hotelTicket.start_at.Value.AddDays(hotelTicket.days - 1);
                             if (endAt > date)
                             {
                                 var location = ticketLocations.Where(o => o.id == hotelTicket.to_location_id).FirstOrDefault();
@@ -345,7 +354,7 @@ namespace DCTS.Bus
             //tripSumary.SaveAs(path);
             this.filledTemplates.Add(tripSumary);
             this.filledTemplateStreams.Add(stream);
-            
+
         }
 
         //处理每日行程
@@ -356,24 +365,24 @@ namespace DCTS.Bus
             string[] specKeys = { "day_date", "day_locations", "day_lweekday" };
             var stream = new MemoryStream();
             var sumary = template.Clone(stream, true) as WordprocessingDocument;
-			//替换一般属性
+            //替换一般属性
             WordTemplateHelper.ReplaceTextWithProperty<TripDay>(sumary, keys, day);
-			//替换特殊文本
-			var date = this.trip.start_at.GetValueOrDefault().AddDays(day.day - 1);
+            //替换特殊文本
+            var date = this.trip.start_at.GetValueOrDefault().AddDays(day.day - 1);
             var locations = this.dayLocations.Where(o => o.day_id == day.id).ToList();
 
-            
+
             //2017年6月1日
-            WordTemplateHelper.ReplaceText(sumary, "%day_date%", WordTemplateHelper.DisplayDate(date));                 
+            WordTemplateHelper.ReplaceText(sumary, "%day_date%", WordTemplateHelper.DisplayDate(date));
             //星期四
             WordTemplateHelper.ReplaceText(sumary, "%day_lweekday%", WordTemplateHelper.DisplayLongWeekDay(date));
             //北京-阿姆斯特丹-罗马
             //string.Join("-", locations.Select(o=>o.ComboLocation.city).ToArray())
             WordTemplateHelper.ReplaceText(sumary, "%day_cities%", (day.cities != null ? day.cities : ""));
-            
+
             var mainDoc = sumary.MainDocumentPart.Document;
 
-			Table dayTable = mainDoc.Body.Descendants<Table>().LastOrDefault();
+            Table dayTable = mainDoc.Body.Descendants<Table>().LastOrDefault();
             if (dayTable != null)
             {
                 //Row 0 is pattern
@@ -432,7 +441,7 @@ namespace DCTS.Bus
         }
 
         //处理每个地点
-        public void HandleLocation( ComboLocation combolocation, Ticket ticket)
+        public void HandleLocation(ComboLocation combolocation, Ticket ticket)
         {
             string[] locationKeys = {"nation","city", "area", "title", "local_title", "address", "local_address", "latlng", "route", "contact", "tips", "open_close_more",
                               // 景点
@@ -465,6 +474,9 @@ namespace DCTS.Bus
                 if (locationType != ComboLocationEnum.Blank)
                 {
                     WordTemplateHelper.ReplaceTextWithProperty<ComboLocation>(duplicated, locationKeys, location);
+                    //删除没有填写内容的模板数据
+                    //if(location.open_close_more==null||location.open_close_more=="")
+                    //removescenicRange(duplicated,  combolocation);
 
                     foreach (string key in specKeys)
                     {
@@ -524,13 +536,14 @@ namespace DCTS.Bus
                                 }
                                 pattern.Remove();
                             }
-                          
+
                         }
-                        else {
+                        else
+                        {
                             var customer = this.customerList.FirstOrDefault(o => o.id == ticket.customer_id);
                             if (customer != null)
                             {
-                                WordTemplateHelper.ReplaceText(duplicated, "%customer_name%", customer.name);  
+                                WordTemplateHelper.ReplaceText(duplicated, "%customer_name%", customer.name);
                             }
                         }
                     }
@@ -573,7 +586,7 @@ namespace DCTS.Bus
             }
 
         }
-        
+
         // 处理每日机票
         public void HanldeFlightTickets(Dictionary<ComboLocationEnum, WordprocessingDocument> tmplDict, List<Ticket> tickets)
         {
@@ -582,7 +595,7 @@ namespace DCTS.Bus
             var stream = new MemoryStream();
             var template = ticketTemplate.Clone(stream, true) as WordprocessingDocument;
             List<int> airportIds = new List<int>();
-            
+
             var mainDoc = template.MainDocumentPart.Document;
             //look for one specific table here
             Table table = mainDoc.Body.Descendants<Table>().LastOrDefault();
@@ -591,7 +604,7 @@ namespace DCTS.Bus
                 for (var i = 0; i < tickets.Count; i++)
                 {
                     var ticket = tickets[i];
-                    var supplier = this.supplierList.First(o=>o.id == ticket.supplier_id);
+                    var supplier = this.supplierList.First(o => o.id == ticket.supplier_id);
                     var cloned = table.CloneNode(true) as Table;
                     var from_location = ticketLocations.FirstOrDefault(o => o.id == ticket.from_location_id);
                     var to_location = ticketLocations.FirstOrDefault(o => o.id == ticket.to_location_id);
@@ -606,22 +619,22 @@ namespace DCTS.Bus
                         WordTemplateHelper.ReplaceText<Table>(cloned, "%ticket_start_time%", WordTemplateHelper.DisplayTime(ticket.start_at.GetValueOrDefault()));
                         WordTemplateHelper.ReplaceText<Table>(cloned, "%ticket_end_time%", WordTemplateHelper.DisplayTime(ticket.end_at.GetValueOrDefault()));
                         //替换图片
-                        if( supplier.img != null )
+                        if (supplier.img != null)
                         {
                             string file = EntityPathConfig.Supplier_LocationImagePath(supplier);
                             if (File.Exists(file))
                             {
                                 string relId = WordTemplateHelper.InsertPicture(template, file);
                                 var blip = cloned.Descendants<DocumentFormat.OpenXml.Drawing.Blip>().FirstOrDefault();
-                                blip.Embed.InnerText = relId;                                
+                                blip.Embed.InnerText = relId;
                             }
                         }
-                        airportIds.Add( ticket.from_location_id);
-                        airportIds.Add( ticket.to_location_id);
+                        airportIds.Add(ticket.from_location_id);
+                        airportIds.Add(ticket.to_location_id);
                     }
                     if (i != 0)
                     {
-                        table.InsertBeforeSelf( new Paragraph(new DocumentFormat.OpenXml.Wordprocessing.Run(new DocumentFormat.OpenXml.Wordprocessing.Break() { Type = BreakValues.TextWrapping })));
+                        table.InsertBeforeSelf(new Paragraph(new DocumentFormat.OpenXml.Wordprocessing.Run(new DocumentFormat.OpenXml.Wordprocessing.Break() { Type = BreakValues.TextWrapping })));
                     }
                     table.InsertBeforeSelf(cloned);
                 }
@@ -632,15 +645,15 @@ namespace DCTS.Bus
             template.Save();
             // 机票文档
             MemoryStream newStream = new MemoryStream();
-            template.Clone(newStream);            
+            template.Clone(newStream);
             stream.Close();
             this.filledTemplates.Add(template);
             this.filledTemplateStreams.Add(newStream);
-            
+
             // 机场文档
             foreach (var aid in airportIds.Distinct())
-            { 
-                var location = ticketLocations.Find( o=>o.id == aid);
+            {
+                var location = ticketLocations.Find(o => o.id == aid);
                 if (location.word != null && File.Exists(EntityPathConfig.LocationWordPath(location)))
                 {
                     var airportStream = new MemoryStream(File.ReadAllBytes(EntityPathConfig.LocationWordPath(location)));
@@ -658,12 +671,12 @@ namespace DCTS.Bus
             var stream = new MemoryStream();
             var template = ticketTemplate.Clone(stream, true) as WordprocessingDocument;
             var customerIds = tickets.Select(o => o.customer_id).ToList();
-            var supplierIds = tickets.Select(o=>o.supplier_id).ToList();
+            var supplierIds = tickets.Select(o => o.supplier_id).ToList();
             var customers = this.customerList.Where(o => customerIds.Contains(o.id)).ToList();
             var mainDoc = template.MainDocumentPart.Document;
-            
-            var supplierNames = this.supplierList.Where(o => supplierIds.Contains(o.id)).Select(o=>o.name).ToList();
-            WordTemplateHelper.ReplaceText<Document>(mainDoc, "%supplier_names%", string.Join("/", supplierNames ));
+
+            var supplierNames = this.supplierList.Where(o => supplierIds.Contains(o.id)).Select(o => o.name).ToList();
+            WordTemplateHelper.ReplaceText<Document>(mainDoc, "%supplier_names%", string.Join("/", supplierNames));
 
             Table customerTable = mainDoc.Body.Descendants<Table>().ElementAt(1);
             if (customerTable != null)
@@ -675,7 +688,7 @@ namespace DCTS.Bus
                     {
                         var customer = customers[i];
                         var cloned = rowPattern.CloneNode(true) as TableRow;
-                        WordTemplateHelper.ReplaceText<TableRow>(cloned, "%customer_i%", (i+1).ToString());
+                        WordTemplateHelper.ReplaceText<TableRow>(cloned, "%customer_i%", (i + 1).ToString());
                         WordTemplateHelper.ReplaceText<TableRow>(cloned, "%customer_name%", customer.name);
                         WordTemplateHelper.ReplaceText<TableRow>(cloned, "%customer_enname%", customer.enname);
                         WordTemplateHelper.ReplaceText<TableRow>(cloned, "%customer_passport%", customer.passport);
@@ -684,13 +697,13 @@ namespace DCTS.Bus
                     rowPattern.Remove();
                 }
             }
-          
+
             Table ticketTable = mainDoc.Body.Descendants<Table>().ElementAt(2);
             //处理机票
             if (ticketTable != null)
             {
                 var rowPattern = ticketTable.Elements<TableRow>().Last();
-                if( rowPattern != null)
+                if (rowPattern != null)
                 {
                     for (var i = 0; i < tickets.Count; i++)
                     {
@@ -701,24 +714,24 @@ namespace DCTS.Bus
                         if (from_location != null && to_location != null)
                         {
                             WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_i%", (i + 1).ToString());
-                            WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_date%", string.Format("{0:MMdd}",ticket.start_at.GetValueOrDefault()));
+                            WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_date%", string.Format("{0:MMdd}", ticket.start_at.GetValueOrDefault()));
                             WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_num%", ticket.num);
                             //0601
                             WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_from_city%", from_location.city);
                             WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_to_city%", to_location.city);
 
                             WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_start_time%", WordTemplateHelper.DisplayTime(ticket.start_at.GetValueOrDefault()));
-                            string endAt = ( ticket.start_at.Value.Date == ticket.end_at.Value.Date ? string.Format("{0:HH:mm}",ticket.end_at.Value) : string.Format("{0:HH:mm}+1",ticket.end_at.Value));
+                            string endAt = (ticket.start_at.Value.Date == ticket.end_at.Value.Date ? string.Format("{0:HH:mm}", ticket.end_at.Value) : string.Format("{0:HH:mm}+1", ticket.end_at.Value));
                             WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_end_time%", endAt);
-                         
+
                         }
-                     
+
                         rowPattern.InsertBeforeSelf(cloned);
                     }
                     rowPattern.Remove();
                 }
             }
-          
+
 
             template.Save();
             this.filledTemplates.Add(template);
@@ -751,7 +764,7 @@ namespace DCTS.Bus
                         var ticket = tickets[i];
                         var cloned = rowPattern.CloneNode(true) as TableRow;
                         var to_location = ticketLocations.FirstOrDefault(o => o.id == ticket.to_location_id);
-                        if ( to_location != null)
+                        if (to_location != null)
                         {
                             WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_i%", (i + 1).ToString());
                             //0607-0609
@@ -806,14 +819,14 @@ namespace DCTS.Bus
                     {
                         var ticket = tickets[i];
                         var cloned = rowPattern.CloneNode(true) as TableRow;
-                        
+
                         var end_at = ticket.start_at.GetValueOrDefault(DateTime.Now).AddDays(ticket.days - 1);
                         //2017.06.07-06.09            
                         var s = String.Format("{0:MM.dd}~{1:MM.dd}", ticket.start_at, end_at);
                         WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_i%", (i + 1).ToString());
                         WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_startenddate%", s);
                         s = String.Format("{0:HH:mm}/{1:HH:mm}", ticket.start_at, end_at);
-                        WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_startendtime%",s);
+                        WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_startendtime%", s);
                         //0601
                         s = string.Format("{0}/{1}", ticket.from_place, ticket.to_place);
                         WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_fromtoplace%", s);
@@ -848,7 +861,7 @@ namespace DCTS.Bus
                 var ticket = tickets.FirstOrDefault();
                 if (ticket != null)
                 {
-                    WordTemplateHelper.ReplaceText<Document>(mainDoc, "%ticket_title%", ticket.title);                    
+                    WordTemplateHelper.ReplaceText<Document>(mainDoc, "%ticket_title%", ticket.title);
                 }
                 Table customerTable = mainDoc.Body.Descendants<Table>().ElementAt(1);
                 if (customerTable != null)
@@ -901,20 +914,22 @@ namespace DCTS.Bus
                         var ticket = tickets[i];
                         var cloned = rowPattern.CloneNode(true) as TableRow;
                         {
-                            var s = ( ticket.ttype ==(int) SupplierEnum.Activity ? "活动" : "火车");
+                            var s = (ticket.ttype == (int)SupplierEnum.Activity ? "活动" : "火车");
                             WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_type%", s);
                             var end_at = ticket.start_at.GetValueOrDefault(DateTime.Now).AddDays(ticket.days - 1);
-                            if( ticket.ttype ==(int) SupplierEnum.Train)
+                            if (ticket.ttype == (int)SupplierEnum.Train)
                             {
-                                s =  string.Format("{0:yyyy.MM.dd HHmm}-{1:HHmm}",ticket.start_at, end_at);
-                            }else{
-                                s =  string.Format("{0:yyyy.MM.dd}",ticket.start_at);
+                                s = string.Format("{0:yyyy.MM.dd HHmm}-{1:HHmm}", ticket.start_at, end_at);
+                            }
+                            else
+                            {
+                                s = string.Format("{0:yyyy.MM.dd}", ticket.start_at);
                             }
                             WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_fulldatetime%", s);
-                            WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_num%", ticket.num );
+                            WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_num%", ticket.num);
                             //0601
                             WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_fromto%", string.Format("{0}-{1}", ticket.from_place, ticket.to_place));
- 
+
                         }
 
                         rowPattern.InsertBeforeSelf(cloned);
@@ -1080,5 +1095,29 @@ namespace DCTS.Bus
             }
         }
 
+        public void removescenicRange(WordprocessingDocument template, ComboLocation combolocation)
+        {
+
+            var stream = new MemoryStream();
+
+
+            var tripSumary = template.Clone(stream, true) as WordprocessingDocument;
+
+            var mainDoc = tripSumary.MainDocumentPart.Document;
+
+
+            Table dayTable = mainDoc.Body.Descendants<Table>().FirstOrDefault();
+
+            var rows = dayTable.Elements<TableRow>().ToList();
+            var rowPattern = rows.Last();
+
+            var rowCopy = rowPattern.CloneNode(true) as TableRow;
+
+            var cell = rowCopy.Elements<TableCell>().ElementAt(1);
+            var pattern = cell.Descendants<Paragraph>().Last();
+
+            Paragraph cloned = pattern.CloneNode(true) as Paragraph;
+            pattern.Remove();
+        }
     }
 }
