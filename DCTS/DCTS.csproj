@@ -61,9 +61,6 @@
     <Reference Include="DocumentFormat.OpenXml">
       <HintPath>..\packages\DocumentFormat.OpenXml.2.7.1\lib\net45\DocumentFormat.OpenXml.dll</HintPath>
     </Reference>
-    <Reference Include="DocX">
-      <HintPath>..\packages\DocX.1.0.0.22\lib\net40\DocX.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -153,13 +150,11 @@
     </EmbeddedResource>
     <Compile Include="Bus\TicketBusiness.cs" />
     <Compile Include="Bus\CustomerTripWordExporterEx.cs" />
-    <Compile Include="Bus\CustomerTripWordExporter.cs" />
     <Compile Include="Bus\SupplierBusiness.cs" />
     <Compile Include="Bus\TripWordExporterEx.cs" />
     <Compile Include="Bus\CSVStreamReader.cs" />
     <Compile Include="Bus\LocationExporter.cs" />
     <Compile Include="Bus\TripBusiness.cs" />
-    <Compile Include="Bus\TripWordExporter.cs" />
     <Compile Include="Bus\WordTemplateHelper.cs" />
     <Compile Include="City.cs">
       <DependentUpon>Model.tt</DependentUpon>

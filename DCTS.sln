@@ -12,6 +12,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D81CBD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfDCTS", "WpfDCTS\WpfDCTS.csproj", "{B6CC8388-7754-4E9F-B581-41124174E07D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shell", "Shell\Shell.csproj", "{711CCF1F-6B8F-4E97-8D84-0EE679C83B41}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShellExplorer", "ShellExplorer\ShellExplorer.csproj", "{7258B802-D0E5-4268-9C71-3DCC6AF5C2C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +30,14 @@ Global
 		{B6CC8388-7754-4E9F-B581-41124174E07D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6CC8388-7754-4E9F-B581-41124174E07D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6CC8388-7754-4E9F-B581-41124174E07D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{711CCF1F-6B8F-4E97-8D84-0EE679C83B41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{711CCF1F-6B8F-4E97-8D84-0EE679C83B41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{711CCF1F-6B8F-4E97-8D84-0EE679C83B41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{711CCF1F-6B8F-4E97-8D84-0EE679C83B41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7258B802-D0E5-4268-9C71-3DCC6AF5C2C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7258B802-D0E5-4268-9C71-3DCC6AF5C2C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7258B802-D0E5-4268-9C71-3DCC6AF5C2C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7258B802-D0E5-4268-9C71-3DCC6AF5C2C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

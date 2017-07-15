@@ -278,17 +278,16 @@ namespace DCTS.Bus
                         for (int j = 0; j < ticketTitles.Count(); j++)
                         {
                             var t = ticketTitles[j];
-                            Paragraph cloned = pattern.CloneNode(true) as Paragraph;
                             if (t.title != null)
                             {
-
+                                Paragraph cloned = pattern.CloneNode(true) as Paragraph;
                                 WordTemplateHelper.ReplaceText<Paragraph>(cloned, "%day_location%", string.Format("{0}. {1}", index + 1, t.title));
                                 pattern.InsertBeforeSelf(cloned);
                                 index++;
                             }
                         }
 
-                        if (ticketTitles.Count > 0)
+                        if (index > 0)
                         {
                             pattern.Remove();
                         }
@@ -474,10 +473,7 @@ namespace DCTS.Bus
                 if (locationType != ComboLocationEnum.Blank)
                 {
                     WordTemplateHelper.ReplaceTextWithProperty<ComboLocation>(duplicated, locationKeys, location);
-                    //删除没有填写内容的模板数据
-                    //if(location.open_close_more==null||location.open_close_more=="")
-                    //removescenicRange(duplicated,  combolocation);
-
+                    
                     foreach (string key in specKeys)
                     {
                         string wrappedKey = "%" + key + "%";
@@ -916,9 +912,9 @@ namespace DCTS.Bus
                         {
                             var s = (ticket.ttype == (int)SupplierEnum.Activity ? "活动" : "火车");
                             WordTemplateHelper.ReplaceText<TableRow>(cloned, "%ticket_type%", s);
-                            var end_at = ticket.start_at.GetValueOrDefault(DateTime.Now).AddDays(ticket.days - 1);
                             if (ticket.ttype == (int)SupplierEnum.Train)
                             {
+                                var end_at = ticket.end_at.GetValueOrDefault(DateTime.Now);
                                 s = string.Format("{0:yyyy.MM.dd HHmm}-{1:HHmm}", ticket.start_at, end_at);
                             }
                             else
@@ -1095,29 +1091,5 @@ namespace DCTS.Bus
             }
         }
 
-        public void removescenicRange(WordprocessingDocument template, ComboLocation combolocation)
-        {
-
-            var stream = new MemoryStream();
-
-
-            var tripSumary = template.Clone(stream, true) as WordprocessingDocument;
-
-            var mainDoc = tripSumary.MainDocumentPart.Document;
-
-
-            Table dayTable = mainDoc.Body.Descendants<Table>().FirstOrDefault();
-
-            var rows = dayTable.Elements<TableRow>().ToList();
-            var rowPattern = rows.Last();
-
-            var rowCopy = rowPattern.CloneNode(true) as TableRow;
-
-            var cell = rowCopy.Elements<TableCell>().ElementAt(1);
-            var pattern = cell.Descendants<Paragraph>().Last();
-
-            Paragraph cloned = pattern.CloneNode(true) as Paragraph;
-            pattern.Remove();
-        }
     }
 }
