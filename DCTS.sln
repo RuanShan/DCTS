@@ -2,6 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DCTS", "DCTS\DCTS.csproj", "{30E879DC-767F-4F7D-991C-FB85720CA82E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{711CCF1F-6B8F-4E97-8D84-0EE679C83B41} = {711CCF1F-6B8F-4E97-8D84-0EE679C83B41}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D81CBD09-77DA-420D-B1F4-45FEF55E1E63}"
 	ProjectSection(SolutionItems) = preProject

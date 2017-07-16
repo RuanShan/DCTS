@@ -133,6 +133,9 @@
     <EmbeddedResource Include="UI\EditCustomerTripForm.resx">
       <DependentUpon>EditCustomerTripForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\ImageExplorerControl.resx">
+      <DependentUpon>ImageExplorerControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\NewCustomerFlightForm.resx">
       <DependentUpon>NewCustomerFlightForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -242,6 +245,12 @@
     </Compile>
     <Compile Include="UI\EditCustomerTripForm.Designer.cs">
       <DependentUpon>EditCustomerTripForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ImageExplorerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\ImageExplorerControl.Designer.cs">
+      <DependentUpon>ImageExplorerControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\NewCustomerFlightForm.cs">
       <SubType>Form</SubType>
@@ -843,7 +852,12 @@
     <None Include="Resources\FirstRecord_small.png" />
     <None Include="Resources\Cancel2_small.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Shell\Shell.csproj">
+      <Project>{711CCF1F-6B8F-4E97-8D84-0EE679C83B41}</Project>
+      <Name>Shell</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <PropertyGroup>

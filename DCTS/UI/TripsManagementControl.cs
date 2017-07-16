@@ -27,6 +27,8 @@ namespace DCTS.UI
         OtherControl otherControl;
         ActivityControl activityControl;
         ImportSystemfiles importSystemfile;
+        ImageExplorerControl imageExplorer;
+
         public TripsManagementControl()
         {
             InitializeComponent();
@@ -242,6 +244,18 @@ namespace DCTS.UI
             this.mainPanel.Controls.Add(importSystemfile);
 
 
+        }
+
+        private void shellToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (imageExplorer == null)
+            {
+                imageExplorer = new ImageExplorerControl();
+                imageExplorer.Dock = DockStyle.Fill;
+            }
+            //this.importSystemfile.BeginActive();
+            this.mainPanel.Controls.Clear();
+            this.mainPanel.Controls.Add(imageExplorer);
         }
 
     }
