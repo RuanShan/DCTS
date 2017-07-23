@@ -161,7 +161,7 @@ namespace DCTS.UI
 
                     if (this.saveFileDialog1.ShowDialog() == DialogResult.OK)
                     {
-                        string tripWordFilePath = EntityPathConfig.TripWordFilePath(trip.id);
+                        string tripWordFilePath = EntityPathHelper.TripWordFilePath(trip.id);
                         string localFilePath = saveFileDialog1.FileName; //获得文件路径 
 
                         //给文件名前加上时间 

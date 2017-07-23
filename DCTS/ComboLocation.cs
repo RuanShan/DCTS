@@ -49,6 +49,8 @@ namespace DCTS
         public string open_close_more { get; set; }
         public string guidance { get; set; }
         public string word { get; set; }
+        public string image_path { get; set; }
+        public string image_name { get; set; }
     
         public virtual ICollection<DayLocation> DayLocations { get; set; }
         public virtual ICollection<LocationImage> LocationImages { get; set; }

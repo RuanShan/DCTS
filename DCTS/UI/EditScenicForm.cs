@@ -41,15 +41,23 @@ namespace DCTS.UI
 
                 ComboLoactionBusiness.Validate(scenic);
 
-                string imgFilePath = scenic.img;
-
-                bool newImg = (scenic.img != originalScenic.img);
+                bool newImg = (scenic.image_path != originalScenic.image_path);
                 if (newImg)
                 {
-                    string imgFileName = Path.GetFileName(imgFilePath);
-                    scenic.img = imgFileName;
-                    string copyToPath = EntityPathConfig.LocationImagePath(scenic);
-                    File.Copy(imgFilePath, copyToPath, true);
+                    string imagePath = scenic.image_path;
+                    //用户选择了素材目录的其他图片
+                    if (imagePath.StartsWith(EntityPathHelper.ImageBasePath))
+                    {
+                        string relativeImagePath = imagePath.Substring(EntityPathHelper.ImageBasePath.Length);
+                        scenic.image_path = relativeImagePath;
+                    }
+                    else
+                    { // 用户选择素材目录之外的图片
+                        string imgFileName = Path.GetFileName(imagePath);
+                        scenic.image_path = imgFileName;
+                        string copyToPath = EntityPathHelper.LocationImagePathEx(scenic);
+                        File.Copy(imagePath, copyToPath, true);
+                    }
                 }
             
                 ctx.SaveChanges();
@@ -73,7 +81,7 @@ namespace DCTS.UI
             var ctx = this.entityDataSource1.DbContext as DctsEntities;
 
             this.scenic = ctx.ComboLocations.Find(ScenicId);
-            this.originalScenic = new ComboLocation() { img = scenic.img };
+            this.originalScenic = new ComboLocation() { image_path = scenic.image_path };
             this.scenicFormControl1.FillFormByModel(scenic);
 
 

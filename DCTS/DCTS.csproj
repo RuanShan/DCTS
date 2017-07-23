@@ -193,7 +193,7 @@
     <Compile Include="DB\DayLocationView.cs" />
     <Compile Include="DB\DBContextExtension.cs" />
     <Compile Include="DB\DiningLocation.cs" />
-    <Compile Include="DB\EntityPathConfig.cs" />
+    <Compile Include="DB\EntityPathHelper.cs" />
     <Compile Include="DB\FlightTicket.cs" />
     <Compile Include="DB\GlobalCache.cs" />
     <Compile Include="DB\MockEntity.cs" />

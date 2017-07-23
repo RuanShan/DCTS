@@ -35,7 +35,7 @@ namespace DCTS.UI
 
                 if (obj.word != null && obj.word != "")
                 {
-                    string copyToPath = EntityPathConfig.LocationWordPath(obj);
+                    string copyToPath = EntityPathHelper.LocationWordPath(obj);
 
 
                     this.docPathTextBox.Text = copyToPath;
@@ -121,7 +121,7 @@ namespace DCTS.UI
                         }
                         if (hasDoc)
                         {
-                            string copyToPath = EntityPathConfig.LocationWordPath(obj);
+                            string copyToPath = EntityPathHelper.LocationWordPath(obj);
                             if (!File.Exists(copyToPath))
                                 File.Copy(docFilePath, copyToPath);
                         }
@@ -144,7 +144,7 @@ namespace DCTS.UI
                         if (hasDoc)
                         {
                             obj.word = copyfilename;
-                            string copyToPath = EntityPathConfig.LocationWordPath(obj);
+                            string copyToPath = EntityPathHelper.LocationWordPath(obj);
 
                             if (!File.Exists(copyToPath) && File.Exists(docFilePath))
                                 File.Copy(docFilePath, copyToPath);

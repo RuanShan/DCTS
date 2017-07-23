@@ -55,8 +55,10 @@
             this.flightSupplierColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.service_no1Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fromAirportColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.fromAddressColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.start_at1Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toAirportColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.toAddressColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.end_atColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.baggageColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.trainTabPage = new System.Windows.Forms.TabPage();
@@ -93,8 +95,11 @@
             this.rulesColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.from_addressColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.start_atColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fromAddressColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.to_addressColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.end_atColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toAddressColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.routeColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.wifiTabPage = new System.Windows.Forms.TabPage();
             this.WIFIGridView = new System.Windows.Forms.DataGridView();
             this.wifiCustomerColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
@@ -107,6 +112,11 @@
             this.dayColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.activityTabPage = new System.Windows.Forms.TabPage();
             this.activityDataGridView = new System.Windows.Forms.DataGridView();
+            this.ActivityCustomerColumn1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.start_atColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.activityCityColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.rulesColumn6 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.overlayColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.startAtDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
             this.findTemplateButton = new System.Windows.Forms.Button();
@@ -127,11 +137,7 @@
             this.customersTextBox2 = new System.Windows.Forms.TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
-            this.ActivityCustomerColumn1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.start_atColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.activityCityColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.rulesColumn6 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.overlayColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.imagePathTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.ticketBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fromAirportBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.toAirportBindingSource)).BeginInit();
@@ -168,15 +174,17 @@
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(86, 154);
+            this.pictureBox1.Location = new System.Drawing.Point(85, 182);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(289, 104);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 46;
             this.pictureBox1.TabStop = false;
             // 
             // deleteFlightButton
             // 
-            this.deleteFlightButton.Location = new System.Drawing.Point(130, 454);
+            this.deleteFlightButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.deleteFlightButton.Location = new System.Drawing.Point(130, 489);
             this.deleteFlightButton.Name = "deleteFlightButton";
             this.deleteFlightButton.Size = new System.Drawing.Size(38, 23);
             this.deleteFlightButton.TabIndex = 42;
@@ -186,7 +194,8 @@
             // 
             // addFlightButton1
             // 
-            this.addFlightButton1.Location = new System.Drawing.Point(86, 454);
+            this.addFlightButton1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.addFlightButton1.Location = new System.Drawing.Point(86, 489);
             this.addFlightButton1.Name = "addFlightButton1";
             this.addFlightButton1.Size = new System.Drawing.Size(38, 23);
             this.addFlightButton1.TabIndex = 41;
@@ -233,7 +242,7 @@
             this.ticketTabControl.Controls.Add(this.rentalTabPage);
             this.ticketTabControl.Controls.Add(this.wifiTabPage);
             this.ticketTabControl.Controls.Add(this.activityTabPage);
-            this.ticketTabControl.Location = new System.Drawing.Point(85, 264);
+            this.ticketTabControl.Location = new System.Drawing.Point(85, 299);
             this.ticketTabControl.Name = "ticketTabControl";
             this.ticketTabControl.SelectedIndex = 0;
             this.ticketTabControl.Size = new System.Drawing.Size(891, 188);
@@ -263,8 +272,10 @@
             this.flightSupplierColumn,
             this.service_no1Column1,
             this.fromAirportColumn,
+            this.fromAddressColumn1,
             this.start_at1Column1,
             this.toAirportColumn,
+            this.toAddressColumn1,
             this.end_atColumn1,
             this.baggageColumn1});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -321,6 +332,12 @@
             this.fromAirportColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.fromAirportColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
+            // fromAddressColumn1
+            // 
+            this.fromAddressColumn1.DataPropertyName = "from_address";
+            this.fromAddressColumn1.HeaderText = "出发航站楼";
+            this.fromAddressColumn1.Name = "fromAddressColumn1";
+            // 
             // start_at1Column1
             // 
             this.start_at1Column1.DataPropertyName = "start_at";
@@ -336,6 +353,12 @@
             this.toAirportColumn.Name = "toAirportColumn";
             this.toAirportColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.toAirportColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // toAddressColumn1
+            // 
+            this.toAddressColumn1.DataPropertyName = "to_address";
+            this.toAddressColumn1.HeaderText = "抵达航站楼";
+            this.toAddressColumn1.Name = "toAddressColumn1";
             // 
             // end_atColumn1
             // 
@@ -650,8 +673,11 @@
             this.rulesColumn4,
             this.from_addressColumn4,
             this.start_atColumn4,
+            this.fromAddressColumn,
             this.to_addressColumn4,
-            this.end_atColumn4});
+            this.end_atColumn4,
+            this.toAddressColumn,
+            this.routeColumn1});
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -678,6 +704,7 @@
             this.rentalCustomerColumn1.Name = "rentalCustomerColumn1";
             this.rentalCustomerColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.rentalCustomerColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.rentalCustomerColumn1.Width = 80;
             // 
             // rentalSupplierColumn4
             // 
@@ -687,12 +714,14 @@
             this.rentalSupplierColumn4.Name = "rentalSupplierColumn4";
             this.rentalSupplierColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.rentalSupplierColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.rentalSupplierColumn4.Width = 80;
             // 
             // numColumn4
             // 
             this.numColumn4.DataPropertyName = "num";
             this.numColumn4.HeaderText = "提车单号";
             this.numColumn4.Name = "numColumn4";
+            this.numColumn4.Width = 80;
             // 
             // rulesColumn4
             // 
@@ -704,16 +733,23 @@
             // from_addressColumn4
             // 
             this.from_addressColumn4.DataPropertyName = "from_place";
-            this.from_addressColumn4.HeaderText = "取车地点";
+            this.from_addressColumn4.HeaderText = "提车地点";
             this.from_addressColumn4.Name = "from_addressColumn4";
             this.from_addressColumn4.Width = 120;
             // 
             // start_atColumn4
             // 
             this.start_atColumn4.DataPropertyName = "start_at";
-            this.start_atColumn4.HeaderText = "取车时间";
+            this.start_atColumn4.HeaderText = "提车时间";
             this.start_atColumn4.Name = "start_atColumn4";
             this.start_atColumn4.Width = 120;
+            // 
+            // fromAddressColumn
+            // 
+            this.fromAddressColumn.DataPropertyName = "from_address";
+            this.fromAddressColumn.HeaderText = "提车详细地址";
+            this.fromAddressColumn.Name = "fromAddressColumn";
+            this.fromAddressColumn.Width = 180;
             // 
             // to_addressColumn4
             // 
@@ -728,6 +764,20 @@
             this.end_atColumn4.HeaderText = "还车时间";
             this.end_atColumn4.Name = "end_atColumn4";
             this.end_atColumn4.Width = 120;
+            // 
+            // toAddressColumn
+            // 
+            this.toAddressColumn.DataPropertyName = "to_address";
+            this.toAddressColumn.HeaderText = "还车详细地址";
+            this.toAddressColumn.Name = "toAddressColumn";
+            this.toAddressColumn.Width = 180;
+            // 
+            // routeColumn1
+            // 
+            this.routeColumn1.DataPropertyName = "route";
+            this.routeColumn1.HeaderText = "如何抵达";
+            this.routeColumn1.Name = "routeColumn1";
+            this.routeColumn1.Width = 200;
             // 
             // wifiTabPage
             // 
@@ -874,190 +924,6 @@
             this.activityDataGridView.TabIndex = 1;
             this.activityDataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.activityDataGridView_DataError);
             // 
-            // startAtDateTimePicker
-            // 
-            this.startAtDateTimePicker.Location = new System.Drawing.Point(520, 99);
-            this.startAtDateTimePicker.Name = "startAtDateTimePicker";
-            this.startAtDateTimePicker.Size = new System.Drawing.Size(165, 21);
-            this.startAtDateTimePicker.TabIndex = 38;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(461, 103);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(53, 12);
-            this.label7.TabIndex = 37;
-            this.label7.Text = "开始时间";
-            // 
-            // findTemplateButton
-            // 
-            this.findTemplateButton.Enabled = false;
-            this.findTemplateButton.Location = new System.Drawing.Point(381, 126);
-            this.findTemplateButton.Name = "findTemplateButton";
-            this.findTemplateButton.Size = new System.Drawing.Size(45, 23);
-            this.findTemplateButton.TabIndex = 36;
-            this.findTemplateButton.Text = "选择";
-            this.findTemplateButton.UseVisualStyleBackColor = true;
-            this.findTemplateButton.Click += new System.EventHandler(this.findTemplateButton_Click);
-            // 
-            // findCustomerButton
-            // 
-            this.findCustomerButton.Location = new System.Drawing.Point(381, 70);
-            this.findCustomerButton.Name = "findCustomerButton";
-            this.findCustomerButton.Size = new System.Drawing.Size(45, 23);
-            this.findCustomerButton.TabIndex = 35;
-            this.findCustomerButton.Text = "选择";
-            this.findCustomerButton.UseVisualStyleBackColor = true;
-            this.findCustomerButton.Click += new System.EventHandler(this.findCustomerButton_Click);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(759, 103);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(29, 12);
-            this.label5.TabIndex = 30;
-            this.label5.Text = "天数";
-            // 
-            // daysNumericUpDown
-            // 
-            this.daysNumericUpDown.Location = new System.Drawing.Point(794, 99);
-            this.daysNumericUpDown.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.daysNumericUpDown.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.daysNumericUpDown.Name = "daysNumericUpDown";
-            this.daysNumericUpDown.Size = new System.Drawing.Size(165, 21);
-            this.daysNumericUpDown.TabIndex = 29;
-            this.daysNumericUpDown.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(485, 75);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(29, 12);
-            this.label9.TabIndex = 27;
-            this.label9.Text = "主题";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(485, 131);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 12);
-            this.label3.TabIndex = 27;
-            this.label3.Text = "备注";
-            // 
-            // titleTextBox
-            // 
-            this.titleTextBox.Location = new System.Drawing.Point(520, 71);
-            this.titleTextBox.Name = "titleTextBox";
-            this.titleTextBox.Size = new System.Drawing.Size(439, 21);
-            this.titleTextBox.TabIndex = 26;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(51, 154);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 12);
-            this.label2.TabIndex = 25;
-            this.label2.Text = "封面";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(50, 131);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 12);
-            this.label4.TabIndex = 34;
-            this.label4.Text = "模板";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(50, 75);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(29, 12);
-            this.label6.TabIndex = 33;
-            this.label6.Text = "客户";
-            // 
-            // tripComboBox
-            // 
-            this.tripComboBox.FormattingEnabled = true;
-            this.tripComboBox.Location = new System.Drawing.Point(86, 127);
-            this.tripComboBox.Name = "tripComboBox";
-            this.tripComboBox.Size = new System.Drawing.Size(289, 20);
-            this.tripComboBox.TabIndex = 31;
-            // 
-            // cancelButton
-            // 
-            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.No;
-            this.cancelButton.Location = new System.Drawing.Point(776, 458);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 23);
-            this.cancelButton.TabIndex = 5;
-            this.cancelButton.Text = "取消";
-            this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
-            // 
-            // saveButton
-            // 
-            this.saveButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
-            this.saveButton.Location = new System.Drawing.Point(695, 458);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(75, 23);
-            this.saveButton.TabIndex = 5;
-            this.saveButton.Text = "保存";
-            this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
-            // 
-            // label1
-            // 
-            this.label1.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(25, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(975, 41);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "新建客户行程";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // memoTextBox
-            // 
-            this.memoTextBox.Location = new System.Drawing.Point(520, 128);
-            this.memoTextBox.Multiline = true;
-            this.memoTextBox.Name = "memoTextBox";
-            this.memoTextBox.Size = new System.Drawing.Size(439, 130);
-            this.memoTextBox.TabIndex = 28;
-            // 
-            // customersTextBox2
-            // 
-            this.customersTextBox2.Location = new System.Drawing.Point(86, 71);
-            this.customersTextBox2.Name = "customersTextBox2";
-            this.customersTextBox2.Size = new System.Drawing.Size(289, 21);
-            this.customersTextBox2.TabIndex = 45;
-            this.customersTextBox2.TextChanged += new System.EventHandler(this.customersTextBox2_TextChanged);
-            // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
-            // 
             // ActivityCustomerColumn1
             // 
             this.ActivityCustomerColumn1.DataPropertyName = "customer_id";
@@ -1099,15 +965,211 @@
             this.overlayColumn6.HeaderText = "换票人";
             this.overlayColumn6.Name = "overlayColumn6";
             // 
+            // startAtDateTimePicker
+            // 
+            this.startAtDateTimePicker.Location = new System.Drawing.Point(530, 98);
+            this.startAtDateTimePicker.Name = "startAtDateTimePicker";
+            this.startAtDateTimePicker.Size = new System.Drawing.Size(165, 21);
+            this.startAtDateTimePicker.TabIndex = 38;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(471, 102);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(53, 12);
+            this.label7.TabIndex = 37;
+            this.label7.Text = "开始时间";
+            // 
+            // findTemplateButton
+            // 
+            this.findTemplateButton.Enabled = false;
+            this.findTemplateButton.Location = new System.Drawing.Point(381, 126);
+            this.findTemplateButton.Name = "findTemplateButton";
+            this.findTemplateButton.Size = new System.Drawing.Size(45, 23);
+            this.findTemplateButton.TabIndex = 36;
+            this.findTemplateButton.Text = "选择";
+            this.findTemplateButton.UseVisualStyleBackColor = true;
+            this.findTemplateButton.Click += new System.EventHandler(this.findTemplateButton_Click);
+            // 
+            // findCustomerButton
+            // 
+            this.findCustomerButton.Location = new System.Drawing.Point(381, 70);
+            this.findCustomerButton.Name = "findCustomerButton";
+            this.findCustomerButton.Size = new System.Drawing.Size(45, 23);
+            this.findCustomerButton.TabIndex = 35;
+            this.findCustomerButton.Text = "选择";
+            this.findCustomerButton.UseVisualStyleBackColor = true;
+            this.findCustomerButton.Click += new System.EventHandler(this.findCustomerButton_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(769, 102);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(29, 12);
+            this.label5.TabIndex = 30;
+            this.label5.Text = "天数";
+            // 
+            // daysNumericUpDown
+            // 
+            this.daysNumericUpDown.Location = new System.Drawing.Point(804, 98);
+            this.daysNumericUpDown.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.daysNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.daysNumericUpDown.Name = "daysNumericUpDown";
+            this.daysNumericUpDown.Size = new System.Drawing.Size(165, 21);
+            this.daysNumericUpDown.TabIndex = 29;
+            this.daysNumericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(495, 74);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(29, 12);
+            this.label9.TabIndex = 27;
+            this.label9.Text = "主题";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(495, 130);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(29, 12);
+            this.label3.TabIndex = 27;
+            this.label3.Text = "备注";
+            // 
+            // titleTextBox
+            // 
+            this.titleTextBox.Location = new System.Drawing.Point(530, 70);
+            this.titleTextBox.Name = "titleTextBox";
+            this.titleTextBox.Size = new System.Drawing.Size(439, 21);
+            this.titleTextBox.TabIndex = 26;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(51, 154);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(29, 12);
+            this.label2.TabIndex = 25;
+            this.label2.Text = "封面";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(50, 131);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 12);
+            this.label4.TabIndex = 34;
+            this.label4.Text = "模板";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(50, 75);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(29, 12);
+            this.label6.TabIndex = 33;
+            this.label6.Text = "客户";
+            // 
+            // tripComboBox
+            // 
+            this.tripComboBox.FormattingEnabled = true;
+            this.tripComboBox.Location = new System.Drawing.Point(86, 127);
+            this.tripComboBox.Name = "tripComboBox";
+            this.tripComboBox.Size = new System.Drawing.Size(289, 20);
+            this.tripComboBox.TabIndex = 31;
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.No;
+            this.cancelButton.Location = new System.Drawing.Point(894, 493);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.TabIndex = 5;
+            this.cancelButton.Text = "取消";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
+            // saveButton
+            // 
+            this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.saveButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
+            this.saveButton.Location = new System.Drawing.Point(813, 493);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.TabIndex = 5;
+            this.saveButton.Text = "保存";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(25, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(975, 41);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "新建客户行程";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // memoTextBox
+            // 
+            this.memoTextBox.Location = new System.Drawing.Point(530, 127);
+            this.memoTextBox.Multiline = true;
+            this.memoTextBox.Name = "memoTextBox";
+            this.memoTextBox.Size = new System.Drawing.Size(439, 159);
+            this.memoTextBox.TabIndex = 28;
+            // 
+            // customersTextBox2
+            // 
+            this.customersTextBox2.Location = new System.Drawing.Point(86, 71);
+            this.customersTextBox2.Name = "customersTextBox2";
+            this.customersTextBox2.Size = new System.Drawing.Size(289, 21);
+            this.customersTextBox2.TabIndex = 45;
+            this.customersTextBox2.TextChanged += new System.EventHandler(this.customersTextBox2_TextChanged);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
+            // 
+            // imagePathTextBox
+            // 
+            this.imagePathTextBox.Location = new System.Drawing.Point(85, 155);
+            this.imagePathTextBox.Name = "imagePathTextBox";
+            this.imagePathTextBox.ReadOnly = true;
+            this.imagePathTextBox.Size = new System.Drawing.Size(289, 21);
+            this.imagePathTextBox.TabIndex = 44;
+            this.imagePathTextBox.TextChanged += new System.EventHandler(this.nationTextBox_TextChanged);
+            // 
             // NewCustomerTripForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1012, 501);
+            this.ClientSize = new System.Drawing.Size(1012, 536);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.deleteFlightButton);
             this.Controls.Add(this.addFlightButton1);
+            this.Controls.Add(this.imagePathTextBox);
             this.Controls.Add(this.nationTextBox);
             this.Controls.Add(this.chooseCountryButton);
             this.Controls.Add(this.label8);
@@ -1203,14 +1265,6 @@
         private System.Windows.Forms.TabPage trainTabPage;
         private System.Windows.Forms.DataGridView trainDataGridView;
         private System.Windows.Forms.BindingSource toAirportBindingSource;
-        private System.Windows.Forms.DataGridViewComboBoxColumn flightCustomerColumn;
-        private System.Windows.Forms.DataGridViewComboBoxColumn flightSupplierColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn service_no1Column1;
-        private System.Windows.Forms.DataGridViewComboBoxColumn fromAirportColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn start_at1Column1;
-        private System.Windows.Forms.DataGridViewComboBoxColumn toAirportColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn end_atColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn baggageColumn1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label9;
@@ -1227,14 +1281,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn insuranceTitleColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn start_atColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn daysColumn3;
-        private System.Windows.Forms.DataGridViewComboBoxColumn rentalCustomerColumn1;
-        private System.Windows.Forms.DataGridViewComboBoxColumn rentalSupplierColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn numColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn rulesColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn from_addressColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn start_atColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn to_addressColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn end_atColumn4;
         private System.Windows.Forms.DataGridViewComboBoxColumn hotelCustomerColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn start_atCloumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn daysColumn2;
@@ -1255,5 +1301,27 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn activityCityColumn;
         private System.Windows.Forms.DataGridViewComboBoxColumn rulesColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn overlayColumn6;
+        private System.Windows.Forms.DataGridViewComboBoxColumn rentalCustomerColumn1;
+        private System.Windows.Forms.DataGridViewComboBoxColumn rentalSupplierColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn numColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rulesColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn from_addressColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn start_atColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fromAddressColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn to_addressColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn end_atColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn toAddressColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn routeColumn1;
+        private System.Windows.Forms.DataGridViewComboBoxColumn flightCustomerColumn;
+        private System.Windows.Forms.DataGridViewComboBoxColumn flightSupplierColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn service_no1Column1;
+        private System.Windows.Forms.DataGridViewComboBoxColumn fromAirportColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fromAddressColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn start_at1Column1;
+        private System.Windows.Forms.DataGridViewComboBoxColumn toAirportColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn toAddressColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn end_atColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn baggageColumn1;
+        public System.Windows.Forms.TextBox imagePathTextBox;
     }
 }

@@ -43,6 +43,10 @@ namespace DCTS
         public int ttype { get; set; }
         public string city { get; set; }
         public string room { get; set; }
+        public string from_address { get; set; }
+        public string to_address { get; set; }
+        public string from_latlng { get; set; }
+        public string to_latlng { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual Supplier Supplier { get; set; }

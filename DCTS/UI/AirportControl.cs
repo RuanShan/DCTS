@@ -326,7 +326,7 @@ namespace DCTS.UI
                         if (hasDoc)
                         {
 
-                            string copyToPath = EntityPathConfig.LocationWordPath(obj);
+                            string copyToPath = EntityPathHelper.LocationWordPath(obj);
                             if (!File.Exists(copyToPath))
                                 File.Copy(docFilePath, copyToPath, true);
                         }
@@ -356,7 +356,7 @@ namespace DCTS.UI
                         List<ComboLocation> list = ctx.ComboLocations.Where(o => o.ltype == model.ltype && o.nation == model.nation).ToList();
                         foreach (ComboLocation item in list)
                         {
-                            string copyToPath = EntityPathConfig.LocationWordPath(item);
+                            string copyToPath = EntityPathHelper.LocationWordPath(item);
                             if (File.Exists(copyToPath))
                             {
                                 File.Copy(copyToPath, strFileName);

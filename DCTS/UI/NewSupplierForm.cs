@@ -44,7 +44,7 @@ namespace DCTS.UI
 
                 if (obj.img != null && obj.img != "")
                 {
-                    string copyToPath = EntityPathConfig.Supplier_LocationImagePath(obj);
+                    string copyToPath = EntityPathHelper.Supplier_LocationImagePath(obj);
                     pictureBox1.ImageLocation = copyToPath;
                 }
             }
@@ -115,7 +115,7 @@ namespace DCTS.UI
                         ctx.SaveChanges();
                         if (hasImg)
                         {
-                            string copyToPath = EntityPathConfig.Supplier_LocationImagePath(obj);
+                            string copyToPath = EntityPathHelper.Supplier_LocationImagePath(obj);
 
                             if (!File.Exists(copyToPath))
                                 File.Copy(imgFilePath, copyToPath);
@@ -143,7 +143,7 @@ namespace DCTS.UI
                         changeid = obj.id;
                         if (hasImg)
                         {
-                            string copyToPath = EntityPathConfig.Supplier_LocationImagePath(obj);
+                            string copyToPath = EntityPathHelper.Supplier_LocationImagePath(obj);
 
                             File.Copy(imgFilePath, copyToPath, true);
                         }

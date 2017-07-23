@@ -51,7 +51,6 @@
             this.IDColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nationColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cityColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.imgNameColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.imgColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.titleColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.localTitleColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -77,7 +76,6 @@
             this.IDColumn1,
             this.nationColumn1,
             this.cityColumn1,
-            this.imgNameColumn1,
             this.imgColumn1,
             this.titleColumn1,
             this.localTitleColumn1,
@@ -261,12 +259,6 @@
             this.cityColumn1.HeaderText = "城市";
             this.cityColumn1.Name = "cityColumn1";
             // 
-            // imgNameColumn1
-            // 
-            this.imgNameColumn1.DataPropertyName = "img";
-            this.imgNameColumn1.HeaderText = "图片名称";
-            this.imgNameColumn1.Name = "imgNameColumn1";
-            // 
             // imgColumn1
             // 
             this.imgColumn1.HeaderText = "图片";
@@ -372,7 +364,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn IDColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn nationColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn cityColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn imgNameColumn1;
         private System.Windows.Forms.DataGridViewImageColumn imgColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn titleColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn localTitleColumn1;

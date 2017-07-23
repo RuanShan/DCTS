@@ -65,7 +65,8 @@ namespace DCTS.UI
                     obj.gender = genderComboBox.Text;
                     obj.passport = passporttexbox.Text;
                     obj.birthday = Convert.ToDateTime(birthdayTextBox.Text);
-
+                    obj.created_at = DateTime.Now;
+                    obj.updated_at = DateTime.Now;
                     if (nameishave == false)
                     {    
                         ctx.Customers.Add(obj);
@@ -80,6 +81,11 @@ namespace DCTS.UI
                     obj.gender = genderComboBox.Text;
                     obj.passport = passporttexbox.Text;
                     obj.birthday = Convert.ToDateTime(birthdayTextBox.Text);
+                    if (obj.created_at == null)
+                    {
+                        obj.created_at = DateTime.Now;
+                    }
+                    obj.updated_at = DateTime.Now;
 
                     ctx.SaveChanges();
 

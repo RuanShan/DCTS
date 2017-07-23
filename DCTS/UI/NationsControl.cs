@@ -185,7 +185,7 @@ namespace DCTS.UI
                     List<ComboLocation> list = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Country && o.nation != null).ToList();
                     foreach (ComboLocation item in list)
                     {
-                        string copyToPath = EntityPathConfig.TripWordFilePath(item.id);
+                        string copyToPath = EntityPathHelper.TripWordFilePath(item.id);
                         if (File.Exists(copyToPath))
                             File.Copy(copyToPath, strFileName + "\\" + item.id.ToString() + ".docx");
                     }
@@ -361,7 +361,7 @@ namespace DCTS.UI
                         if (hasDoc)
                         {
                             obj.word = openFileDialog1.SafeFileName;
-                            string copyToPath = EntityPathConfig.LocationWordPath(obj);
+                            string copyToPath = EntityPathHelper.LocationWordPath(obj);
 
 
                             if (!File.Exists(copyToPath))
@@ -393,7 +393,7 @@ namespace DCTS.UI
                         List<ComboLocation> list = ctx.ComboLocations.Where(o => o.ltype == model.ltype && o.nation == model.nation).ToList();
                         foreach (ComboLocation item in list)
                         {
-                            string copyToPath = EntityPathConfig.LocationWordPath(item);
+                            string copyToPath = EntityPathHelper.LocationWordPath(item);
                             if (File.Exists(copyToPath))
                             {
                                 File.Copy(copyToPath, strFileName);

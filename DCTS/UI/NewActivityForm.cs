@@ -57,7 +57,7 @@ namespace DCTS.UI
                         string imgPath = activity.img;
                         string imgFileName = Path.GetFileName(imgPath);
                         activity.img = imgFileName;
-                        string copyToPath = EntityPathConfig.LocationImagePath(activity);
+                        string copyToPath = EntityPathHelper.LocationImagePath(activity);
                         File.Copy(imgPath, copyToPath);
                     }
                     if (activity.word.Length > 0)
@@ -66,7 +66,7 @@ namespace DCTS.UI
                         string wordFileName = Path.GetFileName(wordPath);
                         activity.word = wordFileName;
 
-                        string copyToPath = EntityPathConfig.LocationWordPath(activity);
+                        string copyToPath = EntityPathHelper.LocationWordPath(activity);
 
                         File.Copy(wordPath, copyToPath);
                     }

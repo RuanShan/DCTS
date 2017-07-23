@@ -57,7 +57,7 @@ namespace DCTS.UI
 
             if (hasImg)
             {
-                string copyToPath = EntityPathConfig.LocationImagePath(activity);
+                string copyToPath = EntityPathHelper.LocationImagePath(activity);
                 File.Copy(imgFilePath, copyToPath, true);
             }
         }

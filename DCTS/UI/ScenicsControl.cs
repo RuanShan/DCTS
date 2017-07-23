@@ -230,9 +230,9 @@ namespace DCTS.UI
                 {
                     ComboLocation selectedItem = grid.Rows[e.RowIndex].DataBoundItem as ComboLocation;
 
-                    if (selectedItem.img != null && selectedItem.img != "" )
+                    if (selectedItem.image_path != null && selectedItem.image_path.Length>0)
                     {
-                        string lcoalPath = EntityPathConfig.LocationImagePath(selectedItem);
+                        string lcoalPath = EntityPathHelper.LocationImagePathEx(selectedItem);
 
                         e.Value = GetImage1(lcoalPath);
                     }
@@ -261,7 +261,7 @@ namespace DCTS.UI
         private void ScenicsControl_Resize(object sender, EventArgs e)
         {
             //                                                   id  imgName
-            titleColumn1.Width = dataGridView.ClientSize.Width - 60 - 100 - 100 * 3 - 280 - 200 - 100 - 60 * 2 - 3;
+            titleColumn1.Width = dataGridView.ClientSize.Width - 60 - 0 - 100 * 3 - 280 - 200 - 100 - 60 * 2 - 3;
             //是否包含滚动条
             if (!(this.dataGridView.DisplayedRowCount(false) == this.dataGridView.RowCount))
             {

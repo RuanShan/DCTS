@@ -55,6 +55,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.openCloseTextBox = new System.Windows.Forms.TextBox();
+            this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -238,7 +239,6 @@
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "PNG(*.png)JPEG(*.jpg,*.jpeg,*.jpe,*.jfif)GIF(*.gif)BMP(*.bmp)|*.png;*.jpg;*.jpeg;" +
     "*.jpe;*.jfif;*.gif;*.bmp";
             this.openFileDialog1.Title = "请选择景点图片";
@@ -273,6 +273,10 @@
             this.openCloseTextBox.Name = "openCloseTextBox";
             this.openCloseTextBox.Size = new System.Drawing.Size(233, 100);
             this.openCloseTextBox.TabIndex = 44;
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
             // 
             // ScenicFormControl
             // 
@@ -340,5 +344,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TextBox openCloseTextBox;
         private System.Windows.Forms.Label label2;
+        private CustomComponents.EntityDataSource entityDataSource1;
     }
 }

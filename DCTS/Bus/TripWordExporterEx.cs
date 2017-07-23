@@ -53,7 +53,7 @@ namespace DCTS.Bus
             {
                 //copy templates/base as template
                 string layout = LocationTemplate.LayoutRelativePath;
-                string tripPath = EntityPathConfig.TripWordFilePath(this.TripId);
+                string tripPath = EntityPathHelper.TripWordFilePath(this.TripId);
                 File.Copy(layout, tripPath,true);
                 using (WordprocessingDocument document = WordprocessingDocument.Open(tripPath, true) )
                 {
@@ -99,7 +99,7 @@ namespace DCTS.Bus
                                     var image = duplicated.MainDocumentPart.ImageParts.ElementAtOrDefault(0);
                                     //Image img = duplicated.Images[0];
 
-                                    string path = EntityPathConfig.LocationImagePath(location);
+                                    string path = EntityPathHelper.LocationImagePath(location);
                                     if (image!=null && File.Exists(path))
                                     {
                                         var b = new WindowsBitmap(path);

@@ -231,7 +231,7 @@ namespace DCTS.UI
                     long folername = selectedItem.id / 1000;
                     if (selectedItem.img != null && selectedItem.img != "" && selectedItem.img != "\"\"")
                     {
-                        string lcoalPath = EntityPathConfig.LocationImagePath(selectedItem);
+                        string lcoalPath = EntityPathHelper.LocationImagePath(selectedItem);
 
                         e.Value = GetImage1(lcoalPath);
                     }

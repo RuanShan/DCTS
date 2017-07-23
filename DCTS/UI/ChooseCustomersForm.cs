@@ -54,5 +54,15 @@ namespace DCTS.UI
             return list;
         
         }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            this.yesButton2.PerformClick();
+        }
+
+        private void yesButton2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

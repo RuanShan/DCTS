@@ -9,7 +9,6 @@ namespace DCTS.DB
 {
     public class GlobalCache
     {
-        static DctsEntities db = new DctsEntities();
         static List<Nation> nationList = null;
         static List<City> cityList = null;
         static ComboLocation flightLocation = null;
@@ -94,22 +93,33 @@ namespace DCTS.DB
                 }.ToList());
             }
         }
+
         private static void InitializeNationList()
         {
-            var nations = db.ComboLocations.Where(o=>o.nation != null).Select(o => o.nation).Distinct().ToList();
-            nationList = nations.Select(o => new Nation() { title = o, code = o }).ToList();
+            // remove staic db, it cause error No connection string named 'DctsEntities' could be found in the application config file. 
+            using (var db = new DctsEntities())
+            {
+                var nations = db.ComboLocations.Where(o => o.nation != null).Select(o => o.nation).Distinct().ToList();
+                nationList = nations.Select(o => new Nation() { title = o, code = o }).ToList();
+            }
         }
         private static void InitializeCityList()
         {
-            var cities = db.ComboLocations.Where(o => o.nation != null && o.city != null && o.city != string.Empty).Select(o => new { o.city, o.nation }).Distinct().ToList();
-            cityList = cities.Select(o => new City() { title = o.city, nationCode = o.nation }).ToList();
+            using (var db = new DctsEntities())
+            {
+                var cities = db.ComboLocations.Where(o => o.nation != null && o.city != null && o.city != string.Empty).Select(o => new { o.city, o.nation }).Distinct().ToList();
+                cityList = cities.Select(o => new City() { title = o.city, nationCode = o.nation }).ToList();
+            }
         }
 
         private static void InitializeLocations()
         {
-            flightLocation = db.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Flight).First();
-            rentalLocation = db.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Rental).First();
-            trainLocation = db.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Train).First();
+            using (var db = new DctsEntities())
+            {
+                flightLocation = db.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Flight).First();
+                rentalLocation = db.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Rental).First();
+                trainLocation = db.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Train).First();
+            }
         }
 
     }

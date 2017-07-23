@@ -114,7 +114,7 @@ namespace DCTS.UI
                 if (activity.id > 0)
                 {
                     this.imgPathTextBox.Text = activity.img;
-                    string lcoalPath = EntityPathConfig.LocationImagePath(activity);
+                    string lcoalPath = EntityPathHelper.LocationImagePath(activity);
                     pictureBox1.ImageLocation = lcoalPath;
                 }
             }

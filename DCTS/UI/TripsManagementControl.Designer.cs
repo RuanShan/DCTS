@@ -40,9 +40,10 @@
             this.airportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.其他ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.shellToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.shellToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rentalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -55,7 +56,7 @@
             this.mainPanel.BackColor = System.Drawing.SystemColors.Window;
             this.mainPanel.Location = new System.Drawing.Point(68, 0);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(691, 338);
+            this.mainPanel.Size = new System.Drawing.Size(691, 417);
             this.mainPanel.TabIndex = 2;
             // 
             // menuStrip1
@@ -72,13 +73,14 @@
             this.activityToolStripMenuItem,
             this.NationToolStripMenuItem,
             this.airportToolStripMenuItem,
+            this.rentalToolStripMenuItem,
             this.imagesToolStripMenuItem,
             this.其他ToolStripMenuItem,
             this.shellToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(6, 12, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(98, 363);
+            this.menuStrip1.Size = new System.Drawing.Size(98, 442);
             this.menuStrip1.Stretch = false;
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
@@ -155,11 +157,18 @@
             this.其他ToolStripMenuItem.Text = "其他";
             this.其他ToolStripMenuItem.Click += new System.EventHandler(this.otherToolStripMenuItem_Click);
             // 
+            // shellToolStripMenuItem
+            // 
+            this.shellToolStripMenuItem.Name = "shellToolStripMenuItem";
+            this.shellToolStripMenuItem.Size = new System.Drawing.Size(85, 29);
+            this.shellToolStripMenuItem.Text = "素材";
+            this.shellToolStripMenuItem.Click += new System.EventHandler(this.shellToolStripMenuItem_Click);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(98, 341);
+            this.statusStrip1.Location = new System.Drawing.Point(98, 420);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(664, 22);
             this.statusStrip1.TabIndex = 4;
@@ -172,12 +181,11 @@
             this.toolStripStatusLabel1.Text = "状态条";
             this.toolStripStatusLabel1.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
             // 
-            // shellToolStripMenuItem
+            // rentalToolStripMenuItem
             // 
-            this.shellToolStripMenuItem.Name = "shellToolStripMenuItem";
-            this.shellToolStripMenuItem.Size = new System.Drawing.Size(85, 29);
-            this.shellToolStripMenuItem.Text = "素材";
-            this.shellToolStripMenuItem.Click += new System.EventHandler(this.shellToolStripMenuItem_Click);
+            this.rentalToolStripMenuItem.Name = "rentalToolStripMenuItem";
+            this.rentalToolStripMenuItem.Size = new System.Drawing.Size(85, 29);
+            this.rentalToolStripMenuItem.Text = "租车";
             // 
             // TripsManagementControl
             // 
@@ -187,7 +195,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.mainPanel);
             this.Name = "TripsManagementControl";
-            this.Size = new System.Drawing.Size(762, 363);
+            this.Size = new System.Drawing.Size(762, 442);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
@@ -214,5 +222,6 @@
         private System.Windows.Forms.ToolStripMenuItem activityToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem imagesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem shellToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rentalToolStripMenuItem;
     }
 }

@@ -60,7 +60,7 @@ CREATE TABLE `ComboLocations` (
   `contact` varchar(255) DEFAULT '',
   `open_at` datetime DEFAULT NULL,
   `close_at` datetime DEFAULT NULL,
-  `open_close_more` varchar(512) DEFAULT '',
+  `open_close_more` varchar(51Tickets2) DEFAULT '',
   `ticket` varchar(1024) DEFAULT '',
   `room` varchar(510) DEFAULT '',
   `dinner` varchar(510) DEFAULT '',
@@ -73,6 +73,8 @@ CREATE TABLE `ComboLocations` (
   `tips` varchar(1020) DEFAULT '',
   `guidance` varchar(1020) DEFAULT '',
   `word` varchar(45) DEFAULT NULL,
+  `image_path` varchar(128) DEFAULT NULL,
+  `image_name` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `ltype` (`ltype`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1261 DEFAULT CHARSET=utf8;
@@ -273,6 +275,10 @@ CREATE TABLE `Tickets` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `room` varchar(256) DEFAULT NULL,
+  `from_address` varchar(256) DEFAULT NULL,
+  `to_address` varchar(256) DEFAULT NULL,
+  `from_latlng` varchar(128) DEFAULT NULL,
+  `to_latlng` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_customer_idx` (`customer_id`),
   KEY `fk_supplier_idx` (`supplier_id`),

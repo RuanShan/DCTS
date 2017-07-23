@@ -49,7 +49,7 @@ namespace DCTS.UI
                 var query = ctx.LocationImages.Where(o => o.id == trip.cover_id);
                 if (query.Count() > 0)
                 {
-                    string ImageLocation = EntityPathConfig.newlocationimagepath(query.ToList()[0]);
+                    string ImageLocation = EntityPathHelper.newlocationimagepath(query.ToList()[0]);
                     imgPathTextBox.Text = query.ToList()[0].name;
                     pictureBox1.ImageLocation = ImageLocation;
                 }
@@ -61,19 +61,12 @@ namespace DCTS.UI
         {
             var form = new SelectSystemfile();
             form.ShowDialog();
-
-
-            //if (form.ShowDialog() == DialogResult.Yes)
-            {
-                List<string> reference = form.listfile;
-                if (reference.Count > 0)
+            {                 
+                if (form.selectedImage.Length > 0)
                 {
-                    imgPathTextBox.Text = reference[0];
-
-                    pictureBox1.ImageLocation = reference[1];
+                    imgPathTextBox.Text = form.selectedImage;
+                    pictureBox1.ImageLocation = form.selectedImageAbsolutePath;
                 }
-
-
             }
         }
     }

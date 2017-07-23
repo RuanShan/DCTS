@@ -76,7 +76,7 @@ namespace DCTS.Bus
             {
                 // 准备模板
                 Dictionary<ComboLocationEnum, WordprocessingDocument> tmplDict = new Dictionary<ComboLocationEnum, WordprocessingDocument>();
-                ComboLocationEnum[] templateTypes = { ComboLocationEnum.TripSummary, ComboLocationEnum.DaySummary, ComboLocationEnum.Flight, ComboLocationEnum.Train,
+                ComboLocationEnum[] templateTypes = { ComboLocationEnum.TripSummary, ComboLocationEnum.DaySummary, ComboLocationEnum.Flight, ComboLocationEnum.Train,ComboLocationEnum.Rental,
                                                     ComboLocationEnum.DeepOnline, ComboLocationEnum.FlightList, ComboLocationEnum.HotelList, ComboLocationEnum.RentalList,
                                                     ComboLocationEnum.InsuranceList, ComboLocationEnum.OtherList};
                 foreach (var type in templateTypes)
@@ -92,7 +92,7 @@ namespace DCTS.Bus
 
                 //cloned templates/base as template
                 string layout = LocationTemplate.LayoutRelativePath;
-                string tripPath = EntityPathConfig.TripWordFilePath(this.TripId);
+                string tripPath = EntityPathHelper.TripWordFilePath(this.TripId);
                 File.Copy(layout, tripPath, true);
 
                 using (WordprocessingDocument document = WordprocessingDocument.Open(tripPath, true))
@@ -333,7 +333,7 @@ namespace DCTS.Bus
                     var image = tripSumary.MainDocumentPart.ImageParts.FirstOrDefault();
                     //Image img = duplicated.Images[0];
 
-                    string imagePath = EntityPathConfig.newlocationimagepath(locationImage);
+                    string imagePath = EntityPathHelper.newlocationimagepath(locationImage);
                     if (image != null && File.Exists(imagePath))
                     {
                         string relID = tripSumary.MainDocumentPart.GetIdOfPart(image);
@@ -349,7 +349,7 @@ namespace DCTS.Bus
                 Console.WriteLine("\tError, couldn't find table with caption ORDER_TABLE in document");
             }
             tripSumary.Save();
-            //string path = EntityPathConfig.TripWordFilePath(TripId, "summary");
+            //string path = EntityPathHelper.TripWordFilePath(TripId, "summary");
             //tripSumary.SaveAs(path);
             this.filledTemplates.Add(tripSumary);
             this.filledTemplateStreams.Add(stream);
@@ -423,7 +423,7 @@ namespace DCTS.Bus
                 var image = sumary.MainDocumentPart.ImageParts.LastOrDefault();
                 //Image img = duplicated.Images[0];
 
-                string imagePath = EntityPathConfig.newlocationimagepath(locationImage);
+                string imagePath = EntityPathHelper.newlocationimagepath(locationImage);
                 if (image != null && File.Exists(imagePath))
                 {
                     string relID = sumary.MainDocumentPart.GetIdOfPart(image);
@@ -488,7 +488,7 @@ namespace DCTS.Bus
                         var image = duplicated.MainDocumentPart.ImageParts.ElementAtOrDefault(0);
                         //Image img = duplicated.Images[0];
 
-                        string imagePath = EntityPathConfig.LocationImagePath(location);
+                        string imagePath = EntityPathHelper.LocationImagePath(location);
                         if (image != null && File.Exists(imagePath))
                         {
                             string relID = duplicated.MainDocumentPart.GetIdOfPart(image);
@@ -579,7 +579,92 @@ namespace DCTS.Bus
                         }
                     }
                 }
+                if (group.Key == (int)SupplierEnum.Rental)
+                {
+                    HanldeRentalTickets(tmplDict, group.ToList());
+
+                }
             }
+
+        }
+
+        // 处理每日租车
+        public void HanldeRentalTickets(Dictionary<ComboLocationEnum, WordprocessingDocument> tmplDict, List<Ticket> tickets)
+        {
+            WordprocessingDocument ticketTemplate = tmplDict[ComboLocationEnum.Rental];
+            var stream = new MemoryStream();
+            var template = ticketTemplate.Clone(stream, true) as WordprocessingDocument;
+
+            var mainDoc = template.MainDocumentPart.Document;
+            //look for one specific table here
+            Table table = mainDoc.Body.Descendants<Table>().LastOrDefault();
+            if (table != null)
+            {
+                //这里每日租车应该只有一个
+                for (var i = 0; i < tickets.Count; i++)
+                {
+                    var ticket = tickets[i];
+                    var supplier = this.supplierList.First(o => o.id == ticket.supplier_id);
+                    var cloned = table.CloneNode(true) as Table;
+
+                    if (supplier != null)
+                    {
+                        WordTemplateHelper.ReplaceText<Table>(cloned, "%ticket_num%", ticket.num);
+                        WordTemplateHelper.ReplaceText<Table>(cloned, "%ticket_route%", ticket.route);
+                        WordTemplateHelper.ReplaceText<Table>(cloned, "%ticket_from_place%", ticket.from_place);
+                        WordTemplateHelper.ReplaceText<Table>(cloned, "%ticket_to_place%", ticket.to_place);
+                        WordTemplateHelper.ReplaceText<Table>(cloned, "%ticket_from_address%", ticket.from_address);
+                        WordTemplateHelper.ReplaceText<Table>(cloned, "%ticket_to_address%", ticket.to_address);
+                        if (ticket.from_latlng != null)
+                        {
+                            WordTemplateHelper.ReplaceText<Table>(cloned, "%ticket_from_latlng%", ticket.from_latlng.Split(" ".ToCharArray()));
+                        }
+                        if (ticket.from_latlng != null)
+                        {
+                            WordTemplateHelper.ReplaceText<Table>(cloned, "%ticket_to_latlng%", ticket.to_latlng.Split(" ".ToCharArray()));
+                        }
+
+                        WordTemplateHelper.ReplaceText<Table>(cloned, "%ticket_start_time%", String.Format("{0:yyyyMMdd HH:mm}", ticket.start_at.GetValueOrDefault()));
+                        WordTemplateHelper.ReplaceText<Table>(cloned, "%ticket_end_time%", String.Format("{0:yyyyMMdd HH:mm}", ticket.end_at.GetValueOrDefault()));
+                        //替换图片
+                        if (supplier.img != null)
+                        {
+                            string file = EntityPathHelper.Supplier_LocationImagePath(supplier);
+                            if (File.Exists(file))
+                            {
+                                string relId = WordTemplateHelper.InsertPicture(template, file);
+                                var blip = cloned.Descendants<DocumentFormat.OpenXml.Drawing.Blip>().LastOrDefault();
+                                blip.Embed.InnerText = relId;
+                            }
+                        }
+                        
+                    }
+
+                    var customer = this.customerList.FirstOrDefault(o => o.id == ticket.customer_id);
+                    if (customer != null)
+                    {
+                        WordTemplateHelper.ReplaceText(cloned, "%customer_name%", customer.name);
+                    }
+
+                    if (i != 0)
+                    {
+                        table.InsertBeforeSelf(new Paragraph(new DocumentFormat.OpenXml.Wordprocessing.Run(new DocumentFormat.OpenXml.Wordprocessing.Break() { Type = BreakValues.TextWrapping })));
+                    }
+                    table.InsertBeforeSelf(cloned);
+                }
+                table.Remove();
+            }
+            //由于未知原因，以下保存的文档是可读的，template.SaveAs(path)， 但是 template.Save(); 再由 MergeDoc 产生的文档不可读。
+            //所以这里新创建MemoryStream，再clone。
+            template.Save();
+            // 机票文档
+            MemoryStream newStream = new MemoryStream();
+            template.Clone(newStream);
+            stream.Close();
+            this.filledTemplates.Add(template);
+            this.filledTemplateStreams.Add(newStream);
+
+
 
         }
 
@@ -617,7 +702,7 @@ namespace DCTS.Bus
                         //替换图片
                         if (supplier.img != null)
                         {
-                            string file = EntityPathConfig.Supplier_LocationImagePath(supplier);
+                            string file = EntityPathHelper.Supplier_LocationImagePath(supplier);
                             if (File.Exists(file))
                             {
                                 string relId = WordTemplateHelper.InsertPicture(template, file);
@@ -650,9 +735,9 @@ namespace DCTS.Bus
             foreach (var aid in airportIds.Distinct())
             {
                 var location = ticketLocations.Find(o => o.id == aid);
-                if (location.word != null && File.Exists(EntityPathConfig.LocationWordPath(location)))
+                if (location.word != null && File.Exists(EntityPathHelper.LocationWordPath(location)))
                 {
-                    var airportStream = new MemoryStream(File.ReadAllBytes(EntityPathConfig.LocationWordPath(location)));
+                    var airportStream = new MemoryStream(File.ReadAllBytes(EntityPathHelper.LocationWordPath(location)));
                     this.filledTemplateStreams.Add(airportStream);
                 }
             }
@@ -1059,7 +1144,7 @@ namespace DCTS.Bus
                     var image = tripSumary.MainDocumentPart.ImageParts.FirstOrDefault();
                     //Image img = duplicated.Images[0];
 
-                    string imagePath = EntityPathConfig.newlocationimagepath(locationImage);
+                    string imagePath = EntityPathHelper.newlocationimagepath(locationImage);
                     if (image != null && File.Exists(imagePath))
                     {
                         string relID = tripSumary.MainDocumentPart.GetIdOfPart(image);
@@ -1075,7 +1160,7 @@ namespace DCTS.Bus
                 Console.WriteLine("\tError, couldn't find table with caption ORDER_TABLE in document");
             }
             tripSumary.Save();
-            //string path = EntityPathConfig.TripWordFilePath(TripId, "summary");
+            //string path = EntityPathHelper.TripWordFilePath(TripId, "summary");
             //tripSumary.SaveAs(path);
             this.filledTemplates.Add(tripSumary);
             this.filledTemplateStreams.Add(stream);

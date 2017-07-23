@@ -68,7 +68,7 @@ namespace DCTS.UI
                             //如果存在复制到相应的文件夹中
                             if (locations != null && locations.Count != 0)
                             {
-                                string copyToPath = EntityPathConfig.newlocationimagepath(locations[0]);
+                                string copyToPath = EntityPathHelper.newlocationimagepath(locations[0]);
                                 if (File.Exists(copyToPath))
                                 {
                                     if (isReplace)
@@ -95,7 +95,7 @@ namespace DCTS.UI
 
                                 ctx.SaveChanges();
 
-                                string copyToPath = EntityPathConfig.newlocationimagepath(obj);
+                                string copyToPath = EntityPathHelper.newlocationimagepath(obj);
                                 if (File.Exists(copyToPath))
                                 {
                                     if (isReplace)
@@ -136,7 +136,7 @@ namespace DCTS.UI
 
                 if (item.name != null)
                 {
-                    string ImageLocation = EntityPathConfig.newlocationimagepath(item);
+                    string ImageLocation = EntityPathHelper.newlocationimagepath(item);
                     if (File.Exists(ImageLocation))
                     {
                         imageListSmall.ImageSize = new Size(188, 188);
@@ -161,7 +161,7 @@ namespace DCTS.UI
 
             foreach (LocationImage item in list)
             {
-                string ImageLocation = EntityPathConfig.newlocationimagepath(item);
+                string ImageLocation = EntityPathHelper.newlocationimagepath(item);
                 if (File.Exists(ImageLocation))
                 {
                     ListViewItem lvi = new ListViewItem();
@@ -323,7 +323,7 @@ namespace DCTS.UI
                             var querynew = ctx.LocationImages.Where(o => o.id == coverid);
                             if (querynew != null && querynew.ToList().Count > 0)
                             {
-                                string ImageLocation = EntityPathConfig.newlocationimagepath(querynew.ToList()[0]);
+                                string ImageLocation = EntityPathHelper.newlocationimagepath(querynew.ToList()[0]);
                                 File.Delete(ImageLocation);
 
                             }

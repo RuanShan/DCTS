@@ -32,7 +32,7 @@ namespace DCTS.UI
                 long folername = obj.id / 1000;
                 if (obj.word != null && obj.word != "")
                 {
-                    string copyToPath = EntityPathConfig.LocationWordPath(obj);
+                    string copyToPath = EntityPathHelper.LocationWordPath(obj);
                     //string lcoalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\data\\export\\words" + "\\" + folername + "\\", obj.word);
 
                     this.docPathTextBox.Text = copyToPath;
@@ -107,7 +107,7 @@ namespace DCTS.UI
                         }
                         if (hasDoc)
                         {
-                            string copyToPath = EntityPathConfig.LocationWordPath(obj);
+                            string copyToPath = EntityPathHelper.LocationWordPath(obj);
                             if (!File.Exists(copyToPath))
                                 File.Copy(docFilePath, copyToPath);
                         }
@@ -125,7 +125,7 @@ namespace DCTS.UI
                         if (hasDoc)
                         {
                             obj.word = copyfilename;
-                            string copyToPath = EntityPathConfig.LocationWordPath(obj);
+                            string copyToPath = EntityPathHelper.LocationWordPath(obj);
 
 
                             if (!File.Exists(copyToPath))

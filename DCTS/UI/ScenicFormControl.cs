@@ -15,24 +15,14 @@ namespace DCTS.UI
     public partial class ScenicFormControl : UserControl
     {
         long scenicId;
-        DctsEntities db;
         public ScenicFormControl()
         {
             InitializeComponent();
-            db = new DctsEntities();
             scenicId = 0;
         }
 
         public void InitializeDataSource()
         {
-            var nationList = DCTS.DB.GlobalCache.NationList;
-
-            this.nationComboBox.DisplayMember = "title";
-            this.nationComboBox.ValueMember = "code";
-            this.nationComboBox.DataSource = nationList;
-            //var query = ctx.Scenics.OrderBy(o => o.id).Skip(offset).Take(pageSize);
-            //var list = this.entityDataSource1.CreateView(query);
-            //this.dataGridView.DataSource = list;
 
         }
 
@@ -50,6 +40,14 @@ namespace DCTS.UI
 
         public void FillFormByModel(ComboLocation scenic)
         {
+
+            var nationList = DCTS.DB.GlobalCache.NationList;
+
+            this.nationComboBox.DisplayMember = "title";
+            this.nationComboBox.ValueMember = "code";
+            this.nationComboBox.DataSource = nationList;
+
+
             // 查询图片是否存在时使用
             this.scenicId = scenic.id;
 
@@ -106,12 +104,12 @@ namespace DCTS.UI
             }
 
             //处理图片
-            if (scenic.img.Length > 0)
+            if (scenic.image_path!=null && scenic.image_path.Length > 0)
             {
                 if (scenic.id > 0 )
-                {                    
-                    this.imgPathTextBox.Text = scenic.img;
-                    string lcoalPath = EntityPathConfig.LocationImagePath(scenic);
+                {
+                    this.imgPathTextBox.Text = Path.Combine(scenic.image_path);
+                    string lcoalPath = EntityPathHelper.LocationImagePathEx(scenic);
                     pictureBox1.ImageLocation = lcoalPath;
                 }
             }
@@ -131,7 +129,7 @@ namespace DCTS.UI
             scenic.tips = this.tipsTextBox.Text;
             scenic.local_address = this.localAddressTextBox.Text;
             scenic.route = this.routeTextBox.Text;
-            scenic.img = this.imgPathTextBox.Text;
+            scenic.image_path = this.imgPathTextBox.Text;
             scenic.open_close_more = this.openCloseTextBox.Text;
             return scenic;
         }
@@ -144,6 +142,7 @@ namespace DCTS.UI
 
         private void findFileButton_Click(object sender, EventArgs e)
         {
+            openFileDialog1.InitialDirectory = EntityPathHelper.ImageBasePath;
             //openFileDialog1.Filter = "PNG(*.png)JPEG(*.jpg,*.jpeg,*.jpe,*.jfif)GIF(*.gif)BMP(*.bmp)|*.png;*.jpg;*.jpeg;*.jpe;*.jfif;*.gif;*.bmp"; //文件类型
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -161,11 +160,21 @@ namespace DCTS.UI
 
             if (hasImg )
             {
+                //var db = this.entityDataSource1.DbContext as DctsEntities;
+
 
                 imgFileName = Path.GetFileName(imgFilePath);
-               
-                existSameImage = (db.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Scenic && o.img == imgFileName && o.id != scenicId).Count() > 0);
-                
+                // 检查选择图片是否是素材目录下的，
+                // 如果是，直接设置image_path,image_name, 
+                // 如果不是，需要检查素材目录下是否存在，
+                //      如果存在 提示文件已存在，是否覆盖
+                //      如果不存在，直接拷贝到素材目录下
+                if (!imgFilePath.StartsWith(EntityPathHelper.ImageBasePath))
+                {
+                    string targetPath = Path.Combine(EntityPathHelper.ImageBasePath, imgFileName);
+
+                    existSameImage = File.Exists(targetPath);
+                }
                 if (existSameImage)
                 {
                     this.errorProvider1.SetError(this.imgPathTextBox, string.Format("文件名<{0}>已存在, 请使用其他文件名！", imgFileName));

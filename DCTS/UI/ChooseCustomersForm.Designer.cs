@@ -30,15 +30,15 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.idColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.genderColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.createdAtColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pager1 = new DCTS.CustomComponents.Pager();
             this.label1 = new System.Windows.Forms.Label();
             this.noButton1 = new System.Windows.Forms.Button();
             this.yesButton2 = new System.Windows.Forms.Button();
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
-            this.idColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.genderColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.createdAtColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,13 +54,43 @@
             this.nameColumn1,
             this.genderColumn1,
             this.createdAtColumn1});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 81);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 71);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(471, 230);
+            this.dataGridView1.Size = new System.Drawing.Size(471, 240);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
+            // 
+            // idColumn1
+            // 
+            this.idColumn1.DataPropertyName = "id";
+            this.idColumn1.HeaderText = "编号";
+            this.idColumn1.Name = "idColumn1";
+            this.idColumn1.ReadOnly = true;
+            // 
+            // nameColumn1
+            // 
+            this.nameColumn1.DataPropertyName = "name";
+            this.nameColumn1.HeaderText = "姓名";
+            this.nameColumn1.Name = "nameColumn1";
+            this.nameColumn1.ReadOnly = true;
+            // 
+            // genderColumn1
+            // 
+            this.genderColumn1.DataPropertyName = "gender";
+            this.genderColumn1.HeaderText = "性别";
+            this.genderColumn1.Name = "genderColumn1";
+            this.genderColumn1.ReadOnly = true;
+            // 
+            // createdAtColumn1
+            // 
+            this.createdAtColumn1.DataPropertyName = "created_at";
+            this.createdAtColumn1.HeaderText = "创建时间";
+            this.createdAtColumn1.Name = "createdAtColumn1";
+            this.createdAtColumn1.ReadOnly = true;
             // 
             // pager1
             // 
@@ -77,12 +107,13 @@
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(12, 21);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.Size = new System.Drawing.Size(471, 33);
             this.label1.TabIndex = 2;
             this.label1.Text = "客户信息";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // noButton1
             // 
@@ -103,34 +134,11 @@
             this.yesButton2.TabIndex = 3;
             this.yesButton2.Text = "确定";
             this.yesButton2.UseVisualStyleBackColor = true;
+            this.yesButton2.Click += new System.EventHandler(this.yesButton2_Click);
             // 
             // entityDataSource1
             // 
             this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
-            // 
-            // idColumn1
-            // 
-            this.idColumn1.DataPropertyName = "id";
-            this.idColumn1.HeaderText = "编号";
-            this.idColumn1.Name = "idColumn1";
-            // 
-            // nameColumn1
-            // 
-            this.nameColumn1.DataPropertyName = "name";
-            this.nameColumn1.HeaderText = "姓名";
-            this.nameColumn1.Name = "nameColumn1";
-            // 
-            // genderColumn1
-            // 
-            this.genderColumn1.DataPropertyName = "gender";
-            this.genderColumn1.HeaderText = "性别";
-            this.genderColumn1.Name = "genderColumn1";
-            // 
-            // createdAtColumn1
-            // 
-            this.createdAtColumn1.DataPropertyName = "created_at";
-            this.createdAtColumn1.HeaderText = "创建时间";
-            this.createdAtColumn1.Name = "createdAtColumn1";
             // 
             // ChooseCustomersForm
             // 
@@ -143,7 +151,7 @@
             this.Controls.Add(this.pager1);
             this.Controls.Add(this.dataGridView1);
             this.Name = "ChooseCustomersForm";
-            this.Text = "ChooseCustomersForm";
+            this.Text = "选择客户";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

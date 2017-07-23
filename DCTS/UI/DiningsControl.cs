@@ -220,7 +220,7 @@ namespace DCTS.UI
 
                     if (selectedItem.img != null && selectedItem.img != "" && selectedItem.img != "\"\"")
                     {
-                        string lcoalPath = EntityPathConfig.LocationImagePath(selectedItem);
+                        string lcoalPath = EntityPathHelper.LocationImagePath(selectedItem);
                         e.Value = GetImage1(lcoalPath);
                     }
                 }

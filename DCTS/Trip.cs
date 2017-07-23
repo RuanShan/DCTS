@@ -32,6 +32,7 @@ namespace DCTS
         public Nullable<System.DateTime> end_at { get; set; }
         public int cover_id { get; set; }
         public string countries { get; set; }
+        public string image_path { get; set; }
     
         public virtual ICollection<DayLocation> DayLocations { get; set; }
         public virtual ICollection<TripDay> TripDays { get; set; }

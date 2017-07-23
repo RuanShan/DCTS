@@ -98,7 +98,7 @@ namespace DCTS.Bus
                 // 检查图片是否存在？
                 if (model.img != null && model.img.Length > 0)
                 {
-                    string path = EntityPathConfig.LocationImagePath(model);
+                    string path = EntityPathHelper.LocationImagePath(model);
                     if (File.Exists(path))
                     {
                         File.Delete(path);
@@ -108,7 +108,7 @@ namespace DCTS.Bus
                 // 检查word是否存在？
                 if (model.word != null && model.word.Length > 0)
                 {
-                    string path = EntityPathConfig.LocationWordPath(model);
+                    string path = EntityPathHelper.LocationWordPath(model);
                     if (File.Exists(path))
                     {
                         File.Delete(path);
@@ -232,18 +232,8 @@ namespace DCTS.Bus
                 {
                     string imgFileName = Path.GetFileName(img);
                     //如果 imgFileName ！= img， 即 img 中包含路径信息， 修改和更新都可能发生。
-                    if (!imgFileName.Equals(img))
-                    {
-
-                        bool existSameImage = false;
-
-                        existSameImage = (ctx.ComboLocations.Where(o => o.ltype == location.ltype && o.img == imgFileName && o.id != id).Count() > 0);
-
-                        if (existSameImage)
-                        {
-                            throw new DbEntityValidationException(string.Format("图片<{0}>已存在。", imgFileName));                                    
-                        }
-                    }
+                    //如果 路径不是 ImageBasePath  即 /data/image, 不需要检查素材是否存在，form 窗口已提示重名，用户点击保存，覆盖即可
+                    
                 }
 
             }

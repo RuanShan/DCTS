@@ -96,6 +96,8 @@
           <Property Name="tips" Type="varchar" MaxLength="1020" />
           <Property Name="guidance" Type="varchar" MaxLength="1020" />
           <Property Name="word" Type="varchar" MaxLength="45" />
+          <Property Name="image_path" Type="varchar" MaxLength="128" />
+          <Property Name="image_name" Type="varchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="Customers">
           <Key>
@@ -227,6 +229,10 @@
           <Property Name="created_at" Type="datetime" />
           <Property Name="updated_at" Type="datetime" />
           <Property Name="room" Type="varchar" MaxLength="256" />
+          <Property Name="from_address" Type="varchar" MaxLength="256" />
+          <Property Name="to_address" Type="varchar" MaxLength="256" />
+          <Property Name="from_latlng" Type="varchar" MaxLength="128" />
+          <Property Name="to_latlng" Type="varchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="TripCustomers">
           <Key>
@@ -249,6 +255,7 @@
           <Property Name="schedule" Type="varchar" MaxLength="2048" />
           <Property Name="cover_id" Type="int" Nullable="false" />
           <Property Name="cities" Type="varchar" MaxLength="256" />
+          <Property Name="image_path" Type="varchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="Trips">
           <Key>
@@ -264,6 +271,7 @@
           <Property Name="end_at" Type="datetime" />
           <Property Name="cover_id" Type="int" Nullable="false" />
           <Property Name="countries" Type="varchar" MaxLength="256" />
+          <Property Name="image_path" Type="varchar" MaxLength="128" />
         </EntityType>
         <Association Name="fk_customer">
           <End Role="Customers" Type="DctsModel.Store.Customers" Multiplicity="1" />
@@ -441,6 +449,7 @@
           <NavigationProperty Name="TripCustomers" Relationship="DctsModel.fk_tripcustomer_trip" FromRole="Trip" ToRole="TripCustomer" />
           <Property Type="String" Name="countries" MaxLength="256" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Tickets" Relationship="DctsModel.fk_ticket_trip" FromRole="Trip" ToRole="Ticket" />
+          <Property Type="String" Name="image_path" MaxLength="128" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="City">
           <Key>
@@ -499,6 +508,8 @@
           <Property Type="String" Name="guidance" MaxLength="1020" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="LocationImages" Relationship="DctsModel.fk_location" FromRole="ComboLocation" ToRole="LocationImage" />
           <Property Type="String" Name="word" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="image_path" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="image_name" MaxLength="128" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="DayLocation">
           <Key>
@@ -582,6 +593,7 @@
           <Property Type="Int32" Name="cover_id" Nullable="false" />
           <NavigationProperty Name="Schedules" Relationship="DctsModel.fk_tripday" FromRole="TripDay" ToRole="Schedule" />
           <Property Type="String" Name="cities" />
+          <Property Type="String" Name="image_path" MaxLength="128" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="dayId">
           <End Type="DctsModel.TripDay" Role="TripDay" Multiplicity="1">
@@ -714,6 +726,10 @@
           <NavigationProperty Name="Trip" Relationship="DctsModel.fk_ticket_trip" FromRole="Ticket" ToRole="Trip" />
           <Property Type="String" Name="city" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="room" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="from_address" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="to_address" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="from_latlng" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="to_latlng" MaxLength="128" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="fk_customer">
           <End Type="DctsModel.Customer" Role="Customer" Multiplicity="1" />
@@ -806,6 +822,7 @@
           <EntitySetMapping Name="Trips">
             <EntityTypeMapping TypeName="DctsModel.Trip">
               <MappingFragment StoreEntitySet="Trips">
+                <ScalarProperty Name="image_path" ColumnName="image_path" />
                 <ScalarProperty Name="countries" ColumnName="countries" />
                 <ScalarProperty Name="cover_id" ColumnName="cover_id" />
                 <ScalarProperty Name="end_at" ColumnName="end_at" />
@@ -847,6 +864,8 @@
           <EntitySetMapping Name="ComboLocations">
             <EntityTypeMapping TypeName="DctsModel.ComboLocation">
               <MappingFragment StoreEntitySet="ComboLocations">
+                <ScalarProperty Name="image_name" ColumnName="image_name" />
+                <ScalarProperty Name="image_path" ColumnName="image_path" />
                 <ScalarProperty Name="word" ColumnName="word" />
                 <ScalarProperty Name="guidance" ColumnName="guidance" />
                 <ScalarProperty Name="open_close_more" ColumnName="open_close_more" />
@@ -973,6 +992,10 @@
           <EntitySetMapping Name="Tickets">
             <EntityTypeMapping TypeName="DctsModel.Ticket">
               <MappingFragment StoreEntitySet="Tickets">
+                <ScalarProperty Name="to_latlng" ColumnName="to_latlng" />
+                <ScalarProperty Name="from_latlng" ColumnName="from_latlng" />
+                <ScalarProperty Name="to_address" ColumnName="to_address" />
+                <ScalarProperty Name="from_address" ColumnName="from_address" />
                 <ScalarProperty Name="room" ColumnName="room" />
                 <ScalarProperty Name="city" ColumnName="city" />
                 <ScalarProperty Name="ttype" ColumnName="ttype" />
@@ -1017,6 +1040,7 @@
           <EntitySetMapping Name="TripDays">
             <EntityTypeMapping TypeName="IsTypeOf(DctsModel.TripDay)">
               <MappingFragment StoreEntitySet="TripDays">
+                <ScalarProperty Name="image_path" ColumnName="image_path" />
                 <ScalarProperty Name="cities" ColumnName="cities" />
                 <ScalarProperty Name="cover_id" ColumnName="cover_id" />
                 <ScalarProperty Name="schedule" ColumnName="schedule" />

@@ -96,17 +96,8 @@ namespace DCTS.UI
             trip.memo = this.memoTextBox.Text;
             trip.end_at = trip.start_at.Value.AddDays(trip.days - 1);
             trip.countries = this.nationTextBox.Text;
-            using (var ctx = new DctsEntities())
-            {
-                var location = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.PageImage).First();
-
-                var query = ctx.LocationImages.Where(o => o.location_id == (int)location.id && o.name == imgPathTextBox.Text);
-                List<LocationImage> list = query.ToList();
-                if (list.Count > 0)
-                {
-                    trip.cover_id = list[0].id;
-                }
-            }
+            trip.image_path = this.imgPathTextBox.Text;
+            
 
             var tripCustomers = trip.TripCustomers.ToList();
             var oriCustomerIds = tripCustomers.Select(o => o.customer_id).ToList();
@@ -133,17 +124,14 @@ namespace DCTS.UI
             this.nationTextBox.Text = trip.countries;
             this.customersTextBox2.Text = string.Join(",", customerList.Select(o => o.name).ToArray() );
             //读取图片位置
-            using (var ctx = new DctsEntities())
+     
+            if ( trip.image_path!=null && trip.image_path.Length>0)
             {
-                var query = ctx.LocationImages.Where(o => o.id == trip.cover_id);
-                if (query.Count() > 0)
-                {
-                    string ImageLocation = EntityPathConfig.newlocationimagepath(query.ToList()[0]);
-                    imgPathTextBox.Text = query.ToList()[0].name;
-                    pictureBox1.ImageLocation = ImageLocation;
-                }
-
+                string fullPath = EntityPathHelper.LocationImagePathEx( trip);
+                imgPathTextBox.Text = trip.image_path;
+                pictureBox1.ImageLocation = fullPath;
             }
+ 
         }
 
         #endregion
@@ -445,18 +433,11 @@ namespace DCTS.UI
             var form = new SelectSystemfile();
             form.ShowDialog();
 
-
-            //if (form.ShowDialog() == DialogResult.Yes)
+            if (form.selectedImage.Length>0)
             {
-                List<string> reference = form.listfile;
-                if (reference.Count > 0)
-                {
-                    imgPathTextBox.Text = reference[0];
+                imgPathTextBox.Text = form.selectedImage;
 
-                    pictureBox1.ImageLocation = reference[1];
-                }
-
-
+                pictureBox1.ImageLocation = form.selectedImageAbsolutePath;
             }
         }
 

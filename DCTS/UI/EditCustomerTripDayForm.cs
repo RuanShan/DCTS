@@ -74,19 +74,11 @@ namespace DCTS.UI
 
         public void FillModelByForm(TripDay tripDay)
         {
-            Model.title = this.titleTextBox.Text;
-            Model.tips = this.tipsTextBox.Text;
-            Model.cities = this.citiesTextBox.Text;
-
-            using (var ctx = new DctsEntities())
-            {
-                var location = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.PageImage).First();
-                var query = ctx.LocationImages.Where(o => o.location_id == (int)location.id && o.name == imgPathTextBox.Text);
-                List<LocationImage> list = query.ToList();
-                if (list.Count > 0)
-                    Model.cover_id = list[0].id;
-            }
-            Model = tripDay;
+            tripDay.title = this.titleTextBox.Text;
+            tripDay.tips = this.tipsTextBox.Text;
+            tripDay.cities = this.citiesTextBox.Text;
+            tripDay.image_path = this.imgPathTextBox.Text;
+            
             //  trip.schedule = this.scheduleTextBox.Text;
         }
 
@@ -98,18 +90,14 @@ namespace DCTS.UI
             this.citiesTextBox.Text = Model.cities;
 
             //读取图片位置
-            using (var ctx = new DctsEntities())
+             
+            if (Model.image_path != null && Model.image_path.Length>0)
             {
-                var query = ctx.LocationImages.Where(o => o.id == Model.cover_id);
-                if (query != null && query.ToList().Count > 0)
-                {
-                    string ImageLocation = EntityPathConfig.newlocationimagepath(query.ToList()[0]);
-                    imgPathTextBox.Text = query.ToList()[0].name;
-                    pictureBox1.ImageLocation = ImageLocation;
-                }
-
+                string fullPath = EntityPathHelper.LocationImagePathEx(Model );
+                imgPathTextBox.Text = Model.image_path;
+                pictureBox1.ImageLocation = fullPath;
             }
-
+           
             //this.scheduleTextBox.Text = trip.schedule;
             InitializeDataGridView();
 
@@ -194,11 +182,10 @@ namespace DCTS.UI
             var form = new SelectSystemfile();
             form.ShowDialog();
             {
-                List<string> reference = form.listfile;
-                if (reference.Count > 0)
+                 if (form.selectedImage.Length > 0)
                 {
-                    imgPathTextBox.Text = reference[0];
-                    pictureBox1.ImageLocation = reference[1];
+                    imgPathTextBox.Text = form.selectedImage;
+                    pictureBox1.ImageLocation = form.selectedImageAbsolutePath;
                 }
             }
         }

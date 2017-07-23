@@ -1,3 +1,11 @@
-﻿1. 修正ChooseLocationForm Datagridview DataError
-delete from combolocations where id>0 and ltype=0;
+﻿1. 租车模板
+
+2. 素材管理
+
+5. 解决机场模板错乱问题
+
+3. 使用上传模板生成所有文档.
+
+4. 生成模板时有进度条.
+
 

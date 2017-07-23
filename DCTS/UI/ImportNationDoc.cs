@@ -108,7 +108,7 @@ namespace DCTS.CustomComponents
                                 //如果存在复制到相应的文件夹中
                                 if (locations != null && locations.Count != 0)
                                 {
-                                    string copyToPath = EntityPathConfig.TripWordFilePath(locations[0].id);
+                                    string copyToPath = EntityPathHelper.TripWordFilePath(locations[0].id);
                                     if (File.Exists(copyToPath))
                                     {
                                         e.Result = "导入[" + file + "]在系统中已存在";

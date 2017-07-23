@@ -221,6 +221,7 @@ namespace DCTS.UI
                     trip.title = this.titleTextBox.Text;
                     trip.memo = this.memoTextBox.Text;
                     trip.countries = this.nationTextBox.Text;
+                    trip.image_path = this.imagePathTextBox.Text;
 
                     if (trip.days < days)
                     {
@@ -252,8 +253,8 @@ namespace DCTS.UI
                     trip.memo = this.memoTextBox.Text;
                     trip.days = Convert.ToInt32(this.daysNumericUpDown.Value);
                     trip.end_at = trip.start_at.Value.AddDays(trip.days - 1);
-
                     trip.countries = this.nationTextBox.Text;
+                    trip.image_path = this.imagePathTextBox.Text;
 
                     for (int i = 0; i < trip.days; i++)
                     {
@@ -548,19 +549,11 @@ namespace DCTS.UI
         {
             var form = new SelectSystemfile();
             form.ShowDialog();
-
-
-
+            if (form.selectedImage.Length>0)
             {
-                List<string> reference = form.listfile;
-                if (reference.Count > 0)
-                {
-
-                    pictureBox1.ImageLocation = reference[1];
-                }
-
-
-            }
+                imagePathTextBox.Text = form.selectedImage;
+                pictureBox1.ImageLocation = form.selectedImageAbsolutePath;
+            }           
         }
 
         private void activityDataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)

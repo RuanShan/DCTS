@@ -74,7 +74,7 @@ namespace DCTS.CustomComponents
                             //如果存在复制到相应的文件夹中
                             if (locations != null && locations.Count != 0)
                             {
-                                string copyToPath = EntityPathConfig.newlocationimagepath(locations[0]);
+                                string copyToPath = EntityPathHelper.newlocationimagepath(locations[0]);
                                 if (File.Exists(copyToPath))
                                 {
                                     if (isReplace)
@@ -101,7 +101,7 @@ namespace DCTS.CustomComponents
 
                                 ctx.SaveChanges();
 
-                                string copyToPath = EntityPathConfig.newlocationimagepath(obj);
+                                string copyToPath = EntityPathHelper.newlocationimagepath(obj);
                                 if (File.Exists(copyToPath))
                                 {
                                     if (isReplace)
@@ -138,7 +138,7 @@ namespace DCTS.CustomComponents
 
                 if (item.name != null)
                 {
-                    string ImageLocation = EntityPathConfig.newlocationimagepath(item);
+                    string ImageLocation = EntityPathHelper.newlocationimagepath(item);
 
                     imageListSmall.Images.Add(Bitmap.FromFile(ImageLocation));
                 }
@@ -302,7 +302,7 @@ namespace DCTS.CustomComponents
             if (this.listView1.CheckedItems.Count > 0)
             {
                 strFileName = this.listView1.SelectedItems[0].Text;
-                string ImageLocation = EntityPathConfig.newlocationimagepath(listpage[this.listView1.SelectedItems[0].StateImageIndex - 1]);
+                string ImageLocation = EntityPathHelper.newlocationimagepath(listpage[this.listView1.SelectedItems[0].StateImageIndex - 1]);
                 listfile.Add(strFileName);
                 listfile.Add(ImageLocation);
                 this.Close();

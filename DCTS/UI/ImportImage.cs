@@ -115,7 +115,7 @@ namespace DCTS.CustomComponents
                                 //如果存在复制到相应的文件夹中
                                 if (locations != null && locations.Count != 0)
                                 {
-                                    string copyToPath = EntityPathConfig.LocationImagePath(locations[0]);
+                                    string copyToPath = EntityPathHelper.LocationImagePath(locations[0]);
                                     if (File.Exists(copyToPath))
                                     {
                                         if (isReplace)

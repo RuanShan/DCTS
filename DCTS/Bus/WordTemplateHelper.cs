@@ -98,6 +98,36 @@ namespace DCTS.Bus
             }
         }
 
+        public static void ReplaceText<T>(T node, string key, IEnumerable<string> lines) where T : OpenXmlElement
+        {
+             
+            foreach (var run in node.Descendants<Run>())
+            {
+                if (run.InnerText.Contains(key))
+                {
+                    int i = 0;
+                    foreach (var line in lines)
+                    {
+                        var cloned = run.CloneNode(true) as Run;
+                        WordTemplateHelper.ReplaceText<Run>(cloned, key, line);
+
+                        if (i > 0)
+                        {
+                            run.InsertBeforeSelf(  (new DocumentFormat.OpenXml.Wordprocessing.Run(new DocumentFormat.OpenXml.Wordprocessing.Break() { Type = BreakValues.TextWrapping })));
+                        }
+                        run.InsertBeforeSelf(cloned);
+                        i++;
+                    }
+                    if (i > 0)
+                    {
+                        run.Remove();
+                    }
+
+                    break;
+                }
+            }
+        }
+
         //Open Xml SDK Word模板开发最佳实践(Best Practice)
         //http://www.cnblogs.com/pengzhen/p/3823980.html?utm_source=tuicool&utm_medium=referral
         public static void ReplaceTextWithProperty<T>( WordprocessingDocument doc, string[] keys, T entity)

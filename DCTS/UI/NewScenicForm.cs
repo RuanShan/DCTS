@@ -39,8 +39,6 @@ namespace DCTS.UI
             {
                 using (var ctx = new DctsEntities())
                 {
-
-
                     ComboLocation scenic = new ComboLocation();
 
                     scenic.ltype = (int)ComboLocationEnum.Scenic;
@@ -60,7 +58,7 @@ namespace DCTS.UI
                     //拷贝图片需要对象ID，所以这样先创建对象，再拷贝图片
                     if (scenic.img.Length > 0)
                     {             
-                        string copyToPath = EntityPathConfig.LocationImagePath(scenic);
+                        string copyToPath = EntityPathHelper.LocationImagePath(scenic);
                         File.Copy(imgPath, copyToPath, true);
                     }
                     Saved = true;

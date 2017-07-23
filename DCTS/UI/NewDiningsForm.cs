@@ -53,7 +53,7 @@ namespace DCTS.UI
                     if (obj.id > 0)
                     {
                         this.imgPathTextBox.Text = obj.img;
-                        string lcoalPath = EntityPathConfig.LocationImagePath(obj);
+                        string lcoalPath = EntityPathHelper.LocationImagePath(obj);
                         pictureBox1.ImageLocation = lcoalPath;
                     }
                 }
@@ -123,7 +123,7 @@ namespace DCTS.UI
                         {
                             imgFileName = Path.GetFileName(imgFilePath);
                             obj.img = imgFileName;
-                            string copyToPath = EntityPathConfig.LocationImagePath(obj);
+                            string copyToPath = EntityPathHelper.LocationImagePath(obj);
                             File.Copy(imgFilePath, copyToPath, true);
                         }
                         ctx.SaveChanges();
@@ -153,7 +153,7 @@ namespace DCTS.UI
                             string imgPath = obj.img;
                             imgFileName = Path.GetFileName(imgPath);
                             obj.img = imgFileName;
-                            //string copyToPath = EntityPathConfig.LocationImagePath(obj);
+                            //string copyToPath = EntityPathHelper.LocationImagePath(obj);
                             //File.Copy(imgPath, copyToPath);
                         }                       
 
@@ -161,7 +161,7 @@ namespace DCTS.UI
                         if (obj.img.Length > 0)
                         {
                             string imgPath = imgFilePath;                           
-                            string copyToPath = EntityPathConfig.LocationImagePath(obj);
+                            string copyToPath = EntityPathHelper.LocationImagePath(obj);
                             File.Copy(imgPath, copyToPath);
                         }   
 

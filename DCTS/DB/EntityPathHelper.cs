@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DCTS.DB
 {
-    class EntityPathConfig
+    class EntityPathHelper
     {
 
 
@@ -52,14 +52,17 @@ namespace DCTS.DB
             return fullPath;
         }
 
-
+        // 系统素材目录
+        // return ex. d:/dcts/data/images/, 包含最后一个'/', 
+        // 便于处理代码
+        // string relativeImagePath = imagePath.Substring(EntityPathHelper.ImageBasePath.Length);
         public static string ImageBasePath
         {
             get
             {
                 string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "data", "images");
                 CreateFolder(path);
-                return path;
+                return path + Path.DirectorySeparatorChar.ToString();
             }
         }
 
@@ -94,6 +97,37 @@ namespace DCTS.DB
 
             return fullPath;
         }
+        // 新的location image path, 使用 image_path
+        public static string LocationImagePathEx(ComboLocation location)
+        {
+            string imagePath = location.image_path == null ? string.Empty : location.image_path;
+
+            string basePath = ImageBasePath;
+
+            return Path.Combine(basePath, imagePath);
+
+        }
+
+        // trip.image_path
+        public static string LocationImagePathEx(Trip trip)
+        {
+            string imagePath = trip.image_path == null ? string.Empty : trip.image_path;
+
+            string basePath = ImageBasePath;
+
+            return Path.Combine(basePath, imagePath);
+        }
+
+        // trip.image_path
+        public static string LocationImagePathEx(TripDay trip)
+        {
+            string imagePath = trip.image_path == null ? string.Empty : trip.image_path;
+
+            string basePath = ImageBasePath;
+
+            return Path.Combine(basePath, imagePath);
+        }
+
         public static string newlocationimagepath(LocationImage location)
         {
 
@@ -106,6 +140,7 @@ namespace DCTS.DB
 
             return fullPath;
         }
+
         public static string Supplier_LocationImagePath(Supplier location)
         {
 
@@ -168,7 +203,7 @@ namespace DCTS.DB
             ComboLocationEnum type = (ComboLocationEnum)location.ltype;
             if (location.word != null)
             {
-                string path = EntityPathConfig.LocationWordPath(location);
+                string path = EntityPathHelper.LocationWordPath(location);
                 if( File.Exists( path ))
                 {
                     return path;
