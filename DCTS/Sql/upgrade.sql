@@ -96,6 +96,9 @@ THEN
 
 	ALTER TABLE `TripDays`
     ADD COLUMN `image_path` varchar(128) default NULL;
+	ALTER TABLE `Suppliers`
+    ADD COLUMN `image_path` varchar(128) default NULL;
+
 END IF;
 END$$
 DELIMITER ; 

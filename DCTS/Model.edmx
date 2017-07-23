@@ -195,6 +195,7 @@
           <Property Name="created_at" Type="datetime" />
           <Property Name="updated_at" Type="datetime" />
           <Property Name="baggage_weight_limit" Type="varchar" MaxLength="45" />
+          <Property Name="image_path" Type="varchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="Tickets">
           <Key>
@@ -689,6 +690,7 @@
           <Property Type="DateTime" Name="updated_at" />
           <NavigationProperty Name="Tickets" Relationship="DctsModel.fk_supplier" FromRole="Supplier" ToRole="Ticket" />
           <Property Type="String" Name="baggage_weight_limit" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="image_path" MaxLength="128" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Ticket">
           <Key>
@@ -977,6 +979,7 @@
           <EntitySetMapping Name="Suppliers">
             <EntityTypeMapping TypeName="DctsModel.Supplier">
               <MappingFragment StoreEntitySet="Suppliers">
+                <ScalarProperty Name="image_path" ColumnName="image_path" />
                 <ScalarProperty Name="baggage_weight_limit" ColumnName="baggage_weight_limit" />
                 <ScalarProperty Name="updated_at" ColumnName="updated_at" />
                 <ScalarProperty Name="created_at" ColumnName="created_at" />
