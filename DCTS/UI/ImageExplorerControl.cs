@@ -74,7 +74,8 @@ namespace DCTS.UI
             string newRelativePath = newAbsolutePath.Substring(basePath.Length);
             using (var db = new DctsEntities())
             {
-
+                string safeOldRelativePath = MySql.Data.MySqlClient.MySqlHelper.EscapeString(oldRelativePath);
+                string safeNewRelativePath = MySql.Data.MySqlClient.MySqlHelper.EscapeString(newRelativePath);
                 //if (oldRelativePath.Contains(System.IO.Path.DirectorySeparatorChar.ToString()))
                 {   // 子路经 abc/xxx 
                     // 更新combolocation
@@ -82,12 +83,13 @@ namespace DCTS.UI
                     //SUBSTRING('foobarbar' FROM 4)
                     //string replace = string.Format("REPLACE(`image_path`, '{0}', '{1}')", oldRelativePath, newRelativePath);
                     // 考虑中文符集
-                    string replaceSql = string.Format("`image_path` = CONCAT('{0}',SUBSTRING(`image_path`, LENGTH('{1}')+1))",  newRelativePath, oldRelativePath);
-                    string whereSql = string.Format("SUBSTRING(`image_path` , 1, LENGTH('{0}'))='{1}'", oldRelativePath, oldRelativePath);
+                    string replaceSql = string.Format("`image_path` = CONCAT('{0}',SUBSTRING(`image_path`, CHAR_LENGTH('{1}')+1))", safeNewRelativePath, safeOldRelativePath);
+                    // id>0 Error Code: 1175. You are using safe update mode
+                    string whereSql = string.Format(" id>0 AND SUBSTRING(`image_path` , 1, CHAR_LENGTH('{0}'))='{1}'", safeOldRelativePath, safeOldRelativePath);
 
                     string updateLocationSql = string.Format("UPDATE ComboLocations SET {0} WHERE {1};", replaceSql, whereSql);
                     // 更新trip
-                    string updateTripSql = string.Format("UPDATE Trips  SET {0} WHERE {1};", replaceSql, whereSql);
+                    string updateTripSql = string.Format("UPDATE Trips  SET {0} WHERE  {1};", replaceSql, whereSql);
 
                     // 更新tripDay
                     string updateTripDaySql = string.Format("UPDATE TripDays SET {0} WHERE {1};", replaceSql, whereSql);
@@ -100,6 +102,43 @@ namespace DCTS.UI
                
 
             }
+        }
+
+        private void shellNotificationListener1_FolderCreated(object sender, GongSolutions.Shell.ShellItemEventArgs e)
+        {
+            string msg = string.Format("folder created {0}  ", e.Item.DisplayName);
+            Console.WriteLine(msg);
+        }
+
+        private void shellNotificationListener1_FolderDeleted(object sender, GongSolutions.Shell.ShellItemEventArgs e)
+        {
+            string msg = string.Format("folder deleted {0}  ", e.Item.DisplayName);
+            Console.WriteLine(msg);
+        }
+
+        private void shellNotificationListener1_FolderUpdated(object sender, GongSolutions.Shell.ShellItemEventArgs e)
+        {
+            string msg = string.Format("folder updated {0}  ", e.Item.DisplayName);
+            Console.WriteLine(msg);
+        }
+
+        private void shellNotificationListener1_ItemDeleted(object sender, GongSolutions.Shell.ShellItemEventArgs e)
+        {
+            string msg = string.Format("file deleted {0}  ", e.Item.DisplayName);
+            Console.WriteLine(msg);
+        }
+
+        private void shellNotificationListener1_ItemCreated(object sender, GongSolutions.Shell.ShellItemEventArgs e)
+        {
+            string msg = string.Format("file created {0}  ", e.Item.DisplayName);
+            Console.WriteLine(msg);
+        }
+
+        private void shellView1_DragDrop(object sender, DragEventArgs e)
+        {
+             
+            string msg = string.Format("DragDrop event ");
+            Console.WriteLine(msg);
         }
     }
 }
