@@ -31,15 +31,18 @@ namespace DCTS.UI
 
             this.activityFormControl1.FillModelByForm(this.activity);
 
-            string imgFilePath = activity.img;
+            string imgFilePath = activity.image_path;
 
-            bool hasImg = (activity.img != originalActivity.img);
+            bool hasImg = (activity.image_path != originalActivity.image_path);
             if (hasImg)
             {
+                string imagePath = activity.image_path;
 
-                string imgFileName = Path.GetFileName(imgFilePath);
-
-                activity.img = imgFileName;
+                if (imagePath.StartsWith(EntityPathHelper.ImageBasePath))
+                {
+                    string relativeImagePath = imagePath.Substring(EntityPathHelper.ImageBasePath.Length);
+                    activity.image_path = relativeImagePath;
+                }
             }
             //word
             string wordFilePath = activity.word;
@@ -57,8 +60,24 @@ namespace DCTS.UI
 
             if (hasImg)
             {
-                string copyToPath = EntityPathHelper.LocationImagePath(activity);
-                File.Copy(imgFilePath, copyToPath, true);
+                bool newImg = (activity.image_path != originalActivity.image_path);
+                if (newImg)
+                {
+                    string imagePath = activity.image_path;
+                    //用户选择了素材目录的其他图片
+                    if (imagePath.StartsWith(EntityPathHelper.ImageBasePath))
+                    {
+                        string relativeImagePath = imagePath.Substring(EntityPathHelper.ImageBasePath.Length);
+                        activity.image_path = relativeImagePath;
+                    }
+                    else
+                    { // 用户选择素材目录之外的图片
+                        string imgFileName = Path.GetFileName(imagePath);
+                        activity.image_path = imgFileName;
+                        string copyToPath = EntityPathHelper.LocationImagePathEx(activity);
+                        File.Copy(imgFilePath, copyToPath, true);
+                    }
+                }
             }
         }
 

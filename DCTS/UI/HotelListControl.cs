@@ -238,9 +238,10 @@ namespace DCTS.UI
                 {
 
                     ComboLocation selectedItem = dataGridView.Rows[e.RowIndex].DataBoundItem as ComboLocation;
-                    if (selectedItem.img != null && selectedItem.img != "")
+                    if (selectedItem.image_path != null && selectedItem.image_path.Length > 0)
                     {
-                        string lcoalPath = EntityPathHelper.LocationImagePath(selectedItem);
+                        string lcoalPath = EntityPathHelper.LocationImagePathEx(selectedItem);
+
                         e.Value = GetImage1(lcoalPath);
                     }
                 }

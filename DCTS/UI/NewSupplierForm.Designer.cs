@@ -58,9 +58,9 @@
             // cancelButton
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.No;
-            this.cancelButton.Location = new System.Drawing.Point(570, 237);
+            this.cancelButton.Location = new System.Drawing.Point(570, 257);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.Size = new System.Drawing.Size(75, 25);
             this.cancelButton.TabIndex = 18;
             this.cancelButton.Text = "取消";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -69,9 +69,9 @@
             // saveButton
             // 
             this.saveButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
-            this.saveButton.Location = new System.Drawing.Point(489, 237);
+            this.saveButton.Location = new System.Drawing.Point(489, 257);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.Size = new System.Drawing.Size(75, 25);
             this.saveButton.TabIndex = 17;
             this.saveButton.Text = "保存";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -80,18 +80,18 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(82, 101);
+            this.label11.Location = new System.Drawing.Point(82, 109);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(29, 12);
+            this.label11.Size = new System.Drawing.Size(31, 13);
             this.label11.TabIndex = 10;
             this.label11.Text = "图片";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(377, 70);
+            this.label6.Location = new System.Drawing.Point(377, 76);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(29, 12);
+            this.label6.Size = new System.Drawing.Size(31, 13);
             this.label6.TabIndex = 7;
             this.label6.Text = "名称";
             // 
@@ -99,10 +99,10 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(12, 13);
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(12, 14);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(681, 41);
+            this.label2.Size = new System.Drawing.Size(681, 44);
             this.label2.TabIndex = 3;
             this.label2.Text = "新建供应商";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -110,9 +110,9 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(82, 70);
+            this.label1.Location = new System.Drawing.Point(82, 76);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 12);
+            this.label1.Size = new System.Drawing.Size(31, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "类型";
             // 
@@ -126,42 +126,42 @@
             // 
             // cshtextbox
             // 
-            this.cshtextbox.Location = new System.Drawing.Point(412, 97);
+            this.cshtextbox.Location = new System.Drawing.Point(412, 105);
             this.cshtextbox.Name = "cshtextbox";
-            this.cshtextbox.Size = new System.Drawing.Size(233, 21);
+            this.cshtextbox.Size = new System.Drawing.Size(233, 20);
             this.cshtextbox.TabIndex = 21;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(377, 101);
+            this.label3.Location = new System.Drawing.Point(377, 109);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 12);
+            this.label3.Size = new System.Drawing.Size(31, 13);
             this.label3.TabIndex = 20;
             this.label3.Text = "电话";
             // 
             // titleTextBox
             // 
-            this.titleTextBox.Location = new System.Drawing.Point(412, 66);
+            this.titleTextBox.Location = new System.Drawing.Point(412, 72);
             this.titleTextBox.Name = "titleTextBox";
-            this.titleTextBox.Size = new System.Drawing.Size(233, 21);
+            this.titleTextBox.Size = new System.Drawing.Size(233, 20);
             this.titleTextBox.TabIndex = 22;
             // 
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(118, 132);
+            this.pictureBox1.Location = new System.Drawing.Point(118, 143);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(233, 100);
+            this.pictureBox1.Size = new System.Drawing.Size(233, 108);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 25;
             this.pictureBox1.TabStop = false;
             // 
             // findFileButton
             // 
-            this.findFileButton.Location = new System.Drawing.Point(319, 96);
+            this.findFileButton.Location = new System.Drawing.Point(319, 104);
             this.findFileButton.Name = "findFileButton";
-            this.findFileButton.Size = new System.Drawing.Size(32, 23);
+            this.findFileButton.Size = new System.Drawing.Size(32, 25);
             this.findFileButton.TabIndex = 24;
             this.findFileButton.Text = "...";
             this.findFileButton.UseVisualStyleBackColor = true;
@@ -169,9 +169,9 @@
             // 
             // imgPathTextBox
             // 
-            this.imgPathTextBox.Location = new System.Drawing.Point(118, 97);
+            this.imgPathTextBox.Location = new System.Drawing.Point(118, 105);
             this.imgPathTextBox.Name = "imgPathTextBox";
-            this.imgPathTextBox.Size = new System.Drawing.Size(195, 21);
+            this.imgPathTextBox.Size = new System.Drawing.Size(195, 20);
             this.imgPathTextBox.TabIndex = 23;
             // 
             // supplComboBox
@@ -182,16 +182,16 @@
             "保险",
             "租车",
             "Wifi"});
-            this.supplComboBox.Location = new System.Drawing.Point(118, 66);
+            this.supplComboBox.Location = new System.Drawing.Point(118, 72);
             this.supplComboBox.Name = "supplComboBox";
-            this.supplComboBox.Size = new System.Drawing.Size(233, 20);
+            this.supplComboBox.Size = new System.Drawing.Size(233, 21);
             this.supplComboBox.TabIndex = 26;
             // 
             // NewSupplierForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(706, 283);
+            this.ClientSize = new System.Drawing.Size(706, 307);
             this.Controls.Add(this.supplComboBox);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.findFileButton);
@@ -207,6 +207,7 @@
             this.Controls.Add(this.label1);
             this.Name = "NewSupplierForm";
             this.Text = "新建供应商";
+            this.Load += new System.EventHandler(this.NewSupplierForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
