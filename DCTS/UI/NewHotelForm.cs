@@ -53,16 +53,17 @@ namespace DCTS.UI
                 kitchen.Text = obj.kitchen;
                 tipsTextBox.Text = obj.tips;
                 this.originalHotel = new ComboLocation() { img = obj.img };
-                //处理图片
-                if (obj.img!=null && obj.img.Length > 0)
+        
+                if (obj.image_path != null && obj.image_path.Length > 0)
                 {
                     if (obj.id > 0)
                     {
-                        this.imgPathTextBox.Text = obj.img;
-                        string lcoalPath = EntityPathHelper.LocationImagePath(obj);
+                        this.imgPathTextBox.Text = Path.Combine(obj.image_path);
+                        string lcoalPath = EntityPathHelper.LocationImagePathEx(obj);
                         pictureBox1.ImageLocation = lcoalPath;
                     }
                 }
+
             }
         }
 
@@ -112,7 +113,7 @@ namespace DCTS.UI
                         obj.city = this.cityComboBox.Text;
                         obj.title = this.titleTextBox.Text;
                         obj.local_title = this.localTitleTextBox.Text;
-                        obj.img = imgFilePath;// this.imgPathTextBox.Text;
+                        obj.image_path = imgFilePath;// this.imgPathTextBox.Text;
 
                         obj.room = room.Text;
                         obj.dinner = moringTextBox.Text;
@@ -127,20 +128,21 @@ namespace DCTS.UI
                         obj.tips = this.tipsTextBox.Text;
                         ComboLoactionBusiness.Validate(obj);
                         ctx.ComboLocations.Add(obj);
-                        if (obj.img.Length > 0)
+                        if (obj.image_path != null && obj.image_path.Length > 0)
                         {
-                            string imgPath = obj.img;
+                            string imgPath = obj.image_path;
                             imgFileName = Path.GetFileName(imgPath);
                             obj.img = imgFileName;
                         }
                         ctx.SaveChanges();
+                   
+                        //拷贝图片需要对象ID，所以这样先创建对象，再拷贝图片
                         if (obj.img.Length > 0)
                         {
                             string imgPath = imgFilePath;
                             string copyToPath = EntityPathHelper.LocationImagePath(obj);
                             File.Copy(imgPath, copyToPath, true);
-                        } 
-
+                        }
                     }
                     else
                     {
@@ -151,7 +153,7 @@ namespace DCTS.UI
                         obj.city = this.cityComboBox.Text;
                         obj.title = this.titleTextBox.Text;
                         obj.local_title = this.localTitleTextBox.Text;
-                        obj.img = imgFilePath;
+                        obj.image_path = imgFilePath;
 
                         obj.room = room.Text;
                         obj.dinner = moringTextBox.Text;
@@ -172,10 +174,20 @@ namespace DCTS.UI
                         bool newImg = (obj.img != originalHotel.img);
                         if (newImg)
                         {
-                            imgFileName = Path.GetFileName(imgFilePath);
-                            obj.img = imgFileName;
-                            string copyToPath = EntityPathHelper.LocationImagePath(obj);
-                            File.Copy(imgFilePath, copyToPath, true);
+                            string imagePath = obj.image_path;
+                            //用户选择了素材目录的其他图片
+                            if (imagePath.StartsWith(EntityPathHelper.ImageBasePath))
+                            {
+                                string relativeImagePath = imagePath.Substring(EntityPathHelper.ImageBasePath.Length);
+                                obj.image_path = relativeImagePath;
+                            }
+                            else
+                            { // 用户选择素材目录之外的图片
+                                imgFileName = Path.GetFileName(imagePath);
+                                obj.image_path = imgFileName;
+                                string copyToPath = EntityPathHelper.LocationImagePathEx(obj);
+                                File.Copy(imagePath, copyToPath, true);
+                            }
                         }
                         ctx.SaveChanges();
                     }
@@ -195,7 +207,8 @@ namespace DCTS.UI
 
         private void findFileButton_Click(object sender, EventArgs e)
         {
-
+            openFileDialog1.InitialDirectory = EntityPathHelper.ImageBasePath;
+          
             //  openFileDialog1.Filter = "PNG(*.png)|*.png|JPEG(*.jpg,*.jpeg,*.jpe,*.jfif)|*.jpg;*.jpeg;*.jpe;*.jfif|GIF(*.gif)|*.gif"; //文件类型
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {

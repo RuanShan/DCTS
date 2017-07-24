@@ -109,14 +109,25 @@ namespace DCTS.UI
             }
 
             //处理图片
-            if (activity.img.Length > 0)
+            //if (activity.img.Length > 0)
+            //{
+            //    if (activity.id > 0)
+            //    {
+            //        this.imgPathTextBox.Text = activity.img;
+            //        string lcoalPath = EntityPathHelper.LocationImagePath(activity);
+            //        pictureBox1.ImageLocation = lcoalPath;
+            //    }
+            //}
+            if (activity.image_path != null && activity.image_path.Length > 0)
             {
                 if (activity.id > 0)
                 {
-                    this.imgPathTextBox.Text = activity.img;
-                    string lcoalPath = EntityPathHelper.LocationImagePath(activity);
+                    this.imgPathTextBox.Text = Path.Combine(activity.image_path);
+                    string lcoalPath = EntityPathHelper.LocationImagePathEx(activity);
                     pictureBox1.ImageLocation = lcoalPath;
                 }
+
+
             }
             //处理word
             if (activity.word != null && activity.word.Length > 0)
@@ -143,7 +154,7 @@ namespace DCTS.UI
             activity.tips = this.tipsTextBox.Text;
             activity.local_address = this.localAddressTextBox.Text;
             activity.route = this.routeTextBox.Text;
-            activity.img = this.imgPathTextBox.Text;
+            activity.image_path = this.imgPathTextBox.Text;
             activity.word = this.docPathTextBox.Text;
             activity.open_close_more = this.openCloseTextBox.Text;
             return activity;
@@ -156,6 +167,9 @@ namespace DCTS.UI
 
         private void findFileButton_Click(object sender, EventArgs e)
         {
+            openFileDialog1.InitialDirectory = EntityPathHelper.ImageBasePath;
+          
+
             //openFileDialog1.Filter = "PNG(*.png)JPEG(*.jpg,*.jpeg,*.jpe,*.jfif)GIF(*.gif)BMP(*.bmp)|*.png;*.jpg;*.jpeg;*.jpe;*.jfif;*.gif;*.bmp"; //文件类型
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {

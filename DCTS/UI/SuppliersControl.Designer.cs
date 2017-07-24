@@ -30,8 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -44,14 +42,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.flightDataGridView = new System.Windows.Forms.DataGridView();
-            this.idColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.stypeColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.flightNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.imgColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cshColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.editFlightColumn = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.deleteFlightColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -100,6 +93,13 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.idColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stypeColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.flightNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.imgColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cshColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.editFlightColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.deleteFlightColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.flightDataGridView)).BeginInit();
             this.supplierTabControl.SuspendLayout();
             this.flightTabPage.SuspendLayout();
@@ -133,7 +133,7 @@
             this.deleteFlightColumn});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
@@ -145,74 +145,16 @@
             this.flightDataGridView.RowHeadersVisible = false;
             this.flightDataGridView.RowTemplate.Height = 50;
             this.flightDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.flightDataGridView.Size = new System.Drawing.Size(794, 272);
+            this.flightDataGridView.Size = new System.Drawing.Size(794, 295);
             this.flightDataGridView.TabIndex = 0;
             this.flightDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellContentClick);
             // 
-            // idColumn1
-            // 
-            this.idColumn1.DataPropertyName = "id";
-            this.idColumn1.HeaderText = "序号";
-            this.idColumn1.Name = "idColumn1";
-            this.idColumn1.Width = 60;
-            // 
-            // stypeColumn
-            // 
-            this.stypeColumn.DataPropertyName = "Stype";
-            this.stypeColumn.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
-            this.stypeColumn.HeaderText = "类型";
-            this.stypeColumn.Name = "stypeColumn";
-            this.stypeColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.stypeColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // flightNameColumn
-            // 
-            this.flightNameColumn.DataPropertyName = "name";
-            this.flightNameColumn.HeaderText = "名称";
-            this.flightNameColumn.Name = "flightNameColumn";
-            this.flightNameColumn.Width = 260;
-            // 
-            // imgColumn1
-            // 
-            this.imgColumn1.DataPropertyName = "img";
-            this.imgColumn1.HeaderText = "图片";
-            this.imgColumn1.Name = "imgColumn1";
-            // 
-            // cshColumn1
-            // 
-            this.cshColumn1.DataPropertyName = "csh";
-            this.cshColumn1.HeaderText = "电话";
-            this.cshColumn1.Name = "cshColumn1";
-            this.cshColumn1.Width = 140;
-            // 
-            // editFlightColumn
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(2, 12, 1, 12);
-            this.editFlightColumn.DefaultCellStyle = dataGridViewCellStyle1;
-            this.editFlightColumn.HeaderText = "";
-            this.editFlightColumn.Name = "editFlightColumn";
-            this.editFlightColumn.Text = "编辑";
-            this.editFlightColumn.UseColumnTextForButtonValue = true;
-            this.editFlightColumn.Width = 60;
-            // 
-            // deleteFlightColumn
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(2, 12, 2, 12);
-            this.deleteFlightColumn.DefaultCellStyle = dataGridViewCellStyle2;
-            this.deleteFlightColumn.HeaderText = "";
-            this.deleteFlightColumn.Name = "deleteFlightColumn";
-            this.deleteFlightColumn.Text = "删除";
-            this.deleteFlightColumn.UseColumnTextForButtonValue = true;
-            this.deleteFlightColumn.Width = 60;
-            // 
             // label2
             // 
-            this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.Location = new System.Drawing.Point(3, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(256, 50);
+            this.label2.Size = new System.Drawing.Size(256, 54);
             this.label2.TabIndex = 14;
             this.label2.Text = "服务供应商管理";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -238,10 +180,10 @@
             this.supplierTabControl.Controls.Add(this.rentalTabPage);
             this.supplierTabControl.Controls.Add(this.insuranceTagPage);
             this.supplierTabControl.Controls.Add(this.wifiTabPage);
-            this.supplierTabControl.Location = new System.Drawing.Point(8, 107);
+            this.supplierTabControl.Location = new System.Drawing.Point(8, 116);
             this.supplierTabControl.Name = "supplierTabControl";
             this.supplierTabControl.SelectedIndex = 0;
-            this.supplierTabControl.Size = new System.Drawing.Size(808, 304);
+            this.supplierTabControl.Size = new System.Drawing.Size(808, 329);
             this.supplierTabControl.TabIndex = 15;
             this.supplierTabControl.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
             // 
@@ -251,7 +193,7 @@
             this.flightTabPage.Location = new System.Drawing.Point(4, 22);
             this.flightTabPage.Name = "flightTabPage";
             this.flightTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.flightTabPage.Size = new System.Drawing.Size(800, 278);
+            this.flightTabPage.Size = new System.Drawing.Size(800, 303);
             this.flightTabPage.TabIndex = 0;
             this.flightTabPage.Text = "航空公司";
             this.flightTabPage.UseVisualStyleBackColor = true;
@@ -262,7 +204,7 @@
             this.trainTabPage.Location = new System.Drawing.Point(4, 22);
             this.trainTabPage.Name = "trainTabPage";
             this.trainTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.trainTabPage.Size = new System.Drawing.Size(800, 278);
+            this.trainTabPage.Size = new System.Drawing.Size(800, 303);
             this.trainTabPage.TabIndex = 4;
             this.trainTabPage.Text = "交通公司";
             this.trainTabPage.UseVisualStyleBackColor = true;
@@ -286,7 +228,7 @@
             this.deleteTrainColumn});
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
             dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
@@ -298,7 +240,7 @@
             this.trainDataGridView.RowHeadersVisible = false;
             this.trainDataGridView.RowTemplate.Height = 50;
             this.trainDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.trainDataGridView.Size = new System.Drawing.Size(794, 272);
+            this.trainDataGridView.Size = new System.Drawing.Size(794, 295);
             this.trainDataGridView.TabIndex = 1;
             this.trainDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellContentClick);
             // 
@@ -365,7 +307,7 @@
             this.rentalTabPage.Controls.Add(this.RentalGridView);
             this.rentalTabPage.Location = new System.Drawing.Point(4, 22);
             this.rentalTabPage.Name = "rentalTabPage";
-            this.rentalTabPage.Size = new System.Drawing.Size(800, 278);
+            this.rentalTabPage.Size = new System.Drawing.Size(800, 303);
             this.rentalTabPage.TabIndex = 2;
             this.rentalTabPage.Text = "租车公司";
             this.rentalTabPage.UseVisualStyleBackColor = true;
@@ -389,7 +331,7 @@
             this.deleteRentalColumn});
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle9.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
             dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
@@ -401,7 +343,7 @@
             this.RentalGridView.RowHeadersVisible = false;
             this.RentalGridView.RowTemplate.Height = 50;
             this.RentalGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.RentalGridView.Size = new System.Drawing.Size(811, 285);
+            this.RentalGridView.Size = new System.Drawing.Size(811, 309);
             this.RentalGridView.TabIndex = 1;
             this.RentalGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.RentalGridView_CellContentClick);
             // 
@@ -469,7 +411,7 @@
             this.insuranceTagPage.Location = new System.Drawing.Point(4, 22);
             this.insuranceTagPage.Name = "insuranceTagPage";
             this.insuranceTagPage.Padding = new System.Windows.Forms.Padding(3);
-            this.insuranceTagPage.Size = new System.Drawing.Size(800, 278);
+            this.insuranceTagPage.Size = new System.Drawing.Size(800, 303);
             this.insuranceTagPage.TabIndex = 1;
             this.insuranceTagPage.Text = "保险公司";
             this.insuranceTagPage.UseVisualStyleBackColor = true;
@@ -493,7 +435,7 @@
             this.deleteInsuranceColumn});
             dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle12.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
             dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
@@ -505,7 +447,7 @@
             this.InsuranceGridView.RowHeadersVisible = false;
             this.InsuranceGridView.RowTemplate.Height = 50;
             this.InsuranceGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.InsuranceGridView.Size = new System.Drawing.Size(811, 285);
+            this.InsuranceGridView.Size = new System.Drawing.Size(811, 309);
             this.InsuranceGridView.TabIndex = 1;
             this.InsuranceGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.InsuranceGridView_CellContentClick);
             // 
@@ -572,7 +514,7 @@
             this.wifiTabPage.Controls.Add(this.WIFIGridView);
             this.wifiTabPage.Location = new System.Drawing.Point(4, 22);
             this.wifiTabPage.Name = "wifiTabPage";
-            this.wifiTabPage.Size = new System.Drawing.Size(800, 278);
+            this.wifiTabPage.Size = new System.Drawing.Size(800, 303);
             this.wifiTabPage.TabIndex = 3;
             this.wifiTabPage.Text = "WIFI";
             this.wifiTabPage.UseVisualStyleBackColor = true;
@@ -596,7 +538,7 @@
             this.deleteWifiColumn});
             dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle15.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
             dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
@@ -608,7 +550,7 @@
             this.WIFIGridView.RowHeadersVisible = false;
             this.WIFIGridView.RowTemplate.Height = 50;
             this.WIFIGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.WIFIGridView.Size = new System.Drawing.Size(811, 285);
+            this.WIFIGridView.Size = new System.Drawing.Size(811, 309);
             this.WIFIGridView.TabIndex = 1;
             this.WIFIGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.WIFIGridView_CellContentClick);
             // 
@@ -673,9 +615,9 @@
             // newButton
             // 
             this.newButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.newButton.Location = new System.Drawing.Point(734, 23);
+            this.newButton.Location = new System.Drawing.Point(734, 25);
             this.newButton.Name = "newButton";
-            this.newButton.Size = new System.Drawing.Size(75, 23);
+            this.newButton.Size = new System.Drawing.Size(75, 25);
             this.newButton.TabIndex = 16;
             this.newButton.Text = "新建";
             this.newButton.UseVisualStyleBackColor = true;
@@ -683,16 +625,16 @@
             // 
             // keywordTextBox
             // 
-            this.keywordTextBox.Location = new System.Drawing.Point(48, 66);
+            this.keywordTextBox.Location = new System.Drawing.Point(48, 72);
             this.keywordTextBox.Name = "keywordTextBox";
-            this.keywordTextBox.Size = new System.Drawing.Size(338, 21);
+            this.keywordTextBox.Size = new System.Drawing.Size(338, 20);
             this.keywordTextBox.TabIndex = 19;
             // 
             // btfind
             // 
-            this.btfind.Location = new System.Drawing.Point(392, 63);
+            this.btfind.Location = new System.Drawing.Point(392, 68);
             this.btfind.Name = "btfind";
-            this.btfind.Size = new System.Drawing.Size(75, 23);
+            this.btfind.Size = new System.Drawing.Size(75, 25);
             this.btfind.TabIndex = 18;
             this.btfind.Text = "查找";
             this.btfind.UseVisualStyleBackColor = true;
@@ -701,9 +643,9 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 70);
+            this.label1.Location = new System.Drawing.Point(12, 76);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 12);
+            this.label1.Size = new System.Drawing.Size(31, 13);
             this.label1.TabIndex = 17;
             this.label1.Text = "名称";
             // 
@@ -711,9 +653,9 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Location = new System.Drawing.Point(10, 46);
+            this.groupBox1.Location = new System.Drawing.Point(10, 50);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(799, 55);
+            this.groupBox1.Size = new System.Drawing.Size(799, 60);
             this.groupBox1.TabIndex = 20;
             this.groupBox1.TabStop = false;
             // 
@@ -726,9 +668,69 @@
             this.bindingSource1.DataSource = this.entityDataSource1;
             this.bindingSource1.Position = 0;
             // 
+            // idColumn1
+            // 
+            this.idColumn1.DataPropertyName = "id";
+            this.idColumn1.HeaderText = "序号";
+            this.idColumn1.Name = "idColumn1";
+            this.idColumn1.Width = 60;
+            // 
+            // stypeColumn
+            // 
+            this.stypeColumn.DataPropertyName = "Stype";
+            this.stypeColumn.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
+            this.stypeColumn.HeaderText = "类型";
+            this.stypeColumn.Name = "stypeColumn";
+            this.stypeColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.stypeColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // flightNameColumn
+            // 
+            this.flightNameColumn.DataPropertyName = "name";
+            this.flightNameColumn.HeaderText = "名称";
+            this.flightNameColumn.Name = "flightNameColumn";
+            this.flightNameColumn.Width = 260;
+            // 
+            // imgColumn1
+            // 
+            this.imgColumn1.DataPropertyName = "img";
+            this.imgColumn1.HeaderText = "图片";
+            this.imgColumn1.Name = "imgColumn1";
+            // 
+            // cshColumn1
+            // 
+            this.cshColumn1.DataPropertyName = "csh";
+            this.cshColumn1.HeaderText = "电话";
+            this.cshColumn1.Name = "cshColumn1";
+            this.cshColumn1.Width = 140;
+            // 
+            // editFlightColumn
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(2, 12, 1, 12);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
+            this.editFlightColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            this.editFlightColumn.HeaderText = "";
+            this.editFlightColumn.Name = "editFlightColumn";
+            this.editFlightColumn.Text = "编辑";
+            this.editFlightColumn.UseColumnTextForButtonValue = true;
+            this.editFlightColumn.Width = 60;
+            // 
+            // deleteFlightColumn
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(2, 12, 2, 12);
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
+            this.deleteFlightColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.deleteFlightColumn.HeaderText = "";
+            this.deleteFlightColumn.Name = "deleteFlightColumn";
+            this.deleteFlightColumn.Text = "删除";
+            this.deleteFlightColumn.UseColumnTextForButtonValue = true;
+            this.deleteFlightColumn.Width = 60;
+            // 
             // SuppliersControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.keywordTextBox);
             this.Controls.Add(this.btfind);
@@ -738,7 +740,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.groupBox1);
             this.Name = "SuppliersControl";
-            this.Size = new System.Drawing.Size(825, 424);
+            this.Size = new System.Drawing.Size(825, 459);
             this.Resize += new System.EventHandler(this.NationsControl_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.flightDataGridView)).EndInit();
             this.supplierTabControl.ResumeLayout(false);
@@ -781,13 +783,6 @@
         private System.Windows.Forms.TabPage trainTabPage;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView trainDataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idColumn1;
-        private System.Windows.Forms.DataGridViewComboBoxColumn stypeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn flightNameColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn imgColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cshColumn1;
-        private System.Windows.Forms.DataGridViewButtonColumn editFlightColumn;
-        private System.Windows.Forms.DataGridViewButtonColumn deleteFlightColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewComboBoxColumn stypeColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
@@ -816,5 +811,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
         private System.Windows.Forms.DataGridViewButtonColumn editRentalColumn;
         private System.Windows.Forms.DataGridViewButtonColumn deleteRentalColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idColumn1;
+        private System.Windows.Forms.DataGridViewComboBoxColumn stypeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn flightNameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn imgColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cshColumn1;
+        private System.Windows.Forms.DataGridViewButtonColumn editFlightColumn;
+        private System.Windows.Forms.DataGridViewButtonColumn deleteFlightColumn;
     }
 }

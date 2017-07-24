@@ -39,8 +39,6 @@ namespace DCTS.UI
             {
                 using (var ctx = new DctsEntities())
                 {
-
-
                     ComboLocation activity = new ComboLocation();
 
                     activity.ltype = (int)ComboLocationEnum.Activity;
@@ -49,16 +47,33 @@ namespace DCTS.UI
                     ComboLoactionBusiness.Validate(activity);
 
                     ctx.ComboLocations.Add(activity);
-                   
-                    ctx.SaveChanges();
 
-                    if (activity.img.Length > 0)
+                    string imgPath = activity.image_path;
+                    if (activity.image_path != null && activity.image_path.Length > 0)
                     {
-                        string imgPath = activity.img;
                         string imgFileName = Path.GetFileName(imgPath);
                         activity.img = imgFileName;
-                        string copyToPath = EntityPathHelper.LocationImagePath(activity);
-                        File.Copy(imgPath, copyToPath);
+                    }
+
+
+                    ctx.SaveChanges();
+
+                    if (activity.image_path != null && activity.image_path.Length > 0)
+                    {
+                        //string imgPath = activity.image_path;
+                        //string imgFileName = Path.GetFileName(imgPath);
+                        //activity.img = imgFileName;
+                        //string copyToPath = EntityPathHelper.LocationImagePath(activity);
+                        //File.Copy(imgPath, copyToPath);
+
+                        //拷贝图片需要对象ID，所以这样先创建对象，再拷贝图片
+                        //if (activity.img.Length > 0)
+                        {
+                            string copyToPath = EntityPathHelper.LocationImagePath(activity);
+                            File.Copy(imgPath, copyToPath, true);
+                        }
+
+
                     }
                     if (activity.word.Length > 0)
                     {

@@ -107,6 +107,17 @@ namespace DCTS.DB
             return Path.Combine(basePath, imagePath);
 
         }
+        //Supplier
+        public static string LocationImagePathEx(Supplier location)
+        {
+            string imagePath = location.image_path == null ? string.Empty : location.image_path;
+
+            string basePath = ImageBasePath;
+
+            return Path.Combine(basePath, imagePath);
+
+        }
+
 
         // trip.image_path
         public static string LocationImagePathEx(Trip trip)
@@ -149,7 +160,7 @@ namespace DCTS.DB
 
             CreateFolder(folderPath);
 
-            string fullPath = Path.Combine(folderPath, location.img);
+            string fullPath = Path.Combine(folderPath, location.image_path);
 
             return fullPath;
         }
