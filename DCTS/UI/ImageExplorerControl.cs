@@ -114,6 +114,7 @@ namespace DCTS.UI
         {
             string msg = string.Format("folder deleted {0}  ", e.Item.DisplayName);
             Console.WriteLine(msg);
+            RemoveFolderOrFile(e.Item);
         }
 
         private void shellNotificationListener1_FolderUpdated(object sender, GongSolutions.Shell.ShellItemEventArgs e)
@@ -126,6 +127,8 @@ namespace DCTS.UI
         {
             string msg = string.Format("file deleted {0}  ", e.Item.DisplayName);
             Console.WriteLine(msg);
+            RemoveFolderOrFile(e.Item);
+
         }
 
         private void shellNotificationListener1_ItemCreated(object sender, GongSolutions.Shell.ShellItemEventArgs e)
@@ -139,6 +142,43 @@ namespace DCTS.UI
              
             string msg = string.Format("DragDrop event ");
             Console.WriteLine(msg);
+        }
+
+
+        private void RemoveFolderOrFile(GongSolutions.Shell.ShellItem item )
+        {
+            string basePath = EntityPathHelper.ImageBasePath;
+            string absolutePath = item.FileSystemPath;
+ 
+            string relativePath = absolutePath.Substring(basePath.Length);
+             using (var db = new DctsEntities())
+            {
+                string safeOldRelativePath = MySql.Data.MySqlClient.MySqlHelper.EscapeString(relativePath);
+
+                //if (oldRelativePath.Contains(System.IO.Path.DirectorySeparatorChar.ToString()))
+                {   // 子路经 abc/xxx 
+                    // 更新combolocation
+                    //REPLACE('www.roseindia.net', 'w', 'W');
+                    //SUBSTRING('foobarbar' FROM 4)
+                    string replaceSql =  "`image_path`=''";
+                    // 考虑中文符集
+                    // id>0 Error Code: 1175. You are using safe update mode
+                    string whereSql = string.Format(" id>0 AND SUBSTRING(`image_path` , 1, CHAR_LENGTH('{0}'))='{1}'", safeOldRelativePath, safeOldRelativePath);
+
+                    string updateLocationSql = string.Format("UPDATE ComboLocations SET {0} WHERE {1};", replaceSql, whereSql);
+                    // 更新trip
+                    string updateTripSql = string.Format("UPDATE Trips  SET {0} WHERE  {1};", replaceSql, whereSql);
+                    // 更新tripDay
+                    string updateTripDaySql = string.Format("UPDATE TripDays SET {0} WHERE {1};", replaceSql, whereSql);
+
+                    db.Database.ExecuteSqlCommand(updateLocationSql);
+                    db.Database.ExecuteSqlCommand(updateTripSql);
+                    db.Database.ExecuteSqlCommand(updateTripDaySql);
+
+                }
+
+
+            }
         }
     }
 }
