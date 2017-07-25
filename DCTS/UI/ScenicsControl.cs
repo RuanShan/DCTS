@@ -246,7 +246,7 @@ namespace DCTS.UI
             if (File.Exists(path))
             {
 
-                System.IO.FileStream fs = new System.IO.FileStream(path, System.IO.FileMode.Open);
+                System.IO.FileStream fs = new System.IO.FileStream(path, System.IO.FileMode.Open  );
                 System.Drawing.Image result = System.Drawing.Image.FromStream(fs);
 
                 fs.Close();

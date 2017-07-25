@@ -126,8 +126,6 @@ namespace DCTS.UI
                     string lcoalPath = EntityPathHelper.LocationImagePathEx(activity);
                     pictureBox1.ImageLocation = lcoalPath;
                 }
-
-
             }
             //处理word
             if (activity.word != null && activity.word.Length > 0)

@@ -352,6 +352,8 @@ CREATE TABLE `Trips` (
   `end_at` datetime DEFAULT NULL COMMENT '行程结束时间',
   `cover_id` int(11) NOT NULL DEFAULT '0' COMMENT '封面图片',
   `countries` varchar(256) DEFAULT NULL,
+  `national_visa` varchar(64) DEFAULT NULL,
+  `travel_style` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_customer_idx` (`customer_id`)

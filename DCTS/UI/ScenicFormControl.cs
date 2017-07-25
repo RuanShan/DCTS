@@ -164,12 +164,13 @@ namespace DCTS.UI
 
 
                 imgFileName = Path.GetFileName(imgFilePath);
-                // 检查选择图片是否是素材目录下的，
+                // 检查选择图片是否是素材目录下的，原有数据是相对路径
                 // 如果是，直接设置image_path,image_name, 
                 // 如果不是，需要检查素材目录下是否存在，
                 //      如果存在 提示文件已存在，是否覆盖
                 //      如果不存在，直接拷贝到素材目录下
-                if (!imgFilePath.StartsWith(EntityPathHelper.ImageBasePath))
+
+                if (Path.IsPathRooted(imgFilePath) && !imgFilePath.StartsWith(EntityPathHelper.ImageBasePath))
                 {
                     string targetPath = Path.Combine(EntityPathHelper.ImageBasePath, imgFileName);
 

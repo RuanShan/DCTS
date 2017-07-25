@@ -33,6 +33,8 @@ namespace DCTS
         public int cover_id { get; set; }
         public string countries { get; set; }
         public string image_path { get; set; }
+        public string national_visa { get; set; }
+        public string travel_style { get; set; }
     
         public virtual ICollection<DayLocation> DayLocations { get; set; }
         public virtual ICollection<TripDay> TripDays { get; set; }

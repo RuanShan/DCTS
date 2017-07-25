@@ -104,3 +104,21 @@ END$$
 DELIMITER ; 
 CALL AddLocationImagePath();
 DROP PROCEDURE AddLocationImagePath;
+
+
+--添加 签证国家,出行方式
+DELIMITER $$
+CREATE PROCEDURE AddTripVisa() BEGIN
+IF NOT EXISTS(
+SELECT * FROM information_schema.COLUMNS
+WHERE COLUMN_NAME='national_visa' AND TABLE_NAME='Trips'
+)
+THEN
+    ALTER TABLE `Trips`
+    ADD COLUMN `national_visa` varchar(64) default NULL,
+	ADD COLUMN `travel_style` varchar(24) default NULL;
+END IF;
+END$$
+DELIMITER ; 
+CALL AddTripVisa();
+DROP PROCEDURE AddTripVisa;

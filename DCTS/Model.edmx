@@ -273,6 +273,8 @@
           <Property Name="cover_id" Type="int" Nullable="false" />
           <Property Name="countries" Type="varchar" MaxLength="256" />
           <Property Name="image_path" Type="varchar" MaxLength="128" />
+          <Property Name="national_visa" Type="varchar" MaxLength="64" />
+          <Property Name="travel_style" Type="varchar" MaxLength="24" />
         </EntityType>
         <Association Name="fk_customer">
           <End Role="Customers" Type="DctsModel.Store.Customers" Multiplicity="1" />
@@ -451,6 +453,8 @@
           <Property Type="String" Name="countries" MaxLength="256" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Tickets" Relationship="DctsModel.fk_ticket_trip" FromRole="Trip" ToRole="Ticket" />
           <Property Type="String" Name="image_path" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="national_visa" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="travel_style" MaxLength="24" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="City">
           <Key>
@@ -824,6 +828,8 @@
           <EntitySetMapping Name="Trips">
             <EntityTypeMapping TypeName="DctsModel.Trip">
               <MappingFragment StoreEntitySet="Trips">
+                <ScalarProperty Name="travel_style" ColumnName="travel_style" />
+                <ScalarProperty Name="national_visa" ColumnName="national_visa" />
                 <ScalarProperty Name="image_path" ColumnName="image_path" />
                 <ScalarProperty Name="countries" ColumnName="countries" />
                 <ScalarProperty Name="cover_id" ColumnName="cover_id" />

@@ -44,6 +44,12 @@ namespace DCTS.UI
             string oldAbsolutePath = oldItem.FileSystemPath;
             string newAbsolutePath = newItem.FileSystemPath;
 
+            //跳过其他目录修正事件
+            if (!oldAbsolutePath.Contains(basePath))
+            {
+                return;
+            }
+
             string oldRelativePath = oldAbsolutePath.Substring(basePath.Length);
             string newRelativePath = newAbsolutePath.Substring(basePath.Length);
             using (var db = new DctsEntities())
@@ -69,6 +75,11 @@ namespace DCTS.UI
             string basePath = EntityPathHelper.ImageBasePath;
             string oldAbsolutePath = oldItem.FileSystemPath;
             string newAbsolutePath = newItem.FileSystemPath;
+            //跳过其他目录修正事件
+            if (!oldAbsolutePath.Contains(basePath))
+            {
+                return;
+            }
 
             string oldRelativePath = oldAbsolutePath.Substring(basePath.Length);
             string newRelativePath = newAbsolutePath.Substring(basePath.Length);
@@ -149,7 +160,13 @@ namespace DCTS.UI
         {
             string basePath = EntityPathHelper.ImageBasePath;
             string absolutePath = item.FileSystemPath;
- 
+
+            //跳过其他目录修正事件
+            if (!absolutePath.Contains(basePath))
+            {
+                return;
+            }
+
             string relativePath = absolutePath.Substring(basePath.Length);
              using (var db = new DctsEntities())
             {

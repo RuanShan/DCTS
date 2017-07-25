@@ -38,12 +38,10 @@
             this.activityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.NationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.airportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.imagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.其他ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.shellToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.rentalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -73,8 +71,6 @@
             this.activityToolStripMenuItem,
             this.NationToolStripMenuItem,
             this.airportToolStripMenuItem,
-            this.rentalToolStripMenuItem,
-            this.imagesToolStripMenuItem,
             this.其他ToolStripMenuItem,
             this.shellToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -143,13 +139,6 @@
             this.airportToolStripMenuItem.Text = "机场";
             this.airportToolStripMenuItem.Click += new System.EventHandler(this.airportToolStripMenuItem_Click);
             // 
-            // imagesToolStripMenuItem
-            // 
-            this.imagesToolStripMenuItem.Name = "imagesToolStripMenuItem";
-            this.imagesToolStripMenuItem.Size = new System.Drawing.Size(85, 29);
-            this.imagesToolStripMenuItem.Text = "素材";
-            this.imagesToolStripMenuItem.Click += new System.EventHandler(this.imagesToolStripMenuItem_Click);
-            // 
             // 其他ToolStripMenuItem
             // 
             this.其他ToolStripMenuItem.Name = "其他ToolStripMenuItem";
@@ -180,12 +169,6 @@
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(44, 17);
             this.toolStripStatusLabel1.Text = "状态条";
             this.toolStripStatusLabel1.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
-            // 
-            // rentalToolStripMenuItem
-            // 
-            this.rentalToolStripMenuItem.Name = "rentalToolStripMenuItem";
-            this.rentalToolStripMenuItem.Size = new System.Drawing.Size(85, 29);
-            this.rentalToolStripMenuItem.Text = "租车";
             // 
             // TripsManagementControl
             // 
@@ -220,8 +203,6 @@
         private System.Windows.Forms.ToolStripMenuItem 其他ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem airportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem activityToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem imagesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem shellToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem rentalToolStripMenuItem;
     }
 }
