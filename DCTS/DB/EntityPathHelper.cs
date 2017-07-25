@@ -152,26 +152,6 @@ namespace DCTS.DB
             return fullPath;
         }
 
-        public static string Supplier_LocationImagePath(Supplier location)
-        {
-
-            string basePath = Supplier_LocationImageBasePath(location);
-            string folderPath = Path.Combine(basePath, (location.id / 1000 * 1000).ToString());
-
-            CreateFolder(folderPath);
-
-            string fullPath = Path.Combine(folderPath, location.image_path);
-
-            return fullPath;
-        }
-        public static string Supplier_LocationImageBasePath(Supplier location)
-        {
-            SupplierEnum type = (SupplierEnum)location.stype;
-            string path = Path.Combine(ImageBasePath, "location_" + type.ToString().ToLower());
-            CreateFolder(path);
-            return path;
-        }
-
 
 
         public static string TripWordFolderPath(long tripId)

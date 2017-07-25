@@ -38,6 +38,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.downloadButton = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             this.IdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.startAtColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.daysColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,7 +49,6 @@
             this.editTripColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.copyTripColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.deleteTripColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.entityDataSource1 = new DCTS.CustomComponents.EntityDataSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.tripDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -140,6 +140,10 @@
             this.saveFileDialog1.Filter = "Word文件（*.docx）|*.docx";
             this.saveFileDialog1.RestoreDirectory = true;
             // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
+            // 
             // IdColumn
             // 
             this.IdColumn.DataPropertyName = "id";
@@ -207,6 +211,7 @@
             this.copyTripColumn1.Name = "copyTripColumn1";
             this.copyTripColumn1.Text = "复制";
             this.copyTripColumn1.UseColumnTextForButtonValue = true;
+            this.copyTripColumn1.Visible = false;
             this.copyTripColumn1.Width = 60;
             // 
             // deleteTripColumn1
@@ -216,10 +221,6 @@
             this.deleteTripColumn1.Text = "删除";
             this.deleteTripColumn1.UseColumnTextForButtonValue = true;
             this.deleteTripColumn1.Width = 60;
-            // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(DCTS.DctsEntities);
             // 
             // CustomerTripListControl
             // 

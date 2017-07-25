@@ -59,6 +59,7 @@ namespace DCTS.UI
         private void newButton_Click(object sender, EventArgs e)
         {
             var form = new NewScenicForm();
+             
             form.ShowDialog();
 
             if (form.Saved)
@@ -232,9 +233,9 @@ namespace DCTS.UI
 
                     if (selectedItem.image_path != null && selectedItem.image_path.Length>0)
                     {
-                        string lcoalPath = EntityPathHelper.LocationImagePathEx(selectedItem);
+                        string localPath = EntityPathHelper.LocationImagePathEx(selectedItem);
 
-                        e.Value = GetImage1(lcoalPath);
+                        e.Value = GetImage1(localPath);
                     }
                 }
             }
@@ -246,7 +247,7 @@ namespace DCTS.UI
             if (File.Exists(path))
             {
 
-                System.IO.FileStream fs = new System.IO.FileStream(path, System.IO.FileMode.Open  );
+                System.IO.FileStream fs = new System.IO.FileStream(path, System.IO.FileMode.Open, System.IO.FileAccess.Read,FileShare.ReadWrite  );
                 System.Drawing.Image result = System.Drawing.Image.FromStream(fs);
 
                 fs.Close();

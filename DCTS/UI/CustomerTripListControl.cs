@@ -189,8 +189,8 @@ namespace DCTS.UI
         }
 
         private void TripListControl_Resize(object sender, EventArgs e)
-        {  //                                                                  出发日期
-            tripTitleColumn1.Width = tripDataGridView.ClientSize.Width - 80 * 2 - 120 - 260 - 120 - 60 * 4 - 3;
+        {  //                                                                  出发日期               复制按钮删除
+            tripTitleColumn1.Width = tripDataGridView.ClientSize.Width - 80 * 2 - 120 - 260 - 120 - 60 * 3 - 3;
 
         }
 

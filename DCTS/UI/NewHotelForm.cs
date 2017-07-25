@@ -38,7 +38,7 @@ namespace DCTS.UI
                 this.cityComboBox.Text = obj.city;
                 this.titleTextBox.Text = obj.title;
                 this.localTitleTextBox.Text = obj.local_title;
-                this.imgPathTextBox.Text = obj.img;
+
                 //this.openAtDateTimePicker.Text = obj.open_at.ToString();
                 //this.closeAtDateTimePicker.Text = obj.close_at.ToString();
                 room.Text = obj.room;
@@ -52,15 +52,15 @@ namespace DCTS.UI
                 reception.Text = obj.reception;
                 kitchen.Text = obj.kitchen;
                 tipsTextBox.Text = obj.tips;
-                this.originalHotel = new ComboLocation() { img = obj.img };
+                this.originalHotel = new ComboLocation() { image_path = obj.image_path };
         
                 if (obj.image_path != null && obj.image_path.Length > 0)
                 {
                     if (obj.id > 0)
                     {
                         this.imgPathTextBox.Text = Path.Combine(obj.image_path);
-                        string lcoalPath = EntityPathHelper.LocationImagePathEx(obj);
-                        pictureBox1.ImageLocation = lcoalPath;
+                        string fullPath = EntityPathHelper.LocationImagePathEx(obj);
+                        pictureBox1.ImageLocation = fullPath;
                     }
                 }
 
@@ -128,21 +128,11 @@ namespace DCTS.UI
                         obj.tips = this.tipsTextBox.Text;
                         ComboLoactionBusiness.Validate(obj);
                         ctx.ComboLocations.Add(obj);
-                        if (obj.image_path != null && obj.image_path.Length > 0)
-                        {
-                            string imgPath = obj.image_path;
-                            imgFileName = Path.GetFileName(imgPath);
-                            obj.img = imgFileName;
-                        }
+                        ComboLoactionBusiness.ProcessImage(obj);
+
                         ctx.SaveChanges();
                    
-                        //拷贝图片需要对象ID，所以这样先创建对象，再拷贝图片
-                        if (obj.img.Length > 0)
-                        {
-                            string imgPath = imgFilePath;
-                            string copyToPath = EntityPathHelper.LocationImagePath(obj);
-                            File.Copy(imgPath, copyToPath, true);
-                        }
+                        //拷贝图片需要对象ID，所以这样先创建对象，再拷贝图片                       
                     }
                     else
                     {
@@ -169,25 +159,10 @@ namespace DCTS.UI
 
                         ComboLoactionBusiness.Validate(obj);
 
-                        imgFilePath = obj.img;
-
-                        bool newImg = (obj.img != originalHotel.img);
+                        bool newImg = (obj.image_path != originalHotel.image_path);
                         if (newImg)
                         {
-                            string imagePath = obj.image_path;
-                            //用户选择了素材目录的其他图片
-                            if (imagePath.StartsWith(EntityPathHelper.ImageBasePath))
-                            {
-                                string relativeImagePath = imagePath.Substring(EntityPathHelper.ImageBasePath.Length);
-                                obj.image_path = relativeImagePath;
-                            }
-                            else
-                            { // 用户选择素材目录之外的图片
-                                imgFileName = Path.GetFileName(imagePath);
-                                obj.image_path = imgFileName;
-                                string copyToPath = EntityPathHelper.LocationImagePathEx(obj);
-                                File.Copy(imagePath, copyToPath, true);
-                            }
+                            ComboLoactionBusiness.ProcessImage(obj);
                         }
                         ctx.SaveChanges();
                     }

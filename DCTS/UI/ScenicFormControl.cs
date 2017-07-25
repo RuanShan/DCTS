@@ -21,9 +21,15 @@ namespace DCTS.UI
             scenicId = 0;
         }
 
+        // 不要在构造函数中调用，会导致DCTSEntity无法找到数据库连接字符串。
         public void InitializeDataSource()
         {
-
+                 
+            var nationList = DCTS.DB.GlobalCache.NationList;
+            this.nationComboBox.DisplayMember = "title";
+            this.nationComboBox.ValueMember = "code";
+            this.nationComboBox.DataSource = nationList;
+        
         }
 
         private void nationComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -108,9 +114,9 @@ namespace DCTS.UI
             {
                 if (scenic.id > 0 )
                 {
-                    this.imgPathTextBox.Text = Path.Combine(scenic.image_path);
-                    string lcoalPath = EntityPathHelper.LocationImagePathEx(scenic);
-                    pictureBox1.ImageLocation = lcoalPath;
+                    this.imgPathTextBox.Text = scenic.image_path;
+                    string localPath = EntityPathHelper.LocationImagePathEx(scenic);
+                    pictureBox1.ImageLocation = localPath;
                 }
             }
         }
@@ -132,12 +138,6 @@ namespace DCTS.UI
             scenic.image_path = this.imgPathTextBox.Text;
             scenic.open_close_more = this.openCloseTextBox.Text;
             return scenic;
-        }
-
-        private void ScenicFormControl_Load(object sender, EventArgs e)
-        {
-            InitializeDataSource();
-
         }
 
         private void findFileButton_Click(object sender, EventArgs e)

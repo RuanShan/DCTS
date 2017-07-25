@@ -178,21 +178,18 @@ namespace DCTS.UI
 
         private void imgPathTextBox_TextChanged(object sender, EventArgs e)
         {
+            //FIXME
             string imgFilePath = this.imgPathTextBox.Text;
             string imgFileName = "";
             bool hasImg = (imgFilePath.Length > 0);
             bool existSameImage = false;
 
-            if (hasImg && imgFilePath != "\"\"")
+            if (hasImg && imgFilePath != "")
             {
 
                 imgFileName = Path.GetFileName(imgFilePath);
 
-                ComboLocation lastLocation = db.ComboLocations.OrderByDescending(o => o.id).FirstOrDefault();
-                if (lastLocation != null)
-                {
-                    existSameImage = (db.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.Activity && o.img == imgFileName && o.id != activityId).Count() > 0);
-                }
+                
                 if (existSameImage)
                 {
                     this.errorProvider1.SetError(this.imgPathTextBox, string.Format("文件名<{0}>已在, 请使用其他文件名！", imgFileName));

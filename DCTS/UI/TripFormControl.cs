@@ -26,15 +26,7 @@ namespace DCTS.UI
 
             trip.memo = this.memoTextBox.Text;
 
-            using (var ctx = new DctsEntities())
-            {
-                var location = ctx.ComboLocations.Where(o => o.ltype == (int)ComboLocationEnum.PageImage).First();
-
-                var query = ctx.LocationImages.Where(o => o.location_id == (int)location.id && o.name == imgPathTextBox.Text);
-                List<LocationImage> list = query.ToList();
-                if (list.Count > 0)
-                    trip.cover_id = list[0].id;
-            }
+            
         }
 
         public void FillFormByModel(Trip trip)
@@ -44,17 +36,11 @@ namespace DCTS.UI
             this.daysNumericUpDown.Value = trip.days;
             this.memoTextBox.Text = trip.memo;
             //读取图片位置
-            using (var ctx = new DctsEntities())
-            {
-                var query = ctx.LocationImages.Where(o => o.id == trip.cover_id);
-                if (query.Count() > 0)
-                {
-                    string ImageLocation = EntityPathHelper.newlocationimagepath(query.ToList()[0]);
-                    imgPathTextBox.Text = query.ToList()[0].name;
-                    pictureBox1.ImageLocation = ImageLocation;
-                }
 
-            }
+            string fullPath = EntityPathHelper.LocationImagePathEx(trip);
+            imgPathTextBox.Text = trip.image_path;
+            pictureBox1.ImageLocation = fullPath;
+             
         }
 
         private void findFileButton_Click(object sender, EventArgs e)

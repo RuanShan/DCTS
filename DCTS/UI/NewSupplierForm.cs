@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DCTS.DB;
+using DCTS.Bus;
 
 namespace DCTS.UI
 {
@@ -19,7 +20,6 @@ namespace DCTS.UI
         List<MockEntity> locationTypeList;
         public bool istrue;
         Supplier originalSupplier;
-        Supplier supplier;
 
         public NewSupplierForm(string maintype, Supplier obj)
         {
@@ -30,6 +30,8 @@ namespace DCTS.UI
             changeid = 0;
             if (maintype == "Edit")
             {
+                this.originalSupplier = new Supplier() { image_path = obj.image_path };
+
                 label2.Text = "编辑供应商";
                 this.Text = "编辑供应商";
                 changeid = obj.id;
@@ -45,11 +47,6 @@ namespace DCTS.UI
 
                 //supplComboBox.Text = (int)SupplierEnum.stype;
 
-                //if (obj.image_path != null && obj.image_path != "")
-                //{
-                //    string copyToPath = EntityPathHelper.Supplier_LocationImagePath(obj);
-                //    pictureBox1.ImageLocation = copyToPath;
-                //}
                 //处理图片
                 if (obj.image_path != null && obj.image_path.Length > 0)
                 {
@@ -57,8 +54,8 @@ namespace DCTS.UI
                     {
                         this.imgPathTextBox.Text = Path.Combine(obj.image_path);
 
-                        string lcoalPath = EntityPathHelper.LocationImagePathEx(obj);
-                        pictureBox1.ImageLocation = lcoalPath;
+                        string localPath = EntityPathHelper.LocationImagePathEx(obj);
+                        pictureBox1.ImageLocation = localPath;
                     }
                 }
             }
@@ -78,143 +75,60 @@ namespace DCTS.UI
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-
+            if(this.titleTextBox.Text.Length == 0)
+            {
+                MessageBox.Show("请输入供应商名称！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             using (var ctx = new DctsEntities())
             {
                 try
                 {
                     int ty = Convert.ToInt32(this.supplComboBox.SelectedValue);
-
-                    #region new
                     string imgFilePath = this.imgPathTextBox.Text;
-                    string imgFileName = "";
-                    bool hasImg = (imgFilePath.Length > 0);
-                    bool existSameImage = false;
-                    bool nameishave = false;
 
-                    if (hasImg)
-                    {
-                        imgFileName = Path.GetFileName(imgFilePath);
-                        existSameImage = (ctx.Suppliers.Where(o => o.stype == ty && o.img == imgFileName && o.id != changeid).Count() > 0);
-
-                    }
-                    bool hastitle = (titleTextBox.Text.Length > 0);
-                    if (hastitle)
-                    {
-                        nameishave = (ctx.Suppliers.Where(o => o.stype == ty && o.name == titleTextBox.Text && o.id != changeid).Count() > 0);
-                    }
-
-                    #endregion
 
                     if (changeid != 0)
                     {
-                        if (existSameImage)
-                        {
-                            istrue = false;
-                            MessageBox.Show(string.Format("文件名<{0}>已在, 请使用其他文件名！", imgFileName));
-                            return;
-                        }
+                        
                         Supplier obj = ctx.Suppliers.Find(Convert.ToInt32(changeid));
                         obj.stype = Convert.ToInt32(this.supplComboBox.SelectedValue);
                         obj.name = this.titleTextBox.Text;
-                        obj.img = imgFileName;
 
                         obj.image_path = imgFilePath;
-                        string imagePath = imgFilePath;
-                        //用户选择了素材目录的其他图片
-                        if (imagePath.StartsWith(EntityPathHelper.ImageBasePath))
+
+                        bool newImg = (obj.image_path != originalSupplier.image_path);
+                        if (newImg)
                         {
-                            string relativeImagePath = imagePath.Substring(EntityPathHelper.ImageBasePath.Length);
-                            obj.image_path = relativeImagePath;
+                            SupplierBusiness.ProcessImage(obj);
                         }
 
                         obj.csh = this.cshtextbox.Text;
                         obj.updated_at = DateTime.Now;
 
                         ctx.SaveChanges();
-                        if (hasImg)
-                        {
-                            bool newImg = (obj.image_path != originalSupplier.image_path);
-                            if (newImg)
-                            {
-                                //string copyToPath = EntityPathHelper.Supplier_LocationImagePath(obj);
-                                //if (!File.Exists(copyToPath))
-                                //    File.Copy(imgFilePath, copyToPath);
-
-                                imagePath = imgFilePath;
-                                //用户选择了素材目录的其他图片
-                                if (imagePath.StartsWith(EntityPathHelper.ImageBasePath))
-                                {
-                                    string relativeImagePath = imagePath.Substring(EntityPathHelper.ImageBasePath.Length);
-                                    obj.image_path = relativeImagePath;
-                                }
-                                else
-                                {
-                                    // 用户选择素材目录之外的图片
-                                    imgFileName = Path.GetFileName(imagePath);
-                                    obj.image_path = imgFileName;
-                                    string copyToPath = EntityPathHelper.Supplier_LocationImagePath(obj);
-                                    File.Copy(imagePath, copyToPath, true);
-                                }
-                            }
-                        }
+                        
                     }
                     else
                     {
                         var obj = ctx.Suppliers.Create();
                         obj.stype = Convert.ToInt32(this.supplComboBox.SelectedValue);
                         obj.name = this.titleTextBox.Text;
-                        obj.img = imgFileName;
-                        // obj.image_path = imgFileName;
-                        string imagePath = imgFilePath;
-                        //用户选择了素材目录的其他图片
-                        if (imagePath.StartsWith(EntityPathHelper.ImageBasePath))
-                        {
-                            string relativeImagePath = imagePath.Substring(EntityPathHelper.ImageBasePath.Length);
-                            obj.image_path = relativeImagePath;
-                        }
+                        obj.image_path = imgFilePath;
+                        SupplierBusiness.ProcessImage(obj);
 
                         obj.csh = this.cshtextbox.Text;
                         obj.created_at = DateTime.Now;
 
                         ctx.Suppliers.Add(obj);
-                        if (nameishave == false && this.titleTextBox.Text.Length <= 100)
-                            ctx.SaveChanges();
-                        else
-                        {
-                            MessageBox.Show("错误：请检查名称的长度或是否已存在！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-
-                        }
-                        changeid = obj.id;
-                        if (hasImg)
-                        {
-                            //string copyToPath = EntityPathHelper.Supplier_LocationImagePath(obj);
-                            //File.Copy(imgFilePath, copyToPath, true);
-
-                            imagePath = imgFilePath;
-                            //用户选择了素材目录的其他图片
-                            if (imagePath.StartsWith(EntityPathHelper.ImageBasePath))
-                            {
-                                string relativeImagePath = imagePath.Substring(EntityPathHelper.ImageBasePath.Length);
-                                obj.image_path = relativeImagePath;
-                            }
-                            else
-                            {
-                                // 用户选择素材目录之外的图片
-                                imgFileName = Path.GetFileName(imagePath);
-                                obj.image_path = imgFileName;
-                                string copyToPath = EntityPathHelper.Supplier_LocationImagePath(obj);
-                                File.Copy(imagePath, copyToPath, true);
-                            }
-                        }
+                        ctx.SaveChanges();
+                       
                     }
                     istrue = true;
 
                 }
                 catch (Exception EX)
                 {
-
                     throw;
                 }
             }
@@ -272,13 +186,7 @@ namespace DCTS.UI
 
         private void NewSupplierForm_Load(object sender, EventArgs e)
         {
-            using (var ctx = new DctsEntities())
-            {
-                //var ctx = this.entityDataSource1.DbContext as DctsEntities;
-
-                this.supplier = ctx.Suppliers.Find(changeid);
-                this.originalSupplier = new Supplier() { image_path = supplier.image_path };
-            }
+         
         }
     }
 }

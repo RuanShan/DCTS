@@ -21,7 +21,6 @@ namespace DCTS.Bus
         Trip trip;
         List<TripDay> days;
         List<DayLocation> dayLocations;
-        List<LocationImage> locationImages;
         List<WordprocessingDocument> filledTemplates;
         List<MemoryStream> filledTemplateStreams = new List<MemoryStream>();
         List<Ticket> ticketList;
@@ -39,16 +38,8 @@ namespace DCTS.Bus
                 days = ctx.TripDays.Include("Schedules").Where(o => o.trip_id == TripId).OrderBy(o => o.day).ToList();
                 dayLocations = ctx.DayLocations.Include("TripDay").Include("ComboLocation").Where(o => o.trip_id == TripId).OrderBy(o => o.TripDay.day).ThenBy(o => o.position).ToList();
                 ticketList = trip.Tickets.ToList();
-                var coverIds = new List<int>();
-                if (trip.cover_id > 0)
-                {
-                    coverIds.Add(trip.cover_id);
-                }
-
-                coverIds.AddRange(days.Where(o => o.cover_id > 0).Select(o => o.cover_id).ToList());
-
-                locationImages = ctx.LocationImages.Where(o => coverIds.Contains(o.id)).ToList();
-
+                
+                
                 var locationIds = new List<int>();
                 locationIds.AddRange(ticketList.Select(o => o.from_location_id).ToArray());
                 locationIds.AddRange(ticketList.Select(o => o.to_location_id).ToArray());
@@ -325,15 +316,13 @@ namespace DCTS.Bus
                     rowPattern.Remove();
 
                 }
-                // 处理图片
-                var locationImage = locationImages.Where(o => o.id == trip.cover_id).FirstOrDefault();
-
-                if (locationImage != null)
+                // 处理行程概要图片
+                if (trip.image_path != null)
                 {
                     var image = tripSumary.MainDocumentPart.ImageParts.FirstOrDefault();
                     //Image img = duplicated.Images[0];
 
-                    string imagePath = EntityPathHelper.newlocationimagepath(locationImage);
+                    string imagePath = EntityPathHelper.LocationImagePathEx(trip);
                     if (image != null && File.Exists(imagePath))
                     {
                         string relID = tripSumary.MainDocumentPart.GetIdOfPart(image);
@@ -415,15 +404,13 @@ namespace DCTS.Bus
             }
 
 
-            // 处理图片
-            var locationImage = locationImages.Where(o => o.id == day.cover_id).FirstOrDefault();
-
-            if (locationImage != null)
+            // 处理每日行程图片
+            if (day.image_path != null)
             {
                 var image = sumary.MainDocumentPart.ImageParts.LastOrDefault();
                 //Image img = duplicated.Images[0];
 
-                string imagePath = EntityPathHelper.newlocationimagepath(locationImage);
+                string imagePath = EntityPathHelper.LocationImagePathEx(day);
                 if (image != null && File.Exists(imagePath))
                 {
                     string relID = sumary.MainDocumentPart.GetIdOfPart(image);
@@ -483,12 +470,12 @@ namespace DCTS.Bus
                             WordTemplateHelper.ReplaceText(duplicated, wrappedKey, ComboLoactionBusiness.DisplayOpeningHours(location));
                         }
                     }
-                    if (location.img.Length > 0)
+                    if (location.image_path !=null && location.image_path.Length > 0)
                     {
                         var image = duplicated.MainDocumentPart.ImageParts.ElementAtOrDefault(0);
                         //Image img = duplicated.Images[0];
 
-                        string imagePath = EntityPathHelper.LocationImagePath(location);
+                        string imagePath = EntityPathHelper.LocationImagePathEx(location);
                         if (image != null && File.Exists(imagePath))
                         {
                             string relID = duplicated.MainDocumentPart.GetIdOfPart(image);
@@ -627,9 +614,9 @@ namespace DCTS.Bus
                         WordTemplateHelper.ReplaceText<Table>(cloned, "%ticket_start_time%", String.Format("{0:yyyyMMdd HH:mm}", ticket.start_at.GetValueOrDefault()));
                         WordTemplateHelper.ReplaceText<Table>(cloned, "%ticket_end_time%", String.Format("{0:yyyyMMdd HH:mm}", ticket.end_at.GetValueOrDefault()));
                         //替换图片
-                        if (supplier.img != null)
+                        if (supplier.image_path != null && supplier.image_path.Length>0)
                         {
-                            string file = EntityPathHelper.Supplier_LocationImagePath(supplier);
+                            string file = EntityPathHelper.LocationImagePathEx(supplier);
                             if (File.Exists(file))
                             {
                                 string relId = WordTemplateHelper.InsertPicture(template, file);
@@ -700,9 +687,9 @@ namespace DCTS.Bus
                         WordTemplateHelper.ReplaceText<Table>(cloned, "%ticket_start_time%", WordTemplateHelper.DisplayTime(ticket.start_at.GetValueOrDefault()));
                         WordTemplateHelper.ReplaceText<Table>(cloned, "%ticket_end_time%", WordTemplateHelper.DisplayTime(ticket.end_at.GetValueOrDefault()));
                         //替换图片
-                        if (supplier.img != null)
+                        if (supplier.image_path != null)
                         {
-                            string file = EntityPathHelper.Supplier_LocationImagePath(supplier);
+                            string file = EntityPathHelper.LocationImagePathEx(supplier);
                             if (File.Exists(file))
                             {
                                 string relId = WordTemplateHelper.InsertPicture(template, file);
@@ -1136,15 +1123,14 @@ namespace DCTS.Bus
                     rowPattern.Remove();
 
                 }
-                // 处理图片
-                var locationImage = locationImages.Where(o => o.id == trip.cover_id).FirstOrDefault();
+                // 处理行程概要图片
 
-                if (locationImage != null)
+                if (trip.image_path != null)
                 {
                     var image = tripSumary.MainDocumentPart.ImageParts.FirstOrDefault();
                     //Image img = duplicated.Images[0];
 
-                    string imagePath = EntityPathHelper.newlocationimagepath(locationImage);
+                    string imagePath = EntityPathHelper.LocationImagePathEx(trip);
                     if (image != null && File.Exists(imagePath))
                     {
                         string relID = tripSumary.MainDocumentPart.GetIdOfPart(image);

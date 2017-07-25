@@ -161,6 +161,7 @@
             this.nationComboBox.Name = "nationComboBox";
             this.nationComboBox.Size = new System.Drawing.Size(233, 20);
             this.nationComboBox.TabIndex = 0;
+            this.nationComboBox.SelectedIndexChanged += new System.EventHandler(this.nationComboBox_SelectedIndexChanged);
             // 
             // tipsTextBox
             // 
@@ -308,7 +309,6 @@
             this.Controls.Add(this.label1);
             this.Name = "ScenicFormControl";
             this.Size = new System.Drawing.Size(634, 430);
-            this.Load += new System.EventHandler(this.ScenicFormControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

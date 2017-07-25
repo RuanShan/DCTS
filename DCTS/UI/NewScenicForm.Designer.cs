@@ -100,6 +100,7 @@
             this.Controls.Add(this.label2);
             this.Name = "NewScenicForm";
             this.Text = "新建景点";
+            this.Load += new System.EventHandler(this.NewScenicForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 

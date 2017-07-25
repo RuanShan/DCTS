@@ -44,20 +44,7 @@ namespace DCTS.UI
                 bool newImg = (scenic.image_path != originalScenic.image_path);
                 if (newImg)
                 {
-                    string imagePath = scenic.image_path;
-                    //用户选择了素材目录的其他图片
-                    if (imagePath.StartsWith(EntityPathHelper.ImageBasePath))
-                    {
-                        string relativeImagePath = imagePath.Substring(EntityPathHelper.ImageBasePath.Length);
-                        scenic.image_path = relativeImagePath;
-                    }
-                    else
-                    { // 用户选择素材目录之外的图片
-                        string imgFileName = Path.GetFileName(imagePath);
-                        scenic.image_path = imgFileName;
-                        string copyToPath = EntityPathHelper.LocationImagePathEx(scenic);
-                        File.Copy(imagePath, copyToPath, true);
-                    }
+                    ComboLoactionBusiness.ProcessImage(scenic);
                 }
             
                 ctx.SaveChanges();

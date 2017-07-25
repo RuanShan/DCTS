@@ -95,15 +95,7 @@ namespace DCTS.Bus
                 ctx.DayLocations.RemoveRange(days);
                 ctx.ComboLocations.Remove(model);
                 ctx.SaveChanges();
-                // 检查图片是否存在？
-                if (model.img != null && model.img.Length > 0)
-                {
-                    string path = EntityPathHelper.LocationImagePath(model);
-                    if (File.Exists(path))
-                    {
-                        File.Delete(path);
-                    }
-                }
+                // 无需删除图片                
 
                 // 检查word是否存在？
                 if (model.word != null && model.word.Length > 0)
@@ -202,6 +194,54 @@ namespace DCTS.Bus
             return str;
         }
 
+        //处理图片 image_path
+        public static bool ProcessImage(ComboLocation location)
+        {
+            // image_path 取值
+            // 1. 为空，null, 缺省值
+            // 2. string.empty
+            // 3. 相对路径，用户素材图片路径
+            // 4. 绝对路径，用户新选择了素材图片路径下的一个图片。
+            // 5. 绝对路径，用户新选择了非素材路径下的一个图片。
+
+            if (location.image_path == null || location.image_path.Length == 0)
+            {
+                return false;
+            }           
+
+            string imgFilePath = location.image_path;
+            string imgFileName = Path.GetFileName(imgFilePath);
+            // 检查选择图片是否是素材目录下的，原有数据是相对路径
+            // 如果是，直接设置image_path,image_name, 
+            // 如果不是，需要检查素材目录下是否存在，
+            //      如果存在 提示文件已存在，是否覆盖
+            //      如果不存在，直接拷贝到素材目录下
+
+            if (Path.IsPathRooted(imgFilePath))
+            {
+                if (imgFilePath.StartsWith(EntityPathHelper.ImageBasePath))
+                {  // 用户选择素材目录下文件
+                    string relativeImagePath = imgFilePath.Substring(EntityPathHelper.ImageBasePath.Length);
+                    location.image_path = relativeImagePath;
+
+                }
+                else
+                {
+                    string copyToPath = Path.Combine(EntityPathHelper.ImageBasePath, imgFileName);
+                    // 用户选择素材目录之外的图片
+                    location.image_path = imgFileName;                     
+                    File.Copy(imgFilePath, copyToPath, true);
+                }
+            }
+            else { 
+                //图片为相对路径，系统素材相对路径中图片
+            
+            }
+
+            return true;
+        }
+
+
         //检验新的location,字段是否正确。
         public static bool Validate(ComboLocation location)
         {
@@ -210,7 +250,7 @@ namespace DCTS.Bus
             bool valid = true;
 
             string title = location.title;
-            string img = location.img;
+            string image_path = location.image_path;
             using( var ctx = new DctsEntities())
             {
                 if (title.Length == 0)
@@ -228,12 +268,11 @@ namespace DCTS.Bus
                     throw new DbEntityValidationException(string.Format("名称<{0}>已存在。", title));            
                 }
 
-                if (img.Length > 0)
-                {
-                    string imgFileName = Path.GetFileName(img);
+                if (image_path.Length > 0)
+                {                   
+                    //FIXME
                     //如果 imgFileName ！= img， 即 img 中包含路径信息， 修改和更新都可能发生。
-                    //如果 路径不是 ImageBasePath  即 /data/image, 不需要检查素材是否存在，form 窗口已提示重名，用户点击保存，覆盖即可
-                    
+                    //如果 路径不是 ImageBasePath  即 /data/image, 不需要检查素材是否存在，form 窗口已提示重名，用户点击保存，覆盖即可                    
                 }
 
             }
@@ -247,7 +286,7 @@ namespace DCTS.Bus
             bool valid = true;
 
             string title = location.title;
-            string img = location.img;
+
             using (var ctx = new DctsEntities())
             {
                //  throw new DbEntityValidationException("名称不能为空");
@@ -260,15 +299,6 @@ namespace DCTS.Bus
 
             return  (ctx.ComboLocations.Where(o=>o.title == title).Count() > 0);
 
-        }
-
-        public static bool ExistsLocationImageName( DctsEntities ctx, string imgFileName, ComboLocationEnum ltype = ComboLocationEnum.Scenic)
-        {
-            bool existSameImage = false;
-              
-            existSameImage = (ctx.ComboLocations.Where(o=> o.img == imgFileName).Count() > 0);
-            
-            return existSameImage;
         }
 
 

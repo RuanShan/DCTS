@@ -21,16 +21,10 @@ namespace DCTS.UI
         public NewScenicForm()
         {
             InitializeComponent();
-            InitializeDataSource();
             Saved = false;
         }
 
-        public void InitializeDataSource()
-        {
-           
-        }
 
-       
 
         private void saveButton_Click(object sender, EventArgs e)
         {
@@ -45,22 +39,11 @@ namespace DCTS.UI
                     this.scenicFormControl1.FillModelByForm(scenic);
 
                     ComboLoactionBusiness.Validate(scenic);
-
-                    ctx.ComboLocations.Add(scenic);
-                    string imgPath = scenic.img;
-                    if (scenic.img.Length > 0)
-                    {
-                        string imgFileName = Path.GetFileName(imgPath);
-                        scenic.img = imgFileName;
-                    }
+                    ComboLoactionBusiness.ProcessImage(scenic);
                     
+                    ctx.ComboLocations.Add(scenic);
+                   
                     ctx.SaveChanges();
-                    //拷贝图片需要对象ID，所以这样先创建对象，再拷贝图片
-                    if (scenic.img.Length > 0)
-                    {             
-                        string copyToPath = EntityPathHelper.LocationImagePath(scenic);
-                        File.Copy(imgPath, copyToPath, true);
-                    }
                     Saved = true;
                     this.Close();
                 }
@@ -77,6 +60,11 @@ namespace DCTS.UI
         private void cancelButton_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void NewScenicForm_Load(object sender, EventArgs e)
+        {
+            this.scenicFormControl1.InitializeDataSource();
         }
 
 

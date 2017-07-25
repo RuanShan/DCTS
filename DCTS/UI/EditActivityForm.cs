@@ -1,4 +1,5 @@
-﻿using DCTS.DB;
+﻿using DCTS.Bus;
+using DCTS.DB;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -35,20 +36,8 @@ namespace DCTS.UI
             bool newImg = (activity.image_path != originalActivity.image_path);
             if (newImg)
             {
-                string imgFullPath = activity.image_path;
+                ComboLoactionBusiness.ProcessImage(activity);
 
-                if (imgFullPath.StartsWith(EntityPathHelper.ImageBasePath))
-                {
-                    string relativeImagePath = imgFullPath.Substring(EntityPathHelper.ImageBasePath.Length);
-                    activity.image_path = relativeImagePath;
-                }
-                else {
-                    // 用户选择素材目录之外的图片
-                    string imgFileName = Path.GetFileName(imgFullPath);
-                    activity.image_path = imgFileName;
-                    string copyToPath = EntityPathHelper.LocationImagePathEx(activity);
-                    File.Copy(imgFullPath, copyToPath, true);
-                }
             }
             //word
             string wordFilePath = activity.word;

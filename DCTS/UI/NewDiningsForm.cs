@@ -19,7 +19,7 @@ namespace DCTS.UI
     {
         private long ModelId { get; set; }
         public bool Saved;
-        ComboLocation originalDinings;
+        ComboLocation originalDining;
 
         public NewDiningsForm(string maintype, ComboLocation obj)
         {
@@ -46,7 +46,7 @@ namespace DCTS.UI
                 this.localTitleTextBox.Text = obj.title;
                 this.openCloseTextBox.Text = obj.open_close_more;
                 this.routeTextBox.Text = obj.route;
-                this.originalDinings = new ComboLocation() { img = obj.image_path };
+                this.originalDining = new ComboLocation() { image_path = obj.image_path };
                 //处理图片
                 //处理图片
                 if (obj.image_path != null && obj.image_path.Length > 0)
@@ -66,7 +66,6 @@ namespace DCTS.UI
 
         public void InitializeDataSource()
         {
-            var ctx = this.entityDataSource1.DbContext as DctsEntities;
             var nationList = DCTS.DB.GlobalCache.NationList;
             this.nationComboBox.DisplayMember = "title";
             this.nationComboBox.ValueMember = "code";
@@ -121,28 +120,10 @@ namespace DCTS.UI
                     
                         imgFilePath = obj.image_path;
 
-                        bool newImg = (obj.image_path != originalDinings.img);
+                        bool newImg = (obj.image_path != originalDining.image_path);
                         if (newImg)
                         {
-                            //imgFileName = Path.GetFileName(imgFilePath);
-                            //obj.image_path = imgFileName;
-                            //string copyToPath = EntityPathHelper.LocationImagePath(obj);
-                            //File.Copy(imgFilePath, copyToPath, true);
-                            string imagePath = obj.image_path;
-                            //用户选择了素材目录的其他图片
-                            if (imagePath.StartsWith(EntityPathHelper.ImageBasePath))
-                            {
-                                string relativeImagePath = imagePath.Substring(EntityPathHelper.ImageBasePath.Length);
-                                obj.image_path = relativeImagePath;
-                            }
-                            else
-                            { // 用户选择素材目录之外的图片
-                                 imgFileName = Path.GetFileName(imagePath);
-                                obj.image_path = imgFileName;
-                                string copyToPath = EntityPathHelper.LocationImagePathEx(obj);
-                                File.Copy(imagePath, copyToPath, true);
-                            }
-
+                            ComboLoactionBusiness.ProcessImage(obj);
                         }
                         ctx.SaveChanges();
                     }
@@ -166,31 +147,11 @@ namespace DCTS.UI
                         ComboLoactionBusiness.Validate(obj);
                         ctx.ComboLocations.Add(obj);
 
-                        if (obj.image_path.Length > 0)
-                        {
-                            string imgPath = obj.image_path;
-                            imgFileName = Path.GetFileName(imgPath);
-                            obj.img = imgFileName;
-                            //string copyToPath = EntityPathHelper.LocationImagePath(obj);
-                            //File.Copy(imgPath, copyToPath);
-                        }
+                        ComboLoactionBusiness.ProcessImage(obj);
                       
                         ctx.SaveChanges();
 
-                        ////拷贝图片需要对象ID，所以这样先创建对象，再拷贝图片
-                        //if (obj.image_path != null && obj.image_path.Length > 0)
-                        //{
-                        //    string imgPath = imgFilePath;    
-                        //    string copyToPath = EntityPathHelper.LocationImagePath(obj);
-                        //    File.Copy(imgPath, copyToPath, true);
-                        //}
-                        if (obj.img.Length > 0)
-                        {
-                            string imgPath = imgFilePath;
-                            string copyToPath = EntityPathHelper.LocationImagePath(obj);
-                            File.Copy(imgPath, copyToPath);
-                        }   
-
+                        ////拷贝图片需要对象ID，所以这样先创建对象，再拷贝图片                    
                     }
                     Saved = true;
                     this.Close();
