@@ -211,7 +211,6 @@
             this.copyTripColumn1.Name = "copyTripColumn1";
             this.copyTripColumn1.Text = "复制";
             this.copyTripColumn1.UseColumnTextForButtonValue = true;
-            this.copyTripColumn1.Visible = false;
             this.copyTripColumn1.Width = 60;
             // 
             // deleteTripColumn1

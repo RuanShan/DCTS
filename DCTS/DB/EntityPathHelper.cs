@@ -182,6 +182,7 @@ namespace DCTS.DB
         public static string TemplatePath = "templates";
 
         public static string LayoutlName = "layout.docx";
+        public static string ScheduleName = "schedule.docx";
         public static string DinningDetailName = "dining-detail.docx";
         public static string ScenicDetailName = "scenic-detail.docx";
         public static string HotelDetailName = "hotel-detail.docx";
@@ -298,6 +299,15 @@ namespace DCTS.DB
             }
         }
 
+        public static string ScheduleRelativePath
+        {
+            get
+            {
+                return Path.Combine(TemplatePath, ScheduleName);
+            }
+        }
+
+        
         private static void CreateFolder(string path)
         {
             if (!Directory.Exists(path))

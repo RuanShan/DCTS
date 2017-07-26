@@ -46,7 +46,6 @@
             this.shellView1.StatusBar = null;
             this.shellView1.TabIndex = 2;
             this.shellView1.Text = "shellView1";
-            this.shellView1.DragDrop += new System.Windows.Forms.DragEventHandler(this.shellView1_DragDrop);
             // 
             // shellTreeView1
             // 
@@ -63,7 +62,6 @@
             this.shellNotificationListener1.FolderCreated += new GongSolutions.Shell.ShellItemEventHandler(this.shellNotificationListener1_FolderCreated);
             this.shellNotificationListener1.FolderDeleted += new GongSolutions.Shell.ShellItemEventHandler(this.shellNotificationListener1_FolderDeleted);
             this.shellNotificationListener1.FolderRenamed += new GongSolutions.Shell.ShellItemChangeEventHandler(this.shellNotificationListener1_FolderRenamed);
-            this.shellNotificationListener1.FolderUpdated += new GongSolutions.Shell.ShellItemEventHandler(this.shellNotificationListener1_FolderUpdated);
             this.shellNotificationListener1.ItemCreated += new GongSolutions.Shell.ShellItemEventHandler(this.shellNotificationListener1_ItemCreated);
             this.shellNotificationListener1.ItemDeleted += new GongSolutions.Shell.ShellItemEventHandler(this.shellNotificationListener1_ItemDeleted);
             this.shellNotificationListener1.ItemRenamed += new GongSolutions.Shell.ShellItemChangeEventHandler(this.shellNotificationListener1_ItemRenamed);

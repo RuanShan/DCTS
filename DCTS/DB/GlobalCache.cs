@@ -70,11 +70,8 @@ namespace DCTS.DB
             get
             {
                 return (new[]{ 
-                    new MockEntity{ Id = (int)ComboLocationEnum.Blank, ShortName="空白页", FullName = "空白页" },
-                    new MockEntity{ Id = (int)ComboLocationEnum.Scenic,ShortName="景点", FullName = "景点" },
-                    new MockEntity{ Id = (int)ComboLocationEnum.Hotel, ShortName="住宿",FullName = "住宿" },
+                    new MockEntity{ Id = (int)ComboLocationEnum.Scenic, ShortName="景点", FullName = "景点" },
                     new MockEntity{ Id = (int)ComboLocationEnum.Dining, ShortName="餐厅",FullName = "餐厅" },
-                    new MockEntity{ Id = (int)ComboLocationEnum.Airport, ShortName="机场",FullName = "机场" },
                 }.ToList());
             }
         }

@@ -99,6 +99,17 @@ namespace DCTS.UI
             this.localtionTitleColumn.ValueMember = "id";
             this.localtionTitleColumn.DataSource = locations;
 
+            var locationTypeList = new[]{ 
+                    new MockEntity{ Id = (int)ComboLocationEnum.Scenic, ShortName="景点", FullName = "景点" },
+                    new MockEntity{ Id = (int)ComboLocationEnum.Dining, ShortName="餐厅",FullName = "餐厅" },
+                    new MockEntity{ Id = (int)ComboLocationEnum.Blank, ShortName="空白页",FullName = "空白页" },
+                };
+            var locationTypeNames = locations.Select(o => new MockEntity() { Id = o.id, FullName = locationTypeList.First(t => t.Id == o.ltype).FullName }).ToList();
+
+            this.locationTypeColumn.DisplayMember = "FullName";
+            this.locationTypeColumn.ValueMember = "Id";
+            this.locationTypeColumn.DataSource = locationTypeNames;
+
 
             InitializeDayListBox(selectDay, selectLocationPosition);
         }

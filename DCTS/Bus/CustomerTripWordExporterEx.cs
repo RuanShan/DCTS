@@ -58,6 +58,7 @@ namespace DCTS.Bus
         }
 
 
+
         //导出word
         public bool ExportWord()
         {
@@ -686,6 +687,9 @@ namespace DCTS.Bus
                         WordTemplateHelper.ReplaceText<Table>(cloned, "%ticket_to_airport%", to_location.title);
                         WordTemplateHelper.ReplaceText<Table>(cloned, "%ticket_start_time%", WordTemplateHelper.DisplayTime(ticket.start_at.GetValueOrDefault()));
                         WordTemplateHelper.ReplaceText<Table>(cloned, "%ticket_end_time%", WordTemplateHelper.DisplayTime(ticket.end_at.GetValueOrDefault()));
+                        WordTemplateHelper.ReplaceText<Table>(cloned, "%ticket_from_address%", ticket.from_address);
+                        WordTemplateHelper.ReplaceText<Table>(cloned, "%ticket_to_address%", ticket.to_address);
+
                         //替换图片
                         if (supplier.image_path != null)
                         {
@@ -1153,6 +1157,93 @@ namespace DCTS.Bus
 
         }
 
+        public bool ExporScheduleWord()
+        {
+            //cloned templates/base as template
+            string layout = LocationTemplate.ScheduleRelativePath;
+            string tripPath = EntityPathHelper.TripWordFilePath(this.TripId, "schedule");
+            //拷贝节点信息核对表模板文件
+            File.Copy(layout, tripPath, true);
+
+            using (WordprocessingDocument document = WordprocessingDocument.Open(tripPath, true))
+            {
+
+                // 客户信息表格
+                var mainDoc = document.MainDocumentPart.Document;
+                var tables = mainDoc.Body.Descendants<Table>();
+                //look for one specific table here
+                Table tripTable = tables.ElementAt(0);
+                Table customerTable = tables.ElementAt(1);
+                Table flightTable = tables.ElementAt(2);
+                Table hotelTable = tables.ElementAt(3);
+                Table insureTable = tables.ElementAt(4);
+                Table wifiTable = tables.ElementAt(5);
+                Table rentalTable = tables.ElementAt(6);
+                Table activityTable = tables.ElementAt(7);
+
+                if (tripTable != null)
+                {
+                    //Row 0 and 1 are Headers
+                    //Row 2 is pattern
+                    //客户编号	目的国家	签证国家	出行方式
+                    //trip.id   trip.countries, trip.national_visa, trip.travel_style
+
+
+                }
+                if (customerTable != null)
+                {
+                    //姓名	生日	 护照号码	有效期
+                    var rows = tripTable.Elements<TableRow>().ToList();
+
+                }
+
+                // 交通信息表格
+                if (flightTable != null)
+                {
+                    //序号	交通 	日期 	交通编码	 出发地	 时间	抵达地	时间	 时长	行李额
+                    var rows = flightTable.Elements<TableRow>().ToList();
+
+                }
+                // 住宿信息
+                if (hotelTable != null)
+                {
+                    //序号	入住 	晚	城市	 酒店	早餐	 价格
+                    var rows = hotelTable.Elements<TableRow>().ToList();
+
+                }
+                // 保险信息
+                if (insureTable != null)
+                {
+                    //保险名称	生效日	天数
+                    var rows = insureTable.Elements<TableRow>().ToList();
+
+                }
+                // WIFI信息
+                if (wifiTable != null)
+                {
+                    //提取点 	日期	 归还点	 日期	使用天数	 生效日期	有效天数
+                    var rows = wifiTable.Elements<TableRow>().ToList();
+
+                }
+                // 租车信息
+                if (wifiTable != null)
+                {
+                    //提取点 	日期	 归还点	 日期	使用天数	 生效日期	有效天数
+                    var rows = wifiTable.Elements<TableRow>().ToList();
+
+                }
+                // 活动信息
+                if (activityTable != null)
+                {
+                    //提取点 	日期	 归还点	 日期	使用天数	 生效日期	有效天数
+                    var rows = activityTable.Elements<TableRow>().ToList();
+
+                }
+                // 交付清单
+
+            }
+            return true;
+        }
 
         ~CustomerTripWordExporterEx()
         {

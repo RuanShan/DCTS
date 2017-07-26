@@ -26,6 +26,8 @@ namespace ShellExplorer {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShellExplorer));
             this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.treeView = new GongSolutions.Shell.ShellTreeView();
+            this.shellView = new GongSolutions.Shell.ShellView();
             this.statusBar = new System.Windows.Forms.StatusBar();
             this.mainMenu = new System.Windows.Forms.MainMenu(this.components);
             this.fileMenu = new System.Windows.Forms.MenuItem();
@@ -39,8 +41,6 @@ namespace ShellExplorer {
             this.forwardButtonMenu = new System.Windows.Forms.ContextMenu();
             this.upButton = new System.Windows.Forms.ToolBarButton();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
-            this.treeView = new GongSolutions.Shell.ShellTreeView();
-            this.shellView = new GongSolutions.Shell.ShellView();
             this.shellComboBox1 = new GongSolutions.Shell.ShellComboBox();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -63,6 +63,29 @@ namespace ShellExplorer {
             this.splitContainer.Size = new System.Drawing.Size(610, 140);
             this.splitContainer.SplitterDistance = 197;
             this.splitContainer.TabIndex = 1;
+            // 
+            // treeView
+            // 
+            this.treeView.AllowDrop = true;
+            this.treeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeView.Location = new System.Drawing.Point(0, 0);
+            this.treeView.Name = "treeView";
+            this.treeView.ShellView = this.shellView;
+            this.treeView.Size = new System.Drawing.Size(197, 140);
+            this.treeView.TabIndex = 0;
+            this.treeView.Text = "shellTreeView1";
+            // 
+            // shellView
+            // 
+            this.shellView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.shellView.Location = new System.Drawing.Point(0, 0);
+            this.shellView.Name = "shellView";
+            this.shellView.Size = new System.Drawing.Size(409, 140);
+            this.shellView.StatusBar = this.statusBar;
+            this.shellView.TabIndex = 0;
+            this.shellView.Text = "shellView1";
+            this.shellView.View = GongSolutions.Shell.ShellViewStyle.Details;
+            this.shellView.Navigated += new System.EventHandler(this.shellView_Navigated);
             // 
             // statusBar
             // 
@@ -156,29 +179,6 @@ namespace ShellExplorer {
             this.imageList.Images.SetKeyName(0, "Back.bmp");
             this.imageList.Images.SetKeyName(1, "Forward.bmp");
             this.imageList.Images.SetKeyName(2, "Up.bmp");
-            // 
-            // treeView
-            // 
-            this.treeView.AllowDrop = true;
-            this.treeView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView.Location = new System.Drawing.Point(0, 0);
-            this.treeView.Name = "treeView";
-            this.treeView.ShellView = this.shellView;
-            this.treeView.Size = new System.Drawing.Size(197, 140);
-            this.treeView.TabIndex = 0;
-            this.treeView.Text = "shellTreeView1";
-            // 
-            // shellView
-            // 
-            this.shellView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.shellView.Location = new System.Drawing.Point(0, 0);
-            this.shellView.Name = "shellView";
-            this.shellView.Size = new System.Drawing.Size(409, 140);
-            this.shellView.StatusBar = this.statusBar;
-            this.shellView.TabIndex = 0;
-            this.shellView.Text = "shellView1";
-            this.shellView.View = GongSolutions.Shell.ShellViewStyle.Details;
-            this.shellView.Navigated += new System.EventHandler(this.shellView_Navigated);
             // 
             // shellComboBox1
             // 

@@ -207,7 +207,8 @@ namespace DCTS.Bus
         /// </summary>
         /// <param name="placeholderName">Image placeholder tag name</param>
         /// <param name="newImage">physical path to the new image file</param>
-        public static void ResizeImage(WordprocessingDocument doc, string imageRelID, string newImage)
+        /// <param name="resizeMode">调整图片尺寸模式 1.保持宽度，保持比例，2.保持高度，保持比例</param>
+        public static void ResizeImage(WordprocessingDocument doc, string imageRelID, string newImage, int resizeMode = 1)
         {
             // Get the id of the image placeholder
             string relID = imageRelID;
@@ -219,6 +220,9 @@ namespace DCTS.Bus
             GetPlaceholderImageSize(doc, imageRelID, out width, out height);
             float newWidth = width; //宽度保持一致
             float newHeight = newWidth*img.Height / img.Width ;    //设置高度保持比例
+            if (resizeMode == 2)
+            { 
+            }
 
             // Loop through all Drawing elements in the document
             foreach (Drawing d in doc.MainDocumentPart.Document.Descendants<Drawing>().ToList())
