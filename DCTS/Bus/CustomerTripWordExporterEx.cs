@@ -10,6 +10,7 @@ using System.IO;
 using DocumentFormat.OpenXml.Wordprocessing;
 using DCTS.Uti;
 using System.Collections;
+using System.ComponentModel;
 
 namespace DCTS.Bus
 {
@@ -17,7 +18,7 @@ namespace DCTS.Bus
     class CustomerTripWordExporterEx
     {
         long TripId { get; set; }
-
+        private BackgroundWorker bgWorker1;
         Trip trip;
         List<TripDay> days;
         List<DayLocation> dayLocations;
@@ -60,12 +61,16 @@ namespace DCTS.Bus
 
 
         //导出word
-        public bool ExportWord()
+        public bool ExportWord(ref BackgroundWorker bgWorker)
         {
             var sources = new List<WordprocessingDocument>();
+        
 
             using (var db = new DctsEntities())
             {
+                bgWorker.ReportProgress(0, "准备模板... " );
+                int t = 7;
+
                 // 准备模板
                 Dictionary<ComboLocationEnum, WordprocessingDocument> tmplDict = new Dictionary<ComboLocationEnum, WordprocessingDocument>();
                 ComboLocationEnum[] templateTypes = { ComboLocationEnum.TripSummary, ComboLocationEnum.DaySummary, ComboLocationEnum.Flight, ComboLocationEnum.Train,ComboLocationEnum.Rental,
@@ -106,25 +111,34 @@ namespace DCTS.Bus
                                 HandleLocation(dl.ComboLocation, null);
                             }
                         }
+                        bgWorker.ReportProgress(0, "机票列表... " + 1.ToString() + "/" + t.ToString());
+              
                         //线上查询说明
                         //机票列表
                         var tickets = this.ticketList.Where(o => o.ttype == (int)SupplierEnum.Flight).ToList();
                         HanldeFlightTicketList(tmplDict, tickets);
                         //酒店列表
+                        bgWorker.ReportProgress(0, "酒店列表... " + 2.ToString() + "/" + t.ToString());
                         tickets = this.ticketList.Where(o => o.ttype == (int)SupplierEnum.Hotal).ToList();
                         HanldeHotelTicketList(tmplDict, tickets);
                         //租车列表
+
+                        bgWorker.ReportProgress(0, "租车列表... " + 3.ToString() + "/" + t.ToString());
                         tickets = this.ticketList.Where(o => o.ttype == (int)SupplierEnum.Rental).ToList();
                         HanldeRentalTicketList(tmplDict, tickets);
                         //保险列表
+                        bgWorker.ReportProgress(0, "保险列表... " + 4.ToString() + "/" + t.ToString());
+
                         tickets = this.ticketList.Where(o => o.ttype == (int)SupplierEnum.Insurance).ToList();
                         HanldeInsuranceTicketList(tmplDict, tickets);
                         //交通及活动列表
+                        bgWorker.ReportProgress(0, "交通及活动列表... " + 5.ToString() + "/" + t.ToString());
                         tickets = this.ticketList.Where(o => o.ttype == (int)SupplierEnum.Activity || o.ttype == (int)SupplierEnum.Train).ToList();
                         if (tickets != null && tickets.Count > 0)
                             HanldeOtherTicketList(tmplDict, tickets);
                     }
                     //合并文档
+                    bgWorker.ReportProgress(0, "合并文档... " + 6.ToString() + "/" + t.ToString());
                     WordTemplateHelper.MergeDoc(filledTemplateStreams, document);
                     document.Save();//保存
                 }

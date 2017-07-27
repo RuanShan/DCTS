@@ -18,6 +18,15 @@ namespace DCTS.UI
     public partial class CustomerTripListControl : UserControl, CustomControlInterface
     {
         public event EventHandler CommandRequestEvent;
+        // 后台执行控件
+        private BackgroundWorker bgWorker;
+        // 消息显示窗体
+        private frmMessageShow frmMessageShow;
+
+        // 后台操作是否正常完成
+        private bool blnBackGroundWorkIsOK = false;
+        //后加的后台属性显
+        private bool backGroundRunResult;
 
         public CustomerTripListControl()
         {
@@ -78,7 +87,7 @@ namespace DCTS.UI
                 int tid = SelectedTripId;
                 var form = new EditCustomerTripForm(tid);
                 form.ShowDialog();
-                if( form.Saved )
+                if (form.Saved)
                 {
                     BeginActive();
                 }
@@ -100,7 +109,7 @@ namespace DCTS.UI
                 if (MessageHelper.DeleteConfirm(msg))
                 {
                     ////删除 schedule 中的信息
-                    
+
                     TripBusiness.Delete(trip.id);
 
                     BeginActive();
@@ -108,16 +117,88 @@ namespace DCTS.UI
             }
 
         }
+        #region worker
+        private void InitialBackGroundWorker()
+        {
+            bgWorker = new BackgroundWorker();
+            bgWorker.WorkerReportsProgress = true;
+            bgWorker.WorkerSupportsCancellation = true;
+            bgWorker.RunWorkerCompleted +=
+                new RunWorkerCompletedEventHandler(bgWorker_RunWorkerCompleted);
+            bgWorker.ProgressChanged +=
+                new ProgressChangedEventHandler(bgWorker_ProgressChanged);
+        }
 
+        private void bgWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                blnBackGroundWorkIsOK = false;
+            }
+            else if (e.Cancelled)
+            {
+                blnBackGroundWorkIsOK = true;
+            }
+            else
+            {
+                blnBackGroundWorkIsOK = true;
+            }
+        }
+
+        private void bgWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            if (frmMessageShow != null && frmMessageShow.Visible == true)
+            {
+                //设置显示的消息
+                frmMessageShow.setMessage(e.UserState.ToString());
+                //设置显示的按钮文字
+                if (e.ProgressPercentage == clsConstant.Thread_Progress_OK)
+                {
+                    frmMessageShow.setStatus(clsConstant.Dialog_Status_Enable);
+                }
+            }
+        }
+
+
+        #endregion
         private void exportWordButton_Click(object sender, EventArgs e)
         {
-            var exporter = new CustomerTripWordExporterEx(SelectedTripId);
-            if (exporter.ExportWord())
+
+            try
             {
-                MessageBox.Show("导出Word成功！");
-                BeginActive();
+                InitialBackGroundWorker();
+                bgWorker.DoWork += new DoWorkEventHandler(exword);
+
+                bgWorker.RunWorkerAsync();
+                // 启动消息显示画面
+                frmMessageShow = new frmMessageShow(clsShowMessage.MSG_001,
+                                                    clsShowMessage.MSG_007,
+                                                    clsConstant.Dialog_Status_Disable);
+                frmMessageShow.ShowDialog();
+                // 数据读取成功后在画面显示
+                if (blnBackGroundWorkIsOK)
+                {
+                    BeginActive();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
 
+ 
+        }
+        private void exword(object sender, DoWorkEventArgs e)
+        {
+
+            var exporter = new CustomerTripWordExporterEx(SelectedTripId);
+            if (exporter.ExportWord(ref this.bgWorker))
+            {
+                //MessageBox.Show("导出Word成功！");
+                bgWorker.ReportProgress(clsConstant.Thread_Progress_OK, clsShowMessage.MSG_009  );
+              
+            }
         }
 
 

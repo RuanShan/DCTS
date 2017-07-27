@@ -123,6 +123,8 @@
     <Compile Include="AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="Bus\clsConstant.cs" />
+    <Compile Include="Bus\clsShowMessage.cs" />
     <Compile Include="Bus\ComboLoactionBusiness.cs" />
     <EmbeddedResource Include="UI\ChooseCountries.resx">
       <DependentUpon>ChooseCountries.cs</DependentUpon>
@@ -132,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\EditCustomerTripForm.resx">
       <DependentUpon>EditCustomerTripForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmMessageShow.resx">
+      <DependentUpon>frmMessageShow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ImageExplorerControl.resx">
       <DependentUpon>ImageExplorerControl.cs</DependentUpon>
@@ -245,6 +250,12 @@
     </Compile>
     <Compile Include="UI\EditCustomerTripForm.Designer.cs">
       <DependentUpon>EditCustomerTripForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\frmMessageShow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmMessageShow.Designer.cs">
+      <DependentUpon>frmMessageShow.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\ImageExplorerControl.cs">
       <SubType>UserControl</SubType>
